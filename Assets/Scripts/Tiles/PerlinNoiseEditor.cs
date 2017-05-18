@@ -10,10 +10,17 @@ public class PerlinNoiseEditor : Editor {
     {
         DrawDefaultInspector();
 
-        Perlin myPerlin = (Perlin) target;
-        if (GUILayout.Button("Generate!"))
+        Perlin  myPerlin  = (Perlin) target;
+        TileMap myTileMap = (TileMap) myPerlin.GetComponent<TileMap>();
+
+        if (GUILayout.Button("Generate"))
         {
-            myPerlin.Init2(256, 256);
+            // myPerlin.Init2();
+            myPerlin.InitalizeRenderTarget();
+        }
+        else if (GUILayout.Button("Generate TileMap") && myTileMap != null)
+        {
+            myPerlin.GenerateTileMap(myTileMap);
         }
     }
 }

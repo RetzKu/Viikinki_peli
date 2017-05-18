@@ -117,6 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 80779267}
   - component: {fileID: 80779266}
+  - component: {fileID: 80779268}
   m_Layer: 0
   m_Name: TileMap
   m_TagString: Untagged
@@ -136,8 +137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Width: 100
-  Heigth: 100
-  GrassSprite: {fileID: 21300000, guid: 977e723fb79cb4e40acbc70627d6708e, type: 3}
+  Height: 100
+  GrassSprite: {fileID: 21300000, guid: b3e77747713b24a4d88f5d05c58094ea, type: 3}
 --- !u!4 &80779267
 Transform:
   m_ObjectHideFlags: 0
@@ -147,10 +148,50 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 233962913}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &80779268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 80779265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a20ed1d6e51d1f24ca64d8a862e3326f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RenderTarget: {fileID: 233962913}
+  Width: 256
+  Heigth: 256
+  Step: 0.1
+  Frequency: 1
+  Exp: 10.75
+  WaterTreshold: 0.2
+  Scorched: {r: 0.2784314, g: 0.41960788, b: 0.41960788, a: 1}
+  Bare: {r: 0.21960786, g: 0.31764707, b: 0.31764707, a: 1}
+  Tundra: {r: 0.21960786, g: 0.31764707, b: 0.31764707, a: 1}
+  TemperateDesert: {r: 0.21960786, g: 0.31764707, b: 0.31764707, a: 1}
+  Shrubland: {r: 0, g: 0, b: 0, a: 1}
+  Taiga: {r: 0, g: 0, b: 0, a: 1}
+  TemperateDeciduousForest: {r: 0, g: 0, b: 0, a: 1}
+  TemperateRainForest: {r: 0, g: 0, b: 0, a: 1}
+  SubtropicalSeasonalForest: {r: 0, g: 0, b: 0, a: 1}
+  TropicalSeasonalRainForest: {r: 0, g: 0, b: 0, a: 1}
+  TropicalRainForest: {r: 0, g: 0, b: 0, a: 1}
+  Water: {r: 0, g: 0.40000004, b: 1, a: 1}
+  DeepWater: {r: 0, g: 0, b: 1, a: 1}
+  Grassland: {r: 0.20000002, g: 0.8000001, b: 0.20000002, a: 1}
+  Beach: {r: 1, g: 1, b: 0.40000004, a: 1}
+  Mountain: {r: 0.2784314, g: 0.41960788, b: 0.41960788, a: 1}
+  Forest: {r: 0, g: 0.6, b: 0.20000002, a: 1}
+  Jungle: {r: 0, g: 0.6, b: 0.20000002, a: 1}
+  Savannah: {r: 0, g: 0.6, b: 0.20000002, a: 1}
+  Snow: {r: 1, g: 1, b: 1, a: 1}
+  Desert: {r: 1, g: 0.8000001, b: 0, a: 1}
 --- !u!1 &233962908
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,7 +203,6 @@ GameObject:
   - component: {fileID: 233962912}
   - component: {fileID: 233962911}
   - component: {fileID: 233962910}
-  - component: {fileID: 233962909}
   m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
@@ -170,44 +210,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &233962909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 233962908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a20ed1d6e51d1f24ca64d8a862e3326f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Widht: 256
-  Heigth: 256
-  Step: 0.1
-  Frequency: 1
-  Exp: 10.75
-  WaterTreshold: 0.2
-  Scorched: {r: 0.2784314, g: 0.41960788, b: 0.41960788, a: 0}
-  Bare: {r: 0.21960786, g: 0.31764707, b: 0.31764707, a: 0}
-  Tundra: {r: 0.21960786, g: 0.31764707, b: 0.31764707, a: 0}
-  TemperateDesert: {r: 0.21960786, g: 0.31764707, b: 0.31764707, a: 0}
-  Shrubland: {r: 0, g: 0, b: 0, a: 0}
-  Taiga: {r: 0, g: 0, b: 0, a: 0}
-  TemperateDeciduousForest: {r: 0, g: 0, b: 0, a: 0}
-  TemperateRainForest: {r: 0, g: 0, b: 0, a: 0}
-  SubtropicalSeasonalForest: {r: 0, g: 0, b: 0, a: 0}
-  TropicalSeasonalRainForest: {r: 0, g: 0, b: 0, a: 0}
-  TropicalRainForest: {r: 0, g: 0, b: 0, a: 0}
-  Water: {r: 0, g: 0.40000004, b: 1, a: 0}
-  DeepWater: {r: 0, g: 0, b: 1, a: 0}
-  Grassland: {r: 0.20000002, g: 0.8000001, b: 0.20000002, a: 0}
-  Beach: {r: 1, g: 1, b: 0.40000004, a: 0}
-  Mountain: {r: 0.2784314, g: 0.41960788, b: 0.41960788, a: 0}
-  Forest: {r: 0, g: 0.6, b: 0.20000002, a: 0}
-  Jungle: {r: 0, g: 0.6, b: 0.20000002, a: 0}
-  Savannah: {r: 0, g: 0.6, b: 0.20000002, a: 0}
-  Snow: {r: 1, g: 1, b: 1, a: 0}
-  Desert: {r: 1, g: 0.8000001, b: 0, a: 0}
 --- !u!23 &233962910
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -267,8 +269,36 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 233962908}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 80779267}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1024133129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1024133130}
+  m_Layer: 0
+  m_Name: 71.29
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1024133130
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1024133129}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.51, y: -1.74, z: -2.2437584}
+  m_LocalPosition: {x: 3.463744, y: -1.6796719, z: -2.2441406}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
 public enum Biome
@@ -16,7 +14,7 @@ public enum Biome
     Tundra,
 
     TemperateDesert,
-    Shrubland,
+    Shrubland,      // en edes tiedä mikä on Shrubland
     Taiga,
 
     GrassLand,
@@ -36,18 +34,20 @@ public enum Biome
     Snow
 }
 
+// TODO: Paljon hienosäätöä biomet voisi vaihtaa samaksi Tile enumiksi, mapin scrollaus, tuolla Texture2D voisi tehdä minimapin
+
 public class Perlin : MonoBehaviour
 {
     #region Fields
 
-    public int Widht = 256;
-    public int Heigth = 256;
+    public Transform RenderTarget;
 
-    public float Step = 0.1f;
-    public float Frequency = 1.0f;
-    public float Exp = 1.0f;
-
-    public float WaterTreshold = 0.2f;
+    public int   Width          = 256;
+    public int   Heigth         = 256;
+    public float Step           = 0.1f;
+    public float Frequency      = 1.0f;
+    public float Exp            = 1.0f;
+    public float WaterTreshold  = 0.2f;
 
     [Header("Järjettömät")]
     public Color Scorched;
@@ -56,7 +56,7 @@ public class Perlin : MonoBehaviour
     public Color TemperateDesert;
     public Color Shrubland;
     public Color Taiga;
-    public Color TemperateDeciduousForest;
+    public Color TemperateDeciduousForest;  // TODO: keksi hassuja tiilien nimiä
     public Color TemperateRainForest;
     public Color SubtropicalSeasonalForest;
     public Color TropicalSeasonalRainForest;
@@ -81,12 +81,35 @@ public class Perlin : MonoBehaviour
 
     void Start()
     {
-        Renderer renderer = GetComponent<Renderer>();
-        _renderer = renderer;
-        Init2(256, 256);
+        if (RenderTarget == null)
+        {
+            Debug.LogError("Please set the renderTarget (Quad)");
+        }
+        _renderer = RenderTarget.GetComponent<Renderer>();
+        InitalizeRenderTarget();
     }
 
-    public Texture2D Init(int width, int height)
+    public void GenerateTileMap(TileMap tileMap)
+    {
+        int width = tileMap.Width;
+        int height = tileMap.Height;
+        float[,] elevation = new float[width, height];
+        float[,] moisture = new float[width, height];
+            
+        GenerateNoiseMap(elevation, moisture, width, height);
+
+        for (int x = 0; x < tileMap.Width; x++)
+        {
+            for (int y = 0; y < tileMap.Height; y++)
+            {
+                float e = elevation[x, y];
+                float m = moisture[x, y];
+                tileMap.GetTileGameObject(x, y).GetComponent<Renderer>().material.color = BiomeToColor(GetBiome2(e, m));
+            }
+        }
+    }
+
+    private Texture2D Init(int width, int height)
     {
         Texture2D random = new Texture2D(width, height);
 
@@ -103,15 +126,34 @@ public class Perlin : MonoBehaviour
         return random;
     }
 
-    public void Init2(int width = 0, int height = 0)
+    public void InitalizeRenderTarget()
     {
-        width = Widht;
-        height = Heigth;
+        Texture2D texture = new Texture2D(Width, Heigth);        
+        float[,] elevation = new float[Width, Heigth];
+        float[,] moisture = new float[Width, Heigth];
+        GenerateNoiseMap(elevation, moisture, Width, Heigth);
 
+        for (int x = 0; x < Width; x++)
+        {
+            for (int y = 0; y < Heigth; y++)
+            {
+                float e = elevation[x, y];
+                float m = moisture[x, y];
+                // Color color = new Color(e, e, e);
+                Color color = BiomeToColor(GetBiome2(e, m));
+                texture.SetPixel(x, y, color);
+            }
+        }
+        texture.Apply();
+        _renderer.material.mainTexture = texture;
+    }
+
+    private void GenerateNoiseMap(float [,] elevation, float[,] moisture, int width, int height)
+    {
         Texture2D random = new Texture2D(width, height);
 
-        float[,] elevation = new float[width, height];
-        float[,] moisture = new float[width, height];
+        // float[,] elevation = new float[width, height];
+        // float[,] moisture = new float[width, height];
         float randMoffset = 10f;
 
         float xOff = 0.0f;
@@ -143,21 +185,7 @@ public class Perlin : MonoBehaviour
             xOff += 0.01f;
         }
 
-        // kaksi looppia koska ei valmis
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                float e = elevation[x, y];
-                float m = moisture[x, y];
-                // Color color = new Color(e, e, e);
-                Color color = BiomeToColor(GetBiome2(e, m));
-                random.SetPixel(x, y, color);
-            }
-        }
-        random.Apply();
-
-        _renderer.material.mainTexture = random;
+      
     }
 
     public Color BiomeToColor(Biome biome)
@@ -192,6 +220,7 @@ public class Perlin : MonoBehaviour
         }
     }
 
+    // Ei käytössä tällä hetkellä
     public Biome GetBiome(float e, float m) // (elevation, moisture)
     {
         if (e < 0.1f) return Biome.Water;
@@ -235,6 +264,7 @@ public class Perlin : MonoBehaviour
     {
         if (e < 0.004f) return Biome.DeepWater;
         if (e < 0.1f) return Biome.Water;
+        // ReSharper disable once PossibleNullReferenceException
         if (e < 0.12f) return Biome.Beach;
 
         if (e > 2.9f)

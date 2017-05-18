@@ -1,0 +1,265 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.Remoting.Messaging;
+using UnityEngine;
+
+public enum Biome
+{
+    Water,
+    DeepWater,
+    Beach,
+
+    Scorhed,
+    Bare,
+    Tundra,
+
+    TemperateDesert,
+    Shrubland,
+    Taiga,
+
+    GrassLand,
+    TemperateDeciduousForest,
+    TemperateRainForest,
+
+    SubtropicalDesert,
+    TropicalSeasonalForest,
+    TropicalRainForest,
+
+    Forest,
+    Jungle,
+    Savannah,
+    Desert,
+    Mountain,
+
+    Snow
+}
+
+public class Perlin : MonoBehaviour
+{
+    #region Fields
+
+    public int Widht = 256;
+    public int Heigth = 256;
+
+    public float Step = 0.1f;
+    public float Frequency = 1.0f;
+    public float Exp = 1.0f;
+
+    public float WaterTreshold = 0.2f;
+
+    [Header("Järjettömät")]
+    public Color Scorched;
+    public Color Bare;
+    public Color Tundra;
+    public Color TemperateDesert;
+    public Color Shrubland;
+    public Color Taiga;
+    public Color TemperateDeciduousForest;
+    public Color TemperateRainForest;
+    public Color SubtropicalSeasonalForest;
+    public Color TropicalSeasonalRainForest;
+    public Color TropicalRainForest;
+
+    [Space(1)]
+    [Header("Järkevät")]
+    public Color Water;
+    public Color DeepWater;
+    public Color Grassland;
+    public Color Beach;
+    public Color Mountain;
+    public Color Forest;
+    public Color Jungle;
+    public Color Savannah;
+    public Color Snow;
+    public Color Desert;
+
+    private Renderer _renderer;
+
+    #endregion
+
+    void Start()
+    {
+        Renderer renderer = GetComponent<Renderer>();
+        _renderer = renderer;
+        Init2(256, 256);
+    }
+
+    public Texture2D Init(int width, int height)
+    {
+        Texture2D random = new Texture2D(width, height);
+
+        for (float x = 0; x < width * Step; x += Step)
+        {
+            for (float y = 0; y < height * Step; y += Step)
+            {
+                float p = Mathf.PerlinNoise(x, y);
+                Color color = new Color(p, p, p);
+                random.SetPixel((int)(x / Step), (int)(y / Step), color);
+            }
+        }
+        random.Apply();
+        return random;
+    }
+
+    public void Init2(int width = 0, int height = 0)
+    {
+        width = Widht;
+        height = Heigth;
+
+        Texture2D random = new Texture2D(width, height);
+
+        float[,] elevation = new float[width, height];
+        float[,] moisture = new float[width, height];
+        float randMoffset = 10f;
+
+        float xOff = 0.0f;
+        for (int x = 0; x < width; x++)
+        {
+            float yOff = 0.0f;
+            for (int y = 0; y < height; y++)
+            {
+                //float nx = (float)x / width;
+                //float ny = (float)y / height;
+                float nx = xOff;
+                float ny = yOff;
+
+                float e = 1 * Mathf.PerlinNoise(nx * Frequency, ny * Frequency) +
+                          0.5f * Mathf.PerlinNoise(2 * nx, 2 * ny)
+                          + 0.25f * Mathf.PerlinNoise(4 * nx, 4 * ny);
+                elevation[x, y] = Mathf.Pow(e, Exp);
+
+                nx += randMoffset;
+                ny += randMoffset;
+
+                float m = 1 * Mathf.PerlinNoise(nx * Frequency, ny * Frequency) +
+                          0.5f * Mathf.PerlinNoise(2 * nx, 2 * ny)
+                          + 0.25f * Mathf.PerlinNoise(4 * nx, 2 * ny);
+                moisture[x, y] = m; // Mathf.Pow(m, Exp);
+
+                yOff += 0.01f;
+            }
+            xOff += 0.01f;
+        }
+
+        // kaksi looppia koska ei valmis
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                float e = elevation[x, y];
+                float m = moisture[x, y];
+                // Color color = new Color(e, e, e);
+                Color color = BiomeToColor(GetBiome2(e, m));
+                random.SetPixel(x, y, color);
+            }
+        }
+        random.Apply();
+
+        _renderer.material.mainTexture = random;
+    }
+
+    public Color BiomeToColor(Biome biome)
+    {
+        switch (biome)
+        {
+            case Biome.DeepWater: return DeepWater;
+            case Biome.Water: return Water;
+            case Biome.Beach: return Beach;
+            case Biome.Scorhed: return Scorched;
+            case Biome.Bare: return Bare;
+            case Biome.Tundra: return Tundra;
+            case Biome.TemperateDesert: return TemperateDesert;
+            case Biome.Shrubland: return Shrubland;
+            case Biome.Taiga: return Taiga;
+            case Biome.GrassLand: return Grassland;
+            case Biome.TemperateDeciduousForest: return TemperateDeciduousForest;
+            case Biome.TemperateRainForest: return TemperateRainForest;
+            case Biome.SubtropicalDesert: return SubtropicalSeasonalForest;
+            case Biome.TropicalSeasonalForest: return TropicalSeasonalRainForest;
+            case Biome.TropicalRainForest: return TropicalRainForest;
+            case Biome.Snow: return Snow;
+            case Biome.Mountain: return Mountain;
+
+            case Biome.Forest: return Forest;
+            case Biome.Jungle: return Jungle;
+            case Biome.Savannah: return Savannah;
+            case Biome.Desert: return Desert;
+            default:
+                print(biome);
+                throw new ArgumentOutOfRangeException("biome", biome, null);
+        }
+    }
+
+    public Biome GetBiome(float e, float m) // (elevation, moisture)
+    {
+        if (e < 0.1f) return Biome.Water;
+        else if (e < 0.2f) return Biome.Beach;
+
+        if (e > 2.8f)
+        {
+            if (m < 0.1f) return Biome.Scorhed;
+            if (m < 0.2f) return Biome.Bare;
+            if (m < 0.5f) return Biome.Tundra;
+            return Biome.Snow;
+        }
+
+        if (e > 0.9f)
+        {
+            return Biome.Mountain;
+        }
+
+        //if (e > 0.9f)
+        //{
+        //    if (m < 0.33f) return Biome.TemperateDesert;
+        //    if (m < 0.66f) return Biome.Shrubland;
+        //    return Biome.Taiga;
+        //}
+
+        if (e > 0.3f)
+        {
+            if (m < 0.16f) return Biome.TemperateDesert;
+            if (m < 0.50f) return Biome.GrassLand;
+            if (m < 0.83f) return Biome.TemperateDeciduousForest;
+            return Biome.TemperateRainForest;
+        }
+
+        if (m < 0.16f) return Biome.SubtropicalDesert;
+        if (m < 0.33f) return Biome.GrassLand;
+        if (m < 0.66f) return Biome.TropicalSeasonalForest;
+        return Biome.TemperateRainForest;
+    }
+
+    public Biome GetBiome2(float e, float m) // (elevation, moisture)
+    {
+        if (e < 0.004f) return Biome.DeepWater;
+        if (e < 0.1f) return Biome.Water;
+        if (e < 0.12f) return Biome.Beach;
+
+        if (e > 2.9f)
+        {
+            if (m < 0.2f) return Biome.Scorhed;
+            if (m < 0.5f) return Biome.Bare;
+            if (m < 0.95f) return Biome.Tundra;
+            return Biome.Snow;
+        }
+        if (e > 1.6f)
+        {
+            return Biome.Mountain;
+        }
+
+        //if (e > 0.3f)
+        //{
+        //    return Biome.Forest;
+        //}
+
+        if (m < 0.1) return Biome.Water;
+        if (m < 0.2) return Biome.Beach;
+        if (m < 0.3) return Biome.Forest;
+        if (m < 0.5) return Biome.Jungle;
+        if (m < 0.7) return Biome.Savannah;
+        if (m < 0.8) return Biome.Desert;
+        return Biome.GrassLand;
+    }
+}

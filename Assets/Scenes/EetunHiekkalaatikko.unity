@@ -165,12 +165,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RenderTarget: {fileID: 233962913}
-  Width: 256
-  Heigth: 256
+  DrawMode: 1
   Step: 0.1
-  Frequency: 1
-  Exp: 10.75
+  Exp: 11.7
   WaterTreshold: 0.2
+  MoistureFrequence: 0.31
+  Frequency: 0.47
+  offsetX: 0
+  offsetY: 0
+  Width: 500
+  Heigth: 500
+  ConstantGenerate: 0
+  Octaves: 2
+  Persistance: 0.5
+  Lacunarity: 3
   Scorched: {r: 0.2784314, g: 0.41960788, b: 0.41960788, a: 1}
   Bare: {r: 0.21960786, g: 0.31764707, b: 0.31764707, a: 1}
   Tundra: {r: 0.21960786, g: 0.31764707, b: 0.31764707, a: 1}
@@ -387,7 +395,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1959881010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: -1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

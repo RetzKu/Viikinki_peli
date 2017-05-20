@@ -11,7 +11,6 @@ public class TileMap : MonoBehaviour
     private Dictionary<Tile, GameObject> _tileGameObjects;  // Tällä saatas takas maailmassa oleva GameObject
     private Tile[,] _tiles;                                 // En tiiä tuntuu mausteikkaalta ratkaisulta(hyvältä)
 
-
     void Start()
     {
         _tileGameObjects = new Dictionary<Tile, GameObject>(Height * Width);

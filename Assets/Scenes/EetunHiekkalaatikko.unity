@@ -171,14 +171,14 @@ MonoBehaviour:
   WaterTreshold: 0.2
   MoistureFrequence: 0.31
   Frequency: 0.47
-  offsetX: 0
-  offsetY: 0
-  Width: 500
-  Heigth: 500
+  OffsetX: 30
+  OffsetY: 30
+  Width: 250
+  Heigth: 250
   ConstantGenerate: 0
-  Octaves: 2
-  Persistance: 0.5
-  Lacunarity: 3
+  Octaves: 3
+  Persistance: 0.32
+  Lacunarity: 3.57
   Scorched: {r: 0.2784314, g: 0.41960788, b: 0.41960788, a: 1}
   Bare: {r: 0.21960786, g: 0.31764707, b: 0.31764707, a: 1}
   Tundra: {r: 0.21960786, g: 0.31764707, b: 0.31764707, a: 1}
@@ -196,10 +196,12 @@ MonoBehaviour:
   Beach: {r: 1, g: 1, b: 0.40000004, a: 1}
   Mountain: {r: 0.2784314, g: 0.41960788, b: 0.41960788, a: 1}
   Forest: {r: 0, g: 0.6, b: 0.20000002, a: 1}
-  Jungle: {r: 0, g: 0.6, b: 0.20000002, a: 1}
+  Jungle: {r: 0.010056239, g: 0.45588237, b: 0.15866491, a: 1}
   Savannah: {r: 0, g: 0.6, b: 0.20000002, a: 1}
   Snow: {r: 1, g: 1, b: 1, a: 1}
   Desert: {r: 1, g: 0.8000001, b: 0, a: 1}
+  BigMapWidth: 4
+  BigMapHeight: 4
 --- !u!1 &233962908
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Timers;
+using System.IO;
+using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
 public enum Biome
@@ -16,7 +15,7 @@ public enum Biome
 
     TemperateDesert,
     Shrubland,      // en edes tiedä mikä on Shrubland
-    Taiga,
+    Taiga,          // näiden tilalle hassuja biome/tileTypejä
 
     GrassLand,
     TemperateDeciduousForest,
@@ -42,9 +41,6 @@ public class Perlin : MonoBehaviour
     public delegate Color ColoringScheme(float elevation, float moisture);
 
     #region Fields
-
-    public Transform RenderTarget;
-
     public enum NoiseMode
     {
         Noise,
@@ -52,6 +48,7 @@ public class Perlin : MonoBehaviour
         ColoredMoistured
     };
 
+    public Transform RenderTarget;
     public NoiseMode DrawMode = NoiseMode.Colored;
 
     [Header("Mauteet/epätoiminnassa")]
@@ -62,8 +59,8 @@ public class Perlin : MonoBehaviour
 
     [Header("Säädöt")]
     public float Frequency = 1.0f;
-    public float offsetX = 0f;
-    public float offsetY = 0f;
+    public float OffsetX = 0f;
+    public float OffsetY = 0f;
     public int Width = 256;
     public int Heigth = 256;
     public bool ConstantGenerate = false;
@@ -102,6 +99,11 @@ public class Perlin : MonoBehaviour
 
     private Renderer _renderer;
 
+
+    [Space(1)] [Header("Big Map settings")]
+    public int BigMapWidth = 3;
+    public int BigMapHeight = 3;
+
     #endregion
 
     void Start()
@@ -112,10 +114,37 @@ public class Perlin : MonoBehaviour
         }
         _renderer = RenderTarget.GetComponent<Renderer>();
         InitalizeRenderTarget();
+
+
     }
 
-    void Update()
+    public void GenerateWorldTextureMap(int x, int y, float startX, float startY)
     {
+        float startOffX = OffsetX; // TODO: fix 
+        float startOffY = OffsetY;
+        int w = 250, h = 250;
+
+        for (int i = 0; i < x; i++)
+        {
+            for (int j = 0; j < y; j++)
+            {
+                float[,] noiseMap = new float[w, h];
+
+                GenerateNoiseMap(noiseMap, w, h);
+
+                var go = GameObject.CreatePrimitive(PrimitiveType.Quad);
+                go.transform.position = new Vector3(startX + i, startY - j);
+                var r = go.GetComponent<Renderer>();
+                r.material.shader = Shader.Find("Unlit/Texture");
+                DrawNoiseMap((e, m) => BiomeToColor(GetBiome(e, m)), r);
+
+                OffsetY -= 2.5f;
+            }
+            OffsetX += 2.5f;
+            OffsetY = startOffY;
+        }
+        OffsetX = startOffX;
+        OffsetY = startOffY;
     }
 
     public void GenerateTileMap(TileMap tileMap)
@@ -156,22 +185,24 @@ public class Perlin : MonoBehaviour
         return random;
     }
 
+    private Color DefaultColoring(float e, float m)
+    {
+        return Color.Lerp(Color.black, Color.white, e);
+    }
+
     public void InitalizeRenderTarget()
     {
         if (DrawMode == NoiseMode.Colored)
         {
-            DrawNoiseMap((e, m) => BiomeToColor(GetBiome(e, m)));
+            DrawNoiseMap((e, m) => BiomeToColor(GetBiome(e, m)), _renderer);
         }
         else if (DrawMode == NoiseMode.Noise)
         {
-            DrawNoiseMap((e, m) => Color.Lerp(Color.black, Color.white, e));
-        }
-        else if (DrawMode == NoiseMode.ColoredMoistured)
-        {
+            DrawNoiseMap((e, m) => Color.Lerp(Color.black, Color.white, e), _renderer);
         }
     }
 
-    public void DrawNoiseMap(ColoringScheme coloring)
+    public void DrawNoiseMap(ColoringScheme coloring, Renderer renderer)
     {
         Texture2D texture = new Texture2D(Width, Heigth);
         texture.filterMode = FilterMode.Point;
@@ -182,11 +213,10 @@ public class Perlin : MonoBehaviour
         float[,] moisture = new float[Width, Heigth];
         GenerateNoiseMap(elevation, Width, Heigth);
 
-        float tmp = offsetX;
-        offsetX += 100f;
+        float tmp = OffsetX;
+        OffsetX += 100f;
         GenerateNoiseMap(moisture, Width, Heigth);
-        offsetX = tmp;
-
+        OffsetX = tmp;
 
         for (int x = 0; x < Width; x++)
         {
@@ -198,10 +228,11 @@ public class Perlin : MonoBehaviour
             }
         }
         texture.Apply();
-        _renderer.material.mainTexture = texture;
+        renderer.material.mainTexture = texture;
     }
 
     // vale seed
+
     private void GenerateNoiseMap(float[,] noiseMap, int width, int height, float seed = 0f)
     {
         float maxNoiseHeigth = float.MinValue;
@@ -215,8 +246,8 @@ public class Perlin : MonoBehaviour
             {
                 //float nx = (float)x / width;
                 //float ny = (float)y / height;
-                float nx = xOff; // offsetX; // TODO: scrollaus
-                float ny = yOff; //  + offsetY;
+                float nx = xOff; // OffsetX; // TODO: scrollaus
+                float ny = yOff; //  + OffsetY;
 
 #if true
                 float frequence = 1;
@@ -225,8 +256,8 @@ public class Perlin : MonoBehaviour
 
                 for (int i = 0; i < Octaves; i++)
                 {
-                    nx = ((x ) / 100f * frequence + offsetX * frequence);
-                    ny = ((y ) / 100f * frequence + offsetY * frequence);
+                    nx = ((x) / 100f * frequence + OffsetX * frequence);
+                    ny = ((y) / 100f * frequence + OffsetY * frequence);
 
                     float perlin = Mathf.PerlinNoise(nx, ny) * 2 - 1;
                     noiseHeigth += perlin * amplitude;
@@ -242,7 +273,7 @@ public class Perlin : MonoBehaviour
                     minNoiseHeight = noiseHeigth;
                 }
                 noiseMap[x, y] = noiseHeigth;
-#else
+#else       
                 float e = 1 * Mathf.PerlinNoise(nx * Frequency, ny * Frequency) +
                           0.5f * Mathf.PerlinNoise(2 * nx, 2 * ny)
                           + 0.25f * Mathf.PerlinNoise(4 * nx, 4 * ny);
@@ -290,7 +321,6 @@ public class Perlin : MonoBehaviour
             case Biome.TropicalRainForest: return TropicalRainForest;
             case Biome.Snow: return Snow;
             case Biome.Mountain: return Mountain;
-
             case Biome.Forest: return Forest;
             case Biome.Jungle: return Jungle;
             case Biome.Savannah: return Savannah;
@@ -311,13 +341,15 @@ public class Perlin : MonoBehaviour
         if (e < 0.50f)
         {
             if (m < 0.20f) return Biome.Desert;
-            // if (m > 0.70) return Biome.Jungle;
+            if (m > 0.70f) return Biome.Jungle;
             return Biome.GrassLand;
         }
         // if (e < 0.60f) return;
         if (e < 0.70f)
         {
             // makes me moist
+            // ehkä Tänne metsä Tyypi?? mutta silloint vuorien rinteet on aina metsää
+            // eli ehkä molempiin  "grassland"(0.5f) pitäisi laitta metsä + normi tiiliä
             return Biome.Forest;
         }
 
@@ -325,41 +357,5 @@ public class Perlin : MonoBehaviour
         if (e < 0.90f) return Biome.Mountain;
         // High mountain
         return Biome.Snow;
-    }
-
-    // fuckdudp
-    public Biome GetBiome2(float e, float m) // (elevation, moisture)
-    {
-        if (e < 0.004f) return Biome.DeepWater;
-        if (e < 0.1f) return Biome.Water;
-        // ReSharper disable once PossibleNullReferenceException
-        if (e < 0.12f) return Biome.Beach;
-
-        if (e > 2.9f)
-        {
-            if (m < 0.2f) return Biome.Scorhed;
-            if (m < 0.5f) return Biome.Bare;
-            if (m < 0.95f) return Biome.Tundra;
-            return Biome.Snow;
-        }
-        if (e > 1.6f)
-        {
-            return Biome.Mountain;
-        }
-
-        if (m < 0.33) // Häck
-            return Biome.Jungle;
-        if (e > 0.3f)
-        {
-            return Biome.Forest;
-        }
-
-        if (m < 0.1) return Biome.Water;
-        if (m < 0.2) return Biome.Beach;
-        if (m < 0.3) return Biome.Forest;
-        if (m < 0.5) return Biome.Jungle;
-        if (m < 0.7) return Biome.Savannah;
-        if (m < 0.8) return Biome.Desert;
-        return Biome.GrassLand;
     }
 }

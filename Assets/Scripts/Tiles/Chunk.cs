@@ -15,6 +15,9 @@ public class Chunk
     private Tile[,] _tiles;
     private Dictionary<Tile, GameObject> _tileGameObjects;
 
+    private int offsetX;
+    private int offsetY;
+
     public void Init(int chunkOffsetX, int chunkOffsetY)
     {
         _tileGameObjects = new Dictionary<Tile, GameObject>(CHUNK_SIZE * CHUNK_SIZE);
@@ -30,11 +33,11 @@ public class Chunk
         {
             for (int x = 0; x < CHUNK_SIZE; x++)
             {
-                _tiles[y, x] = new Tile(y, x);
+                _tiles[y, x] = new Tile(x, y);
 
                 GameObject tileObject = new GameObject("(" + y + "," + x + ")");
                 tileObject.transform.parent = parent.transform;
-                tileObject.transform.position = new Vector3(y + chunkOffsetY, x + chunkOffsetX, 0);
+                tileObject.transform.position = new Vector3( x + chunkOffsetX, y + chunkOffsetY, 0);
 
                 SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
                 spriteRenderer.sprite = GrassSprite;
@@ -44,6 +47,9 @@ public class Chunk
                 _tileGameObjects.Add(_tiles[y, x], tileObject);
             }
         }
+
+        offsetX = chunkOffsetX;
+        offsetY = chunkOffsetY;
     }
 
     // näitä kutsuu todenkäköisesti vain TileMap class jonka kautta kaikki kommunikaatio
@@ -58,11 +64,8 @@ public class Chunk
         return _tileGameObjects[GetTile(x, y)];
     }
 
-    void OnDrawGizmos()
+    public void OnDrawGizmos()
     {
-        if (debugDrawChunk)
-        {
-            // draw chunk borders?
-        }
+       
     }
 }

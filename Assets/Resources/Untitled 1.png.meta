@@ -1,11 +1,6 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: d6c910ee253c8c34e8c41e3dcbffda89
-timeCreated: 1497253604
-=======
-guid: 9ad332cd15b972648aecc5b49295532d
+guid: fb1a5a6b24d2b984c9e77540833633af
 timeCreated: 1497349854
->>>>>>> Hikky
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName: {}
@@ -63,8 +58,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-<<<<<<< HEAD
-=======
   - buildTarget: Standalone
     maxTextureSize: 2048
     textureFormat: -1
@@ -129,7 +122,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
->>>>>>> Hikky
   spriteSheet:
     serializedVersion: 2
     sprites: []

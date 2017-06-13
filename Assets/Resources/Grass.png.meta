@@ -1,7 +1,13 @@
 fileFormatVersion: 2
-guid: a315a963e64bd7844bb16a69cf4bb51f
-timeCreated: 1495025238
+<<<<<<< HEAD:Assets/Dummy_Tile.png.meta
+guid: ee9d0b1954621a84bb532048b90ed491
+timeCreated: 1495119872
 licenseType: Free
+=======
+guid: 1de215bc980f1b64abeab6fc77ffee36
+timeCreated: 1497349854
+licenseType: Pro
+>>>>>>> Hikky:Assets/Resources/Grass.png.meta
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 4
@@ -27,24 +33,24 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
-    filterMode: 0
-    aniso: 16
-    mipBias: 0
-    wrapMode: 0
-  nPOTScale: 0
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: -1
+  nPOTScale: 1
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 3
+  spriteMode: 0
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 4
+  spritePixelsToUnits: 100
   alphaUsage: 1
   alphaIsTransparency: 0
   spriteTessellationDetail: -1
-  textureType: 8
+  textureType: 0
   textureShape: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
@@ -52,23 +58,7 @@ TextureImporter:
   platformSettings:
   - buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    textureFormat: 4
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: Standalone
-    maxTextureSize: 2048
-    textureFormat: 4
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: WebGL
-    maxTextureSize: 2048
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -77,11 +67,7 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline:
-    - - {x: -2, y: -2}
-      - {x: -2, y: 2}
-      - {x: 2, y: 2}
-      - {x: 2, y: -2}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

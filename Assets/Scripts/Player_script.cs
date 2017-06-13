@@ -53,7 +53,7 @@ public class Player_script : MonoBehaviour {
         {
             cd = false;
         }
-
+	}
     }
 	
     void OnDrawGizmos()

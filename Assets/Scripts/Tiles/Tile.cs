@@ -18,6 +18,7 @@ public class Tile
 
     public Tile(int x, int y)
     {
+
         Type = TileType.Empty;
         X = x;
         Y = y;

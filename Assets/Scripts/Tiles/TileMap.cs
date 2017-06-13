@@ -13,82 +13,139 @@ public class TileMap : MonoBehaviour
     private Perlin _perlinGenerator;
 
     public Chunk[,] _chunks; // TODO: object pool
-
-    public bool TilemapDebug = false;
+    public bool TilemapDebug = true;
+    private bool running = false;
 
     void Start()
     {
-        _tileGameObjects = new Dictionary<Tile, GameObject>(Height * Width);
+        _tileGameObjects = new Dictionary<Tile, GameObject>(Height * Width);    // TODO: widht height rikki atm
         _tiles = new Tile[Height, Width];
 
         GameObject parent = new GameObject("Tiles");
 
         if (TilemapDebug)
         {
-
-            for (int x = 0; x < Width; x++)
+            for (int y = 0; y < Width; y++)
             {
-                for (int y = 0; y < Height; y++)
+                for (int x = 0; x < Height; x++)
                 {
-                    _tiles[x, y] = new Tile(x, y);
+                    _tiles[y, x] = new Tile(x, y);
 
-                    GameObject tileObject = new GameObject("(" + x + "," + y + ")");
+                    GameObject tileObject = new GameObject("(" + y + "," + x + ")");
                     tileObject.transform.parent = parent.transform;
-                    tileObject.transform.position = new Vector3(x, y, 0);
+                    tileObject.transform.position = new Vector3(y, x, 0);
 
                     SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
                     spriteRenderer.sprite = GrassSprite;
                     spriteRenderer.sortingLayerName = "TileMap";
 
-                    _tileGameObjects.Add(_tiles[x, y], tileObject);
+                    _tileGameObjects.Add(_tiles[y, x], tileObject);
                 }
             }
         }
 
+        running = true;
         _perlinGenerator = GetComponent<Perlin>();
-        _chunks = new Chunk[3, 3]; // ehkä, ehkä ei
+        _chunks = new Chunk[3, 3];
 
         for (int y = 0; y < 3; y++)
         {
             for (int x = 0; x < 3; x++)
             {
-                _chunks[y, x] = new Chunk();
+                _chunks[y, x] = new Chunk();        // tmp
                 _chunks[y, x].Init(x, y);
-                GenerateChunk(x, y); // ei vällii
+            }
+        }
+
+        for (int y = 0; y < 2; y++)
+        {
+            for (int x = 0; x < 2; x++)
+            {
+                GenerateChunk(x, y); // ei vällii?
             }
         }
     }
 
-    void Update()
+    void OnDrawGizmos()
     {
-        // Dunno ? 
+        if (running)
+        {
+            for (int y = 0; y < 3; y++)
+            {
+                for (int x = 0; x < 3; x++)
+                {
+                    int halfChunk = Chunk.CHUNK_SIZE / 2;
+                    Vector3 center = new Vector3(halfChunk + x * Chunk.CHUNK_SIZE - 0.5f, halfChunk + y * Chunk.CHUNK_SIZE - 0.5f);
+                    Vector3 bounds = new Vector3(Chunk.CHUNK_SIZE, Chunk.CHUNK_SIZE);
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawWireCube(center, bounds);
+                }
+            }
+        }
     }
 
-    // if out of chunk check  in player aka           % chunkSize or something
-    // chunk Stuff ????
-    // player gets Chunk coordinates ? 
-    public void UpdateTilemap<T>(T player) where T : MonoBehaviour  // temp
+    // oleetaan että viewrange on aina pienempi kuin chunk
+    public void UpdateTilemap<T>(T player, int viewRange) where T : MonoBehaviour, ITestPlayer  // tmp  
     {
         // calculate current Chunk coords
-        // Player.transform.position.x 
-
-        // TODO: missä on origo? 
         int chunkOffsetX = (int)(player.transform.position.x / Chunk.CHUNK_SIZE);
         int chunkOffsetY = (int)(player.transform.position.y / Chunk.CHUNK_SIZE);
 
-        Debug.LogFormat("player chunk X:{0}, Y:{1}", chunkOffsetX, chunkOffsetY);
-    }
+        if (chunkOffsetX != player.ChunkOffsets.X || chunkOffsetY != player.ChunkOffsets.Y)
+        {
+            Debug.LogFormat("player chunk changed to({0}:{1})", chunkOffsetX, chunkOffsetY);
 
+
+
+            int chunkDtX = chunkOffsetX - player.ChunkOffsets.X;
+            int chunkDtY = chunkOffsetY - player.ChunkOffsets.Y;
+
+            player.ChunkOffsets.X = chunkOffsetX;
+            player.ChunkOffsets.Y = chunkOffsetY;
+
+            if (chunkDtX < 0)
+            {
+                for (int i = -1; i < 2; i++)    // -1
+                {
+                    GenerateChunk(chunkOffsetX - 1, chunkOffsetY + i);
+                    Debug.LogFormat("gen: {0}:{1}", chunkOffsetX - 1, chunkOffsetY + i);
+                }
+            }
+            else if (chunkDtX > 0)
+            {
+                for (int i = -1; i < 2; i++)    // -1
+                {
+                    GenerateChunk(chunkOffsetX + 1, chunkOffsetY + i);
+                    Debug.LogFormat("gen: {0}:{1}", chunkOffsetX + 1, chunkOffsetY + i);
+                }
+            }
+
+            if (chunkDtY < 0)
+            {
+                for (int i = -1; i < 2; i++)    // -1
+                {
+                    GenerateChunk(chunkOffsetX + i, chunkOffsetY - 1);
+                }
+            }
+            else if (chunkDtY > 0)
+            {
+                for (int i = -1; i < 2; i++)    // -1
+                    GenerateChunk(chunkOffsetX + i, chunkOffsetY + 1);
+            }
+        }
+        // onko viewiin tullut uusi chunk
+    }
 
     void GenerateChunk(int offsetX, int offsetY) // mitkä ???
     {
-        // ota yhteys Perliiiniin        
+        // ota yhteys Perliiiniin     
+        // _chunks[offsetY, offsetX].Init(offsetX, offsetY);   
         _perlinGenerator.GenerateChunk(_chunks[offsetY, offsetX], offsetX, offsetY);
     }
 
     void LoadChunk()
     {
-        // just gen        
+        // just gen   
     }
 
     void SaveChunk()
@@ -107,7 +164,7 @@ public class TileMap : MonoBehaviour
         if (x < 0 || x > Width || y < 0 || y > Height)           // Note(Eetu): nyt aluksi jotai mutta sitten kun perlin noise saa liikkumaan 
             Debug.LogError("TileMap::GetTile Out of bounds");    // niin kenttä voisi teoriassa olla rajaton
 
-        return _tiles[x, y];
+        return _tiles[y, x];
     }
 
     public GameObject GetTileGameObject(Tile tile)

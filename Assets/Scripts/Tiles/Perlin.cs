@@ -122,7 +122,7 @@ public class Perlin : MonoBehaviour
     {
         float startOffX = OffsetX; // TODO: fix 
         float startOffY = OffsetY;
-        int w = 250, h = 250;
+        int w = 200, h = 200;
 
         for (int i = 0; i < x; i++)
         {
@@ -300,6 +300,55 @@ public class Perlin : MonoBehaviour
         }
     }
 
+    public void GenerateChunk(Chunk chunk, int offsetX, int offsetY) // chunkin offsetit 0,0:sta
+    {
+        int chunkSize = Chunk.CHUNK_SIZE;
+
+        // offsetX *= Chunk.CHUNK_SIZE;
+        // offsetY *= Chunk.CHUNK_SIZE;
+        // TODO: KORJAA API ihmisen luettavaksi
+        OffsetX = .20f * (float)offsetY;
+        OffsetY = .20f * (float)offsetX;
+      
+
+        float[,] elevation = new float[chunkSize, chunkSize];
+        float[,] moisture = new float[chunkSize, chunkSize];
+
+        GenerateNoiseMap(elevation, chunkSize, chunkSize);
+        GenerateNoiseMap(moisture, chunkSize, chunkSize);
+
+        for (int y = 0; y < chunkSize; y++)
+        {
+            for (int x = 0; x < chunkSize; x++)
+            {
+                chunk.GetGameObject(x, y).GetComponent<Renderer>().material.color =
+                    BiomeToColor(GetBiome(elevation[y, x], moisture[y, x]));
+                // WARNING: väärin päin x y !! TODO: !!!!
+            }
+        }
+    }
+
+    //public void GenerateTileMap(TileMap tileMap)
+    //{
+    //    int width = tileMap.Width;
+    //    int height = tileMap.Height;
+    //    float[,] elevation = new float[width, height];
+    //    float[,] moisture = new float[width, height];
+
+    //    GenerateNoiseMap(elevation, width, height);
+    //    GenerateNoiseMap(moisture, width, height);
+
+    //    for (int x = 0; x < tileMap.Width; x++)
+
+    //    {
+    //        for (int y = 0; y < tileMap.Height; y++)
+    //        {
+    //            tileMap.GetTileGameObject(x, y).GetComponent<Renderer>().material.color =
+    //                BiomeToColor(GetBiome(elevation[x, y], moisture[x, y]));
+    //        }
+    //    }
+    //}
+
     public Color BiomeToColor(Biome biome)
     {
         switch (biome)
@@ -358,4 +407,6 @@ public class Perlin : MonoBehaviour
         // High mountain
         return Biome.Snow;
     }
+
+   
 }

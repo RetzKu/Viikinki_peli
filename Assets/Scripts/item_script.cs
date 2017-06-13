@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class item : MonoBehaviour {
+public class item_script : MonoBehaviour {
     public int ID;
     public string Name;
     public int Atk;

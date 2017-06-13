@@ -7,17 +7,48 @@ public class Player_script : MonoBehaviour {
     private List<Item_Values> inventory;
     private List<Item_Values> id_in_range;
 
+    Vector3 startPoint;
+    Vector3 endPoint;
+    public bool running = false;
+	
     void Start () {
         inventory = new List<Item_Values>(10);
         id_in_range = new List<Item_Values>(999);
+	running = true;
 	}
+
     void Update()
     {
+	    
+	var mousePos = Input.mousePosition;
+        mousePos.z = 10;
+
+        Vector3 playerPosition = new Vector3(transform.position.x, transform.position.y, 0.0f); // Pelaajan positio
+        Vector3 clickPosition = new Vector3();
+        clickPosition.x = Camera.main.ScreenToWorldPoint(mousePos).x - playerPosition.x; // clickPosition on loppupiste - alkupiste
+        clickPosition.y = Camera.main.ScreenToWorldPoint(mousePos).y - playerPosition.y;
+        clickPosition.z = 0.0f;
+
+        Vector3.Normalize(clickPosition);
+        //print(clickPosition);
+
+        startPoint = playerPosition; // Pelaajan positio
+        endPoint = Camera.main.ScreenToWorldPoint(mousePos); // Hiiren osoittama kohta
+	    
         if (Input.GetAxisRaw("Interract") == 1)
         {
 
         }
     }
+	
+    void OnDrawGizmos()
+    {
+        if (running == true)
+        {
+            Gizmos.DrawLine(startPoint, endPoint); // piirretään viiva visualisoimaan toimivuutta
+        }
+    }
+	
     void OnTriggerEnter2D(Collider2D Trig)
     {
         if(Trig.gameObject.tag == "Item")

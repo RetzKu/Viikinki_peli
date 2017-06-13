@@ -7,10 +7,14 @@ public class Player_script : MonoBehaviour {
     private List<Item_Values> inventory;
     private List<Item_Values> id_in_range;
 
+    private bool cd = false;
+
+
     Vector3 startPoint;
     Vector3 endPoint;
     public bool running = false;
 	
+
     void Start () {
         inventory = new List<Item_Values>(10);
         id_in_range = new List<Item_Values>(999);
@@ -19,8 +23,7 @@ public class Player_script : MonoBehaviour {
 
     void Update()
     {
-	    
-	var mousePos = Input.mousePosition;
+      var mousePos = Input.mousePosition;
         mousePos.z = 10;
 
         Vector3 playerPosition = new Vector3(transform.position.x, transform.position.y, 0.0f); // Pelaajan positio
@@ -34,11 +37,23 @@ public class Player_script : MonoBehaviour {
 
         startPoint = playerPosition; // Pelaajan positio
         endPoint = Camera.main.ScreenToWorldPoint(mousePos); // Hiiren osoittama kohta
-	    
-        if (Input.GetAxisRaw("Interract") == 1)
-        {
 
+        if (cd == false)
+        {
+          if (Input.GetAxisRaw("Interract") == 1)
+          {
+              if (Input.GetAxisRaw("Interract") == 1)
+              {
+                  Debug.Log("pressed f for respect");
+                  cd = true;
+                  pick_up();
+              } 
+          }
+        if (Input.GetAxisRaw("Interract") == 0)
+        {
+            cd = false;
         }
+
     }
 	
     void OnDrawGizmos()
@@ -53,15 +68,8 @@ public class Player_script : MonoBehaviour {
     {
         if(Trig.gameObject.tag == "Item")
         {
-
-            int ID = Trig.GetComponent<item_script>().ID;
-            string Name = Trig.GetComponent<item_script>().Name;
-            int Atk = Trig.GetComponent<item_script>().Atk;
-
             in_range(Trig, true);
-            //inventory.Add(new Item(ID,Name,Atk));
-
-            Debug.Log("item");
+            Debug.Log("item found");
         }
     }
     void OnTriggerExit2D(Collider2D Trig)
@@ -80,21 +88,23 @@ public class Player_script : MonoBehaviour {
         {
             if(on_off == false)
             {
-                int id = Trig.GetComponent<item_script>().ID;
-                //int it = id_in_range.IndexOf(id);
-                //Debug.Log(it);
-                //id_in_range.Remove(it);
+                int it = id_in_range.FindIndex(x => x.ID == Trig.GetComponent<item_script>().ID);
+                id_in_range.RemoveAt(it);  
             }
         }
+    }
+    void pick_up()
+    {
+        Debug.Log(id_in_range.Count);
     }
 }
 
 class Item_Values
 {
-    int ID;
+    public int ID;
     string Name;
     int Atk;
 
-    public Item_Values(int ID, string Name, int Atk) { }
+    public Item_Values(int _ID, string _Name, int _Atk) { ID = _ID; Name = _Name; Atk = _Atk; }
 }
 

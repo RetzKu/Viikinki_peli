@@ -145,6 +145,8 @@ public class Perlin : MonoBehaviour
         }
         OffsetX = startOffX;
         OffsetY = startOffY;
+
+       
     }
 
     public void GenerateTileMap(TileMap tileMap)
@@ -157,13 +159,12 @@ public class Perlin : MonoBehaviour
         GenerateNoiseMap(elevation, width, height);
         GenerateNoiseMap(moisture, width, height);
 
-        for (int x = 0; x < tileMap.Width; x++)
-
+        for (int y = 0; y < tileMap.Width; y++)
         {
-            for (int y = 0; y < tileMap.Height; y++)
+            for (int x = 0; x < tileMap.Height; x++)
             {
-                tileMap.GetTileGameObject(x, y).GetComponent<Renderer>().material.color =
-                    BiomeToColor(GetBiome(elevation[x, y], moisture[x, y]));
+                tileMap.GetTileGameObject(y, x).GetComponent<Renderer>().material.color =
+                    BiomeToColor(GetBiome(elevation[y, x], moisture[y, x]));
             }
         }
     }
@@ -218,12 +219,12 @@ public class Perlin : MonoBehaviour
         GenerateNoiseMap(moisture, Width, Heigth);
         OffsetX = tmp;
 
-        for (int x = 0; x < Width; x++)
+        for (int y = 0; y < Width; y++)
         {
-            for (int y = 0; y < Heigth; y++)
+            for (int x = 0; x < Heigth; x++)
             {
-                float e = elevation[x, y];
-                float m = moisture[x, y];
+                float e = elevation[y, x];
+                float m = moisture[y, x];
                 texture.SetPixel(x, y, coloring(e, m));
             }
         }
@@ -239,10 +240,10 @@ public class Perlin : MonoBehaviour
         float minNoiseHeight = float.MaxValue;
 
         float xOff = seed;
-        for (int x = 0; x < width; x++)
+        for (int y = 0; y < width; y++)
         {
             float yOff = seed;
-            for (int y = 0; y < height; y++)
+            for (int x = 0; x < height; x++)
             {
                 //float nx = (float)x / width;
                 //float ny = (float)y / height;
@@ -256,8 +257,8 @@ public class Perlin : MonoBehaviour
 
                 for (int i = 0; i < Octaves; i++)
                 {
-                    nx = ((x) / 100f * frequence + OffsetX * frequence);
-                    ny = ((y) / 100f * frequence + OffsetY * frequence);
+                    nx = ((y) / 100f * frequence + OffsetY * frequence);
+                    ny = ((x) / 100f * frequence + OffsetX * frequence);
 
                     float perlin = Mathf.PerlinNoise(nx, ny) * 2 - 1;
                     noiseHeigth += perlin * amplitude;
@@ -272,7 +273,7 @@ public class Perlin : MonoBehaviour
                 {
                     minNoiseHeight = noiseHeigth;
                 }
-                noiseMap[x, y] = noiseHeigth;
+                noiseMap[y, x] = noiseHeigth;
 #else       
                 float e = 1 * Mathf.PerlinNoise(nx * Frequency, ny * Frequency) +
                           0.5f * Mathf.PerlinNoise(2 * nx, 2 * ny)
@@ -307,8 +308,8 @@ public class Perlin : MonoBehaviour
         // offsetX *= Chunk.CHUNK_SIZE;
         // offsetY *= Chunk.CHUNK_SIZE;
         // TODO: KORJAA API ihmisen luettavaksi
-        OffsetX = .20f * (float)offsetY;
-        OffsetY = .20f * (float)offsetX;
+        OffsetX = .20f * (float)offsetX;
+        OffsetY = .20f * (float)offsetY;
       
 
         float[,] elevation = new float[chunkSize, chunkSize];
@@ -323,9 +324,10 @@ public class Perlin : MonoBehaviour
             {
                 chunk.GetGameObject(x, y).GetComponent<Renderer>().material.color =
                     BiomeToColor(GetBiome(elevation[y, x], moisture[y, x]));
-                // WARNING: väärin päin x y !! TODO: !!!!
             }
         }
+        offsetX = 0;
+        OffsetY = 0;
     }
 
     //public void GenerateTileMap(TileMap tileMap)

@@ -13,12 +13,12 @@ public class Player_script : MonoBehaviour
     Vector3 endPoint;
     public bool running = false;
 
-
     void Start()
     {
         inventory = new List<Item_Values>(10);
         id_in_range = new List<Item_Values>(999);
         running = true;
+        
     }
 
     void Update()
@@ -33,9 +33,34 @@ public class Player_script : MonoBehaviour
         clickPosition.z = 0.0f;
 
         Vector3.Normalize(clickPosition);
-        //print(clickPosition);
+        print(clickPosition);
         startPoint = playerPosition; // Pelaajan positio
         endPoint = Camera.main.ScreenToWorldPoint(mousePos); // Hiiren osoittama kohta
+
+
+        if (clickPosition.x < 0.0f)
+        {
+            if(GameObject.Find("Lapio").GetComponent<SpriteRenderer>().flipX == false)
+            {
+                //GameObject.Find("Lapio").GetComponent<Transform>().position.x = -0.4; // Väittää että muuttuja olisi constant vaikkei pitäisi olla :c
+                GameObject.Find("Lapio").GetComponent<SpriteRenderer>().flipX = true;
+            }
+        }
+
+        if (clickPosition.x > 0.0f)
+        {
+            if (GameObject.Find("Lapio").GetComponent<SpriteRenderer>().flipX == true)
+            {
+                GameObject.Find("Lapio").GetComponent<SpriteRenderer>().flipX = false;
+            }
+        }
+
+        if (Input.GetKey(KeyCode.Mouse0) == true)
+        {
+            
+            GetComponentInChildren<Animator>().SetTrigger("lapioAttack");
+            print(clickPosition);
+        }
 
     }
     void OnDrawGizmos()

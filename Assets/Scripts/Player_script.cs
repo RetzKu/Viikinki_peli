@@ -135,7 +135,6 @@ public class Player_script : MonoBehaviour
             inventory.Add(closest_item);
             closest_item = null;
             Destroy(id_in_range[it].Trig.gameObject);
-            id_in_range.RemoveAt(it);
         }
     }
 

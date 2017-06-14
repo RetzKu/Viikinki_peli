@@ -47,22 +47,9 @@ public class Chunk
                 _tileGameObjects.Add(_tiles[y, x], tileObject);
             }
         }
+
         offsetX = chunkOffsetX;
         offsetY = chunkOffsetY;
-    }
-
-    public void moveChunk(int x, int y)
-    {
-        int dtOffsetX = CHUNK_SIZE * x;
-        int dtOffsetY = CHUNK_SIZE * y;
-
-        foreach (var keypairvalue in _tileGameObjects)
-        {
-            GameObject go = keypairvalue.Value;
-            go.transform.position = new Vector3(go.transform.position.x + dtOffsetX, go.transform.position.y + dtOffsetY, go.transform.position.z);
-        }
-        offsetX = dtOffsetX;
-        offsetY = dtOffsetY;
     }
 
     // näitä kutsuu todenkäköisesti vain TileMap class jonka kautta kaikki kommunikaatio

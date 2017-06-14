@@ -22,8 +22,14 @@ public interface ITestPlayer
 
 public class DebugMover : MonoBehaviour, ITestPlayer
 {
+    public float Speed = 1f;
     public float DebugViewRange = 16f; // range per suunta 8f
+
+    private Rigidbody2D body;
+    private Vector2 vel;
+
     private TileMap tilemap;
+
     public Vec2 ChunkOffsets { get; set; }
     private int _viewRange = 8;
 
@@ -36,12 +42,19 @@ public class DebugMover : MonoBehaviour, ITestPlayer
 
     void Start()
     {
+        body = GetComponent<Rigidbody2D>();
+
         tilemap = FindObjectOfType<TileMap>();
-        ChunkOffsets = TileMap.GetChunkOffset (transform.position.x, transform.position.y);
+
+        ChunkOffsets = new Vec2(0, 0);
     }
 
     void Update ()
     {
+        vel = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+        vel *= Speed;
+        body.MovePosition(body.position + vel);
+
         tilemap.UpdateTilemap(this, _viewRange);
     }
 }

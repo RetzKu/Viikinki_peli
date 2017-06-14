@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Player_script : MonoBehaviour
@@ -8,21 +9,22 @@ public class Player_script : MonoBehaviour
     private List<Item_Values> inventory;
     private List<Item_Values> id_in_range;
 
+    private Item_Values closest_item;
     private bool cd = false;
     Vector3 startPoint;
     Vector3 endPoint;
-    public bool running = false;
+    public bool running = true;
 
 
     void Start()
     {
-        inventory = new List<Item_Values>(10);
-        id_in_range = new List<Item_Values>(999);
-        running = true;
+        inventory = new List<Item_Values>(20);
+        id_in_range = new List<Item_Values>(100);
     }
 
     void Update()
     {
+
         interraction();
         var mousePos = Input.mousePosition;
         mousePos.z = 10;
@@ -37,6 +39,7 @@ public class Player_script : MonoBehaviour
         startPoint = playerPosition; // Pelaajan positio
         endPoint = Camera.main.ScreenToWorldPoint(mousePos); // Hiiren osoittama kohta
 
+        inventory_management();
     }
     void OnDrawGizmos()
     {
@@ -66,25 +69,55 @@ public class Player_script : MonoBehaviour
     {
         if (on_off == true)
         {
-            id_in_range.Add(new Item_Values(Trig.GetComponent<item_script>().ID, Trig.GetComponent<item_script>().Name, Trig.GetComponent<item_script>().Atk));
+            id_in_range.Add(new Item_Values(Trig));
         }
         else
         {
             if (on_off == false)
             {
-                int it = id_in_range.FindIndex(x => x.ID == Trig.GetComponent<item_script>().ID);
+                int id = Trig.GetComponent<item_script>().ID;
+                int it = id_in_range.FindIndex(x => x.Trig.GetComponent<item_script>().ID == id);
                 id_in_range.RemoveAt(it);
             }
+        }
+    }
+
+    void closest()
+    {
+        
+        closest_item = null;
+        if (id_in_range.Count != 0)
+        {
+            int it = 0;
+            float closest_distance = 9999;
+            for (int i = 0; i < id_in_range.Count; i++)
+            {
+                if(Vector2.Distance(id_in_range[i].Trig.bounds.center, transform.position)< closest_distance)
+                {
+                    it = i;
+                }
+            }
+            closest_item = id_in_range[it];
+            Debug.Log(closest_item.Trig.bounds.center.ToString("f4"));
         }
     }
 
     void pick_up()
     {
         Debug.Log(id_in_range.Count);
+        if(id_in_range.Count > 0)
+        {
+            int it = id_in_range.FindIndex(x => x.Trig.GetComponent<item_script>().ID == closest_item.Trig.GetComponent<item_script>().ID);
+            inventory.Add(closest_item);
+            closest_item = null;
+            Destroy(id_in_range[it].Trig.gameObject);
+            id_in_range.RemoveAt(it);
+        }
     }
 
     void interraction()
     {
+        closest();
         if (cd == false)
         {
             if (Input.GetAxisRaw("Interract") == 1)
@@ -100,14 +133,18 @@ public class Player_script : MonoBehaviour
             cd = false;
         }
     }
-}    
 
+    void inventory_management()
+    {
+        
+    }
+
+}
+ 
 class Item_Values
 {
-    public int ID;
-    string Name;
-    int Atk;
-
-    public Item_Values(int _ID, string _Name, int _Atk) { ID = _ID; Name = _Name; Atk = _Atk; }
+    public Collider2D Trig;
+    public Item_Values(Collider2D _Trig) { Trig = _Trig;}
 }
+
 

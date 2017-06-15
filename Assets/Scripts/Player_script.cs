@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player_script : MonoBehaviour
 {
 
-    private List<Item_Values> inventory;
+    public List<Item_Values> invetory_data;
     private List<Item_Values> id_in_range;
 
     private Item_Values closest_item;
@@ -18,7 +18,7 @@ public class Player_script : MonoBehaviour
 
     void Start()
     {
-        inventory = new List<Item_Values>(20);
+        invetory_data = new List<Item_Values>(20);
         id_in_range = new List<Item_Values>(100);
     }
 
@@ -78,15 +78,12 @@ public class Player_script : MonoBehaviour
         if (Trig.gameObject.tag == "Item")
         {
             in_range(Trig, true);
-            Debug.Log("item found");
         }
     }
 
     void OnTriggerExit2D(Collider2D Trig)
     {
-        Debug.Log("item exit");
         in_range(Trig, false);
-
     }
 
     void in_range(Collider2D Trig, bool on_off)
@@ -108,7 +105,6 @@ public class Player_script : MonoBehaviour
 
     void closest()
     {
-        
         closest_item = null;
         if (id_in_range.Count != 0)
         {
@@ -132,9 +128,10 @@ public class Player_script : MonoBehaviour
         if(id_in_range.Count > 0)
         {
             int it = id_in_range.FindIndex(x => x.Trig.GetComponent<item_script>().ID == closest_item.Trig.GetComponent<item_script>().ID);
-            inventory.Add(closest_item);
+            invetory_data.Add(closest_item);
             closest_item = null;
             Destroy(id_in_range[it].Trig.gameObject);
+            id_in_range.RemoveAt(it);
         }
     }
 
@@ -163,8 +160,8 @@ public class Player_script : MonoBehaviour
     }
 
 }
- 
-class Item_Values
+
+public class Item_Values
 {
     public Collider2D Trig;
     public Item_Values(Collider2D _Trig) { Trig = _Trig;}

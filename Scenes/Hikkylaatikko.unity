@@ -328,6 +328,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114610926286296066, guid: 1f301049b4c0be3489c749352f91ebc1,
+        type: 2}
+      propertyPath: InventorySize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114610926286296066, guid: 1f301049b4c0be3489c749352f91ebc1,
+        type: 2}
+      propertyPath: text_object
+      value: 
+      objectReference: {fileID: 957683052}
     m_RemovedComponents:
     - {fileID: 61702353700118178, guid: 1f301049b4c0be3489c749352f91ebc1, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 1f301049b4c0be3489c749352f91ebc1, type: 2}
@@ -348,7 +358,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &957683053
 RectTransform:
   m_ObjectHideFlags: 0
@@ -364,8 +374,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 237, y: -156}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 173.50006, y: -213.49997}
+  m_SizeDelta: {x: 171, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &957683054
 MonoBehaviour:
@@ -476,6 +486,11 @@ Prefab:
     - target: {fileID: 1121568548503450, guid: d40e84613197c284897f7f617df89532, type: 2}
       propertyPath: m_Name
       value: Tmp_miekka (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114421060506276594, guid: d40e84613197c284897f7f617df89532,
+        type: 2}
+      propertyPath: Name
+      value: Miekka2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d40e84613197c284897f7f617df89532, type: 2}

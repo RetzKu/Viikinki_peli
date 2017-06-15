@@ -16,6 +16,6 @@ public class inventory : MonoBehaviour {
 	void Update ()
     {
         inventory_data = PlayerGameobject.GetComponent<Player_script>().invetory_data;
-        if(inventory_data.Count != 0) { Debug.Log(inventory_data[0].Trig.GetComponent<item_script>().Name); }
+        
     }
 }

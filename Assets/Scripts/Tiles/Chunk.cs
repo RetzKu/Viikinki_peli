@@ -10,15 +10,18 @@ public class Chunk
 
 
     private TileType[,] _tiles;
-    private Dictionary<TileType, GameObject> _tileGameObjects;
+    private GameObject[,] _tileGameObjects;
 
     private int offsetX;
     private int offsetY;
 
     public void Init(int chunkOffsetX, int chunkOffsetY)
     {
-        _tileGameObjects = new Dictionary<TileType, GameObject>(CHUNK_SIZE * CHUNK_SIZE);
+        // _tileGameObjects = new Dictionary<TileType, GameObject>(CHUNK_SIZE * CHUNK_SIZE);
         _tiles = new TileType[CHUNK_SIZE, CHUNK_SIZE];
+        _tileGameObjects = new GameObject[CHUNK_SIZE, CHUNK_SIZE];
+
+
         GrassSprite = Resources.Load<Sprite>("Dummy_Tile");
         // GrassSprite.
 
@@ -41,7 +44,8 @@ public class Chunk
                 spriteRenderer.sortingLayerName = "TileMap";
                 // spriteRenderer.shader
 
-                _tileGameObjects.Add(_tiles[y, x], tileObject);
+                _tileGameObjects[y, x] = tileObject;
+                // _tileGameObjects.Add(_tiles[y, x], tileObject);
             }
         }
         offsetX = chunkOffsetX;
@@ -53,11 +57,11 @@ public class Chunk
         int dtOffsetX = CHUNK_SIZE * x;
         int dtOffsetY = CHUNK_SIZE * y;
 
-        foreach (var keypairvalue in _tileGameObjects)
+        foreach(var go in _tileGameObjects)
         {
-            GameObject go = keypairvalue.Value;
             go.transform.position = new Vector3(go.transform.position.x + dtOffsetX, go.transform.position.y + dtOffsetY, go.transform.position.z);
         }
+
         offsetX = dtOffsetX;
         offsetY = dtOffsetY;
     }
@@ -71,7 +75,7 @@ public class Chunk
 
     public GameObject GetGameObject(int x, int y) 
     {
-        return _tileGameObjects[GetTile(x, y)];
+        return _tileGameObjects[y, x];
     }
 
     public void OnDrawGizmos()

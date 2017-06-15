@@ -3,8 +3,9 @@ using System.IO;
 using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
-public enum Biome
+public enum TileType
 {
+    Invalid,   
     Water,
     DeepWater,
     Beach,
@@ -182,6 +183,7 @@ public class Perlin : MonoBehaviour
                 random.SetPixel((int)(x / Step), (int)(y / Step), color);
             }
         }
+
         random.Apply();
         return random;
     }
@@ -351,49 +353,49 @@ public class Perlin : MonoBehaviour
     //    }
     //}
 
-    public Color BiomeToColor(Biome biome)
+    public Color BiomeToColor(TileType biome)
     {
         switch (biome)
         {
-            case Biome.DeepWater: return DeepWater;
-            case Biome.Water: return Water;
-            case Biome.Beach: return Beach;
-            case Biome.Scorhed: return Scorched;
-            case Biome.Bare: return Bare;
-            case Biome.Tundra: return Tundra;
-            case Biome.TemperateDesert: return TemperateDesert;
-            case Biome.Shrubland: return Shrubland;
-            case Biome.Taiga: return Taiga;
-            case Biome.GrassLand: return Grassland;
-            case Biome.TemperateDeciduousForest: return TemperateDeciduousForest;
-            case Biome.TemperateRainForest: return TemperateRainForest;
-            case Biome.SubtropicalDesert: return SubtropicalSeasonalForest;
-            case Biome.TropicalSeasonalForest: return TropicalSeasonalRainForest;
-            case Biome.TropicalRainForest: return TropicalRainForest;
-            case Biome.Snow: return Snow;
-            case Biome.Mountain: return Mountain;
-            case Biome.Forest: return Forest;
-            case Biome.Jungle: return Jungle;
-            case Biome.Savannah: return Savannah;
-            case Biome.Desert: return Desert;
+            case TileType.DeepWater: return DeepWater;
+            case TileType.Water: return Water;
+            case TileType.Beach: return Beach;
+            case TileType.Scorhed: return Scorched;
+            case TileType.Bare: return Bare;
+            case TileType.Tundra: return Tundra;
+            case TileType.TemperateDesert: return TemperateDesert;
+            case TileType.Shrubland: return Shrubland;
+            case TileType.Taiga: return Taiga;
+            case TileType.GrassLand: return Grassland;
+            case TileType.TemperateDeciduousForest: return TemperateDeciduousForest;
+            case TileType.TemperateRainForest: return TemperateRainForest;
+            case TileType.SubtropicalDesert: return SubtropicalSeasonalForest;
+            case TileType.TropicalSeasonalForest: return TropicalSeasonalRainForest;
+            case TileType.TropicalRainForest: return TropicalRainForest;
+            case TileType.Snow: return Snow;
+            case TileType.Mountain: return Mountain;
+            case TileType.Forest: return Forest;
+            case TileType.Jungle: return Jungle;
+            case TileType.Savannah: return Savannah;
+            case TileType.Desert: return Desert;
             default:
                 print(biome);
                 throw new ArgumentOutOfRangeException("biome", biome, null);
         }
     }
 
-    public Biome GetBiome(float e, float m) // (elevation, moisture)
+    public TileType GetBiome(float e, float m) // (elevation, moisture)
     {
-        if (e < 0.05f) return Biome.DeepWater;
-        if (e < 0.22) return Biome.Water;
-        if (e < 0.26) return Biome.Beach;
+        if (e < 0.05f) return TileType.DeepWater;
+        if (e < 0.22) return TileType.Water;
+        if (e < 0.26) return TileType.Beach;
 
         // if (e < 0.40f) return ;
         if (e < 0.50f)
         {
-            if (m < 0.20f) return Biome.Desert;
-            if (m > 0.70f) return Biome.Jungle;
-            return Biome.GrassLand;
+            if (m < 0.20f) return TileType.Desert;
+            if (m > 0.70f) return TileType.Jungle;
+            return TileType.GrassLand;
         }
         // if (e < 0.60f) return;
         if (e < 0.70f)
@@ -401,14 +403,12 @@ public class Perlin : MonoBehaviour
             // makes me moist
             // ehkä Tänne metsä Tyypi?? mutta silloint vuorien rinteet on aina metsää
             // eli ehkä molempiin  "grassland"(0.5f) pitäisi laitta metsä + normi tiiliä
-            return Biome.Forest;
+            return TileType.Forest;
         }
 
-        if (e < 0.80f) return Biome.Bare;
-        if (e < 0.90f) return Biome.Mountain;
+        if (e < 0.80f) return TileType.Bare;
+        if (e < 0.90f) return TileType.Mountain;
         // High mountain
-        return Biome.Snow;
+        return TileType.Snow;
     }
-
-   
 }

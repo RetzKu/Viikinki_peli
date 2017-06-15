@@ -2,13 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TileType
-{
-    Empty,
-    Grass,
-    Sea, 
-    Pate
-}
+
 
 public class Tile
 {
@@ -18,9 +12,8 @@ public class Tile
 
     public Tile(int x, int y)
     {
-
-        Type = TileType.Empty;
-        X = x;
+        Type = TileType.Invalid;
+        this.X = x;
         Y = y;
     }
 }

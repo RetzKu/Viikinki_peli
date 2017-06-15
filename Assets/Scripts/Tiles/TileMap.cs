@@ -4,17 +4,28 @@ using UnityEngine;
 
 public class TileMap : MonoBehaviour
 {
+    [Header("älä käytä")]
     public int Width;
     public int Height;
     public Sprite GrassSprite; // Note(Eetu): Spritet kannattaa varmaan eroitella toiseen scriptiin (ehkä?)
 
     private Dictionary<Tile, GameObject> _tileGameObjects;  // Tällä saatas takas maailmassa oleva GameObject
     private Tile[,] _tiles;                                 // En tiiä tuntuu mausteikkaalta ratkaisulta(hyvältä)
-    private Perlin _perlinGenerator;
 
+    private Perlin _perlinGenerator;
     public Chunk[,] _chunks; // TODO: object pool
-    public bool TilemapDebug = true;
+
+    //private int tilemapInitWidth  = 2;
+    //private int tilemapInitHeight = 2;
+
+    private bool TilemapDebug = false; // depricated
     private bool running = false;
+
+    [Header("kayta")]
+    public bool tilemapPrototypeLayout = false;
+    public float tilemapGenerationOffsetX = 0;
+    public float tilemapGenerationOffsetY = 0;
+
 
     void Start()
     {
@@ -57,9 +68,17 @@ public class TileMap : MonoBehaviour
             }
         }
 
-        for (int y = 0; y < 2; y++)
+        int initHeight = 3;
+        int initWidth = 3;
+        if (tilemapPrototypeLayout)
         {
-            for (int x = 0; x < 2; x++)
+            initHeight = 3;
+            initWidth = 3;
+        }
+
+        for (int y = 0; y < initHeight; y++)
+        {
+            for (int x = 0; x < initWidth; x++)
             {
                 GenerateChunk(x, y); // ei vällii?
             }
@@ -84,18 +103,32 @@ public class TileMap : MonoBehaviour
         }
     }
 
-    // oleetaan että viewrange on aina pienempi kuin chunk
+    public static Vec2 GetChunkOffset(float x, float y)
+    {
+        int chunkOffsetX = (int)(x / Chunk.CHUNK_SIZE);
+        int chunkOffsetY = (int)(y / Chunk.CHUNK_SIZE);
+
+        return new Vec2(chunkOffsetX, chunkOffsetY);
+    }
+
+    public static int GetChunkOffset(float coord)
+    {
+        return (int)(coord / Chunk.CHUNK_SIZE);
+    }
+
+    // oletetaan että viewrange on aina pienempi kuin chunk
     public void UpdateTilemap<T>(T player, int viewRange) where T : MonoBehaviour, ITestPlayer  // tmp  
     {
+        if (tilemapPrototypeLayout)
+            return;
+
         // calculate current Chunk coords
-        int chunkOffsetX = (int)(player.transform.position.x / Chunk.CHUNK_SIZE);
-        int chunkOffsetY = (int)(player.transform.position.y / Chunk.CHUNK_SIZE);
+        int chunkOffsetX = GetChunkOffset(player.transform.position.x);
+        int chunkOffsetY = GetChunkOffset(player.transform.position.y);
 
         if (chunkOffsetX != player.ChunkOffsets.X || chunkOffsetY != player.ChunkOffsets.Y)
         {
             Debug.LogFormat("player chunk changed to({0}:{1})", chunkOffsetX, chunkOffsetY);
-
-
 
             int chunkDtX = chunkOffsetX - player.ChunkOffsets.X;
             int chunkDtY = chunkOffsetY - player.ChunkOffsets.Y;
@@ -105,37 +138,98 @@ public class TileMap : MonoBehaviour
 
             if (chunkDtX < 0)
             {
+                swapColumn(2, 1);
+                swapColumn(1, 0);
+
                 for (int i = -1; i < 2; i++)    // -1
                 {
-                    GenerateChunk(chunkOffsetX - 1, chunkOffsetY + i);
-                    Debug.LogFormat("gen: {0}:{1}", chunkOffsetX - 1, chunkOffsetY + i);
+                    GenerateChunk(0, i + 1, chunkOffsetX - 1, chunkOffsetY + i);
+                    _chunks[i + 1, 0].moveChunk(-3, 0);
                 }
             }
             else if (chunkDtX > 0)
             {
+                swapColumn(1, 0);
+                swapColumn(2, 1);
+
                 for (int i = -1; i < 2; i++)    // -1
                 {
-                    GenerateChunk(chunkOffsetX + 1, chunkOffsetY + i);
-                    Debug.LogFormat("gen: {0}:{1}", chunkOffsetX + 1, chunkOffsetY + i);
+                    GenerateChunk(2, i + 1, chunkOffsetX + 1, chunkOffsetY + i);
+                    _chunks[i + 1, 2].moveChunk(3, 0);
                 }
             }
-
             if (chunkDtY < 0)
             {
+                swapRow(2, 1);
+                swapRow(1, 0);
+
                 for (int i = -1; i < 2; i++)    // -1
                 {
-                    GenerateChunk(chunkOffsetX + i, chunkOffsetY - 1);
+                    GenerateChunk(i + 1, 0, chunkOffsetX + i, chunkOffsetY - 1);
+                    _chunks[0, i + 1].moveChunk(0, -3);
                 }
             }
             else if (chunkDtY > 0)
             {
+                swapRow(1, 0);
+                swapRow(2, 1);
+
                 for (int i = -1; i < 2; i++)    // -1
-                    GenerateChunk(chunkOffsetX + i, chunkOffsetY + 1);
+                {
+                    GenerateChunk(i + 1, 2, chunkOffsetX + i, chunkOffsetY + 1);
+                    _chunks[2, i + 1].moveChunk(0, 3);
+                }
             }
         }
-        // onko viewiin tullut uusi chunk
     }
 
+    void Update()
+    {
+        // debug
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            for(int i = 0; i < 3; i++)
+            {
+                _chunks[i, 2].moveChunk(3, 0);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            swapColumn(1, 0);
+            swapColumn(2, 1);
+        }
+    }
+  
+    void swapRow(int y, int newY)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            swapChunks(i, i, y, newY);
+        }
+    }
+
+    void swapColumn(int x, int newX)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            swapChunks(x, newX, i, i);
+        }
+    }
+
+    void swapChunks(int offsetX, int newOffsetX, int offsetY, int newOffsetY)
+    {
+        Chunk tmp = _chunks[offsetY, offsetX];
+        _chunks[offsetY, offsetX] = _chunks[newOffsetY, newOffsetX];
+        _chunks[newOffsetY, newOffsetX] = tmp;
+    }
+
+    void GenerateChunk(int offsetX, int offsetY, int perlinOffsetX, int perlinOffsetY) // mitkä ???
+    {
+        _perlinGenerator.GenerateChunk(_chunks[offsetY, offsetX], perlinOffsetX, perlinOffsetY);
+    }
+
+    // TMP TODO: DELETE!!!
     void GenerateChunk(int offsetX, int offsetY) // mitkä ???
     {
         // ota yhteys Perliiiniin     
@@ -145,7 +239,7 @@ public class TileMap : MonoBehaviour
 
     void LoadChunk()
     {
-        // just gen   
+       
     }
 
     void SaveChunk()
@@ -161,9 +255,8 @@ public class TileMap : MonoBehaviour
 
     public Tile GetTile(int x, int y)
     {
-        if (x < 0 || x > Width || y < 0 || y > Height)           // Note(Eetu): nyt aluksi jotai mutta sitten kun perlin noise saa liikkumaan 
-            Debug.LogError("TileMap::GetTile Out of bounds");    // niin kenttä voisi teoriassa olla rajaton
-
+        if (x < 0 || x > Width || y < 0 || y > Height)
+            Debug.LogError("TileMap::GetTile Out of bounds");
         return _tiles[y, x];
     }
 

@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.Collections.Generic;
 using UnityEngine;
-
-//      load/generate Chunks of world
 
 public class Chunk 
 {
@@ -12,16 +8,17 @@ public class Chunk
 
     public Sprite GrassSprite;
 
-    private Tile[,] _tiles;
-    private Dictionary<Tile, GameObject> _tileGameObjects;
+
+    private TileType[,] _tiles;
+    private Dictionary<TileType, GameObject> _tileGameObjects;
 
     private int offsetX;
     private int offsetY;
 
     public void Init(int chunkOffsetX, int chunkOffsetY)
     {
-        _tileGameObjects = new Dictionary<Tile, GameObject>(CHUNK_SIZE * CHUNK_SIZE);
-        _tiles = new Tile[CHUNK_SIZE, CHUNK_SIZE];
+        _tileGameObjects = new Dictionary<TileType, GameObject>(CHUNK_SIZE * CHUNK_SIZE);
+        _tiles = new TileType[CHUNK_SIZE, CHUNK_SIZE];
         GrassSprite = Resources.Load<Sprite>("Dummy_Tile");
         // GrassSprite.
 
@@ -33,7 +30,7 @@ public class Chunk
         {
             for (int x = 0; x < CHUNK_SIZE; x++)
             {
-                _tiles[y, x] = new Tile(x, y);
+                _tiles[y, x] = TileType.Invalid;
 
                 GameObject tileObject = new GameObject("(" + y + "," + x + ")");
                 tileObject.transform.parent = parent.transform;
@@ -47,19 +44,32 @@ public class Chunk
                 _tileGameObjects.Add(_tiles[y, x], tileObject);
             }
         }
-
         offsetX = chunkOffsetX;
         offsetY = chunkOffsetY;
     }
 
+    public void moveChunk(int x, int y)
+    {
+        int dtOffsetX = CHUNK_SIZE * x;
+        int dtOffsetY = CHUNK_SIZE * y;
+
+        foreach (var keypairvalue in _tileGameObjects)
+        {
+            GameObject go = keypairvalue.Value;
+            go.transform.position = new Vector3(go.transform.position.x + dtOffsetX, go.transform.position.y + dtOffsetY, go.transform.position.z);
+        }
+        offsetX = dtOffsetX;
+        offsetY = dtOffsetY;
+    }
+
     // näitä kutsuu todenkäköisesti vain TileMap class jonka kautta kaikki kommunikaatio
     // chunkeille tehdään!
-    public Tile GetTile(int x, int y)
+    public TileType GetTile(int x, int y)
     {
         return _tiles[y, x];
     }
 
-    public GameObject GetGameObject(int x, int y) // hiaman hitaampi kuin Tile varitaatio (jota ei ole olemassa(vielä))
+    public GameObject GetGameObject(int x, int y) 
     {
         return _tileGameObjects[GetTile(x, y)];
     }

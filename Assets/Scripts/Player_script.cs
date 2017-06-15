@@ -39,8 +39,6 @@ public class Player_script : MonoBehaviour
         startPoint = playerPosition; // Pelaajan positio
         endPoint = Camera.main.ScreenToWorldPoint(mousePos); // Hiiren osoittama kohta
 
-        inventory_management();
-
         if (clickPosition.x < 0.0f)
         {
             if (GameObject.Find("Lapio").GetComponent<SpriteRenderer>().flipX == false)
@@ -78,12 +76,14 @@ public class Player_script : MonoBehaviour
         if (Trig.gameObject.tag == "Item")
         {
             in_range(Trig, true);
+            Debug.Log("item in range");
         }
     }
 
     void OnTriggerExit2D(Collider2D Trig)
     {
         in_range(Trig, false);
+        Debug.Log("item no longer in range");
     }
 
     void in_range(Collider2D Trig, bool on_off)
@@ -131,13 +131,13 @@ public class Player_script : MonoBehaviour
             invetory_data.Add(closest_item);
             closest_item = null;
             Destroy(id_in_range[it].Trig.gameObject);
-            id_in_range.RemoveAt(it);
         }
     }
 
     void interraction()
     {
         closest();
+
         if (cd == false)
         {
             if (Input.GetAxisRaw("Interract") == 1)
@@ -145,20 +145,10 @@ public class Player_script : MonoBehaviour
                 Debug.Log("pressed f for respect");
                 cd = true;
                 pick_up();
-            }
-            
+            }   
         }
-        if (Input.GetAxisRaw("Interract") == 0)
-        {
-            cd = false;
-        }
+        if (Input.GetAxisRaw("Interract") == 0){cd = false;}
     }
-
-    void inventory_management()
-    {
-        
-    }
-
 }
 
 public class Item_Values

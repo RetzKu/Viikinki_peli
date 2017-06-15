@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Chunk 
@@ -12,8 +13,8 @@ public class Chunk
     private TileType[,] _tiles;
     private GameObject[,] _tileGameObjects;
 
-    private int offsetX;
-    private int offsetY;
+    public int offsetX;
+    public int offsetY;
 
     public void Init(int chunkOffsetX, int chunkOffsetY)
     {
@@ -37,19 +38,29 @@ public class Chunk
 
                 GameObject tileObject = new GameObject("(" + y + "," + x + ")");
                 tileObject.transform.parent = parent.transform;
-                tileObject.transform.position = new Vector3( x + chunkOffsetX, y + chunkOffsetY, 0);
+                tileObject.transform.position = new Vector3(x + chunkOffsetX, y + chunkOffsetY, 0);
 
                 SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
                 spriteRenderer.sprite = GrassSprite;
                 spriteRenderer.sortingLayerName = "TileMap";
-                // spriteRenderer.shader
 
                 _tileGameObjects[y, x] = tileObject;
-                // _tileGameObjects.Add(_tiles[y, x], tileObject);
+
+                var collider = tileObject.AddComponent<BoxCollider2D>();
+                collider.enabled = false;
             }
         }
         offsetX = chunkOffsetX;
         offsetY = chunkOffsetY;
+
+    }
+
+    public void disableChunkCollision()
+    {
+        foreach (var go in _tileGameObjects)
+        {
+            go.GetComponent<Collider2D>().enabled = false;
+        }
     }
 
     public void moveChunk(int x, int y)
@@ -71,6 +82,11 @@ public class Chunk
     public TileType GetTile(int x, int y)
     {
         return _tiles[y, x];
+    }
+
+    public void SetTile(int x, int y, TileType type)
+    {
+        _tiles[y, x] = type;
     }
 
     public GameObject GetGameObject(int x, int y) 

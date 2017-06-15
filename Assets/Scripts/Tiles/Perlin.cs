@@ -3,37 +3,7 @@ using System.IO;
 using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
-public enum TileType
-{
-    Invalid,   
-    Water,
-    DeepWater,
-    Beach,
 
-    Scorhed,
-    Bare,
-    Tundra,
-
-    TemperateDesert,
-    Shrubland,      // en edes tiedä mikä on Shrubland
-    Taiga,          // näiden tilalle hassuja biome/tileTypejä
-
-    GrassLand,
-    TemperateDeciduousForest,
-    TemperateRainForest,
-
-    SubtropicalDesert,
-    TropicalSeasonalForest,
-    TropicalRainForest,
-
-    Forest,
-    Jungle,
-    Savannah,
-    Desert,
-    Mountain,
-
-    Snow
-}
 
 // TODO: Paljon hienosäätöä biomet voisi vaihtaa samaksi Tile enumiksi, mapin scrollaus, tuolla Texture2D voisi tehdä minimapin
 
@@ -306,14 +276,11 @@ public class Perlin : MonoBehaviour
     public void GenerateChunk(Chunk chunk, int offsetX, int offsetY) // chunkin offsetit 0,0:sta
     {
         int chunkSize = Chunk.CHUNK_SIZE;
-
-        // offsetX *= Chunk.CHUNK_SIZE;
-        // offsetY *= Chunk.CHUNK_SIZE;
+        
         // TODO: KORJAA API ihmisen luettavaksi
         OffsetX = .20f * (float)offsetX;
         OffsetY = .20f * (float)offsetY;
       
-
         float[,] elevation = new float[chunkSize, chunkSize];
         float[,] moisture = new float[chunkSize, chunkSize];
 
@@ -324,8 +291,17 @@ public class Perlin : MonoBehaviour
         {
             for (int x = 0; x < chunkSize; x++)
             {
-                chunk.GetGameObject(x, y).GetComponent<Renderer>().material.color =
-                    BiomeToColor(GetBiome(elevation[y, x], moisture[y, x]));
+                GameObject go = chunk.GetGameObject(x, y);
+                TileType type = GetBiome(elevation[y, x], moisture[y, x]);
+                go.GetComponent<Renderer>().material.color = BiomeToColor(GetBiome(elevation[y, x], moisture[y, x]));
+
+                if (TileMap.Collides(type)) // disable atm TileMap.cs
+                {
+                    Collider2D body = go.GetComponent<Collider2D>();
+                    body.enabled = true;
+                }
+
+                chunk.SetTile(x, y, type);
             }
         }
         offsetX = 0;
@@ -386,9 +362,9 @@ public class Perlin : MonoBehaviour
 
     public TileType GetBiome(float e, float m) // (elevation, moisture)
     {
-        if (e < 0.05f) return TileType.DeepWater;
-        if (e < 0.22) return TileType.Water;
-        if (e < 0.26) return TileType.Beach;
+        if (e < 0.16f) return TileType.DeepWater;
+        if (e < 0.22f) return TileType.Water;
+        if (e < 0.26f) return TileType.Beach;
 
         // if (e < 0.40f) return ;
         if (e < 0.50f)

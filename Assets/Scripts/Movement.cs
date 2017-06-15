@@ -11,9 +11,19 @@ public class Movement : MonoBehaviour
     public Vector2 destination;
     public float slowdown;
 
+    Rigidbody2D body;
+
+    // nopeus = vel * kihtyyys  
+    // max pituus
+    /// <summary>
+    ///  
+    /// </summary>
+
+
     void Start()
     {
         destination = transform.position;
+        body = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -24,7 +34,8 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.position = Vector2.Lerp(transform.position, Input_checker(),slowdown * Time.deltaTime);
+        body.MovePosition(Vector2.Lerp(transform.position, Input_checker(), slowdown * Time.deltaTime));
+        // transform.position =
     }
 
     Vector2 Input_checker()
@@ -32,7 +43,14 @@ public class Movement : MonoBehaviour
         Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
         movement = movement / divider;
         destination += movement;
+
+        float test = Vector2.Distance(destination, body.position);
+        if (test > Mathf.Sqrt(2.1f))
+        {
+            destination = body.position;
+            movement.Normalize();
+            destination += movement / divider;
+        }
         return destination;
     }
-
 }

@@ -43,5 +43,10 @@ public class DebugMover : MonoBehaviour, ITestPlayer
     void Update ()
     {
         tilemap.UpdateTilemap(this, _viewRange);
+        if (Input.GetKey(KeyCode.D))
+        {
+            var body = GetComponent<Rigidbody2D>();
+            body.MovePosition(new Vector2(body.position.x + 0.5f, body.position.y));
+        }
     }
 }

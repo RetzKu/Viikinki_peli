@@ -84,6 +84,11 @@ public class TileMap : MonoBehaviour
             }
         }
     }
+    
+    public static bool Collides(TileType type)
+    {
+        return (type <= TileType.CollisionTiles);
+    }
 
     void OnDrawGizmos()
     {
@@ -143,6 +148,7 @@ public class TileMap : MonoBehaviour
 
                 for (int i = -1; i < 2; i++)    // -1
                 {
+                    _chunks[i + 1, 0].disableChunkCollision();
                     GenerateChunk(0, i + 1, chunkOffsetX - 1, chunkOffsetY + i);
                     _chunks[i + 1, 0].moveChunk(-3, 0);
                 }
@@ -154,6 +160,8 @@ public class TileMap : MonoBehaviour
 
                 for (int i = -1; i < 2; i++)    // -1
                 {
+                    _chunks[i + 1, 2].disableChunkCollision();
+
                     GenerateChunk(2, i + 1, chunkOffsetX + 1, chunkOffsetY + i);
                     _chunks[i + 1, 2].moveChunk(3, 0);
                 }
@@ -165,8 +173,11 @@ public class TileMap : MonoBehaviour
 
                 for (int i = -1; i < 2; i++)    // -1
                 {
+                    _chunks[0, i + 1].disableChunkCollision();
+
                     GenerateChunk(i + 1, 0, chunkOffsetX + i, chunkOffsetY - 1);
                     _chunks[0, i + 1].moveChunk(0, -3);
+
                 }
             }
             else if (chunkDtY > 0)
@@ -176,11 +187,15 @@ public class TileMap : MonoBehaviour
 
                 for (int i = -1; i < 2; i++)    // -1
                 {
+                    _chunks[2, i + 1].disableChunkCollision();
+
                     GenerateChunk(i + 1, 2, chunkOffsetX + i, chunkOffsetY + 1);
                     _chunks[2, i + 1].moveChunk(0, 3);
+
                 }
             }
         }
+        
     }
 
     void Update()
@@ -248,43 +263,47 @@ public class TileMap : MonoBehaviour
     }
 
 
-    public Tile GetTile(float x, float y)
+    //public Tile GetTile(float x, float y)
+    //{
+    //    return GetTile((int)x, (int)y);
+    //}
+
+    public TileType GetTile(float x, float y)
     {
-        return GetTile((int)x, (int)y);
+        //int offsetX = _chunks[1, 1].offsetX;
+        //int offsetY = _chunks[1, 1].offsetY;
+
+        int offsetX = (int)x % Chunk.CHUNK_SIZE;
+        int offsetY = (int)y % Chunk.CHUNK_SIZE;
+        // TODO: pieni clean up
+        return _chunks[1, 1].GetTile(offsetX, offsetY);
     }
 
-    public Tile GetTile(int x, int y)
-    {
-        if (x < 0 || x > Width || y < 0 || y > Height)
-            Debug.LogError("TileMap::GetTile Out of bounds");
-        return _tiles[y, x];
-    }
 
-    public GameObject GetTileGameObject(Tile tile)
+    public void SetTile(float x, float y, TileType type)
     {
-        GameObject gameObject;
-        if (_tileGameObjects.TryGetValue(tile, out gameObject))
-        {
-            return gameObject;
-        }
-        else
-        {
-            Debug.LogError("No GameObject Exist");
-        }
-        return gameObject;
+        int offsetX = (int)x % Chunk.CHUNK_SIZE;
+        int offsetY = (int)y % Chunk.CHUNK_SIZE;
+        // TODO: pieni clean up
+        _chunks[1, 1].SetTile(offsetX, offsetY, type);
     }
-
-    public GameObject GetTileGameObject(int x, int y)
+    //public GameObject GetTileGameObject(Tile tile)
+    //{
+    //    GameObject gameObject;
+    //    if (_tileGameObjects.TryGetValue(tile, out gameObject))
+    //    {
+    //        return gameObject;
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("No GameObject Exist");
+    //    }
+    //    return gameObject;
+    //}
+    public GameObject GetTileGameObject(float x, float y)
     {
-        GameObject gameObject;
-        if (_tileGameObjects.TryGetValue(GetTile(x, y), out gameObject))
-        {
-            return gameObject;
-        }
-        else
-        {
-            Debug.LogError("No GameObject Exist");
-        }
-        return gameObject;
+        int offsetX = (int)x % Chunk.CHUNK_SIZE;
+        int offsetY = (int)y % Chunk.CHUNK_SIZE;
+        return _chunks[1, 1].GetGameObject(offsetX, offsetY);
     }
 }

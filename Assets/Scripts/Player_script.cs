@@ -1,31 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Player_script : MonoBehaviour
 {
 
-    public List<Item_Values> invetory_data;
-    private List<Item_Values> id_in_range;
+    internal List<item_script> invetory_data;
+        public int InventorySize;
 
+    private List<Item_Values> id_in_range;
     private Item_Values closest_item;
-    private bool cd = false;
+
+    private bool interraction_cd = false;
+    private bool inventory_cd = false;
+
     Vector3 startPoint;
     Vector3 endPoint;
+
     public bool running = true;
+
+    public GameObject text_object;
 
 
     void Start()
     {
-        invetory_data = new List<Item_Values>(20);
+        invetory_data = new List<item_script>(InventorySize);
         id_in_range = new List<Item_Values>(100);
     }
 
     void Update()
     {
 
-        interraction();
+        KeyCommands();
         var mousePos = Input.mousePosition;
         mousePos.z = 10;
         Vector3 playerPosition = new Vector3(transform.position.x, transform.position.y, 0.0f); // Pelaajan positio
@@ -128,26 +133,57 @@ public class Player_script : MonoBehaviour
         if(id_in_range.Count > 0)
         {
             int it = id_in_range.FindIndex(x => x.Trig.GetComponent<item_script>().ID == closest_item.Trig.GetComponent<item_script>().ID);
-            invetory_data.Add(closest_item);
+            invetory_data.Add(closest_item.Trig.GetComponent<item_script>());
             closest_item = null;
             Destroy(id_in_range[it].Trig.gameObject);
         }
     }
 
-    void interraction()
+    void KeyCommands()
     {
-        closest();
+        Interraction();
+        InventoryToggle();
+    }
 
-        if (cd == false)
+
+    /*Start of KeyCommands() internal functions*/
+    void InventoryToggle()
+    {
+        if (inventory_cd == false)
         {
+            if (Input.GetAxisRaw("Inventory") == 1)
+            {
+                inventory_cd = true;
+                switch (text_object.activeSelf)
+                {
+                    case true:
+                        {
+                            text_object.SetActive(false);
+                            break;   
+                        }
+                    case false:
+                        {
+                            text_object.SetActive(true);
+                            break;
+                        }
+                }
+            }
+        }
+        if (Input.GetAxisRaw("Inventory") == 0) { inventory_cd = false; }
+    }
+    void Interraction()
+    {
+        if (interraction_cd == false)
+        {
+            closest();
             if (Input.GetAxisRaw("Interract") == 1)
             {
                 Debug.Log("pressed f for respect");
-                cd = true;
+                interraction_cd = true;
                 pick_up();
-            }   
+            }
         }
-        if (Input.GetAxisRaw("Interract") == 0){cd = false;}
+        if (Input.GetAxisRaw("Interract") == 0) { interraction_cd = false; }
     }
 }
 

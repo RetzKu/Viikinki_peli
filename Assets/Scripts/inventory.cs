@@ -3,11 +3,11 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class inventory : MonoBehaviour {
+public class Inventory : MonoBehaviour {
 
     public GameObject PlayerGameobject;
     private List<item_script> inventory_data;
-    public Text Text_object;
+    //public Text Text_object;
 
 	void Start ()
     {
@@ -23,7 +23,7 @@ public class inventory : MonoBehaviour {
         }
         else
         {
-            Text_object.text = "Inventory empty";
+            //Text_object.text = "Inventory empty";
         }
     }
 
@@ -38,7 +38,7 @@ public class inventory : MonoBehaviour {
             inventory_string += string.Format("Name:{0} \n", Name);
             
         }
-        Text_object.text = inventory_string;
+        //Text_object.text = inventory_string;
 
     }
 }

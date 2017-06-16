@@ -7,12 +7,13 @@ public class ButtonScript : MonoBehaviour {
 
 
     private bool inventory_cd = false;
-    public GameObject TextObject;
-	// Use this for initialization
-	void Start()
+    private GameObject TextObject;
+    private GameObject Hud;
+
+    void Start()
     {
-       GetComponent<Button>().onClick.AddListener(inventory);
-	}
+        GameObject Hud = GameObject.Find("Hud");
+    }
 	
 	// Update is called once per frame
 	void Update()

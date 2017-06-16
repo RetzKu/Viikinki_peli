@@ -22,7 +22,6 @@ public class ButtonScript : MonoBehaviour {
 
     void inventory()
     {
-
         switch (TextObject.activeSelf)
         {
             case true:
@@ -35,7 +34,6 @@ public class ButtonScript : MonoBehaviour {
                     TextObject.SetActive(true);
                     break;
                 }
-
         }
     }
 }

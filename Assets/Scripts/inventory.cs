@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour {
+public class inventory : MonoBehaviour {
 
     public GameObject PlayerGameobject;
     private List<item_script> inventory_data;

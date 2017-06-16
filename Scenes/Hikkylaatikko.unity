@@ -271,6 +271,11 @@ Transform:
   m_Father: {fileID: 80779267}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &261706660 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1957399424480916, guid: 1f301049b4c0be3489c749352f91ebc1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1018985450}
 --- !u!1 &957683052
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,6 +473,16 @@ Prefab:
       propertyPath: Name
       value: Miekka2
       objectReference: {fileID: 0}
+    - target: {fileID: 114421060506276594, guid: d40e84613197c284897f7f617df89532,
+        type: 2}
+      propertyPath: ID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 212885786388462134, guid: d40e84613197c284897f7f617df89532,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: -630457927
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d40e84613197c284897f7f617df89532, type: 2}
   m_IsPrefabParent: 0
@@ -502,6 +517,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0123e90237aca9e4db534931aaa68f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerGameobject: {fileID: 261706660}
+  Text_object: {fileID: 957683054}
 --- !u!222 &1206511104
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -561,7 +578,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -630457927
   m_SortingOrder: 101
   m_TargetDisplay: 0
 --- !u!224 &1206511108
@@ -713,6 +730,11 @@ Prefab:
         type: 2}
       propertyPath: m_SortingOrder
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 212885786388462134, guid: d40e84613197c284897f7f617df89532,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: -630457927
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d40e84613197c284897f7f617df89532, type: 2}

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Chunk 
@@ -9,16 +10,17 @@ public class Chunk
 
     public Sprite GrassSprite;
 
-
-    private TileType[,] _tiles;
+    public TileType[,] _tiles;
     private GameObject[,] _tileGameObjects;
-
+   
+    // TODO: // ainoastaa center chunk on oikeassa chunkissa atm
     public int offsetX;
     public int offsetY;
 
+    FileInfo f;
+
     public void Init(int chunkOffsetX, int chunkOffsetY)
     {
-        // _tileGameObjects = new Dictionary<TileType, GameObject>(CHUNK_SIZE * CHUNK_SIZE);
         _tiles = new TileType[CHUNK_SIZE, CHUNK_SIZE];
         _tileGameObjects = new GameObject[CHUNK_SIZE, CHUNK_SIZE];
 
@@ -52,8 +54,57 @@ public class Chunk
         }
         offsetX = chunkOffsetX;
         offsetY = chunkOffsetY;
-
     }
+
+    public string path = "saveFile.data";
+    public void Save()
+    {
+        //StreamWriter w;
+        //if (!f.Exists)
+        //{
+        //    w = f.CreateText();
+        //}
+        //else
+        //{
+        //    f.Delete();
+        //    w = f.CreateText();
+        //}
+        //w.WriteLine(_tiles[0,0]);
+        //w.Close();
+        //  var test = (byte)_tiles[0,0];
+        //File.WriteAllBytes("test.data", (byte[])_tiles);
+
+        //TileType[] array = new TileType[10];
+
+        FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+        BinaryWriter bw = new BinaryWriter(fs);
+        for (int i = 0; i < 20; i++)
+        {
+            for (int j = 0; j < 20; j++)
+            {
+                bw.Write((int)_tiles[i, j]);
+            }
+        }
+        bw.Close();
+        fs.Close();
+        //File.WriteAllBytes("ads", (int[,])_tiles); 
+    }
+
+    public void Load()
+    {
+        using (BinaryReader b = new BinaryReader(File.Open(path, FileMode.Open)))
+        {
+            int pos = 0;
+            int length = (int)b.BaseStream.Length;
+            while (pos < length)
+            {
+                int v = b.ReadInt32();
+                Debug.Log(v);
+                pos += sizeof(int);
+            }
+        }
+    }
+
 
     public void disableChunkCollision()
     {
@@ -63,7 +114,7 @@ public class Chunk
         }
     }
 
-    public void moveChunk(int x, int y)
+    public void MoveChunk(int x, int y)
     {
         int dtOffsetX = CHUNK_SIZE * x;
         int dtOffsetY = CHUNK_SIZE * y;
@@ -72,7 +123,6 @@ public class Chunk
         {
             go.transform.position = new Vector3(go.transform.position.x + dtOffsetX, go.transform.position.y + dtOffsetY, go.transform.position.z);
         }
-
         offsetX = dtOffsetX;
         offsetY = dtOffsetY;
     }
@@ -96,6 +146,5 @@ public class Chunk
 
     public void OnDrawGizmos()
     {
-       
     }
 }

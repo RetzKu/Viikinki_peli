@@ -49,6 +49,4 @@ public class Tile
         this.X = x;
         Y = y;
     }
-
-
 }

@@ -15,9 +15,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Tile
+  - Player
   - 
   - 
   - 
@@ -42,4 +42,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: TileMap
+    uniqueID: 3129451229
+    locked: 0
+  - name: Tile
+    uniqueID: 1958771453
+    locked: 0
+  - name: Enemy
+    uniqueID: 174363751
+    locked: 0
+  - name: Player
+    uniqueID: 3664509369
     locked: 0

@@ -245,7 +245,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2ac7d8b08d63145aa35a27ad3854a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InventorySize: 0
   running: 0
+  text_object: {fileID: 0}
 --- !u!124 &124868072790649290
 Behaviour:
   m_ObjectHideFlags: 1
@@ -284,7 +286,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 76
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a8cddc3c016a28c4e95c5b859b16e2c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

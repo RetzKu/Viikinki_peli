@@ -136,6 +136,7 @@ public class Player_script : MonoBehaviour
             invetory_data.Add(closest_item.Trig.GetComponent<item_script>());
             closest_item = null;
             Destroy(id_in_range[it].Trig.gameObject);
+            id_in_range.RemoveAt(it);
         }
     }
 

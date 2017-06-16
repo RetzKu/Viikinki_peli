@@ -130,13 +130,13 @@ public class Player_script : MonoBehaviour
     void pick_up()
     {
         Debug.Log(id_in_range.Count);
-        if(id_in_range.Count > 0)
+        if(id_in_range.Count != 0)
         {
             int it = id_in_range.FindIndex(x => x.Trig.GetComponent<item_script>().ID == closest_item.Trig.GetComponent<item_script>().ID);
             invetory_data.Add(closest_item.Trig.GetComponent<item_script>());
             closest_item = null;
             Destroy(id_in_range[it].Trig.gameObject);
-            id_in_range.RemoveAt(it);
+            //id_in_range.RemoveAt(it);
         }
     }
 
@@ -193,5 +193,3 @@ public class Item_Values
     public Collider2D Trig;
     public Item_Values(Collider2D _Trig) { Trig = _Trig;}
 }
-
-

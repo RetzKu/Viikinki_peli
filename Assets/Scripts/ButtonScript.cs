@@ -12,7 +12,7 @@ public class ButtonScript : MonoBehaviour {
 
     void Start()
     {
-        GameObject Hud = GameObject.Find("Hud");
+        GameObject Hud = GameObject.FindGameObjectWithTag("Ui");
     }
 	
 	// Update is called once per frame

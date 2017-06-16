@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour {
 
-    public GameObject PlayerGameobject;
+    private GameObject PlayerGameobject;
     private List<item_script> inventory_data;
-    //public Text Text_object;
+    //public Text TextObjectPrefab;
 
 	void Start ()
     {
-        inventory_data = new List<item_script>(PlayerGameobject.GetComponent<Player_script>().InventorySize);
+        PlayerGameobject = GameObject.FindGameObjectWithTag("Player");
     }
 	
 	void Update ()
@@ -29,16 +29,6 @@ public class Inventory : MonoBehaviour {
 
     void screen_inventory()
     {
-        string inventory_string = null;
-        string Name;
-
-        for (int i = 0; i < inventory_data.Count; i++)
-        {
-            Name = inventory_data[i].Name;
-            inventory_string += string.Format("Name:{0} \n", Name);
-            
-        }
-        //Text_object.text = inventory_string;
 
     }
 }

@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float slowdown;
+    public float slowdown = 10;
     private Rigidbody2D rb;
     private Vector2 movement;
-    public float thrust;
-    public float max_spd;
+    public float thrust = 15;
+    public float max_spd = 3;
 
     Rigidbody2D body;
 

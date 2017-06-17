@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_script : MonoBehaviour
+public class PlayerScript : MonoBehaviour
 {
 
     internal List<item_script> invetory_data;
         public int InventorySize;
 
     private List<Item_Values> id_in_range;
-    private Item_Values closest_item;
+        private Item_Values closest_item;
 
     private bool interraction_cd = false;
-    private bool inventory_cd = false;
 
     Vector3 startPoint;
     Vector3 endPoint;
@@ -31,6 +30,11 @@ public class Player_script : MonoBehaviour
     {
 
         KeyCommands();
+        tmpswing();
+        
+    }
+    void tmpswing()
+    {
         var mousePos = Input.mousePosition;
         mousePos.z = 10;
         Vector3 playerPosition = new Vector3(transform.position.x, transform.position.y, 0.0f); // Pelaajan positio
@@ -110,67 +114,42 @@ public class Player_script : MonoBehaviour
 
     void closest()
     {
-        closest_item = null;
         if (id_in_range.Count != 0)
         {
-            int it = 0;
-            float closest_distance = 9999;
+            float ClosestItem = 9999999999999999;
             for (int i = 0; i < id_in_range.Count; i++)
             {
-                if(Vector2.Distance(id_in_range[i].Trig.bounds.center, transform.position)< closest_distance)
+                if (Vector2.Distance(id_in_range[i].Trig.transform.position, transform.position) < ClosestItem)
                 {
-                    it = i;
+                    closest_item = id_in_range[i];
+                    ClosestItem = Vector2.Distance(id_in_range[i].Trig.transform.position, transform.position);
                 }
             }
-            closest_item = id_in_range[it];
-            Debug.Log(closest_item.Trig.bounds.center.ToString("f4"));
         }
     }
+
 
     void pick_up()
     {
         Debug.Log(id_in_range.Count);
-        if(id_in_range.Count > 0)
+        if(id_in_range.Count != 0)
         {
             int it = id_in_range.FindIndex(x => x.Trig.GetComponent<item_script>().ID == closest_item.Trig.GetComponent<item_script>().ID);
             invetory_data.Add(closest_item.Trig.GetComponent<item_script>());
             closest_item = null;
             Destroy(id_in_range[it].Trig.gameObject);
+            //id_in_range.RemoveAt(it); // pitää olla 5.5.1 unityssä koska collisiononexit toimii eri tavalla
         }
     }
 
     void KeyCommands()
     {
         Interraction();
-        InventoryToggle();
     }
 
 
     /*Start of KeyCommands() internal functions*/
-    void InventoryToggle()
-    {
-        if (inventory_cd == false)
-        {
-            if (Input.GetAxisRaw("Inventory") == 1)
-            {
-                inventory_cd = true;
-                switch (text_object.activeSelf)
-                {
-                    case true:
-                        {
-                            text_object.SetActive(false);
-                            break;   
-                        }
-                    case false:
-                        {
-                            text_object.SetActive(true);
-                            break;
-                        }
-                }
-            }
-        }
-        if (Input.GetAxisRaw("Inventory") == 0) { inventory_cd = false; }
-    }
+    
     void Interraction()
     {
         if (interraction_cd == false)
@@ -192,5 +171,3 @@ public class Item_Values
     public Collider2D Trig;
     public Item_Values(Collider2D _Trig) { Trig = _Trig;}
 }
-
-

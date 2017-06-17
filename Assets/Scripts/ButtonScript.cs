@@ -19,6 +19,10 @@ public class ButtonScript : MonoBehaviour {
         InventoryButton.onClick.AddListener(ActiveSwitcher); //Make it so each click will call activeswitcher function
         InventoryObject.SetActive(false);
     }
+    void Update()
+    {
+        InventoryToggle();
+    }
 
     void InventoryToggle() // same as button system but made for hotkey i for pc
     {

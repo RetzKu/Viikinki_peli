@@ -138,7 +138,7 @@ public class PlayerScript : MonoBehaviour
             invetory_data.Add(closest_item.Trig.GetComponent<item_script>());
             closest_item = null;
             Destroy(id_in_range[it].Trig.gameObject);
-            //id_in_range.RemoveAt(it);
+            //id_in_range.RemoveAt(it); // pitää olla 5.5.1 unityssä koska collisiononexit toimii eri tavalla
         }
     }
 

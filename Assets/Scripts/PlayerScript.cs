@@ -8,10 +8,9 @@ public class PlayerScript : MonoBehaviour
         public int InventorySize;
 
     private List<Item_Values> id_in_range;
-    private Item_Values closest_item;
+        private Item_Values closest_item;
 
     private bool interraction_cd = false;
-    private bool inventory_cd = false;
 
     Vector3 startPoint;
     Vector3 endPoint;
@@ -31,6 +30,11 @@ public class PlayerScript : MonoBehaviour
     {
 
         KeyCommands();
+        tmpswing();
+        
+    }
+    void tmpswing()
+    {
         var mousePos = Input.mousePosition;
         mousePos.z = 10;
         Vector3 playerPosition = new Vector3(transform.position.x, transform.position.y, 0.0f); // Pelaajan positio
@@ -110,22 +114,20 @@ public class PlayerScript : MonoBehaviour
 
     void closest()
     {
-        closest_item = null;
         if (id_in_range.Count != 0)
         {
-            int it = 0;
-            float closest_distance = 9999;
+            float ClosestItem = 9999999999999999;
             for (int i = 0; i < id_in_range.Count; i++)
             {
-                if(Vector2.Distance(id_in_range[i].Trig.bounds.center, transform.position)< closest_distance)
+                if (Vector2.Distance(id_in_range[i].Trig.transform.position, transform.position) < ClosestItem)
                 {
-                    it = i;
+                    closest_item = id_in_range[i];
+                    ClosestItem = Vector2.Distance(id_in_range[i].Trig.transform.position, transform.position);
                 }
             }
-            closest_item = id_in_range[it];
-            Debug.Log(closest_item.Trig.bounds.center.ToString("f4"));
         }
     }
+
 
     void pick_up()
     {
@@ -143,35 +145,11 @@ public class PlayerScript : MonoBehaviour
     void KeyCommands()
     {
         Interraction();
-        InventoryToggle();
     }
 
 
     /*Start of KeyCommands() internal functions*/
-    void InventoryToggle()
-    {
-        if (inventory_cd == false)
-        {
-            if (Input.GetAxisRaw("Inventory") == 1)
-            {
-                inventory_cd = true;
-                switch (text_object.activeSelf)
-                {
-                    case true:
-                        {
-                            text_object.SetActive(false);
-                            break;   
-                        }
-                    case false:
-                        {
-                            text_object.SetActive(true);
-                            break;
-                        }
-                }
-            }
-        }
-        if (Input.GetAxisRaw("Inventory") == 0) { inventory_cd = false; }
-    }
+    
     void Interraction()
     {
         if (interraction_cd == false)

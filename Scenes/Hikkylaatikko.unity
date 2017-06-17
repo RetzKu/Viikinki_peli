@@ -560,56 +560,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114610926286296066, guid: 1f301049b4c0be3489c749352f91ebc1,
-        type: 2}
-      propertyPath: InventorySize
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114610926286296066, guid: 1f301049b4c0be3489c749352f91ebc1,
-        type: 2}
-      propertyPath: text_object
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 50337190456871076, guid: 1f301049b4c0be3489c749352f91ebc1,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 20960943712297972, guid: 1f301049b4c0be3489c749352f91ebc1,
-        type: 2}
-      propertyPath: m_Depth
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 20960943712297972, guid: 1f301049b4c0be3489c749352f91ebc1,
-        type: 2}
-      propertyPath: orthographic size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 20960943712297972, guid: 1f301049b4c0be3489c749352f91ebc1,
-        type: 2}
-      propertyPath: near clip plane
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4438058690776808, guid: 1f301049b4c0be3489c749352f91ebc1, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4438058690776808, guid: 1f301049b4c0be3489c749352f91ebc1, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4438058690776808, guid: 1f301049b4c0be3489c749352f91ebc1, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4438058690776808, guid: 1f301049b4c0be3489c749352f91ebc1, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4438058690776808, guid: 1f301049b4c0be3489c749352f91ebc1, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 2.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f301049b4c0be3489c749352f91ebc1, type: 2}
   m_IsPrefabParent: 0
@@ -639,7 +589,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1056658195
 Prefab:
   m_ObjectHideFlags: 0

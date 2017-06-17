@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_script : MonoBehaviour
+public class PlayerScript : MonoBehaviour
 {
 
     internal List<item_script> invetory_data;

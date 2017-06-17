@@ -5,14 +5,17 @@ using UnityEngine;
 
 public class ButtonScript : MonoBehaviour {
 
-
-    private bool inventory_cd = false;
-    private GameObject TextObject;
-    private GameObject Hud;
+    private GameObject InventoryObject;
+    private GameObject Ui;
+    private Button InventoryButton;
 
     void Start()
     {
-        GameObject Hud = GameObject.FindGameObjectWithTag("Ui");
+        Ui = GameObject.FindGameObjectWithTag("Ui");
+        InventoryObject = Ui.transform.Find("InventoryObject").gameObject;
+        InventoryButton = GetComponent<Button>();
+        InventoryButton.onClick.AddListener(Inventory_toggle);
+        InventoryObject.SetActive(false);
     }
 	
 	// Update is called once per frame
@@ -21,18 +24,19 @@ public class ButtonScript : MonoBehaviour {
         
     }
 
-    void inventory()
+    void Inventory_toggle()
     {
-        switch (TextObject.activeSelf)
+        bool InventoryButtonBool = InventoryObject.activeSelf;
+        switch (InventoryButtonBool)
         {
             case true:
                 {
-                    TextObject.SetActive(false);
+                    InventoryObject.SetActive(false);
                     break;
                 }
             case false:
                 {
-                    TextObject.SetActive(true);
+                    InventoryObject.SetActive(true);
                     break;
                 }
         }

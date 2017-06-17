@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Item
   - ScreenInventory
+  - Ui
   layers:
   - Default
   - TransparentFX

@@ -69,7 +69,7 @@ public class PlayerScript : MonoBehaviour
         {
 
             GetComponentInChildren<Animator>().SetTrigger("lapioAttack");
-            print(clickPosition);
+            //print(clickPosition);
         }
     }
     void OnDrawGizmos()

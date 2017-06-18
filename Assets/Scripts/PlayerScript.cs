@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
 
-    internal List<item_script> invetory_data;
+    internal List<ItemScript> invetory_data;
         public int InventorySize;
 
     private List<Item_Values> id_in_range;
@@ -22,7 +22,7 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
-        invetory_data = new List<item_script>(InventorySize);
+        invetory_data = new List<ItemScript>(InventorySize);
         id_in_range = new List<Item_Values>(100);
     }
 
@@ -105,8 +105,8 @@ public class PlayerScript : MonoBehaviour
         {
             if (on_off == false)
             {
-                int id = Trig.GetComponent<item_script>().ID;
-                int it = id_in_range.FindIndex(x => x.Trig.GetComponent<item_script>().ID == id);
+                int id = Trig.GetComponent<ItemScript>().ID;
+                int it = id_in_range.FindIndex(x => x.Trig.GetComponent<ItemScript>().ID == id);
                 id_in_range.RemoveAt(it);
             }
         }
@@ -134,8 +134,8 @@ public class PlayerScript : MonoBehaviour
         Debug.Log(id_in_range.Count);
         if(id_in_range.Count != 0)
         {
-            int it = id_in_range.FindIndex(x => x.Trig.GetComponent<item_script>().ID == closest_item.Trig.GetComponent<item_script>().ID);
-            invetory_data.Add(closest_item.Trig.GetComponent<item_script>());
+            int it = id_in_range.FindIndex(x => x.Trig.GetComponent<ItemScript>().ID == closest_item.Trig.GetComponent<ItemScript>().ID);
+            invetory_data.Add(closest_item.Trig.GetComponent<ItemScript>());
             closest_item = null;
             Destroy(id_in_range[it].Trig.gameObject);
             //id_in_range.RemoveAt(it); // pitää olla 5.5.1 unityssä koska collisiononexit toimii eri tavalla

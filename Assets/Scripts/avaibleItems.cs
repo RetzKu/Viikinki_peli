@@ -35,33 +35,48 @@ public class avaibleItems : MonoBehaviour {
 
         if(Input.GetKeyDown(KeyCode.Q) == true)
         {
-          
-            Destroy(GameObject.FindGameObjectWithTag("item2"));
- 
-
-            if(itemCount < (luku-1))
+      
+            if(GameObject.Find("Inventory").transform.childCount >= 1 & GameObject.Find("Equip").transform.childCount < 1)
             {
-                itemCount++;
+                Debug.Log(GameObject.Find("Inventory").transform.childCount);
+                var objectCache = GameObject.FindGameObjectWithTag("item_inventoryssa").gameObject;
+                //objectCache.SetActive(true);
+                objectCache.tag = "item2";
+                objectCache.transform.position = GameObject.Find("hahmo").transform.position;
+                
+                
+                Instantiate(objectCache, GameObject.Find("Equip").transform);
+                Destroy(objectCache);
             }
-           
-            Instantiate(items[itemCount], transform.parent);
             
         }
         if (Input.GetKeyDown(KeyCode.E) == true)
         {
-            
-            Destroy(GameObject.FindGameObjectWithTag("item2"));
-            
 
-            if (itemCount >= 0)
+            if (GameObject.Find("Equip").transform.childCount >= 1)
             {
-                itemCount--;
-            }
+                var objectCache2 = GameObject.FindGameObjectWithTag("item2").gameObject;
+                objectCache2.tag = "item_inventoryssa";
+                //objectCache2.SetActive(false);
 
-            if(itemCount >= 0)
-            {
-                Instantiate(items[itemCount], transform.parent);
+                string nameCache = objectCache2.name;
+                int copyTest = nameCache.IndexOf("(Clone)");
+                if(copyTest != -1)
+                {
+                    string newName = nameCache.Remove(copyTest);
+                    objectCache2.name = newName;
+                    copyTest = -1;
+                }
+
+                objectCache2.transform.position = new Vector3(0, 0, 0);
+                Instantiate(objectCache2, GameObject.Find("Inventory").transform);
+                Destroy(objectCache2);
             }
+        }
+        if (Input.GetKeyDown(KeyCode.Space) == true)
+        {
+            //GameObject.Find("Inventory").SetActiveRecursively(true);
+            
         }
     }
 }

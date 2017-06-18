@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class TileMap : MonoBehaviour
 {
@@ -18,8 +19,10 @@ public class TileMap : MonoBehaviour
 
     //private int tilemapInitWidth  = 2;
     //private int tilemapInitHeight = 2;
+    // asd
 
-    private bool TilemapDebug = false; // depricated
+
+    // private bool TilemapDebug = false; // depricated
     private bool running = false;
 
     [Header("kayta")]
@@ -33,7 +36,7 @@ public class TileMap : MonoBehaviour
      //   _tileGameObjects = new Dictionary<Tile, GameObject>(Height * Width);    // TODO: widht height rikki atm
       //  _tiles = new Tile[Height, Width];
 
-        GameObject parent = new GameObject("Tiles");
+        // GameObject parent = new GameObject("Tiles");
 
         //if (TilemapDebug)
         //{
@@ -65,7 +68,7 @@ public class TileMap : MonoBehaviour
             for (int x = 0; x < 3; x++)
             {
                 _chunks[y, x] = new Chunk(); 
-                _chunks[y, x].Init(x, y);
+                _chunks[y, x].Init(x, y, this.transform);
             }
         }
 
@@ -236,6 +239,11 @@ public class TileMap : MonoBehaviour
 
     void Update()
     {
+        if (CrossPlatformInputManager.GetButtonDown("Jump"))
+        {
+            Destroy(this.gameObject);            
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             for (int i = 0; i < 3; i++)

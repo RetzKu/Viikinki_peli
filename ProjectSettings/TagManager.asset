@@ -18,8 +18,8 @@ TagManager:
   - Enemy
   - Tile
   - Player
-  - 
-  - 
+  - TouchController
+  - TileMap
   - 
   - 
   - 
@@ -54,4 +54,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3664509369
+    locked: 0
+  - name: TouchController
+    uniqueID: 1155609689
     locked: 0

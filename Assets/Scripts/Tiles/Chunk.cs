@@ -19,7 +19,7 @@ public class Chunk
 
     FileInfo f;
 
-    public void Init(int chunkOffsetX, int chunkOffsetY)
+    public void Init(int chunkOffsetX, int chunkOffsetY, Transform tilemap)
     {
         _tiles = new TileType[CHUNK_SIZE, CHUNK_SIZE];
         _tileGameObjects = new GameObject[CHUNK_SIZE, CHUNK_SIZE];
@@ -32,6 +32,8 @@ public class Chunk
         chunkOffsetY *= CHUNK_SIZE;
 
         GameObject parent = new GameObject("CHUNKERS!");
+        parent.transform.parent = tilemap;
+
         for (int y = 0; y < CHUNK_SIZE; y++)
         {
             for (int x = 0; x < CHUNK_SIZE; x++)
@@ -41,6 +43,8 @@ public class Chunk
                 GameObject tileObject = new GameObject("(" + y + "," + x + ")");
                 tileObject.transform.parent = parent.transform;
                 tileObject.transform.position = new Vector3(x + chunkOffsetX, y + chunkOffsetY, 0);
+                tileObject.layer = 9;
+
 
                 SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
                 spriteRenderer.sprite = GrassSprite;
@@ -49,6 +53,7 @@ public class Chunk
                 _tileGameObjects[y, x] = tileObject;
 
                 var collider = tileObject.AddComponent<BoxCollider2D>();
+                
                 collider.enabled = false;
             }
         }

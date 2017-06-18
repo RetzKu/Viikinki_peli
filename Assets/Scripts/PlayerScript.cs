@@ -82,6 +82,7 @@ public class PlayerScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D Trig)
     {
+        Debug.Log("triggered");
         if (Trig.gameObject.tag == "Item")
         {
             in_range(Trig, true);
@@ -91,8 +92,11 @@ public class PlayerScript : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D Trig)
     {
-        in_range(Trig, false);
-        Debug.Log("item no longer in range");
+        if(Trig.gameObject.tag == "Item")
+        {
+            in_range(Trig, false);
+            Debug.Log("item no longer in range")
+        }
     }
 
     void in_range(Collider2D Trig, bool on_off)

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class TileMap : MonoBehaviour
 {
@@ -9,16 +11,18 @@ public class TileMap : MonoBehaviour
     public int Height;
     public Sprite GrassSprite; // Note(Eetu): Spritet kannattaa varmaan eroitella toiseen scriptiin (ehkä?)
 
-    private Dictionary<Tile, GameObject> _tileGameObjects;  // Tällä saatas takas maailmassa oleva GameObject
-    private Tile[,] _tiles;                                 // En tiiä tuntuu mausteikkaalta ratkaisulta(hyvältä)
+  //  private Dictionary<Tile, GameObject> _tileGameObjects;  // Tällä saatas takas maailmassa oleva GameObject
+  //  private Tile[,] _tiles;                                 // En tiiä tuntuu mausteikkaalta ratkaisulta(hyvältä)
 
     private Perlin _perlinGenerator;
     public Chunk[,] _chunks; // TODO: object pool
 
     //private int tilemapInitWidth  = 2;
     //private int tilemapInitHeight = 2;
+    // asd
 
-    private bool TilemapDebug = false; // depricated
+
+    // private bool TilemapDebug = false; // depricated
     private bool running = false;
 
     [Header("kayta")]
@@ -29,31 +33,31 @@ public class TileMap : MonoBehaviour
 
     void Start()
     {
-        _tileGameObjects = new Dictionary<Tile, GameObject>(Height * Width);    // TODO: widht height rikki atm
-        _tiles = new Tile[Height, Width];
+     //   _tileGameObjects = new Dictionary<Tile, GameObject>(Height * Width);    // TODO: widht height rikki atm
+      //  _tiles = new Tile[Height, Width];
 
-        GameObject parent = new GameObject("Tiles");
+        // GameObject parent = new GameObject("Tiles");
 
-        if (TilemapDebug)
-        {
-            for (int y = 0; y < Width; y++)
-            {
-                for (int x = 0; x < Height; x++)
-                {
-                    _tiles[y, x] = new Tile(x, y);
+        //if (TilemapDebug)
+        //{
+        //    for (int y = 0; y < Width; y++)
+        //    {
+        //        for (int x = 0; x < Height; x++)
+        //        {
+        //            _tiles[y, x] = new Tile(x, y);
 
-                    GameObject tileObject = new GameObject("(" + y + "," + x + ")");
-                    tileObject.transform.parent = parent.transform;
-                    tileObject.transform.position = new Vector3(y, x, 0);
+        //            GameObject tileObject = new GameObject("(" + y + "," + x + ")");
+        //            tileObject.transform.parent = parent.transform;
+        //            tileObject.transform.position = new Vector3(y, x, 0);
 
-                    SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
-                    spriteRenderer.sprite = GrassSprite;
-                    spriteRenderer.sortingLayerName = "TileMap";
+        //            SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
+        //            spriteRenderer.sprite = GrassSprite;
+        //            spriteRenderer.sortingLayerName = "TileMap";
 
-                    _tileGameObjects.Add(_tiles[y, x], tileObject);
-                }
-            }
-        }
+        //            _tileGameObjects.Add(_tiles[y, x], tileObject);
+        //        }
+        //    }
+        //}
 
         running = true;
         _perlinGenerator = GetComponent<Perlin>();
@@ -63,8 +67,8 @@ public class TileMap : MonoBehaviour
         {
             for (int x = 0; x < 3; x++)
             {
-                _chunks[y, x] = new Chunk();        // tmp
-                _chunks[y, x].Init(x, y);
+                _chunks[y, x] = new Chunk(); 
+                _chunks[y, x].Init(x, y, this.transform);
             }
         }
 
@@ -80,7 +84,7 @@ public class TileMap : MonoBehaviour
         {
             for (int x = 0; x < initWidth; x++)
             {
-                GenerateChunk(x, y); // ei vällii?
+                GenerateChunk(x, y); // ei vällii?      // vanhaa koodia? 
             }
         }
     }
@@ -127,7 +131,6 @@ public class TileMap : MonoBehaviour
         if (tilemapPrototypeLayout)
             return;
 
-        // calculate current Chunk coords
         int chunkOffsetX = GetChunkOffset(player.transform.position.x);
         int chunkOffsetY = GetChunkOffset(player.transform.position.y);
 
@@ -150,7 +153,7 @@ public class TileMap : MonoBehaviour
                 {
                     _chunks[i + 1, 0].disableChunkCollision();
                     GenerateChunk(0, i + 1, chunkOffsetX - 1, chunkOffsetY + i);
-                    _chunks[i + 1, 0].moveChunk(-3, 0);
+                    _chunks[i + 1, 0].MoveChunk(-3, 0);
                 }
             }
             else if (chunkDtX > 0)
@@ -163,7 +166,7 @@ public class TileMap : MonoBehaviour
                     _chunks[i + 1, 2].disableChunkCollision();
 
                     GenerateChunk(2, i + 1, chunkOffsetX + 1, chunkOffsetY + i);
-                    _chunks[i + 1, 2].moveChunk(3, 0);
+                    _chunks[i + 1, 2].MoveChunk(3, 0);
                 }
             }
             if (chunkDtY < 0)
@@ -176,7 +179,7 @@ public class TileMap : MonoBehaviour
                     _chunks[0, i + 1].disableChunkCollision();
 
                     GenerateChunk(i + 1, 0, chunkOffsetX + i, chunkOffsetY - 1);
-                    _chunks[0, i + 1].moveChunk(0, -3);
+                    _chunks[0, i + 1].MoveChunk(0, -3);
 
                 }
             }
@@ -190,32 +193,16 @@ public class TileMap : MonoBehaviour
                     _chunks[2, i + 1].disableChunkCollision();
 
                     GenerateChunk(i + 1, 2, chunkOffsetX + i, chunkOffsetY + 1);
-                    _chunks[2, i + 1].moveChunk(0, 3);
+                    _chunks[2, i + 1].MoveChunk(0, 3);
 
                 }
             }
         }
-        
+
+        _chunks[1, 1].offsetX = chunkOffsetX;   // ainoastaa center chunk on oikeassa chunkissa atm
+        _chunks[1, 1].offsetY = chunkOffsetY;
     }
 
-    void Update()
-    {
-        // debug
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            for(int i = 0; i < 3; i++)
-            {
-                _chunks[i, 2].moveChunk(3, 0);
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            swapColumn(1, 0);
-            swapColumn(2, 1);
-        }
-    }
-  
     void swapRow(int y, int newY)
     {
         for (int i = 0; i < 3; i++)
@@ -239,71 +226,109 @@ public class TileMap : MonoBehaviour
         _chunks[newOffsetY, newOffsetX] = tmp;
     }
 
-    void GenerateChunk(int offsetX, int offsetY, int perlinOffsetX, int perlinOffsetY) // mitkä ???
+    void GenerateChunk(int offsetX, int offsetY, int perlinOffsetX, int perlinOffsetY)
     {
         _perlinGenerator.GenerateChunk(_chunks[offsetY, offsetX], perlinOffsetX, perlinOffsetY);
     }
 
     // TMP TODO: DELETE!!!
-    void GenerateChunk(int offsetX, int offsetY) // mitkä ???
+    void GenerateChunk(int offsetX, int offsetY) 
     {
-        // ota yhteys Perliiiniin     
-        // _chunks[offsetY, offsetX].Init(offsetX, offsetY);   
         _perlinGenerator.GenerateChunk(_chunks[offsetY, offsetX], offsetX, offsetY);
     }
 
-    void LoadChunk()
+    void Update()
     {
-       
+        if (CrossPlatformInputManager.GetButtonDown("Jump"))
+        {
+            Destroy(this.gameObject);            
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                _chunks[i, 2].MoveChunk(3, 0);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            swapColumn(1, 0);
+            swapColumn(2, 1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            _chunks[1, 1].Save();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            _chunks[1, 1].Load();
+        }
     }
 
-    void SaveChunk()
+    void LoadChunk(int x, int y)
     {
-        // nothings
+
     }
 
-
-    //public Tile GetTile(float x, float y)
-    //{
-    //    return GetTile((int)x, (int)y);
-    //}
-
+    // NOTE(Eetu):
+    // jos funktioiden matematiikka on liian raskasta niin on vielä mahdollista optimoida se muutamalla kikalla
+    // raskas toiminnallisuuss liittyen tiilien looppaamiseen kannattaa sijoittaa chunkkeihin suoraan
+    // tarkoitettu lähinnä tiilien vaihtoon / yksittäisiin tiili operaatioihin
     public TileType GetTile(float x, float y)
     {
-        //int offsetX = _chunks[1, 1].offsetX;
-        //int offsetY = _chunks[1, 1].offsetY;
+        int chunkX = 1;
+        int chunkY = 1;
+        GetChunkOffsetXY(ref chunkX, ref chunkY, x, y);
 
         int offsetX = (int)x % Chunk.CHUNK_SIZE;
         int offsetY = (int)y % Chunk.CHUNK_SIZE;
-        // TODO: pieni clean up
-        return _chunks[1, 1].GetTile(offsetX, offsetY);
+        return _chunks[chunkY, chunkX].GetTile(offsetX, offsetY);
     }
-
 
     public void SetTile(float x, float y, TileType type)
     {
+        int chunkX = 1;
+        int chunkY = 1;
+        GetChunkOffsetXY(ref chunkX, ref chunkY, x, y);
+
         int offsetX = (int)x % Chunk.CHUNK_SIZE;
         int offsetY = (int)y % Chunk.CHUNK_SIZE;
-        // TODO: pieni clean up
-        _chunks[1, 1].SetTile(offsetX, offsetY, type);
+        _chunks[chunkY, chunkX].SetTile(offsetX, offsetY, type);
     }
-    //public GameObject GetTileGameObject(Tile tile)
-    //{
-    //    GameObject gameObject;
-    //    if (_tileGameObjects.TryGetValue(tile, out gameObject))
-    //    {
-    //        return gameObject;
-    //    }
-    //    else
-    //    {
-    //        Debug.LogError("No GameObject Exist");
-    //    }
-    //    return gameObject;
-    //}
+
     public GameObject GetTileGameObject(float x, float y)
     {
+        int chunkX = 1;
+        int chunkY = 1;
+        GetChunkOffsetXY(ref chunkX, ref chunkY, x, y);
+
         int offsetX = (int)x % Chunk.CHUNK_SIZE;
         int offsetY = (int)y % Chunk.CHUNK_SIZE;
-        return _chunks[1, 1].GetGameObject(offsetX, offsetY);
+        return _chunks[chunkY, chunkX].GetGameObject(offsetX, offsetY);
+    }
+
+    private void GetChunkOffsetXY(ref int x, ref int y, float worldX, float worldY)
+    {
+        if (worldX > _chunks[1, 1].offsetX * Chunk.CHUNK_SIZE + Chunk.CHUNK_SIZE)
+        {
+            ++x;
+        }
+        else if (worldX < _chunks[1, 1].offsetX * Chunk.CHUNK_SIZE)
+        {
+            --x;
+        }
+
+        if (worldY > _chunks[1, 1].offsetY * Chunk.CHUNK_SIZE + Chunk.CHUNK_SIZE)
+        {
+            ++y;
+        }
+        else if(worldY < _chunks[1, 1].offsetY * Chunk.CHUNK_SIZE)
+        {
+            --y;
+        }
     }
 }

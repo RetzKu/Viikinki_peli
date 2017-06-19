@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Vec2
 {
@@ -27,6 +23,7 @@ public class ChunkMover : MonoBehaviour, ITestPlayer
     public Vec2 ChunkOffsets { get; set; }
     private int _viewRange = 8;
 
+      
 
     void OnDrawGizmos()
     {

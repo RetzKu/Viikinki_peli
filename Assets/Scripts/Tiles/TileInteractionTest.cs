@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class TileInteractionTest : MonoBehaviour
 {
-
-    // Use this for initialization
-
     public float maxReachDistance = 2f;
     public TileMap tilemap;
     private Perlin perlinGenerator;
     Vector2 mousePos;
 
+    private bool _running = false;
+
     void Start()
     {
         tilemap = FindObjectOfType<TileMap>();
         perlinGenerator = FindObjectOfType<Perlin>();
+        _running = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -35,6 +34,7 @@ public class TileInteractionTest : MonoBehaviour
                 go.GetComponent<Collider2D>().enabled = true;
             }
         }
+
         if (Input.GetMouseButton(1))
         {
             Vector2 reach = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
@@ -52,8 +52,11 @@ public class TileInteractionTest : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(new Vector3(mousePos.x, mousePos.y, 0), new Vector3(1f, 1f, 0));
-        var tile = tilemap.GetTileGameObject(mousePos.x, mousePos.y);
-        Gizmos.DrawWireCube(new Vector3(tile.transform.position.x, tile.transform.position.y, 0), new Vector3(1f, 1f, 0));
+        if (_running)
+        {
+            Gizmos.DrawWireCube(new Vector3(mousePos.x, mousePos.y, 0), new Vector3(1f, 1f, 0));
+            var tile = tilemap.GetTileGameObject(mousePos.x, mousePos.y);
+            Gizmos.DrawWireCube(new Vector3(tile.transform.position.x, tile.transform.position.y, 0), new Vector3(1f, 1f, 0));
+        }
     }
 }

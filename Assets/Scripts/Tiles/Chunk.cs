@@ -8,7 +8,9 @@ public class Chunk
     public bool debugDrawChunk = false;
     public static int CHUNK_SIZE = 20;
 
-    public Sprite GrassSprite;
+    public static Sprite[] GrassSprite;
+    public static bool UseDebugTileMap;
+    
 
     public TileType[,] _tiles;
     private GameObject[,] _tileGameObjects;
@@ -25,7 +27,11 @@ public class Chunk
         _tileGameObjects = new GameObject[CHUNK_SIZE, CHUNK_SIZE];
 
 
-        GrassSprite = Resources.Load<Sprite>("Dummy_Tile");
+        //for (int i = 0; i < GrassSprite.Length; i++)
+        //{
+        //    GrassSprite[i] = Resources.Load<Sprite>("tiles_ground_" + i.ToString());
+        //}
+
         // GrassSprite.
 
         chunkOffsetX *= CHUNK_SIZE;
@@ -47,7 +53,9 @@ public class Chunk
 
 
                 SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
-                spriteRenderer.sprite = GrassSprite;
+
+                spriteRenderer.sprite = GrassSprite[Random.Range(0, GrassSprite.Length)];                        // HUOM SPRITE CONTROLLER!!!!!
+
                 spriteRenderer.sortingLayerName = "TileMap";
 
                 _tileGameObjects[y, x] = tileObject;

@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.IO;
-using UnityStandardAssets.CrossPlatformInput;
+﻿using UnityEngine;
 
 public class TileMap : MonoBehaviour
 {
@@ -30,14 +26,18 @@ public class TileMap : MonoBehaviour
     public float tilemapGenerationOffsetX = 0;
     public float tilemapGenerationOffsetY = 0;
 
-
+    public bool useChunkSprites;
+    public Sprite[] chunkTestSprites;
+    
     void Start()
     {
-     //   _tileGameObjects = new Dictionary<Tile, GameObject>(Height * Width);    // TODO: widht height rikki atm
-      //  _tiles = new Tile[Height, Width];
+        Chunk.GrassSprite = chunkTestSprites;
 
+        //   _tileGameObjects = new Dictionary<Tile, GameObject>(Height * Width);    // TODO: widht height rikki atm
+        //  _tiles = new Tile[Height, Width];
+        
         // GameObject parent = new GameObject("Tiles");
-
+        
         //if (TilemapDebug)
         //{
         //    for (int y = 0; y < Width; y++)
@@ -239,10 +239,10 @@ public class TileMap : MonoBehaviour
 
     void Update()
     {
-        if (CrossPlatformInputManager.GetButtonDown("Jump"))
-        {
-            Destroy(this.gameObject);            
-        }
+        //if (CrossPlatformInputManager.GetButtonDown("Jump"))
+        //{
+        //    Destroy(this.gameObject);            
+        //}
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

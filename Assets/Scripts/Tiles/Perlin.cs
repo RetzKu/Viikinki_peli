@@ -293,7 +293,7 @@ public class Perlin : MonoBehaviour
             {
                 GameObject go = chunk.GetGameObject(x, y);
                 TileType type = GetBiome(elevation[y, x], moisture[y, x]);
-                go.GetComponent<Renderer>().material.color = BiomeToColor(GetBiome(elevation[y, x], moisture[y, x]));
+               //  go.GetComponent<Renderer>().material.color = // BiomeToColor(GetBiome(elevation[y, x], moisture[y, x]));
 
                 if (TileMap.Collides(type)) // disable atm TileMap.cs
                 {

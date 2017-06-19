@@ -172,23 +172,23 @@ public class TouchController : MonoBehaviour
             Activate(movement * 3 * Time.deltaTime);
         }
 
-        //if (Input.GetMouseButton(1) || Input.GetMouseButton(0) /*|| Input.GetTouch(0).*/)
-        //{
-        //    var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //    mousePos.z = 2;
+        if (Input.GetMouseButton(1) || Input.GetMouseButton(0) /*|| Input.GetTouch(0).*/)
+        {
+            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 2;
 
-        //    touchCollider.GetComponent<Collider2D>().enabled = true;
-        //    touchCollider.transform.position = mousePos;
+            touchCollider.GetComponent<Collider2D>().enabled = true;
+            touchCollider.transform.position = mousePos;
 
-        //    _touching = true;
-        //}
-        //else
-        //{
-        //    index = 0;
-        //    ResetColliders();
-        //    touchCollider.GetComponent<Collider2D>().enabled = false;
-        //    _touching = false;
-        //}
+            _touching = true;
+        }
+        else
+        {
+            index = 0;
+            ResetColliders();
+            touchCollider.GetComponent<Collider2D>().enabled = false;
+            _touching = false;
+        }
 
         // draw
     }
@@ -232,7 +232,8 @@ public class TouchController : MonoBehaviour
         {
             print(transform.localPosition.x);
             positions[index] = new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f);
-            LineRenderer.positionCount = index + 1;
+            //LineRenderer.positionCount = index + 1;
+            LineRenderer.numPositions = index + 1;
             LineRenderer.SetPosition(index, positions[index]);
             LineRenderer.sortingLayerName = "Foreground";
             index++;

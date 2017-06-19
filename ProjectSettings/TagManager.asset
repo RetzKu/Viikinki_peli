@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Item
   - ScreenInventory
+  - Ui
+  - item2
+  - item_maassa
+  - item_inventoryssa
   layers:
   - Default
   - TransparentFX

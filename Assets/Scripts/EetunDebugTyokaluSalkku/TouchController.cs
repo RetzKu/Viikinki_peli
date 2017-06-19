@@ -169,6 +169,7 @@ public class TouchController : MonoBehaviour
         if (movement.x != 0 || movement.y != 0)
         {
             Character.transform.Translate(movement * 3 * Time.deltaTime);
+            Activate(movement * 3 * Time.deltaTime);
         }
 
         //if (Input.GetMouseButton(1) || Input.GetMouseButton(0) /*|| Input.GetTouch(0).*/)
@@ -190,7 +191,6 @@ public class TouchController : MonoBehaviour
         //}
 
         // draw
-        Activate();
     }
 
     private GameObject GetFromArray(int x, int y)
@@ -208,8 +208,14 @@ public class TouchController : MonoBehaviour
     }
 
     // make line
-    private void Activate()
+    private void Activate(Vector2 movement)
     {
+        for (int i = 0; i < index; i++)
+        {
+            positions[i].x += movement.x;
+            positions[i].y += movement.y;
+            LineRenderer.SetPosition(i, positions[i]);
+        }
         // if (index > 1)
         // {
         //for (int i = 0; i < index; i++)

@@ -10,6 +10,7 @@ TagManager:
   - item2
   - item_maassa
   - item_inventoryssa
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Player
   - TouchController
   - TileMap
-  - 
+  - Pate
   - 
   - 
   - 

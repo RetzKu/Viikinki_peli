@@ -12,8 +12,10 @@ public class Chunk
     public static bool UseDebugTileMap;
     
 
-    public TileType[,] _tiles;
-    private GameObject[,] _tileGameObjects;
+    public TileType[,] Tiles;
+    public GameObject[,] TileGameObjects;
+
+
    
     // TODO: // ainoastaa center chunk on oikeassa chunkissa atm
     public int offsetX;
@@ -23,8 +25,8 @@ public class Chunk
 
     public void Init(int chunkOffsetX, int chunkOffsetY, Transform tilemap)
     {
-        _tiles = new TileType[CHUNK_SIZE, CHUNK_SIZE];
-        _tileGameObjects = new GameObject[CHUNK_SIZE, CHUNK_SIZE];
+        Tiles = new TileType[CHUNK_SIZE, CHUNK_SIZE];
+        TileGameObjects = new GameObject[CHUNK_SIZE, CHUNK_SIZE];
 
 
         //for (int i = 0; i < GrassSprite.Length; i++)
@@ -44,7 +46,7 @@ public class Chunk
         {
             for (int x = 0; x < CHUNK_SIZE; x++)
             {
-                _tiles[y, x] = TileType.Invalid;
+                Tiles[y, x] = TileType.Invalid;
 
                 GameObject tileObject = new GameObject("(" + y + "," + x + ")");
                 tileObject.transform.parent = parent.transform;
@@ -54,11 +56,11 @@ public class Chunk
 
                 SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
 
-                spriteRenderer.sprite = GrassSprite[Random.Range(0, GrassSprite.Length)];                        // HUOM SPRITE CONTROLLER!!!!!
+                spriteRenderer.sprite = GrassSprite[0]; // GrassSprite[Random.Range(0, GrassSprite.Length)];                        // HUOM SPRITE CONTROLLER!!!!!
 
                 spriteRenderer.sortingLayerName = "TileMap";
 
-                _tileGameObjects[y, x] = tileObject;
+                TileGameObjects[y, x] = tileObject;
 
                 var collider = tileObject.AddComponent<BoxCollider2D>();
                 
@@ -82,10 +84,10 @@ public class Chunk
         //    f.Delete();
         //    w = f.CreateText();
         //}
-        //w.WriteLine(_tiles[0,0]);
+        //w.WriteLine(Tiles[0,0]);
         //w.Close();
-        //  var test = (byte)_tiles[0,0];
-        //File.WriteAllBytes("test.data", (byte[])_tiles);
+        //  var test = (byte)Tiles[0,0];
+        //File.WriteAllBytes("test.data", (byte[])Tiles);
 
         //TileType[] array = new TileType[10];
 
@@ -95,12 +97,12 @@ public class Chunk
         {
             for (int j = 0; j < 20; j++)
             {
-                bw.Write((int)_tiles[i, j]);
+                bw.Write((int)Tiles[i, j]);
             }
         }
         bw.Close();
         fs.Close();
-        //File.WriteAllBytes("ads", (int[,])_tiles); 
+        //File.WriteAllBytes("ads", (int[,])Tiles); 
     }
 
     public void Load()
@@ -121,7 +123,7 @@ public class Chunk
 
     public void disableChunkCollision()
     {
-        foreach (var go in _tileGameObjects)
+        foreach (var go in TileGameObjects)
         {
             go.GetComponent<Collider2D>().enabled = false;
         }
@@ -132,7 +134,7 @@ public class Chunk
         int dtOffsetX = CHUNK_SIZE * x;
         int dtOffsetY = CHUNK_SIZE * y;
 
-        foreach(var go in _tileGameObjects)
+        foreach(var go in TileGameObjects)
         {
             go.transform.position = new Vector3(go.transform.position.x + dtOffsetX, go.transform.position.y + dtOffsetY, go.transform.position.z);
         }
@@ -144,17 +146,17 @@ public class Chunk
     // chunkeille tehdään!
     public TileType GetTile(int x, int y)
     {
-        return _tiles[y, x];
+        return Tiles[y, x];
     }
 
     public void SetTile(int x, int y, TileType type)
     {
-        _tiles[y, x] = type;
+        Tiles[y, x] = type;
     }
 
     public GameObject GetGameObject(int x, int y) 
     {
-        return _tileGameObjects[y, x];
+        return TileGameObjects[y, x];
     }
 
     public void OnDrawGizmos()

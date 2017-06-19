@@ -8,7 +8,7 @@ public class TileMap : MonoBehaviour
     public Sprite GrassSprite; // Note(Eetu): Spritet kannattaa varmaan eroitella toiseen scriptiin (ehkä?)
 
   //  private Dictionary<Tile, GameObject> _tileGameObjects;  // Tällä saatas takas maailmassa oleva GameObject
-  //  private Tile[,] _tiles;                                 // En tiiä tuntuu mausteikkaalta ratkaisulta(hyvältä)
+  //  private Tile[,] Tiles;                                 // En tiiä tuntuu mausteikkaalta ratkaisulta(hyvältä)
 
     private Perlin _perlinGenerator;
     public Chunk[,] _chunks; // TODO: object pool
@@ -28,13 +28,16 @@ public class TileMap : MonoBehaviour
 
     public bool useChunkSprites;
     public Sprite[] chunkTestSprites;
+
+
+    [Header("Sydeemit")] public TileSpriteController SpriteController;
     
     void Start()
     {
         Chunk.GrassSprite = chunkTestSprites;
 
         //   _tileGameObjects = new Dictionary<Tile, GameObject>(Height * Width);    // TODO: widht height rikki atm
-        //  _tiles = new Tile[Height, Width];
+        //  Tiles = new Tile[Height, Width];
         
         // GameObject parent = new GameObject("Tiles");
         
@@ -44,7 +47,7 @@ public class TileMap : MonoBehaviour
         //    {
         //        for (int x = 0; x < Height; x++)
         //        {
-        //            _tiles[y, x] = new Tile(x, y);
+        //            Tiles[y, x] = new Tile(x, y);
 
         //            GameObject tileObject = new GameObject("(" + y + "," + x + ")");
         //            tileObject.transform.parent = parent.transform;
@@ -54,7 +57,7 @@ public class TileMap : MonoBehaviour
         //            spriteRenderer.sprite = GrassSprite;
         //            spriteRenderer.sortingLayerName = "TileMap";
 
-        //            _tileGameObjects.Add(_tiles[y, x], tileObject);
+        //            _tileGameObjects.Add(Tiles[y, x], tileObject);
         //        }
         //    }
         //}
@@ -85,6 +88,7 @@ public class TileMap : MonoBehaviour
             for (int x = 0; x < initWidth; x++)
             {
                 GenerateChunk(x, y); // ei vällii?      // vanhaa koodia? 
+                SpriteController.InitChunkSprites(_chunks[y, x]);
             }
         }
     }
@@ -144,7 +148,7 @@ public class TileMap : MonoBehaviour
             player.ChunkOffsets.X = chunkOffsetX;
             player.ChunkOffsets.Y = chunkOffsetY;
 
-            if (chunkDtX < 0)
+            if (chunkDtX < 0) // vasen
             {
                 swapColumn(2, 1);
                 swapColumn(1, 0);
@@ -155,6 +159,8 @@ public class TileMap : MonoBehaviour
                     GenerateChunk(0, i + 1, chunkOffsetX - 1, chunkOffsetY + i);
                     _chunks[i + 1, 0].MoveChunk(-3, 0);
                 }
+
+                // SpriteController.SmoothCorners(_chunks, false);
             }
             else if (chunkDtX > 0)
             {
@@ -197,6 +203,9 @@ public class TileMap : MonoBehaviour
 
                 }
             }
+
+            // testailua
+            SpriteController.InitChunkSprites(_chunks[1, 1]);
         }
 
         _chunks[1, 1].offsetX = chunkOffsetX;   // ainoastaa center chunk on oikeassa chunkissa atm

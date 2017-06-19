@@ -1,18 +1,18 @@
 fileFormatVersion: 2
 guid: 23868ad455d42ef43a39f5fa15149f40
-timeCreated: 1497881465
-licenseType: Pro
+timeCreated: 1497892983
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: tilesheet_grass_1
-    21300002: tilesheet_grass_1_1
-    21300004: tilesheet_grass_1_2
-    21300006: tilesheet_grass_1_3
-    21300008: tilesheet_grass_1_4
-    21300010: tilesheet_grass_1_5
-    21300012: tilesheet_grass_1_6
-    21300014: tilesheet_grass_1_7
-    21300016: tilesheet_grass_1_8
+    21300000: GrassLand_ES
+    21300002: GrassLand_ESW
+    21300004: GrassLand_SW
+    21300006: GrassLand_NES
+    21300008: GrassLand_NESW
+    21300010: GrassLand_NSW
+    21300012: GrassLand_NE
+    21300014: GrassLand_NEW
+    21300016: GrassLand_NW
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -135,7 +135,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tilesheet_grass_1
+      name: GrassLand_ES
       rect:
         serializedVersion: 2
         x: 0
@@ -148,7 +148,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tilesheet_grass_1_1
+      name: GrassLand_ESW
       rect:
         serializedVersion: 2
         x: 64
@@ -161,7 +161,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tilesheet_grass_1_2
+      name: GrassLand_SW
       rect:
         serializedVersion: 2
         x: 128
@@ -169,12 +169,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tilesheet_grass_1_3
+      name: GrassLand_NES
       rect:
         serializedVersion: 2
         x: 0
@@ -182,12 +182,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tilesheet_grass_1_4
+      name: GrassLand_NESW
       rect:
         serializedVersion: 2
         x: 64
@@ -195,12 +195,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tilesheet_grass_1_5
+      name: GrassLand_NSW
       rect:
         serializedVersion: 2
         x: 128
@@ -208,12 +208,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tilesheet_grass_1_6
+      name: GrassLand_NE
       rect:
         serializedVersion: 2
         x: 0
@@ -221,12 +221,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tilesheet_grass_1_7
+      name: GrassLand_NEW
       rect:
         serializedVersion: 2
         x: 64
@@ -234,12 +234,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tilesheet_grass_1_8
+      name: GrassLand_NW
       rect:
         serializedVersion: 2
         x: 128
@@ -247,7 +247,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

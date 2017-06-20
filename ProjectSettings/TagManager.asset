@@ -9,6 +9,7 @@ TagManager:
   - Ui
   - Dropped
   - puu
+  - Inventory
   layers:
   - Default
   - TransparentFX

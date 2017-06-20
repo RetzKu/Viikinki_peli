@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class avaibleItems : MonoBehaviour {
 
-    public GameObject[] items;
+    private GameObject[] items;
     private int itemCount = -1;
     private int luku = 0;
 

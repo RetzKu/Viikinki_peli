@@ -7,9 +7,7 @@ TagManager:
   - Item
   - ScreenInventory
   - Ui
-  - item2
-  - item_maassa
-  - item_inventoryssa
+  - Dropped
   - puu
   layers:
   - Default

@@ -5,33 +5,28 @@ public class PlayerScript : MonoBehaviour
 {
 
     internal List<ItemScript> invetory_data;
-        public int InventorySize;
-
-   // private List<Item_Values> id_in_range;
-   //     private Item_Values closest_item;
+    public int InventorySize;
 
     private bool interraction_cd = false;
+    private GameObject InventoryChild;
 
     Vector3 startPoint;
     Vector3 endPoint;
 
     public bool running = true;
 
-    public GameObject text_object;
+    private GameObject text_object;
 
 
     void Start()
     {
         invetory_data = new List<ItemScript>(InventorySize);
-        //id_in_range = new List<Item_Values>(100);
+        InventoryChild = gameObject.transform.Find("Inventory").gameObject;
     }
 
     void Update()
     {
-
-       // KeyCommands();
         tmpswing();
-        OnTriggerEnter2D(GetComponent<Collider2D>());
     }
 
     void tmpswing()
@@ -81,98 +76,22 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D Trig)
+    public void OnTriggerEnter2D(Collider2D Trig)
     {
+        InventoryChild.GetComponent<inventory>().AddItem(Trig.gameObject);
+        Debug.Log("debug");
         if (Trig.gameObject.tag == "item_maassa")
         {
-            //in_range(Trig, true);
             Debug.Log("Toimii");
-            
         }
     }
 
     void OnTriggerExit2D(Collider2D Trig)
     {
-        //in_range(Trig, false);
         Debug.Log("Ulos");
         Trig.gameObject.tag = "item_inventoryssa";
         Instantiate(Trig.gameObject, GameObject.Find("Inventory").transform);
         Destroy(Trig.gameObject);
     }
 
-    //    void in_range(Collider2D Trig, bool on_off)
-    //    {
-    //        if (on_off == true)
-    //        {
-    //            id_in_range.Add(new Item_Values(Trig));
-    //        }
-    //        else
-    //        {
-    //            if (on_off == false)
-    //            {
-    //                int id = Trig.GetComponent<item_script>().ID;
-    //                int it = id_in_range.FindIndex(x => x.Trig.GetComponent<ItemScript>().ID == id);
-    //                id_in_range.RemoveAt(it);
-    //            }
-    //        }
-    //    }
-
-    //    void closest()
-    //    {
-    //        if (id_in_range.Count != 0)
-    //        {
-    //            float ClosestItem = 9999999999999999;
-    //            for (int i = 0; i < id_in_range.Count; i++)
-    //            {
-    //                if (Vector2.Distance(id_in_range[i].Trig.transform.position, transform.position) < ClosestItem)
-    //                {
-    //                    closest_item = id_in_range[i];
-    //                    ClosestItem = Vector2.Distance(id_in_range[i].Trig.transform.position, transform.position);
-    //                }
-    //            }
-    //        }
-    //    }
-
-
-    //    void pick_up()
-    //    {
-    //        Debug.Log(id_in_range.Count);
-    //        if(id_in_range.Count != 0)
-    //        {
-    //            int it = id_in_range.FindIndex(x => x.Trig.GetComponent<ItemScript>().ID == closest_item.Trig.GetComponent<ItemScript>().ID);
-    //            invetory_data.Add(closest_item.Trig.GetComponent<ItemScript>());
-    //            closest_item = null;
-    //            Destroy(id_in_range[it].Trig.gameObject);
-    //            //id_in_range.RemoveAt(it); // pitää olla 5.5.1 unityssä koska collisiononexit toimii eri tavalla
-    //        }
-    //    }
-
-    //    void KeyCommands()
-    //    {
-    //        Interraction();
-    //    }
-
-
-    //    /*Start of KeyCommands() internal functions*/
-
-    //    void Interraction()
-    //    {
-    //        if (interraction_cd == false)
-    //        {
-    //            closest();
-    //            if (Input.GetAxisRaw("Interract") == 1)
-    //            {
-    //                Debug.Log("pressed f for respect");
-    //                interraction_cd = true;
-    //                pick_up();
-    //            }
-    //        }
-    //        if (Input.GetAxisRaw("Interract") == 0) { interraction_cd = false; }
-    //    }
 }
-
-//public class Item_Values
-//{
-//    public Collider2D Trig;
-//    public Item_Values(Collider2D _Trig) { Trig = _Trig;}
-//}

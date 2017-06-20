@@ -19,7 +19,6 @@ public class PlayerScript : MonoBehaviour
 
     private GameObject text_object;
 
-
     void Start()
     {
         invetory_data = new List<ItemScript>(InventorySize);
@@ -50,29 +49,31 @@ public class PlayerScript : MonoBehaviour
         startPoint = playerPosition; // Pelaajan positio
         endPoint = Camera.main.ScreenToWorldPoint(mousePos); // Hiiren osoittama kohta
 
-        if (clickPosition.x < 0.0f)
-        {
-            if (GameObject.Find("Lapio").GetComponent<SpriteRenderer>().flipX == false)
-            {
-                //GameObject.Find("Lapio").GetComponent<Transform>().position.x = -0.4; // Väittää että muuttuja olisi constant vaikkei pitäisi olla :c
-                GameObject.Find("Lapio").GetComponent<SpriteRenderer>().flipX = true;
-            }
-        }
 
-        if (clickPosition.x > 0.0f)
-        {
-            if (GameObject.Find("Lapio").GetComponent<SpriteRenderer>().flipX == true)
-            {
-                GameObject.Find("Lapio").GetComponent<SpriteRenderer>().flipX = false;
-            }
-        }
 
         if (Input.GetKey(KeyCode.Mouse0) == true)
         {
+            if (clickPosition.x < 0.0f & GameObject.Find("Equip").transform.childCount >= 1)
 
-            GetComponentInChildren<Animator>().SetTrigger("lapioAttack");
-            //print(clickPosition);
+            {
+                //GameObject.FindGameObjectWithTag("item2").GetComponent<SpriteRenderer>().flipX = true;
+                //Debug.Log("loopinsisaanpaastiin1");
+                GameObject.FindGameObjectWithTag("item2").transform.eulerAngles = new Vector3(0.0f, 0.0f, 90.0f);
+            }
+
+            else if (clickPosition.x > 0.0f & GameObject.Find("Equip").transform.childCount >= 1)
+            {
+                //GameObject.FindGameObjectWithTag("item2").GetComponent<SpriteRenderer>().flipX = false;
+                //Debug.Log("loopinsisaanpaastiin2");
+                GameObject.FindGameObjectWithTag("item2").transform.eulerAngles = new Vector3(0.0f, 0.0f, 270.0f);
+            }
         }
+
+        else if (GameObject.Find("Equip").transform.childCount >= 1)
+        {
+            GameObject.FindGameObjectWithTag("item2").transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+        }
+        
     }
     void OnDrawGizmos()
     {
@@ -93,6 +94,15 @@ public class PlayerScript : MonoBehaviour
         {
             print("Dropped item on the ground");
         }
+
+        if (Trig.gameObject.tag == "puu")
+        {
+            Debug.Log("BONK");
+            Trig.GetComponent<TreeHP>().hp -= 25;
+        }
+
+        //Debug.Log("Toimii");
+
     }
 
     void OnTriggerExit2D(Collider2D Trig)

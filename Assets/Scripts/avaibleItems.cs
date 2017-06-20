@@ -42,10 +42,10 @@ public class avaibleItems : MonoBehaviour {
                 var objectCache = GameObject.FindGameObjectWithTag("item_inventoryssa").gameObject;
                 //objectCache.SetActive(true);
                 objectCache.tag = "item2";
-                objectCache.transform.position = GameObject.Find("hahmo").transform.position;
+                objectCache.transform.position = GameObject.Find("Player").transform.position;
                 
                 
-                Instantiate(objectCache, GameObject.Find("Equip").transform);
+                Instantiate(objectCache, GameObject.Find("Equip").transform).transform.name = objectCache.name;
                 Destroy(objectCache);
             }
             
@@ -69,7 +69,7 @@ public class avaibleItems : MonoBehaviour {
                 }
 
                 objectCache2.transform.position = new Vector3(0, 0, 0);
-                Instantiate(objectCache2, GameObject.Find("Inventory").transform);
+                Instantiate(objectCache2, GameObject.Find("Inventory").transform).transform.name = objectCache2.name;
                 Destroy(objectCache2);
             }
         }

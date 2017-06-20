@@ -72,7 +72,18 @@ public class PlayerScript : MonoBehaviour
         {
             GameObject.FindGameObjectWithTag("item2").transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
         }
-        
+
+        if(Input.GetKeyDown(KeyCode.A) == true)
+        {
+            GameObject.Find("c_torso").GetComponent<Transform>().localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.D) == true)
+        {
+            GameObject.Find("c_torso").GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+
+
     }
     void OnDrawGizmos()
     {
@@ -87,7 +98,7 @@ public class PlayerScript : MonoBehaviour
         if (Trig.gameObject.tag == "item_maassa")
         {
             Trig.gameObject.tag = "item_inventoryssa";
-            Instantiate(Trig.gameObject, GameObject.Find("Inventory").transform);
+            Instantiate(Trig.gameObject, GameObject.Find("Inventory").transform).transform.name = Trig.name;
             Destroy(Trig.gameObject);
         }
 

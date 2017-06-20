@@ -1,23 +1,22 @@
 fileFormatVersion: 2
-guid: a554bb6b6ba40474da96a0bfe7f6ea59
-timeCreated: 1497879531
+guid: 5da900f9aedc67d4895628a91ac751a9
+timeCreated: 1497941925
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: tile_ground_0
-    21300002: tiles_ground_1_1
-    21300004: tiles_ground_1
-    21300006: tiles_ground_2
-    21300008: tiles_ground_3
-    21300010: tiles_ground_4
-    21300012: tiles_ground_5
-    21300014: tiles_ground_8
-    21300016: tiles_ground_6
-    21300018: tiles_ground_7
+    21300000: GrassLand_ES
+    21300002: GrassLand_EW
+    21300004: GrassLand_SW
+    21300006: GrassLand_NES
+    21300008: GrassLand_NESW
+    21300010: GrassLand_NSW
+    21300012: GrassLand_NE
+    21300014: GrassLand_NEW
+    21300016: GrassLand_NW
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -29,7 +28,7 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-  isReadable: 0
+  isReadable: 1
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -37,8 +36,8 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
-    filterMode: 1
-    aniso: -1
+    filterMode: 0
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -49,9 +48,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 0, y: 0, z: 138, w: 136}
   spritePixelsToUnits: 64
-  alphaUsage: 1
+  alphaUsage: 0
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
@@ -136,11 +135,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tile_ground_0
+      name: GrassLand_ES
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
+        x: 8
+        y: 47
         width: 64
         height: 64
       alignment: 0
@@ -149,20 +148,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tiles_ground_1_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: tiles_ground_1
+      name: GrassLand_EW
       rect:
         serializedVersion: 2
         x: 64
@@ -175,7 +161,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tiles_ground_2
+      name: GrassLand_SW
       rect:
         serializedVersion: 2
         x: 128
@@ -188,7 +174,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tiles_ground_3
+      name: GrassLand_NES
       rect:
         serializedVersion: 2
         x: 0
@@ -201,7 +187,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tiles_ground_4
+      name: GrassLand_NESW
       rect:
         serializedVersion: 2
         x: 64
@@ -214,7 +200,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tiles_ground_5
+      name: GrassLand_NSW
       rect:
         serializedVersion: 2
         x: 128
@@ -227,20 +213,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tiles_ground_8
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: tiles_ground_6
+      name: GrassLand_NE
       rect:
         serializedVersion: 2
         x: 0
@@ -253,10 +226,23 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tiles_ground_7
+      name: GrassLand_NEW
       rect:
         serializedVersion: 2
         x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GrassLand_NW
+      rect:
+        serializedVersion: 2
+        x: 128
         y: 0
         width: 64
         height: 64

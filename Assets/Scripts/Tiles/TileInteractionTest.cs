@@ -22,7 +22,6 @@ public class TileInteractionTest : MonoBehaviour
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 reach = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);

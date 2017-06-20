@@ -7,30 +7,31 @@ public class PlayerScript : MonoBehaviour
     internal List<ItemScript> invetory_data;
     public int InventorySize;
 
-    // private List<Item_Values> id_in_range;
-    //     private Item_Values closest_item;
-
     private bool interraction_cd = false;
+
+    private GameObject InventoryChild;
+    private GameObject EquipChild;
 
     Vector3 startPoint;
     Vector3 endPoint;
 
     public bool running = true;
 
-    public GameObject text_object;
+    private GameObject text_object;
 
     void Start()
     {
         invetory_data = new List<ItemScript>(InventorySize);
-        //id_in_range = new List<Item_Values>(100);
+
+        InventoryChild = gameObject.transform.Find("Inventory").gameObject;
+        EquipChild = gameObject.transform.Find("Equip").gameObject;
     }
 
     void Update()
     {
-
-        // KeyCommands();
         tmpswing();
-        OnTriggerEnter2D(GetComponent<Collider2D>());
+        Equip();
+        Drop();
     }
 
     void tmpswing()
@@ -84,11 +85,14 @@ public class PlayerScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D Trig)
     {
-        if (Trig.gameObject.tag == "item_maassa")
+        if (Trig.transform.tag != "Dropped")
         {
-            Trig.gameObject.tag = "item_inventoryssa";
-            Instantiate(Trig.gameObject, GameObject.Find("Inventory").transform);
-            Destroy(Trig.gameObject);
+            AddToInventory(Trig);
+            print("Poimittu"); 
+        }
+        else
+        {
+            print("Dropped item on the ground");
         }
 
         if (Trig.gameObject.tag == "puu")
@@ -102,9 +106,75 @@ public class PlayerScript : MonoBehaviour
     }
 
     void OnTriggerExit2D(Collider2D Trig)
-    {
-        //Debug.Log("Ulos");
-        
+    { 
+        if(Trig.transform.tag == "Dropped")
+        {
+            Trig.transform.tag = "Item";
+            print("escaped dropped item");
+        }
     }
 
+    void AddToInventory(Collider2D Item)
+    {
+        int it = 0;
+        if (EquipChild.transform.childCount == 0)
+        {
+            Instantiate(Item.gameObject, EquipChild.transform);
+            EquipChild.transform.GetChild(0).name = Item.transform.name;
+            Destroy(Item.gameObject);
+        }
+        else
+        {
+            if (InventoryChild.transform.childCount < InventorySize)
+            {
+                Instantiate(Item.gameObject, InventoryChild.transform);
+
+                switch(InventoryChild.transform.childCount)
+                {
+                    case 1: { it = 0; break; }
+                    case 2: { it = 1; break; }
+                    case 3: { it = 2; break; }
+                }
+                InventoryChild.transform.GetChild(it).name = Item.transform.name;
+                Destroy(Item.gameObject);
+            }
+        }
+    }
+
+    void Drop()
+    {
+        if(Input.GetKeyDown("f") == true)
+        {
+            if (EquipChild.transform.childCount > 0)
+            {
+                GameObject EquipCopy = EquipChild.transform.GetChild(0).gameObject;
+                EquipCopy.transform.tag = "Dropped";
+                Instantiate(EquipCopy, gameObject.transform.position, EquipCopy.transform.rotation).transform.name = EquipCopy.transform.name;
+                Destroy(EquipCopy); 
+            }
+        }
+    }
+    
+    void Equip()
+    {
+        bool swap = false;
+        int it = 0;
+        if (Input.GetKeyDown("1") == true) { if (InventoryChild.transform.childCount > 0) { swap = true; it = 0; }}
+        if (Input.GetKeyDown("2") == true) { if (InventoryChild.transform.childCount > 1) { swap = true; it = 1; } }
+        if (Input.GetKeyDown("3") == true) { if (InventoryChild.transform.childCount > 2) { swap = true; it = 2; } }
+
+        if (swap == true)
+        {
+            GameObject InventoryCopy = InventoryChild.transform.GetChild(it).gameObject;
+
+            if (EquipChild.transform.childCount != 0)
+            {
+                GameObject EquipCopy = EquipChild.transform.GetChild(0).gameObject;
+                Instantiate(EquipCopy, InventoryChild.transform).transform.name = EquipCopy.transform.name;
+                Destroy(EquipCopy);
+            }
+            Instantiate(InventoryCopy, EquipChild.transform).transform.name = InventoryCopy.transform.name;
+            Destroy(InventoryCopy);
+        }
+    }
 }

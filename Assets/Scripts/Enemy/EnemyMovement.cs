@@ -55,7 +55,7 @@ public class EnemyMovement : MonoBehaviour
         return ostart + (ostop - ostart) * ((value - istart) / (istop - istart));
     }
 
-    public void GiveWanderingTarget()
+    void GiveWanderingTarget()
     {
         Vector2 temp = new Vector2(0f, 0f);
         temp = body.position + velocity;
@@ -136,7 +136,6 @@ public class EnemyMovement : MonoBehaviour
 
         body.MovePosition(body.position + velocity);
         acceleration *= 0;
-
     }
 
 

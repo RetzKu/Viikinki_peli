@@ -71,7 +71,7 @@ public class PlayerScript : MonoBehaviour
 
         else if (GameObject.Find("Equip").transform.childCount >= 1)
         {
-            GameObject.FindGameObjectWithTag("item2").transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+            EquipChild.transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
         }
 
         if(Input.GetKeyDown(KeyCode.A) == true)
@@ -96,13 +96,8 @@ public class PlayerScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D Trig)
     {
-        if (Trig.transform.tag != "Dropped")
+        if (Trig.transform.tag == "Item")
         {
-
-            //Trig.gameObject.tag = "item_inventoryssa";
-            //Instantiate(Trig.gameObject, GameObject.Find("Inventory").transform).transform.name = Trig.name;
-            //Destroy(Trig.gameObject);
-
             AddToInventory(Trig);
             print("Poimittu"); 
         }
@@ -116,8 +111,6 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("BONK");
             Trig.GetComponent<TreeHP>().hp -= 25;
         }
-
-        //Debug.Log("Toimii");
 
     }
 

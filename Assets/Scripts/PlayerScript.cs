@@ -74,6 +74,8 @@ public class PlayerScript : MonoBehaviour
             EquipChild.transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
         }
 
+        else { }
+
         if(Input.GetKeyDown(KeyCode.A) == true)
         {
             GameObject.Find("c_torso").GetComponent<Transform>().localScale = new Vector3(-1.0f, 1.0f, 1.0f);

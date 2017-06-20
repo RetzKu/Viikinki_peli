@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class inventory : MonoBehaviour {
 
-    public List<GameObject> Tools;
+    public List<Items> Tools;
     internal GameObject ChestPiece;
 
 	void Start ()
     {
-        Tools = new List<GameObject>();
+        Tools = new List<Items>();
     }
 
     void Update()
@@ -20,7 +20,12 @@ public class inventory : MonoBehaviour {
     
     internal void AddItem(GameObject Item)
     {
-        Tools.Add(Item);
-        Destroy(Item);
+        Tools.Add(new Items(Item));
+    }
+    public class Items
+    {
+        public GameObject Item;
+
+        public Items(GameObject _Item) { Item = _Item; }
     }
 }

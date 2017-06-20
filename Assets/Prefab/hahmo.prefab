@@ -23,9 +23,25 @@ GameObject:
   - component: {fileID: 92613482871531378}
   - component: {fileID: 124868072790649290}
   - component: {fileID: 81361144340278614}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1803812170920884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4174556627604684}
+  - component: {fileID: 114605349454964286}
+  m_Layer: 0
+  m_Name: Inventory
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +56,7 @@ GameObject:
   - component: {fileID: 4163010936149224}
   - component: {fileID: 212926624115821190}
   - component: {fileID: 95851351965390082}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Lapio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,9 +76,24 @@ GameObject:
   - component: {fileID: 114372884177931760}
   - component: {fileID: 114610926286296066}
   - component: {fileID: 60967493593200138}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: hahmo
   m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1978435983113564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4974659344567574}
+  m_Layer: 0
+  m_Name: Equip
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,6 +110,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4688105702265794}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4174556627604684
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1803812170920884}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4688105702265794}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4438058690776808
 Transform:
@@ -105,8 +149,23 @@ Transform:
   m_Children:
   - {fileID: 4438058690776808}
   - {fileID: 4163010936149224}
+  - {fileID: 4174556627604684}
+  - {fileID: 4974659344567574}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4974659344567574
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978435983113564}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4688105702265794}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &20960943712297972
 Camera:
@@ -263,6 +322,18 @@ MonoBehaviour:
   slowdown: 10
   thrust: 15
   max_spd: 3
+--- !u!114 &114605349454964286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1803812170920884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0123e90237aca9e4db534931aaa68f44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tools: []
 --- !u!114 &114610926286296066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -276,7 +347,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventorySize: 20
   running: 0
-  text_object: {fileID: 0}
 --- !u!124 &124868072790649290
 Behaviour:
   m_ObjectHideFlags: 1

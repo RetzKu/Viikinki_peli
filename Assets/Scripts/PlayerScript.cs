@@ -8,7 +8,9 @@ public class PlayerScript : MonoBehaviour
     public int InventorySize;
 
     private bool interraction_cd = false;
+
     private GameObject InventoryChild;
+    private GameObject EquipChild;
 
     Vector3 startPoint;
     Vector3 endPoint;
@@ -21,12 +23,16 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         invetory_data = new List<ItemScript>(InventorySize);
+
         InventoryChild = gameObject.transform.Find("Inventory").gameObject;
+        EquipChild = gameObject.transform.Find("Equip").gameObject;
     }
 
     void Update()
     {
         tmpswing();
+        Equip();
+        Drop();
     }
 
     void tmpswing()
@@ -76,22 +82,89 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter2D(Collider2D Trig)
+    void OnTriggerEnter2D(Collider2D Trig)
     {
-        InventoryChild.GetComponent<inventory>().AddItem(Trig.gameObject);
-        Debug.Log("debug");
-        if (Trig.gameObject.tag == "item_maassa")
+        if (Trig.transform.tag != "Dropped")
         {
-            Debug.Log("Toimii");
+            AddToInventory(Trig);
+            print("Poimittu"); 
+        }
+        else
+        {
+            print("Dropped item on the ground");
         }
     }
 
     void OnTriggerExit2D(Collider2D Trig)
-    {
-        Debug.Log("Ulos");
-        Trig.gameObject.tag = "item_inventoryssa";
-        Instantiate(Trig.gameObject, GameObject.Find("Inventory").transform);
-        Destroy(Trig.gameObject);
+    { 
+        if(Trig.transform.tag == "Dropped")
+        {
+            Trig.transform.tag = "Item";
+            print("escaped dropped item");
+        }
     }
 
+    void AddToInventory(Collider2D Item)
+    {
+        int it = 0;
+        if (EquipChild.transform.childCount == 0)
+        {
+            Instantiate(Item.gameObject, EquipChild.transform);
+            EquipChild.transform.GetChild(0).name = Item.transform.name;
+            Destroy(Item.gameObject);
+        }
+        else
+        {
+            if (InventoryChild.transform.childCount < InventorySize)
+            {
+                Instantiate(Item.gameObject, InventoryChild.transform);
+
+                switch(InventoryChild.transform.childCount)
+                {
+                    case 1: { it = 0; break; }
+                    case 2: { it = 1; break; }
+                    case 3: { it = 2; break; }
+                }
+                InventoryChild.transform.GetChild(it).name = Item.transform.name;
+                Destroy(Item.gameObject);
+            }
+        }
+    }
+
+    void Drop()
+    {
+        if(Input.GetKeyDown("f") == true)
+        {
+            if (EquipChild.transform.childCount > 0)
+            {
+                GameObject EquipCopy = EquipChild.transform.GetChild(0).gameObject;
+                EquipCopy.transform.tag = "Dropped";
+                Instantiate(EquipCopy, gameObject.transform.position, EquipCopy.transform.rotation).transform.name = EquipCopy.transform.name;
+                Destroy(EquipCopy); 
+            }
+        }
+    }
+    
+    void Equip()
+    {
+        bool swap = false;
+        int it = 0;
+        if (Input.GetKeyDown("1") == true) { if (InventoryChild.transform.childCount > 0) { swap = true; it = 0; }}
+        if (Input.GetKeyDown("2") == true) { if (InventoryChild.transform.childCount > 1) { swap = true; it = 1; } }
+        if (Input.GetKeyDown("3") == true) { if (InventoryChild.transform.childCount > 2) { swap = true; it = 2; } }
+
+        if (swap == true)
+        {
+            GameObject InventoryCopy = InventoryChild.transform.GetChild(it).gameObject;
+
+            if (EquipChild.transform.childCount != 0)
+            {
+                GameObject EquipCopy = EquipChild.transform.GetChild(0).gameObject;
+                Instantiate(EquipCopy, InventoryChild.transform).transform.name = EquipCopy.transform.name;
+                Destroy(EquipCopy);
+            }
+            Instantiate(InventoryCopy, EquipChild.transform).transform.name = InventoryCopy.transform.name;
+            Destroy(InventoryCopy);
+        }
+    }
 }

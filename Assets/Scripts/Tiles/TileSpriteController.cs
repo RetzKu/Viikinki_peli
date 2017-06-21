@@ -25,8 +25,6 @@ public class TileSpriteController : MonoBehaviour
     //liikkuessa vain
     //ne tietyt saumat?
 
-
-
     //    public void InitChunkSprites(Chunk chunk)
     //    {
     //        // chunk.TileGameObjects
@@ -180,8 +178,6 @@ public class TileSpriteController : MonoBehaviour
             tilemap.Tiles[pos.Y, pos.X] = GetMostCommonNeighbour(tilemap.Tiles, pos.Y, pos.X);
         }
     }
-
-
 
     //foreach(var pos in problemsCases)
     //{

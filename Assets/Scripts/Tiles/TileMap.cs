@@ -69,9 +69,9 @@ public class TileMap : MonoBehaviour
                 // SpriteController.InitChunkSprites(_chunks[y, x]);
             }
         }
-        
-        
-        SpriteController.InitChunkSprites(TotalWidth - 2, TotalHeight - 2, this, 1, 1);
+        // reunin maisille joku placeholder tekstuura
+
+        SpriteController.InitChunkSprites(TotalWidth - 1, TotalHeight - 1, this, 1, 1);
         running = true;
     }
 
@@ -134,7 +134,6 @@ public class TileMap : MonoBehaviour
         }
     }
 
-
     public static Vec2 GetChunkOffset(float x, float y)
     {
         int chunkOffsetX = (int)(x / Chunk.CHUNK_SIZE);
@@ -188,7 +187,7 @@ public class TileMap : MonoBehaviour
                 swapColumn(1, 0);
                 swapColumn(2, 1);
 
-                SwapRight();
+                // SwapRight();
 
                 for (int i = -1; i < 2; i++)    // -1
                 {

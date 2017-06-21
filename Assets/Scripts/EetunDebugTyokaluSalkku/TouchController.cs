@@ -234,7 +234,7 @@ public class TouchController : MonoBehaviour
             //LineRenderer.positionCount = index + 1;
             //LineRenderer.positionCount = index + 1;
             //LineRenderer.positionCount = index + 1;
-            LineRenderer.numPositions = index + 1;
+            LineRenderer.positionCount = index + 1;
 
             LineRenderer.SetPosition(index, positions[index]);
             LineRenderer.sortingLayerName = "Foreground";

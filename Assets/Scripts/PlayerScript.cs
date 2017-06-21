@@ -52,40 +52,166 @@ public class PlayerScript : MonoBehaviour
 
 
 
-        if (Input.GetKey(KeyCode.Mouse0) == true)
+        if (Input.GetKeyDown(KeyCode.Mouse0) == true)
         {
             if (clickPosition.x < 0.0f & GameObject.Find("Equip").transform.childCount >= 1)
 
             {
-                
-                //GameObject.FindGameObjectWithTag("item2").GetComponent<SpriteRenderer>().flipX = true;
-                //Debug.Log("loopinsisaanpaastiin1");
-                GameObject.Find("Equip").transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 90.0f);
+
+                GameObject.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
+                //GameObject.Find("Equip").transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 90.0f);
             }
 
             else if (clickPosition.x > 0.0f & GameObject.Find("Equip").transform.childCount >= 1)
             {
-                //GameObject.FindGameObjectWithTag("item2").GetComponent<SpriteRenderer>().flipX = false;
-                //Debug.Log("loopinsisaanpaastiin2");
-                GameObject.Find("Equip").transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 270.0f);
+                GameObject.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
+                //GameObject.Find("Equip").transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 270.0f);
             }
         }
 
         else if (GameObject.Find("Equip").transform.childCount >= 1)
         {
-            EquipChild.transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+            //EquipChild.transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
         }
 
         else { }
 
-        if(Input.GetKeyDown(KeyCode.A) == true)
+        //if (Input.GetKeyDown(KeyCode.A) == false & Input.GetKeyDown(KeyCode.S) == false & Input.GetKeyDown(KeyCode.D) == false & Input.GetKeyDown(KeyCode.W) == false);
+        //{
+        //    SpriteRenderer[] sprites = GameObject.Find("s_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+        //    for (int i = 0; i < sprites.Length; i++)
+        //    {
+        //        sprites[i].enabled = false;
+        //    }
+
+        //    sprites = GameObject.Find("u_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+        //    for (int i = 0; i < sprites.Length; i++)
+        //    {
+        //        sprites[i].enabled = false;
+        //    }
+
+        //    sprites = GameObject.Find("d_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+        //    for (int i = 0; i < sprites.Length; i++)
+        //    {
+        //        sprites[i].enabled = true;
+        //    }
+
+        //}
+
+        if(Input.GetKey(KeyCode.A) == true | Input.GetKey(KeyCode.D) == true)
         {
-            GameObject.Find("c_torso").GetComponent<Transform>().localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+
+            GameObject.Find("s_c_torso").GetComponent<Animator>().SetBool("playerRun", true);
+
+            if (Input.GetKey(KeyCode.A) == true)
+            {
+                SpriteRenderer[] sprites = GameObject.Find("u_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+                for (int i = 0; i < sprites.Length; i++)
+                {
+                    sprites[i].enabled = false;
+                }
+
+                sprites = GameObject.Find("d_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+                for (int i = 0; i < sprites.Length; i++)
+                {
+                    sprites[i].enabled = false;
+                }
+
+                sprites = GameObject.Find("s_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+                for (int i = 0; i < sprites.Length; i++)
+                {
+                    sprites[i].enabled = true;
+                }
+
+                GameObject.Find("s_c_torso").GetComponent<Transform>().localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+            }
+
+
+            if (Input.GetKey(KeyCode.D) == true)
+            {
+                SpriteRenderer[] sprites = GameObject.Find("u_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+                for (int i = 0; i < sprites.Length; i++)
+                {
+                    sprites[i].enabled = false;
+                }
+
+                sprites = GameObject.Find("d_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+                for (int i = 0; i < sprites.Length; i++)
+                {
+                    sprites[i].enabled = false;
+                }
+
+                sprites = GameObject.Find("s_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+                for (int i = 0; i < sprites.Length; i++)
+                {
+                    sprites[i].enabled = true;
+                }
+
+                GameObject.Find("s_c_torso").GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.D) == true)
+        else
         {
-            GameObject.Find("c_torso").GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            GameObject.Find("s_c_torso").GetComponent<Animator>().SetBool("playerRun", false);
+        }
+        
+
+        if (Input.GetKey(KeyCode.W) == true)
+        {
+            SpriteRenderer[] sprites = GameObject.Find("u_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i].enabled = true;
+            }
+
+            sprites = GameObject.Find("d_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i].enabled = false;
+            }
+
+            sprites = GameObject.Find("s_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i].enabled = false;
+            }
+        }
+
+        if (Input.GetKey(KeyCode.S) == true)
+        {
+            SpriteRenderer[] sprites = GameObject.Find("u_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i].enabled = false;
+            }
+
+            sprites = GameObject.Find("d_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i].enabled = true;
+            }
+
+            sprites = GameObject.Find("s_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i].enabled = false;
+            }
         }
 
 
@@ -128,8 +254,9 @@ public class PlayerScript : MonoBehaviour
         int it = 0;
         if (EquipChild.transform.childCount == 0)
         {
-            Item.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
-            Instantiate(Item.gameObject, EquipChild.transform);
+            Item.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+            Item.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 270.0f);
+            Instantiate(Item.gameObject, GameObject.Find("Equip").transform);
             EquipChild.transform.GetChild(0).name = Item.transform.name;
             Destroy(Item.gameObject);
         }

@@ -44,8 +44,8 @@ public class avaibleItems : MonoBehaviour {
                 //objectCache.SetActive(true);
  
                 objectCache.transform.position = GameObject.Find("Player").transform.position;
+                objectCache.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 270.0f);
 
-                
                 Instantiate(objectCache, GameObject.Find("Equip").transform).transform.name = objectCache.name;
                 Destroy(objectCache);
             }

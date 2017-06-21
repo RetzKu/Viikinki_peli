@@ -57,16 +57,17 @@ public class PlayerScript : MonoBehaviour
             if (clickPosition.x < 0.0f & GameObject.Find("Equip").transform.childCount >= 1)
 
             {
+                
                 //GameObject.FindGameObjectWithTag("item2").GetComponent<SpriteRenderer>().flipX = true;
                 //Debug.Log("loopinsisaanpaastiin1");
-                GameObject.FindGameObjectWithTag("item2").transform.eulerAngles = new Vector3(0.0f, 0.0f, 90.0f);
+                GameObject.Find("Equip").transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 90.0f);
             }
 
             else if (clickPosition.x > 0.0f & GameObject.Find("Equip").transform.childCount >= 1)
             {
                 //GameObject.FindGameObjectWithTag("item2").GetComponent<SpriteRenderer>().flipX = false;
                 //Debug.Log("loopinsisaanpaastiin2");
-                GameObject.FindGameObjectWithTag("item2").transform.eulerAngles = new Vector3(0.0f, 0.0f, 270.0f);
+                GameObject.Find("Equip").transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 270.0f);
             }
         }
 
@@ -127,6 +128,7 @@ public class PlayerScript : MonoBehaviour
         int it = 0;
         if (EquipChild.transform.childCount == 0)
         {
+            Item.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
             Instantiate(Item.gameObject, EquipChild.transform);
             EquipChild.transform.GetChild(0).name = Item.transform.name;
             Destroy(Item.gameObject);
@@ -135,7 +137,10 @@ public class PlayerScript : MonoBehaviour
         {
             if (InventoryChild.transform.childCount < InventorySize)
             {
+                Item.transform.position = GameObject.Find("Player").transform.position;
                 Instantiate(Item.gameObject, InventoryChild.transform);
+
+                Debug.Log("Elseasd");
 
                 switch(InventoryChild.transform.childCount)
                 {
@@ -178,9 +183,11 @@ public class PlayerScript : MonoBehaviour
             if (EquipChild.transform.childCount != 0)
             {
                 GameObject EquipCopy = EquipChild.transform.GetChild(0).gameObject;
+                EquipCopy.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
                 Instantiate(EquipCopy, InventoryChild.transform).transform.name = EquipCopy.transform.name;
                 Destroy(EquipCopy);
             }
+            InventoryCopy.transform.position = GameObject.Find("Player").transform.position;
             Instantiate(InventoryCopy, EquipChild.transform).transform.name = InventoryCopy.transform.name;
             Destroy(InventoryCopy);
         }

@@ -21,9 +21,10 @@ GameObject:
   - component: {fileID: 4944008002391322}
   - component: {fileID: 212764307580142884}
   - component: {fileID: 58231207963940862}
-  m_Layer: 10
+  - component: {fileID: 114139640933835690}
+  m_Layer: 0
   m_Name: tree_1
-  m_TagString: Untagged
+  m_TagString: puu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1126833354552126}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.01, y: 30.96, z: 0}
+  m_LocalPosition: {x: 34.856304, y: 30.298298, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -56,6 +57,18 @@ CircleCollider2D:
   m_Offset: {x: -0.05, y: -0.71}
   serializedVersion: 2
   m_Radius: 0.27863693
+--- !u!114 &114139640933835690
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1126833354552126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce5097306c2ecae4ca7db9e15ad5187a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
 --- !u!212 &212764307580142884
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -87,7 +100,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -630457927
   m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 53ae6238298c88d41b10672f14e470eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

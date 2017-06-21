@@ -35,15 +35,16 @@ public class avaibleItems : MonoBehaviour {
 
         if(Input.GetKeyDown(KeyCode.Q) == true)
         {
-      
+        
             if(GameObject.Find("Inventory").transform.childCount >= 1 & GameObject.Find("Equip").transform.childCount < 1)
             {
+               
                 Debug.Log(GameObject.Find("Inventory").transform.childCount);
-                var objectCache = GameObject.FindGameObjectWithTag("item_inventoryssa").gameObject;
+                var objectCache = GameObject.Find("Inventory").transform.GetChild(0).gameObject;
                 //objectCache.SetActive(true);
-                objectCache.tag = "item2";
+ 
                 objectCache.transform.position = GameObject.Find("Player").transform.position;
-                
+
                 
                 Instantiate(objectCache, GameObject.Find("Equip").transform).transform.name = objectCache.name;
                 Destroy(objectCache);
@@ -55,8 +56,9 @@ public class avaibleItems : MonoBehaviour {
 
             if (GameObject.Find("Equip").transform.childCount >= 1)
             {
-                var objectCache2 = GameObject.FindGameObjectWithTag("item2").gameObject;
-                objectCache2.tag = "item_inventoryssa";
+
+                var objectCache2 = GameObject.Find("Equip").transform.GetChild(0).gameObject;
+
                 //objectCache2.SetActive(false);
 
                 string nameCache = objectCache2.name;
@@ -68,7 +70,7 @@ public class avaibleItems : MonoBehaviour {
                     copyTest = -1;
                 }
 
-                objectCache2.transform.position = new Vector3(0, 0, 0);
+                objectCache2.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
                 Instantiate(objectCache2, GameObject.Find("Inventory").transform).transform.name = objectCache2.name;
                 Destroy(objectCache2);
             }

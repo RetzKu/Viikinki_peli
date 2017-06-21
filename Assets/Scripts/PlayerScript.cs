@@ -7,8 +7,6 @@ public class PlayerScript : MonoBehaviour
     internal List<ItemScript> invetory_data;
     public int InventorySize;
 
-    private bool interraction_cd = false;
-
     private GameObject InventoryChild;
     private GameObject EquipChild;
 
@@ -16,8 +14,6 @@ public class PlayerScript : MonoBehaviour
     Vector3 endPoint;
 
     public bool running = true;
-
-    private GameObject text_object;
 
     void Start()
     {
@@ -57,16 +53,17 @@ public class PlayerScript : MonoBehaviour
             if (clickPosition.x < 0.0f & GameObject.Find("Equip").transform.childCount >= 1)
 
             {
+                
                 //GameObject.FindGameObjectWithTag("item2").GetComponent<SpriteRenderer>().flipX = true;
                 //Debug.Log("loopinsisaanpaastiin1");
-                GameObject.FindGameObjectWithTag("item2").transform.eulerAngles = new Vector3(0.0f, 0.0f, 90.0f);
+                GameObject.Find("Equip").transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 90.0f);
             }
 
             else if (clickPosition.x > 0.0f & GameObject.Find("Equip").transform.childCount >= 1)
             {
                 //GameObject.FindGameObjectWithTag("item2").GetComponent<SpriteRenderer>().flipX = false;
                 //Debug.Log("loopinsisaanpaastiin2");
-                GameObject.FindGameObjectWithTag("item2").transform.eulerAngles = new Vector3(0.0f, 0.0f, 270.0f);
+                GameObject.Find("Equip").transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 270.0f);
             }
         }
 
@@ -127,14 +124,19 @@ public class PlayerScript : MonoBehaviour
         int it = 0;
         if (EquipChild.transform.childCount == 0)
         {
-            Item.transform.SetParent(EquipChild.transform, false);
-            //Destroy(Item.gameObject);
+            Item.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+            Instantiate(Item.gameObject, EquipChild.transform);
+            EquipChild.transform.GetChild(0).name = Item.transform.name;
+            Destroy(Item.gameObject);
         }
         else
         {
             if (InventoryChild.transform.childCount < InventorySize)
             {
+                Item.transform.position = GameObject.Find("Player").transform.position;
                 Instantiate(Item.gameObject, InventoryChild.transform);
+
+                Debug.Log("Elseasd");
 
                 switch(InventoryChild.transform.childCount)
                 {
@@ -177,9 +179,11 @@ public class PlayerScript : MonoBehaviour
             if (EquipChild.transform.childCount != 0)
             {
                 GameObject EquipCopy = EquipChild.transform.GetChild(0).gameObject;
+                EquipCopy.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
                 Instantiate(EquipCopy, InventoryChild.transform).transform.name = EquipCopy.transform.name;
                 Destroy(EquipCopy);
             }
+            InventoryCopy.transform.position = GameObject.Find("Player").transform.position;
             Instantiate(InventoryCopy, EquipChild.transform).transform.name = InventoryCopy.transform.name;
             Destroy(InventoryCopy);
         }

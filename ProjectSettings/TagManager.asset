@@ -10,6 +10,8 @@ TagManager:
   - Dropped
   - puu
   - Inventory
+  - ItemEquip
+  - ItemInventory
   layers:
   - Default
   - TransparentFX

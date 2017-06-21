@@ -116,14 +116,12 @@ public class Perlin : MonoBehaviour
         }
         OffsetX = startOffX;
         OffsetY = startOffY;
-
-       
     }
 
     public void GenerateTileMap(TileMap tileMap)
     {
         int width = tileMap.Width;
-        int height = tileMap.Height;
+        int height = tileMap.Heigth;
         float[,] elevation = new float[width, height];
         float[,] moisture = new float[width, height];
 
@@ -132,7 +130,7 @@ public class Perlin : MonoBehaviour
 
         for (int y = 0; y < tileMap.Width; y++)
         {
-            for (int x = 0; x < tileMap.Height; x++)
+            for (int x = 0; x < tileMap.Heigth; x++)
             {
                 tileMap.GetTileGameObject(y, x).GetComponent<Renderer>().material.color =
                     BiomeToColor(GetBiome(elevation[y, x], moisture[y, x]));
@@ -203,8 +201,6 @@ public class Perlin : MonoBehaviour
         texture.Apply();
         renderer.material.mainTexture = texture;
     }
-
-    // vale seed
 
     private void GenerateNoiseMap(float[,] noiseMap, int width, int height, float seed = 0f)
     {
@@ -293,7 +289,7 @@ public class Perlin : MonoBehaviour
             {
                 GameObject go = chunk.GetGameObject(x, y);
                 TileType type = GetBiome(elevation[y, x], moisture[y, x]);
-               //  go.GetComponent<Renderer>().material.color = // BiomeToColor(GetBiome(elevation[y, x], moisture[y, x]));
+                go.GetComponent<Renderer>().material.color = BiomeToColor(GetBiome(elevation[y, x], moisture[y, x]));
 
                 if (TileMap.Collides(type)) // disable atm TileMap.cs
                 {
@@ -302,6 +298,40 @@ public class Perlin : MonoBehaviour
                 }
 
                 chunk.SetTile(x, y, type);
+            }
+        }
+        offsetX = 0;
+        OffsetY = 0;
+    }
+
+    public void GenerateChunk(TileType[,] tiles, GameObject[,] gameObjects, int offsetX, int offsetY, int startX, int startY) // chunkin offsetit 0,0:sta
+    {
+        int chunkSize = Chunk.CHUNK_SIZE;
+
+        // TODO: KORJAA API ihmisen luettavaksi
+        OffsetX = .20f * (float)offsetX;
+        OffsetY = .20f * (float)offsetY;
+
+        float[,] elevation = new float[chunkSize, chunkSize];
+        float[,] moisture = new float[chunkSize, chunkSize];
+
+        GenerateNoiseMap(elevation, chunkSize, chunkSize);
+        GenerateNoiseMap(moisture, chunkSize, chunkSize);
+
+        for (int y = startY, chunkY = 0; y < startY + chunkSize - 1; y++, chunkY++)
+        {
+            for (int x = startX, chunkX = 0; x < startX + chunkSize - 1; x++, chunkX++)
+            {
+                GameObject go = gameObjects[y, x];
+                TileType type = GetBiome(elevation[chunkY, chunkX], moisture[chunkY, chunkX]);
+                go.GetComponent<Renderer>().material.color = BiomeToColor(GetBiome(elevation[chunkY, chunkX], moisture[chunkY, chunkX]));
+
+                if (TileMap.Collides(type)) // disable atm TileMap.cs
+                {
+                    Collider2D body = go.GetComponent<Collider2D>();
+                    body.enabled = true;
+                }
+                tiles[y, x] = type;
             }
         }
         offsetX = 0;

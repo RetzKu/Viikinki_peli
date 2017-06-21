@@ -84,7 +84,6 @@ public class TouchController : MonoBehaviour
 
 
     private int FinderId = -1000;
-    private TouchPhase currentPhaser = TouchPhase.Ended;
 
     void Update()
     {
@@ -233,10 +232,15 @@ public class TouchController : MonoBehaviour
             print(transform.localPosition.x);
             positions[index] = new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f);
             //LineRenderer.positionCount = index + 1;
+
+            //LineRenderer.positionCount = index + 1;
+            //LineRenderer.positionCount = index + 1;
             LineRenderer.positionCount = index + 1;
+
             LineRenderer.SetPosition(index, positions[index]);
             LineRenderer.sortingLayerName = "Foreground";
             index++;
         }
     }
+    // fix: LineRenderer.numPositions = index + 1;
 }

@@ -1,18 +1,18 @@
 fileFormatVersion: 2
-guid: 23868ad455d42ef43a39f5fa15149f40
-timeCreated: 1497881465
+guid: 40df359cc5beba04db712773aa897f15
+timeCreated: 1498043611
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: tilesheet_grass_1
-    21300002: tilesheet_grass_1_1
-    21300004: tilesheet_grass_1_2
-    21300006: tilesheet_grass_1_3
-    21300008: tilesheet_grass_1_4
-    21300010: tilesheet_grass_1_5
-    21300012: tilesheet_grass_1_6
-    21300014: tilesheet_grass_1_7
-    21300016: tilesheet_grass_1_8
+    21300000: tileset_stone (2)_0
+    21300002: tileset_stone (2)_1
+    21300004: tileset_stone (2)_2
+    21300006: tileset_stone (2)_6
+    21300008: tileset_stone (2)_7
+    21300010: tileset_stone (2)_8
+    21300012: tileset_stone (2)_11
+    21300014: tileset_stone (2)_12
+    21300016: tileset_stone (2)_13
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -135,37 +135,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tilesheet_grass_1
+      name: tileset_stone (2)_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: tilesheet_grass_1_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: tilesheet_grass_1_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 128
+        y: 320
         width: 64
         height: 64
       alignment: 0
@@ -174,11 +148,37 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tilesheet_grass_1_3
+      name: tileset_stone (2)_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_stone (2)_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_stone (2)_6
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 256
         width: 64
         height: 64
       alignment: 0
@@ -187,11 +187,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tilesheet_grass_1_4
+      name: tileset_stone (2)_7
       rect:
         serializedVersion: 2
         x: 64
-        y: 64
+        y: 256
         width: 64
         height: 64
       alignment: 0
@@ -200,11 +200,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tilesheet_grass_1_5
+      name: tileset_stone (2)_8
       rect:
         serializedVersion: 2
         x: 128
-        y: 64
+        y: 256
         width: 64
         height: 64
       alignment: 0
@@ -213,11 +213,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tilesheet_grass_1_6
+      name: tileset_stone (2)_11
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -226,11 +226,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tilesheet_grass_1_7
+      name: tileset_stone (2)_12
       rect:
         serializedVersion: 2
         x: 64
-        y: 0
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -239,11 +239,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tilesheet_grass_1_8
+      name: tileset_stone (2)_13
       rect:
         serializedVersion: 2
         x: 128
-        y: 0
+        y: 192
         width: 64
         height: 64
       alignment: 0

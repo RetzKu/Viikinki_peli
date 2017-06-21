@@ -4,48 +4,61 @@ using UnityEngine;
 
 
 //pate
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovement /*: MonoBehaviour*/
 {
     [HideInInspector]
     public float spawnX;
     [HideInInspector]
     public float spawnY;
 
-    private Rigidbody2D body;
-
+    //private Rigidbody2D body;
+    [HideInInspector]
     public float MaxSpeed = 0.02f;
+    [HideInInspector]
     public float MaxSteeringForce = 0.001f; // higher = better steering
+    [HideInInspector]
     public float ArriveRadius = 0.3f;      // slowdown beginning
 
     //ai
+    [HideInInspector]
     public float IdleRadius = 60.0f;
+    [HideInInspector]
     public float IdleBallDistance = 100.0f;
-    public int IdleRefreshRate = 100;
-    private int counter;
-    bool GiveStartTarget = true;
-
-    public float desiredseparation = 0.3f;
+    //[HideInInspector]
+    //public int IdleRefreshRate = 100;
+    //private int counter;
+    //bool GiveStartTarget = true;
+    [HideInInspector]
+    public float desiredseparation = 0.7f;
+    [HideInInspector]
     public float alingmentDistance = 1.0f;
 
-    public float sepF = 1.5f;
-    public float aliF = 1.0f;
-    public float cohF = 1.0f;
+    [HideInInspector]
+    public float sepF = 0.1f;
+    [HideInInspector]
+    public float aliF = 0.2f;
+    [HideInInspector]
+    public float cohF = 0.1f;
 
 
 
     Vector2 velocity = new Vector2(); //An object’s PVector velocity will remain constant if it is in a state of equilibrium.
     Vector2 acceleration = new Vector2(); //summs upp by all forces 
     Vector2 target = new Vector2();
+    Vector2 bodyPosition = new Vector2();
 
-    public void InitStart(float x, float y)
+    public void InitRules(float sepF, float aliF,float cohF,float desiredseparation,float alingmentDistance,float IdleRadius,float IdleBallDistance,float ArriveRadius, float MaxSteeringForce,float MaxSpeed)
     {
-        spawnX = x;
-        spawnY = y;
-        body = GetComponent<Rigidbody2D>();
-        body.MovePosition(new Vector2(spawnX, spawnY));
-        velocity.x = Random.Range(-10f, 10f);
-        velocity.y = Random.Range(-10f, 10f);
-
+        this.sepF = sepF;
+        this.aliF = aliF;
+        this.cohF = cohF;
+        this.desiredseparation = desiredseparation;
+        this.alingmentDistance = alingmentDistance;
+        this.IdleRadius = IdleRadius;
+        this.IdleBallDistance = IdleBallDistance;
+        this.ArriveRadius = ArriveRadius;
+        this.MaxSteeringForce = MaxSteeringForce;
+        this.MaxSpeed = MaxSpeed;
     }
 
     //maps dictanses
@@ -58,90 +71,156 @@ public class EnemyMovement : MonoBehaviour
     void GiveWanderingTarget()
     {
         Vector2 temp = new Vector2(0f, 0f);
-        temp = body.position + velocity;
+        temp = bodyPosition + velocity;
         temp.Normalize();
         temp *= IdleBallDistance;
 
         target = temp;
     }
-    void Wander() /// gets random targets
+    void Wander(bool changeDir) /// gets random targets
     {
-        if (counter > IdleRefreshRate)
+        if (changeDir)
         {
             Vector2.Angle(target, target);
-            counter = 0;
+            //counter = 0;
             float angle = Random.Range(0.0f, 1.0f) * Mathf.PI * 2;
             float x = Mathf.Cos(angle) * IdleRadius;
             float y = Mathf.Sin(angle) * IdleRadius;
 
             Vector2 arm = new Vector2(x + target.x, y + target.y);
             Vector2 desired = new Vector2();
-            desired = arm - body.position;
+            desired = arm - bodyPosition;
             desired.Normalize();
             desired *= IdleBallDistance;
-            target = body.position + desired;
+            target = bodyPosition + desired;
+            //seek(target);
         }
-        else
-        {
-            counter++;
-        }
+        //else
+        //{
+        //    counter++;
+        //}
     }
 
-    public void applyBehaviors(List<GameObject> Mobs)
+    public Vector2 applyBehaviors(Collider2D[] GroupMobs, Collider2D[] CollisionMobs, Vector2 Rvelocity, Vector2 Rtarget, Vector2 position,int flags)
     {
-        LayerMask mask = LayerMask.GetMask("Pate");
-        var array = Physics2D.OverlapCircleAll(body.position, alingmentDistance, mask); // , mask);
+        float tempSpeed = MaxSpeed;
 
-        if (array.Length > 1)
+        acceleration *= 0;
+        velocity = Rvelocity;
+        target = Rtarget;
+        bodyPosition = position;
+        //LayerMask mask = LayerMask.GetMask("Pate");
+        //var array = Physics2D.OverlapCircleAll(bodyPosition, alingmentDistance, mask); // , mask);
+
+       
+        if((flags & (int)behavior.separate) == (int)behavior.separate)
         {
-            Vector2 sepaV = separate(Mobs);
-            Vector2 ali = alingment(array);
-            Vector2 coh = cohesion(array);
-
+            Vector2 sepaV = separate(CollisionMobs);
             sepaV *= sepF;
-            ali *= aliF;
-            coh *= cohF;
-
             applyForce(sepaV);
-            applyForce(ali);
-            applyForce(coh);
-
-            GiveStartTarget = true; // used for solo wander
         }
-        else
+        if ((flags & (int)behavior.alingment) == (int)behavior.alingment)
         {
-            if (GiveStartTarget)
-            {
-                GiveWanderingTarget();
-                GiveStartTarget = false;
-            }
-            Wander();
+            Vector2 ali = alingment(GroupMobs);
+            ali *= aliF;
+            applyForce(ali);
+        }
+        if ((flags & (int)behavior.cohesion) == (int)behavior.cohesion)
+        {
+            Vector2 coh = cohesion(GroupMobs);
+            coh *= cohF;
+            applyForce(coh);
+        }
+        if ((flags & (int)behavior.giveWanderingTargetSolo) == (int)behavior.giveWanderingTargetSolo)
+        {
+            GiveWanderingTarget();
+        }
+        if ((flags & (int)behavior.wander) == (int)behavior.wander)
+        {
+            Wander(false);
             Vector2 steer = seek(target);
             applyForce(steer);
         }
+        if ((flags & (int)behavior.changeSoloDIr) == (int)behavior.changeSoloDIr)
+        {
+            Wander(true);
+            Vector2 steer = seek(target);
+            applyForce(steer);
+        }
+        if ((flags & (int)behavior.seek) == (int)behavior.seek)
+        {
+            Vector2 steer = seek(target);
+            applyForce(steer);
+        }
+        if ((flags & (int)behavior.arrive) == (int)behavior.arrive)
+        {
+            tempSpeed =  arriving(MaxSpeed);
+        }
 
-
-    }
-
-    public void MovementUpdate()
-    {
         velocity += acceleration;
         // limit max speed
 
         if (velocity.magnitude > MaxSpeed)
         {
             velocity.Normalize();
-            velocity *= MaxSpeed;
+            velocity *= tempSpeed;
         }
 
-        body.MovePosition(body.position + velocity);
-        acceleration *= 0;
+        return velocity;
+        
+
+
+
+        //if (array.Length > 1)
+        //{
+        //    Vector2 sepaV = separate(Mobs);
+        //    Vector2 ali = alingment(array);
+        //    Vector2 coh = cohesion(array);
+
+        //    sepaV *= sepF;
+        //    ali *= aliF;
+        //    coh *= cohF;
+
+        //    applyForce(sepaV);
+        //    applyForce(ali);
+        //    applyForce(coh);
+
+        //    GiveStartTarget = true; // used for solo wander
+        //}
+        //else
+        //{
+        //    if (GiveStartTarget)
+        //    {
+        //        GiveWanderingTarget();
+        //        GiveStartTarget = false;
+        //    }
+        //    Wander();
+        //    Vector2 steer = seek(target);
+        //    applyForce(steer);
+        //}
+
+
     }
+
+    //public void MovementUpdate()
+    //{
+    //    velocity += acceleration;
+    //    // limit max speed
+
+    //    if (velocity.magnitude > MaxSpeed)
+    //    {
+    //        velocity.Normalize();
+    //        velocity *= MaxSpeed;
+    //    }
+
+    //    body.MovePosition(bodyPosition + velocity);
+    //    acceleration *= 0;
+    //}
 
 
     float arriving(float max_speed) // slowsdown at endpoint
     {
-        Vector2 dist = (target - body.position);
+        Vector2 dist = (target - bodyPosition);
         if (dist.magnitude < ArriveRadius)
         {
             if (dist.magnitude < 0.01f)
@@ -161,7 +240,7 @@ public class EnemyMovement : MonoBehaviour
     Vector2 seek(Vector2 TempTarget) // seeks the target
     {
         Vector2 desiredV = new Vector2(0, 0);
-        desiredV = TempTarget - body.position;
+        desiredV = TempTarget - bodyPosition;
         desiredV.Normalize();
         desiredV = desiredV * MaxSpeed;
         Vector2 steer = new Vector2(0, 0);
@@ -190,8 +269,8 @@ public class EnemyMovement : MonoBehaviour
         for (int i = 0; i < array.Length; i++)
         {
             Vector2 temp = new Vector2(0f, 0f);
-            temp = body.position - array[i].transform.GetComponent<EnemyMovement>().body.position;
-            average = average + array[i].GetComponent<EnemyMovement>().velocity;
+            temp = bodyPosition - array[i].transform.GetComponent<EnemyAI>().getPosition();
+            average = average + array[i].GetComponent<EnemyAI>().velocity;
         }
 
 
@@ -225,9 +304,9 @@ public class EnemyMovement : MonoBehaviour
         for (int i = 0; i < array.Length; i++)
         {
             Vector2 temp = new Vector2(0f, 0f);
-            temp = body.position - array[i].transform.GetComponent<EnemyMovement>().body.position;
+            temp = bodyPosition - array[i].transform.GetComponent<EnemyAI>().getPosition();
 
-            average = average + array[i].GetComponent<EnemyMovement>().body.position;
+            average = average + array[i].GetComponent<EnemyAI>().getPosition();
         }
 
         if (array.Length > 1)
@@ -242,25 +321,25 @@ public class EnemyMovement : MonoBehaviour
     }
 
 
-    Vector2 separate(List<GameObject> mobs)
+    Vector2 separate(Collider2D[] array)
     {
         Vector2 average = new Vector2(0, 0);
         int count = 0;
 
-        LayerMask mask = LayerMask.GetMask("Pate");
+        //LayerMask mask = LayerMask.GetMask("Pate");
 
-        //var arrayb = Physics2D.OverlapCircle(body.position, desiredseparation, mask, );
+        //var arrayb = Physics2D.OverlapCircle(bodyPosition, desiredseparation, mask, );
         //var joku =  Physics2D.OverlapCircleAll()
         //print(arrayb);
 
-        var array = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask); // , mask);
+        //var array = Physics2D.OverlapCircleAll(bodyPosition, desiredseparation, mask); // , mask);
 
         //print(array.Length);
 
 
         for (int i = 0; i < array.Length; i++)
         {
-            Vector2 temp = body.position - array[i].transform.GetComponent<EnemyMovement>().body.position;
+            Vector2 temp = bodyPosition - array[i].transform.GetComponent<EnemyAI>().getPosition();
             float d = temp.magnitude;
             //print(d);
 

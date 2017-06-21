@@ -16,8 +16,8 @@ public class MobsControl : MonoBehaviour
     public int Mob_Amount;
     public GameObject EnemyPrefab;
     List<GameObject> Boids;
-    List<spawn> spawner = new List<spawn>(1);
-    [HideInInspector]
+    List<spawn> spawner = new List<spawn>();
+    //[HideInInspector]
 
 
     // Use this for initialization
@@ -33,7 +33,7 @@ public class MobsControl : MonoBehaviour
             float x = Random.Range(0f, 50f);
             float y = Random.Range(0f, 50f);
             var go = Instantiate(EnemyPrefab, new Vector2(x, y), Quaternion.identity);
-            go.GetComponent<EnemyMovement>().InitStart(x, y);
+            go.GetComponent<EnemyAI>().InitStart(x, y);
             Boids.Add(go);
         }
 
@@ -50,7 +50,7 @@ public class MobsControl : MonoBehaviour
                 float x = Random.Range(spawner[0].x - spawner[0].rad, spawner[0].x + spawner[0].rad);
                 float y = Random.Range(spawner[0].x - spawner[0].rad, spawner[0].x + spawner[0].rad);
                 var go = Instantiate(EnemyPrefab, new Vector2(x, y), Quaternion.identity);
-                go.GetComponent<EnemyMovement>().InitStart(x, y);
+                go.GetComponent<EnemyAI>().InitStart(x, y);
                 Boids.Add(go);
 
                 spawner[0].amount--;
@@ -62,10 +62,7 @@ public class MobsControl : MonoBehaviour
         }
         for (int i = 0; i < Boids.Count; i++)
         {
-
-            Boids[i].GetComponent<EnemyMovement>().applyBehaviors(Boids);
-            Boids[i].GetComponent<EnemyMovement>().MovementUpdate();
-
+            Boids[i].GetComponent<EnemyAI>().UpdatePosition(Boids);
         }
     }
     public void SpawnBoids(float x, float y, float radius, int amount)

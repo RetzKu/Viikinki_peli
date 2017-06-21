@@ -6,13 +6,11 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float slowdown = 10;
     private Rigidbody2D rb;
-    private Vector2 movement;
-    public float thrust = 15;
-    public float max_spd = 3;
-
-    Rigidbody2D body;
+        private Vector2 movement;
+            public float slowdown = 10;
+            public float thrust = 15;
+            public float max_spd = 3;
 
 
     void Start()
@@ -20,28 +18,22 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-
-    void Update()
-    {
-    }
-
     void FixedUpdate()
     {
-        tmp();
-        rb.velocity += new Vector2(tmp().x, tmp().y);
+        Vector2 SpeedLimiter = SpeedLimitChecker();
+        rb.velocity += new Vector2(SpeedLimiter.x, SpeedLimiter.y);
     }
 
     Vector2 Input_checker()
     {
         Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
-        if(movement.x == 0 && movement.y == 0) {rb.drag = slowdown;}
-        else{rb.drag = 2;}
+        if (movement.x == 0 && movement.y == 0) {rb.drag = slowdown;}
+        else {rb.drag = 2;}
 
         return movement;
     }
-    Vector2 tmp()
+    Vector2 SpeedLimitChecker()
     {
         Vector2 added_spd = Input_checker();
 

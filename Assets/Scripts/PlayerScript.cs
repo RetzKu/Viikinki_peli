@@ -25,6 +25,7 @@ public class PlayerScript : MonoBehaviour
 
         InventoryChild = gameObject.transform.Find("Inventory").gameObject;
         EquipChild = gameObject.transform.Find("Equip").gameObject;
+       
     }
 
     void Update()
@@ -101,11 +102,7 @@ public class PlayerScript : MonoBehaviour
         if (Trig.transform.tag == "Item")
         {
             AddToInventory(Trig);
-            print("Poimittu"); 
-        }
-        else
-        {
-            print("Dropped item on the ground");
+            Debug.Log(Trig.transform.name + " Picked up");
         }
 
         if (Trig.gameObject.tag == "puu")

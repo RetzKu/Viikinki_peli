@@ -2,13 +2,10 @@
 
 public class TileMap : MonoBehaviour
 {
- 
     public Sprite GrassSprite; // Note(Eetu): Spritet kannattaa varmaan eroitella toiseen scriptiin (ehkä?)
-
 
     private Perlin _perlinGenerator;
     public Chunk[,] _chunks;
-
 
     public const int TotalWidth = 60;
     public const int TotalHeight = 60;
@@ -33,19 +30,15 @@ public class TileMap : MonoBehaviour
 
     void Start()
     {
-        Chunk.GrassSprite = chunkTestSprites;
+        SpriteController = FindObjectOfType<TileSpriteController>();
 
-   
+        Chunk.GrassSprite = chunkTestSprites[0];
 
         _perlinGenerator = GetComponent<Perlin>();
-
         _chunks = new Chunk[3, 3];
-
 
         Chunk.TileGameObjects = TileGameObjects;
         Chunk.Tiles = Tiles;
-
-
 
         for (int y = 0; y < 3; y++)
         {
@@ -57,13 +50,8 @@ public class TileMap : MonoBehaviour
                 int viewIndexY = y * Chunk.CHUNK_SIZE;
 
                 _chunks[y, x].Init(x, y, this.transform, Tiles, TileGameObjects, viewIndexX, viewIndexY);
-
-                print(viewIndexY);
-                print(viewIndexX);
-                // _chunks[y, x].SetView(x * Chunk.CHUNK_SIZE - x * 1, y * Chunk.CHUNK_SIZE - y * 1); // 0 19 39
             }
         }
-
 
         int initHeight = 3;
         int initWidth = 3;
@@ -107,8 +95,45 @@ public class TileMap : MonoBehaviour
                     Gizmos.DrawWireCube(center, bounds);
                 }
             }
+
+            // DEBUG for chunk tile real loc
+            //Gizmos.color = Color.red;
+            //Vector3 size = new Vector3(1, 1, 1);
+            //Vector3 pos = TileGameObjects[0, 0].transform.position;
+
+            //Gizmos.DrawCube(pos, size);
+            //TileGameObjects[24, 25].transform.position;
+            //Gizmos.DrawCube(pos, size);
+
+            //TileGameObjects[0, 0].transform.position;
+            //Gizmos.DrawCube(pos, size);
+
         }
     }
+
+    public Sprite[] TestTiles;
+    void RandomizeAllTiles()
+    {
+        foreach (var tile in TileGameObjects)
+        {
+
+            var spriteRenderer = tile.GetComponent<SpriteRenderer>();
+            // spriteRenderer = new SpriteRenderer();
+            spriteRenderer.sprite = TestTiles[Random.Range(0, TestTiles.Length)];
+            spriteRenderer.color = Color.white;
+            spriteRenderer.material.color = Color.white;
+        }
+    }
+
+    void ResetColor()
+    {
+        foreach (var tile in TileGameObjects)
+        {
+            var spriteRenderer = tile.GetComponent<SpriteRenderer>();
+            spriteRenderer.material.color = Color.white;
+        }
+    }
+
 
     public static Vec2 GetChunkOffset(float x, float y)
     {
@@ -147,6 +172,8 @@ public class TileMap : MonoBehaviour
                 swapColumn(2, 1);
                 swapColumn(1, 0);
 
+                SwapLeft();
+
                 for (int i = -1; i < 2; i++)    // -1
                 {
                     _chunks[i + 1, 0].disableChunkCollision();
@@ -160,6 +187,8 @@ public class TileMap : MonoBehaviour
             {
                 swapColumn(1, 0);
                 swapColumn(2, 1);
+
+                SwapRight();
 
                 for (int i = -1; i < 2; i++)    // -1
                 {
@@ -197,7 +226,7 @@ public class TileMap : MonoBehaviour
                 }
             }
 
-           //  SpriteController.InitChunkSprites(_chunks[1, 1]);
+            // SpriteController.InitChunkSprites(_chunks[1, 1]);
         }
 
         _chunks[1, 1].offsetX = chunkOffsetX;   // ainoastaa center chunk on oikeassa chunkissa atm
@@ -246,12 +275,23 @@ public class TileMap : MonoBehaviour
         //    Destroy(this.gameObject);            
         //}
 
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            RandomizeAllTiles();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            ResetColor();
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            for (int i = 0; i < 3; i++)
-            {
-                _chunks[i, 2].MoveChunk(3, 0);
-            }
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    SpriteController.InitChunkSprites()
+            //}
+            SpriteController.InitChunkSprites(TotalWidth - 2, TotalHeight - 2, this, 1, 1);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -277,7 +317,7 @@ public class TileMap : MonoBehaviour
         new Vec2(1, 1), new Vec2(1, 0),
     };
 
-    void SwapTiles()
+    void SwapLeft()
     {
         for (int y = 0; y < 3; y++)
         {
@@ -291,6 +331,7 @@ public class TileMap : MonoBehaviour
 
     void SwapRight()
     {
+        print("calss");
         for (int y = 3; y > 1; y--)
         {
             for (int x = 59; x > 39; x--)

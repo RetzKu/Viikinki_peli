@@ -8,6 +8,8 @@ public enum TileType
     Water,
     DeepWater,
     Mountain,
+
+    
     CollisionTiles,
 
     Beach,

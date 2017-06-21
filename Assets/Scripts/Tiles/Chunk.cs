@@ -1,6 +1,4 @@
-﻿#define REFACTOR
-
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 
 // must change start once scrolling
@@ -10,20 +8,23 @@ public class View<T>
     public int _startX;
     public int _startY;
 
-    private int _size;
+    public int Size;
     public View(T[,] array, int startX, int startY, int size)
     {
         this._array = array;
         _startX = startX;
         _startY = startY;
-        _size = size;
+        Size = size;
+
     }
+
+
 
     public T this[int y, int x]
     {
         get
         {
-            if (x < 0 || _size >= x)
+            if (x < 0 || Size >= x)
             {
                 return _array[_startY + y, _startX + x];
             }
@@ -43,48 +44,31 @@ public class View<T>
 
 public class Chunk      // sub array
 {
-    public bool debugDrawChunk = false;
     public static int CHUNK_SIZE = 20;
-
-    public static Sprite[] GrassSprite;
-    public static bool UseDebugTileMap;
-
-    // aseta tilemapissa
-#if REFACTOR
     public static TileType[,] Tiles;
     public static GameObject[,] TileGameObjects;
-#else
-    public TileType[,] Tiles;
-    public GameObject[,] TileGameObjects;
-#endif
 
-    // TODO: // ainoastaa center chunk on oikeassa chunkissa atm
     public int offsetX;
     public int offsetY;
-
-    public int chunkIndexX;
-    public int chunkIndexY;
     FileInfo f;
 
-    public View<TileType>   TilemapTilesView;
+    public View<TileType> TilemapTilesView;
     public View<GameObject> GameObjectView;
+
+    public static Sprite GrassSprite;
 
     public void SetView(int startIndexX, int startIndexY)
     {
         TilemapTilesView._startX = startIndexX;
         TilemapTilesView._startY = startIndexY;
-    } 
+    }
 
     public void Init(int chunkOffsetX, int chunkOffsetY, Transform tilemap, TileType[,] tiles, GameObject[,] gameobjects, int viewStartXIndex, int viewStartYIndex)
     {
         Debug.Log("x: " + viewStartXIndex);
-        TilemapTilesView = new View<TileType>(tiles, viewStartXIndex , viewStartYIndex, 20); // 0 1 2    // SETVIEW;
-        GameObjectView = new View<GameObject>(gameobjects, viewStartXIndex, viewStartYIndex , 20);
+        TilemapTilesView = new View<TileType>(tiles, viewStartXIndex, viewStartYIndex, 20); // 0 1 2    // SETVIEW;
+        GameObjectView = new View<GameObject>(gameobjects, viewStartXIndex, viewStartYIndex, 20);
 
-#if !REFACTOR
-        Tiles = new TileType[CHUNK_SIZE, CHUNK_SIZE];
-        TileGameObjects = new GameObject[CHUNK_SIZE, CHUNK_SIZE];
-#endif
         chunkOffsetX *= CHUNK_SIZE;
         chunkOffsetY *= CHUNK_SIZE;
 
@@ -105,7 +89,7 @@ public class Chunk      // sub array
                 GameObjectView[y, x] = tileObject;
 
                 SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
-                spriteRenderer.sprite = GrassSprite[0]; // GrassSprite[Random.Range(0, GrassSprite.Length)];                        // HUOM SPRITE CONTROLLER!!!!!
+                spriteRenderer.sprite = GrassSprite; // GrassSprite[Random.Range(0, GrassSprite.Length)];                        // HUOM SPRITE CONTROLLER!!!!!
                 spriteRenderer.sortingLayerName = "TileMap";
 
 
@@ -153,33 +137,29 @@ public class Chunk      // sub array
 
     public void Load()
     {
-        using (BinaryReader b = new BinaryReader(File.Open(path, FileMode.Open)))
-        {
-            int pos = 0;
-            int length = (int)b.BaseStream.Length;
-            while (pos < length)
-            {
-                int v = b.ReadInt32();
-                Debug.Log(v);
-                pos += sizeof(int);
-            }
-        }
+        //using (BinaryReader b = new BinaryReader(File.Open(path, FileMode.Open)))
+        //{
+        //    int pos = 0;
+        //    int length = (int)b.BaseStream.Length;
+        //    while (pos < length)
+        //    {
+        //        int v = b.ReadInt32();
+        //        Debug.Log(v);
+        //        pos += sizeof(int);
+        //    }
+        //}
     }
 
 
     public void disableChunkCollision()
     {
-#if REFACTOR
-        //for (int y = startY; y < startY + CHUNK_SIZE; y++)
-        //{
-
-        //}
-#else
-        foreach (var go in TileGameObjects)
+       for(int y = 0; y < GameObjectView.Size; y++)
         {
-            go.GetComponent<Collider2D>().enabled = false;
+            for (int x = 0; x < GameObjectView.Size; x++)
+            {
+                GameObjectView[y, x].GetComponent<Collider2D>().enabled = false;
+            }
         }
-#endif
     }
 
     public void MoveChunk(int x, int y)
@@ -199,7 +179,7 @@ public class Chunk      // sub array
 
     // näitä kutsuu todenkäköisesti vain TileMap class jonka kautta kaikki kommunikaatio
     // chunkeille tehdään! 
-    public TileType GetTile(int x, int y) 
+    public TileType GetTile(int x, int y)
     {
         return TilemapTilesView[y, x];
     }

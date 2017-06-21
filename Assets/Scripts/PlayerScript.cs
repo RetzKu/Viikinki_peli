@@ -124,8 +124,7 @@ public class PlayerScript : MonoBehaviour
         int it = 0;
         if (EquipChild.transform.childCount == 0)
         {
-            Item.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
-            Instantiate(Item.gameObject, EquipChild.transform);
+            Instantiate(Item.gameObject, EquipChild.transform).transform.position = transform.position;
             EquipChild.transform.GetChild(0).name = Item.transform.name;
             Destroy(Item.gameObject);
         }

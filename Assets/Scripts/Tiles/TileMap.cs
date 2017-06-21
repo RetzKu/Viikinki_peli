@@ -271,17 +271,43 @@ public class TileMap : MonoBehaviour
         }
     }
 
-    void LoadChunk(int x, int y)
+    public enum Dir { Rigth, Left }
+    public static readonly Vec2[] Data =
     {
+        new Vec2(1, 1), new Vec2(1, 0),
+    };
 
+    void SwapTiles()
+    {
+        for (int y = 0; y < 3; y++)
+        {
+            for (int x = 0; x < 20; x++)
+            {
+                Tiles[y, x] = Tiles[y, x + 20];
+                Tiles[y, x + 20] = Tiles[y, x + 40];
+            }
+        }
     }
+
+    void SwapRight()
+    {
+        for (int y = 3; y > 1; y--)
+        {
+            for (int x = 59; x > 39; x--)
+            {
+                Tiles[y, x] = Tiles[y, x - 20];
+                Tiles[y, x - 20] = Tiles[y, x - 40];
+            }
+        }
+    }
+
 
     // NOTE(Eetu):
     // jos funktioiden matematiikka on liian raskasta niin on vielä mahdollista optimoida se muutamalla kikalla
     // raskas toiminnallisuuss liittyen tiilien looppaamiseen kannattaa sijoittaa chunkkeihin suoraan
     // tarkoitettu lähinnä tiilien vaihtoon / yksittäisiin tiili operaatioihin
-    public TileType GetTile(float x, float y)
-    {
+    public TileType GetTile(float x, float y)                   // TODO: FIX THESE
+    {   
         int chunkX = 1;
         int chunkY = 1;
         GetChunkOffsetXY(ref chunkX, ref chunkY, x, y);

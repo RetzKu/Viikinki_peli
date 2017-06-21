@@ -7,8 +7,6 @@ public class PlayerScript : MonoBehaviour
     internal List<ItemScript> invetory_data;
     public int InventorySize;
 
-    private bool interraction_cd = false;
-
     private GameObject InventoryChild;
     private GameObject EquipChild;
 
@@ -16,8 +14,6 @@ public class PlayerScript : MonoBehaviour
     Vector3 endPoint;
 
     public bool running = true;
-
-    private GameObject text_object;
 
     void Start()
     {

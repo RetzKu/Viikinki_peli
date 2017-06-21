@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4944008002391322}
   - component: {fileID: 212764307580142884}
   - component: {fileID: 58231207963940862}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tree_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,9 +52,10 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -0.01, y: -0.09}
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.05, y: -0.71}
   serializedVersion: 2
-  m_Radius: 0.0597414
+  m_Radius: 0.27863693
 --- !u!212 &212764307580142884
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -85,8 +86,13 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -630457927
-  m_SortingOrder: 9
+  m_SortingLayer: 4
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 53ae6238298c88d41b10672f14e470eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0

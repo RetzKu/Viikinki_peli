@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61201734234515974}
   m_Layer: 0
   m_Name: Miekka_3
-  m_TagString: item_maassa
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

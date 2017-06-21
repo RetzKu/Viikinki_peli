@@ -127,9 +127,8 @@ public class PlayerScript : MonoBehaviour
         int it = 0;
         if (EquipChild.transform.childCount == 0)
         {
-            Instantiate(Item.gameObject, EquipChild.transform);
-            EquipChild.transform.GetChild(0).name = Item.transform.name;
-            Destroy(Item.gameObject);
+            Item.transform.SetParent(EquipChild.transform, false);
+            //Destroy(Item.gameObject);
         }
         else
         {

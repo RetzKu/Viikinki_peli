@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 114450468289407712}
   - component: {fileID: 61868856117280216}
   - component: {fileID: 114205534462821520}
+  - component: {fileID: 114571015897412422}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -138,8 +139,6 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
-  m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -175,20 +174,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
   m_Offset: {x: 0.0602941, y: -0.05301022}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.27, y: 3.48}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1.9918188, y: 2.1017067}
-  m_EdgeRadius: 0
 --- !u!81 &81127572377712670
 AudioListener:
   m_ObjectHideFlags: 1
@@ -243,9 +231,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2ac7d8b08d63145aa35a27ad3854a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventorySize: 0
+  InventorySize: 3
   running: 0
-  text_object: {fileID: 0}
+--- !u!114 &114571015897412422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1939644750868466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79301afa6bbc93e439e6700014b81b82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowdown: 10
+  thrust: 15
+  max_spd: 3
 --- !u!124 &124539979530909974
 Behaviour:
   m_ObjectHideFlags: 1
@@ -283,16 +284,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -630457927
-  m_SortingLayer: 4
   m_SortingOrder: 80
   m_Sprite: {fileID: 21300000, guid: e890be8529e100743824d4c33d4f9941, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
 --- !u!212 &212667455987292316
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -323,13 +319,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -630457927
-  m_SortingLayer: 4
   m_SortingOrder: 76
   m_Sprite: {fileID: 21300000, guid: a8cddc3c016a28c4e95c5b859b16e2c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0

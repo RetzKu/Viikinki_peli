@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 4e0d0f811b9b117428e6d2cd3132ef5c
-timeCreated: 1498054224
-licenseType: Pro
+timeCreated: 1498072798
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: GrassLand_NESW_0
@@ -21,14 +21,16 @@ TextureImporter:
     21300028: GrassLand_NE
     21300030: GrassLand_NEW
     21300032: GrassLand_NW
-    21300034: tileset_grass (4)_17
+    21300034: GrassLand_NESW_d3
     21300036: tileset_grass (4)_18
-    21300038: tileset_grass (4)_19
+    21300038: GrassLand_NESW_d1
     21300040: tileset_grass (4)_20
     21300042: tileset_grass (4)_21
-    21300044: tileset_grass (4)_22
+    21300044: GrassLand_NESW_d4
     21300046: tileset_grass (4)_23
-    21300048: tileset_grass (4)_24
+    21300048: GrassLand_NESW_d2
+    21300050: tileset_grass (4)_0
+    21300052: tileset_grass (4)_1
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -372,7 +374,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_grass (4)_17
+      name: GrassLand_NESW_d3
       rect:
         serializedVersion: 2
         x: 0
@@ -398,7 +400,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_grass (4)_19
+      name: GrassLand_NESW_d1
       rect:
         serializedVersion: 2
         x: 128
@@ -428,7 +430,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 65
+        y: 64
         width: 64
         height: 64
       alignment: 0
@@ -437,7 +439,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_grass (4)_22
+      name: GrassLand_NESW_d4
       rect:
         serializedVersion: 2
         x: 0
@@ -463,13 +465,39 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_grass (4)_24
+      name: GrassLand_NESW_d2
       rect:
         serializedVersion: 2
         x: 128
         y: 0
         width: 64
         height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_grass (4)_0
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 84
+        width: 2
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_grass (4)_1
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 86
+        width: 3
+        height: 2
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

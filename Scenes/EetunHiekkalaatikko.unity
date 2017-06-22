@@ -244,7 +244,7 @@ Transform:
   m_GameObject: {fileID: 424710493}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.13, y: 1, z: -10}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 868275450}
   m_RootOrder: 0
@@ -321,6 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8427936ca66e5146960487d5e2b697d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 868275449}
 --- !u!1 &425716592
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,6 +373,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: TestTiles.Array.size
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
         type: 2}
       propertyPath: chunkTestSprites.Array.size
@@ -475,6 +481,60 @@ Prefab:
       propertyPath: SpriteController
       value: 
       objectReference: {fileID: 1310822892}
+    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: TestTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
+        type: 3}
+    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: TestTiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300002, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
+        type: 3}
+    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: TestTiles.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300004, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
+        type: 3}
+    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: TestTiles.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300012, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
+        type: 3}
+    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: TestTiles.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300014, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
+        type: 3}
+    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: TestTiles.Array.data[5]
+      value: 
+      objectReference: {fileID: 21300016, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
+        type: 3}
+    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: TestTiles.Array.data[6]
+      value: 
+      objectReference: {fileID: 21300022, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
+        type: 3}
+    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: TestTiles.Array.data[7]
+      value: 
+      objectReference: {fileID: 21300024, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
+        type: 3}
+    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: TestTiles.Array.data[8]
+      value: 
+      objectReference: {fileID: 21300026, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ba8cfce009a3764ba416b37c8f039af, type: 2}
   m_IsPrefabParent: 0
@@ -908,7 +968,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
 --- !u!4 &1114906435

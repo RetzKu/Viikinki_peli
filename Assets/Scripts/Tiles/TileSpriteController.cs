@@ -91,9 +91,12 @@ public class TileSpriteController : MonoBehaviour
 
 
     private static Vec2[] neighbours = {
-        new Vec2(0, -1), new Vec2(0, 1), 
+        new Vec2(0, -1), new Vec2(0, 1),
         new Vec2(-1, 0),  new Vec2(1, 0)
     };
+
+
+
 
     public void InitChunkSprites(int width, int height, TileMap tilemap, int startX, int startY)
     {
@@ -117,8 +120,9 @@ public class TileSpriteController : MonoBehaviour
                 //}
 
                 // bit mask // boolean Mask XD?
-                
+
                 int count = 0;
+
                 if (tilemap.Tiles[y + 1, x] == type)
                 {
                     assetName += "N";
@@ -140,16 +144,24 @@ public class TileSpriteController : MonoBehaviour
                     count++;
                 }
 
+                // kuinka väli-ilman suunnat lisätään ??
                 if (count == 1 || count == 0)
                 {
-                    // ongelma tapaus
-                    // tilemap.Tiles[y, x] = TileType.Invalid;
                     problemsCases.Add(new Vec2(x, y));
                 }
 
                 if (count == 4)
                 {
-                    assetName += "_" + Random.Range(0, 9).ToString();
+                    int dir = GetDiagonals(tilemap.Tiles, x, y, type);
+
+                    if (dir != 0)
+                    {
+                        assetName += "_d" +  dir.ToString();
+                    }
+                    else
+                    {
+                        assetName += "_" + Random.Range(0, 9).ToString();
+                    }
                     Sprite sprite;
                     if (_textures.TryGetValue(assetName, out sprite))
                     {
@@ -172,13 +184,33 @@ public class TileSpriteController : MonoBehaviour
         }
 
         print(problemsCases.Count);
-        foreach ( var pos in problemsCases)
+        foreach (var pos in problemsCases)
         {
             Debug.LogFormat("coords: {0}, {1}", pos.X, pos.Y);
             tilemap.Tiles[pos.Y, pos.X] = GetMostCommonNeighbour(tilemap.Tiles, pos.Y, pos.X);
         }
     }
 
+    // todo: replace with enum
+
+    // ala vasen   //   ylä vasaen    // ala oikea  // ala vasen
+    private static readonly Vec2[] Diagonals = {
+        new Vec2(-1, -1), new Vec2(1, -1),  // 
+        new Vec2(-1, 1),  new Vec2(1, 1)
+    };
+
+    int GetDiagonals(TileType[,] types, int x, int y, TileType selfType)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            var type = types[y + Diagonals[i].X, x + Diagonals[i].Y];
+            if (type != selfType)
+            {
+                return i+1;
+            }
+        }
+        return 0;
+    }
     //foreach(var pos in problemsCases)
     //{
     //    tilemap.Tiles[pos.Y, pos.X] = // get most neighbours ???
@@ -205,7 +237,7 @@ public class TileSpriteController : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            if (count[i] == count[i+1])
+            if (count[i] == count[i + 1])
             {
                 value = count[i];
                 break;

@@ -15,7 +15,7 @@ public class TileMap : MonoBehaviour
 
     public int Width = TotalWidth;
     public int Heigth = TotalHeight;
-    
+
     [Header("kayta")]
     public bool tilemapPrototypeLayout = false;
     public float tilemapGenerationOffsetX = 0;
@@ -27,6 +27,9 @@ public class TileMap : MonoBehaviour
     private bool running = false;
     [Header("Sydeemit")]
     public TileSpriteController SpriteController;
+
+    public Color tint;
+    private Color last;
 
     void Start()
     {
@@ -73,6 +76,22 @@ public class TileMap : MonoBehaviour
 
         SpriteController.InitChunkSprites(TotalWidth - 1, TotalHeight - 1, this, 1, 1);
         running = true;
+
+
+        last = tint;
+    }
+
+    
+    public void Tint()
+    {
+        if (last != tint)
+        {
+            foreach(var go in TileGameObjects)
+            {
+                go.GetComponent<SpriteRenderer>().material.color = tint;
+                last = tint;
+            }
+        }
     }
 
     public static bool Collides(TileType type)
@@ -96,16 +115,19 @@ public class TileMap : MonoBehaviour
                 }
             }
 
-            // DEBUG for chunk tile real loc
+
+            //// DEBUG for chunk tile real loc
+
+
             //Gizmos.color = Color.red;
             //Vector3 size = new Vector3(1, 1, 1);
             //Vector3 pos = TileGameObjects[0, 0].transform.position;
 
             //Gizmos.DrawCube(pos, size);
-            //TileGameObjects[24, 25].transform.position;
+            //pos = TileGameObjects[24, 25].transform.position;
             //Gizmos.DrawCube(pos, size);
 
-            //TileGameObjects[0, 0].transform.position;
+            //pos = TileGameObjects[].transform.position;
             //Gizmos.DrawCube(pos, size);
 
         }
@@ -180,7 +202,7 @@ public class TileMap : MonoBehaviour
                     _chunks[i + 1, 0].MoveChunk(-3, 0);
                 }
 
-               // SpriteController.InitChunkSprites(21, 58, this, 1, 1);
+                // SpriteController.InitChunkSprites(21, 58, this, 1, 1);
             }
             else if (chunkDtX > 0)
             {
@@ -260,7 +282,7 @@ public class TileMap : MonoBehaviour
         _perlinGenerator.GenerateChunk(_chunks[offsetY, offsetX], perlinOffsetX, perlinOffsetY);
     }
 
-   
+
     // TMP TODO: DELETE!!!
     void GenerateChunk(int offsetX, int offsetY)
     {
@@ -269,6 +291,7 @@ public class TileMap : MonoBehaviour
 
     void Update()
     {
+        Tint();
         //if (CrossPlatformInputManager.GetButtonDown("Jump"))
         //{
         //    Destroy(this.gameObject);            
@@ -347,7 +370,7 @@ public class TileMap : MonoBehaviour
     // raskas toiminnallisuuss liittyen tiilien looppaamiseen kannattaa sijoittaa chunkkeihin suoraan
     // tarkoitettu lähinnä tiilien vaihtoon / yksittäisiin tiili operaatioihin
     public TileType GetTile(float x, float y)                   // TODO: FIX THESE
-    {   
+    {
         int chunkX = 1;
         int chunkY = 1;
         GetChunkOffsetXY(ref chunkX, ref chunkY, x, y);

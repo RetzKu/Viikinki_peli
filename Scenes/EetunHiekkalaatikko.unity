@@ -450,6 +450,7 @@ GameObject:
   - component: {fileID: 868275454}
   - component: {fileID: 868275453}
   - component: {fileID: 868275455}
+  - component: {fileID: 868275456}
   m_Layer: 10
   m_Name: hahmo
   m_TagString: Player
@@ -565,6 +566,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5161bac8b279074f89dcc35aa146973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &868275456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 868275449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 137c1b2f65ad1ab40815f0a9a4a21588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aggroDist: 5
 --- !u!1 &1030943109
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,7 +798,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrassSprite: {fileID: 21300000, guid: 99d412a553ad16c4a936acb3f892544c, type: 3}
   SuperSprite: {fileID: 21300000, guid: 1a84d002a1cba994585636880c39ff1a, type: 3}
-  StartSprite: {fileID: 0}
+  StartSprite: {fileID: 21300000, guid: fb1a5a6b24d2b984c9e77540833633af, type: 3}
 --- !u!4 &1473925182
 Transform:
   m_ObjectHideFlags: 0
@@ -871,7 +884,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4647033125703550, guid: 2b5b440fa7b64344ea4718be6cea3e4e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 4647033125703550, guid: 2b5b440fa7b64344ea4718be6cea3e4e, type: 2}
       propertyPath: m_LocalPosition.y
@@ -904,7 +917,7 @@ Prefab:
     - target: {fileID: 114082371090620650, guid: 2b5b440fa7b64344ea4718be6cea3e4e,
         type: 2}
       propertyPath: Mob_Amount
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b5b440fa7b64344ea4718be6cea3e4e, type: 2}

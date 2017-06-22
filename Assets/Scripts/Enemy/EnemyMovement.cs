@@ -59,6 +59,7 @@ public class EnemyMovement /*: MonoBehaviour*/
         this.ArriveRadius = ArriveRadius;
         this.MaxSteeringForce = MaxSteeringForce;
         this.MaxSpeed = MaxSpeed;
+        
     }
 
     //maps dictanses
@@ -101,7 +102,7 @@ public class EnemyMovement /*: MonoBehaviour*/
         //}
     }
 
-    public Vector2 applyBehaviors(Collider2D[] GroupMobs, Collider2D[] CollisionMobs, Vector2 Rvelocity, Vector2 Rtarget, Vector2 position,int flags)
+    public Vector2[] applyBehaviors(Collider2D[] GroupMobs, Collider2D[] CollisionMobs, Vector2 Rvelocity, Vector2 Rtarget, Vector2 position,int flags)
     {
         float tempSpeed = MaxSpeed;
 
@@ -156,6 +157,21 @@ public class EnemyMovement /*: MonoBehaviour*/
         {
             tempSpeed =  arriving(MaxSpeed);
         }
+        if ((flags & (int)behavior.arrive) == (int)behavior.startLeap)//attack
+        {
+            velocity *= 0;
+
+        }
+        if ((flags & (int)behavior.arrive) == (int)behavior.Inleap)//attack
+        {
+            velocity *= 0;
+
+        }
+        //if ((flags & (int)behavior.arrive) == (int)behavior.getInPosition)//attack
+        //{
+        //    velocity *= 0;
+        //    //seek(target);
+        //}
 
         velocity += acceleration;
         // limit max speed
@@ -166,7 +182,10 @@ public class EnemyMovement /*: MonoBehaviour*/
             velocity *= tempSpeed;
         }
 
-        return velocity;
+        Vector2[] powers = new Vector2[2];
+        powers[0] = velocity;
+        powers[1] = target;
+        return powers;
         
 
 

@@ -16,11 +16,15 @@ public enum behavior
     changeSoloDIr = 32,
     seek = 64,
     arrive = 128,
+    moveToAttRange = 256,
+    Inleap = 512,
+    startLeap = 1024,
 
     wanderGroup = separate | alingment | cohesion,
     startWanderingSolo = wander | giveWanderingTargetSolo,
     changeSoloWanderDir = wander | changeSoloDIr,
-    seekAndArrive = seek | arrive
+    seekAndArrive = seek | arrive,
+    getInPosition = seek,
 }
 
 
@@ -31,12 +35,14 @@ public class EnemyAI : MonoBehaviour
     public float spawnX;
     [HideInInspector]
     public float spawnY;
-
+    public bool agro = false;
+    public bool inAttack = false;
+    public float attackDist = 0.1f;
+    public float leapDist = 2.0f;
 
     public float MaxSpeed = 0.02f;
     public float MaxSteeringForce = 0.001f; // higher = better steering
     public float ArriveRadius = 0.3f;      // slowdown beginning
-
     //ai
     public float IdleRadius = 60.0f;
     public float IdleBallDistance = 100.0f;
@@ -62,7 +68,7 @@ public class EnemyAI : MonoBehaviour
 
 
     EnemyMovement Physics = new EnemyMovement();
-
+    private GameObject player;
     // Use this for initialization
     public void InitStart(float x, float y)
     {
@@ -72,6 +78,7 @@ public class EnemyAI : MonoBehaviour
         body.MovePosition(new Vector2(spawnX, spawnY));
         velocity = new Vector2(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f));
         Physics.InitRules(sepF, aliF, cohF, desiredseparation, alingmentDistance, IdleRadius, IdleBallDistance, ArriveRadius, MaxSteeringForce, MaxSpeed);
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -80,38 +87,91 @@ public class EnemyAI : MonoBehaviour
         LayerMask mask = LayerMask.GetMask("Pate");
         var HeardArray = Physics2D.OverlapCircleAll(body.position, alingmentDistance, mask); // , mask);
         var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
-        if (HeardArray.Length > 1)
+        Vector2[] powers = new Vector2[2];
+
+        if (!agro)
         {
-            flags = (int)behavior.wanderGroup;
-            GiveStartTarget = true;
-    }
-        else
-        {
-            if (GiveStartTarget)
+            if (HeardArray.Length > 1)
             {
-                flags = (int)behavior.startWanderingSolo;
-                counter = 0;
-                GiveStartTarget = false;
-            }
-            if (counter > IdleRefreshRate)
-            {
-                print("changing dir");
-                flags = (int)behavior.changeSoloWanderDir;
-                counter = 0;
+                flags = (int)behavior.wanderGroup;
+                GiveStartTarget = true;
             }
             else
             {
-                print("moving forward");
-                counter++;
+                if (GiveStartTarget)
+                {
+                    flags = (int)behavior.startWanderingSolo;
+                    counter = 0;
+                    GiveStartTarget = false;
+                }
+                if (counter > IdleRefreshRate)
+                {
+                    //print("changing dir");
+                    flags = (int)behavior.changeSoloWanderDir;
+                    counter = 0;
+                }
+                else
+                {
+                    flags = (int)behavior.wander;
+                    //print("moving forward");
+                    counter++;
+                }
             }
+
+
+            powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags);
+            //print(velocity.x);
+            //print(velocity.y);
+            // print("uptading");
+            velocity = powers[0];
+            target = powers[1];
+            body.MovePosition(body.position + velocity);
+        }
+        else if (agro)
+        {
+            Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
+
+                Vector2 dist = body.position - playerPos;
+            //if (dist.magnitude <= attackDist)
+            //{
+            //    if (!inAttack)
+            //    {
+            //        print("leaping");
+
+            //        dist.Normalize();
+            //        dist *= leapDist;
+            //        target = body.position + dist;
+            //        flags = (int)behavior.startLeap;
+            //        inAttack = true;
+            //    }
+            //    else
+            //    {
+            //        print("leaping");
+
+            //        flags = (int)behavior.Inleap;
+            //        if (body.position == target)
+            //        {
+            //            inAttack = false;
+            //        }
+            //    }
+            //}
+            //else
+            //{
+                //print("getting in position");
+                dist.Normalize();
+                dist *= attackDist;
+                //print(dist.magnitude);
+                target = body.position + dist;
+                flags = (int)behavior.getInPosition;
+            ////}
+
+            powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags);
+            target = powers[1];
+            velocity = powers[1];
+            body.MovePosition(body.position + velocity);
         }
 
-        velocity = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags);
-        //print(velocity.x);
-        //print(velocity.y);
-       // print("uptading");
 
-        body.MovePosition(body.position + velocity);
     }
 
     public Vector2 getPosition()

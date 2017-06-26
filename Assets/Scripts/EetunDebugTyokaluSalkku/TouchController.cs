@@ -234,7 +234,7 @@ public class TouchController : MonoBehaviour
     public void OnTouchDetected(int x, int y)
     {
         // var go = GetFromArray(x, y);
-        if (_touching)
+        if (_touching && index < 9)
         {
             print(transform.localPosition.x);
             positions[index] = new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f);
@@ -244,7 +244,7 @@ public class TouchController : MonoBehaviour
             //LineRenderer.positionCount = index + 1;
             //LineRenderer.positionCount = index + 1;
             //LineRenderer.positionCount = index + 1;
-            lineRenderer.numPositions = index + 1;
+            lineRenderer.positionCount = index + 1;
 
             lineRenderer.SetPosition(index, positions[index]);
             lineRenderer.sortingLayerName = "Foreground";

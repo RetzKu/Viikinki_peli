@@ -74,4 +74,14 @@ public class MobsControl : MonoBehaviour
         k.amount = amount;
         spawner.Add(k);
     }
+
+    public void DeleteAllCurrentMobs()
+    {
+        foreach (GameObject kakka in Boids)
+        {
+            Destroy(kakka);
+        }
+        Boids = new List<GameObject>(); // EETU TRIGGER
+        spawner = new List<spawn>(); // EETU TRIGGER
+    }
 }

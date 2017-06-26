@@ -13,7 +13,7 @@ public class EnemyMovement /*: MonoBehaviour*/
 
     //private Rigidbody2D body;
     [HideInInspector]
-    public float MaxSpeed = 0.02f;
+    public float MaxSpeed = 0.2f;
     [HideInInspector]
     public float MaxSteeringForce = 0.001f; // higher = better steering
     [HideInInspector]
@@ -47,7 +47,7 @@ public class EnemyMovement /*: MonoBehaviour*/
     Vector2 target = new Vector2();
     Vector2 bodyPosition = new Vector2();
 
-    public void InitRules(float sepF, float aliF,float cohF,float desiredseparation,float alingmentDistance,float IdleRadius,float IdleBallDistance,float ArriveRadius, float MaxSteeringForce,float MaxSpeed)
+    public void InitRules(float sepF, float aliF, float cohF, float desiredseparation, float alingmentDistance, float IdleRadius, float IdleBallDistance, float ArriveRadius, float MaxSteeringForce, float MaxSpeed)
     {
         this.sepF = sepF;
         this.aliF = aliF;
@@ -59,7 +59,7 @@ public class EnemyMovement /*: MonoBehaviour*/
         this.ArriveRadius = ArriveRadius;
         this.MaxSteeringForce = MaxSteeringForce;
         this.MaxSpeed = MaxSpeed;
-        
+
     }
 
     //maps dictanses
@@ -102,7 +102,7 @@ public class EnemyMovement /*: MonoBehaviour*/
         //}
     }
 
-    public Vector2[] applyBehaviors(Collider2D[] GroupMobs, Collider2D[] CollisionMobs, Vector2 Rvelocity, Vector2 Rtarget, Vector2 position,int flags)
+    public Vector2[] applyBehaviors(Collider2D[] GroupMobs, Collider2D[] CollisionMobs, Vector2 Rvelocity, Vector2 Rtarget, Vector2 position, int flags)
     {
         float tempSpeed = MaxSpeed;
 
@@ -113,8 +113,8 @@ public class EnemyMovement /*: MonoBehaviour*/
         //LayerMask mask = LayerMask.GetMask("Pate");
         //var array = Physics2D.OverlapCircleAll(bodyPosition, alingmentDistance, mask); // , mask);
 
-       
-        if((flags & (int)behavior.separate) == (int)behavior.separate)
+
+        if ((flags & (int)behavior.separate) == (int)behavior.separate)
         {
             Vector2 sepaV = separate(CollisionMobs);
             sepaV *= sepF;
@@ -155,28 +155,28 @@ public class EnemyMovement /*: MonoBehaviour*/
         }
         if ((flags & (int)behavior.arrive) == (int)behavior.arrive)
         {
-            tempSpeed =  arriving(MaxSpeed);
+            tempSpeed = arriving(tempSpeed);
         }
-        if ((flags & (int)behavior.arrive) == (int)behavior.startLeap)//attack
-        {
-            velocity *= 0;
-
-        }
-        if ((flags & (int)behavior.arrive) == (int)behavior.Inleap)//attack
-        {
-            velocity *= 0;
-
-        }
-        //if ((flags & (int)behavior.arrive) == (int)behavior.getInPosition)//attack
+        //if ((flags & (int)behavior.arrive) == (int)behavior.startLeap)//attack
         //{
         //    velocity *= 0;
-        //    //seek(target);
+
+        //}
+        //if ((flags & (int)behavior.arrive) == (int)behavior.Inleap)//attack
+        //{
+        //    velocity *= 0;
+
+        //}
+        //if ((flags & (int)behavior.arrive) == (int)behavior.getInPosition)//attack
+        //{
+        //    //velocity *= 0;
+        //    seek(target);
         //}
 
         velocity += acceleration;
         // limit max speed
 
-        if (velocity.magnitude > MaxSpeed)
+        if (velocity.magnitude > tempSpeed)
         {
             velocity.Normalize();
             velocity *= tempSpeed;
@@ -186,7 +186,7 @@ public class EnemyMovement /*: MonoBehaviour*/
         powers[0] = velocity;
         powers[1] = target;
         return powers;
-        
+
 
 
 

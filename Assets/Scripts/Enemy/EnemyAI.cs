@@ -24,23 +24,25 @@ public enum behavior
     startWanderingSolo = wander | giveWanderingTargetSolo,
     changeSoloWanderDir = wander | changeSoloDIr,
     seekAndArrive = seek | arrive,
-    getInPosition = seek,
+    //getInPosition = seek | arrive
 }
 
 
 
 public class EnemyAI : MonoBehaviour
 {
+
+
     [HideInInspector]
     public float spawnX;
     [HideInInspector]
     public float spawnY;
     public bool agro = false;
     public bool inAttack = false;
-    public float attackDist = 0.1f;
-    public float leapDist = 2.0f;
+    public float attackDist = 3.0f;
+    public float leapDist = 10.0f;
 
-    public float MaxSpeed = 0.02f;
+    public float MaxSpeed = 0.05f;
     public float MaxSteeringForce = 0.001f; // higher = better steering
     public float ArriveRadius = 0.3f;      // slowdown beginning
     //ai
@@ -48,6 +50,8 @@ public class EnemyAI : MonoBehaviour
     public float IdleBallDistance = 100.0f;
     public int IdleRefreshRate = 100;
     private int counter = 0;
+    private int attackCounter = 0;
+    private int attackUptade = 100;
     bool GiveStartTarget = true;
 
 
@@ -62,7 +66,6 @@ public class EnemyAI : MonoBehaviour
 
     public Vector2 velocity = new Vector2(); //An object’s PVector velocity will remain constant if it is in a state of equilibrium.
     Vector2 target = new Vector2();
-    //Vector2 acceleration = new Vector2(); //summs upp by all forces 
 
     int flags = 0;
 
@@ -78,6 +81,7 @@ public class EnemyAI : MonoBehaviour
         body.MovePosition(new Vector2(spawnX, spawnY));
         velocity = new Vector2(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f));
         Physics.InitRules(sepF, aliF, cohF, desiredseparation, alingmentDistance, IdleRadius, IdleBallDistance, ArriveRadius, MaxSteeringForce, MaxSpeed);
+        Physics.MaxSpeed = MaxSpeed;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -106,23 +110,18 @@ public class EnemyAI : MonoBehaviour
                 }
                 if (counter > IdleRefreshRate)
                 {
-                    //print("changing dir");
                     flags = (int)behavior.changeSoloWanderDir;
                     counter = 0;
                 }
                 else
                 {
                     flags = (int)behavior.wander;
-                    //print("moving forward");
                     counter++;
                 }
             }
 
 
             powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags);
-            //print(velocity.x);
-            //print(velocity.y);
-            // print("uptading");
             velocity = powers[0];
             target = powers[1];
             body.MovePosition(body.position + velocity);
@@ -131,51 +130,65 @@ public class EnemyAI : MonoBehaviour
         {
             Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
 
-                Vector2 dist = body.position - playerPos;
-            //if (dist.magnitude <= attackDist)
-            //{
-            //    if (!inAttack)
-            //    {
-            //        print("leaping");
+            Vector2 dist = body.position - playerPos;
 
-            //        dist.Normalize();
-            //        dist *= leapDist;
-            //        target = body.position + dist;
-            //        flags = (int)behavior.startLeap;
-            //        inAttack = true;
-            //    }
-            //    else
-            //    {
-            //        print("leaping");
-
-            //        flags = (int)behavior.Inleap;
-            //        if (body.position == target)
-            //        {
-            //            inAttack = false;
-            //        }
-            //    }
-            //}
-            //else
-            //{
-                //print("getting in position");
-                dist.Normalize();
-                dist *= attackDist;
-                //print(dist.magnitude);
-                target = body.position + dist;
-                flags = (int)behavior.getInPosition;
-            ////}
-
+            if (dist.magnitude <= attackDist || inAttack || velocity.magnitude == 0)
+            {
+                if (!inAttack && attackCounter > attackUptade)
+                {
+                    //start leap
+                    Physics.MaxSpeed = MaxSpeed * 4;
+                    dist.Normalize();
+                    dist *= 5;
+                    dist *= -1.0f;
+                    target = body.position + dist;
+                    flags = (int)behavior.seek;
+                    inAttack = true;
+                }
+                else if (inAttack)
+                {
+                    //leaping
+                    Vector2 t = target - body.position;
+                    flags = (int)behavior.seekAndArrive;
+                    if (velocity.magnitude == 0)
+                    {
+                        Physics.MaxSpeed = MaxSpeed;
+                        inAttack = false;
+                        attackCounter = 0;
+                    }
+                }
+                else
+                {
+                    //follow player
+                    attackCounter++;
+                    followPlayer(dist, playerPos);
+                }
+            }
+            else
+            {
+                //follow player
+                followPlayer(dist, playerPos);
+                attackCounter = attackUptade;
+            }
             powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags);
             target = powers[1];
-            velocity = powers[1];
+            velocity = powers[0];
             body.MovePosition(body.position + velocity);
         }
 
 
     }
+    void followPlayer(Vector2 dist, Vector2 playerPos)
+    {
+        dist.Normalize();
+        dist *= attackDist;
+        target = playerPos + dist;
+        flags = (int)behavior.seekAndArrive | (int)behavior.separate;
+        Physics.sepF = sepF * 2;
+    }
 
     public Vector2 getPosition()
     {
         return body.position;
-    } 
+    }
 }

@@ -25,8 +25,8 @@ public class TileSpriteController : MonoBehaviour
             _textures[sprite.name] = sprite;
             //print(sprite.name);
         }
-        
-        for(int i = 0; i < temporarySecondLayer.Length; i++)
+
+        for (int i = 0; i < temporarySecondLayer.Length; i++)
         {
             temporarySecondLayer[i] = new GameObject();
             // go.SetActive(false);
@@ -36,80 +36,92 @@ public class TileSpriteController : MonoBehaviour
         }
     }
 
-    //nurkat rajatapauksia / chunkkien välistä keskustelua
-    //spawnatessa tasoita aivan kaikki
-    //liikkuessa vain
-    //ne tietyt saumat?
+    string GetAssetNameByte(int x, int y, TileType[,] tiles, out int count)
+    {
+        count = 0;
+        TileType type = tiles[y, x];
+        string assetName = "GrassLand_";
 
-    //    public void InitChunkSprites(Chunk chunk)
-    //    {
-    //        // chunk.TileGameObjects
+        if (type == TileType.Mountain)
+        {
+            assetName = type.ToString() + "_";
+        }
+        if (tiles[y + 1, x] == type)
+        {
+            assetName += "N";
+            count++;
+        }
+        if (tiles[y, x + 1] == type)
+        {
+            assetName += "E";
+            count++;
+        }
+        if (tiles[y - 1, x] == type)
+        {
+            assetName += "S";
+            count++;
+        }
+        if (tiles[y, x - 1] == type)
+        {
+            assetName += "W";
+            count++;
+        }
 
-    //        int width = Chunk.CHUNK_SIZE;
-    //        int height = Chunk.CHUNK_SIZE;
+        if (count == 4)
+        {
+            int dir = GetDiagonals(tiles, x, y, type);
 
-    //        // käy jokainen läpi ja valitse spritelle nimi!
-
-    //        // looppa rajat erikseen ??
-    //        // ei out of bounds checkkiä silloin
-
-
-
-    //        for (int y = 0; y < height; y++)
-    //        {
-    //            for (int x = 1; x < width; x++)
-    //            {
-
-    //                TileType type = chunk.Tiles[y, x];
-    //                //if (type != TileType.GrassLand)
-    //                //{
-    //                //    return; // vain GrassLand on implementattu atm!!!
-    //                //}
-
-    //#if false
-    //                        string assetName = type.ToString() + "_";
-    //#else
-    //                string assetName = "GrassLand_";
-    //#endif
-
-    //                // bit mask // boolean Mask XD?
-    //                if (chunk.Tiles[y + 1, x] == type)
-    //                {
-    //                    assetName += "N";
-    //                }
-    //                if (chunk.Tiles[y, x + 1] == type)
-    //                {
-    //                    assetName += "E";
-    //                }
-    //                if (chunk.Tiles[y - 1, x] == type)
-    //                {
-    //                    assetName += "S";
-    //                }
-    //                if (chunk.Tiles[y, x - 1] == type)
-    //                {
-    //                    assetName += "W";
-    //                }
-
-    //                Sprite sprite;
-    //                if (_textures.TryGetValue(assetName, out sprite))
-    //                {
-    //                    chunk.TileGameObjects[y, x].GetComponent<SpriteRenderer>().sprite = sprite;
-    //                }
-    //                else
-    //                {
-    //                    Debug.LogWarning("Texture: " + assetName + " Missing!");
-    //                    // TODO: default / debug texture / pink texture
-    //                }
-    //            }
-    //        }
-    //    }
-
-
+            if (dir != 0)
+            {
+                assetName += "_d" + dir.ToString();
+            }
+            else
+            {
+                assetName += "_" + Random.Range(0, 9).ToString();
+            }
+        }
+        return assetName;
+    }
 
     private static Vec2[] neighbours = {
         new Vec2(0, -1), new Vec2(0, 1),
         new Vec2(-1, 0),  new Vec2(1, 0)
     };
+
+    string GetAssetNameBitmask(int x, int y, TileMap Tilemap, out int count)
+    {
+        count = 0;
+        TileType type = Tilemap.GetTileFast(x, y);
+        string assetName = "testTiles_";
+
+        if (type == TileType.Mountain)
+        {
+            assetName = type.ToString() + "_";
+        }
+
+        // 4-bit directions
+        // North, west, east, south
+        int value = 0;
+        if (Tilemap.GetTileFast(x, y + 1) == type)
+        {
+            value += 1;
+        }
+        if (Tilemap.GetTileFast(x + 1, y) == type)
+        {
+            value += 4;
+        }
+        if (Tilemap.GetTileFast(x, y - 1) == type)
+        {
+            value += 8;
+        }
+        if (Tilemap.GetTileFast(x - 1, y) == type)
+        {
+            value += 2;
+        }
+
+        assetName += value.ToString();
+        return assetName;
+    }
 
     string GetAssetName(int x, int y, TileType[,] tiles, out int count)
     {
@@ -157,6 +169,30 @@ public class TileSpriteController : MonoBehaviour
             }
         }
         return assetName;
+    }
+
+    public void SetTileSprites(int width, int height, TileMap tilemap, int startX, int startY)
+    {
+        for (int y = startY; y < height; y++)
+        {
+            for (int x = startX; x < width; x++)
+            {
+                int count = 0;
+                string assetName = GetAssetNameBitmask(x, y, tilemap, out count);
+
+                Sprite sprite;
+                if (_textures.TryGetValue(assetName, out sprite))
+                {
+                    // tilemap.TileGameObjects[y, x].GetComponent<SpriteRenderer>().sprite = sprite;
+                    tilemap.GetGameObjectFast(x, y).GetComponent<SpriteRenderer>().sprite = sprite;
+                    // tilemap.GetGameObjectFast(x, y).GetComponent<SpriteRenderer>().sprite = sprite;
+                }
+                else
+                {
+                   Debug.LogWarning("Texture: " + assetName + " Missing!");
+                }
+            }
+        }
     }
 
     public void InitChunkSprites(int width, int height, TileMap tilemap, int startX, int startY)
@@ -217,29 +253,29 @@ public class TileSpriteController : MonoBehaviour
             //}
 
             // TODO: FUNKTIO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            for(int i = 0; i < neighbours.Length; i++)
-            {
-                int x = neighbours[i].X + pos.X;
-                int y = neighbours[i].Y + pos.Y;
+            //for(int i = 0; i < neighbours.Length; i++)
+            //{
+            //    int x = neighbours[i].X + pos.X;
+            //    int y = neighbours[i].Y + pos.Y;
 
-                int count = 0;
-                string assetName = GetAssetName(x, y, tilemap.Tiles, out count);
+            //    int count = 0;
+            //    // string assetName = GetAssetName(x, y, tilemap.Tiles, out count);
 
-                //if (count == 1 || count == 0)
-                //{
-                //    problemsCases.Add(new Vec2(x, y));
-                //}
+            //    //if (count == 1 || count == 0)
+            //    //{
+            //    //    problemsCases.Add(new Vec2(x, y));
+            //    //}
 
-                Sprite sprite;
-                if (_textures.TryGetValue(assetName, out sprite))
-                {
-                    tilemap.TileGameObjects[y, x].GetComponent<SpriteRenderer>().sprite = sprite;
-                }
-                else
-                {
-                    Debug.LogWarning("Texture: " + assetName + " Missing!");
-                }
-            }
+            //    Sprite sprite;
+            //    if (_textures.TryGetValue(assetName, out sprite))
+            //    {
+            //        tilemap.TileGameObjects[y, x].GetComponent<SpriteRenderer>().sprite = sprite;
+            //    }
+            //    else
+            //    {
+            //        Debug.LogWarning("Texture: " + assetName + " Missing!");
+            //    }
+            //}
         }
         // probleemojen
         // naapureiden uudestaan initointi
@@ -253,12 +289,10 @@ public class TileSpriteController : MonoBehaviour
         return true;
     }
 
-   
+
 
     public void DoubleLayerBorders(List<Vec2> borderTiles, TileType[,] tiles, GameObject[,] gameobjects, TileMap map) // border tile list 
     {
-
-
         Debug.Log("meilla on: " + borderTiles.Count);
         for (int i = 0; i < borderTiles.Count; i++)
         {
@@ -293,7 +327,7 @@ public class TileSpriteController : MonoBehaviour
 
     public void SetNeighbours(int x, int y, TileMap map, TileType backgroundTile)
     {
-        foreach(var pos in neighbours)
+        foreach (var pos in neighbours)
         {
             if (TileType.GrassLand == map.Tiles[y, x])
             {

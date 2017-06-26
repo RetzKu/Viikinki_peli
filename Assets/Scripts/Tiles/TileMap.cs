@@ -70,23 +70,41 @@ public class TileMap : MonoBehaviour
             {
                 GenerateChunk(x, y); // ei vällii?      // vanhaa koodia? 
                 // SpriteController.InitChunkSprites(_chunks[y, x]);
+
             }
         }
         // reunin maisille joku placeholder tekstuura
 
-        SpriteController.InitChunkSprites(TotalWidth - 1, TotalHeight - 1, this, 1, 1);
-        running = true;
+        //for (int y = 0; y < TotalHeight; y++)
+        //{
+        //    for (int x = 0; x < TotalWidth; x++)
+        //    {
+        //        var go = TileGameObjects[y,x] = new GameObject();
+        //        var rend = go.AddComponent<SpriteRenderer>();
+        //        rend.sprite = GrassSprite;
+        //    }
+        //}
+        for (int x = 0; x < TotalWidth; x++)
+        {
+            TileGameObjects[0, x].GetComponent<SpriteRenderer>().sprite = GrassSprite;
+            TileGameObjects[TotalHeight - 1, x].GetComponent<SpriteRenderer>().sprite = GrassSprite;
+            TileGameObjects[x, 0].GetComponent<SpriteRenderer>().sprite = GrassSprite;
+            TileGameObjects[x, TotalWidth - 1].GetComponent<SpriteRenderer>().sprite = GrassSprite;
+        }
 
+        // SpriteController.InitChunkSprites(TotalWidth - 1, TotalHeight - 1, this, 1, 1);
+        SpriteController.SetTileSprites(TotalWidth - 2, TotalHeight - 2, this, 1, 1);
+        running = true;
 
         last = tint;
     }
 
-    
+
     public void Tint()
     {
         if (last != tint)
         {
-            foreach(var go in TileGameObjects)
+            foreach (var go in TileGameObjects)
             {
                 go.GetComponent<SpriteRenderer>().material.color = tint;
                 last = tint;
@@ -191,15 +209,20 @@ public class TileMap : MonoBehaviour
             if (chunkDtX < 0) // vasen
             {
                 swapColumn(2, 1);
-                swapColumn(1, 0);
+                // SwapColumnsViews(2, 1);
 
-                SwapLeft();
+                swapColumn(1, 0);
+                // SwapColumnsViews(1, 0);
+
+                // ResetTileViews();
+
+                // SwapLeft();
 
                 for (int i = -1; i < 2; i++)    // -1
                 {
                     _chunks[i + 1, 0].disableChunkCollision();
                     GenerateChunk(0, i + 1, chunkOffsetX - 1, chunkOffsetY + i);
-                    _chunks[i + 1, 0].MoveChunk(-3, 0);
+                    _chunks[i + 1, 0].MoveChunk(-3, 0); // moves gos
                 }
 
                 // SpriteController.InitChunkSprites(21, 58, this, 1, 1);
@@ -207,8 +230,10 @@ public class TileMap : MonoBehaviour
             else if (chunkDtX > 0)
             {
                 swapColumn(1, 0);
+                // SwapColumnsViews(2, 1);
                 swapColumn(2, 1);
-
+                // SwapColumnsViews(1, 0);
+                // ResetTileViews();
                 // SwapRight();
 
                 for (int i = -1; i < 2; i++)    // -1
@@ -224,6 +249,8 @@ public class TileMap : MonoBehaviour
                 swapRow(2, 1);
                 swapRow(1, 0);
 
+                // CopyChunks();
+
                 for (int i = -1; i < 2; i++)    // -1
                 {
                     _chunks[0, i + 1].disableChunkCollision();
@@ -238,6 +265,8 @@ public class TileMap : MonoBehaviour
                 swapRow(1, 0);
                 swapRow(2, 1);
 
+                // CopyChunks();
+
                 for (int i = -1; i < 2; i++)    // -1
                 {
                     _chunks[2, i + 1].disableChunkCollision();
@@ -246,12 +275,76 @@ public class TileMap : MonoBehaviour
                     _chunks[2, i + 1].MoveChunk(0, 3);
                 }
             }
-
             // SpriteController.InitChunkSprites(_chunks[1, 1]);
+
+
+            // Huokaus...
+
+
+            // CopyChunks();
+            SpriteController.SetTileSprites(59, 59, this, 1, 1);
         }
 
         _chunks[1, 1].offsetX = chunkOffsetX;   // ainoastaa center chunk on oikeassa chunkissa atm
         _chunks[1, 1].offsetY = chunkOffsetY;
+    }
+
+    // optimaalisimpiakin vaihtoehtoja olisi?
+    // siirrä chunkit vastaavaam oikeita paikkoja?
+    // Data vastaisi oikeita täällä 
+    // algoja varten 
+    // placement jne... 
+    // ->   ->   ->
+    //     O  O  ->  O  X  -> 
+    //     O  O  ->  O  X  ->
+
+    void SwapColumnsViews(int destX, int fromX)
+    {
+        for (int iY = 0; iY < 3; iY++)
+        {
+            Chunk dest = _chunks[iY, destX];
+            Chunk from = _chunks[iY, fromX];
+
+            // Chunk.SwapViews(dest, from);
+            for (int y = 0; y < Chunk.CHUNK_SIZE; y++)
+            {
+                for (int x = 0; x < Chunk.CHUNK_SIZE; x++)
+                {
+                    Tiles[iY * 20, destX * 20 + x] = from.TilemapTilesView[y, x];
+                }
+            }
+        }
+    }
+
+    void ResetTileViews()
+    {
+        for (int y = 0; y < 3; y++)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                _chunks[y, x].SetView(x * Chunk.CHUNK_SIZE, y * Chunk.CHUNK_SIZE);
+            }
+        }
+    }
+
+    void CopyChunks()
+    {
+        for (int y = 0; y < 3; y++)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                int iY = 0;
+                for (int yy = 0; yy < Chunk.CHUNK_SIZE; yy++, iY++)
+                {
+                    int iX = 0;
+                    for (int xx = 0; xx < Chunk.CHUNK_SIZE; xx++, iX++)
+                    {
+                        Tiles[iY, iX] = _chunks[y, x].TilemapTilesView[yy, xx];
+                    }
+                }
+                // _chunks[y, x].SetView(y * Chunk.CHUNK_SIZE, x * Chunk.CHUNK_SIZE);
+            }
+        }
     }
 
     void swapRow(int y, int newY)
@@ -272,9 +365,26 @@ public class TileMap : MonoBehaviour
 
     void swapChunks(int offsetX, int newOffsetX, int offsetY, int newOffsetY)
     {
+        // fuckihng algot
+        //int startY = offsetY * Chunk.CHUNK_SIZE;
+        //int startX = offsetX * Chunk.CHUNK_SIZE;
+        //int destinationStartX = newOffsetX * Chunk.CHUNK_SIZE;
+        //int destinationStartY = newOffsetY * Chunk.CHUNK_SIZE;
+
+        //for (int fromY = startY, destY = destinationStartY; fromY < startY + Chunk.CHUNK_SIZE; fromY++, destY++)
+        //{
+        //    for (int fromX = startX, destX = destinationStartX; fromX < startX + Chunk.CHUNK_SIZE; fromX++, destX++)
+        //    {
+        //        Tiles[destY, destX] = Tiles[fromY, fromX];
+        //    }
+        //}
+        // reset chunk views=?=?===?=??=???????
+
         Chunk tmp = _chunks[offsetY, offsetX];
         _chunks[offsetY, offsetX] = _chunks[newOffsetY, newOffsetX];
         _chunks[newOffsetY, newOffsetX] = tmp;
+
+        //Chunk.SwapViews(_chunks[offsetY, offsetX], _chunks[newOffsetY, newOffsetX]);
     }
 
     void GenerateChunk(int offsetX, int offsetY, int perlinOffsetX, int perlinOffsetY)
@@ -313,7 +423,8 @@ public class TileMap : MonoBehaviour
             //{
             //    SpriteController.InitChunkSprites()
             //}
-            SpriteController.InitChunkSprites(TotalWidth - 2, TotalHeight - 2, this, 1, 1);
+            // SpriteController.InitChunkSprites(TotalWidth - 2, TotalHeight - 2, this, 1, 1);
+            SpriteController.SetTileSprites(TotalWidth - 2, TotalHeight - 2, this, 1, 1);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -389,6 +500,23 @@ public class TileMap : MonoBehaviour
         int offsetX = (int)x % Chunk.CHUNK_SIZE;
         int offsetY = (int)y % Chunk.CHUNK_SIZE;
         _chunks[chunkY, chunkX].SetTile(offsetX, offsetY, type);
+    }
+
+    // 40
+    // 2
+    // 0
+    public GameObject GetGameObjectFast(int x, int y)
+    {
+        int ix = x / 20;
+        int iy = y / 20;
+        return _chunks[iy, ix].GetGameObject(x - ChunkSize * ix, y - ChunkSize * iy);
+    }
+
+    public TileType GetTileFast(int x, int y)
+    {
+        int ix = x / 20;
+        int iy = y / 20;
+        return _chunks[iy, ix].GetTile(x - ChunkSize * ix, y - ChunkSize * iy);
     }
 
     public GameObject GetTileGameObject(float x, float y)

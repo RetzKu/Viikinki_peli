@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.Remoting.Messaging;
 using UnityEngine;
-
+using UnityEngine.Assertions.Comparers;
 
 
 // TODO: Paljon hienosäätöä biomet voisi vaihtaa samaksi Tile enumiksi, mapin scrollaus, tuolla Texture2D voisi tehdä minimapin
@@ -16,7 +16,8 @@ public class Perlin : MonoBehaviour
     {
         Noise,
         Colored,
-        ColoredMoistured
+        ColoredMoistured,
+        ObjectMode
     };
 
     public Transform RenderTarget;
@@ -71,11 +72,14 @@ public class Perlin : MonoBehaviour
     private Renderer _renderer;
 
 
-    [Space(1)] [Header("Big Map settings")]
+    [Space(1)]
+    [Header("Big Map settings")]
     public int BigMapWidth = 3;
     public int BigMapHeight = 3;
 
     #endregion
+
+    private GameObject trees;
 
     void Start()
     {
@@ -86,7 +90,7 @@ public class Perlin : MonoBehaviour
         _renderer = RenderTarget.GetComponent<Renderer>();
         InitalizeRenderTarget();
 
-
+        trees = new GameObject("trees");
     }
 
     public void GenerateWorldTextureMap(int x, int y, float startX, float startY)
@@ -171,6 +175,90 @@ public class Perlin : MonoBehaviour
         {
             DrawNoiseMap((e, m) => Color.Lerp(Color.black, Color.white, e), _renderer);
         }
+        else if (DrawMode == NoiseMode.ColoredMoistured)
+        {
+            float[,] blueNoise = GenerateBlueNoise(100, 100);
+            DrawNoiseMap((elevation, moisture) => Color.Lerp(Color.black, Color.blue, elevation), _renderer, blueNoise,
+                100, 100);
+        }
+        else if (DrawMode == NoiseMode.ObjectMode)
+        {
+            float[,] blueNoise = GenerateBlueNoise(100, 100);
+            // TODO: fix visualization once needed
+
+            float[,] noiseMap = new float[115, 115];
+            GenerateNoiseMap(noiseMap, 115, 115);
+            bool[,] trees = PlaceTrees(blueNoise, 100, 100, noiseMap, noiseMap);
+            DrawNoiseMap((elevation, moisture) => Color.Lerp(Color.black, Color.blue, elevation), _renderer, trees, 100, 100);
+        }
+    }
+
+
+
+    public int blueNoiseOctaves = 2;
+    public float blueNoiseLacunarity = 0f;
+    public float blueNoisePersistance = 0f;
+    public int ObjectRValue = 2;
+
+    public float[,] GenerateBlueNoise(int sizeX, int sizeY)
+    {
+        float[,] noiseMap = new float[sizeY, sizeY];
+        GenerateNoiseMap(noiseMap, sizeX, sizeY, 0f, blueNoiseOctaves, blueNoisePersistance, blueNoiseLacunarity);
+        return noiseMap;
+    }
+
+
+    public bool[,] PlaceTrees(float[,] noiseMap, int sizeX, int sizeY, float[,] elevation, float[,] moisture)
+    {
+        int R = ObjectRValue;
+        bool[,] treeArray = new bool[sizeY, sizeX];
+
+        // Blue noise olisi aina isompi Kuin R????
+        // int blueNoiseSafeSpace = 15;
+
+        for (int yc = 0; yc < sizeY; yc++)
+        {
+            for (int xc = 0; xc < sizeX; xc++)
+            {
+                double max = 0;
+                R = GetBiomeTreeRate(GetBiome(elevation[yc, xc], moisture[yc, xc]));
+
+                for (int yn = yc - R; yn <= yc + R; yn++)
+                {
+                    for (int xn = xc - R; xn <= xc + R; xn++)
+                    {
+                        if (xn < 0 || yn < 0 || xn >= sizeX || yn >= sizeY)
+                            continue;
+
+                        double e = noiseMap[yn, xn];
+                        if (e > max)
+                        {
+                            max = e;
+                        }
+                    }
+                }
+
+                if (noiseMap[yc, xc] == max)
+                {
+                    treeArray[yc, xc] = true;
+                }
+            }
+        }
+        return treeArray;
+    }
+
+
+    int GetBiomeTreeRate(TileType type)
+    {
+        if (type == TileType.GrassLand)
+        {
+            return 2;
+        }
+        else if (type == TileType.Water)
+        {
+            return 30;
+        }
+        return 6;
     }
 
     public void DrawNoiseMap(ColoringScheme coloring, Renderer renderer)
@@ -202,8 +290,58 @@ public class Perlin : MonoBehaviour
         renderer.material.mainTexture = texture;
     }
 
-    private void GenerateNoiseMap(float[,] noiseMap, int width, int height, float seed = 0f)
+    public void DrawNoiseMap(ColoringScheme coloring, Renderer renderer, float[,] map, int sizeX, int sizeY)
     {
+        Texture2D texture = new Texture2D(sizeX, sizeY);
+        texture.filterMode = FilterMode.Point;
+        texture.wrapMode = TextureWrapMode.Clamp;
+
+        for (int y = 0; y < sizeY; y++)
+        {
+            for (int x = 0; x < sizeX; x++)
+            {
+                float e = map[y, x];
+                texture.SetPixel(x, y, coloring(e, 0));
+            }
+        }
+        texture.Apply();
+        renderer.material.mainTexture = texture;
+    }
+
+    public void DrawNoiseMap(ColoringScheme coloring, Renderer renderer, bool[,] map, int sizeX, int sizeY)
+    {
+        Texture2D texture = new Texture2D(sizeX, sizeY);
+        texture.filterMode = FilterMode.Point;
+        texture.wrapMode = TextureWrapMode.Clamp;
+
+        for (int y = 0; y < sizeY; y++)
+        {
+            for (int x = 0; x < sizeX; x++)
+            {
+                bool e = map[y, x];
+                Color color = e ? Color.black : Color.white;
+                texture.SetPixel(x, y, color);
+            }
+        }
+        texture.Apply();
+        renderer.material.mainTexture = texture;
+    }
+
+    private void GenerateNoiseMap(float[,] noiseMap, int width, int height, float seed = 0f, int octaves = 0, float persistance = 0f, float lacuranity = 0f)
+    {
+        if (octaves == 0)
+        {
+            octaves = this.Octaves; float[,] blueNoise = GenerateBlueNoise(100, 100);
+        }
+        if (lacuranity == 0f)
+        {
+            lacuranity = this.Lacunarity;
+        }
+        if (persistance == 0f)
+        {
+            persistance = this.Persistance;
+        }
+
         float maxNoiseHeigth = float.MinValue;
         float minNoiseHeight = float.MaxValue;
 
@@ -223,15 +361,15 @@ public class Perlin : MonoBehaviour
                 float amplitude = 1;
                 float noiseHeigth = 0;
 
-                for (int i = 0; i < Octaves; i++)
+                for (int i = 0; i < octaves; i++)
                 {
                     nx = ((y) / 100f * frequence + OffsetY * frequence);
                     ny = ((x) / 100f * frequence + OffsetX * frequence);
 
                     float perlin = Mathf.PerlinNoise(nx, ny) * 2 - 1;
                     noiseHeigth += perlin * amplitude;
-                    amplitude *= Persistance;
-                    frequence *= Lacunarity;
+                    amplitude *= persistance;
+                    frequence *= lacuranity;
                 }
                 if (noiseHeigth > maxNoiseHeigth)
                 {
@@ -272,16 +410,34 @@ public class Perlin : MonoBehaviour
     public void GenerateChunk(Chunk chunk, int offsetX, int offsetY) // chunkin offsetit 0,0:sta
     {
         int chunkSize = Chunk.CHUNK_SIZE;
-        
+
         // TODO: KORJAA API ihmisen luettavaksi
         OffsetX = .20f * (float)offsetX;
         OffsetY = .20f * (float)offsetY;
-      
+
         float[,] elevation = new float[chunkSize, chunkSize];
         float[,] moisture = new float[chunkSize, chunkSize];
 
         GenerateNoiseMap(elevation, chunkSize, chunkSize);
         GenerateNoiseMap(moisture, chunkSize, chunkSize);
+
+        float[,] blueNoise = GenerateBlueNoise(20, 20);
+        // todo: hyper-optimization 
+        bool[,] trees = PlaceTrees(blueNoise, 20, 20, elevation, moisture);
+        // spawn trees ?? 
+
+        for (int y = 0; y < 20; y++)
+        {
+            for (int x = 0; x < 20; x++)
+            {
+                if (trees[y, x])
+                {
+                    Vector3 spawnPosition = new Vector3(offsetX * 20 + x, offsetY * 20 + y);
+                    var go = Instantiate(TreeTrefab, this.trees.transform);
+                    go.transform.position = spawnPosition;
+                }
+            }
+        }
 
         for (int y = 0; y < chunkSize; y++)
         {
@@ -304,6 +460,7 @@ public class Perlin : MonoBehaviour
         OffsetY = 0;
     }
 
+    public GameObject TreeTrefab;
     public void GenerateChunk(TileType[,] tiles, GameObject[,] gameObjects, int offsetX, int offsetY, int startX, int startY) // chunkin offsetit 0,0:sta
     {
         int chunkSize = Chunk.CHUNK_SIZE;
@@ -314,6 +471,8 @@ public class Perlin : MonoBehaviour
 
         float[,] elevation = new float[chunkSize, chunkSize];
         float[,] moisture = new float[chunkSize, chunkSize];
+
+
 
         GenerateNoiseMap(elevation, chunkSize, chunkSize);
         GenerateNoiseMap(moisture, chunkSize, chunkSize);

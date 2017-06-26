@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4647033125703550}
   - component: {fileID: 114082371090620650}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: EnemySpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,3 +54,4 @@ MonoBehaviour:
   Mob_Amount: 80
   EnemyPrefab: {fileID: 1925071990572098, guid: a2ccd4b9edf717045b278594c3228d6e,
     type: 2}
+  enemyChild: {fileID: 0}

@@ -12,20 +12,21 @@ public class DetectEnemies : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        LayerMask mask = LayerMask.GetMask("Pate");
+        LayerMask mask = LayerMask.GetMask("Enemy");
         var aggroArray = Physics2D.OverlapCircleAll(body.position, aggroDist, mask); // , mask);
         for (int i = 0; i < aggroArray.Length; i++)
         {
+            
             //print("BERZERG");
             // tähän check että ei ole minkään takana
-            aggroArray[i].GetComponent<EnemyAI>().agro = true;
+            aggroArray[i].transform.root.GetComponent<EnemyAI>().agro = true;
         }
+        
     }
     public Vector2 getPosition()
     {

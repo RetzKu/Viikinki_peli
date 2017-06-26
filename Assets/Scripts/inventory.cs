@@ -5,15 +5,27 @@ using UnityEngine;
 
 public class inventory : MonoBehaviour {
 
+    public List<Items> Tools;
+    internal GameObject ChestPiece;
 
 	void Start ()
     {
-  
-    }
-	
-	void Update ()
-    {
-       
+        Tools = new List<Items>();
     }
 
+    void Update()
+    {
+
+    }
+    
+    internal void AddItem(GameObject Item)
+    {
+        Tools.Add(new Items(Item));
+    }
+    public class Items
+    {
+        public GameObject Item;
+
+        public Items(GameObject _Item) { Item = _Item; }
+    }
 }

@@ -7,10 +7,12 @@ TagManager:
   - Item
   - ScreenInventory
   - Ui
-  - item2
-  - item_maassa
-  - item_inventoryssa
   - Enemy
+  - Dropped
+  - puu
+  - Inventory
+  - ItemEquip
+  - ItemInventory
   layers:
   - Default
   - TransparentFX

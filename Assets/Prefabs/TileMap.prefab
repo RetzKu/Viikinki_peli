@@ -103,7 +103,6 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33237521181896082
 MeshFilter:
@@ -186,9 +185,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe7d1aef62cba44e98493997c79bf35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GrassSprite: {fileID: 21300000, guid: 5da900f9aedc67d4895628a91ac751a9, type: 3}
+  ChunkSize: 20
   Width: 100
-  Height: 100
-  GrassSprite: {fileID: 21300000, guid: b3e77747713b24a4d88f5d05c58094ea, type: 3}
+  Heigth: 60
   tilemapPrototypeLayout: 0
   tilemapGenerationOffsetX: 0
   tilemapGenerationOffsetY: 0
+  useChunkSprites: 0
+  chunkTestSprites:
+  - {fileID: 21300002, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
+  - {fileID: 21300004, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
+  - {fileID: 21300006, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
+  - {fileID: 21300010, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
+  - {fileID: 21300012, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
+  - {fileID: 21300012, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
+  - {fileID: 21300014, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
+  - {fileID: 21300008, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
+  - {fileID: 21300008, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
+  SpriteController: {fileID: 0}
+  TestTiles:
+  - {fileID: 21300000, guid: 810929fcfd1999e4884d517233be8709, type: 3}
+  - {fileID: 21300002, guid: 810929fcfd1999e4884d517233be8709, type: 3}
+  - {fileID: 21300004, guid: 810929fcfd1999e4884d517233be8709, type: 3}
+  - {fileID: 21300006, guid: 810929fcfd1999e4884d517233be8709, type: 3}
+  - {fileID: 21300008, guid: 810929fcfd1999e4884d517233be8709, type: 3}
+  - {fileID: 21300010, guid: 810929fcfd1999e4884d517233be8709, type: 3}
+  - {fileID: 21300012, guid: 810929fcfd1999e4884d517233be8709, type: 3}
+  - {fileID: 21300014, guid: 810929fcfd1999e4884d517233be8709, type: 3}
+  - {fileID: 21300016, guid: 810929fcfd1999e4884d517233be8709, type: 3}

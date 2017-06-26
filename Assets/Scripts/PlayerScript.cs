@@ -5,33 +5,34 @@ public class PlayerScript : MonoBehaviour
 {
 
     internal List<ItemScript> invetory_data;
-        public int InventorySize;
-
-   // private List<Item_Values> id_in_range;
-   //     private Item_Values closest_item;
+    public int InventorySize;
 
     private bool interraction_cd = false;
+
+    private GameObject InventoryChild;
+    private GameObject EquipChild;
 
     Vector3 startPoint;
     Vector3 endPoint;
 
     public bool running = true;
 
-    public GameObject text_object;
-
+    private GameObject text_object;
 
     void Start()
     {
         invetory_data = new List<ItemScript>(InventorySize);
-        //id_in_range = new List<Item_Values>(100);
+
+        InventoryChild = gameObject.transform.Find("Inventory").gameObject;
+        EquipChild = gameObject.transform.Find("Equip").gameObject;
+
     }
 
     void Update()
     {
-
-       // KeyCommands();
         tmpswing();
-        OnTriggerEnter2D(GetComponent<Collider2D>());
+        Equip();
+        Drop();
     }
 
     void tmpswing()
@@ -49,29 +50,171 @@ public class PlayerScript : MonoBehaviour
         startPoint = playerPosition; // Pelaajan positio
         endPoint = Camera.main.ScreenToWorldPoint(mousePos); // Hiiren osoittama kohta
 
-        if (clickPosition.x < 0.0f)
+
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) == true)
         {
-            if (GameObject.Find("Lapio").GetComponent<SpriteRenderer>().flipX == false)
+            if (clickPosition.x < 0.0f & GameObject.Find("Equip").transform.childCount >= 1)
+
             {
-                //GameObject.Find("Lapio").GetComponent<Transform>().position.x = -0.4; // Väittää että muuttuja olisi constant vaikkei pitäisi olla :c
-                GameObject.Find("Lapio").GetComponent<SpriteRenderer>().flipX = true;
+
+                GameObject.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
+                //GameObject.Find("Equip").transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 90.0f);
+            }
+
+            else if (clickPosition.x > 0.0f & GameObject.Find("Equip").transform.childCount >= 1)
+            {
+                GameObject.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
+                //GameObject.Find("Equip").transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 270.0f);
             }
         }
 
-        if (clickPosition.x > 0.0f)
+        else if (GameObject.Find("Equip").transform.childCount >= 1)
         {
-            if (GameObject.Find("Lapio").GetComponent<SpriteRenderer>().flipX == true)
+            //EquipChild.transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+        }
+
+        else { }
+
+        //if (Input.GetKeyDown(KeyCode.A) == false & Input.GetKeyDown(KeyCode.S) == false & Input.GetKeyDown(KeyCode.D) == false & Input.GetKeyDown(KeyCode.W) == false);
+        //{
+        //    SpriteRenderer[] sprites = GameObject.Find("s_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+        //    for (int i = 0; i < sprites.Length; i++)
+        //    {
+        //        sprites[i].enabled = false;
+        //    }
+
+        //    sprites = GameObject.Find("u_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+        //    for (int i = 0; i < sprites.Length; i++)
+        //    {
+        //        sprites[i].enabled = false;
+        //    }
+
+        //    sprites = GameObject.Find("d_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+        //    for (int i = 0; i < sprites.Length; i++)
+        //    {
+        //        sprites[i].enabled = true;
+        //    }
+
+        //}
+
+        if (Input.GetKey(KeyCode.A) == true | Input.GetKey(KeyCode.D) == true)
+        {
+
+            transform.Find("s_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", true);
+
+            if (Input.GetKey(KeyCode.A) == true)
             {
-                GameObject.Find("Lapio").GetComponent<SpriteRenderer>().flipX = false;
+                SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+                for (int i = 0; i < sprites.Length; i++)
+                {
+                    sprites[i].enabled = false;
+                }
+
+                sprites = transform.Find("d_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+                for (int i = 0; i < sprites.Length; i++)
+                {
+                    sprites[i].enabled = false;
+                }
+
+                sprites = transform.Find("s_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+                for (int i = 0; i < sprites.Length; i++)
+                {
+                    sprites[i].enabled = true;
+                }
+
+                transform.Find("s_c_torso").gameObject.GetComponent<Transform>().localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+            }
+
+
+            if (Input.GetKey(KeyCode.D) == true)
+            {
+                SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+                for (int i = 0; i < sprites.Length; i++)
+                {
+                    sprites[i].enabled = false;
+                }
+
+                sprites = transform.Find("d_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+                for (int i = 0; i < sprites.Length; i++)
+                {
+                    sprites[i].enabled = false;
+                }
+
+                sprites = transform.Find("s_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+                for (int i = 0; i < sprites.Length; i++)
+                {
+                    sprites[i].enabled = true;
+                }
+
+                transform.Find("s_c_torso").gameObject.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
             }
         }
 
-        if (Input.GetKey(KeyCode.Mouse0) == true)
+        else
         {
-
-            GetComponentInChildren<Animator>().SetTrigger("lapioAttack");
-            //print(clickPosition);
+            transform.Find("s_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", false);
         }
+
+
+        if (Input.GetKey(KeyCode.W) == true)
+        {
+            SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i].enabled = true;
+            }
+
+            sprites = transform.Find("d_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i].enabled = false;
+            }
+
+            sprites = transform.Find("s_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i].enabled = false;
+            }
+        }
+
+        if (Input.GetKey(KeyCode.S) == true)
+        {
+            SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i].enabled = false;
+            }
+
+            sprites = transform.Find("d_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i].enabled = true;
+            }
+
+            sprites = transform.Find("s_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i].enabled = false;
+            }
+        }
+
+
     }
     void OnDrawGizmos()
     {
@@ -83,96 +226,97 @@ public class PlayerScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D Trig)
     {
-        if (Trig.gameObject.tag == "item_maassa")
+        if (Trig.transform.tag == "Item")
         {
-            //in_range(Trig, true);
-            Debug.Log("Toimii");
-            
+            AddToInventory(Trig);
+            Debug.Log(Trig.transform.name + " Picked up");
         }
+
+        if (Trig.gameObject.tag == "puu")
+        {
+            Debug.Log("BONK");
+            Trig.GetComponent<TreeHP>().hp -= 25;
+        }
+
     }
 
     void OnTriggerExit2D(Collider2D Trig)
     {
-        //in_range(Trig, false);
-        Debug.Log("Ulos");
-        Trig.gameObject.tag = "item_inventoryssa";
-        Instantiate(Trig.gameObject, GameObject.Find("Inventory").transform);
-        Destroy(Trig.gameObject);
+        if (Trig.transform.tag == "Dropped")
+        {
+            Trig.transform.tag = "Item";
+            print("escaped dropped item");
+        }
     }
 
-    //    void in_range(Collider2D Trig, bool on_off)
-    //    {
-    //        if (on_off == true)
-    //        {
-    //            id_in_range.Add(new Item_Values(Trig));
-    //        }
-    //        else
-    //        {
-    //            if (on_off == false)
-    //            {
-    //                int id = Trig.GetComponent<item_script>().ID;
-    //                int it = id_in_range.FindIndex(x => x.Trig.GetComponent<ItemScript>().ID == id);
-    //                id_in_range.RemoveAt(it);
-    //            }
-    //        }
-    //    }
+    void AddToInventory(Collider2D Item)
+    {
+        int it = 0;
+        if (EquipChild.transform.childCount == 0)
+        {
+            Item.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+            Item.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 270.0f);
+            Instantiate(Item.gameObject, GameObject.Find("Equip").transform);
+            EquipChild.transform.GetChild(0).name = Item.transform.name;
+            Destroy(Item.gameObject);
+        }
+        else
+        {
+            if (InventoryChild.transform.childCount < InventorySize)
+            {
+                Item.transform.position = GameObject.Find("Player").transform.position;
+                Instantiate(Item.gameObject, InventoryChild.transform);
 
-    //    void closest()
-    //    {
-    //        if (id_in_range.Count != 0)
-    //        {
-    //            float ClosestItem = 9999999999999999;
-    //            for (int i = 0; i < id_in_range.Count; i++)
-    //            {
-    //                if (Vector2.Distance(id_in_range[i].Trig.transform.position, transform.position) < ClosestItem)
-    //                {
-    //                    closest_item = id_in_range[i];
-    //                    ClosestItem = Vector2.Distance(id_in_range[i].Trig.transform.position, transform.position);
-    //                }
-    //            }
-    //        }
-    //    }
+                Debug.Log("Elseasd");
 
+                switch (InventoryChild.transform.childCount)
+                {
+                    case 1: { it = 0; break; }
+                    case 2: { it = 1; break; }
+                    case 3: { it = 2; break; }
+                }
+                InventoryChild.transform.GetChild(it).name = Item.transform.name;
+                Destroy(Item.gameObject);
+            }
+        }
+    }
 
-    //    void pick_up()
-    //    {
-    //        Debug.Log(id_in_range.Count);
-    //        if(id_in_range.Count != 0)
-    //        {
-    //            int it = id_in_range.FindIndex(x => x.Trig.GetComponent<ItemScript>().ID == closest_item.Trig.GetComponent<ItemScript>().ID);
-    //            invetory_data.Add(closest_item.Trig.GetComponent<ItemScript>());
-    //            closest_item = null;
-    //            Destroy(id_in_range[it].Trig.gameObject);
-    //            //id_in_range.RemoveAt(it); // pitää olla 5.5.1 unityssä koska collisiononexit toimii eri tavalla
-    //        }
-    //    }
+    void Drop()
+    {
+        if (Input.GetKeyDown("f") == true)
+        {
+            if (EquipChild.transform.childCount > 0)
+            {
+                GameObject EquipCopy = EquipChild.transform.GetChild(0).gameObject;
+                EquipCopy.transform.tag = "Dropped";
+                Instantiate(EquipCopy, gameObject.transform.position, EquipCopy.transform.rotation).transform.name = EquipCopy.transform.name;
+                Destroy(EquipCopy);
+            }
+        }
+    }
 
-    //    void KeyCommands()
-    //    {
-    //        Interraction();
-    //    }
+    void Equip()
+    {
+        bool swap = false;
+        int it = 0;
+        if (Input.GetKeyDown("1") == true) { if (InventoryChild.transform.childCount > 0) { swap = true; it = 0; } }
+        if (Input.GetKeyDown("2") == true) { if (InventoryChild.transform.childCount > 1) { swap = true; it = 1; } }
+        if (Input.GetKeyDown("3") == true) { if (InventoryChild.transform.childCount > 2) { swap = true; it = 2; } }
 
+        if (swap == true)
+        {
+            GameObject InventoryCopy = InventoryChild.transform.GetChild(it).gameObject;
 
-    //    /*Start of KeyCommands() internal functions*/
-
-    //    void Interraction()
-    //    {
-    //        if (interraction_cd == false)
-    //        {
-    //            closest();
-    //            if (Input.GetAxisRaw("Interract") == 1)
-    //            {
-    //                Debug.Log("pressed f for respect");
-    //                interraction_cd = true;
-    //                pick_up();
-    //            }
-    //        }
-    //        if (Input.GetAxisRaw("Interract") == 0) { interraction_cd = false; }
-    //    }
+            if (EquipChild.transform.childCount != 0)
+            {
+                GameObject EquipCopy = EquipChild.transform.GetChild(0).gameObject;
+                EquipCopy.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+                Instantiate(EquipCopy, InventoryChild.transform).transform.name = EquipCopy.transform.name;
+                Destroy(EquipCopy);
+            }
+            InventoryCopy.transform.position = GameObject.Find("Player").transform.position;
+            Instantiate(InventoryCopy, EquipChild.transform).transform.name = InventoryCopy.transform.name;
+            Destroy(InventoryCopy);
+        }
+    }
 }
-
-//public class Item_Values
-//{
-//    public Collider2D Trig;
-//    public Item_Values(Collider2D _Trig) { Trig = _Trig;}
-//}

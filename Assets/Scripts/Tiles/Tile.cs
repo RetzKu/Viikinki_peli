@@ -8,6 +8,8 @@ public enum TileType
     Water,
     DeepWater,
     Mountain,
+
+    
     CollisionTiles,
 
     Beach,
@@ -20,7 +22,7 @@ public enum TileType
     Shrubland,      // en edes tiedä mikä on Shrubland
     Taiga,          // näiden tilalle hassuja biome/tileTypejä
 
-    GrassLand,
+    GrassLand, // norm caps
     TemperateDeciduousForest,
     TemperateRainForest,
 

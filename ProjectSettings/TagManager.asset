@@ -7,6 +7,7 @@ TagManager:
   - Item
   - ScreenInventory
   - Ui
+  - Enemy
   - Dropped
   - puu
   - Inventory
@@ -26,8 +27,8 @@ TagManager:
   - Player
   - TouchController
   - TileMap
-  - 
-  - 
+  - Pate
+  - Door
   - 
   - 
   - 

@@ -365,24 +365,6 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    void SetToHand(GameObject Item, Transform Arm)
-    {
-        Quaternion rotation = Quaternion.Euler(0, 0, -90);
-        Item.transform.SetParent(Arm);
-        Item.transform.position = Arm.position;
-        Item.transform.localRotation = rotation;
-        Item.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-        Item.GetComponent<SpriteRenderer>().sortingOrder = 20;
-    }
-
-    void CheckHand(GameObject tmp)
-    {
-        GameObject Copy = Instantiate(tmp) as GameObject;
-        Copy.transform.name = tmp.transform.name;
-        Hand.EmptyHand();
-        SetToHand(Copy, SidewaysHand);
-    }
-
     void Drop()
     {
         if (Input.GetKeyDown("f") == true)

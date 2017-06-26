@@ -6,7 +6,7 @@ public class TileSpriteController : MonoBehaviour
 {
     // wheels badman käyttää stringejä 
     private Dictionary<string, Sprite> _textures;
-    GameObject[] temporarySecondLayer = new GameObject[100];
+    GameObject[] temporarySecondLayer = new GameObject[450];
 
     public Sprite temproraryFillSprite;
 
@@ -88,38 +88,82 @@ public class TileSpriteController : MonoBehaviour
         new Vec2(-1, 0),  new Vec2(1, 0)
     };
 
-    string GetAssetNameBitmask(int x, int y, TileMap Tilemap, out int count)
-    {
-        count = 0;
-        TileType type = Tilemap.GetTileFast(x, y);
-        string assetName = "testTiles_";
+    private static readonly Vec2[] Diagonals = {
+        new Vec2(-1, -1), new Vec2(1, -1),  // 
+        new Vec2(-1, 1),  new Vec2(1, 1)
+    };
 
-        if (type == TileType.Mountain)
+    //public enum TileType
+    //{
+    //    Invalid,
+    //    Water,
+    //    DeepWater,
+    //    Mountain,
+
+    //    CollisionTiles,
+    //    Beach,
+    //    GrassLand, // norm caps
+    //    Forest,
+    //    Jungle,
+    //    Savannah,
+    //    Desert,
+    //    Snow
+    //}
+
+    //private static readonly int[,] tileVisualRules = {
+    //    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    //    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    //    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    //};
+
+    bool IsUpperTile(TileType upper, TileType down)
+    {
+        if (upper == down) return true;
+        return upper > down;  // TODO: Kunnon säännöt
+    }
+
+
+    string GetAssetNameBitmask(int x, int y, TileMap Tilemap, out int value, out bool found)
+    {
+        found = false;
+        TileType type = Tilemap.GetTileFast(x, y);
+
+        string assetName = "";
+
+        if (type == TileType.Mountain || type == TileType.GrassLand || type == TileType.Water)
         {
-            assetName = type.ToString() + "_";
+            assetName = "tileset_" + type.ToString() + "_";
+            found = true;
+        }
+
+        if (type == TileType.Forest)
+        {
+            assetName = "tileset_ground_";
+            found = true;
         }
 
         // 4-bit directions
         // North, west, east, south
-        int value = 0;
-        if (Tilemap.GetTileFast(x, y + 1) == type)
+        value = 0;
+        if (IsUpperTile(type, Tilemap.GetTileFast(x, y + 1)))  // Tähän reunan insert
         {
             value += 1;
         }
-        if (Tilemap.GetTileFast(x + 1, y) == type)
+        if (IsUpperTile(type, Tilemap.GetTileFast(x + 1, y)))
         {
             value += 4;
         }
-        if (Tilemap.GetTileFast(x, y - 1) == type)
+        if (IsUpperTile(type, Tilemap.GetTileFast(x, y - 1)))
         {
             value += 8;
         }
-        if (Tilemap.GetTileFast(x - 1, y) == type)
+        if (IsUpperTile(type, Tilemap.GetTileFast(x - 1, y)))
         {
             value += 2;
         }
-
-        assetName += value.ToString();
+        // asset randilla reuna ton mukaan
+        // assetName += value.ToString();  // TODO: lisää reuna
+                                        // Reunojen alle sitä viereistä ???
         return assetName;
     }
 
@@ -171,27 +215,103 @@ public class TileSpriteController : MonoBehaviour
         return assetName;
     }
 
+    public int GetAssetCount(TileType type)
+    {
+        if (type == TileType.Water)
+        {
+            return 1;
+        }
+        return 9;
+    }
+
     public void SetTileSprites(int width, int height, TileMap tilemap, int startX, int startY)
     {
+        int tempIndex = 0;
+        float offsetX = transform.position.x;
+        float offsetY = transform.position.y;
+
         for (int y = startY; y < height; y++)
         {
             for (int x = startX; x < width; x++)
             {
-                int count = 0;
-                string assetName = GetAssetNameBitmask(x, y, tilemap, out count);
+                int value = 0;
+                bool found;
 
-                Sprite sprite;
+                string assetName = GetAssetNameBitmask(x, y, tilemap, out value, out found);
+                TileType type = tilemap.GetTileFast(x, y);  // TODO: optimization opportunity
+
+                Sprite sprite;  // perus 
+
+                if (!found)
+                    assetName = "tileset_GrassLand_";
+                assetName += Random.Range(0, GetAssetCount(type));    // max count smt smt 
+                    
+
                 if (_textures.TryGetValue(assetName, out sprite))
                 {
-                    // tilemap.TileGameObjects[y, x].GetComponent<SpriteRenderer>().sprite = sprite;
                     tilemap.GetGameObjectFast(x, y).GetComponent<SpriteRenderer>().sprite = sprite;
-                    // tilemap.GetGameObjectFast(x, y).GetComponent<SpriteRenderer>().sprite = sprite;
                 }
                 else
                 {
-                   Debug.LogWarning("Texture: " + assetName + " Missing!");
+                    Debug.LogWarning("Texture: " + assetName + " Missing!");
+                }
+
+                // lisää: reunat
+                // 4-bit directions
+                // North, west, east, south
+                if (value == 15)
+                {
+                    continue;
+                }
+
+                if (tempIndex < temporarySecondLayer.Length)
+                 {
+                    string border = "reunatiilet";
+
+                    if (type == TileType.GrassLand || type == TileType.Water || type == TileType.Mountain) 
+                    {
+                        border = type.ToString();
+                    }
+
+                    if (type == TileType.Forest)
+                    {
+                        border = "tileset_ground_";
+                    }
+
+                    if ((value & (1 << 1 - 1)) == 0)
+                    {
+                        temporarySecondLayer[tempIndex].GetComponent<SpriteRenderer>().sprite = _textures[border + "_N0"];
+                        temporarySecondLayer[tempIndex].active = true;
+                        temporarySecondLayer[tempIndex].transform.position = new Vector3(x + offsetX, y + offsetY + 1);
+                        tempIndex++;
+                    }
+                    if ((value & (1 << 2 - 1)) == 0)
+                    {
+                        temporarySecondLayer[tempIndex].GetComponent<SpriteRenderer>().sprite = _textures[border + "_W0"];
+                        temporarySecondLayer[tempIndex].transform.position = new Vector3(x + offsetX - 1, y + offsetY );
+                        temporarySecondLayer[tempIndex].active = true;
+                        tempIndex++;
+                    }
+                    if ((value & (1 << 3 - 1)) == 0)
+                    {
+                        temporarySecondLayer[tempIndex].GetComponent<SpriteRenderer>().sprite = _textures[border + "_E0"];
+                        temporarySecondLayer[tempIndex].transform.position = new Vector3(x + offsetX + 1, y + offsetY);
+                        temporarySecondLayer[tempIndex].active = true;
+                        tempIndex++;
+                    }
+                    if ((value & (1 << 4 - 1)) == 0)
+                    {
+                        temporarySecondLayer[tempIndex].GetComponent<SpriteRenderer>().sprite = _textures[border + "_S0"];
+                        temporarySecondLayer[tempIndex].transform.position = new Vector3(x + offsetX, y + offsetY - 1);
+                        temporarySecondLayer[tempIndex].active = true;
+                        tempIndex++;
+                    }
                 }
             }
+        }
+        for (int i = tempIndex; i < temporarySecondLayer.Length; i++)
+        {
+            temporarySecondLayer[i].active = false;
         }
     }
 
@@ -279,7 +399,6 @@ public class TileSpriteController : MonoBehaviour
         }
         // probleemojen
         // naapureiden uudestaan initointi
-
         DoubleLayerBorders(BorderTiles, tilemap.Tiles, tilemap.TileGameObjects, tilemap);
     }
 
@@ -288,8 +407,6 @@ public class TileSpriteController : MonoBehaviour
     {
         return true;
     }
-
-
 
     public void DoubleLayerBorders(List<Vec2> borderTiles, TileType[,] tiles, GameObject[,] gameobjects, TileMap map) // border tile list 
     {
@@ -315,7 +432,6 @@ public class TileSpriteController : MonoBehaviour
                         renderer.sprite = grassFiller;
                     }
 
-                    //gameobjects[borderTiles[i].Y, borderTiles[i].X].SetActive(false);
                     renderer.transform.position = new Vector3(borderTiles[i].X, borderTiles[i].Y);
                     renderer.gameObject.SetActive(true);
 
@@ -363,11 +479,6 @@ public class TileSpriteController : MonoBehaviour
 
     // todo: replace with enum
     // ala vasen   //   ylä vasaen    // ala oikea  // ala vasen
-    private static readonly Vec2[] Diagonals = {
-        new Vec2(-1, -1), new Vec2(1, -1),  // 
-        new Vec2(-1, 1),  new Vec2(1, 1)
-    };
-
     int GetDiagonals(TileType[,] types, int x, int y, TileType selfType)
     {
         for (int i = 0; i < 4; i++)

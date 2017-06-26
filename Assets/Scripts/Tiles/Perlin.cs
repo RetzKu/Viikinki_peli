@@ -256,7 +256,7 @@ public class Perlin : MonoBehaviour
         }
         else if (type == TileType.Water)
         {
-            return 30;
+            return 10;
         }
         return 6;
     }
@@ -525,18 +525,18 @@ public class Perlin : MonoBehaviour
             case TileType.DeepWater: return DeepWater;
             case TileType.Water: return Water;
             case TileType.Beach: return Beach;
-            case TileType.Scorhed: return Scorched;
-            case TileType.Bare: return Bare;
-            case TileType.Tundra: return Tundra;
-            case TileType.TemperateDesert: return TemperateDesert;
-            case TileType.Shrubland: return Shrubland;
-            case TileType.Taiga: return Taiga;
+            //case TileType.Scorhed: return Scorched;
+            //case TileType.Bare: return Bare;
+            //case TileType.Tundra: return Tundra;
+            //case TileType.TemperateDesert: return TemperateDesert;
+            //case TileType.Shrubland: return Shrubland;
+            //case TileType.Taiga: return Taiga;
             case TileType.GrassLand: return Grassland;
-            case TileType.TemperateDeciduousForest: return TemperateDeciduousForest;
-            case TileType.TemperateRainForest: return TemperateRainForest;
-            case TileType.SubtropicalDesert: return SubtropicalSeasonalForest;
-            case TileType.TropicalSeasonalForest: return TropicalSeasonalRainForest;
-            case TileType.TropicalRainForest: return TropicalRainForest;
+            //case TileType.TemperateDeciduousForest: return TemperateDeciduousForest;
+            //case TileType.TemperateRainForest: return TemperateRainForest;
+            //case TileType.SubtropicalDesert: return SubtropicalSeasonalForest;
+            //case TileType.TropicalSeasonalForest: return TropicalSeasonalRainForest;
+            //case TileType.TropicalRainForest: return TropicalRainForest;
             case TileType.Snow: return Snow;
             case TileType.Mountain: return Mountain;
             case TileType.Forest: return Forest;
@@ -571,7 +571,7 @@ public class Perlin : MonoBehaviour
             return TileType.Forest;
         }
 
-        if (e < 0.80f) return TileType.Bare;
+        //if (e < 0.80f) return TileType.Bare;
         if (e < 0.90f) return TileType.Mountain;
         // High mountain
         return TileType.Snow;

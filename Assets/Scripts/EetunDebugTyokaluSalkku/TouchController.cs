@@ -17,7 +17,7 @@ public class TouchController : MonoBehaviour
     public float Radius = 5f;
     public float bulletSpeed = 4f;
 
-    private LineRenderer LineRenderer;
+    private LineRenderer lineRenderer;
 
     private Vector3[] positions;
     private int index = 0;
@@ -26,8 +26,10 @@ public class TouchController : MonoBehaviour
 
     public GameObject touchCollider;
 
-    public GameObject moveThisGuy;
+    public GameObject TrafficLights;
     public GameObject Character;
+
+    public Material lineMaterial;
 
     public float screenX = 600f;
 
@@ -41,6 +43,7 @@ public class TouchController : MonoBehaviour
             }
         }
     }
+
     // Use this for initialization
     void Start()
     {
@@ -48,9 +51,9 @@ public class TouchController : MonoBehaviour
         // start.x = 0f;
         // start.y = 0f;
 
-        LineRenderer = GetComponent<LineRenderer>();
+        lineRenderer = GetComponent<LineRenderer>();
         positions = new Vector3[10];
-        LineRenderer.SetPositions(positions);
+        lineRenderer.SetPositions(positions);
 
         GameObject parent = new GameObject("colliders");
         parent.transform.position = transform.position;
@@ -67,6 +70,7 @@ public class TouchController : MonoBehaviour
                 coll.radius = Radius;
                 _colliders[index] = go;
                 coll.isTrigger = true;
+                
                 // go.layer = SortingLayer.GetLayerValueFromName("TouchController");
 
                 // TouchScreenPoint newPoint = new TouchScreenPoint(x, y);
@@ -74,16 +78,20 @@ public class TouchController : MonoBehaviour
                 var point = go.GetComponent<TouchScreenPoint>();
                 point.x = x;
                 point.y = y;
+                
 
                 index++;
                 // _colliders[index].transform.position = new Vector3(start.x + x * offset, start.y + y * offset, 0);
                 // _colliders[index].radius = Radius;
             }
         }
+        lineRenderer.material = lineMaterial;
+        lineRenderer.sortingOrder = 1;
+        lineRenderer.sortingLayerName = "Line";
     }
 
 
-    private int FinderId = -1000;
+    private int FingerId = -1000;
 
     void Update()
     {
@@ -92,18 +100,17 @@ public class TouchController : MonoBehaviour
         // print(mousePos);
         // positions[index] = new Vector3(mousePos.x, mousePos.y, 0);
 
-
         Touch[] myTouches = Input.touches;
         for (int i = 0; i < Input.touchCount; i++)
         {
             if (myTouches[i].position.x > screenX)
             {
-                if (FinderId == -1000)
+                if (FingerId == -1000)
                 {
-                    FinderId = myTouches[i].fingerId;
+                    FingerId = myTouches[i].fingerId;
                 }
 
-                if (myTouches[i].fingerId == FinderId) // oikea sormi liikkellä 
+                if (myTouches[i].fingerId == FingerId) // oikea sormi liikkellä 
                 {
                     var mousePos = Camera.main.ScreenToWorldPoint(myTouches[i].position);
                     mousePos.z = 2;
@@ -113,7 +120,7 @@ public class TouchController : MonoBehaviour
 
                     if (myTouches[i].phase == TouchPhase.Ended) // loppu
                     {
-                        FinderId = -1000;
+                        FingerId = -1000;
                         touchCollider.transform.position = myTouches[i].position;
                         touchCollider.GetComponent<Collider2D>().enabled = false;
 
@@ -141,15 +148,15 @@ public class TouchController : MonoBehaviour
 
         if (myTouches.Length == 0) 
         {
-            moveThisGuy.GetComponent<SpriteRenderer>().material.color = Color.red;
+            TrafficLights.GetComponent<SpriteRenderer>().material.color = Color.red;
         }
         else if (myTouches.Length == 1)
         {
-            moveThisGuy.GetComponent<SpriteRenderer>().material.color = Color.blue;
+            TrafficLights.GetComponent<SpriteRenderer>().material.color = Color.blue;
         }
         else if (myTouches.Length >= 2)
         {
-            moveThisGuy.GetComponent<SpriteRenderer>().material.color = Color.green;
+            TrafficLights.GetComponent<SpriteRenderer>().material.color = Color.green;
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -164,14 +171,14 @@ public class TouchController : MonoBehaviour
             renderer.sprite = BulletSprite;
         }
 
-        Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical"));
-        if (movement.x != 0 || movement.y != 0)
-        {
-            Character.transform.Translate(movement * 3 * Time.deltaTime);
-            Activate(movement * 3 * Time.deltaTime);
-        }
+        //Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical"));
+        //if (movement.x != 0 || movement.y != 0)
+        //{
+        //    Character.transform.Translate(movement * 3 * Time.deltaTime);
+        //    Activate(movement * 3 * Time.deltaTime);
+        //}
 
-        if (Input.GetMouseButton(1) || Input.GetMouseButton(0) /*|| Input.GetTouch(0).*/)
+        if (Input.GetMouseButton(1) || Input.GetMouseButton(0) /*|| Input.GetTouch(0).*/ )
         {
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 2;
@@ -213,7 +220,7 @@ public class TouchController : MonoBehaviour
         {
             positions[i].x += movement.x;
             positions[i].y += movement.y;
-            LineRenderer.SetPosition(i, positions[i]);
+            lineRenderer.SetPosition(i, positions[i]);
         }
         // if (index > 1)
         // {
@@ -236,10 +243,11 @@ public class TouchController : MonoBehaviour
             //LineRenderer.positionCount = index + 1;
             //LineRenderer.positionCount = index + 1;
             //LineRenderer.positionCount = index + 1;
-            LineRenderer.positionCount = index + 1;
+            //LineRenderer.positionCount = index + 1;
+            lineRenderer.numPositions = index + 1;
 
-            LineRenderer.SetPosition(index, positions[index]);
-            LineRenderer.sortingLayerName = "Foreground";
+            lineRenderer.SetPosition(index, positions[index]);
+            lineRenderer.sortingLayerName = "Foreground";
             index++;
         }
     }

@@ -46,8 +46,8 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
+  - name: TouchController
+    uniqueID: 1155609689
     locked: 0
   - name: TileMap
     uniqueID: 3129451229
@@ -61,6 +61,9 @@ TagManager:
   - name: Player
     uniqueID: 3664509369
     locked: 0
-  - name: TouchController
-    uniqueID: 1155609689
+  - name: Line
+    uniqueID: 2644647065
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0

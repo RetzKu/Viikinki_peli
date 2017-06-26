@@ -13,6 +13,8 @@ public class TileMap : MonoBehaviour
     public TileType[,] Tiles = new TileType[TotalHeight, TotalWidth]; // todo: w h laskeminen koosta
     public GameObject[,] TileGameObjects = new GameObject[TotalHeight, TotalWidth];
 
+
+
     public int Width = TotalWidth;
     public int Heigth = TotalHeight;
 
@@ -30,6 +32,9 @@ public class TileMap : MonoBehaviour
 
     public Color tint;
     private Color last;
+
+
+    // TODO: object pool for general object trees, rocks jne...
 
     void Start()
     {
@@ -93,6 +98,7 @@ public class TileMap : MonoBehaviour
         }
 
         // SpriteController.InitChunkSprites(TotalWidth - 1, TotalHeight - 1, this, 1, 1);
+        SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position;
         SpriteController.SetTileSprites(TotalWidth - 2, TotalHeight - 2, this, 1, 1);
         running = true;
 
@@ -275,28 +281,13 @@ public class TileMap : MonoBehaviour
                     _chunks[2, i + 1].MoveChunk(0, 3);
                 }
             }
-            // SpriteController.InitChunkSprites(_chunks[1, 1]);
-
-
-            // Huokaus...
-
-
-            // CopyChunks();
+            SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position;
             SpriteController.SetTileSprites(59, 59, this, 1, 1);
         }
 
         _chunks[1, 1].offsetX = chunkOffsetX;   // ainoastaa center chunk on oikeassa chunkissa atm
         _chunks[1, 1].offsetY = chunkOffsetY;
     }
-
-    // optimaalisimpiakin vaihtoehtoja olisi?
-    // siirrä chunkit vastaavaam oikeita paikkoja?
-    // Data vastaisi oikeita täällä 
-    // algoja varten 
-    // placement jne... 
-    // ->   ->   ->
-    //     O  O  ->  O  X  -> 
-    //     O  O  ->  O  X  ->
 
     void SwapColumnsViews(int destX, int fromX)
     {
@@ -305,7 +296,6 @@ public class TileMap : MonoBehaviour
             Chunk dest = _chunks[iY, destX];
             Chunk from = _chunks[iY, fromX];
 
-            // Chunk.SwapViews(dest, from);
             for (int y = 0; y < Chunk.CHUNK_SIZE; y++)
             {
                 for (int x = 0; x < Chunk.CHUNK_SIZE; x++)
@@ -464,7 +454,6 @@ public class TileMap : MonoBehaviour
 
     void SwapRight()
     {
-        print("calss");
         for (int y = 3; y > 1; y--)
         {
             for (int x = 59; x > 39; x--)

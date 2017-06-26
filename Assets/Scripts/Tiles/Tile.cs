@@ -8,33 +8,30 @@ public enum TileType
     Water,
     DeepWater,
     Mountain,
-
     
     CollisionTiles,
-
     Beach,
 
-    Scorhed,
-    Bare,
-    Tundra,
-
-    TemperateDesert,
-    Shrubland,      // en edes tiedä mikä on Shrubland
-    Taiga,          // näiden tilalle hassuja biome/tileTypejä
+    //Scorhed,
+    //Bare,
+    //Tundra,
+    
+    //TemperateDesert,
+    //Shrubland,      // en edes tiedä mikä on Shrubland
+    //Taiga,          // näiden tilalle hassuja biome/tileTypejä
 
     GrassLand, // norm caps
-    TemperateDeciduousForest,
-    TemperateRainForest,
+    //TemperateDeciduousForest,
+    //TemperateRainForest,
 
-    SubtropicalDesert,
-    TropicalSeasonalForest,
-    TropicalRainForest,
+    //SubtropicalDesert,
+    //TropicalSeasonalForest,
+    //TropicalRainForest,
 
     Forest,
     Jungle,
     Savannah,
     Desert,
-
     Snow
 }
 

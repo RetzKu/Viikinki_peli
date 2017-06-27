@@ -8,7 +8,21 @@ public enum EnemyType
     Wolf,
     Archer
 }
-
+public enum Dir
+{
+    Right,
+    Left,
+    Up,
+    Down,
+    Basic
+}
+public enum collision
+{
+    Main,
+    Right,
+    Left,
+    none
+}
 [Flags]
 public enum behavior
 {
@@ -23,7 +37,7 @@ public enum behavior
     moveToAttRange = 256,
     Inleap = 512,
     startLeap = 1024,
-
+    Collide = 2048,
     wanderGroup = separate | alingment | cohesion,
     startWanderingSolo = wander | giveWanderingTargetSolo,
     changeSoloWanderDir = wander | changeSoloDIr,
@@ -35,7 +49,8 @@ public enum behavior
 
 public class EnemyAI : MonoBehaviour
 {
-
+    float collideDist = 1f;
+    collision CollState = collision.none;
 
     [HideInInspector]
     public float spawnX;
@@ -45,7 +60,7 @@ public class EnemyAI : MonoBehaviour
     public bool agro = false;
     [HideInInspector]
     public bool inAttack = false;
-    public float attackDist = 3.0f;
+    public float attackDist = 4.0f;
     public float leapDist = 10.0f;
 
     public float MaxSpeed = 0.05f;
@@ -188,7 +203,9 @@ public class EnemyAI : MonoBehaviour
                 archerPattern(dist, playerPos);
             }
         }
-        powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags);
+        RayCollide();
+        flags = (int)flags | (int)behavior.Collide; 
+        powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags,CollState);
         target = powers[1];
         velocity = powers[0];
         body.MovePosition(body.position + velocity);
@@ -297,4 +314,50 @@ public class EnemyAI : MonoBehaviour
     {
         return body.position;
     }
+
+    void RayCollide()
+    {
+        CollState = collision.none;
+        LayerMask mask = LayerMask.GetMask("Collide");
+        Vector2 main = velocity;
+        main.Normalize();
+        main *= collideDist; // EETU TRIGGER
+        Vector2 perpendicular = new Vector2(main.y, main.x*-1);
+        perpendicular /= 2f;
+        Vector2 first = (main + perpendicular);
+        Vector2 second = (main + (perpendicular * -1));
+        if(Physics2D.Raycast(body.position,main, collideDist, mask).collider != null)
+        {
+            //print("COLLIDING MAIN");
+            CollState = collision.Main;
+        }
+        else if (Physics2D.Raycast(body.position, first, collideDist, mask).collider != null)
+        {
+            //print("COLLIDING RIGHT");
+            CollState = collision.Right;
+        }
+        else if (Physics2D.Raycast(body.position, second, collideDist, mask).collider != null)
+        {
+            //print("COLLIDING LEFT");
+            CollState = collision.Left;
+        }
+
+    }
+
+    void OnDrawGizmos()
+    {
+        Vector2 main = velocity;
+        main.Normalize();
+        main *= collideDist; // EETU TRIGGER
+        Vector2 perpendicular = new Vector2(main.y, main.x * -1);
+        perpendicular /= 2f;
+        Vector2 first = (main + perpendicular);
+        Vector2 second = (main + (perpendicular * -1));
+
+        Gizmos.DrawLine(body.position, body.position+main); // piirretään viiva visualisoimaan toimivuutta 
+        Gizmos.DrawLine(body.position, body.position + first);
+        Gizmos.DrawLine(body.position, body.position + second);
+
+    }
+
 }

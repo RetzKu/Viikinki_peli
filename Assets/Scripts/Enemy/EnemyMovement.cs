@@ -85,8 +85,8 @@ public class EnemyMovement /*: MonoBehaviour*/
             Vector2.Angle(target, target);
             //counter = 0;
             float angle = Random.Range(0.0f, 1.0f) * Mathf.PI * 2;
-            float x = Mathf.Cos(angle) * IdleRadius;
-            float y = Mathf.Sin(angle) * IdleRadius;
+            float x = Mathf.Cos(angle) * IdleRadius;        // KATO VOITKO KORJATA
+            float y = Mathf.Sin(angle) * IdleRadius;        // KATO VOITKO KORJATA
 
             Vector2 arm = new Vector2(x + target.x, y + target.y);
             Vector2 desired = new Vector2();
@@ -99,7 +99,7 @@ public class EnemyMovement /*: MonoBehaviour*/
 
     }
 
-    public Vector2[] applyBehaviors(Collider2D[] GroupMobs, Collider2D[] CollisionMobs, Vector2 Rvelocity, Vector2 Rtarget, Vector2 position, int flags)
+    public Vector2[] applyBehaviors(Collider2D[] GroupMobs, Collider2D[] CollisionMobs, Vector2 Rvelocity, Vector2 Rtarget, Vector2 position, int flags,collision collstate)
     {
         float tempSpeed = MaxSpeed;
 
@@ -153,7 +153,17 @@ public class EnemyMovement /*: MonoBehaviour*/
         {
             tempSpeed = arriving(tempSpeed);
         }
-
+        if((flags & (int)behavior.Collide) == (int)behavior.Collide)
+        {
+            if((flags & (int)behavior.wanderGroup) == (int)behavior.wanderGroup)
+            {
+                acceleration =  CollideSteer(collstate,acceleration,true); // EETU TRIGGER
+            }
+            else
+            {
+                acceleration = CollideSteer(collstate, acceleration); // EETU TRIGGER
+            }
+        }
 
         velocity += acceleration;
         // limit max speed
@@ -171,7 +181,45 @@ public class EnemyMovement /*: MonoBehaviour*/
 
     }
 
-    
+    Vector2 CollideSteer(collision collstate,Vector2 acc,bool change = false )
+    {
+        float accMag = acc.magnitude;
+        Vector2 temp = velocity;
+        switch (collstate)
+        {
+            case collision.none:
+                return acc;
+            case collision.Right:
+                Vector2 perpendicularR = new Vector2(temp.y, temp.x *-1);
+                perpendicularR /= 2f;
+                temp = (temp + (perpendicularR * -1));
+                break;
+            case collision.Left:
+                Vector2 perpendicularL = new Vector2(temp.y, temp.x * -1);
+                perpendicularL /= 2f;
+                temp = (temp + perpendicularL);
+                break;
+            case collision.Main:
+                Vector2 perpendicularM = new Vector2(temp.y, temp.x * -1);
+                perpendicularM *= 2f;
+                temp = (temp + perpendicularM);
+                break;
+
+        }
+        temp.Normalize();
+        if (change)
+        {
+        acc = temp;
+        }
+        temp *= IdleBallDistance;
+        target = bodyPosition + temp;
+
+        if (change)
+        {
+            acc = temp * accMag;
+        }
+        return acc;
+    }
 
     float arriving(float max_speed) // slowsdown at endpoint
     {

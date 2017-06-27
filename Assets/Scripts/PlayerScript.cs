@@ -21,6 +21,14 @@ public class PlayerScript : MonoBehaviour
 
     private ItemManager Hand;
 
+    enum direction
+    {
+        right, left, up, down
+    }
+
+    direction playerDirection = direction.down; // Pelaaja defaulttina katsoo alaspain
+    bool playerMoving = false;  // Pelaaja defaulttina ei ole liikkeessa
+
     void Start()
     {
         invetory_data = new List<ItemScript>(InventorySize);
@@ -38,10 +46,57 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
+        Direction();
         tmpswing();
         Equip();
         Drop();
         Side();
+    }
+
+    void Direction()    // Tarkistetaan pelaajan suunta ja liikkuuko se
+    {
+        if (Input.GetKeyDown(KeyCode.D) == true)
+        {
+            playerDirection = direction.right;
+            playerMoving = true;
+            //Debug.Log(playerDirection);
+        }
+
+        else if (Input.GetKeyDown(KeyCode.A) == true)
+        {
+            playerDirection = direction.left;
+            playerMoving = true;
+            //Debug.Log(playerDirection);
+        }
+
+        else if (Input.GetKeyDown(KeyCode.S) == true)
+        {
+            playerDirection = direction.down;
+            playerMoving = true;
+            //Debug.Log(playerDirection);
+        }
+
+        else if (Input.GetKeyDown(KeyCode.W) == true)
+        {
+            playerDirection = direction.up;
+            playerMoving = true;
+            //Debug.Log(playerDirection);
+        }
+
+        else if(Input.GetKey(KeyCode.W) == false & Input.GetKey(KeyCode.A) == false & Input.GetKey(KeyCode.S) == false & Input.GetKey(KeyCode.D) == false)
+        {
+            playerMoving = false;
+        }
+
+        else
+        {
+
+        }
+    }
+
+    direction GetPlayerDirection()
+    {
+        return playerDirection;
     }
 
     void Side()
@@ -73,7 +128,6 @@ public class PlayerScript : MonoBehaviour
             if (clickPosition.x < 0.0f & transform.Find("Equip").transform.childCount >= 1)
 
             {
-
                 transform.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
                 //GameObject.Find("Equip").transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 90.0f);
             }
@@ -92,36 +146,41 @@ public class PlayerScript : MonoBehaviour
 
         else { }
 
-        //if (Input.GetKeyDown(KeyCode.A) == false & Input.GetKeyDown(KeyCode.S) == false & Input.GetKeyDown(KeyCode.D) == false & Input.GetKeyDown(KeyCode.W) == false);
-        //{
-        //    SpriteRenderer[] sprites = GameObject.Find("s_c_torso").GetComponentsInChildren<SpriteRenderer>();
-
-        //    for (int i = 0; i < sprites.Length; i++)
-        //    {
-        //        sprites[i].enabled = false;
-        //    }
-
-        //    sprites = GameObject.Find("u_c_torso").GetComponentsInChildren<SpriteRenderer>();
-
-        //    for (int i = 0; i < sprites.Length; i++)
-        //    {
-        //        sprites[i].enabled = false;
-        //    }
-
-        //    sprites = GameObject.Find("d_c_torso").GetComponentsInChildren<SpriteRenderer>();
-
-        //    for (int i = 0; i < sprites.Length; i++)
-        //    {
-        //        sprites[i].enabled = true;
-        //    }
-
-        //}
-
-        if (Input.GetKey(KeyCode.A) == true | Input.GetKey(KeyCode.D) == true)
+        if (playerMoving == false)
         {
+            SpriteRenderer[] sprites = GameObject.Find("s_c_torso").GetComponentsInChildren<SpriteRenderer>();
 
-            transform.Find("s_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", true);
-            if (Input.GetKey(KeyCode.A) == true)
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i].enabled = false;
+            }
+
+            sprites = GameObject.Find("u_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i].enabled = false;
+            }
+
+            sprites = GameObject.Find("d_c_torso").GetComponentsInChildren<SpriteRenderer>();
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i].enabled = true;
+            }
+
+            transform.Find("s_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", false);
+
+        }
+
+        if (playerDirection == direction.right | playerDirection == direction.left)
+        {
+            if (playerMoving == true)
+            {
+                transform.Find("s_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", true);
+            }
+
+            if (playerDirection == direction.left)
             {
                 SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
 
@@ -148,7 +207,7 @@ public class PlayerScript : MonoBehaviour
             }
 
 
-            if (Input.GetKey(KeyCode.D) == true)
+            if (playerDirection == direction.right)
             {
                 SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
                 for (int i = 0; i < sprites.Length; i++)
@@ -174,13 +233,8 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        else
-        {
-            transform.Find("s_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", false);
-        }
 
-
-        if (Input.GetKey(KeyCode.W) == true)
+        if (playerDirection == direction.up)
         {
             SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
             for (int i = 0; i < sprites.Length; i++)
@@ -203,7 +257,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.S) == true)
+        if (playerDirection == direction.down)
         {
             SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
             for (int i = 0; i < sprites.Length; i++)

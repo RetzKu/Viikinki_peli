@@ -36,17 +36,17 @@ public class avaibleItems : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Q) == true)
         {
         
-            if(GameObject.Find("Inventory").transform.childCount >= 1 & GameObject.Find("Equip").transform.childCount < 1)
+            if(transform.Find("Inventory").transform.childCount >= 1 & transform.Find("Equip").transform.childCount < 1)
             {
                
-                Debug.Log(GameObject.Find("Inventory").transform.childCount);
-                var objectCache = GameObject.Find("Inventory").transform.GetChild(0).gameObject;
+                Debug.Log(transform.Find("Inventory").transform.childCount);
+                var objectCache = transform.Find("Inventory").transform.GetChild(0).gameObject;
                 //objectCache.SetActive(true);
  
-                objectCache.transform.position = GameObject.Find("Player").transform.position;
+                objectCache.transform.position = transform.Find("Player").transform.position;
                 objectCache.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 270.0f);
 
-                Instantiate(objectCache, GameObject.Find("Equip").transform).transform.name = objectCache.name;
+                Instantiate(objectCache, transform.Find("Equip").transform).transform.name = objectCache.name;
                 Destroy(objectCache);
             }
             
@@ -54,10 +54,10 @@ public class avaibleItems : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.E) == true)
         {
 
-            if (GameObject.Find("Equip").transform.childCount >= 1)
+            if (transform.Find("Equip").transform.childCount >= 1)
             {
 
-                var objectCache2 = GameObject.Find("Equip").transform.GetChild(0).gameObject;
+                var objectCache2 = transform.Find("Equip").transform.GetChild(0).gameObject;
 
                 //objectCache2.SetActive(false);
 
@@ -71,7 +71,7 @@ public class avaibleItems : MonoBehaviour {
                 }
 
                 objectCache2.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
-                Instantiate(objectCache2, GameObject.Find("Inventory").transform).transform.name = objectCache2.name;
+                Instantiate(objectCache2, transform.Find("Inventory").transform).transform.name = objectCache2.name;
                 Destroy(objectCache2);
             }
         }

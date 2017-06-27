@@ -25,8 +25,8 @@ public class TileSpriteController : MonoBehaviour
             _textures[sprite.name] = sprite;
             //print(sprite.name);
         }
-        
-        for(int i = 0; i < temporarySecondLayer.Length; i++)
+
+        for (int i = 0; i < temporarySecondLayer.Length; i++)
         {
             temporarySecondLayer[i] = new GameObject();
             // go.SetActive(false);
@@ -217,7 +217,7 @@ public class TileSpriteController : MonoBehaviour
             //}
 
             // TODO: FUNKTIO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            for(int i = 0; i < neighbours.Length; i++)
+            for (int i = 0; i < neighbours.Length; i++)
             {
                 int x = neighbours[i].X + pos.X;
                 int y = neighbours[i].Y + pos.Y;
@@ -253,7 +253,7 @@ public class TileSpriteController : MonoBehaviour
         return true;
     }
 
-   
+
 
     public void DoubleLayerBorders(List<Vec2> borderTiles, TileType[,] tiles, GameObject[,] gameobjects, TileMap map) // border tile list 
     {
@@ -293,7 +293,7 @@ public class TileSpriteController : MonoBehaviour
 
     public void SetNeighbours(int x, int y, TileMap map, TileType backgroundTile)
     {
-        foreach(var pos in neighbours)
+        foreach (var pos in neighbours)
         {
             if (TileType.GrassLand == map.Tiles[y, x])
             {

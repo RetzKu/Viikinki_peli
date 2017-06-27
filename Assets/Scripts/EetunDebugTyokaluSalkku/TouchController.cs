@@ -139,7 +139,7 @@ public class TouchController : MonoBehaviour
             }
         }
 
-        if (myTouches.Length == 0) 
+        if (myTouches.Length == 0)
         {
             moveThisGuy.GetComponent<SpriteRenderer>().material.color = Color.red;
         }

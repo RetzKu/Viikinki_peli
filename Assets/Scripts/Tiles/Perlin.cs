@@ -576,4 +576,55 @@ public class Perlin : MonoBehaviour
         // High mountain
         return TileType.Snow;
     }
+
+    public BiomeSettings settings;
+    public TileType GetBiomeWSettings(float e, float m )
+    {
+        foreach(var elevationsArray in settings.elevations)
+        {
+            for(int i = 0; i < elevationsArray.startElevation)
+            {
+
+            }
+        }
+
+        return TileType.GrassLand;
+    }
+
+
+
+    // XD
+    //void WriteBiomeDataToFile(BiomeSettings settings) // settings todo:
+    //{
+    //    string data = "";
+    //    data += GetEnumName();
+
+    //    // Kirjoita ehdot;
+    //    for(int i = 0; i < settings.elevations.Length; i++)
+    //    {
+    //        float Elevation = settings.elevations[i].startElevation;
+    //        WriteElevationIf(Elevation);
+
+    //    }
+
+    //    data += EndName();
+
+    //    System.IO.File.WriteAllText("eetulähettääterveisensä.txt", data);
+    //}
+
+    //string GetEnumName()
+    //{
+    //    return "public TileType GetBiome(float e, float m) {";
+    //}
+
+    //string EndName()
+    //{
+    //    return "\n}";
+    //}
+
+    //string WriteElevationIf(float elevation)
+    //{
+    //    string str = "if ( e" + elevation.ToString() + " < " + elevation.ToString() + " ) \n{";
+    //    return elevation.ToString();
+    //}
 }

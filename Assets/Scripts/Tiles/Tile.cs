@@ -32,7 +32,8 @@ public enum TileType
     Jungle,
     Savannah,
     Desert,
-    Snow
+    Snow,
+    Max
 }
 
 // ei käytössä atm

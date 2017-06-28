@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: SpriteContorller
+  m_EditorClassIdentifier: Assembly-CSharp::BiomeSettings
+  elevations:
+  - startElevation: 3.4
+    tiles:
+    - startMoisture: 0
+      type: 1
+      sprites:
+      - {fileID: 21300000, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
+      - {fileID: 21300002, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
+      - {fileID: 21300010, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
+      - {fileID: 21300008, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
+      - {fileID: 21300004, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
+      - {fileID: 21300006, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
+      assetName: 
+    - startMoisture: 28.8
+      type: 7
+      sprites:
+      - {fileID: 21300000, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300002, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300004, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300006, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300008, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300010, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300012, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300014, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300016, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300024, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300022, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300018, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300020, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      assetName: 
+    - startMoisture: 70.81
+      type: 3
+      sprites:
+      - {fileID: 21300000, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300002, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300004, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300006, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300008, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300010, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300012, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300014, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300016, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300024, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300022, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300018, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300020, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      assetName: 
+    - startMoisture: 60.11
+      type: 6
+      sprites:
+      - {fileID: 21300000, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300002, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300004, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300006, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300008, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300010, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300012, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300014, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300016, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300032, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300030, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300026, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300028, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      assetName: 
+  - startElevation: 62.5
+    tiles:
+    - startMoisture: 0
+      type: 1
+      sprites:
+      - {fileID: 21300000, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
+      - {fileID: 21300002, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
+      - {fileID: 21300010, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
+      - {fileID: 21300008, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
+      - {fileID: 21300004, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
+      - {fileID: 21300006, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
+      assetName: 
+    - startMoisture: 0
+      type: 7
+      sprites:
+      - {fileID: 21300000, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300002, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300004, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300006, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300008, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300010, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300012, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300014, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300016, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300024, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300022, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300018, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      - {fileID: 21300020, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
+      assetName: 
+    - startMoisture: 0
+      type: 3
+      sprites:
+      - {fileID: 21300000, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300002, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300004, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300006, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300008, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300010, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300012, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300014, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300016, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300024, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300022, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300018, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      - {fileID: 21300020, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+      assetName: 
+    - startMoisture: 0
+      type: 6
+      sprites:
+      - {fileID: 21300000, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300002, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300004, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300006, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300008, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300010, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300012, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300014, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300016, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300032, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300030, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300026, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      - {fileID: 21300028, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+      assetName: 

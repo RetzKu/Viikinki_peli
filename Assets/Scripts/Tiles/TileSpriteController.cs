@@ -6,13 +6,14 @@ public class TileSpriteController : MonoBehaviour
 {
     // wheels badman käyttää stringejä 
     private Dictionary<string, Sprite> _textures;
-    GameObject[] temporarySecondLayer = new GameObject[450];
+    GameObject[] temporarySecondLayer = new GameObject[450];    // LOL
 
     public Sprite temproraryFillSprite;
-
     public Sprite grassFiller;
     public Sprite ForesFiller;
+    public BiomeSettings Settings;
 
+    int[] TileCount = new int[(int)TileType.Max];
 
     void Awake()
     {
@@ -22,8 +23,8 @@ public class TileSpriteController : MonoBehaviour
         Sprite[] sprites = Resources.LoadAll<Sprite>("Tiles/");
         foreach (Sprite sprite in sprites)
         {
-            _textures[sprite.name] = sprite;
-            //print(sprite.name);
+            //  _textures[sprite.name] = sprite;
+            //  print(sprite.name);
         }
 
         for (int i = 0; i < temporarySecondLayer.Length; i++)
@@ -35,7 +36,36 @@ public class TileSpriteController : MonoBehaviour
             temporarySecondLayer[i].transform.parent = gameObject.transform;
             renderer.sortingLayerName = "TileMapBorder";
         }
+
+        foreach(var elevation in Settings.elevations)
+        {
+            foreach(var tile in elevation.tiles)
+            {
+                string name = tile.type.ToString();
+                TileCount[(int)tile.type] = tile.sprites.Length;
+
+                int count = 0;
+                for(int i = 0; i < tile.sprites.Length - 4; i++)
+                {
+                    _textures[name + stringsEnds[i]] = tile.sprites[i];
+                    print(_textures[name + stringsEnds[i]]);
+                    count++;
+                }
+                TileCount[(int)tile.type] = count;
+
+                for (int i = tile.sprites.Length - 4; i < tile.sprites.Length; i++)
+                {
+                    _textures[name + stringsEnds[i]] = tile.sprites[i];
+                    print(_textures[name + stringsEnds[i]]);
+                }
+            }
+        }
     }
+
+    private readonly string[] stringsEnds = new string[13]
+    {
+        "_0", "_1", "_2", "_3", "_4", "_5", "_6", "_7", "_8", "_E0", "_N0", "_S0", "_W0" 
+    };
 
     string GetAssetNameByte(int x, int y, TileType[,] tiles, out int count)
     {
@@ -133,13 +163,13 @@ public class TileSpriteController : MonoBehaviour
 
         if (type == TileType.Mountain || type == TileType.GrassLand || type == TileType.Water)
         {
-            assetName = "tileset_" + type.ToString() + "_";
+            assetName = type.ToString() + "_";
             found = true;
         }
 
         if (type == TileType.Forest)
         {
-            assetName = "tileset_ground_";
+            assetName = "Forest_";
             found = true;
         }
 
@@ -218,11 +248,13 @@ public class TileSpriteController : MonoBehaviour
 
     public int GetAssetCount(TileType type)
     {
-        if (type == TileType.Water)
-        {
-            return 1;
-        }
-        return 9;
+        return TileCount[(int)type];
+
+        //  if (type == TileType.Water)
+        //{
+        //    return 1;
+        //}
+        //return 9;
     }
 
     public void SetTileSprites(int width, int height, TileMap tilemap, int startX, int startY)
@@ -244,7 +276,7 @@ public class TileSpriteController : MonoBehaviour
                 Sprite sprite;  // perus 
 
                 if (!found)
-                    assetName = "tileset_GrassLand_";
+                    assetName = "GrassLand_";
                 assetName += Random.Range(0, GetAssetCount(type));    // max count smt smt 
                     
 
@@ -267,18 +299,19 @@ public class TileSpriteController : MonoBehaviour
 
                 if (tempIndex < temporarySecondLayer.Length)
                  {
-                    string border = "reunatiilet";
+                    string border = "GrassLand";
 
-                    if (type == TileType.GrassLand || type == TileType.Water || type == TileType.Mountain) 
+                    if (type == TileType.GrassLand || type == TileType.Water || type == TileType.Mountain || type == TileType.Forest) 
                     {
                         border = type.ToString();
                     }
 
-                    if (type == TileType.Forest)
-                    {
-                        border = "tileset_ground_";
-                    }
+                    //if (type == TileType.Forest)
+                    //{
+                    //    border = "tileset_ground_";
+                    //}
 
+                    print(border);
                     if ((value & (1 << 1 - 1)) == 0)
                     {
                         temporarySecondLayer[tempIndex].GetComponent<SpriteRenderer>().sprite = _textures[border + "_N0"];

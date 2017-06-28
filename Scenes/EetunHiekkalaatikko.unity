@@ -439,16 +439,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: TestTiles.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: chunkTestSprites.Array.size
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 4772326767965640, guid: 9ba8cfce009a3764ba416b37c8f039af, type: 2}
       propertyPath: m_LocalPosition.x
       value: -1.1
@@ -483,165 +473,9 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
         type: 2}
-      propertyPath: GrassSprite
-      value: 
-      objectReference: {fileID: 21300012, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
-        type: 3}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: chunkTestSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: chunkTestSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: chunkTestSprites.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: chunkTestSprites.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: chunkTestSprites.Array.data[4]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: chunkTestSprites.Array.data[5]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: chunkTestSprites.Array.data[6]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: chunkTestSprites.Array.data[7]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: chunkTestSprites.Array.data[8]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: chunkTestSprites.Array.data[9]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: useChunkSprites
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
       propertyPath: SpriteController
       value: 
       objectReference: {fileID: 1310822892}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: TestTiles.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
-        type: 3}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: TestTiles.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300002, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
-        type: 3}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: TestTiles.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300004, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
-        type: 3}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: TestTiles.Array.data[3]
-      value: 
-      objectReference: {fileID: 21300012, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
-        type: 3}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: TestTiles.Array.data[4]
-      value: 
-      objectReference: {fileID: 21300014, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
-        type: 3}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: TestTiles.Array.data[5]
-      value: 
-      objectReference: {fileID: 21300016, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
-        type: 3}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: TestTiles.Array.data[6]
-      value: 
-      objectReference: {fileID: 21300022, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
-        type: 3}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: TestTiles.Array.data[7]
-      value: 
-      objectReference: {fileID: 21300024, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
-        type: 3}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: TestTiles.Array.data[8]
-      value: 
-      objectReference: {fileID: 21300026, guid: 4e0d0f811b9b117428e6d2cd3132ef5c,
-        type: 3}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: TreeTrefab
-      value: 
-      objectReference: {fileID: 1384798036243720, guid: 1d6b060ef40a3664da1b12583f13f561,
-        type: 2}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: DrawMode
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: OffsetX
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: blueNoiseLacunarity
-      value: 58.88
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: blueNoisePersistance
-      value: 0.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: ObjectRValue
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: Forest.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: Forest.b
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ba8cfce009a3764ba416b37c8f039af, type: 2}
   m_IsPrefabParent: 0
@@ -999,6 +833,7 @@ MonoBehaviour:
     type: 3}
   grassFiller: {fileID: 21300000, guid: 4e0d0f811b9b117428e6d2cd3132ef5c, type: 3}
   ForesFiller: {fileID: 21300022, guid: 4e0d0f811b9b117428e6d2cd3132ef5c, type: 3}
+  Settings: {fileID: 11400000, guid: df019bbda264cf945b4f696a86801f07, type: 2}
 --- !u!4 &1310822893
 Transform:
   m_ObjectHideFlags: 0

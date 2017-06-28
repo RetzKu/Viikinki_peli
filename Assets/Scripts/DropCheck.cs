@@ -8,6 +8,8 @@ public class DropCheck : MonoBehaviour
     private GameObject[] Items;
     private List<ItemStates> ItemStatesList;
 
+    private float Clock;
+
     /*ITEM DROPWHITELIST*/
     private void Start()
     {
@@ -17,15 +19,36 @@ public class DropCheck : MonoBehaviour
 
         ItemStatesList = new List<ItemStates>();
         ResetStates();
+        StartCoroutine(UpdateClock());
     }
-    
-    void ResetStates()
+
+    IEnumerator UpdateClock()
+    {
+        while (true)
+        {
+            Clock = transform.GetComponent<DayNightCycle>().Result;
+            yield return new WaitForSeconds(5f);
+        }
+    }
+
+    public bool NightDrops()
+    {
+        if (Clock > 75)
+        {
+            return true;
+        }
+        else
+        {
+            return false; 
+        }
+    }
+
+    public void ResetStates()
     {
         for (int i = 0; i < Items.Length; i++)
         {
             ItemStatesList.Add(new ItemStates(Items[i], false)); 
         }
-        print("kek");
     }
     class ItemStates
     {

@@ -249,10 +249,6 @@ public class PlayerScript : MonoBehaviour
         if (Trig.gameObject.tag == "puu")
         {
             Debug.Log("BONK");
-            if(Trig.GetComponent<TreeHP>().hp < Damage)
-            {
-                Trig.GetComponent<DropScript>().Drop();
-            }
             Trig.GetComponent<TreeHP>().hp -= Damage;
         }
     }

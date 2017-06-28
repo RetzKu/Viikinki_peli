@@ -191,18 +191,27 @@ public class EnemyMovement /*: MonoBehaviour*/
                 return acc;
             case collision.Right:
                 Vector2 perpendicularR = new Vector2(temp.y, temp.x *-1);
-                perpendicularR /= 2f;
+                perpendicularR /= 3f;
                 temp = (temp + (perpendicularR * -1));
                 break;
             case collision.Left:
                 Vector2 perpendicularL = new Vector2(temp.y, temp.x * -1);
-                perpendicularL /= 2f;
+                perpendicularL /= 3f;
                 temp = (temp + perpendicularL);
                 break;
             case collision.Main:
+                if(Mathf.Abs(velocity.x) >= Mathf.Abs(velocity.y))
+                {
                 Vector2 perpendicularM = new Vector2(temp.y, temp.x * -1);
-                perpendicularM *= 2f;
+                perpendicularM *= 1.5f;
                 temp = (temp + perpendicularM);
+                }
+                else
+                {
+                    Vector2 perpendicularM = new Vector2(temp.y, temp.x * -1);
+                    perpendicularM *= -1.5f;
+                    temp = (temp + perpendicularM);
+                }
                 break;
 
         }

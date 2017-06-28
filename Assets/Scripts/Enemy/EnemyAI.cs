@@ -164,14 +164,14 @@ public class EnemyAI : MonoBehaviour
     public void UpdatePosition(List<GameObject> Mobs)
     {
         LayerMask mask = new LayerMask();
-        if (myType == EnemyType.Wolf)
-        {
-            mask = LayerMask.GetMask("Wolf");
-        }
-        else
-        {
-            mask = LayerMask.GetMask("Archer");
-        }
+        //if (myType == EnemyType.Wolf)
+        //{
+            mask = LayerMask.GetMask("Enemy");
+        //}
+        //else
+        //{
+           // mask = LayerMask.GetMask("Archer");
+        //}
         var HeardArray = Physics2D.OverlapCircleAll(body.position, alingmentDistance, mask); // , mask);
         var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
         Vector2[] powers = new Vector2[2];

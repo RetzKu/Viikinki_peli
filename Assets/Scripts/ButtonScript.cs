@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class ButtonScript : MonoBehaviour {
+public class ButtonScript : MonoBehaviour
+{
 
     private GameObject InventoryObject;
     private GameObject Ui;

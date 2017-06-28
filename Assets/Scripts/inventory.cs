@@ -3,12 +3,13 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class inventory : MonoBehaviour {
+public class inventory : MonoBehaviour
+{
 
     public List<Items> Tools;
     internal GameObject ChestPiece;
 
-	void Start ()
+    void Start()
     {
         Tools = new List<Items>();
     }
@@ -17,7 +18,7 @@ public class inventory : MonoBehaviour {
     {
 
     }
-    
+
     internal void AddItem(GameObject Item)
     {
         Tools.Add(new Items(Item));

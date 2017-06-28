@@ -168,7 +168,7 @@ public class Chunk      // sub array
 
     public void disableChunkCollision()
     {
-       for(int y = 0; y < GameObjectView.Size; y++)
+        for (int y = 0; y < GameObjectView.Size; y++)
         {
             for (int x = 0; x < GameObjectView.Size; x++)
             {

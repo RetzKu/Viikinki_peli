@@ -1,41 +1,46 @@
 fileFormatVersion: 2
-guid: bcda750768d677d4fa4534f67593c139
-timeCreated: 1498125041
+guid: be16eab27af0a614aae26bc439022188
+timeCreated: 1498126075
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: character_sheet 1_0
-    21300002: character_sheet 1_1
-    21300004: character_sheet 1_2
-    21300006: character_sheet 1_3
-    21300008: character_sheet 1_4
-    21300010: character_sheet 1_5
-    21300012: character_sheet 1_6
-    21300014: character_sheet 1_7
-    21300016: character_sheet 1_8
-    21300018: character_sheet 1_9
-    21300020: character_sheet 1_10
-    21300022: character_sheet 1_11
-    21300024: character_sheet 1_12
-    21300026: character_sheet 1_13
-    21300028: character_sheet 1_14
-    21300030: character_sheet 1_15
-    21300032: character_sheet 1_16
-    21300034: character_sheet 1_17
-    21300036: character_sheet 1_18
-    21300038: character_sheet 1_19
-    21300040: character_sheet 1_20
-    21300042: character_sheet 1_21
-    21300044: character_sheet 1_22
-    21300046: character_sheet 1_23
-    21300048: character_sheet 1_24
-    21300050: character_sheet 1_25
-    21300052: character_sheet 1_26
-    21300054: character_sheet 1_27
+    21300000: character_sheet (2)_0
+    21300002: character_sheet (2)_1
+    21300004: character_sheet (2)_2
+    21300006: character_sheet (2)_3
+    21300008: character_sheet (2)_4
+    21300010: character_sheet (2)_5
+    21300012: character_sheet (2)_6
+    21300014: character_sheet (2)_7
+    21300016: character_sheet (2)_8
+    21300018: character_sheet (2)_9
+    21300020: character_sheet (2)_10
+    21300022: character_sheet (2)_11
+    21300024: character_sheet (2)_12
+    21300026: character_sheet (2)_13
+    21300028: character_sheet (2)_14
+    21300030: character_sheet (2)_15
+    21300032: character_sheet (2)_16
+    21300034: character_sheet (2)_17
+    21300036: character_sheet (2)_18
+    21300038: character_sheet (2)_19
+    21300040: character_sheet (2)_20
+    21300042: character_sheet (2)_21
+    21300044: character_sheet (2)_22
+    21300046: character_sheet (2)_23
+    21300048: character_sheet (2)_24
+    21300050: character_sheet (2)_25
+    21300052: character_sheet (2)_26
+    21300054: character_sheet (2)_27
+    21300056: character_sheet (2)_28
+    21300058: character_sheet (2)_29
+    21300060: character_sheet (2)_30
+    21300062: character_sheet (2)_31
+    21300064: character_sheet (2)_32
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -56,7 +61,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: 0
-    aniso: 16
+    aniso: -1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -64,11 +69,11 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 100
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -154,7 +159,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: character_sheet 1_0
+      name: character_sheet (2)_0
       rect:
         serializedVersion: 2
         x: 12
@@ -167,7 +172,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_1
+      name: character_sheet (2)_1
       rect:
         serializedVersion: 2
         x: 26
@@ -180,7 +185,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_2
+      name: character_sheet (2)_2
       rect:
         serializedVersion: 2
         x: 40
@@ -193,7 +198,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_3
+      name: character_sheet (2)_3
       rect:
         serializedVersion: 2
         x: 59
@@ -206,7 +211,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_4
+      name: character_sheet (2)_4
       rect:
         serializedVersion: 2
         x: 73
@@ -219,7 +224,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_5
+      name: character_sheet (2)_5
       rect:
         serializedVersion: 2
         x: 11
@@ -232,7 +237,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_6
+      name: character_sheet (2)_6
       rect:
         serializedVersion: 2
         x: 25
@@ -245,7 +250,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_7
+      name: character_sheet (2)_7
       rect:
         serializedVersion: 2
         x: 41
@@ -258,7 +263,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_8
+      name: character_sheet (2)_8
       rect:
         serializedVersion: 2
         x: 95
@@ -271,7 +276,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_9
+      name: character_sheet (2)_9
       rect:
         serializedVersion: 2
         x: 12
@@ -284,7 +289,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_10
+      name: character_sheet (2)_10
       rect:
         serializedVersion: 2
         x: 18
@@ -297,7 +302,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_11
+      name: character_sheet (2)_11
       rect:
         serializedVersion: 2
         x: 26
@@ -310,7 +315,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_12
+      name: character_sheet (2)_12
       rect:
         serializedVersion: 2
         x: 32
@@ -323,7 +328,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_13
+      name: character_sheet (2)_13
       rect:
         serializedVersion: 2
         x: 41
@@ -336,7 +341,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_14
+      name: character_sheet (2)_14
       rect:
         serializedVersion: 2
         x: 46
@@ -349,89 +354,89 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_15
+      name: character_sheet (2)_15
       rect:
         serializedVersion: 2
         x: 12
-        y: 78
+        y: 75
         width: 4
-        height: 8
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_16
+      name: character_sheet (2)_16
       rect:
         serializedVersion: 2
         x: 18
-        y: 78
+        y: 75
         width: 4
-        height: 8
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_17
+      name: character_sheet (2)_17
       rect:
         serializedVersion: 2
         x: 26
-        y: 78
+        y: 75
         width: 4
-        height: 8
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_18
+      name: character_sheet (2)_18
       rect:
         serializedVersion: 2
         x: 32
-        y: 78
+        y: 75
         width: 4
-        height: 8
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_19
+      name: character_sheet (2)_19
       rect:
         serializedVersion: 2
         x: 41
-        y: 78
+        y: 79
         width: 4
-        height: 8
+        height: 6
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_20
+      name: character_sheet (2)_20
       rect:
         serializedVersion: 2
         x: 46
-        y: 78
+        y: 79
         width: 4
-        height: 8
+        height: 6
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_21
+      name: character_sheet (2)_21
       rect:
         serializedVersion: 2
         x: 11
-        y: 64
+        y: 60
         width: 5
         height: 12
       alignment: 0
@@ -440,11 +445,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_22
+      name: character_sheet (2)_22
       rect:
         serializedVersion: 2
         x: 18
-        y: 64
+        y: 60
         width: 5
         height: 12
       alignment: 0
@@ -453,11 +458,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_23
+      name: character_sheet (2)_23
       rect:
         serializedVersion: 2
         x: 25
-        y: 64
+        y: 60
         width: 5
         height: 12
       alignment: 0
@@ -466,11 +471,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_24
+      name: character_sheet (2)_24
       rect:
         serializedVersion: 2
         x: 32
-        y: 64
+        y: 60
         width: 5
         height: 12
       alignment: 0
@@ -479,38 +484,103 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_25
+      name: character_sheet (2)_25
       rect:
         serializedVersion: 2
         x: 40
-        y: 64
-        width: 6
-        height: 12
+        y: 66
+        width: 5
+        height: 6
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_26
+      name: character_sheet (2)_26
       rect:
         serializedVersion: 2
         x: 47
-        y: 64
-        width: 6
-        height: 12
+        y: 66
+        width: 5
+        height: 6
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: character_sheet 1_27
+      name: character_sheet (2)_27
       rect:
         serializedVersion: 2
-        x: 25
+        x: 40
         y: 59
-        width: 8
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sheet (2)_28
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 59
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sheet (2)_29
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 55
+        width: 6
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sheet (2)_30
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 55
+        width: 6
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sheet (2)_31
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 75
+        width: 4
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sheet (2)_32
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 75
+        width: 4
         height: 3
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

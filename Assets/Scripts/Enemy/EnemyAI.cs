@@ -187,24 +187,26 @@ public class EnemyAI : MonoBehaviour
 
         if (!agro)
         {
-            wander(HeardArray);
+            // wander(HeardArray);
+            findPath();
         }
         else if (agro)
         {
-            Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
+            //Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
 
-            Vector2 dist = body.position - playerPos;
-            if (myType == EnemyType.Wolf)
-            {
-                leapingPattern(dist,playerPos);
-            }
-            else if(myType == EnemyType.Archer)
-            {
-                archerPattern(dist, playerPos);
-            }
+            //Vector2 dist = body.position - playerPos;
+            //if (myType == EnemyType.Wolf)
+            //{
+            //    leapingPattern(dist,playerPos);
+            //}
+            //else if(myType == EnemyType.Archer)
+            //{
+            //    archerPattern(dist, playerPos);
+            //}
+            findPath();
         }
-        RayCollide();
-        flags = (int)flags | (int)behavior.Collide; 
+        //RayCollide();
+        //flags = (int)flags | (int)behavior.Collide; 
         powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags,CollState);
         target = powers[1];
         velocity = powers[0];
@@ -281,6 +283,43 @@ public class EnemyAI : MonoBehaviour
         target = playerPos + dist;
         flags = (int)behavior.seekAndArrive | (int)behavior.separate;
         Physics.sepF = sepF * 2;
+    }
+    void findPath()
+    {
+        var pl = GameObject.FindGameObjectWithTag("Player");
+
+        // missä olen
+        BreadthFirstSearch.states k =  pl.GetComponent<UpdatePathFind>().path.getTileDir(body.position);
+        //BreadthFirstSearch.states k = BreadthFirstSearch.states.right;
+        if (k == BreadthFirstSearch.states.goal || k == BreadthFirstSearch.states.wall || k == BreadthFirstSearch.states.unVisited)
+        {
+            flags = 0;
+        }
+        else if (k == BreadthFirstSearch.states.right)
+        {
+            flags = (int)behavior.seek;
+            target = new Vector2(body.position.x + 1, body.position.y);
+        }
+        else if (k == BreadthFirstSearch.states.left)
+        {
+            flags = (int)behavior.seek;
+            target = new Vector2(body.position.x - 1, body.position.y);
+        }
+        else if (k == BreadthFirstSearch.states.up)
+        {
+            flags = (int)behavior.seek;
+            target = new Vector2(body.position.x, body.position.y + 1);
+        }
+        else if (k == BreadthFirstSearch.states.down)
+        {
+            flags = (int)behavior.seek;
+            target = new Vector2(body.position.x, body.position.y - 1);
+        }
+        else
+        {
+            flags = 0;
+        }
+        //minne menen
     }
     void wander(Collider2D[] HeardArray)
     {

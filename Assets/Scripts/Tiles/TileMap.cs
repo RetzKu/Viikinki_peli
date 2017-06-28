@@ -498,6 +498,11 @@ public class TileMap : MonoBehaviour
         return _chunks[iy, ix].GetGameObject(x - ChunkSize * ix, y - ChunkSize * iy);
     }
 
+    public TileType GetTileFast(Vector2 position)
+    {
+        return GetTileFast((int)position.x, (int)position.y);
+    }
+
     public TileType GetTileFast(int x, int y)
     {
         int ix = x / 20;

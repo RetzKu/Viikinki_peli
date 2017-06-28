@@ -203,6 +203,7 @@ public class TouchController : MonoBehaviour
             touchCollider.GetComponent<Collider2D>().enabled = false;
             _touching = false;
             // ResetColliders();
+            _timer -= 200;
         }
 
 
@@ -221,22 +222,24 @@ public class TouchController : MonoBehaviour
     public float TotalLineFadeEffectTime = 0.4f;
     IEnumerator LineFadeEffect()
     {
+        // MVP: Kommunikaatio Runejen laukaisun kannsa
+        RuneHolder.SendIndices(runeIndices, index);
+
         LineFadeEffectRunning = true;
         Color color = new Color(170, 170, 170, 120);
         lineRenderer.material.color = color;
+        
         // larger line every frame? 
-        for (float i = 0; i < 200; i++)
+        for (float i = 0; i < 30; i++)
         {
-            lineRenderer.widthMultiplier = Mathf.Lerp(LineStartWidth, MaxWidht, (float)i / 200);
-            yield return new WaitForSeconds(TotalLineFadeEffectTime / 200);
+            lineRenderer.widthMultiplier = Mathf.Lerp(LineStartWidth, MaxWidht, (float)i / 30);
+            yield return new WaitForSeconds(TotalLineFadeEffectTime / 30);
         }
 
         ResetColliders();
         lineRenderer.widthMultiplier = LineStartWidth;
-        lineRenderer.positionCount = 0;
-
-        // MVP
-        RuneHolder.SendIndices(runeIndices, index);
+        //lineRenderer.positionCount = 0;
+        lineRenderer.numPositions = 0;
 
         index = 0;
         LineFadeEffectRunning = false;
@@ -289,7 +292,8 @@ public class TouchController : MonoBehaviour
             //LineRenderer.positionCount = index + 1;
             //LineRenderer.positionCount = index + 1;
             //LineRenderer.positionCount = index + 1;
-            lineRenderer.positionCount = index + 1;
+            //lineRenderer.positionCount = index + 1;
+            lineRenderer.numPositions = index + 1;
 
             lineRenderer.SetPosition(index, positions[index]);
             lineRenderer.sortingLayerName = "Foreground";

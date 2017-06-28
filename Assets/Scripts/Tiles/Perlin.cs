@@ -433,7 +433,7 @@ public class Perlin : MonoBehaviour
                 if (trees[y, x])
                 {
                     Vector3 spawnPosition = new Vector3(offsetX * 20 + x, offsetY * 20 + y);
-                    var go = Instantiate(TreeTrefab, this.trees.transform);
+                    var go = Instantiate(TreeTrefab, this.trees.transform);                     // instantiate biome spesifiseste drop changeillä?
                     go.transform.position = spawnPosition;
                 }
             }

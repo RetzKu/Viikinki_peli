@@ -20,6 +20,10 @@ public class Vec2
     {
         return !(a == b);
     }
+
+
+    
+    
 }
 
 public interface ITestPlayer

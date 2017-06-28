@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 8
+  serializedVersion: 7
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -25,7 +25,6 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 3
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -42,7 +41,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 7
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -54,7 +53,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
-    serializedVersion: 8
+    serializedVersion: 4
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -67,27 +66,13 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
+    m_DirectLightInLightProbes: 1
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
-    m_MixedBakeMode: 1
-    m_BakeBackend: 0
-    m_PVRSampling: 1
-    m_PVRDirectSampleCount: 32
-    m_PVRSampleCount: 500
-    m_PVRBounces: 2
-    m_PVRFiltering: 0
-    m_PVRFilteringMode: 1
-    m_PVRCulling: 1
-    m_PVRFilteringGaussRadiusDirect: 1
-    m_PVRFilteringGaussRadiusIndirect: 5
-    m_PVRFilteringGaussRadiusAO: 2
-    m_PVRFilteringAtrousColorSigma: 1
-    m_PVRFilteringAtrousNormalSigma: 1
-    m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_ShadowMaskMode: 2
+  m_RuntimeCPUUsage: 25
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -104,8 +89,6 @@ NavMeshSettings:
     minRegionArea: 2
     manualCellSize: 0
     cellSize: 0.16666667
-    manualTileSize: 0
-    tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
 --- !u!4 &290183173 stripped
@@ -124,6 +107,11 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 120115076912736880, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: m_Positions.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4570202345613644, guid: c51b4a74f8629674fb27f9785679c065, type: 2}
       propertyPath: m_LocalPosition.x
@@ -199,12 +187,12 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: fe51d0cb6988075499b336909be84165, type: 2}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 114859529828968886, guid: c51b4a74f8629674fb27f9785679c065,
         type: 2}
       propertyPath: lineMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: fe51d0cb6988075499b336909be84165, type: 2}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 114859529828968886, guid: c51b4a74f8629674fb27f9785679c065,
         type: 2}
       propertyPath: lineResetTime
@@ -225,6 +213,86 @@ Prefab:
       propertyPath: RuneHolder
       value: 
       objectReference: {fileID: 868275455}
+    - target: {fileID: 120115076912736880, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 120115076912736880, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[2].time
+      value: 0.3194464
+      objectReference: {fileID: 0}
+    - target: {fileID: 120115076912736880, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[3].time
+      value: 0.5655193
+      objectReference: {fileID: 0}
+    - target: {fileID: 120115076912736880, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[3].inSlope
+      value: -0.13187408
+      objectReference: {fileID: 0}
+    - target: {fileID: 120115076912736880, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[3].outSlope
+      value: -0.13187408
+      objectReference: {fileID: 0}
+    - target: {fileID: 120115076912736880, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[4].time
+      value: 0.83421344
+      objectReference: {fileID: 0}
+    - target: {fileID: 120115076912736880, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[5].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 120115076912736880, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[5].value
+      value: 0.9927536
+      objectReference: {fileID: 0}
+    - target: {fileID: 120115076912736880, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[5].inSlope
+      value: -0.048194136
+      objectReference: {fileID: 0}
+    - target: {fileID: 120115076912736880, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[5].outSlope
+      value: -0.048194136
+      objectReference: {fileID: 0}
+    - target: {fileID: 120115076912736880, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: m_Parameters.colorGradient.key0.rgba
+      value: 4278190335
+      objectReference: {fileID: 0}
+    - target: {fileID: 120115076912736880, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: m_Parameters.colorGradient.key1.rgba
+      value: 4278255601
+      objectReference: {fileID: 0}
+    - target: {fileID: 120115076912736880, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: m_Positions.Array.data[0].x
+      value: 46
+      objectReference: {fileID: 0}
+    - target: {fileID: 120115076912736880, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: m_Positions.Array.data[0].y
+      value: 27.579998
+      objectReference: {fileID: 0}
+    - target: {fileID: 120115076912736880, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: m_Positions.Array.data[0].z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114859529828968886, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: TotalLineFadeEffectTime
+      value: 0.11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c51b4a74f8629674fb27f9785679c065, type: 2}
   m_IsPrefabParent: 0
@@ -318,8 +386,6 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
-  m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -620,7 +686,6 @@ TrailRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Time: 0.22
   m_Parameters:
@@ -651,15 +716,30 @@ TrailRenderer:
       m_PostInfinity: 2
       m_RotationOrder: 0
     colorGradient:
-      serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 1}
-      key1: {r: 0.9862069, g: 1, b: 0, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
-      key3: {r: 0, g: 0, b: 0, a: 0}
-      key4: {r: 0, g: 0, b: 0, a: 0}
-      key5: {r: 0, g: 0, b: 0, a: 0}
-      key6: {r: 0, g: 0, b: 0, a: 0}
-      key7: {r: 0, g: 0, b: 0, a: 0}
+      key0:
+        serializedVersion: 2
+        rgba: 4278190335
+      key1:
+        serializedVersion: 2
+        rgba: 4285792361
+      key2:
+        serializedVersion: 2
+        rgba: 0
+      key3:
+        serializedVersion: 2
+        rgba: 0
+      key4:
+        serializedVersion: 2
+        rgba: 0
+      key5:
+        serializedVersion: 2
+        rgba: 0
+      key6:
+        serializedVersion: 2
+        rgba: 0
+      key7:
+        serializedVersion: 2
+        rgba: 0
       ctime0: 0
       ctime1: 65535
       ctime2: 0
@@ -752,16 +832,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -630457927
-  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a8cddc3c016a28c4e95c5b859b16e2c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
 --- !u!114 &868275452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -785,20 +860,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
   m_Offset: {x: 0.07154846, y: 0.0071544647}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.27, y: 3.48}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1.9248581, y: 1.9202156}
-  m_EdgeRadius: 0
 --- !u!50 &868275454
 Rigidbody2D:
   serializedVersion: 4
@@ -832,6 +896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runes:
   - {fileID: 11400000, guid: 6d19112c5faec534d92ac23bf9a0afa0, type: 2}
+  - {fileID: 11400000, guid: 207037571df1c974d899c749fc783fdc, type: 2}
 --- !u!114 &868275456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1035,13 +1100,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1a84d002a1cba994585636880c39ff1a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0

@@ -36,6 +36,7 @@ public class RuneEffectLauncher : MonoBehaviour {
         }
         
         yield return new WaitForSeconds(2f);
+       
         Destroy(go);
     }
 }

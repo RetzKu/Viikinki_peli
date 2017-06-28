@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4318093634337616}
   - component: {fileID: 212705228645128690}
+  - component: {fileID: 95019072351918298}
   m_Layer: 0
   m_Name: u_c_torso
   m_TagString: Untagged
@@ -267,7 +268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1656931869217660
 GameObject:
   m_ObjectHideFlags: 1
@@ -488,13 +489,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4279524207715094}
   - component: {fileID: 212899029465143232}
+  - component: {fileID: 95412243410894176}
   m_Layer: 0
   m_Name: d_c_torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1898506340217674
 GameObject:
   m_ObjectHideFlags: 1
@@ -1284,6 +1286,40 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1825560142250224}
   m_Enabled: 1
+--- !u!95 &95019072351918298
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1065948089935670}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6b037db6f9470b049a3d3591a3c92c0d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95412243410894176
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1875644227542808}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9efa5f456951a8e4cb33a0c8a48b7d44, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95748632759970124
 Animator:
   serializedVersion: 3

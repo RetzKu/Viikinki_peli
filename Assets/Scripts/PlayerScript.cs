@@ -125,6 +125,10 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0) == true)
         {
+
+            transform.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
+
+            /*
             if (clickPosition.x < 0.0f & transform.Find("Equip").transform.childCount >= 1)
 
             {
@@ -137,6 +141,7 @@ public class PlayerScript : MonoBehaviour
                 transform.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
                 //GameObject.Find("Equip").transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 270.0f);
             }
+            */
         }
 
         else if (transform.Find("Equip").transform.childCount >= 1)
@@ -170,6 +175,8 @@ public class PlayerScript : MonoBehaviour
             }
 
             transform.Find("s_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", false);
+            transform.Find("d_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", false);
+            transform.Find("u_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", false);
 
         }
 
@@ -236,6 +243,12 @@ public class PlayerScript : MonoBehaviour
 
         if (playerDirection == direction.up)
         {
+
+            if (playerMoving == true)
+            {
+                transform.Find("u_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", true);
+            }
+
             SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
             for (int i = 0; i < sprites.Length; i++)
             {
@@ -259,6 +272,12 @@ public class PlayerScript : MonoBehaviour
 
         if (playerDirection == direction.down)
         {
+
+            if (playerMoving == true)
+            {
+                transform.Find("d_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", true);
+            }
+
             SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
             for (int i = 0; i < sprites.Length; i++)
             {

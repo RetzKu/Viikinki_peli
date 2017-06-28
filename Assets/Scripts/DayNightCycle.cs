@@ -18,7 +18,7 @@ public class DayNightCycle : MonoBehaviour {
         Multiplier = 1;
         ResetCD = true;
         Ui = GameObject.Find("Ui");
-        ClockText = Ui.transform.FindChild("Clock").GetComponent<Text>();
+        ClockText = Ui.transform.Find("Clock").GetComponent<Text>();
 	}
     
     void Update()

@@ -17,11 +17,11 @@ public class door : MonoBehaviour {
     public Sprite SuperSprite;
     public Sprite StartSprite;
 
-
+    private GameObject Spawner;
     void Start()
     {
-        //Activate();
-        // init sprites
+        Spawner = GameObject.FindGameObjectWithTag("Spawner");
+
     }
 
     // Update is called once per frame
@@ -86,13 +86,25 @@ public class door : MonoBehaviour {
                     //print("drawing star point");
                     spriteRenderer.sprite = StartSprite;
                 }
-
-
-
             }
         }
-        //var go = Instantiate(EnemyPrefab, new Vector2(x, y), Quaternion.identity);
-        //go.GetComponent<EnemyMovement>().InitStart(x, y);
+
+        for (int i = 0;i < finalRooms.Count; i++)
+        {
+            if(finalRooms[i].roomsize > 10)
+            {
+                Spawner.GetComponent<MobsControl>().SpawnBoids((float)finalRooms[i].tiles[0].tileX, (float)finalRooms[i].tiles[0].tileY, 5,5);//EETU TRIGGER
+            }
+            else if (finalRooms[i].roomsize < 20)
+            {
+                Spawner.GetComponent<MobsControl>().SpawnBoids((float)finalRooms[i].tiles[0].tileX, (float)finalRooms[i].tiles[0].tileY, 5, 10);//EETU TRIGGER
+            }
+            if (finalRooms[i].roomsize < 30)
+            {
+                Spawner.GetComponent<MobsControl>().SpawnBoids((float)finalRooms[i].tiles[0].tileX, (float)finalRooms[i].tiles[0].tileY, 5, 17);//EETU TRIGGER
+            }
+        }
+
 
     }
     void createNewCave()

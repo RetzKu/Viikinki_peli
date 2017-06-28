@@ -15,7 +15,11 @@ public class MobsControl : MonoBehaviour
     //List<GameObject> Mobs;
     public int Mob_Amount;
     public GameObject EnemyPrefab;
+    public GameObject enemyChild;
     List<GameObject> Boids;
+    //List<GameObject> wolfBoids;
+    //List<GameObject> archerBoids;
+
     List<spawn> spawner = new List<spawn>();
     //[HideInInspector]
 
@@ -27,13 +31,35 @@ public class MobsControl : MonoBehaviour
         //Mobs = new List<GameObject>(Mob_Amount);
         //spawner = new List<Vector4>(1);
         Boids = new List<GameObject>(Mob_Amount); // mah fix
+        //wolfBoids = new List< GameObject > (Mob_Amount);
+        //archerBoids = new List< GameObject > (Mob_Amount);
         for (int i = 0; i < Mob_Amount; i++)
         {
-
-            float x = Random.Range(0f, 50f);
-            float y = Random.Range(0f, 50f);
+            float x = 0;
+            float y = 0;
+            do
+            {
+                x = Random.Range(0f, 50f);
+                y = Random.Range(0f, 50f);
+            }
+            while (Physics2D.OverlapCircleAll(new Vector2(x, y), 0.5f).Length != 0);  // EETU TRIGGER
             var go = Instantiate(EnemyPrefab, new Vector2(x, y), Quaternion.identity);
-            go.GetComponent<EnemyAI>().InitStart(x, y);
+            //var ga = Instantiate(enemyChild, new Vector2(x, y), Quaternion.identity);
+
+            //ga.transform.parent = go.transform;
+
+            if (i <= Mob_Amount/2)
+            {
+                go.GetComponent<EnemyAI>().InitStart(x, y,EnemyType.Archer);
+                go.layer = 8; // enemy
+                //archerBoids.Add(go);
+            }
+            else
+            {
+                go.GetComponent<EnemyAI>().InitStart(x, y, EnemyType.Wolf);
+                go.layer = 8; // enemy
+                //wolfBoids.Add(go);
+            }
             Boids.Add(go);
         }
 
@@ -50,7 +76,8 @@ public class MobsControl : MonoBehaviour
                 float x = Random.Range(spawner[0].x - spawner[0].rad, spawner[0].x + spawner[0].rad);
                 float y = Random.Range(spawner[0].x - spawner[0].rad, spawner[0].x + spawner[0].rad);
                 var go = Instantiate(EnemyPrefab, new Vector2(x, y), Quaternion.identity);
-                go.GetComponent<EnemyAI>().InitStart(x, y);
+                go.GetComponent<EnemyAI>().InitStart(x, y,EnemyType.Wolf);
+                //wolfBoids.Add(go);
                 Boids.Add(go);
 
                 spawner[0].amount--;
@@ -62,7 +89,14 @@ public class MobsControl : MonoBehaviour
         }
         for (int i = 0; i < Boids.Count; i++)
         {
+            //if (Boids[i].GetComponent<EnemyAI>().myType == EnemyType.Wolf)
+            //{
             Boids[i].GetComponent<EnemyAI>().UpdatePosition(Boids);
+            //}
+            //else if(Boids[i].GetComponent<EnemyAI>().myType == EnemyType.Archer)
+            //{
+            //    Boids[i].GetComponent<EnemyAI>().UpdatePosition(archerBoids);
+            //}
         }
     }
     public void SpawnBoids(float x, float y, float radius, int amount)
@@ -75,13 +109,13 @@ public class MobsControl : MonoBehaviour
         spawner.Add(k);
     }
 
-    public void DeleteAllCurrentMobs()
+    public void DeleteAllCurrentMobs() // korjaa
     {
         foreach (GameObject kakka in Boids)
         {
             Destroy(kakka);
         }
-        Boids = new List<GameObject>(); // EETU TRIGGER
-        spawner = new List<spawn>(); // EETU TRIGGER
+        Boids.Clear(); // EETU TRIGGER might
+        spawner.Clear(); // EETU TRIGGER might
     }
 }

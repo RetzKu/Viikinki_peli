@@ -12,6 +12,7 @@ TagManager:
   - Inventory
   - ItemEquip
   - ItemInventory
+  - Spawner
   layers:
   - Default
   - TransparentFX
@@ -26,10 +27,12 @@ TagManager:
   - Player
   - TouchController
   - TileMap
+  - Wolf
+  - Door
+  - Archer
+  - Collide
   - TileMapBorders
-  - 
-  - 
-  - 
+
   - 
   - 
   - 

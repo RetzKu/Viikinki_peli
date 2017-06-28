@@ -7,8 +7,6 @@ public class PlayerScript : MonoBehaviour
     internal List<ItemScript> invetory_data;
     public int InventorySize;
 
-    private bool interraction_cd = false;
-
     private GameObject InventoryChild;
     private GameObject EquipChild;
 
@@ -17,7 +15,11 @@ public class PlayerScript : MonoBehaviour
 
     public bool running = true;
 
-    private GameObject text_object;
+    public Transform SidewaysHand;
+    public Transform UpwardsHand;
+    public Transform DownwardsHand;
+
+    private ItemManager Hand;
 
     void Start()
     {
@@ -26,6 +28,12 @@ public class PlayerScript : MonoBehaviour
         InventoryChild = gameObject.transform.Find("Inventory").gameObject;
         EquipChild = gameObject.transform.Find("Equip").gameObject;
 
+        /*Get Player Gameobjects hands*/
+        SidewaysHand = transform.Find("s_c_torso").Find("s_l_upper_arm").GetChild(0).GetChild(0);
+        UpwardsHand = transform.Find("u_c_torso").Find("u_l_upper_arm").GetChild(0).GetChild(0);
+        DownwardsHand = transform.Find("d_c_torso").Find("d_l_upper_arm").GetChild(0).GetChild(0);
+
+        Hand = new ItemManager(SidewaysHand);
     }
 
     void Update()
@@ -33,6 +41,14 @@ public class PlayerScript : MonoBehaviour
         tmpswing();
         Equip();
         Drop();
+        Side();
+    }
+
+    void Side()
+    {
+        if(Input.GetKeyDown("w")) { Hand.Handstate = 2; Hand.SetHand(UpwardsHand); }
+        if(Input.GetKeyDown("s")) { Hand.Handstate = 1; Hand.SetHand(DownwardsHand); }
+        if (Input.GetKeyDown("a") || Input.GetKeyDown("d")) { Hand.Handstate = 0; Hand.SetHand(SidewaysHand); }
     }
 
     void tmpswing()
@@ -54,22 +70,22 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0) == true)
         {
-            if (clickPosition.x < 0.0f & GameObject.Find("Equip").transform.childCount >= 1)
+            if (clickPosition.x < 0.0f & transform.Find("Equip").transform.childCount >= 1)
 
             {
 
-                GameObject.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
+                transform.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
                 //GameObject.Find("Equip").transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 90.0f);
             }
 
-            else if (clickPosition.x > 0.0f & GameObject.Find("Equip").transform.childCount >= 1)
+            else if (clickPosition.x > 0.0f & transform.Find("Equip").transform.childCount >= 1)
             {
-                GameObject.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
+                transform.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
                 //GameObject.Find("Equip").transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 270.0f);
             }
         }
 
-        else if (GameObject.Find("Equip").transform.childCount >= 1)
+        else if (transform.Find("Equip").transform.childCount >= 1)
         {
             //EquipChild.transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
         }
@@ -105,7 +121,6 @@ public class PlayerScript : MonoBehaviour
         {
 
             transform.Find("s_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", true);
-
             if (Input.GetKey(KeyCode.A) == true)
             {
                 SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
@@ -136,7 +151,6 @@ public class PlayerScript : MonoBehaviour
             if (Input.GetKey(KeyCode.D) == true)
             {
                 SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
-
                 for (int i = 0; i < sprites.Length; i++)
                 {
                     sprites[i].enabled = false;
@@ -169,7 +183,6 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKey(KeyCode.W) == true)
         {
             SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
-
             for (int i = 0; i < sprites.Length; i++)
             {
                 sprites[i].enabled = true;
@@ -193,7 +206,6 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKey(KeyCode.S) == true)
         {
             SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
-
             for (int i = 0; i < sprites.Length; i++)
             {
                 sprites[i].enabled = false;
@@ -249,15 +261,89 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    /*WHEN TIME, TRANSFER DEFAULT METHODS TO THIS CLASS*/
+    public class ItemManager
+    {
+        private Transform Hand;
+        public int Handstate = 0;
+
+        public ItemManager(Transform _Hand) { Hand = _Hand; } //default builder requires atleast 1 hand at the start
+
+        public void Equip(GameObject Item)
+        {
+            if (Hand.transform.childCount > 0)
+            {
+                EmptyHand();
+            }
+            GameObject Copy = Instantiate(Item) as GameObject;
+            Copy.name = Item.transform.name;
+            Copy.transform.SetParent(Hand);
+
+            if (Handstate == 0)
+            {
+                Quaternion rotation = Quaternion.Euler(0, 0, -90);
+                Copy.transform.SetParent(Hand);
+                Copy.transform.position = Hand.position;
+                Copy.transform.localRotation = rotation;
+                Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+                Copy.GetComponent<SpriteRenderer>().sortingOrder = 20;
+            }
+            if (Handstate == 1)
+            {
+                /*REQUIRES SETTINGS*/
+            }
+            if (Handstate == 2)
+            {
+                /*REQUIRES SETTINGS*/
+            }
+        }
+
+        public void EmptyHand()
+        {
+            if (Hand.childCount > 0)
+            {
+                Destroy(Hand.GetChild(0).gameObject); // Destroy item from hand
+            }
+        }
+
+        public void SetHand(Transform _Hand) //used to redefine hand to be used
+        {
+            if(_Hand.transform.name != Hand.transform.name)
+            {
+                if (Hand.childCount > 0)
+                {
+                    Hand.GetChild(0).SetParent(_Hand);
+                    Hand = _Hand;
+                    GameObject Copy = Hand.transform.GetChild(0).gameObject;
+                    switch (Hand.transform.name)
+                    {
+                        case "s_l_hand":
+                            {
+                                Quaternion rotation = Quaternion.Euler(0, 0, -90);
+                                Copy.transform.position = Hand.position;
+                                Copy.transform.localRotation = rotation;
+                                Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+                                Copy.GetComponent<SpriteRenderer>().sortingOrder = 20;
+                                break;
+                            }
+                        case "u_l_hand": { /*REQUIRES SETTINGS*/ break; }
+                        case "d_l_hand": { /*REQUIRES SETTINGS*/ break; }
+                    } 
+                }
+            }
+        }
+
+    }
+
     void AddToInventory(Collider2D Item)
     {
         int it = 0;
         if (EquipChild.transform.childCount == 0)
         {
-            Item.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
-            Item.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 270.0f);
-            Instantiate(Item.gameObject, GameObject.Find("Equip").transform);
-            EquipChild.transform.GetChild(0).name = Item.transform.name;
+
+            GameObject Copy = Instantiate(Item.gameObject, EquipChild.transform) as GameObject;
+            Copy.name = Item.transform.name;
+            Hand.Equip(Copy);
             Destroy(Item.gameObject);
         }
         else
@@ -266,8 +352,6 @@ public class PlayerScript : MonoBehaviour
             {
                 Item.transform.position = GameObject.Find("Player").transform.position;
                 Instantiate(Item.gameObject, InventoryChild.transform);
-
-                Debug.Log("Elseasd");
 
                 switch (InventoryChild.transform.childCount)
                 {
@@ -287,6 +371,7 @@ public class PlayerScript : MonoBehaviour
         {
             if (EquipChild.transform.childCount > 0)
             {
+                Hand.EmptyHand();
                 GameObject EquipCopy = EquipChild.transform.GetChild(0).gameObject;
                 EquipCopy.transform.tag = "Dropped";
                 Instantiate(EquipCopy, gameObject.transform.position, EquipCopy.transform.rotation).transform.name = EquipCopy.transform.name;
@@ -310,13 +395,19 @@ public class PlayerScript : MonoBehaviour
             if (EquipChild.transform.childCount != 0)
             {
                 GameObject EquipCopy = EquipChild.transform.GetChild(0).gameObject;
-                EquipCopy.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
                 Instantiate(EquipCopy, InventoryChild.transform).transform.name = EquipCopy.transform.name;
                 Destroy(EquipCopy);
             }
+
             InventoryCopy.transform.position = GameObject.Find("Player").transform.position;
-            Instantiate(InventoryCopy, EquipChild.transform).transform.name = InventoryCopy.transform.name;
+            GameObject Copy = Instantiate(InventoryCopy, EquipChild.transform) as GameObject;
+            Copy.transform.name = InventoryCopy.name;
+
             Destroy(InventoryCopy);
+
+            Hand.Equip(Copy);
         }
     }
+
+    
 }

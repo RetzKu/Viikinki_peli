@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class TouchScreenPoint : MonoBehaviour
 {
-
     //private CircleCollider2D _collider;
     private TouchController _touchController;
     public int x;
     public int y;
-
 
     void Start()
     {
@@ -24,9 +22,12 @@ public class TouchScreenPoint : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        _touchController.OnTouchDetected(x, y);
-        GetComponent<CircleCollider2D>().enabled = false;
-        Debug.LogFormat("{0} {1}", x, y);
+        if (_touchController != null)
+        {
+            _touchController.OnTouchDetected(x, y);
+            GetComponent<CircleCollider2D>().enabled = false;
+           //  Debug.LogFormat("{0} {1}", x, y);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

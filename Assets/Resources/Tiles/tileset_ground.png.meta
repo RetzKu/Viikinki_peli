@@ -1,40 +1,26 @@
 fileFormatVersion: 2
-guid: 4e0d0f811b9b117428e6d2cd3132ef5c
-timeCreated: 1498072798
-licenseType: Free
+guid: a31d3431277a94540ab7fc65094f899d
+timeCreated: 1498474697
+licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: GrassLand_NESW_0
-    21300002: GrassLand_NESW_1
-    21300004: GrassLand_NESW_2
-    21300006: GrassLand_ES
-    21300008: GrassLand_ESW
-    21300010: GrassLand_SW
-    21300012: GrassLand_NESW_3
-    21300014: GrassLand_NESW_4
-    21300016: GrassLand_NESW_5
-    21300018: GrassLand_NES
-    21300020: GrassLand_NSW
-    21300022: GrassLand_NESW_6
-    21300024: GrassLand_NESW_7
-    21300026: GrassLand_NESW_8
-    21300028: GrassLand_NE
-    21300030: GrassLand_NEW
-    21300032: GrassLand_NW
-    21300034: GrassLand_NESW_d3
-    21300036: tileset_grass (4)_18
-    21300038: GrassLand_NESW_d1
-    21300040: tileset_grass (4)_20
-    21300042: tileset_grass (4)_21
-    21300044: GrassLand_NESW_d4
-    21300046: tileset_grass (4)_23
-    21300048: GrassLand_NESW_d2
-    21300050: tileset_grass (4)_0
-    21300052: tileset_grass (4)_1
+    21300000: tileset_ground_0
+    21300002: tileset_ground_1
+    21300004: tileset_ground_2
+    21300006: tileset_ground_3
+    21300008: tileset_ground_4
+    21300010: tileset_ground_5
+    21300012: tileset_ground_6
+    21300014: tileset_ground_7
+    21300016: tileset_ground_8
+    21300018: tileset_ground_S0
+    21300020: tileset_ground_W0
+    21300022: tileset_ground_N0
+    21300024: tileset_ground_E0
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -153,150 +139,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GrassLand_NESW_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 320
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: GrassLand_NESW_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 320
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: GrassLand_NESW_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 320
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: GrassLand_ES
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 320
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: GrassLand_ESW
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 320
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: GrassLand_SW
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 320
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: GrassLand_NESW_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 256
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: GrassLand_NESW_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 256
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: GrassLand_NESW_5
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 256
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: GrassLand_NES
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 256
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: GrassLand_NSW
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 256
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: GrassLand_NESW_6
+      name: tileset_ground_0
       rect:
         serializedVersion: 2
         x: 0
@@ -309,7 +152,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: GrassLand_NESW_7
+      name: tileset_ground_1
       rect:
         serializedVersion: 2
         x: 64
@@ -322,7 +165,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: GrassLand_NESW_8
+      name: tileset_ground_2
       rect:
         serializedVersion: 2
         x: 128
@@ -335,46 +178,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: GrassLand_NE
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: GrassLand_NEW
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: GrassLand_NW
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: GrassLand_NESW_d3
+      name: tileset_ground_3
       rect:
         serializedVersion: 2
         x: 0
@@ -387,7 +191,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_grass (4)_18
+      name: tileset_ground_4
       rect:
         serializedVersion: 2
         x: 64
@@ -400,7 +204,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: GrassLand_NESW_d1
+      name: tileset_ground_5
       rect:
         serializedVersion: 2
         x: 128
@@ -413,7 +217,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_grass (4)_20
+      name: tileset_ground_6
       rect:
         serializedVersion: 2
         x: 0
@@ -426,7 +230,20 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_grass (4)_21
+      name: tileset_ground_7
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_ground_8
       rect:
         serializedVersion: 2
         x: 128
@@ -439,7 +256,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: GrassLand_NESW_d4
+      name: tileset_ground_S0
       rect:
         serializedVersion: 2
         x: 0
@@ -452,7 +269,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_grass (4)_23
+      name: tileset_ground_W0
       rect:
         serializedVersion: 2
         x: 64
@@ -465,7 +282,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: GrassLand_NESW_d2
+      name: tileset_ground_N0
       rect:
         serializedVersion: 2
         x: 128
@@ -478,26 +295,13 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_grass (4)_0
+      name: tileset_ground_E0
       rect:
         serializedVersion: 2
-        x: 198
-        y: 84
-        width: 2
-        height: 1
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: tileset_grass (4)_1
-      rect:
-        serializedVersion: 2
-        x: 105
-        y: 86
-        width: 3
-        height: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

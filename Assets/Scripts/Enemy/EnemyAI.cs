@@ -3,8 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
+public enum EnemyType
+{
+    Wolf,
+    Archer
+}
+public enum Dir
+{
+    Right,
+    Left,
+    Up,
+    Down,
+    Basic
+}
+public enum collision
+{
+    Main,
+    Right,
+    Left,
+    none
+}
 [Flags]
 public enum behavior
 {
@@ -19,7 +37,7 @@ public enum behavior
     moveToAttRange = 256,
     Inleap = 512,
     startLeap = 1024,
-
+    Collide = 2048,
     wanderGroup = separate | alingment | cohesion,
     startWanderingSolo = wander | giveWanderingTargetSolo,
     changeSoloWanderDir = wander | changeSoloDIr,
@@ -31,15 +49,18 @@ public enum behavior
 
 public class EnemyAI : MonoBehaviour
 {
-
+    float collideDist = 1f;
+    collision CollState = collision.none;
 
     [HideInInspector]
     public float spawnX;
     [HideInInspector]
     public float spawnY;
+    [HideInInspector]
     public bool agro = false;
+    [HideInInspector]
     public bool inAttack = false;
-    public float attackDist = 3.0f;
+    public float attackDist = 4.0f;
     public float leapDist = 10.0f;
 
     public float MaxSpeed = 0.05f;
@@ -69,12 +90,67 @@ public class EnemyAI : MonoBehaviour
 
     int flags = 0;
 
+    public EnemyType myType;
 
     EnemyMovement Physics = new EnemyMovement();
     private GameObject player;
     // Use this for initialization
-    public void InitStart(float x, float y)
+    public void InitStart(float x, float y,EnemyType type)
     {
+        myType = type;
+
+        switch (myType)
+        {
+            case EnemyType.Wolf:
+                {
+                    this.attackDist = UnityEngine.Random.Range(2f, 4f);
+                    this.leapDist = 5.0f;
+
+                    this.MaxSpeed = 0.04f;
+                    this.MaxSteeringForce = 0.001f; // higher = better steering
+                    this.ArriveRadius = 0.3f;      // slowdown beginning
+                                                   //ai
+                    this.IdleRadius = 60.0f;
+                    this.IdleBallDistance = 100.0f;
+                    this.IdleRefreshRate = 100;
+                    this.attackUptade = 300;
+                    this.attackCounter = this.attackUptade;
+
+                    this.desiredseparation = 0.7f;
+                    this.alingmentDistance = 1.0f;
+
+                    this.sepF = 0.1f;
+                    this.aliF = 0.2f;
+                    this.cohF = 0.1f;
+                }
+
+                break;
+            case EnemyType.Archer:
+                {
+                    this.attackDist = UnityEngine.Random.Range(4f, 6f);/*5.0f;*/
+                    this.leapDist = 0f;
+
+                    this.MaxSpeed = 0.04f;
+                    this.MaxSteeringForce = 0.001f; // higher = better steering
+                    this.ArriveRadius = 0.3f;      // slowdown beginning
+                                                   //ai
+                    this.IdleRadius = 60.0f;
+                    this.IdleBallDistance = 100.0f;
+                    this.IdleRefreshRate = 100;
+                    this.attackUptade = 100;
+
+                    this.desiredseparation = 0.7f;
+                    this.alingmentDistance = 1.0f;
+
+                    this.sepF = 0.1f;
+                    this.aliF = 0.2f;
+                    this.cohF = 0.1f;
+                }
+                break;
+
+        }
+
+
         body = GetComponent<Rigidbody2D>();
         spawnX = x;
         spawnY = y;
@@ -85,99 +161,119 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    // Update is called once per frame
     public void UpdatePosition(List<GameObject> Mobs)
     {
-        LayerMask mask = LayerMask.GetMask("Pate");
+        LayerMask mask = new LayerMask();
+        //if (myType == EnemyType.Wolf)
+        //{
+            mask = LayerMask.GetMask("Enemy");
+        //}
+        //else
+        //{
+           // mask = LayerMask.GetMask("Archer");
+        //}
         var HeardArray = Physics2D.OverlapCircleAll(body.position, alingmentDistance, mask); // , mask);
         var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
         Vector2[] powers = new Vector2[2];
 
+        if (agro)
+        {
+            for (int i = 0; i < HeardArray.Length; i++)
+            {
+                HeardArray[i].GetComponent<EnemyAI>().agro = true;
+            }
+        }
+
+
         if (!agro)
         {
-            if (HeardArray.Length > 1)
-            {
-                flags = (int)behavior.wanderGroup;
-                GiveStartTarget = true;
-            }
-            else
-            {
-                if (GiveStartTarget)
-                {
-                    flags = (int)behavior.startWanderingSolo;
-                    counter = 0;
-                    GiveStartTarget = false;
-                }
-                if (counter > IdleRefreshRate)
-                {
-                    flags = (int)behavior.changeSoloWanderDir;
-                    counter = 0;
-                }
-                else
-                {
-                    flags = (int)behavior.wander;
-                    counter++;
-                }
-            }
-
-
-            powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags);
-            velocity = powers[0];
-            target = powers[1];
-            body.MovePosition(body.position + velocity);
+            wander(HeardArray);
         }
         else if (agro)
         {
             Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
 
             Vector2 dist = body.position - playerPos;
-
-            if (dist.magnitude <= attackDist || inAttack || velocity.magnitude == 0)
+            if (myType == EnemyType.Wolf)
             {
-                if (!inAttack && attackCounter > attackUptade)
+                leapingPattern(dist,playerPos);
+            }
+            else if(myType == EnemyType.Archer)
+            {
+                archerPattern(dist, playerPos);
+            }
+        }
+        RayCollide();
+        flags = (int)flags | (int)behavior.Collide; 
+        powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags,CollState);
+        target = powers[1];
+        velocity = powers[0];
+        body.MovePosition(body.position + velocity);
+
+    }
+    void archerPattern(Vector2 dist, Vector2 playerPos)
+    {
+        followPlayer(dist, playerPos);
+        desiredseparation = 4f;
+        Physics.sepF = 1f;
+        if (dist.magnitude >= attackDist)
+        {
+            Physics.MaxSpeed = 0.06f;
+        }
+        else
+        {
+            Physics.MaxSpeed = 0.02f;
+        }
+        Physics.MaxSteeringForce = 0.1f;
+    }
+
+    void leapingPattern(Vector2 dist,Vector2 playerPos)
+    {
+
+
+        if (dist.magnitude <= attackDist || inAttack || velocity.magnitude == 0)
+        {
+            if (!inAttack && attackCounter > attackUptade)
+            {
+                //start leap
+                Physics.MaxSpeed = MaxSpeed * 4;
+                dist.Normalize();
+                dist *= 5;
+                dist *= -1.0f;
+                target = body.position + dist;
+                flags = (int)behavior.seek;
+                inAttack = true;
+            }
+            else if (inAttack)
+            {
+                //leaping
+                Vector2 t = target - body.position;
+                flags = (int)behavior.seekAndArrive;
+                if (velocity.magnitude == 0)
                 {
-                    //start leap
-                    Physics.MaxSpeed = MaxSpeed * 4;
-                    dist.Normalize();
-                    dist *= 5;
-                    dist *= -1.0f;
-                    target = body.position + dist;
-                    flags = (int)behavior.seek;
-                    inAttack = true;
-                }
-                else if (inAttack)
-                {
-                    //leaping
-                    Vector2 t = target - body.position;
-                    flags = (int)behavior.seekAndArrive;
-                    if (velocity.magnitude == 0)
-                    {
-                        Physics.MaxSpeed = MaxSpeed;
-                        inAttack = false;
-                        attackCounter = 0;
-                    }
-                }
-                else
-                {
-                    //follow player
-                    attackCounter++;
-                    followPlayer(dist, playerPos);
+                    Physics.MaxSpeed = MaxSpeed;
+                    inAttack = false;
+                    attackCounter = 0;
                 }
             }
             else
             {
                 //follow player
+                attackCounter++;
                 followPlayer(dist, playerPos);
-                attackCounter = attackUptade;
             }
-            powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags);
-            target = powers[1];
-            velocity = powers[0];
-            body.MovePosition(body.position + velocity);
+        }
+        else
+        {
+            //follow player
+            attackCounter++;
+
+            followPlayer(dist, playerPos);
+            //attackCounter = attackUptade;
         }
 
-
     }
+
     void followPlayer(Vector2 dist, Vector2 playerPos)
     {
         dist.Normalize();
@@ -186,9 +282,82 @@ public class EnemyAI : MonoBehaviour
         flags = (int)behavior.seekAndArrive | (int)behavior.separate;
         Physics.sepF = sepF * 2;
     }
+    void wander(Collider2D[] HeardArray)
+    {
+        if (HeardArray.Length > 1)
+        {
+            flags = (int)behavior.wanderGroup;
+            GiveStartTarget = true;
+        }
+        else
+        {
+            if (GiveStartTarget)
+            {
+                flags = (int)behavior.startWanderingSolo;
+                counter = 0;
+                GiveStartTarget = false;
+            }
+            if (counter > IdleRefreshRate)
+            {
+                flags = (int)behavior.changeSoloWanderDir;
+                counter = 0;
+            }
+            else
+            {
+                flags = (int)behavior.wander;
+                counter++;
+            }
+        }
+    }
 
     public Vector2 getPosition()
     {
         return body.position;
     }
+
+    void RayCollide()
+    {
+        CollState = collision.none;
+        LayerMask mask = LayerMask.GetMask("Collide");
+        Vector2 main = velocity;
+        main.Normalize();
+        main *= collideDist; // EETU TRIGGER
+        Vector2 perpendicular = new Vector2(main.y, main.x*-1);
+        perpendicular /= 2f;
+        Vector2 first = (main + perpendicular);
+        Vector2 second = (main + (perpendicular * -1));
+        if(Physics2D.Raycast(body.position,main, collideDist, mask).collider != null)
+        {
+            //print("COLLIDING MAIN");
+            CollState = collision.Main;
+        }
+        else if (Physics2D.Raycast(body.position, first, collideDist, mask).collider != null)
+        {
+            //print("COLLIDING RIGHT");
+            CollState = collision.Right;
+        }
+        else if (Physics2D.Raycast(body.position, second, collideDist, mask).collider != null)
+        {
+            //print("COLLIDING LEFT");
+            CollState = collision.Left;
+        }
+
+    }
+
+    void OnDrawGizmos()
+    {
+        Vector2 main = velocity;
+        main.Normalize();
+        main *= collideDist; // EETU TRIGGER
+        Vector2 perpendicular = new Vector2(main.y, main.x * -1);
+        perpendicular /= 2f;
+        Vector2 first = (main + perpendicular);
+        Vector2 second = (main + (perpendicular * -1));
+
+        Gizmos.DrawLine(body.position, body.position+main); // piirretään viiva visualisoimaan toimivuutta 
+        Gizmos.DrawLine(body.position, body.position + first);
+        Gizmos.DrawLine(body.position, body.position + second);
+
+    }
+
 }

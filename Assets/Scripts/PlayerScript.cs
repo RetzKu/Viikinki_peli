@@ -42,6 +42,8 @@ public class PlayerScript : MonoBehaviour
         DownwardsHand = transform.Find("d_c_torso").Find("d_l_upper_arm").GetChild(0).GetChild(0);
 
         Hand = new ItemManager(SidewaysHand);
+
+
     }
 
     void Update()

@@ -3,27 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
-
 [CreateAssetMenu(menuName = "Tiles/BiomeSpawnRates")]
 public class BiomeSettings : ScriptableObject
 {
     [System.Serializable]
     public class TileData
     {
-        public float startMoisture;
-        public TileType type;
-        public Sprite[] sprites;
-        public string assetName;
+        [Range(0f, 1f)]
+        public float StartMoisture;
+        public TileType Type;
+        public string AssetName;
+        public TilemapObjectSpawnSettings SpawnSettings;
     }
+
     [System.Serializable]
     public class ElevationData
     {
-        public float startElevation;
-        public TileData[] tiles;
+        [Range(0f, 1f)]
+        public float StartElevation;
+        public TileData[] Tiles;
+        public string EditorName;
     }
-
-    public ElevationData[] elevations;
+    public ElevationData[] Elevations;
 }
 
 //  0 -> ;;28 -> ;;60 -> ;;71

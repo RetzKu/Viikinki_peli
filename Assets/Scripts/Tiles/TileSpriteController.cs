@@ -8,10 +8,8 @@ public class TileSpriteController : MonoBehaviour
     private Dictionary<string, Sprite> _textures;
     GameObject[] temporarySecondLayer = new GameObject[450];    // LOL
 
-    public Sprite temproraryFillSprite;
-    public Sprite grassFiller;
-    public Sprite ForesFiller;
-    public BiomeSettings Settings;
+
+    public SpriteControllerSettings Settings;
 
     int[] TileCount = new int[(int)TileType.Max];
 
@@ -32,39 +30,38 @@ public class TileSpriteController : MonoBehaviour
             temporarySecondLayer[i] = new GameObject();
             // go.SetActive(false);
             var renderer = temporarySecondLayer[i].AddComponent<SpriteRenderer>();
-            renderer.sprite = temproraryFillSprite;
             temporarySecondLayer[i].transform.parent = gameObject.transform;
             renderer.sortingLayerName = "TileMapBorder";
         }
 
-        foreach(var elevation in Settings.elevations)
+        foreach (var tile in Settings.SpriteData)
         {
-            foreach(var tile in elevation.tiles)
+            if (tile.Sprites.Length == 0)
+                continue;
+
+            string name = tile.Type.ToString();
+            TileCount[(int) tile.Type] = tile.Sprites.Length;
+
+            int count = 0;
+            for (int i = 0; i < tile.Sprites.Length - 4; i++)
             {
-                string name = tile.type.ToString();
-                TileCount[(int)tile.type] = tile.sprites.Length;
+                _textures[name + stringsEnds[i]] = tile.Sprites[i];
+                print(_textures[name + stringsEnds[i]]);
+                count++;
+            }
+            TileCount[(int) tile.Type] = count;
 
-                int count = 0;
-                for(int i = 0; i < tile.sprites.Length - 4; i++)
-                {
-                    _textures[name + stringsEnds[i]] = tile.sprites[i];
-                    print(_textures[name + stringsEnds[i]]);
-                    count++;
-                }
-                TileCount[(int)tile.type] = count;
-
-                for (int i = tile.sprites.Length - 4; i < tile.sprites.Length; i++)
-                {
-                    _textures[name + stringsEnds[i]] = tile.sprites[i];
-                    print(_textures[name + stringsEnds[i]]);
-                }
+            for (int i = tile.Sprites.Length - 4, stringEndIndex = 9; i < tile.Sprites.Length; i++, stringEndIndex++)
+            {
+                _textures[name + stringsEnds[stringEndIndex]] = tile.Sprites[i];
+                print(_textures[name + stringsEnds[stringEndIndex]]);
             }
         }
     }
 
     private readonly string[] stringsEnds = new string[13]
     {
-        "_0", "_1", "_2", "_3", "_4", "_5", "_6", "_7", "_8", "_E0", "_N0", "_S0", "_W0" 
+        "_0", "_1", "_2", "_3", "_4", "_5", "_6", "_7", "_8", "_E0", "_N0", "_S0", "_W0"
     };
 
     string GetAssetNameByte(int x, int y, TileType[,] tiles, out int count)
@@ -194,7 +191,7 @@ public class TileSpriteController : MonoBehaviour
         }
         // asset randilla reuna ton mukaan
         // assetName += value.ToString();  // TODO: lisää reuna
-                                        // Reunojen alle sitä viereistä ???
+        // Reunojen alle sitä viereistä ???
         return assetName;
     }
 
@@ -278,7 +275,7 @@ public class TileSpriteController : MonoBehaviour
                 if (!found)
                     assetName = "GrassLand_";
                 assetName += Random.Range(0, GetAssetCount(type));    // max count smt smt 
-                    
+
 
                 if (_textures.TryGetValue(assetName, out sprite))
                 {
@@ -298,10 +295,10 @@ public class TileSpriteController : MonoBehaviour
                 }
 
                 if (tempIndex < temporarySecondLayer.Length)
-                 {
+                {
                     string border = "GrassLand";
 
-                    if (type == TileType.GrassLand || type == TileType.Water || type == TileType.Mountain || type == TileType.Forest) 
+                    if (type == TileType.GrassLand || type == TileType.Water || type == TileType.Mountain || type == TileType.Forest)
                     {
                         border = type.ToString();
                     }
@@ -322,7 +319,7 @@ public class TileSpriteController : MonoBehaviour
                     if ((value & (1 << 2 - 1)) == 0)
                     {
                         temporarySecondLayer[tempIndex].GetComponent<SpriteRenderer>().sprite = _textures[border + "_W0"];
-                        temporarySecondLayer[tempIndex].transform.position = new Vector3(x + offsetX - 1, y + offsetY );
+                        temporarySecondLayer[tempIndex].transform.position = new Vector3(x + offsetX - 1, y + offsetY);
                         temporarySecondLayer[tempIndex].SetActive(true);
                         tempIndex++;
                     }
@@ -433,7 +430,7 @@ public class TileSpriteController : MonoBehaviour
         }
         // probleemojen
         // naapureiden uudestaan initointi
-        DoubleLayerBorders(BorderTiles, tilemap.Tiles, tilemap.TileGameObjects, tilemap);
+        //DoubleLayerBorders(BorderTiles, tilemap.Tiles, tilemap.TileGameObjects, tilemap);
     }
 
     // TMP NEW CREATE!
@@ -442,50 +439,50 @@ public class TileSpriteController : MonoBehaviour
         return true;
     }
 
-    public void DoubleLayerBorders(List<Vec2> borderTiles, TileType[,] tiles, GameObject[,] gameobjects, TileMap map) // border tile list 
-    {
-        Debug.Log("meilla on: " + borderTiles.Count);
-        for (int i = 0; i < borderTiles.Count; i++)
-        {
-            if (true) // TODO: REAL WEIGHTING
-            {
-                var neighbour = GetFirstDifferentNeighbour(tiles, borderTiles[i].X, borderTiles[i].Y);
-                //if (i % 10 == 0)
-                //    Debug.Log(tile.ToString());
+    //public void DoubleLayerBorders(List<Vec2> borderTiles, TileType[,] tiles, GameObject[,] gameobjects, TileMap map) // border tile list 
+    //{
+    //    Debug.Log("meilla on: " + borderTiles.Count);
+    //    for (int i = 0; i < borderTiles.Count; i++)
+    //    {
+    //        if (true) // TODO: REAL WEIGHTING
+    //        {
+    //            var neighbour = GetFirstDifferentNeighbour(tiles, borderTiles[i].X, borderTiles[i].Y);
+    //            //if (i % 10 == 0)
+    //            //    Debug.Log(tile.ToString());
 
-                if (i < 100)
-                {
-                    var renderer = temporarySecondLayer[i].GetComponent<SpriteRenderer>(); //  gameobjects[borderTiles[i].Y, borderTiles[i].X].GetComponent<SpriteRenderer>();
+    //            if (i < 100)
+    //            {
+    //                var renderer = temporarySecondLayer[i].GetComponent<SpriteRenderer>(); //  gameobjects[borderTiles[i].Y, borderTiles[i].X].GetComponent<SpriteRenderer>();
 
-                    if (neighbour == TileType.Forest)
-                    {
-                        renderer.sprite = ForesFiller;
-                    }
-                    else if (neighbour == TileType.GrassLand)
-                    {
-                        renderer.sprite = grassFiller;
-                    }
+    //                if (neighbour == TileType.Forest)
+    //                {
+    //                    renderer.sprite = ForesFiller;
+    //                }
+    //                else if (neighbour == TileType.GrassLand)
+    //                {
+    //                    renderer.sprite = grassFiller;
+    //                }
 
-                    renderer.transform.position = new Vector3(borderTiles[i].X, borderTiles[i].Y);
-                    renderer.gameObject.SetActive(true);
+    //                renderer.transform.position = new Vector3(borderTiles[i].X, borderTiles[i].Y);
+    //                renderer.gameObject.SetActive(true);
 
-                    SetNeighbours(borderTiles[i].X, borderTiles[i].Y, map, tiles[borderTiles[i].Y, borderTiles[i].X]);
-                }
-            }
-        }
-    }
+    //                SetNeighbours(borderTiles[i].X, borderTiles[i].Y, map, tiles[borderTiles[i].Y, borderTiles[i].X]);
+    //            }
+    //        }
+    //    }
+    //}
 
-    public void SetNeighbours(int x, int y, TileMap map, TileType backgroundTile)
-    {
-        foreach (var pos in neighbours)
-        {
-            if (TileType.GrassLand == map.Tiles[y, x])
-            {
-                map.TileGameObjects[y + pos.Y, x + pos.X].GetComponent<SpriteRenderer>().sprite = grassFiller;
-                Debug.LogWarning("called");
-            }
-        }
-    }
+    //public void SetNeighbours(int x, int y, TileMap map, TileType backgroundTile)
+    //{
+    //    foreach (var pos in neighbours)
+    //    {
+    //        if (TileType.GrassLand == map.Tiles[y, x])
+    //        {
+    //            map.TileGameObjects[y + pos.Y, x + pos.X].GetComponent<SpriteRenderer>().sprite = grassFiller;
+    //            Debug.LogWarning("called");
+    //        }
+    //    }
+    //}
 
     // oletetaan että biomeja on vain kahta eriä vierekkäin
     public TileType GetFirstDifferentNeighbour(TileType[,] tiles, int x, int y)

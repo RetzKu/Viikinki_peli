@@ -6,41 +6,35 @@ public class DropScript : MonoBehaviour
 {
 
     public List<Drops> DropsList;
-    private GameObject Object;
     private DropCheck DropChecker;
 
     void Start()
     {
-        Object = transform.gameObject;
         DropChecker = GameObject.Find("Passive").GetComponent<DropCheck>();
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void OnDestroy()
     {
-
+        Drop();
     }
 
     public void Drop()
     {
-        for (int i = 0; i < DropsList.Count; i++)
-        {
-            bool night = DropChecker.NightDrops();
+        bool night = DropChecker.NightDrops(); // is it night drops time
 
-            if (DropsList[i].NightItem == night || DropsList[i].NightItem == false)
+        for (int i = 0; i < DropsList.Count; i++) //Loop x times in objects drop list
+        {
+
+            if (DropsList[i].NightItem == night || DropsList[i].NightItem == false) // misses if item is nightitem and it is daytime
             {
-                if (Random.Range(0, 100) <= DropsList[i].DropChance)
+                if (Random.Range(0, 100) <= DropsList[i].DropChance) //did rng jesus bless ye
                 {
-                    GameObject Copy = Instantiate(DropsList[i].Item) as GameObject;
-                    Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-                    Copy.transform.position = transform.position;
+                    GameObject Copy = Instantiate(DropsList[i].Item) as GameObject; //Copy item from droplist with correct index
+                    Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player"; // changes layer so it shows to player and not under the map
+                    Copy.transform.position = transform.position; //drop it at destroyed objects position
                 }
             }
         }
-    }
-    private void OnDestroy()
-    {
-        Drop();
     }
 
     [System.Serializable]

@@ -6,23 +6,31 @@ using System;
 public class DropCheck : MonoBehaviour
 {
     private GameObject[] Items;
-    private List<ItemStates> ItemStatesList;
 
+    public List<ItemStates> ItemStatesList;
+    private List<GameObject> asd;
+    
     private float Clock;
 
     /*ITEM DROPWHITELIST*/
     private void Start()
     {
-        System.IO.DirectoryInfo myDir = new System.IO.DirectoryInfo("Assets/Resources/Items/");
-        Items = new GameObject[myDir.GetFiles().Length];
-        Items = Resources.LoadAll<GameObject>("Items"); // Lataa kaikki items kansiossa olevat prefabit
-
         ItemStatesList = new List<ItemStates>();
+
+        foreach(GameObject t in Resources.LoadAll<GameObject>("Items/NightItems"))
+        {
+            ItemStatesList.Add(new ItemStates(t,false));
+        }
+
+        for(int i = 0; i < ItemStatesList.Count; i++)
+        {
+            Debug.Log(ItemStatesList[i].Item.name);
+        }
         ResetStates();
-        StartCoroutine(UpdateClock());
+        StartCoroutine(UpdateClock()); //starts courutine
     }
 
-    IEnumerator UpdateClock()
+    IEnumerator UpdateClock() //COURUTINE THAT RUN EVERY 5SEC. SAFE FOR LATER USE
     {
         while (true)
         {
@@ -31,29 +39,28 @@ public class DropCheck : MonoBehaviour
         }
     }
 
+    public bool ItemCD(GameObject Item)
+    {
+
+        return true;
+    }
+
     public bool NightDrops()
     {
-        if (Clock > 75)
-        {
-            return true;
-        }
-        else
-        {
-            return false; 
-        }
+        if (Clock > 75){return true;}
+        else{return false;}
     }
 
     public void ResetStates()
     {
-        for (int i = 0; i < Items.Length; i++)
-        {
-            ItemStatesList.Add(new ItemStates(Items[i], false)); 
-        }
+       
     }
-    class ItemStates
+
+    [System.Serializable]
+    public class ItemStates
     {
-        private bool State;
-        private GameObject Item;
+        public bool State;
+        public GameObject Item;
 
         public ItemStates(GameObject _Item, bool _State) { Item = _Item; State = _State; }
     }

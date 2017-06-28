@@ -85,8 +85,8 @@ public class EnemyMovement /*: MonoBehaviour*/
             Vector2.Angle(target, target);
             //counter = 0;
             float angle = Random.Range(0.0f, 1.0f) * Mathf.PI * 2;
-            float x = Mathf.Cos(angle) * IdleRadius;
-            float y = Mathf.Sin(angle) * IdleRadius;
+            float x = Mathf.Cos(angle) * IdleRadius;        // KATO VOITKO KORJATA
+            float y = Mathf.Sin(angle) * IdleRadius;        // KATO VOITKO KORJATA
 
             Vector2 arm = new Vector2(x + target.x, y + target.y);
             Vector2 desired = new Vector2();
@@ -96,13 +96,10 @@ public class EnemyMovement /*: MonoBehaviour*/
             target = bodyPosition + desired;
             //seek(target);
         }
-        //else
-        //{
-        //    counter++;
-        //}
+
     }
 
-    public Vector2[] applyBehaviors(Collider2D[] GroupMobs, Collider2D[] CollisionMobs, Vector2 Rvelocity, Vector2 Rtarget, Vector2 position, int flags)
+    public Vector2[] applyBehaviors(Collider2D[] GroupMobs, Collider2D[] CollisionMobs, Vector2 Rvelocity, Vector2 Rtarget, Vector2 position, int flags,collision collstate)
     {
         float tempSpeed = MaxSpeed;
 
@@ -110,8 +107,7 @@ public class EnemyMovement /*: MonoBehaviour*/
         velocity = Rvelocity;
         target = Rtarget;
         bodyPosition = position;
-        //LayerMask mask = LayerMask.GetMask("Pate");
-        //var array = Physics2D.OverlapCircleAll(bodyPosition, alingmentDistance, mask); // , mask);
+
 
 
         if ((flags & (int)behavior.separate) == (int)behavior.separate)
@@ -157,21 +153,17 @@ public class EnemyMovement /*: MonoBehaviour*/
         {
             tempSpeed = arriving(tempSpeed);
         }
-        //if ((flags & (int)behavior.arrive) == (int)behavior.startLeap)//attack
-        //{
-        //    velocity *= 0;
-
-        //}
-        //if ((flags & (int)behavior.arrive) == (int)behavior.Inleap)//attack
-        //{
-        //    velocity *= 0;
-
-        //}
-        //if ((flags & (int)behavior.arrive) == (int)behavior.getInPosition)//attack
-        //{
-        //    //velocity *= 0;
-        //    seek(target);
-        //}
+        if((flags & (int)behavior.Collide) == (int)behavior.Collide)
+        {
+            if((flags & (int)behavior.wanderGroup) == (int)behavior.wanderGroup)
+            {
+                acceleration =  CollideSteer(collstate,acceleration,true); // EETU TRIGGER
+            }
+            else
+            {
+                acceleration = CollideSteer(collstate, acceleration); // EETU TRIGGER
+            }
+        }
 
         velocity += acceleration;
         // limit max speed
@@ -187,55 +179,56 @@ public class EnemyMovement /*: MonoBehaviour*/
         powers[1] = target;
         return powers;
 
-
-
-
-        //if (array.Length > 1)
-        //{
-        //    Vector2 sepaV = separate(Mobs);
-        //    Vector2 ali = alingment(array);
-        //    Vector2 coh = cohesion(array);
-
-        //    sepaV *= sepF;
-        //    ali *= aliF;
-        //    coh *= cohF;
-
-        //    applyForce(sepaV);
-        //    applyForce(ali);
-        //    applyForce(coh);
-
-        //    GiveStartTarget = true; // used for solo wander
-        //}
-        //else
-        //{
-        //    if (GiveStartTarget)
-        //    {
-        //        GiveWanderingTarget();
-        //        GiveStartTarget = false;
-        //    }
-        //    Wander();
-        //    Vector2 steer = seek(target);
-        //    applyForce(steer);
-        //}
-
-
     }
 
-    //public void MovementUpdate()
-    //{
-    //    velocity += acceleration;
-    //    // limit max speed
+    Vector2 CollideSteer(collision collstate,Vector2 acc,bool change = false )
+    {
+        float accMag = acc.magnitude;
+        Vector2 temp = velocity;
+        switch (collstate)
+        {
+            case collision.none:
+                return acc;
+            case collision.Right:
+                Vector2 perpendicularR = new Vector2(temp.y, temp.x *-1);
+                perpendicularR /= 3f;
+                temp = (temp + (perpendicularR * -1));
+                break;
+            case collision.Left:
+                Vector2 perpendicularL = new Vector2(temp.y, temp.x * -1);
+                perpendicularL /= 3f;
+                temp = (temp + perpendicularL);
+                break;
+            case collision.Main:
+                if(Mathf.Abs(velocity.x) >= Mathf.Abs(velocity.y))
+                {
+                Vector2 perpendicularM = new Vector2(temp.y, temp.x * -1);
+                perpendicularM *= 1.5f;
+                temp = (temp + perpendicularM);
+                }
+                else
+                {
+                    Vector2 perpendicularM = new Vector2(temp.y, temp.x * -1);
+                    perpendicularM *= -1.5f;
+                    temp = (temp + perpendicularM);
+                }
+                break;
 
-    //    if (velocity.magnitude > MaxSpeed)
-    //    {
-    //        velocity.Normalize();
-    //        velocity *= MaxSpeed;
-    //    }
+        }
+        temp.Normalize();
+        if (change)
+        {
+        acc = temp;
+        }
+        temp *= IdleBallDistance;
+        target = bodyPosition + temp;
 
-    //    body.MovePosition(bodyPosition + velocity);
-    //    acceleration *= 0;
-    //}
-
+        if (change)
+        {
+            acc = temp * accMag;
+        }
+        return acc;
+    }
 
     float arriving(float max_speed) // slowsdown at endpoint
     {
@@ -345,26 +338,14 @@ public class EnemyMovement /*: MonoBehaviour*/
         Vector2 average = new Vector2(0, 0);
         int count = 0;
 
-        //LayerMask mask = LayerMask.GetMask("Pate");
-
-        //var arrayb = Physics2D.OverlapCircle(bodyPosition, desiredseparation, mask, );
-        //var joku =  Physics2D.OverlapCircleAll()
-        //print(arrayb);
-
-        //var array = Physics2D.OverlapCircleAll(bodyPosition, desiredseparation, mask); // , mask);
-
-        //print(array.Length);
-
 
         for (int i = 0; i < array.Length; i++)
         {
             Vector2 temp = bodyPosition - array[i].transform.GetComponent<EnemyAI>().getPosition();
             float d = temp.magnitude;
-            //print(d);
 
             if (d > 0)
             {
-                //print("colliding");
                 temp.Normalize();
                 temp = temp / d;
                 average = average + temp;

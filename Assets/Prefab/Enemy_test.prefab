@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 50974865766895542}
   - component: {fileID: 58843232225932048}
   - component: {fileID: 114956738490009994}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: Enemy_test
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -90,7 +90,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnX: 0
   spawnY: 0
-  MaxSpeed: 0.02
+  agro: 0
+  inAttack: 0
+  attackDist: 3
+  leapDist: 10
+  MaxSpeed: 0.04
   MaxSteeringForce: 0.001
   ArriveRadius: 0.3
   IdleRadius: 60
@@ -102,6 +106,7 @@ MonoBehaviour:
   aliF: 0.2
   cohF: 0.1
   velocity: {x: 0, y: 0}
+  myType: 0
 --- !u!212 &212241639797788244
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DayNightCycle : MonoBehaviour {
 
@@ -8,9 +9,16 @@ public class DayNightCycle : MonoBehaviour {
     public float Result;
     public float Multiplier;
 
+    public bool ResetCD;
+    private GameObject Ui;
+    private Text ClockText;
+
 	void Start ()
     {
         Multiplier = 1;
+        ResetCD = true;
+        Ui = GameObject.Find("Ui");
+        ClockText = Ui.transform.FindChild("Clock").GetComponent<Text>();
 	}
     
     void Update()
@@ -20,6 +28,7 @@ public class DayNightCycle : MonoBehaviour {
         CheckMin();
         CheckHour();
         ConvertTimeToPrecent();
+        ResetDrops();
     }
 
     void CheckSec()
@@ -73,10 +82,30 @@ public class DayNightCycle : MonoBehaviour {
         }
         
     }
-
+    void ResetDrops()
+    {
+        if (ResetCD == false)
+        {
+            if (Result > 33)
+            {
+                transform.GetComponent<DropCheck>().ResetStates();
+                Debug.Log("Reseted");
+                ResetCD = true;
+            } 
+        }
+        if (ResetCD == true)
+        {
+            if (Result < 1)
+            {
+                ResetCD = false;
+                print("Cd off");
+            } 
+        }
+    }
     void TextMeshUpdate(int Precent)
     {
-        gameObject.GetComponent<TextMesh>().text = string.Format("%{0}",Precent);
+        int _Precent = Precent;
+        ClockText.text = string.Format("{0}%",Precent);
     }
 
     [System.Serializable]

@@ -57,10 +57,25 @@ public class Chunk      // sub array
 
     public static Sprite GrassSprite;
 
+    public static void SwapViews(Chunk a, Chunk b)
+    {
+        View<TileType> temp = a.TilemapTilesView;
+        a.TilemapTilesView = b.TilemapTilesView;
+        b.TilemapTilesView = temp;
+    
+
+        //View<GameObject> tmp = a.GameObjectView;
+        //a.GameObjectView = b.GameObjectView;
+        //b.GameObjectView = tmp;
+    }
+
     public void SetView(int startIndexX, int startIndexY)
     {
         TilemapTilesView._startX = startIndexX;
         TilemapTilesView._startY = startIndexY;
+
+        // GameObjectView._startX = startIndexX;
+        // GameObjectView._startY = startIndexY;
     }
 
     public void Init(int chunkOffsetX, int chunkOffsetY, Transform tilemap, TileType[,] tiles, GameObject[,] gameobjects, int viewStartXIndex, int viewStartYIndex)
@@ -153,7 +168,7 @@ public class Chunk      // sub array
 
     public void disableChunkCollision()
     {
-       for(int y = 0; y < GameObjectView.Size; y++)
+        for (int y = 0; y < GameObjectView.Size; y++)
         {
             for (int x = 0; x < GameObjectView.Size; x++)
             {

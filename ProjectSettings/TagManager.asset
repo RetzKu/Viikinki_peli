@@ -7,12 +7,12 @@ TagManager:
   - Item
   - ScreenInventory
   - Ui
-  - Enemy
   - Dropped
   - puu
   - Inventory
   - ItemEquip
   - ItemInventory
+  - Spawner
   layers:
   - Default
   - TransparentFX
@@ -27,10 +27,12 @@ TagManager:
   - Player
   - TouchController
   - TileMap
-  - Pate
+  - Wolf
   - Door
-  - 
-  - 
+  - Archer
+  - Collide
+  - TileMapBorders
+
   - 
   - 
   - 
@@ -47,11 +49,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
+  - name: TouchController
+    uniqueID: 1155609689
     locked: 0
   - name: TileMap
     uniqueID: 3129451229
+    locked: 0
+  - name: TileMapBorder
+    uniqueID: 170880935
     locked: 0
   - name: Tile
     uniqueID: 1958771453
@@ -59,9 +64,15 @@ TagManager:
   - name: Enemy
     uniqueID: 174363751
     locked: 0
+  - name: RuneEffects
+    uniqueID: 4257505443
+    locked: 0
   - name: Player
     uniqueID: 3664509369
     locked: 0
-  - name: TouchController
-    uniqueID: 1155609689
+  - name: Line
+    uniqueID: 2644647065
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0

@@ -20,6 +20,7 @@ public class PlayerScript : MonoBehaviour
     public Transform DownwardsHand;
 
     private ItemManager Hand;
+    public int Damage;
 
     enum direction
     {
@@ -42,8 +43,7 @@ public class PlayerScript : MonoBehaviour
         DownwardsHand = transform.Find("d_c_torso").Find("d_l_upper_arm").GetChild(0).GetChild(0);
 
         Hand = new ItemManager(SidewaysHand);
-
-
+        Damage = 30;
     }
 
     void Update()
@@ -322,9 +322,8 @@ public class PlayerScript : MonoBehaviour
         if (Trig.gameObject.tag == "puu")
         {
             Debug.Log("BONK");
-            Trig.GetComponent<TreeHP>().hp -= 25;
+            Trig.GetComponent<TreeHP>().hp -= Damage;
         }
-
     }
 
     void OnTriggerExit2D(Collider2D Trig)

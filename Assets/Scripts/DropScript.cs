@@ -25,14 +25,16 @@ public class DropScript : MonoBehaviour
     {
         for (int i = 0; i < DropsList.Count; i++)
         {
-            if (DropChecker.NightDrops() == true)
+            bool night = DropChecker.NightDrops();
+
+            if (DropsList[i].NightItem == night || DropsList[i].NightItem == false)
             {
                 if (Random.Range(0, 100) <= DropsList[i].DropChance)
                 {
                     GameObject Copy = Instantiate(DropsList[i].Item) as GameObject;
                     Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                     Copy.transform.position = transform.position;
-                } 
+                }
             }
         }
     }
@@ -48,6 +50,6 @@ public class DropScript : MonoBehaviour
         public int DropChance;
         public bool NightItem;
 
-        public Drops(GameObject _Item, int _DropChance,bool _NightItem) { Item = _Item; DropChance = _DropChance; NightItem = _NightItem; }
+        public Drops(GameObject _Item, int _DropChance, bool _NightItem) { Item = _Item; DropChance = _DropChance; NightItem = _NightItem; }
     }
 }

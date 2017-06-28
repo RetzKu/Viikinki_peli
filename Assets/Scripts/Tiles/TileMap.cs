@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class TileMap : MonoBehaviour
 {
@@ -12,8 +13,6 @@ public class TileMap : MonoBehaviour
     public int ChunkSize = 20;
     public TileType[,] Tiles = new TileType[TotalHeight, TotalWidth]; // todo: w h laskeminen koosta
     public GameObject[,] TileGameObjects = new GameObject[TotalHeight, TotalWidth];
-
-
 
     public int Width = TotalWidth;
     public int Heigth = TotalHeight;
@@ -33,9 +32,7 @@ public class TileMap : MonoBehaviour
     public Color tint;
     private Color last;
 
-
     // TODO: object pool for general object trees, rocks jne...
-
     void Start()
     {
         SpriteController = FindObjectOfType<TileSpriteController>();

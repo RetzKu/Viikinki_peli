@@ -205,6 +205,26 @@ Prefab:
       propertyPath: lineMaterial
       value: 
       objectReference: {fileID: 2100000, guid: fe51d0cb6988075499b336909be84165, type: 2}
+    - target: {fileID: 114859529828968886, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: lineResetTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114859529828968886, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: LineStartWidth
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 114859529828968886, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: MaxWidht
+      value: 1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 114859529828968886, guid: c51b4a74f8629674fb27f9785679c065,
+        type: 2}
+      propertyPath: RuneHolder
+      value: 
+      objectReference: {fileID: 868275455}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c51b4a74f8629674fb27f9785679c065, type: 2}
   m_IsPrefabParent: 0
@@ -677,6 +697,8 @@ GameObject:
   - component: {fileID: 868275452}
   - component: {fileID: 868275454}
   - component: {fileID: 868275453}
+  - component: {fileID: 868275455}
+  - component: {fileID: 868275456}
   m_Layer: 10
   m_Name: hahmo
   m_TagString: Player
@@ -797,6 +819,30 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &868275455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 868275449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602a66cc43821a5428bd9d8eaf449add, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runes:
+  - {fileID: 11400000, guid: 6d19112c5faec534d92ac23bf9a0afa0, type: 2}
+--- !u!114 &868275456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 868275449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b036b3c0df7fc164d902c9b2867b4de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1054414161
 Prefab:
   m_ObjectHideFlags: 0

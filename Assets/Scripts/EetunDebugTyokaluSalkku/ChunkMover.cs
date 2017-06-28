@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[System.Serializable]
 public class Vec2
 {
     public int X;
@@ -8,6 +9,16 @@ public class Vec2
     {
         X = x;
         Y = y;
+    }
+
+    public static bool operator ==(Vec2 a, Vec2 b)
+    {
+        return (a.X == b.X && a.Y == b.Y);
+    }
+
+    public static bool operator !=(Vec2 a, Vec2 b)
+    {
+        return !(a == b);
     }
 }
 

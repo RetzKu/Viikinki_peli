@@ -40,8 +40,8 @@ public class PlayerScript : MonoBehaviour
         /*Get Player Gameobjects hands*/
         SidewaysHand = transform.Find("s_c_torso").Find("s_l_upper_arm").GetChild(0).GetChild(0);
         UpwardsHand = transform.Find("u_c_torso").Find("u_l_upper_arm").GetChild(0).GetChild(0);
-        DownwardsHand = transform.Find("d_c_torso").Find("d_l_upper_arm").GetChild(0).GetChild(0);
-
+        DownwardsHand = transform.Find("d_c_torso").Find("d_r_upper_arm").GetChild(0).GetChild(0);
+        //pate on paras
         Hand = new ItemManager(SidewaysHand);
         Damage = 30;
     }
@@ -85,7 +85,7 @@ public class PlayerScript : MonoBehaviour
             //Debug.Log(playerDirection);
         }
 
-        else if(Input.GetKey(KeyCode.W) == false & Input.GetKey(KeyCode.A) == false & Input.GetKey(KeyCode.S) == false & Input.GetKey(KeyCode.D) == false)
+        else if (Input.GetKey(KeyCode.W) == false & Input.GetKey(KeyCode.A) == false & Input.GetKey(KeyCode.S) == false & Input.GetKey(KeyCode.D) == false)
         {
             playerMoving = false;
         }
@@ -103,8 +103,8 @@ public class PlayerScript : MonoBehaviour
 
     void Side()
     {
-        if(Input.GetKeyDown("w")) { Hand.Handstate = 2; Hand.SetHand(UpwardsHand); }
-        if(Input.GetKeyDown("s")) { Hand.Handstate = 1; Hand.SetHand(DownwardsHand); }
+        if (Input.GetKeyDown("w")) { Hand.Handstate = 2; Hand.SetHand(UpwardsHand); }
+        if (Input.GetKeyDown("s")) { Hand.Handstate = 1; Hand.SetHand(DownwardsHand); }
         if (Input.GetKeyDown("a") || Input.GetKeyDown("d")) { Hand.Handstate = 0; Hand.SetHand(SidewaysHand); }
     }
 
@@ -362,11 +362,16 @@ public class PlayerScript : MonoBehaviour
                 Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                 Copy.GetComponent<SpriteRenderer>().sortingOrder = 20;
             }
-            if (Handstate == 1)
+            if (Handstate == 1) // downwards
             {
-                /*REQUIRES SETTINGS*/
+                Quaternion rotation = Quaternion.Euler(-5.84f,-16.481f, 103.594f);
+                Copy.transform.SetParent(Hand);
+                Copy.transform.position = Hand.position;
+                Copy.transform.localRotation = rotation;
+                Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+                Copy.GetComponent<SpriteRenderer>().sortingOrder = 16;
             }
-            if (Handstate == 2)
+            if (Handstate == 2) //upwards
             {
                 /*REQUIRES SETTINGS*/
             }
@@ -382,7 +387,7 @@ public class PlayerScript : MonoBehaviour
 
         public void SetHand(Transform _Hand) //used to redefine hand to be used
         {
-            if(_Hand.transform.name != Hand.transform.name)
+            if (_Hand.transform.name != Hand.transform.name)
             {
                 if (Hand.childCount > 0)
                 {
@@ -400,9 +405,21 @@ public class PlayerScript : MonoBehaviour
                                 Copy.GetComponent<SpriteRenderer>().sortingOrder = 20;
                                 break;
                             }
-                        case "u_l_hand": { /*REQUIRES SETTINGS*/ break; }
-                        case "d_l_hand": { /*REQUIRES SETTINGS*/ break; }
-                    } 
+                        case "u_l_hand":
+                            {
+                                break;
+                            }
+                        case "d_r_hand":
+                            {
+                                Quaternion rotation = Quaternion.Euler(-5.84f, -16.481f, 103.594f);
+                                Copy.transform.SetParent(Hand);
+                                Copy.transform.position = Hand.position;
+
+                                Copy.transform.localRotation = rotation;
+                                Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+                                Copy.GetComponent<SpriteRenderer>().sortingOrder = 16; break;
+                            }
+                    }
                 }
             }
         }
@@ -483,5 +500,5 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    
+
 }

@@ -239,7 +239,8 @@ public class TouchController : MonoBehaviour
         ResetColliders();
         lineRenderer.widthMultiplier = LineStartWidth;
         //lineRenderer.positionCount = 0;
-        lineRenderer.positionCount = 0;
+
+        lineRenderer.numPositions = 0;
 
         index = 0;
         LineFadeEffectRunning = false;
@@ -293,7 +294,8 @@ public class TouchController : MonoBehaviour
             //LineRenderer.positionCount = index + 1;
             //LineRenderer.positionCount = index + 1;
             //lineRenderer.positionCount = index + 1;
-            lineRenderer.positionCount = index + 1;
+            //lineRenderer.positionCount = index + 1;
+            lineRenderer.numPositions = index + 1;
 
             lineRenderer.SetPosition(index, positions[index]);
             lineRenderer.sortingLayerName = "Foreground";

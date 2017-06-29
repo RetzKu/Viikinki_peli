@@ -1,15 +1,17 @@
 fileFormatVersion: 2
-guid: 4b3dc74f3e58fbd459aec0d200a47558
-timeCreated: 1498673367
-licenseType: Free
+guid: cca2cb4f0a5eaee4b94335e81f7d9da4
+timeCreated: 1498737723
+licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: tileset_Water_0
-    21300002: tileset_Water_1
-    21300004: tileset_Water_S0
-    21300006: tileset_Water_W0
-    21300008: tileset_Water_N0
-    21300010: tileset_Water_E0
+    21300000: tileset_forestfloor (2)_0
+    21300002: tileset_forestfloor (2)_1
+    21300004: tileset_forestfloor (2)_2
+    21300006: tileset_forestfloor (2)_3
+    21300008: tileset_forestfloor (2)_S
+    21300010: tileset_forestfloor (2)_WW
+    21300012: tileset_forestfloor (2)_N
+    21300014: tileset_forestfloor (2)_EE
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -34,7 +36,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: 0
-    aniso: -1
+    aniso: 1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -132,7 +134,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tileset_Water_0
+      name: tileset_forestfloor (2)_0
       rect:
         serializedVersion: 2
         x: 0
@@ -145,7 +147,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_Water_1
+      name: tileset_forestfloor (2)_1
       rect:
         serializedVersion: 2
         x: 64
@@ -158,7 +160,33 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_Water_S0
+      name: tileset_forestfloor (2)_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_forestfloor (2)_3
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_forestfloor (2)_S
       rect:
         serializedVersion: 2
         x: 0
@@ -171,7 +199,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_Water_W0
+      name: tileset_forestfloor (2)_WW
       rect:
         serializedVersion: 2
         x: 64
@@ -184,7 +212,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_Water_N0
+      name: tileset_forestfloor (2)_N
       rect:
         serializedVersion: 2
         x: 128
@@ -197,7 +225,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_Water_E0
+      name: tileset_forestfloor (2)_EE
       rect:
         serializedVersion: 2
         x: 192

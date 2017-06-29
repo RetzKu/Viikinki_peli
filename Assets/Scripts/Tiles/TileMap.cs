@@ -201,7 +201,7 @@ public class TileMap : MonoBehaviour
 
         if (chunkOffsetX != player.ChunkOffsets.X || chunkOffsetY != player.ChunkOffsets.Y)
         {
-            Debug.LogFormat("player chunk changed to({0}:{1})", chunkOffsetX, chunkOffsetY);
+            //Debug.LogFormat("player chunk changed to({0}:{1})", chunkOffsetX, chunkOffsetY);
 
             int chunkDtX = chunkOffsetX - player.ChunkOffsets.X;
             int chunkDtY = chunkOffsetY - player.ChunkOffsets.Y;

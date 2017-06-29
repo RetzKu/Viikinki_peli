@@ -5,30 +5,32 @@ using UnityEngine;
 public enum TileType
 {
     Invalid,
-    Water,
+
     DeepWater,
+    Water,
     Mountain,
     
     CollisionTiles,
+
+    Forest,
+
+
     Beach,
 
     //Scorhed,
     //Bare,
     //Tundra,
-    
     //TemperateDesert,
     //Shrubland,      // en edes tiedä mikä on Shrubland
     //Taiga,          // näiden tilalle hassuja biome/tileTypejä
 
-    GrassLand, // norm caps
-    //TemperateDeciduousForest,
-    //TemperateRainForest,
 
-    //SubtropicalDesert,
-    //TropicalSeasonalForest,
-    //TropicalRainForest,
+    GrassLand,
 
-    Forest,
+
+
+
+
     Jungle,
     Savannah,
     Desert,

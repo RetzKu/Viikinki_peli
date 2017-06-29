@@ -36,7 +36,7 @@ public class PlayerScript : MonoBehaviour
         Hand = new ItemManager(SidewaysHand);
     }
 
-    void Update()
+    void Update()           
     {
         tmpswing();
         Equip();

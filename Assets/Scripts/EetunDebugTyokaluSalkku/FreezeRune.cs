@@ -32,27 +32,36 @@ public class FreezeRune : Rune
         Debug.Log("FreezeRune lähettää terveisensä");
 
     }
-
     // Rune effect funktio, jota kutsuttaisiin Launcherista takaisin
     // OnStart Ja OnRuneEnd, joihin laitettaisiin esim buffin statsit ja rune effectiä voisi myös kutsua coroutinellä takaisin
-
-
 }
 
-[CreateAssetMenu(menuName = "Runes/WeaponBuffRune NOT IMPLEMENTED!")]
+[CreateAssetMenu(menuName = "Runes/BuffRune NOT IMPLEMENTED!")]
 public class WeaponBuffRune : Rune
 {
     // effect?
     private GameObject owner;
     public float Range = 10f;
 
+    public float duration;
+
+    // statsit:
+    // HP
+    // Attack
+    // Movement Speed 
+    // joku cool buff: Immortal jne...
+    // Debuffs:
+    // CC
+    // Statsit
+
     public override void init(GameObject owner)
     {
-        this.owner = owner;
+        this.owner = owner;     // Launcheriin visuaalinene efectio jos on sellainen 
     }
 
     public override void Fire()
     {
-        Vector2 pos = owner.transform.position;
+        // owner.applyBuff();
+        // laita timer joka lopettaa buffing keston
     }
 }

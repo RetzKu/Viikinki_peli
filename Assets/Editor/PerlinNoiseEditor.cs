@@ -35,7 +35,7 @@ public class PerlinNoiseEditor : Editor
         }
         else if (GUILayout.Button("Generate Big Map!"))
         {
-            myPerlin.GenerateWorldTextureMap(myPerlin.BigMapWidth, myPerlin.BigMapWidth, 0f, -2f);
+            //myPerlin.GenerateWorldTextureMap(myPerlin.BigMapWidth, myPerlin.BigMapWidth, 0f, -2f);
         }
     }
 }

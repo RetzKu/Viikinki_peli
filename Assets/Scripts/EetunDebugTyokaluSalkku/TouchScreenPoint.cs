@@ -22,11 +22,14 @@ public class TouchScreenPoint : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (_touchController != null)
+        if (other.CompareTag("TouchPoint"))
         {
-            _touchController.OnTouchDetected(x, y);
-            GetComponent<CircleCollider2D>().enabled = false;
-           //  Debug.LogFormat("{0} {1}", x, y);
+            if (_touchController != null)
+            {
+                _touchController.OnTouchDetected(x, y);
+                GetComponent<CircleCollider2D>().enabled = false;
+                //  Debug.LogFormat("{0} {1}", x, y);
+            }
         }
     }
 

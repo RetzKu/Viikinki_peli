@@ -9,8 +9,21 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Tiles/ObjectSpawnSettings")]
 public class TilemapObjectSpawnSettings : ScriptableObject
 {
+    public TileType Type;
     public SpawnSettingsData[] SpawnableObjects;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 [System.Serializable]
 public class SpawnSettingsData  

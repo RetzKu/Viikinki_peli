@@ -11,7 +11,8 @@ public class TileSpriteController : MonoBehaviour
 
     public SpriteControllerSettings Settings;
 
-    int[] TileCount = new int[(int)TileType.Max];
+    int[] TileCount    = new int[(int)TileType.Max];
+    bool[] Implemented = new bool[(int)TileType.Max];
 
     void Awake()
     {
@@ -19,6 +20,7 @@ public class TileSpriteController : MonoBehaviour
         // nopeampiakin ratkaisuja olisi
         _textures = new Dictionary<string, Sprite>(16);
         Sprite[] sprites = Resources.LoadAll<Sprite>("Tiles/");
+
         foreach (Sprite sprite in sprites)
         {
             //  _textures[sprite.name] = sprite;
@@ -39,6 +41,8 @@ public class TileSpriteController : MonoBehaviour
             if (tile.Sprites.Length == 0)
                 continue;
 
+            Implemented[(int)tile.Type] = true;
+
             string name = tile.Type.ToString();
             TileCount[(int) tile.Type] = tile.Sprites.Length;
 
@@ -46,7 +50,6 @@ public class TileSpriteController : MonoBehaviour
             for (int i = 0; i < tile.Sprites.Length - 4; i++)
             {
                 _textures[name + stringsEnds[i]] = tile.Sprites[i];
-                print(_textures[name + stringsEnds[i]]);
                 count++;
             }
             TileCount[(int) tile.Type] = count;
@@ -54,7 +57,6 @@ public class TileSpriteController : MonoBehaviour
             for (int i = tile.Sprites.Length - 4, stringEndIndex = 9; i < tile.Sprites.Length; i++, stringEndIndex++)
             {
                 _textures[name + stringsEnds[stringEndIndex]] = tile.Sprites[i];
-                print(_textures[name + stringsEnds[stringEndIndex]]);
             }
         }
     }
@@ -121,52 +123,26 @@ public class TileSpriteController : MonoBehaviour
         new Vec2(-1, 1),  new Vec2(1, 1)
     };
 
-    //public enum TileType
-    //{
-    //    Invalid,
-    //    Water,
-    //    DeepWater,
-    //    Mountain,
-
-    //    CollisionTiles,
-    //    Beach,
-    //    GrassLand, // norm caps
-    //    Forest,
-    //    Jungle,
-    //    Savannah,
-    //    Desert,
-    //    Snow
-    //}
-
-    //private static readonly int[,] tileVisualRules = {
-    //    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    //    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    //    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    //};
+    bool IsImplemented(TileType type)
+    {
+        return Implemented[(int)type];
+    }
 
     bool IsUpperTile(TileType upper, TileType down)
     {
         if (upper == down) return true;
-        return upper > down;  // TODO: Kunnon säännöt
+        return upper < down;  // TODO: Kunnon säännöt
     }
-
 
     string GetAssetNameBitmask(int x, int y, TileMap Tilemap, out int value, out bool found)
     {
         found = false;
         TileType type = Tilemap.GetTileFast(x, y);
-
         string assetName = "";
-
-        if (type == TileType.Mountain || type == TileType.GrassLand || type == TileType.Water)
+        
+        if (IsImplemented(type))
         {
             assetName = type.ToString() + "_";
-            found = true;
-        }
-
-        if (type == TileType.Forest)
-        {
-            assetName = "Forest_";
             found = true;
         }
 
@@ -189,9 +165,6 @@ public class TileSpriteController : MonoBehaviour
         {
             value += 2;
         }
-        // asset randilla reuna ton mukaan
-        // assetName += value.ToString();  // TODO: lisää reuna
-        // Reunojen alle sitä viereistä ???
         return assetName;
     }
 
@@ -298,7 +271,7 @@ public class TileSpriteController : MonoBehaviour
                 {
                     string border = "GrassLand";
 
-                    if (type == TileType.GrassLand || type == TileType.Water || type == TileType.Mountain || type == TileType.Forest)
+                    if (IsImplemented(type))
                     {
                         border = type.ToString();
                     }
@@ -308,7 +281,6 @@ public class TileSpriteController : MonoBehaviour
                     //    border = "tileset_ground_";
                     //}
 
-                    print(border);
                     if ((value & (1 << 1 - 1)) == 0)
                     {
                         temporarySecondLayer[tempIndex].GetComponent<SpriteRenderer>().sprite = _textures[border + "_N0"];
@@ -340,9 +312,10 @@ public class TileSpriteController : MonoBehaviour
                 }
             }
         }
+
         for (int i = tempIndex; i < temporarySecondLayer.Length; i++)
         {
-            temporarySecondLayer[i].active = false;
+            temporarySecondLayer[i].SetActive(false);
         }
     }
 
@@ -379,10 +352,8 @@ public class TileSpriteController : MonoBehaviour
             }
         }
 
-        print(problemsCases.Count);
         foreach (var pos in problemsCases)
         {
-            Debug.LogFormat("coords: {0}, {1}", pos.X, pos.Y);
             tilemap.Tiles[pos.Y, pos.X] = GetMostCommonNeighbour(tilemap.Tiles, pos.X, pos.Y);
 
             //int count = 0;

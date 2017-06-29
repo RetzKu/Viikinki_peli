@@ -13,39 +13,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpriteData:
   - Type: 1
-    Sprites:
-    - {fileID: 21300000, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
-    - {fileID: 21300002, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
-    - {fileID: 21300010, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
-    - {fileID: 21300008, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
-    - {fileID: 21300004, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
-    - {fileID: 21300006, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
-  - Type: 2
-    Sprites:
-    - {fileID: 21300000, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
-    - {fileID: 21300002, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
-    - {fileID: 21300010, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
-    - {fileID: 21300008, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
-    - {fileID: 21300004, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
-    - {fileID: 21300006, guid: 4b3dc74f3e58fbd459aec0d200a47558, type: 3}
-  - Type: 3
     Sprites: []
-  - Type: 7
+  - Type: 2
+    Sprites: []
+  - Type: 3
     Sprites:
-    - {fileID: 21300000, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
-    - {fileID: 21300002, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
-    - {fileID: 21300004, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
-    - {fileID: 21300006, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
-    - {fileID: 21300008, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
-    - {fileID: 21300010, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
-    - {fileID: 21300012, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
-    - {fileID: 21300014, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
-    - {fileID: 21300016, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
-    - {fileID: 21300024, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
-    - {fileID: 21300022, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
-    - {fileID: 21300018, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
-    - {fileID: 21300020, guid: a31d3431277a94540ab7fc65094f899d, type: 3}
-  - Type: 6
+    - {fileID: 21300000, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+    - {fileID: 21300002, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+    - {fileID: 21300004, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+    - {fileID: 21300006, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+    - {fileID: 21300008, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+    - {fileID: 21300010, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+    - {fileID: 21300012, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+    - {fileID: 21300014, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+    - {fileID: 21300016, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+    - {fileID: 21300024, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+    - {fileID: 21300022, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+    - {fileID: 21300018, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+    - {fileID: 21300020, guid: 3e2122eb547d94f4d9b8aaf27ba804dc, type: 3}
+  - Type: 7
     Sprites:
     - {fileID: 21300000, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
     - {fileID: 21300002, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
@@ -60,3 +46,18 @@ MonoBehaviour:
     - {fileID: 21300030, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
     - {fileID: 21300026, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
     - {fileID: 21300028, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+  - Type: 5
+    Sprites:
+    - {fileID: 21300000, guid: 6bd377acfafc0024ead1ae156865bf62, type: 3}
+    - {fileID: 21300002, guid: 6bd377acfafc0024ead1ae156865bf62, type: 3}
+    - {fileID: 21300004, guid: 6bd377acfafc0024ead1ae156865bf62, type: 3}
+    - {fileID: 21300006, guid: 6bd377acfafc0024ead1ae156865bf62, type: 3}
+    - {fileID: 21300008, guid: 6bd377acfafc0024ead1ae156865bf62, type: 3}
+    - {fileID: 21300010, guid: 6bd377acfafc0024ead1ae156865bf62, type: 3}
+    - {fileID: 21300012, guid: 6bd377acfafc0024ead1ae156865bf62, type: 3}
+    - {fileID: 21300014, guid: 6bd377acfafc0024ead1ae156865bf62, type: 3}
+    - {fileID: 21300016, guid: 6bd377acfafc0024ead1ae156865bf62, type: 3}
+    - {fileID: 21300018, guid: 6bd377acfafc0024ead1ae156865bf62, type: 3}
+    - {fileID: 21300020, guid: 6bd377acfafc0024ead1ae156865bf62, type: 3}
+    - {fileID: 21300022, guid: 6bd377acfafc0024ead1ae156865bf62, type: 3}
+    - {fileID: 21300024, guid: 6bd377acfafc0024ead1ae156865bf62, type: 3}

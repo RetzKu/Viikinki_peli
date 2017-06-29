@@ -290,10 +290,12 @@ public class EnemyAI : MonoBehaviour
 
         // missä olen
         BreadthFirstSearch.states k =  pl.GetComponent<UpdatePathFind>().path.getTileDir(body.position);
+        print(k.ToString());
         //BreadthFirstSearch.states k = BreadthFirstSearch.states.right;
         if (k == BreadthFirstSearch.states.goal || k == BreadthFirstSearch.states.wall || k == BreadthFirstSearch.states.unVisited)
         {
             flags = 0;
+            velocity *= 0;
         }
         else if (k == BreadthFirstSearch.states.right)
         {
@@ -318,6 +320,7 @@ public class EnemyAI : MonoBehaviour
         else
         {
             flags = 0;
+            velocity *= 0;
         }
         //minne menen
     }

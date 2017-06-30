@@ -66,9 +66,11 @@ public class AnimatorScript : MonoBehaviour
         public SpriteChanger(Transform Player, Rigidbody2D Rb)
         {
             PlayerTransform = Player; PlayerRb = Rb;
-            Sprites.Add((PlayerTransform.Find("d_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>());
-            PlayerTransform.Find("d_c_torso").gameObject
-        }
+            Sprites = new List<SpriteRenderer[]>(3);
+            Sprites.Add(PlayerTransform.Find("s_c_torso").GetComponentsInChildren<SpriteRenderer>());
+            Sprites.Add(PlayerTransform.Find("d_c_torso").GetComponentsInChildren<SpriteRenderer>());
+            Sprites.Add(PlayerTransform.Find("u_c_torso").GetComponentsInChildren<SpriteRenderer>());
+a        }
 
         void DirectionCheck()
         {

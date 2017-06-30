@@ -91,6 +91,67 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &11378950 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1468715861072664, guid: 9ba8cfce009a3764ba416b37c8f039af,
+    type: 2}
+  m_PrefabInternal: {fileID: 1777036962}
+--- !u!114 &11378951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 11378950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a20ed1d6e51d1f24ca64d8a862e3326f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RenderTarget: {fileID: 0}
+  DrawMode: 2
+  Step: 0.1
+  Exp: 11.7
+  WaterTreshold: 0.2
+  MoistureFrequence: 0.31
+  Frequency: 0.47
+  OffsetX: 0.4
+  OffsetY: 0
+  Width: 250
+  Heigth: 250
+  ConstantGenerate: 0
+  Octaves: 3
+  Persistance: 0.32
+  Lacunarity: 3.57
+  Scorched: {r: 0.2784314, g: 0.41960788, b: 0.41960788, a: 1}
+  Bare: {r: 0.21960786, g: 0.31764707, b: 0.31764707, a: 1}
+  Tundra: {r: 0.21960786, g: 0.31764707, b: 0.31764707, a: 1}
+  TemperateDesert: {r: 0.21960786, g: 0.31764707, b: 0.31764707, a: 1}
+  Shrubland: {r: 0, g: 0, b: 0, a: 1}
+  Taiga: {r: 0, g: 0, b: 0, a: 1}
+  TemperateDeciduousForest: {r: 0, g: 0, b: 0, a: 1}
+  TemperateRainForest: {r: 0, g: 0, b: 0, a: 1}
+  SubtropicalSeasonalForest: {r: 0, g: 0, b: 0, a: 1}
+  TropicalSeasonalRainForest: {r: 0, g: 0, b: 0, a: 1}
+  TropicalRainForest: {r: 0, g: 0, b: 0, a: 1}
+  Water: {r: 0, g: 0.40000004, b: 1, a: 1}
+  DeepWater: {r: 0, g: 0, b: 1, a: 1}
+  Grassland: {r: 0.20000002, g: 0.8000001, b: 0.20000002, a: 1}
+  Beach: {r: 1, g: 1, b: 0.40000004, a: 1}
+  Mountain: {r: 0.2784314, g: 0.41960788, b: 0.41960788, a: 1}
+  Forest: {r: 0, g: 0, b: 0, a: 1}
+  Jungle: {r: 0.010056239, g: 0.45588237, b: 0.15866491, a: 1}
+  Savannah: {r: 0, g: 0.6, b: 0.20000002, a: 1}
+  Snow: {r: 1, g: 1, b: 1, a: 1}
+  Desert: {r: 1, g: 0.8000001, b: 0, a: 1}
+  BigMapWidth: 4
+  BigMapHeight: 4
+  blueNoiseOctaves: 2
+  blueNoiseLacunarity: 58.88
+  blueNoisePersistance: 0.65
+  ObjectRValue: 0
+  SpawnSettings: {fileID: 11400000, guid: 655ce7f831845be4f9535528f9e15f11, type: 2}
+  TreeTrefab: {fileID: 1384798036243720, guid: 1d6b060ef40a3664da1b12583f13f561, type: 2}
+  settings: {fileID: 11400000, guid: 969c536d7bb4979439a339ee5d529bdd, type: 2}
 --- !u!1 &20165569
 GameObject:
   m_ObjectHideFlags: 0
@@ -2791,9 +2852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cd7ac0f27c8f694ba485407359a0914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  temproraryFillSprite: {fileID: 0}
-  grassFiller: {fileID: 0}
-  ForesFiller: {fileID: 0}
+  Settings: {fileID: 0}
 --- !u!4 &1423292497
 Transform:
   m_ObjectHideFlags: 0
@@ -3285,6 +3344,48 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1001 &1636690075
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4215607394559902, guid: 735606dd2bac71047b80845bc97b376a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 31.454117
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215607394559902, guid: 735606dd2bac71047b80845bc97b376a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 51.242336
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215607394559902, guid: 735606dd2bac71047b80845bc97b376a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.484375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215607394559902, guid: 735606dd2bac71047b80845bc97b376a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215607394559902, guid: 735606dd2bac71047b80845bc97b376a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215607394559902, guid: 735606dd2bac71047b80845bc97b376a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215607394559902, guid: 735606dd2bac71047b80845bc97b376a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215607394559902, guid: 735606dd2bac71047b80845bc97b376a, type: 2}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 735606dd2bac71047b80845bc97b376a, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1641319528
 Prefab:
   m_ObjectHideFlags: 0
@@ -4605,6 +4706,18 @@ Prefab:
       propertyPath: TreeTrefab
       value: 
       objectReference: {fileID: 1384798036243720, guid: 1d6b060ef40a3664da1b12583f13f561,
+        type: 2}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: settings
+      value: 
+      objectReference: {fileID: 11400000, guid: 969c536d7bb4979439a339ee5d529bdd,
+        type: 2}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: SpawnSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 655ce7f831845be4f9535528f9e15f11,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ba8cfce009a3764ba416b37c8f039af, type: 2}

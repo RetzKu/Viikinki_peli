@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04dc6761d973d26478f4b5b7179a0081, type: 3}
+  m_Name: GrassLand
+  m_EditorClassIdentifier: 
+  Type: 7
+  SpawnableObjects:
+  - ObjectPrefab: {fileID: 1384798036243720, guid: 871736e1853082c49860972fa8d1382a,
+      type: 2}
+    SpawnRate: 4.3
+  - ObjectPrefab: {fileID: 1384798036243720, guid: 36b2e15252df0ac4d995a232e2bddb45,
+      type: 2}
+    SpawnRate: 2.89
+  - ObjectPrefab: {fileID: 1384798036243720, guid: c21a5b0ce54693145bfab62a7359ecd8,
+      type: 2}
+    SpawnRate: 39.59
+  - ObjectPrefab: {fileID: 1384798036243720, guid: 771bbb64aac035248bda92dbe5e67c78,
+      type: 2}
+    SpawnRate: 12.72
+  - ObjectPrefab: {fileID: 1384798036243720, guid: 2aa8ce0659842644abb9deb866f0eb82,
+      type: 2}
+    SpawnRate: 10.44

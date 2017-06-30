@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 251cca67e14ca6d4ba1fc77d6f7f7162, type: 3}
+  m_Name: ElevationSettings
+  m_EditorClassIdentifier: 
+  Elevations:
+  - StartElevation: 0.2
+    Tiles:
+    - StartMoisture: 1
+      Type: 2
+      AssetName: 
+      SpawnSettings: {fileID: 11400000, guid: 655ce7f831845be4f9535528f9e15f11, type: 2}
+    EditorName: "syv\xE4 vesi"
+  - StartElevation: 0.22
+    Tiles:
+    - StartMoisture: 0.233
+      Type: 1
+      AssetName: 
+      SpawnSettings: {fileID: 11400000, guid: 655ce7f831845be4f9535528f9e15f11, type: 2}
+    EditorName: Matal vesi
+  - StartElevation: 0.26
+    Tiles:
+    - StartMoisture: 1
+      Type: 5
+      AssetName: 
+      SpawnSettings: {fileID: 11400000, guid: 655ce7f831845be4f9535528f9e15f11, type: 2}
+    EditorName: beach
+  - StartElevation: 0.5
+    Tiles:
+    - StartMoisture: 0.2
+      Type: 10
+      AssetName: 
+      SpawnSettings: {fileID: 11400000, guid: 655ce7f831845be4f9535528f9e15f11, type: 2}
+    - StartMoisture: 0.7
+      Type: 7
+      AssetName: 
+      SpawnSettings: {fileID: 0}
+    - StartMoisture: 1
+      Type: 8
+      AssetName: 
+      SpawnSettings: {fileID: 0}
+    EditorName: Avointa seutua
+  - StartElevation: 0.7
+    Tiles:
+    - StartMoisture: 1
+      Type: 6
+      AssetName: 
+      SpawnSettings: {fileID: 11400000, guid: 655ce7f831845be4f9535528f9e15f11, type: 2}
+    EditorName: "Metsikk\xF6\xE4"
+  - StartElevation: 0.9
+    Tiles:
+    - StartMoisture: 1
+      Type: 3
+      AssetName: 
+      SpawnSettings: {fileID: 11400000, guid: 655ce7f831845be4f9535528f9e15f11, type: 2}
+    EditorName: Vuoristoa
+  - StartElevation: 1
+    Tiles:
+    - StartMoisture: 1
+      Type: 11
+      AssetName: 
+      SpawnSettings: {fileID: 11400000, guid: 655ce7f831845be4f9535528f9e15f11, type: 2}
+    EditorName: LUNTAAA

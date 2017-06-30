@@ -27,7 +27,6 @@ public abstract class Rune : ScriptableObject
                 return false;
             }
         }
-
         return true;
     }
 

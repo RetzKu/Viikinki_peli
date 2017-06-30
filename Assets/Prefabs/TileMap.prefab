@@ -137,13 +137,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RenderTarget: {fileID: 4433194363785122}
-  DrawMode: 1
+  DrawMode: 3
   Step: 0.1
   Exp: 11.7
   WaterTreshold: 0.2
   MoistureFrequence: 0.31
   Frequency: 0.47
-  OffsetX: 0
+  OffsetX: 0.4
   OffsetY: 0
   Width: 250
   Heigth: 250
@@ -167,13 +167,18 @@ MonoBehaviour:
   Grassland: {r: 0.20000002, g: 0.8000001, b: 0.20000002, a: 1}
   Beach: {r: 1, g: 1, b: 0.40000004, a: 1}
   Mountain: {r: 0.2784314, g: 0.41960788, b: 0.41960788, a: 1}
-  Forest: {r: 0, g: 0.6, b: 0.20000002, a: 1}
+  Forest: {r: 0, g: 0, b: 0, a: 1}
   Jungle: {r: 0.010056239, g: 0.45588237, b: 0.15866491, a: 1}
   Savannah: {r: 0, g: 0.6, b: 0.20000002, a: 1}
   Snow: {r: 1, g: 1, b: 1, a: 1}
   Desert: {r: 1, g: 0.8000001, b: 0, a: 1}
   BigMapWidth: 4
   BigMapHeight: 4
+  blueNoiseOctaves: 2
+  blueNoiseLacunarity: 58.88
+  blueNoisePersistance: 0.65
+  ObjectRValue: 0
+  TreeTrefab: {fileID: 1384798036243720, guid: 1d6b060ef40a3664da1b12583f13f561, type: 2}
 --- !u!114 &114672467721544216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -185,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe7d1aef62cba44e98493997c79bf35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GrassSprite: {fileID: 21300000, guid: 5da900f9aedc67d4895628a91ac751a9, type: 3}
+  GrassSprite: {fileID: 21300012, guid: 4e0d0f811b9b117428e6d2cd3132ef5c, type: 3}
   ChunkSize: 20
   Width: 100
   Heigth: 60
@@ -194,23 +199,24 @@ MonoBehaviour:
   tilemapGenerationOffsetY: 0
   useChunkSprites: 0
   chunkTestSprites:
-  - {fileID: 21300002, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
-  - {fileID: 21300004, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
-  - {fileID: 21300006, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
-  - {fileID: 21300010, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
-  - {fileID: 21300012, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
-  - {fileID: 21300012, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
-  - {fileID: 21300014, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
-  - {fileID: 21300008, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
-  - {fileID: 21300008, guid: 23868ad455d42ef43a39f5fa15149f40, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   SpriteController: {fileID: 0}
+  tint: {r: 0, g: 0, b: 0, a: 0}
   TestTiles:
-  - {fileID: 21300000, guid: 810929fcfd1999e4884d517233be8709, type: 3}
-  - {fileID: 21300002, guid: 810929fcfd1999e4884d517233be8709, type: 3}
-  - {fileID: 21300004, guid: 810929fcfd1999e4884d517233be8709, type: 3}
-  - {fileID: 21300006, guid: 810929fcfd1999e4884d517233be8709, type: 3}
-  - {fileID: 21300008, guid: 810929fcfd1999e4884d517233be8709, type: 3}
-  - {fileID: 21300010, guid: 810929fcfd1999e4884d517233be8709, type: 3}
-  - {fileID: 21300012, guid: 810929fcfd1999e4884d517233be8709, type: 3}
-  - {fileID: 21300014, guid: 810929fcfd1999e4884d517233be8709, type: 3}
-  - {fileID: 21300016, guid: 810929fcfd1999e4884d517233be8709, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

@@ -44,7 +44,7 @@ public class PlayerScript : MonoBehaviour
         Damage = 30;
     }
 
-    void Update()
+    void Update()           
     {
         Direction();
         tmpswing();

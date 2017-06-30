@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 using UnityEngine.Assertions.Comparers;
+using Random = UnityEngine.Random;
 
 
 // TODO: Paljon hienosäätöä biomet voisi vaihtaa samaksi Tile enumiksi, mapin scrollaus, tuolla Texture2D voisi tehdä minimapin
@@ -10,6 +12,8 @@ using UnityEngine.Assertions.Comparers;
 public class Perlin : MonoBehaviour
 {
     public delegate Color ColoringScheme(float elevation, float moisture);
+
+    private Dictionary<TileType, TilemapObjectSpawnSettings> TileSpawnSettings = new Dictionary<TileType, TilemapObjectSpawnSettings>((int)TileType.Max);
 
     #region Fields
     public enum NoiseMode
@@ -81,19 +85,42 @@ public class Perlin : MonoBehaviour
 
     private GameObject trees;
 
+    void Awake()
+    {
+        trees = new GameObject("trees");
+    }
+
     void Start()
     {
         if (RenderTarget == null)
         {
             Debug.LogError("Please set the renderTarget (Quad)");
         }
+
         _renderer = RenderTarget.GetComponent<Renderer>();
         InitalizeRenderTarget();
 
-        trees = new GameObject("trees");
+        InitSettings();
     }
 
-    public void GenerateWorldTextureMap(int x, int y, float startX, float startY)
+    void InitSettings()
+    {
+        var tiles = (Resources.LoadAll<TilemapObjectSpawnSettings>("TileSettings"));
+
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            TileSpawnSettings[tiles[i].Type] = tiles[i];
+            ImplementedTileSettings[(int)tiles[i].Type] = true;
+        }
+    }
+
+    private bool[] ImplementedTileSettings = new bool[(int)TileType.Max];
+    private bool IsImplementedSetting(TileType type)
+    {
+        return ImplementedTileSettings[(int)type];
+    }
+
+    public void voidGenerateWorldTextureMap(int x, int y, float startX, float startY)
     {
         float startOffX = OffsetX; // TODO: fix 
         float startOffY = OffsetY;
@@ -169,7 +196,7 @@ public class Perlin : MonoBehaviour
     {
         if (DrawMode == NoiseMode.Colored)
         {
-            DrawNoiseMap((e, m) => BiomeToColor(GetBiome(e, m)), _renderer);
+            DrawNoiseMap((e, m) => BiomeToColor(GetBiomeWSettings(e, m)), _renderer);
         }
         else if (DrawMode == NoiseMode.Noise)
         {
@@ -184,16 +211,29 @@ public class Perlin : MonoBehaviour
         else if (DrawMode == NoiseMode.ObjectMode)
         {
             float[,] blueNoise = GenerateBlueNoise(100, 100);
-            // TODO: fix visualization once needed
 
+            // TODO: fix visualization once needed
             float[,] noiseMap = new float[115, 115];
             GenerateNoiseMap(noiseMap, 115, 115);
-            bool[,] trees = PlaceTrees(blueNoise, 100, 100, noiseMap, noiseMap);
+            bool[,] trees = PlaceTrees(blueNoise, 100, 100, GetTestTileTypeArray(100, 100));
             DrawNoiseMap((elevation, moisture) => Color.Lerp(Color.black, Color.blue, elevation), _renderer, trees, 100, 100);
         }
     }
 
+    TileType[,] GetTestTileTypeArray(int x, int y)
+    {
+        TileType[,] value = new TileType[y, x];
 
+        for (int yIndex = 0; yIndex < y; yIndex++)
+        {
+            for (int xIndex = 0; xIndex < x; xIndex++)
+            {
+                value[yIndex, xIndex] = TileType.GrassLand;
+            }
+        }
+
+        return value;
+    }
 
     public int blueNoiseOctaves = 2;
     public float blueNoiseLacunarity = 0f;
@@ -208,7 +248,7 @@ public class Perlin : MonoBehaviour
     }
 
 
-    public bool[,] PlaceTrees(float[,] noiseMap, int sizeX, int sizeY, float[,] elevation, float[,] moisture)
+    public bool[,] PlaceTrees(float[,] noiseMap, int sizeX, int sizeY, TileType[,] types)
     {
         int R = ObjectRValue;
         bool[,] treeArray = new bool[sizeY, sizeX];
@@ -221,7 +261,7 @@ public class Perlin : MonoBehaviour
             for (int xc = 0; xc < sizeX; xc++)
             {
                 double max = 0;
-                R = GetBiomeTreeRate(GetBiome(elevation[yc, xc], moisture[yc, xc]));
+                R = GetBiomeTreeRate(types[yc, xc]);
 
                 for (int yn = yc - R; yn <= yc + R; yn++)
                 {
@@ -252,7 +292,7 @@ public class Perlin : MonoBehaviour
     {
         if (type == TileType.GrassLand)
         {
-            return 2;
+            return 1;
         }
         else if (type == TileType.Water)
         {
@@ -407,6 +447,29 @@ public class Perlin : MonoBehaviour
         }
     }
 
+    public TilemapObjectSpawnSettings SpawnSettings;
+    public void SpawnObject(Vector3 spawnPosition, Transform parent, TileType type)
+    {
+        // choose object to spawn
+        // TODO: jokaiselle biomelle omat spawnsettingits
+
+        if (IsImplementedSetting(type))
+        {
+            var setting = TileSpawnSettings[type];
+            if (setting.SpawnableObjects.Length != 0)
+            {
+                GameObject prefab = setting.SpawnableObjects[Random.Range(0, setting.SpawnableObjects.Length)].ObjectPrefab;
+                var go = Instantiate(prefab, parent);
+                go.transform.position = spawnPosition;
+            }
+        }
+        else
+        {
+            // var go = Instantiate(SpawnSettings.SpawnableObjects[Random.Range(0, SpawnSettings.SpawnableObjects.Length)].ObjectPrefab, parent);
+            // go.transform.position = spawnPosition;
+        }
+    }
+
     public void GenerateChunk(Chunk chunk, int offsetX, int offsetY) // chunkin offsetit 0,0:sta
     {
         int chunkSize = Chunk.CHUNK_SIZE;
@@ -417,14 +480,35 @@ public class Perlin : MonoBehaviour
 
         float[,] elevation = new float[chunkSize, chunkSize];
         float[,] moisture = new float[chunkSize, chunkSize];
+        TileType[,] types = new TileType[chunkSize, chunkSize];
 
         GenerateNoiseMap(elevation, chunkSize, chunkSize);
         GenerateNoiseMap(moisture, chunkSize, chunkSize);
 
+        for (int y = 0; y < chunkSize; y++)
+        {
+            for (int x = 0; x < chunkSize; x++)
+            {
+                GameObject go = chunk.GetGameObject(x, y);
+                // TileType type = GetBiome(elevation[y, x], moisture[y, x]);
+                TileType type = GetBiomeWSettings(elevation[y, x], moisture[y, x]);
+
+                types[y, x] = type;
+                go.GetComponent<Renderer>().material.color = BiomeToColor(type);
+
+                if (TileMap.Collides(type)) // disable atm TileMap.cs
+                {
+                    Collider2D body = go.GetComponent<Collider2D>();
+                    body.enabled = true;
+                }
+                chunk.SetTile(x, y, type);
+            }
+        }
+
+
         float[,] blueNoise = GenerateBlueNoise(20, 20);
-        // todo: hyper-optimization 
-        bool[,] trees = PlaceTrees(blueNoise, 20, 20, elevation, moisture);
-        // spawn trees ?? 
+        // todo: hyper-optimization
+        bool[,] trees = PlaceTrees(blueNoise, 20, 20, types); // kutsu suoraan tuolla niin ei tarvita uutta arrayta
 
         for (int y = 0; y < 20; y++)
         {
@@ -433,30 +517,12 @@ public class Perlin : MonoBehaviour
                 if (trees[y, x])
                 {
                     Vector3 spawnPosition = new Vector3(offsetX * 20 + x, offsetY * 20 + y);
-                    var go = Instantiate(TreeTrefab, this.trees.transform);                     // instantiate biome spesifiseste drop changeillä?
-                    go.transform.position = spawnPosition;
+                    SpawnObject(spawnPosition, this.trees.transform, types[y, x]);
                 }
             }
         }
 
-        for (int y = 0; y < chunkSize; y++)
-        {
-            for (int x = 0; x < chunkSize; x++)
-            {
-                GameObject go = chunk.GetGameObject(x, y);
-                TileType type = GetBiome(elevation[y, x], moisture[y, x]);
-                go.GetComponent<Renderer>().material.color = BiomeToColor(GetBiome(elevation[y, x], moisture[y, x]));
-
-                if (TileMap.Collides(type)) // disable atm TileMap.cs
-                {
-                    Collider2D body = go.GetComponent<Collider2D>();
-                    body.enabled = true;
-                }
-
-                chunk.SetTile(x, y, type);
-            }
-        }
-        offsetX = 0;
+        OffsetX = 0;
         OffsetY = 0;
     }
 
@@ -471,8 +537,6 @@ public class Perlin : MonoBehaviour
 
         float[,] elevation = new float[chunkSize, chunkSize];
         float[,] moisture = new float[chunkSize, chunkSize];
-
-
 
         GenerateNoiseMap(elevation, chunkSize, chunkSize);
         GenerateNoiseMap(moisture, chunkSize, chunkSize);
@@ -493,7 +557,7 @@ public class Perlin : MonoBehaviour
                 tiles[y, x] = type;
             }
         }
-        offsetX = 0;
+        OffsetX = 0;
         OffsetY = 0;
     }
 
@@ -576,4 +640,69 @@ public class Perlin : MonoBehaviour
         // High mountain
         return TileType.Snow;
     }
+
+
+    // sama asia kuin ylempänä
+    public BiomeSettings settings;
+
+    public TileType GetBiomeWSettings(float e, float m)
+    {
+        foreach (BiomeSettings.ElevationData elevationsArray in settings.Elevations)
+        {
+            // for (int i = 0; i < elevationsArray.startElevation; i++) // järjestykseesä pienin suurint
+            {
+                // 0.16f
+                if (e < elevationsArray.StartElevation)
+                {
+                    foreach (var tileData in elevationsArray.Tiles)
+                    {
+                        // moisturechecking
+                        if (m < tileData.StartMoisture)
+                        {
+                            return tileData.Type;
+                        }
+                    }
+                }
+            }
+        }
+
+        return TileType.GrassLand; // place holder olisi kiva
+    }
+
+
+
+    // XD: 
+    //void WriteBiomeDataToFile(BiomeSettings settings) // settings todo:
+    //{
+    //    string data = "";
+    //    data += GetEnumName();
+
+    //    // Kirjoita ehdot;
+    //    for(int i = 0; i < settings.elevations.Length; i++)
+    //    {
+    //        float Elevation = settings.elevations[i].startElevation;
+    //        WriteElevationIf(Elevation);
+
+    //    }
+
+    //    data += EndName();
+
+    //    System.IO.File.WriteAllText("eetulähettääterveisensä.txt", data);
+    //}
+
+    //string GetEnumName()
+    //{
+    //    return "public TileType GetBiome(float e, float m) {";
+    //}
+
+    //string EndName()
+    //{
+    //    return "\n}";
+    //}
+
+    //string WriteElevationIf(float elevation)
+    //{
+    //    string str = "if ( e" + elevation.ToString() + " < " + elevation.ToString() + " ) \n{";
+    //    return elevation.ToString();
+    //}
 }

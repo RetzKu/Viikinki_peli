@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RuneEffectLauncher : MonoBehaviour {
+public class RuneEffectLauncher : MonoBehaviour
+{
+    private ParticleSystem _particleSystem;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Start()
+    {
+        _particleSystem =  GetComponent<ParticleSystem>();
+    }
 
     public void Fire(Sprite sprite)
     {
@@ -39,4 +36,8 @@ public class RuneEffectLauncher : MonoBehaviour {
        
         Destroy(go);
     }
+
+
+    IEnumerator EmitParticles;
+
 }

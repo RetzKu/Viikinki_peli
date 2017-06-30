@@ -86,6 +86,7 @@ public class TileMap : MonoBehaviour
         //        rend.sprite = GrassSprite;
         //    }
         //}
+
         for (int x = 0; x < TotalWidth; x++)
         {
             TileGameObjects[0, x].GetComponent<SpriteRenderer>().sprite = GrassSprite;
@@ -135,22 +136,6 @@ public class TileMap : MonoBehaviour
                     Gizmos.DrawWireCube(center, bounds);
                 }
             }
-
-
-            //// DEBUG for chunk tile real loc
-
-
-            //Gizmos.color = Color.red;
-            //Vector3 size = new Vector3(1, 1, 1);
-            //Vector3 pos = TileGameObjects[0, 0].transform.position;
-
-            //Gizmos.DrawCube(pos, size);
-            //pos = TileGameObjects[24, 25].transform.position;
-            //Gizmos.DrawCube(pos, size);
-
-            //pos = TileGameObjects[].transform.position;
-            //Gizmos.DrawCube(pos, size);
-
         }
     }
 
@@ -159,7 +144,6 @@ public class TileMap : MonoBehaviour
     {
         foreach (var tile in TileGameObjects)
         {
-
             var spriteRenderer = tile.GetComponent<SpriteRenderer>();
             // spriteRenderer = new SpriteRenderer();
             spriteRenderer.sprite = TestTiles[Random.Range(0, TestTiles.Length)];
@@ -201,7 +185,7 @@ public class TileMap : MonoBehaviour
 
         if (chunkOffsetX != player.ChunkOffsets.X || chunkOffsetY != player.ChunkOffsets.Y)
         {
-            Debug.LogFormat("player chunk changed to({0}:{1})", chunkOffsetX, chunkOffsetY);
+            //Debug.LogFormat("player chunk changed to({0}:{1})", chunkOffsetX, chunkOffsetY);
 
             int chunkDtX = chunkOffsetX - player.ChunkOffsets.X;
             int chunkDtY = chunkOffsetY - player.ChunkOffsets.Y;

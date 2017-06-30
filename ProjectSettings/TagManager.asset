@@ -13,6 +13,8 @@ TagManager:
   - ItemEquip
   - ItemInventory
   - Spawner
+  - Enemy
+  - TouchPoint
   layers:
   - Default
   - TransparentFX
@@ -32,8 +34,6 @@ TagManager:
   - Archer
   - Collide
   - TileMapBorders
-
-  - 
   - 
   - 
   - 
@@ -75,4 +75,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer
+    uniqueID: 1593682653
     locked: 0

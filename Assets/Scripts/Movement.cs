@@ -28,14 +28,8 @@ public class Movement : MonoBehaviour
 
     Vector2 Input_checker()
     {
-        //if (Keyboard == false)
-        //{
-        //    Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical")).normalized;
-        //}
-        //else
-        //{
-            Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-        //}
+        Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+
         if (movement.x == 0 && movement.y == 0) {rb.drag = slowdown;}
         else {rb.drag = 2;}
 

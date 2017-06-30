@@ -58,39 +58,25 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D) == true)
         {
             playerDirection = direction.right;
-            playerMoving = true;
             //Debug.Log(playerDirection);
         }
 
         else if (Input.GetKeyDown(KeyCode.A) == true)
         {
             playerDirection = direction.left;
-            playerMoving = true;
             //Debug.Log(playerDirection);
         }
 
         else if (Input.GetKeyDown(KeyCode.S) == true)
         {
             playerDirection = direction.down;
-            playerMoving = true;
             //Debug.Log(playerDirection);
         }
 
         else if (Input.GetKeyDown(KeyCode.W) == true)
         {
             playerDirection = direction.up;
-            playerMoving = true;
             //Debug.Log(playerDirection);
-        }
-
-        else if (Input.GetKey(KeyCode.W) == false & Input.GetKey(KeyCode.A) == false & Input.GetKey(KeyCode.S) == false & Input.GetKey(KeyCode.D) == false)
-        {
-            playerMoving = false;
-        }
-
-        else
-        {
-
         }
     }
 
@@ -125,31 +111,8 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0) == true)
         {
-
             transform.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
-
-            /*
-            if (clickPosition.x < 0.0f & transform.Find("Equip").transform.childCount >= 1)
-
-            {
-                transform.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
-                //GameObject.Find("Equip").transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 90.0f);
-            }
-
-            else if (clickPosition.x > 0.0f & transform.Find("Equip").transform.childCount >= 1)
-            {
-                transform.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
-                //GameObject.Find("Equip").transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 270.0f);
-            }
-            */
         }
-
-        else if (transform.Find("Equip").transform.childCount >= 1)
-        {
-            //EquipChild.transform.GetChild(0).transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
-        }
-
-        else { }
 
         if (playerMoving == false)
         {
@@ -173,11 +136,6 @@ public class PlayerScript : MonoBehaviour
             {
                 sprites[i].enabled = true;
             }
-
-            transform.Find("s_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", false);
-            transform.Find("d_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", false);
-            transform.Find("u_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", false);
-
         }
 
         if (playerDirection == direction.right | playerDirection == direction.left)
@@ -209,7 +167,6 @@ public class PlayerScript : MonoBehaviour
                 {
                     sprites[i].enabled = true;
                 }
-
                 transform.Find("s_c_torso").gameObject.GetComponent<Transform>().localScale = new Vector3(-1.0f, 1.0f, 1.0f);
             }
 

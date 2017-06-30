@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TileSpriteController : MonoBehaviour
 {
@@ -131,7 +133,7 @@ public class TileSpriteController : MonoBehaviour
     bool IsUpperTile(TileType upper, TileType down)
     {
         if (upper == down) return true;
-        return (int)upper < (int)down;  // TODO: Kunnon säännöt
+        return (int)upper > (int)down;  // TODO: Kunnon säännöt
     }
 
     string GetAssetNameBitmask(int x, int y, TileMap Tilemap, out int value, out bool found)
@@ -219,12 +221,6 @@ public class TileSpriteController : MonoBehaviour
     public int GetAssetCount(TileType type)
     {
         return TileCount[(int)type];
-
-        //  if (type == TileType.Water)
-        //{
-        //    return 1;
-        //}
-        //return 9;
     }
 
     public void SetTileSprites(int width, int height, TileMap tilemap, int startX, int startY)
@@ -319,6 +315,7 @@ public class TileSpriteController : MonoBehaviour
         }
     }
 
+    [Obsolete]
     public void InitChunkSprites(int width, int height, TileMap tilemap, int startX, int startY)
     {
         List<Vec2> problemsCases = new List<Vec2>(32);
@@ -405,6 +402,7 @@ public class TileSpriteController : MonoBehaviour
     }
 
     // TMP NEW CREATE!
+    [Obsolete]
     public bool TileWeight(TileType type, TileType type2)
     {
         return true;

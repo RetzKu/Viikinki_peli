@@ -1,12 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
-
-public class Circle : MonoBehaviour
-{
-}
 
 public class TouchController : MonoBehaviour
 {
@@ -194,15 +187,15 @@ public class TouchController : MonoBehaviour
 
         if (Input.GetMouseButton(1) || Input.GetMouseButton(0) /*|| Input.GetTouch(0).*/ )
         {
-            // TODO: Efectin erittely / terminaatio ehto
-            //if (LineFadeEffectRunning)
-            //{
-            //    lineRenderer.widthMultiplier = LineStartWidth;
-            //    lineRenderer.numPositions = 0;
-            //    index = 0;
-            //    LineFadeEffectRunning = false;
-            //    lineActive = false;
-            //}
+            if (LineFadeEffectRunning)
+            {
+                StopCoroutine(LineFadeEffect());
+                lineRenderer.widthMultiplier = LineStartWidth;
+                lineRenderer.numPositions = 0;
+                index = 0;
+                LineFadeEffectRunning = false;
+                lineActive = false;
+            }    
 
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 2;
@@ -248,7 +241,7 @@ public class TouchController : MonoBehaviour
         }
 
         lineRenderer.widthMultiplier = LineStartWidth;
-        lineRenderer.positionCount = 0;
+        lineRenderer.numPositions = 0;
 
         index = 0;
         LineFadeEffectRunning = false;
@@ -296,7 +289,7 @@ public class TouchController : MonoBehaviour
             //LineRenderer.positionCount = index + 1;
             //lineRenderer.positionCount = index + 1;
             //lineRenderer.positionCount = index + 1;
-            lineRenderer.positionCount = index + 1;
+            lineRenderer.numPositions = index + 1;
 
             lineRenderer.SetPosition(index, positions[index]);
             lineRenderer.sortingLayerName = "Foreground";

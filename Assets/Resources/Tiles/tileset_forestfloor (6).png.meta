@@ -1,17 +1,22 @@
 fileFormatVersion: 2
-guid: cca2cb4f0a5eaee4b94335e81f7d9da4
-timeCreated: 1498737723
+guid: 69e632a40484b3941aa6d7c31caf57ab
+timeCreated: 1498809804
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: tileset_forestfloor (2)_0
-    21300002: tileset_forestfloor (2)_1
-    21300004: tileset_forestfloor (2)_2
-    21300006: tileset_forestfloor (2)_3
-    21300008: tileset_forestfloor (2)_S
-    21300010: tileset_forestfloor (2)_WW
-    21300012: tileset_forestfloor (2)_N
-    21300014: tileset_forestfloor (2)_EE
+    21300000: tileset_forestfloor (6)_0
+    21300002: tileset_forestfloor (6)_1
+    21300004: tileset_forestfloor (6)_2
+    21300006: tileset_forestfloor (6)_3
+    21300008: tileset_forestfloor (6)_4
+    21300010: tileset_forestfloor (6)_5
+    21300012: tileset_forestfloor (6)_6
+    21300014: tileset_forestfloor (6)_7
+    21300016: tileset_forestfloor (6)_8
+    21300018: tileset_forestfloor (6)_9
+    21300020: tileset_forestfloor (6)_10
+    21300022: tileset_forestfloor (6)_11
+    21300024: tileset_forestfloor (6)_12
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -36,7 +41,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: 0
-    aniso: 1
+    aniso: -1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -134,7 +139,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tileset_forestfloor (2)_0
+      name: tileset_forestfloor (6)_0
       rect:
         serializedVersion: 2
         x: 0
@@ -142,12 +147,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_forestfloor (2)_1
+      name: tileset_forestfloor (6)_1
       rect:
         serializedVersion: 2
         x: 64
@@ -155,12 +160,25 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_forestfloor (2)_2
+      name: tileset_forestfloor (6)_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_forestfloor (6)_3
       rect:
         serializedVersion: 2
         x: 0
@@ -168,12 +186,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_forestfloor (2)_3
+      name: tileset_forestfloor (6)_4
       rect:
         serializedVersion: 2
         x: 64
@@ -181,12 +199,64 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_forestfloor (2)_S
+      name: tileset_forestfloor (6)_5
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_forestfloor (6)_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_forestfloor (6)_7
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_forestfloor (6)_8
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_forestfloor (6)_9
       rect:
         serializedVersion: 2
         x: 0
@@ -194,12 +264,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_forestfloor (2)_WW
+      name: tileset_forestfloor (6)_10
       rect:
         serializedVersion: 2
         x: 64
@@ -207,12 +277,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_forestfloor (2)_N
+      name: tileset_forestfloor (6)_11
       rect:
         serializedVersion: 2
         x: 128
@@ -220,12 +290,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_forestfloor (2)_EE
+      name: tileset_forestfloor (6)_12
       rect:
         serializedVersion: 2
         x: 192
@@ -233,7 +303,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

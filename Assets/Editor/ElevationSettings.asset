@@ -40,7 +40,7 @@ MonoBehaviour:
       AssetName: 
       SpawnSettings: {fileID: 11400000, guid: 655ce7f831845be4f9535528f9e15f11, type: 2}
     - StartMoisture: 0.7
-      Type: 6
+      Type: 7
       AssetName: 
       SpawnSettings: {fileID: 0}
     - StartMoisture: 1
@@ -51,7 +51,7 @@ MonoBehaviour:
   - StartElevation: 0.7
     Tiles:
     - StartMoisture: 1
-      Type: 7
+      Type: 6
       AssetName: 
       SpawnSettings: {fileID: 11400000, guid: 655ce7f831845be4f9535528f9e15f11, type: 2}
     EditorName: "Metsikk\xF6\xE4"

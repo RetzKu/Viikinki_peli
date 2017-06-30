@@ -23,13 +23,8 @@ public enum TileType
     //Shrubland,      // en edes tiedä mikä on Shrubland
     //Taiga,          // näiden tilalle hassuja biome/tileTypejä
 
-
-    GrassLand,
-
     Forest,
-
-
-
+    GrassLand,
 
     Jungle,
     Savannah,

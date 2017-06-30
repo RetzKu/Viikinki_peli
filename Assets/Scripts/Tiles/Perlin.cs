@@ -96,6 +96,7 @@ public class Perlin : MonoBehaviour
         {
             Debug.LogError("Please set the renderTarget (Quad)");
         }
+
         _renderer = RenderTarget.GetComponent<Renderer>();
         InitalizeRenderTarget();
 
@@ -212,11 +213,26 @@ public class Perlin : MonoBehaviour
             float[,] blueNoise = GenerateBlueNoise(100, 100);
 
             // TODO: fix visualization once needed
-            //float[,] noiseMap = new float[115, 115];
-            //GenerateNoiseMap(noiseMap, 115, 115);
-            //bool[,] trees = PlaceTrees(blueNoise, 100, 100, /*types*/);
-            //DrawNoiseMap((elevation, moisture) => Color.Lerp(Color.black, Color.blue, elevation), _renderer, trees, 100, 100);
+            float[,] noiseMap = new float[115, 115];
+            GenerateNoiseMap(noiseMap, 115, 115);
+            bool[,] trees = PlaceTrees(blueNoise, 100, 100, GetTestTileTypeArray(100, 100));
+            DrawNoiseMap((elevation, moisture) => Color.Lerp(Color.black, Color.blue, elevation), _renderer, trees, 100, 100);
         }
+    }
+
+    TileType[,] GetTestTileTypeArray(int x, int y)
+    {
+        TileType[,] value = new TileType[y, x];
+
+        for (int yIndex = 0; yIndex < y; yIndex++)
+        {
+            for (int xIndex = 0; xIndex < x; xIndex++)
+            {
+                value[yIndex, xIndex] = TileType.GrassLand;
+            }
+        }
+
+        return value;
     }
 
     public int blueNoiseOctaves = 2;
@@ -276,7 +292,7 @@ public class Perlin : MonoBehaviour
     {
         if (type == TileType.GrassLand)
         {
-            return 2;
+            return 1;
         }
         else if (type == TileType.Water)
         {

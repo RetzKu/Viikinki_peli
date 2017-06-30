@@ -20,6 +20,40 @@ public class Vec2
     {
         return !(a == b);
     }
+
+    //public override bool Equals(object obj)
+    //{
+    //    if (obj == null)
+    //    {
+    //        return false;
+    //    }
+
+    //    Vec2 p = obj as Vec2;
+    //    if ((System.Object)p == null)
+    //    {
+    //        return false;
+    //    }
+
+    //    return (X == p.X) && (Y == p.Y);
+    //}
+
+    //public bool Equals(Vec2 p)
+    //{
+    //    if ((object)p == null)
+    //    {
+    //        return false;
+    //    }
+
+    //    return (X == p.X) && (Y == p.Y);
+    //}
+
+    public override int GetHashCode()
+    {
+        int hash = 17;
+        hash = hash * 23 + X.GetHashCode();
+        hash = hash * 23 + Y.GetHashCode();
+        return hash;
+    }
 }
 
 public interface ITestPlayer

@@ -372,6 +372,7 @@ public class TileSpriteController : MonoBehaviour
             //}
 
             // TODO: FUNKTIO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
             //for(int i = 0; i < neighbours.Length; i++)
             //{
             //    int x = neighbours[i].X + pos.X;

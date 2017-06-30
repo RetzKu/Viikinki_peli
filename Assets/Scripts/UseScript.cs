@@ -22,4 +22,5 @@ public class UseScript : MonoBehaviour {
     {
         Debug.Log("Item used");
     }
+ 
 }

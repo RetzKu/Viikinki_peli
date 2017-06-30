@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 
 
@@ -12,6 +13,7 @@ public class Movement : MonoBehaviour
             public float thrust = 15;
             public float max_spd = 3;
 
+    public bool Keyboard = true;
 
     void Start()
     {

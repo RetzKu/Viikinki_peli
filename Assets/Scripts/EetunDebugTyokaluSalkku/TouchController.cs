@@ -241,6 +241,7 @@ public class TouchController : MonoBehaviour
         }
 
         lineRenderer.widthMultiplier = LineStartWidth;
+
         lineRenderer.numPositions = 0;
 
         index = 0;

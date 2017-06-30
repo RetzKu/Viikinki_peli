@@ -21,7 +21,7 @@ MonoBehaviour:
     EditorName: "syv\xE4 vesi"
   - StartElevation: 0.22
     Tiles:
-    - StartMoisture: 1
+    - StartMoisture: 0.233
       Type: 1
       AssetName: 
       SpawnSettings: {fileID: 11400000, guid: 655ce7f831845be4f9535528f9e15f11, type: 2}

@@ -99,7 +99,7 @@ public class TouchController : MonoBehaviour
 
         for(int i = 0; i < 10; i++)
         {
-            runeIndices[i] = new Vec2(0, 0);
+            // KruneIndices[i] = new Vec2(0, 0);
         }
         index = 0;
     }
@@ -248,7 +248,7 @@ public class TouchController : MonoBehaviour
         }
 
         lineRenderer.widthMultiplier = LineStartWidth;
-        lineRenderer.numPositions = 0;
+        lineRenderer.positionCount = 0;
 
         index = 0;
         LineFadeEffectRunning = false;
@@ -296,7 +296,7 @@ public class TouchController : MonoBehaviour
             //LineRenderer.positionCount = index + 1;
             //lineRenderer.positionCount = index + 1;
             //lineRenderer.positionCount = index + 1;
-            lineRenderer.numPositions = index + 1;
+            lineRenderer.positionCount = index + 1;
 
             lineRenderer.SetPosition(index, positions[index]);
             lineRenderer.sortingLayerName = "Foreground";

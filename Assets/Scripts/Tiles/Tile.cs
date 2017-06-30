@@ -12,7 +12,6 @@ public enum TileType
     
     CollisionTiles,
 
-    Forest,
 
 
     Beach,
@@ -27,6 +26,7 @@ public enum TileType
 
     GrassLand,
 
+    Forest,
 
 
 

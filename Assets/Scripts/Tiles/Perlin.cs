@@ -449,8 +449,8 @@ public class Perlin : MonoBehaviour
         }
         else
         {
-            var go = Instantiate(SpawnSettings.SpawnableObjects[Random.Range(0, SpawnSettings.SpawnableObjects.Length)].ObjectPrefab, parent);
-            go.transform.position = spawnPosition;
+            // var go = Instantiate(SpawnSettings.SpawnableObjects[Random.Range(0, SpawnSettings.SpawnableObjects.Length)].ObjectPrefab, parent);
+            // go.transform.position = spawnPosition;
         }
     }
 

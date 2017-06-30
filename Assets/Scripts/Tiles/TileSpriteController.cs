@@ -131,7 +131,7 @@ public class TileSpriteController : MonoBehaviour
     bool IsUpperTile(TileType upper, TileType down)
     {
         if (upper == down) return true;
-        return upper < down;  // TODO: Kunnon säännöt
+        return (int)upper < (int)down;  // TODO: Kunnon säännöt
     }
 
     string GetAssetNameBitmask(int x, int y, TileMap Tilemap, out int value, out bool found)
@@ -267,7 +267,7 @@ public class TileSpriteController : MonoBehaviour
                     continue;
                 }
 
-                if (tempIndex < temporarySecondLayer.Length)
+                if (tempIndex < temporarySecondLayer.Length - 1)
                 {
                     string border = "GrassLand";
 

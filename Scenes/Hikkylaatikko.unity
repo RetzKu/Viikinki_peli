@@ -2317,6 +2317,7 @@ GameObject:
   - component: {fileID: 1234730254}
   - component: {fileID: 1234730253}
   - component: {fileID: 1234730259}
+  - component: {fileID: 1234730260}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2339,6 +2340,7 @@ MonoBehaviour:
   slowdown: 10
   thrust: 15
   max_spd: 3
+  Keyboard: 1
 --- !u!114 &1234730254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2463,6 +2465,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DebugViewRange: 16
+--- !u!114 &1234730260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1234730252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 346d15d1fa97b8d4f98a2b1aa2c13c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1305883630
 GameObject:
   m_ObjectHideFlags: 0

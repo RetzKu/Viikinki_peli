@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 
 
@@ -12,6 +13,7 @@ public class Movement : MonoBehaviour
             public float thrust = 15;
             public float max_spd = 3;
 
+    public bool Keyboard = true;
 
     void Start()
     {
@@ -26,8 +28,14 @@ public class Movement : MonoBehaviour
 
     Vector2 Input_checker()
     {
-        Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-
+        //if (Keyboard == false)
+        //{
+        //    Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical")).normalized;
+        //}
+        //else
+        //{
+            Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+        //}
         if (movement.x == 0 && movement.y == 0) {rb.drag = slowdown;}
         else {rb.drag = 2;}
 

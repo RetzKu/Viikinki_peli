@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
 
-    internal List<ItemScript> invetory_data;
     public int InventorySize;
 
     private GameObject InventoryChild;
@@ -32,8 +31,7 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
-        invetory_data = new List<ItemScript>(InventorySize);
-
+        /*Get Inventory parents*/
         InventoryChild = gameObject.transform.Find("Inventory").gameObject;
         EquipChild = gameObject.transform.Find("Equip").gameObject;
 

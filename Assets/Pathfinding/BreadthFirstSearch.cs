@@ -87,98 +87,42 @@ public class BreadthFirstSearch
         goalX = playerX;
         goalY = playerY;
 
-
-        //tiles_list[playerY][playerX].tileState = states.goal;
-        //List<tiles> frontier = new List<tiles>();
-       
-        //frontier.Add(moveTiles[playerY][playerX]);
-
-
+        Dictionary<tiles, int> toimii = new Dictionary<tiles, int>();
 
         Queue<tiles> hue = new Queue<tiles>(100);
         hue.Enqueue(moveTiles[playerY][playerX]);
-        //List<tiles> visitedNodes = new List<tiles>(100);
-        //visitedNodes.Add(moveTiles[playerY][playerX]);
+
 
         while (hue.Count != 0)
         {
             tiles current = hue.Dequeue();
-            if (current.y - 1 >= 0 && moveTiles[current.y - 1][current.x].tileState == states.unVisited)
-            {
-                tiles tile = moveTiles[current.y-1][current.x];
-                hue.Enqueue(tile);
-                tile.tileState = states.up;
-                //visitedNodes.Add(tile);
-                //frontier.Add(moveTiles[current.x][current.y - 1]);
-                //moveTiles[current.x][current.y - 1].tileState = states.up;
-                //tiles_list[i.x ][i.y- 1].value = tileValue++;
-            }
-
-            if (current.y + 1 <= 59 && moveTiles[current.y + 1][current.x].tileState == states.unVisited)
-            {
-                tiles tile = moveTiles[current.y + 1][current.x];
-                hue.Enqueue(tile);
-                tile.tileState = states.down;
-                //visitedNodes.Add(tile);
-                //frontier.Add(moveTiles[current.x][current.y + 1]);
-                //moveTiles[current.x][current.y + 1].tileState = states.down;
-            }
 
             if (current.x - 1 >= 0 && moveTiles[current.y][current.x - 1].tileState == states.unVisited)
             {
                 tiles tile = moveTiles[current.y][current.x - 1];
                 hue.Enqueue(tile);
                 tile.tileState = states.right;
-                //visitedNodes.Add(tile);
             }
-
-
             if (current.x + 1 <= 59 && moveTiles[current.y][current.x + 1].tileState == states.unVisited)
             {
                 tiles tile = moveTiles[current.y][current.x + 1];
                 hue.Enqueue(tile);
                 tile.tileState = states.left;
-                //visitedNodes.Add(tile);
-                //frontier.Add(moveTiles[current.x + 1][current.y]);
-                //moveTiles[current.x + 1][current.y].tileState = states.left;
-                //tiles_list[i.x + 1][i.y].value = tileValue++;
             }
-
-           
-            //hue.Dequeue();
-
-                // foreach (tiles i in frontier) // check neighbours
-                //for (int i = 0; i < frontier.Count; i++)
-                //{
-
-                //        if (frontier[i].x -1 >= 0 ||moveTiles[frontier[i].x - 1][frontier[i].y].tileState == states.unVisited)
-                //        {
-                //            frontier.Add(moveTiles[frontier[i].x - 1][frontier[i].y]);
-                //            moveTiles[frontier[i].x - 1][frontier[i].y].tileState = states.right;
-                //            //tiles_list[i.x - 1][i.y].value = tileValue++;
-                //        }
-                //        if (frontier[i].x + 1 <= 59 || moveTiles[frontier[i].x + 1][frontier[i].y].tileState == states.unVisited)
-                //        {
-                //            frontier.Add(moveTiles[frontier[i].x + 1][frontier[i].y]);
-                //            moveTiles[frontier[i].x + 1][i.y].tileState = states.left;
-                //            //tiles_list[i.x + 1][i.y].value = tileValue++;
-                //        }
-                //        if (frontier[i].y - 1 >= 0 || moveTiles[frontier[i].x][frontier[i].y - 1].tileState == states.unVisited)
-                //        {
-                //            frontier.Add(moveTiles[frontier[i].x][frontier[i].y - 1]);
-                //            moveTiles[frontier[i].x][i.y - 1].tileState = states.up;
-                //            //tiles_list[i.x ][i.y- 1].value = tileValue++;
-                //        }
-                //        if (frontier[i].y + 1 <= 59 || moveTiles[frontier[i].x][i.y + 1].tileState == states.unVisited)
-                //        {
-                //            frontier.Add(moveTiles[frontier[i].x][frontier[i].y + 1]);
-                //            moveTiles[frontier[i].x][frontier[i].y + 1].tileState = states.down;
-                //            //tiles_list[i.x][i.y + 1].value = tileValue++;
-                //        }
-                //    frontier.Remove(i); // check does this work
-                //}
+            if (current.y + 1 <= 59 && moveTiles[current.y + 1][current.x].tileState == states.unVisited)
+            {
+                tiles tile = moveTiles[current.y + 1][current.x];
+                hue.Enqueue(tile);
+                tile.tileState = states.down;
             }
-
-
+            if (current.y - 1 >= 0 && moveTiles[current.y - 1][current.x].tileState == states.unVisited)
+            {
+                tiles tile = moveTiles[current.y-1][current.x];
+                hue.Enqueue(tile);
+                tile.tileState = states.up;
+            }
         }
+
+
+    }
 }

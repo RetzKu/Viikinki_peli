@@ -23,6 +23,20 @@ public enum collision
     Left,
     none
 }
+
+public enum enemyDir
+{
+    Right,
+    Left,
+    Down,
+    Up,
+    LU,
+    LD,
+    RU,
+    RD,
+    Still
+}
+
 [Flags]
 public enum behavior
 {
@@ -49,6 +63,8 @@ public enum behavior
 
 public class EnemyAI : MonoBehaviour
 {
+    enemyDir myDir {get;set;}
+
     float collideDist = 1f;
     collision CollState = collision.none;
 
@@ -98,7 +114,7 @@ public class EnemyAI : MonoBehaviour
     public void InitStart(float x, float y,EnemyType type)
     {
         myType = type;
-
+        myDir = enemyDir.Still;
         switch (myType)
         {
             case EnemyType.Wolf:
@@ -161,6 +177,76 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
+    void uptadeDir4() // tämä voidaan tehdä myös keskiarvolla
+    {
+        float xx = Mathf.Abs(velocity.x);
+        float yy = Mathf.Abs(velocity.y);
+
+        if(xx >= yy)
+        {
+            if (xx >= 0)
+            {
+                myDir = enemyDir.Up;
+            }
+            else
+            {
+                myDir = enemyDir.Left;
+            }
+        }
+        else
+        {
+            if (yy <= 0)
+            {
+                myDir = enemyDir.Right;
+            }
+            else
+            {
+                myDir = enemyDir.Left;
+            }
+        }
+    }
+    void uptadeDir6() // tämä voidaan tehdä myös keskiarvolla
+    {
+        float xx = Mathf.Abs(velocity.x);
+        float yy = Mathf.Abs(velocity.y);
+
+        if (xx >= yy)
+        {
+            if (xx >= 0)
+            {
+                myDir = enemyDir.Right;
+            }
+            else
+            {
+                myDir = enemyDir.Left;
+            }
+        }
+        else
+        {
+            if (yy <= 0)
+            {
+                if(xx >= 0)
+                {
+                    myDir = enemyDir.RU;
+                }
+                else
+                {
+                    myDir = enemyDir.RD;
+                }
+            }
+            else
+            {
+                if (xx >= 0)
+                {
+                    myDir = enemyDir.LU;
+                }
+                else
+                {
+                    myDir = enemyDir.LD;
+                }
+            }
+        }
+    }
     public void UpdatePosition(List<GameObject> Mobs)
     {
         LayerMask mask = new LayerMask();
@@ -290,7 +376,7 @@ public class EnemyAI : MonoBehaviour
 
         // missä olen
         BreadthFirstSearch.states k =  pl.GetComponent<UpdatePathFind>().path.getTileDir(body.position);
-        print(k.ToString());
+        //print(k.ToString());
         //BreadthFirstSearch.states k = BreadthFirstSearch.states.right;
         if (k == BreadthFirstSearch.states.goal || k == BreadthFirstSearch.states.wall || k == BreadthFirstSearch.states.unVisited)
         {

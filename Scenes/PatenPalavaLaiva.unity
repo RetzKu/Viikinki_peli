@@ -1024,7 +1024,7 @@ Prefab:
     - target: {fileID: 114082371090620650, guid: 2b5b440fa7b64344ea4718be6cea3e4e,
         type: 2}
       propertyPath: Mob_Amount
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 114082371090620650, guid: 2b5b440fa7b64344ea4718be6cea3e4e,
         type: 2}

@@ -213,8 +213,10 @@ public class TileMap : MonoBehaviour
                 }
 
                 // SpriteController.InitChunkSprites(21, 58, this, 1, 1);
+
+                SpriteController.SetTileSprites(22, 58, this, 1, 1);
             }
-            else if (chunkDtX > 0)
+            else if (chunkDtX > 0)      // oikealle
             {
                 swapColumn(1, 0);
                 // SwapColumnsViews(2, 1);
@@ -230,6 +232,8 @@ public class TileMap : MonoBehaviour
                     GenerateChunk(2, i + 1, chunkOffsetX + 1, chunkOffsetY + i);
                     _chunks[i + 1, 2].MoveChunk(3, 0);
                 }
+
+                SpriteController.SetTileSprites(58, 58, this, 38, 1);
             }
             if (chunkDtY < 0)
             {
@@ -246,8 +250,10 @@ public class TileMap : MonoBehaviour
                     _chunks[0, i + 1].MoveChunk(0, -3);
 
                 }
+
+                SpriteController.SetTileSprites(58, 22, this, 1, 1);
             }
-            else if (chunkDtY > 0)
+            else if (chunkDtY > 0)  // ylös
             {
                 swapRow(1, 0);
                 swapRow(2, 1);
@@ -261,9 +267,13 @@ public class TileMap : MonoBehaviour
                     GenerateChunk(i + 1, 2, chunkOffsetX + i, chunkOffsetY + 1);
                     _chunks[2, i + 1].MoveChunk(0, 3);
                 }
+
+                SpriteController.SetTileSprites(58, 58, this, 1, 38);
             }
             SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position;
-            SpriteController.SetTileSprites(59, 59, this, 1, 1);
+
+
+            //SpriteController.SetTileSprites(59, 59, this, 1, 1);
         }
 
         _chunks[1, 1].offsetX = chunkOffsetX;   // ainoastaa center chunk on oikeassa chunkissa atm
@@ -398,12 +408,7 @@ public class TileMap : MonoBehaviour
             SpriteController.SetTileSprites(TotalWidth - 2, TotalHeight - 2, this, 1, 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            swapColumn(1, 0);
-            swapColumn(2, 1);
-        }
-
+       
         if (Input.GetKeyDown(KeyCode.Q))
         {
             _chunks[1, 1].Save();

@@ -191,6 +191,7 @@ public class TouchController : MonoBehaviour
             {
                 StopCoroutine(LineFadeEffect());
                 lineRenderer.widthMultiplier = LineStartWidth;
+                //lineRenderer.positionCount = 0;
                 lineRenderer.numPositions = 0;
                 index = 0;
                 LineFadeEffectRunning = false;

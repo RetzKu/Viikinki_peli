@@ -11,5 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04dc6761d973d26478f4b5b7179a0081, type: 3}
   m_Name: forest
   m_EditorClassIdentifier: 
-  Type: 0
-  SpawnableObjects: []
+  Type: 6
+  SpawnableObjects:
+  - ObjectPrefab: {fileID: 1384798036243720, guid: c21a5b0ce54693145bfab62a7359ecd8,
+      type: 2}
+    SpawnRate: 0

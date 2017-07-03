@@ -70,7 +70,7 @@ public class AnimatorScript : MonoBehaviour
             Sprites.Add(PlayerTransform.Find("s_c_torso").GetComponentsInChildren<SpriteRenderer>());
             Sprites.Add(PlayerTransform.Find("d_c_torso").GetComponentsInChildren<SpriteRenderer>());
             Sprites.Add(PlayerTransform.Find("u_c_torso").GetComponentsInChildren<SpriteRenderer>());
-a        }
+        }
 
         void DirectionCheck()
         {

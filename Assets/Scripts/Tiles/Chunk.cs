@@ -80,7 +80,7 @@ public class Chunk      // sub array
 
     public void Init(int chunkOffsetX, int chunkOffsetY, Transform tilemap, TileType[,] tiles, GameObject[,] gameobjects, int viewStartXIndex, int viewStartYIndex)
     {
-        Debug.Log("x: " + viewStartXIndex);
+        // Debug.Log("x: " + viewStartXIndex);
         TilemapTilesView = new View<TileType>(tiles, viewStartXIndex, viewStartYIndex, 20); // 0 1 2    // SETVIEW;
         GameObjectView = new View<GameObject>(gameobjects, viewStartXIndex, viewStartYIndex, 20);
 

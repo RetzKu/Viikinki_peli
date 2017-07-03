@@ -15,6 +15,12 @@ public class Perlin : MonoBehaviour
 
     private Dictionary<TileType, TilemapObjectSpawnSettings> TileSpawnSettings = new Dictionary<TileType, TilemapObjectSpawnSettings>((int)TileType.Max);
 
+    // Sampler for Trees 
+    private PoissonDiscSampler sampler;
+    private int samplerWidth = 20;
+    private int samplerHeigth = 20;
+    private int samplerRadius = 2;
+
     #region Fields
     public enum NoiseMode
     {
@@ -101,6 +107,8 @@ public class Perlin : MonoBehaviour
         InitalizeRenderTarget();
 
         InitSettings();
+
+        sampler = new PoissonDiscSampler(samplerWidth, samplerHeigth, samplerRadius);
     }
 
     void InitSettings()
@@ -255,7 +263,6 @@ public class Perlin : MonoBehaviour
 
         // Blue noise olisi aina isompi Kuin R????
         // int blueNoiseSafeSpace = 15;
-
         for (int yc = 0; yc < sizeY; yc++)
         {
             for (int xc = 0; xc < sizeX; xc++)
@@ -265,7 +272,7 @@ public class Perlin : MonoBehaviour
 
                 for (int yn = yc - R; yn <= yc + R; yn++)
                 {
-                    for (int xn = xc - R; xn <= xc + R; xn++)
+                    for (int xn = xc - R; xn <= xc + R; xn++) 
                     {
                         if (xn < 0 || yn < 0 || xn >= sizeX || yn >= sizeY)
                             continue;
@@ -452,22 +459,61 @@ public class Perlin : MonoBehaviour
     {
         // choose object to spawn
         // TODO: jokaiselle biomelle omat spawnsettingits
-
-        if (IsImplementedSetting(type))
+        // type = TileType.GrassLand;
+        if (!IsImplementedSetting(type))
         {
-            var setting = TileSpawnSettings[type];
-            if (setting.SpawnableObjects.Length != 0)
+            type = TileType.GrassLand; // atm kaikki grasslandikisi jos ei löydy
+        }
+
+        var setting = TileSpawnSettings[type];
+
+        if (setting.SpawnableObjects.Length != 0)
+        {
+            float roll = Random.Range(0f, 100f);
+            float totalCount = 0;
+
+            for (int i = 0; i < setting.SpawnableObjects.Length; i++)
             {
-                GameObject prefab = setting.SpawnableObjects[Random.Range(0, setting.SpawnableObjects.Length)].ObjectPrefab;
-                var go = Instantiate(prefab, parent);
-                go.transform.position = spawnPosition;
+                float spawnRate = setting.SpawnableObjects[i].SpawnRate;
+                if (totalCount + (spawnRate) >= roll)
+                {
+                    GameObject prefab = setting.SpawnableObjects[i].ObjectPrefab;
+                    var go = Instantiate(prefab, parent);
+                    go.transform.localScale *= Random.Range(0.90f, 1.10f);
+                    go.transform.position = spawnPosition;
+                    break; // ei montaa samaan kohtaan
+                }
+               totalCount += spawnRate;
             }
         }
-        else
+    }
+
+    // spawn ratet:
+    // 100
+    //  - 20
+    //   - lisää ?
+    //   - lisää ? 
+    //  - 40
+    //   - lisää ?
+
+
+    // noise:
+    // 
+
+    bool[,] GenerateObjectsPosition(float[,] objectNoise) // suurempi kuin R
+    {
+        sampler = new PoissonDiscSampler(samplerWidth, samplerHeigth, 1.5f); // GG
+        bool[,] result = new bool[samplerHeigth, samplerWidth];
+
+        foreach (Vector2 sample in sampler.Samples()) // 20, 20 alueelta pisteitä muuta indekseiksi
         {
-            // var go = Instantiate(SpawnSettings.SpawnableObjects[Random.Range(0, SpawnSettings.SpawnableObjects.Length)].ObjectPrefab, parent);
-            // go.transform.position = spawnPosition;
+            float a = objectNoise[(int)sample.y, (int)sample.x];
+            if (a > 0.45f)
+            {
+                result[(int)sample.x, (int)sample.y] = true;   // myohemmin generaatio voisi suoraan olla tähän
+            }
         }
+        return result;
     }
 
     public void GenerateChunk(Chunk chunk, int offsetX, int offsetY) // chunkin offsetit 0,0:sta
@@ -505,19 +551,20 @@ public class Perlin : MonoBehaviour
             }
         }
 
+        // float[,] blueNoise = GenerateBlueNoise(20, 20);
+        // bool[,] trees = PlaceTrees(blueNoise, 20, 20, types); // kutsu suoraan tuolla niin ei tarvita uutta arrayta
+        bool[,] trees = GenerateObjectsPosition(moisture);
 
-        float[,] blueNoise = GenerateBlueNoise(20, 20);
-        // todo: hyper-optimization
-        bool[,] trees = PlaceTrees(blueNoise, 20, 20, types); // kutsu suoraan tuolla niin ei tarvita uutta arrayta
-
+        float startZ = (float)offsetY;
         for (int y = 0; y < 20; y++)
         {
-            for (int x = 0; x < 20; x++)
+            for (int x = 0; x < 20; x++)    // offsetY
             {
                 if (trees[y, x])
                 {
-                    Vector3 spawnPosition = new Vector3(offsetX * 20 + x, offsetY * 20 + y);
+                    Vector3 spawnPosition = new Vector3(offsetX * 20 + x + Random.Range(-0.4f, 0.4f), offsetY * 20 + y + Random.Range(-0.4f, 0.4f), startZ);
                     SpawnObject(spawnPosition, this.trees.transform, types[y, x]);
+                    startZ += 0.001f;
                 }
             }
         }
@@ -644,7 +691,6 @@ public class Perlin : MonoBehaviour
 
     // sama asia kuin ylempänä
     public BiomeSettings settings;
-
     public TileType GetBiomeWSettings(float e, float m)
     {
         foreach (BiomeSettings.ElevationData elevationsArray in settings.Elevations)

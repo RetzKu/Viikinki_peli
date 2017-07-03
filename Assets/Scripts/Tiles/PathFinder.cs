@@ -179,8 +179,9 @@ public class PathFinder : MonoBehaviour
                     frontier.Enqueue(next);
                     cameFrom[next] = current;
                 }
-            }
+           }
         }
+
         GeneratePaths(cameFrom);
     }
 

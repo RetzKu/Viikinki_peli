@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: 3e2122eb547d94f4d9b8aaf27ba804dc
-timeCreated: 1498650658
+guid: 646166efea25f504383c71b7ab904aad
+timeCreated: 1499083630
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: tileset_Mountain_0
-    21300002: tileset_Mountain_1
-    21300004: tileset_Mountain_2
-    21300006: tileset_Mountain_3
-    21300008: tileset_Mountain_4
-    21300010: tileset_Mountain_5
-    21300012: tileset_Mountain_6
-    21300014: tileset_Mountain_7
-    21300016: tileset_Mountain_8
-    21300018: tileset_Mountain_S0
-    21300020: tileset_Mountain_W0
-    21300022: tileset_Mountain_N0
-    21300024: tileset_Mountain_E0
+    21300000: tileset_stone (5)_0
+    21300002: tileset_stone (5)_1
+    21300004: tileset_stone (5)_2
+    21300006: tileset_stone (5)_3
+    21300008: tileset_stone (5)_4
+    21300010: tileset_stone (5)_5
+    21300012: tileset_stone (5)_6
+    21300014: tileset_stone (5)_7
+    21300016: tileset_stone (5)_8
+    21300018: tileset_stone (5)_9
+    21300020: tileset_stone (5)_10
+    21300022: tileset_stone (5)_11
+    21300024: tileset_stone (5)_12
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -41,14 +41,14 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: 0
-    aniso: -1
+    aniso: 1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 1
+  spriteExtrude: 3
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -139,7 +139,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tileset_Mountain_0
+      name: tileset_stone (5)_0
       rect:
         serializedVersion: 2
         x: 0
@@ -147,12 +147,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_Mountain_1
+      name: tileset_stone (5)_1
       rect:
         serializedVersion: 2
         x: 64
@@ -160,12 +160,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_Mountain_2
+      name: tileset_stone (5)_2
       rect:
         serializedVersion: 2
         x: 128
@@ -173,12 +173,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_Mountain_3
+      name: tileset_stone (5)_3
       rect:
         serializedVersion: 2
         x: 0
@@ -186,12 +186,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_Mountain_4
+      name: tileset_stone (5)_4
       rect:
         serializedVersion: 2
         x: 64
@@ -199,12 +199,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_Mountain_5
+      name: tileset_stone (5)_5
       rect:
         serializedVersion: 2
         x: 128
@@ -212,12 +212,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_Mountain_6
+      name: tileset_stone (5)_6
       rect:
         serializedVersion: 2
         x: 0
@@ -225,12 +225,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_Mountain_7
+      name: tileset_stone (5)_7
       rect:
         serializedVersion: 2
         x: 64
@@ -238,12 +238,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_Mountain_8
+      name: tileset_stone (5)_8
       rect:
         serializedVersion: 2
         x: 128
@@ -251,12 +251,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_Mountain_S0
+      name: tileset_stone (5)_9
       rect:
         serializedVersion: 2
         x: 0
@@ -264,12 +264,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_Mountain_W0
+      name: tileset_stone (5)_10
       rect:
         serializedVersion: 2
         x: 64
@@ -277,12 +277,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_Mountain_N0
+      name: tileset_stone (5)_11
       rect:
         serializedVersion: 2
         x: 128
@@ -290,12 +290,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_Mountain_E0
+      name: tileset_stone (5)_12
       rect:
         serializedVersion: 2
         x: 192
@@ -303,7 +303,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

@@ -1,30 +1,26 @@
 fileFormatVersion: 2
-guid: ec78f0097cec70d4ebfada55b8edc6dc
-timeCreated: 1498650723
+guid: cb8c4f09d39b47b4db2dc4ca2cd2614f
+timeCreated: 1499083642
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: tileset_GrassLand_0
-    21300002: tileset_GrassLand_1
-    21300004: tileset_GrassLand_2
-    21300006: tileset_GrassLand_3
-    21300008: tileset_GrassLand_4
-    21300010: tileset_GrassLand_5
-    21300012: tileset_GrassLand_6
-    21300014: tileset_GrassLand_7
-    21300016: tileset_GrassLand_8
-    21300018: GrassLand_S0
-    21300020: GrassLand_W0
-    21300022: GrassLand_N0
-    21300024: GrassLand_E0
-    21300026: tileset_GrassLand_S0
-    21300028: tileset_GrassLand_W0
-    21300030: tileset_GrassLand_N0
-    21300032: tileset_GrassLand_E0
+    21300000: tileset_ground (1)_0
+    21300002: tileset_ground (1)_1
+    21300004: tileset_ground (1)_2
+    21300006: tileset_ground (1)_3
+    21300008: tileset_ground (1)_4
+    21300010: tileset_ground (1)_5
+    21300012: tileset_ground (1)_6
+    21300014: tileset_ground (1)_7
+    21300016: tileset_ground (1)_8
+    21300018: tileset_ground (1)_9
+    21300020: tileset_ground (1)_10
+    21300022: tileset_ground (1)_11
+    21300024: tileset_ground (1)_12
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -45,7 +41,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: 0
-    aniso: 16
+    aniso: 1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -143,7 +139,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tileset_GrassLand_0
+      name: tileset_ground (1)_0
       rect:
         serializedVersion: 2
         x: 0
@@ -151,12 +147,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_GrassLand_1
+      name: tileset_ground (1)_1
       rect:
         serializedVersion: 2
         x: 64
@@ -164,12 +160,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_GrassLand_2
+      name: tileset_ground (1)_2
       rect:
         serializedVersion: 2
         x: 128
@@ -177,12 +173,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_GrassLand_3
+      name: tileset_ground (1)_3
       rect:
         serializedVersion: 2
         x: 0
@@ -190,12 +186,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_GrassLand_4
+      name: tileset_ground (1)_4
       rect:
         serializedVersion: 2
         x: 64
@@ -203,12 +199,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_GrassLand_5
+      name: tileset_ground (1)_5
       rect:
         serializedVersion: 2
         x: 128
@@ -216,12 +212,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_GrassLand_6
+      name: tileset_ground (1)_6
       rect:
         serializedVersion: 2
         x: 0
@@ -229,12 +225,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_GrassLand_7
+      name: tileset_ground (1)_7
       rect:
         serializedVersion: 2
         x: 64
@@ -242,12 +238,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_GrassLand_8
+      name: tileset_ground (1)_8
       rect:
         serializedVersion: 2
         x: 128
@@ -255,12 +251,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_GrassLand_S0
+      name: tileset_ground (1)_9
       rect:
         serializedVersion: 2
         x: 0
@@ -268,12 +264,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_GrassLand_W0
+      name: tileset_ground (1)_10
       rect:
         serializedVersion: 2
         x: 64
@@ -281,12 +277,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_GrassLand_N0
+      name: tileset_ground (1)_11
       rect:
         serializedVersion: 2
         x: 128
@@ -294,12 +290,12 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tileset_GrassLand_E0
+      name: tileset_ground (1)_12
       rect:
         serializedVersion: 2
         x: 192
@@ -307,7 +303,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

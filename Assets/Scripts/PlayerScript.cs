@@ -21,6 +21,8 @@ public class PlayerScript : MonoBehaviour
     private ItemManager Hand;
     public int Damage;
 
+    private int Direction;
+
     enum direction
     {
         right, left, up, down
@@ -42,54 +44,23 @@ public class PlayerScript : MonoBehaviour
         //pate on paras
         Hand = new ItemManager(SidewaysHand);
         Damage = 30;
+        /*AnimatorScript material*/
+        Direction = transform.GetComponent<AnimatorScript>().PlayerDir();
     }
 
     void Update()           
     {
-        Direction();
         tmpswing();
         Equip();
         Drop();
         Side();
     }
 
-    void Direction()    // Tarkistetaan pelaajan suunta ja liikkuuko se
-    {
-        if (Input.GetKeyDown(KeyCode.D) == true)
-        {
-            playerDirection = direction.right;
-            //Debug.Log(playerDirection);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.A) == true)
-        {
-            playerDirection = direction.left;
-            //Debug.Log(playerDirection);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.S) == true)
-        {
-            playerDirection = direction.down;
-            //Debug.Log(playerDirection);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.W) == true)
-        {
-            playerDirection = direction.up;
-            //Debug.Log(playerDirection);
-        }
-    }
-
-    direction GetPlayerDirection()
-    {
-        return playerDirection;
-    }
-
     void Side()
     {
-        if (Input.GetKeyDown("w")) { Hand.Handstate = 2; Hand.SetHand(UpwardsHand); }
-        if (Input.GetKeyDown("s")) { Hand.Handstate = 1; Hand.SetHand(DownwardsHand); }
-        if (Input.GetKeyDown("a") || Input.GetKeyDown("d")) { Hand.Handstate = 0; Hand.SetHand(SidewaysHand); }
+        if (Direction == 2) { Hand.Handstate = 2; Hand.SetHand(UpwardsHand); }
+        if (Direction == 1) { Hand.Handstate = 1; Hand.SetHand(DownwardsHand); }
+        if (Direction == 0 || Direction == 3) { Hand.Handstate = 0; Hand.SetHand(SidewaysHand); }
     }
 
     void tmpswing()
@@ -107,155 +78,10 @@ public class PlayerScript : MonoBehaviour
         startPoint = playerPosition; // Pelaajan positio
         endPoint = Camera.main.ScreenToWorldPoint(mousePos); // Hiiren osoittama kohta
 
-
-
         if (Input.GetKeyDown(KeyCode.Mouse0) == true)
         {
             transform.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
         }
-
-        if (playerMoving == false)
-        {
-            SpriteRenderer[] sprites = GameObject.Find("s_c_torso").GetComponentsInChildren<SpriteRenderer>();
-
-            for (int i = 0; i < sprites.Length; i++)
-            {
-                sprites[i].enabled = false;
-            }
-
-            sprites = GameObject.Find("u_c_torso").GetComponentsInChildren<SpriteRenderer>();
-
-            for (int i = 0; i < sprites.Length; i++)
-            {
-                sprites[i].enabled = false;
-            }
-
-            sprites = GameObject.Find("d_c_torso").GetComponentsInChildren<SpriteRenderer>();
-
-            for (int i = 0; i < sprites.Length; i++)
-            {
-                sprites[i].enabled = true;
-            }
-        }
-
-        if (playerDirection == direction.right | playerDirection == direction.left)
-        {
-            if (playerMoving == true)
-            {
-                transform.Find("s_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", true);
-            }
-
-            if (playerDirection == direction.left)
-            {
-                SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
-
-                for (int i = 0; i < sprites.Length; i++)
-                {
-                    sprites[i].enabled = false;
-                }
-
-                sprites = transform.Find("d_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
-
-                for (int i = 0; i < sprites.Length; i++)
-                {
-                    sprites[i].enabled = false;
-                }
-
-                sprites = transform.Find("s_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
-
-                for (int i = 0; i < sprites.Length; i++)
-                {
-                    sprites[i].enabled = true;
-                }
-                transform.Find("s_c_torso").gameObject.GetComponent<Transform>().localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-            }
-
-
-            if (playerDirection == direction.right)
-            {
-                SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
-                for (int i = 0; i < sprites.Length; i++)
-                {
-                    sprites[i].enabled = false;
-                }
-
-                sprites = transform.Find("d_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
-
-                for (int i = 0; i < sprites.Length; i++)
-                {
-                    sprites[i].enabled = false;
-                }
-
-                sprites = transform.Find("s_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
-
-                for (int i = 0; i < sprites.Length; i++)
-                {
-                    sprites[i].enabled = true;
-                }
-
-                transform.Find("s_c_torso").gameObject.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            }
-        }
-
-
-        if (playerDirection == direction.up)
-        {
-
-            if (playerMoving == true)
-            {
-                transform.Find("u_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", true);
-            }
-
-            SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
-            for (int i = 0; i < sprites.Length; i++)
-            {
-                sprites[i].enabled = true;
-            }
-
-            sprites = transform.Find("d_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
-
-            for (int i = 0; i < sprites.Length; i++)
-            {
-                sprites[i].enabled = false;
-            }
-
-            sprites = transform.Find("s_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
-
-            for (int i = 0; i < sprites.Length; i++)
-            {
-                sprites[i].enabled = false;
-            }
-        }
-
-        if (playerDirection == direction.down)
-        {
-
-            if (playerMoving == true)
-            {
-                transform.Find("d_c_torso").gameObject.GetComponent<Animator>().SetBool("playerRun", true);
-            }
-
-            SpriteRenderer[] sprites = transform.Find("u_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
-            for (int i = 0; i < sprites.Length; i++)
-            {
-                sprites[i].enabled = false;
-            }
-
-            sprites = transform.Find("d_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
-
-            for (int i = 0; i < sprites.Length; i++)
-            {
-                sprites[i].enabled = true;
-            }
-
-            sprites = transform.Find("s_c_torso").gameObject.GetComponentsInChildren<SpriteRenderer>();
-
-            for (int i = 0; i < sprites.Length; i++)
-            {
-                sprites[i].enabled = false;
-            }
-        }
-
 
     }
     void OnDrawGizmos()

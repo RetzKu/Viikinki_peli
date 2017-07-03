@@ -573,8 +573,8 @@ GameObject:
   - component: {fileID: 212374960915335526}
   - component: {fileID: 50990400736129328}
   - component: {fileID: 61155882546345656}
-  - component: {fileID: 114310682460244036}
   - component: {fileID: 114477974180598708}
+  - component: {fileID: 114934620639546162}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1324,22 +1324,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114310682460244036
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1911641289611760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a2ac7d8b08d63145aa35a27ad3854a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InventorySize: 3
-  running: 1
-  SidewaysHand: {fileID: 0}
-  UpwardsHand: {fileID: 0}
-  DownwardsHand: {fileID: 0}
 --- !u!114 &114477974180598708
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1354,6 +1338,7 @@ MonoBehaviour:
   slowdown: 10
   thrust: 15
   max_spd: 3
+  Keyboard: 1
 --- !u!114 &114669396056617556
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1363,6 +1348,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2688772389acd684db7b6ac3acb8e3a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114934620639546162
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1911641289611760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 346d15d1fa97b8d4f98a2b1aa2c13c7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!124 &124963409196348866

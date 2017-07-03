@@ -31,6 +31,7 @@ public class AnimatorScript : MonoBehaviour
     void Update()
     {
         CheckVelocity();
+        Sprites.DirectionCheck();
     }
 
     void CheckVelocity()
@@ -63,6 +64,9 @@ public class AnimatorScript : MonoBehaviour
             List<SpriteRenderer[]> Sprites;
         Rigidbody2D PlayerRb;
 
+        int LastSpriteNum;
+        int Index;
+
         public SpriteChanger(Transform Player, Rigidbody2D Rb)
         {
             PlayerTransform = Player; PlayerRb = Rb;
@@ -70,23 +74,29 @@ public class AnimatorScript : MonoBehaviour
             Sprites.Add(PlayerTransform.Find("s_c_torso").GetComponentsInChildren<SpriteRenderer>());
             Sprites.Add(PlayerTransform.Find("d_c_torso").GetComponentsInChildren<SpriteRenderer>());
             Sprites.Add(PlayerTransform.Find("u_c_torso").GetComponentsInChildren<SpriteRenderer>());
-a        }
+        }
 
-        void DirectionCheck()
+        public void DirectionCheck()
         {
             if (PlayerRb.velocity.x > 0) // X positive
             {
                 if (PlayerRb.velocity.x < PlayerRb.velocity.y) // 1,1
                 {
                     //spritesup
+                    print("up");
+                    Index = 2;
                 }
-                if (PlayerRb.velocity.x < PlayerRb.velocity.y * -1) //1,-1
+                else if (PlayerRb.velocity.x < PlayerRb.velocity.y * -1) //1,-1
                 {
                     //spritesdown
+                    print("down");
+                    Index = 1;
                 }
                 else
                 {
                     //spritesright
+                    print("right");
+                    Index = 0;
                 }
             }
             if (PlayerRb.velocity.x < 0) // X negative
@@ -94,17 +104,48 @@ a        }
                 if (PlayerRb.velocity.x > PlayerRb.velocity.y * -1) // -1,1
                 {
                     //spritesup
+                    print("up");
+                    Index = 2;
                 }
-                if (PlayerRb.velocity.x > PlayerRb.velocity.y) //-1,-1
+                else if (PlayerRb.velocity.x > PlayerRb.velocity.y) //-1,-1
                 {
                     //spritesdown
+                    print("down");
+                    Index = 1;
                 }
                 else
                 {
                     //spritesleft
-
+                    print("left");
+                    Index = 0;
                 }
             }
+            EnableSprites(Index)
+        }
+        void EnableSprites(int SpriteNum)
+        {
+
+            if (SpriteNum != LastSpriteNum)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (SpriteNum == i)
+                    {
+                        foreach (SpriteRenderer t in Sprites[i])
+                        {
+                            t.enabled = true;
+                        }
+                    }
+                    else
+                    {
+                        foreach (SpriteRenderer t in Sprites[i])
+                        {
+                            t.enabled = false;
+                        }
+                    }
+                } 
+            }
+            LastSpriteNum = SpriteNum;
         }
     }
 }

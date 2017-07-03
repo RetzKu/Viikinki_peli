@@ -17,7 +17,7 @@ public class DropScript : MonoBehaviour
     {
         Drop();
     }
-
+        
     public void Drop()
     {
         bool night = DropChecker.NightDrops(); // is it night drops time

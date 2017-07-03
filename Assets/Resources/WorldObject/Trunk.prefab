@@ -9,76 +9,94 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1384798036243720}
+  m_RootGameObject: {fileID: 1351328196579566}
   m_IsPrefabParent: 1
---- !u!1 &1384798036243720
+--- !u!1 &1351328196579566
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4948538543650018}
-  - component: {fileID: 212860160791456262}
-  - component: {fileID: 58480590067472398}
-  - component: {fileID: 114721178487755548}
+  - component: {fileID: 4967684853948910}
+  - component: {fileID: 50637329397155142}
+  - component: {fileID: 212577490634523388}
+  - component: {fileID: 58853274038677486}
+  - component: {fileID: 61945725712728838}
   m_Layer: 0
-  m_Name: SpawnableTree 1
+  m_Name: Trunk
   m_TagString: puu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4948538543650018
+--- !u!4 &4967684853948910
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1384798036243720}
+  m_GameObject: {fileID: 1351328196579566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34.856304, y: 30.298298, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &58480590067472398
+--- !u!50 &50637329397155142
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1351328196579566}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
+--- !u!58 &58853274038677486
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1384798036243720}
+  m_GameObject: {fileID: 1351328196579566}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -0.05, y: -0.71}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.27863693
---- !u!114 &114721178487755548
-MonoBehaviour:
+  m_Radius: 0.2
+--- !u!61 &61945725712728838
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1384798036243720}
+  m_GameObject: {fileID: 1351328196579566}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce5097306c2ecae4ca7db9e15ad5187a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 100
-  Treetype: 
-  Sprite: {fileID: 0}
-  End: {fileID: 0}
-  Trunk: {fileID: 1351328196579566, guid: 0c1e6c058ccc4e043ac9c73399ec263b, type: 2}
-  InvColliderPlatform: {fileID: 0}
---- !u!212 &212860160791456262
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.04735279, y: -0.26301974}
+  serializedVersion: 2
+  m_Size: {x: 11.87253, y: 0.10331643}
+--- !u!212 &212577490634523388
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1384798036243720}
+  m_GameObject: {fileID: 1351328196579566}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -102,9 +120,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -630457927
-  m_SortingOrder: 10
-  m_Sprite: {fileID: 21300052, guid: 86e218568da6d3946a1ffdceee9efe41, type: 3}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300044, guid: 86e218568da6d3946a1ffdceee9efe41, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

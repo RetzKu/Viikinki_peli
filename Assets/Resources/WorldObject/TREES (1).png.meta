@@ -1,12 +1,12 @@
 fileFormatVersion: 2
 guid: 86e218568da6d3946a1ffdceee9efe41
-timeCreated: 1498826384
+timeCreated: 1499067932
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
     21300000: TREES (1)_0
-    21300002: TREES (1)_1
-    21300004: TREES (1)_2
+    21300002: pine
+    21300004: pine_falling
     21300006: TREES (1)_3
     21300008: TREES (1)_4
     21300010: TREES (1)_5
@@ -26,7 +26,7 @@ TextureImporter:
     21300038: TREES (1)_19
     21300040: TREES (1)_20
     21300042: TREES (1)_21
-    21300044: TREES (1)_22
+    21300044: pine_trunk
     21300046: TREES (1)_23
     21300048: TREES (1)_24
     21300050: TREES (1)_25
@@ -169,7 +169,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_1
+      name: pine
       rect:
         serializedVersion: 2
         x: 101
@@ -182,11 +182,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_2
+      name: pine_falling
       rect:
         serializedVersion: 2
-        x: 165
-        y: 415
+        x: 167
+        y: 416
         width: 56
         height: 90
       alignment: 0
@@ -442,7 +442,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_22
+      name: pine_trunk
       rect:
         serializedVersion: 2
         x: 182

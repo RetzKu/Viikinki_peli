@@ -13,18 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 7
   SpawnableObjects:
-  - ObjectPrefab: {fileID: 1384798036243720, guid: 36b2e15252df0ac4d995a232e2bddb45,
+  - ObjectPrefab: {fileID: 1384798036243720, guid: 1d6b060ef40a3664da1b12583f13f561,
       type: 2}
-    SpawnRate: 4
-  - ObjectPrefab: {fileID: 1384798036243720, guid: 36b2e15252df0ac4d995a232e2bddb45,
-      type: 2}
-    SpawnRate: 10
-  - ObjectPrefab: {fileID: 1384798036243720, guid: c21a5b0ce54693145bfab62a7359ecd8,
-      type: 2}
-    SpawnRate: 40
-  - ObjectPrefab: {fileID: 1384798036243720, guid: 771bbb64aac035248bda92dbe5e67c78,
-      type: 2}
-    SpawnRate: 15
-  - ObjectPrefab: {fileID: 1384798036243720, guid: 2aa8ce0659842644abb9deb866f0eb82,
-      type: 2}
-    SpawnRate: 15
+    SpawnRate: 5

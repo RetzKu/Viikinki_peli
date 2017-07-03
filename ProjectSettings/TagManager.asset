@@ -34,8 +34,8 @@ TagManager:
   - Archer
   - Collide
   - TileMapBorders
-  - 
-  - 
+  - objectLeftovers
+  - ObjectLayer
   - 
   - 
   - 

@@ -10,10 +10,9 @@ public class TileSpriteController : MonoBehaviour
     private Dictionary<string, Sprite> _textures;
     GameObject[] temporarySecondLayer = new GameObject[450];    // LOL
 
-
     public SpriteControllerSettings Settings;
 
-    int[] TileCount    = new int[(int)TileType.Max];
+    int[]  TileCount    = new int[(int)TileType.Max];
     bool[] Implemented = new bool[(int)TileType.Max];
 
     void Awake()
@@ -22,12 +21,6 @@ public class TileSpriteController : MonoBehaviour
         // nopeampiakin ratkaisuja olisi
         _textures = new Dictionary<string, Sprite>(16);
         Sprite[] sprites = Resources.LoadAll<Sprite>("Tiles/");
-
-        foreach (Sprite sprite in sprites)
-        {
-            //  _textures[sprite.name] = sprite;
-            //  print(sprite.name);
-        }
 
         for (int i = 0; i < temporarySecondLayer.Length; i++)
         {
@@ -65,7 +58,7 @@ public class TileSpriteController : MonoBehaviour
 
     private readonly string[] stringsEnds = new string[13]
     {
-        "_0", "_1", "_2", "_3", "_4", "_5", "_6", "_7", "_8", "_E0", "_N0", "_S0", "_W0"
+        "_0", "_1", "_2", "_3", "_4", "_5", "_6", "_7", "_8", "_S0", "_W0", "_N0", "_E0"
     };
 
     string GetAssetNameByte(int x, int y, TileType[,] tiles, out int count)

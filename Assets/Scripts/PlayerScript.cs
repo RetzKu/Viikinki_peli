@@ -90,7 +90,7 @@ public class PlayerScript : MonoBehaviour
         if (Trig.gameObject.tag == "puu")
         {
             Debug.Log("BONK");
-            Trig.GetComponent<TreeHP>().hp -= Damage;
+            Trig.transform.parent.GetComponent<TreeHP>().hp -= Damage;
         }
     }
 

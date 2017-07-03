@@ -31,6 +31,14 @@ public class AnimatorScript : MonoBehaviour
     void Update()
     {
         CheckVelocity();
+        Sprites.DirectionCheck();
+        Attack();
+    }
+
+    public int PlayerDir()
+    {
+        int tmp = Sprites.Index;
+        return tmp;
     }
 
     void CheckVelocity()
@@ -53,6 +61,13 @@ public class AnimatorScript : MonoBehaviour
         }
         Debug.Log("Movin state: " + playerRun);
     }
+    void Attack()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0)==true)
+        {
+            transform.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
+        }
+    }
 
     public class SpriteChanger
     {
@@ -61,7 +76,11 @@ public class AnimatorScript : MonoBehaviour
 
         Transform PlayerTransform;
             List<SpriteRenderer[]> Sprites;
+            Transform Torso;
         Rigidbody2D PlayerRb;
+
+        int LastSpriteNum;
+        public int Index;
 
         public SpriteChanger(Transform Player, Rigidbody2D Rb)
         {
@@ -70,41 +89,88 @@ public class AnimatorScript : MonoBehaviour
             Sprites.Add(PlayerTransform.Find("s_c_torso").GetComponentsInChildren<SpriteRenderer>());
             Sprites.Add(PlayerTransform.Find("d_c_torso").GetComponentsInChildren<SpriteRenderer>());
             Sprites.Add(PlayerTransform.Find("u_c_torso").GetComponentsInChildren<SpriteRenderer>());
+            Torso = PlayerTransform.Find("s_c_torso");
         }
 
-        void DirectionCheck()
+        public void DirectionCheck()
         {
             if (PlayerRb.velocity.x > 0) // X positive
             {
                 if (PlayerRb.velocity.x < PlayerRb.velocity.y) // 1,1
                 {
                     //spritesup
+                    print("up");
+                    Index = 2;
                 }
-                if (PlayerRb.velocity.x < PlayerRb.velocity.y * -1) //1,-1
+                else if (PlayerRb.velocity.x < PlayerRb.velocity.y * -1) //1,-1
                 {
                     //spritesdown
+                    print("down");
+                    Index = 1;
                 }
                 else
                 {
                     //spritesright
+                    print("right");
+                    Index = 3;
                 }
             }
-            if (PlayerRb.velocity.x < 0) // X negative
+            else if (PlayerRb.velocity.x < 0) // X negative
             {
                 if (PlayerRb.velocity.x > PlayerRb.velocity.y * -1) // -1,1
                 {
                     //spritesup
+                    print("up");
+                    Index = 2;
                 }
-                if (PlayerRb.velocity.x > PlayerRb.velocity.y) //-1,-1
+                else if (PlayerRb.velocity.x > PlayerRb.velocity.y) //-1,-1
                 {
                     //spritesdown
+                    print("down");
+                    Index = 1;
                 }
                 else
                 {
                     //spritesleft
-
+                    print("left");
+                    Index = 0;
                 }
             }
+            EnableSprites(Index);
+        }
+        void EnableSprites(int SpriteNum)
+        {
+            bool changed = false;
+            if (SpriteNum != LastSpriteNum)
+            {
+                if (SpriteNum == 3)
+                {
+                    Torso.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                }
+                else
+                {
+                    Torso.GetComponent<Transform>().localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    if (SpriteNum == i || SpriteNum == 3 && changed == false)
+                    {
+                        changed = true;
+                        foreach (SpriteRenderer t in Sprites[i])
+                        {
+                            t.enabled = true;
+                        }
+                    }
+                    else
+                    {
+                        foreach (SpriteRenderer t in Sprites[i])
+                        {
+                            t.enabled = false;
+                        }
+                    }
+                } 
+            }
+            LastSpriteNum = SpriteNum;
         }
     }
 }

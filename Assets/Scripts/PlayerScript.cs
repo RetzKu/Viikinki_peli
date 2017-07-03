@@ -23,14 +23,6 @@ public class PlayerScript : MonoBehaviour
 
     private int Direction;
 
-    enum direction
-    {
-        right, left, up, down
-    }
-
-    direction playerDirection = direction.down; // Pelaaja defaulttina katsoo alaspain
-    bool playerMoving = false;  // Pelaaja defaulttina ei ole liikkeessa
-
     void Start()
     {
         /*Get Inventory parents*/
@@ -45,7 +37,6 @@ public class PlayerScript : MonoBehaviour
         Hand = new ItemManager(SidewaysHand);
         Damage = 30;
         /*AnimatorScript material*/
-        Direction = transform.GetComponent<AnimatorScript>().PlayerDir();
     }
 
     void Update()           
@@ -54,13 +45,14 @@ public class PlayerScript : MonoBehaviour
         Equip();
         Drop();
         Side();
+        Direction = transform.GetComponent<AnimatorScript>().PlayerDir();
     }
 
     void Side()
     {
         if (Direction == 2) { Hand.Handstate = 2; Hand.SetHand(UpwardsHand); }
-        if (Direction == 1) { Hand.Handstate = 1; Hand.SetHand(DownwardsHand); }
-        if (Direction == 0 || Direction == 3) { Hand.Handstate = 0; Hand.SetHand(SidewaysHand); }
+        else if (Direction == 1) { Hand.Handstate = 1; Hand.SetHand(DownwardsHand); }
+        else if (Direction == 0 || Direction == 3) { Hand.Handstate = 0; Hand.SetHand(SidewaysHand); }
     }
 
     void tmpswing()
@@ -77,11 +69,6 @@ public class PlayerScript : MonoBehaviour
         //print(clickPosition);
         startPoint = playerPosition; // Pelaajan positio
         endPoint = Camera.main.ScreenToWorldPoint(mousePos); // Hiiren osoittama kohta
-
-        if (Input.GetKeyDown(KeyCode.Mouse0) == true)
-        {
-            transform.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
-        }
 
     }
     void OnDrawGizmos()
@@ -145,7 +132,7 @@ public class PlayerScript : MonoBehaviour
             }
             if (Handstate == 1) // downwards
             {
-                Quaternion rotation = Quaternion.Euler(-5.84f,-16.481f, 103.594f);
+                Quaternion rotation = Quaternion.Euler(0,0, 103.594f);
                 Copy.transform.SetParent(Hand);
                 Copy.transform.position = Hand.position;
                 Copy.transform.localRotation = rotation;
@@ -155,6 +142,7 @@ public class PlayerScript : MonoBehaviour
             if (Handstate == 2) //upwards
             {
                 /*REQUIRES SETTINGS*/
+                Copy.transform.position = Hand.position;
             }
         }
 
@@ -188,11 +176,12 @@ public class PlayerScript : MonoBehaviour
                             }
                         case "u_l_hand":
                             {
+                                Copy.transform.position = Hand.position;
                                 break;
                             }
                         case "d_r_hand":
                             {
-                                Quaternion rotation = Quaternion.Euler(-5.84f, -16.481f, 103.594f);
+                                Quaternion rotation = Quaternion.Euler(0, 0, 103.594f);
                                 Copy.transform.SetParent(Hand);
                                 Copy.transform.position = Hand.position;
 

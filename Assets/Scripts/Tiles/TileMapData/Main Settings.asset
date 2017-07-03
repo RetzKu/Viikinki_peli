@@ -58,16 +58,16 @@ MonoBehaviour:
     - {fileID: 21300028, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
   - Type: 7
     Sprites:
-    - {fileID: 21300000, guid: dee725916b56fbc4ea7f890b75404601, type: 3}
-    - {fileID: 21300002, guid: dee725916b56fbc4ea7f890b75404601, type: 3}
-    - {fileID: 21300004, guid: dee725916b56fbc4ea7f890b75404601, type: 3}
-    - {fileID: 21300006, guid: dee725916b56fbc4ea7f890b75404601, type: 3}
-    - {fileID: 21300008, guid: dee725916b56fbc4ea7f890b75404601, type: 3}
-    - {fileID: 21300010, guid: dee725916b56fbc4ea7f890b75404601, type: 3}
-    - {fileID: 21300012, guid: dee725916b56fbc4ea7f890b75404601, type: 3}
-    - {fileID: 21300014, guid: dee725916b56fbc4ea7f890b75404601, type: 3}
-    - {fileID: 21300016, guid: dee725916b56fbc4ea7f890b75404601, type: 3}
-    - {fileID: 21300024, guid: dee725916b56fbc4ea7f890b75404601, type: 3}
-    - {fileID: 21300022, guid: dee725916b56fbc4ea7f890b75404601, type: 3}
-    - {fileID: 21300018, guid: dee725916b56fbc4ea7f890b75404601, type: 3}
-    - {fileID: 21300020, guid: dee725916b56fbc4ea7f890b75404601, type: 3}
+    - {fileID: 21300000, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+    - {fileID: 21300002, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+    - {fileID: 21300004, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+    - {fileID: 21300006, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+    - {fileID: 21300008, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+    - {fileID: 21300010, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+    - {fileID: 21300012, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+    - {fileID: 21300014, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+    - {fileID: 21300016, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+    - {fileID: 21300032, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+    - {fileID: 21300030, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+    - {fileID: 21300026, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}
+    - {fileID: 21300028, guid: ec78f0097cec70d4ebfada55b8edc6dc, type: 3}

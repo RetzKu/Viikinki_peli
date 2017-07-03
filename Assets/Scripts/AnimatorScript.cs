@@ -32,11 +32,13 @@ public class AnimatorScript : MonoBehaviour
     {
         CheckVelocity();
         Sprites.DirectionCheck();
+        Attack();
     }
 
     public int PlayerDir()
     {
-        return Sprites.PlayerDir();
+        int tmp = Sprites.Index;
+        return tmp;
     }
 
     void CheckVelocity()
@@ -59,6 +61,13 @@ public class AnimatorScript : MonoBehaviour
         }
         Debug.Log("Movin state: " + playerRun);
     }
+    void Attack()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0)==true)
+        {
+            transform.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
+        }
+    }
 
     public class SpriteChanger
     {
@@ -72,11 +81,6 @@ public class AnimatorScript : MonoBehaviour
 
         int LastSpriteNum;
         public int Index;
-
-        public int PlayerDir()
-        {
-            return Index;
-        }
 
         public SpriteChanger(Transform Player, Rigidbody2D Rb)
         {

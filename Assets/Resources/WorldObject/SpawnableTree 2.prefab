@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 212860160791456262}
   - component: {fileID: 58480590067472398}
   - component: {fileID: 114721178487755548}
-  m_Layer: 0
-  m_Name: SpawnableTree 2
+  m_Layer: 16
+  m_Name: SpawnableTree
   m_TagString: puu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

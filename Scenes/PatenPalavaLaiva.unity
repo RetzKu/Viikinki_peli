@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b89cc67f5a1e31942802ff0453d461f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  terveisin: {fileID: 599953886}
 --- !u!114 &238461599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,6 +442,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 43282b77e01d1e844978eb0a286e0fa6, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &599953886 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
+    type: 2}
+  m_PrefabInternal: {fileID: 1777036962}
+  m_Script: {fileID: 11500000, guid: bbe7d1aef62cba44e98493997c79bf35, type: 3}
 --- !u!1001 &630694975
 Prefab:
   m_ObjectHideFlags: 0
@@ -1612,6 +1619,32 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: a554bb6b6ba40474da96a0bfe7f6ea59,
         type: 3}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: TreeTrefab
+      value: 
+      objectReference: {fileID: 1384798036243720, guid: 1d6b060ef40a3664da1b12583f13f561,
+        type: 2}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: blueNoiseLacunarity
+      value: 75.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: blueNoisePersistance
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: DrawMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: OffsetX
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ba8cfce009a3764ba416b37c8f039af, type: 2}
   m_IsPrefabParent: 0

@@ -17,6 +17,9 @@ public class MobsControl : MonoBehaviour
     public GameObject EnemyPrefab;
     //public GameObject enemyChild;
     List<GameObject> Boids;
+
+    public GameObject player;
+
     //List<GameObject> wolfBoids;
     //List<GameObject> archerBoids;
 
@@ -27,54 +30,88 @@ public class MobsControl : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        print("Starting spawning");
+        //print("Starting spawning");
         //Mobs = new List<GameObject>(Mob_Amount);
         //spawner = new List<Vector4>(1);
         Boids = new List<GameObject>(Mob_Amount); // mah fix
         //wolfBoids = new List< GameObject > (Mob_Amount);
-        //archerBoids = new List< GameObject > (Mob_Amount);
-        for (int i = 0; i < Mob_Amount; i++)
-        {
-            float x = 0;
-            float y = 0;
-            do
-            {
-                x = Random.Range(10f, 40f);
-                y = Random.Range(10f, 40f);
-            }
-            while (Physics2D.OverlapCircleAll(new Vector2(x, y), 0.5f).Length != 0);  // EETU TRIGGER
-            var go = Instantiate(EnemyPrefab, new Vector2(x, y), Quaternion.identity);
+        ////archerBoids = new List< GameObject > (Mob_Amount);
+        //for (int i = 0; i < Mob_Amount; i++)
+        //{
+
+        //    PathFinder.Dir k;
+        //    float x = 0;
+        //    float y = 0;
+
+            //do
+            //{
+            //    x = Random.Range(10f, 40f); // KORJAA
+            //    y = Random.Range(10f, 40f); // KORJAA
+            //    k = player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(x, y)); // korjaa
+            //}
+            //while (k == PathFinder.Dir.NoDir);
+
+            //do
+            //{
+            //    x = Random.Range(10f, 40f);
+            //    y = Random.Range(10f, 40f);
+            //}
+            //while (Physics2D.OverlapCircleAll(new Vector2(x, y), 0.5f).Length != 0);  // EETU TRIGGER
+
+
+           // var go = Instantiate(EnemyPrefab, new Vector2(x, y), Quaternion.identity);
             //var ga = Instantiate(enemyChild, new Vector2(x, y), Quaternion.identity);
 
             //ga.transform.parent = go.transform;
 
-            if (i <= Mob_Amount/2)
-            {
-                go.GetComponent<EnemyAI>().InitStart(x, y,EnemyType.Archer);
-                go.layer = 8; // enemy
-                //archerBoids.Add(go);
-            }
-            else
-            {
-                go.GetComponent<EnemyAI>().InitStart(x, y, EnemyType.Wolf);
-                go.layer = 8; // enemy
-                //wolfBoids.Add(go);
-            }
-            Boids.Add(go);
-        }
+            //if (i <= Mob_Amount/2)
+            //{
+            //    go.GetComponent<EnemyAI>().InitStart(x, y,EnemyType.Archer);
+            //    go.layer = 8; // enemy
+            //    //archerBoids.Add(go);
+            //}
+            //else
+            //{
+            //    go.GetComponent<EnemyAI>().InitStart(x, y, EnemyType.Wolf);
+            //    go.layer = 8; // enemy
+            //    //wolfBoids.Add(go);
+            //}
+            //Boids.Add(go);
+        //}
 
-
+        //print("mob amount" + " " + Boids.Count);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown("y"))
+        {
+            var pl = player.GetComponent<Rigidbody2D>().position;
+            SpawnBoids(pl.x, pl.y, 15f, Mob_Amount);          
+        }
+        if (Input.GetKeyDown("m"))
+        {
+            DeleteAllCurrentMobs();
+        }
+
+
+
         if (spawner.Count > 0)// spawn every uptade if it is requested
         {
             if (spawner[0].amount > 0)
             {
-                float x = Random.Range(spawner[0].x - spawner[0].rad, spawner[0].x + spawner[0].rad);
-                float y = Random.Range(spawner[0].x - spawner[0].rad, spawner[0].x + spawner[0].rad);
+                float x;
+                float y;
+                PathFinder.Dir k;
+                do
+                {
+                    x = Random.Range(spawner[0].x - spawner[0].rad, spawner[0].x + spawner[0].rad);
+                    y = Random.Range(spawner[0].y - spawner[0].rad, spawner[0].y + spawner[0].rad);
+                    k = player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(x, y));
+                }
+                while (k == PathFinder.Dir.NoDir);
+
                 var go = Instantiate(EnemyPrefab, new Vector2(x, y), Quaternion.identity);
                 go.GetComponent<EnemyAI>().InitStart(x, y,EnemyType.Wolf);
                 //wolfBoids.Add(go);

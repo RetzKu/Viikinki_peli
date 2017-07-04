@@ -39,8 +39,8 @@ public class MobsControl : MonoBehaviour
             float y = 0;
             do
             {
-                x = Random.Range(0f, 50f);
-                y = Random.Range(0f, 50f);
+                x = Random.Range(10f, 40f);
+                y = Random.Range(10f, 40f);
             }
             while (Physics2D.OverlapCircleAll(new Vector2(x, y), 0.5f).Length != 0);  // EETU TRIGGER
             var go = Instantiate(EnemyPrefab, new Vector2(x, y), Quaternion.identity);

@@ -59,7 +59,7 @@ public class AnimatorScript : MonoBehaviour
                 foreach (Animator t in Animators) { t.SetBool("playerRun", playerRun); }
             }
         }
-        Debug.Log("Movin state: " + playerRun);
+        //Debug.Log("Movin state: " + playerRun);
     }
     void Attack()
     {

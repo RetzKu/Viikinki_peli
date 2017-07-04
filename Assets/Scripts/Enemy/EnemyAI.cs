@@ -56,6 +56,7 @@ public enum behavior
     startWanderingSolo = wander | giveWanderingTargetSolo,
     changeSoloWanderDir = wander | changeSoloDIr,
     seekAndArrive = seek | arrive,
+    findPath = seek | separate,
     //getInPosition = seek | arrive
 }
 
@@ -113,6 +114,8 @@ public class EnemyAI : MonoBehaviour
     // Use this for initialization
     public void InitStart(float x, float y,EnemyType type)
     {
+        //var pl = GameObject.FindGameObjectWithTag("Player");
+
         myType = type;
         myDir = enemyDir.Still;
         switch (myType)
@@ -249,15 +252,18 @@ public class EnemyAI : MonoBehaviour
     }
     public void UpdatePosition(List<GameObject> Mobs)
     {
+        if(myType == EnemyType.Archer)
+        {
+            uptadeDir4();
+        }
+        else
+        {
+            uptadeDir6();
+        }
         LayerMask mask = new LayerMask();
-        //if (myType == EnemyType.Wolf)
-        //{
-            mask = LayerMask.GetMask("Enemy");
-        //}
-        //else
-        //{
-           // mask = LayerMask.GetMask("Archer");
-        //}
+
+        mask = LayerMask.GetMask("Enemy");
+
         var HeardArray = Physics2D.OverlapCircleAll(body.position, alingmentDistance, mask); // , mask);
         var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
         Vector2[] powers = new Vector2[2];
@@ -273,24 +279,25 @@ public class EnemyAI : MonoBehaviour
 
         if (!agro)
         {
-            // wander(HeardArray);
-            findPath();
+            wander(HeardArray);
+            //findPath();
         }
         else if (agro)
         {
-            //Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
+            Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
 
-            //Vector2 dist = body.position - playerPos;
-            //if (myType == EnemyType.Wolf)
-            //{
-            //    leapingPattern(dist,playerPos);
-            //}
-            //else if(myType == EnemyType.Archer)
-            //{
-            //    archerPattern(dist, playerPos);
-            //}
-            findPath();
+            Vector2 dist = body.position - playerPos;
+            if (myType == EnemyType.Wolf)
+            {
+                leapingPattern(dist, playerPos);
+            }
+            else if (myType == EnemyType.Archer)
+            {
+                archerPattern(dist, playerPos);
+            }
+            //findPath();
         }
+        //flags = (int)flags | (int)behavior.separate;
         //RayCollide();
         //flags = (int)flags | (int)behavior.Collide; 
         powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags,CollState);
@@ -301,24 +308,25 @@ public class EnemyAI : MonoBehaviour
     }
     void archerPattern(Vector2 dist, Vector2 playerPos)
     {
-        followPlayer(dist, playerPos);
-        desiredseparation = 4f;
+        //desiredseparation = 4f;
         Physics.sepF = 1f;
         if (dist.magnitude >= attackDist)
         {
+            Physics.desiredseparation = 1.3f;
             Physics.MaxSpeed = 0.06f;
+            findPath();
         }
         else
         {
+            Physics.desiredseparation = 0.7f;
             Physics.MaxSpeed = 0.02f;
+            followPlayer(dist, playerPos);
         }
-        Physics.MaxSteeringForce = 0.1f;
+        Physics.MaxSteeringForce = 0.1f; //EETU TRIGGER
     }
 
     void leapingPattern(Vector2 dist,Vector2 playerPos)
     {
-
-
         if (dist.magnitude <= attackDist || inAttack || velocity.magnitude == 0)
         {
             if (!inAttack && attackCounter > attackUptade)
@@ -355,8 +363,14 @@ public class EnemyAI : MonoBehaviour
         {
             //follow player
             attackCounter++;
-
-            followPlayer(dist, playerPos);
+            if(dist.magnitude <= attackDist)
+            {
+                followPlayer(dist, playerPos);
+            }
+            else
+            {
+                findPath();
+            }
             //attackCounter = attackUptade;
         }
 
@@ -372,35 +386,35 @@ public class EnemyAI : MonoBehaviour
     }
     void findPath()
     {
-        var pl = GameObject.FindGameObjectWithTag("Player");
+        
 
         // missä olen
-        BreadthFirstSearch.states k =  pl.GetComponent<UpdatePathFind>().path.getTileDir(body.position);
+        PathFinder.Dir k =  player.GetComponent<UpdatePathFind>().path.getTileDir(body.position);
         //print(k.ToString());
         //BreadthFirstSearch.states k = BreadthFirstSearch.states.right;
-        if (k == BreadthFirstSearch.states.goal || k == BreadthFirstSearch.states.wall || k == BreadthFirstSearch.states.unVisited)
+        if (k == PathFinder.Dir.NoDir /*|| k == BreadthFirstSearch.states.wall || k == BreadthFirstSearch.states.unVisited*/)
         {
             flags = 0;
             velocity *= 0;
         }
-        else if (k == BreadthFirstSearch.states.right)
+        else if (k == PathFinder.Dir.Right)
         {
-            flags = (int)behavior.seek;
+            flags = (int)behavior.findPath;
             target = new Vector2(body.position.x + 1, body.position.y);
         }
-        else if (k == BreadthFirstSearch.states.left)
+        else if (k == PathFinder.Dir.Left)
         {
-            flags = (int)behavior.seek;
+            flags = (int)behavior.findPath;
             target = new Vector2(body.position.x - 1, body.position.y);
         }
-        else if (k == BreadthFirstSearch.states.up)
+        else if (k == PathFinder.Dir.Up)
         {
-            flags = (int)behavior.seek;
+            flags = (int)behavior.findPath;
             target = new Vector2(body.position.x, body.position.y + 1);
         }
-        else if (k == BreadthFirstSearch.states.down)
+        else if (k == PathFinder.Dir.Down)
         {
-            flags = (int)behavior.seek;
+            flags = (int)behavior.findPath;
             target = new Vector2(body.position.x, body.position.y - 1);
         }
         else

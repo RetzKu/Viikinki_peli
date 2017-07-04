@@ -24,7 +24,7 @@ public class DetectEnemies : MonoBehaviour
             
             //print("BERZERG");
             // tähän check että ei ole minkään takana
-            aggroArray[i].transform.root.GetComponent<EnemyAI>().agro = false;
+            aggroArray[i].transform.root.GetComponent<EnemyAI>().agro = true;
         }
         
     }

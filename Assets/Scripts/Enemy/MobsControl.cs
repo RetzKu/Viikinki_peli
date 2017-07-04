@@ -15,7 +15,7 @@ public class MobsControl : MonoBehaviour
     //List<GameObject> Mobs;
     public int Mob_Amount;
     public GameObject EnemyPrefab;
-    public GameObject enemyChild;
+    //public GameObject enemyChild;
     List<GameObject> Boids;
     //List<GameObject> wolfBoids;
     //List<GameObject> archerBoids;

@@ -15,6 +15,7 @@ TagManager:
   - Spawner
   - Enemy
   - TouchPoint
+  - ResourceEffectEmitter
   layers:
   - Default
   - TransparentFX
@@ -67,6 +68,12 @@ TagManager:
   - name: RuneEffects
     uniqueID: 4257505443
     locked: 0
+  - name: ObjectLeftOvers
+    uniqueID: 2481744113
+    locked: 0
+  - name: ObjectLayer
+    uniqueID: 1593682653
+    locked: 0
   - name: Player
     uniqueID: 3664509369
     locked: 0
@@ -76,6 +83,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: New Layer
-    uniqueID: 1593682653
+  - name: ParticleLayer
+    uniqueID: 632902071
     locked: 0

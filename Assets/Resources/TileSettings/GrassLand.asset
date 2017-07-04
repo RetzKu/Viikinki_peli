@@ -15,4 +15,4 @@ MonoBehaviour:
   SpawnableObjects:
   - ObjectPrefab: {fileID: 1384798036243720, guid: 1d6b060ef40a3664da1b12583f13f561,
       type: 2}
-    SpawnRate: 5
+    SpawnRate: 35

@@ -28,7 +28,7 @@ public class Movement : MonoBehaviour
 
     Vector2 Input_checker()
     {
-        Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical")).normalized;
+        Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxis("Horizontal"), CrossPlatformInputManager.GetAxis("Vertical")).normalized;
 
         if (movement.x == 0 && movement.y == 0) {rb.drag = slowdown;}
         else {rb.drag = 2;}

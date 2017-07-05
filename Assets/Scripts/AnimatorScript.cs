@@ -59,7 +59,6 @@ public class AnimatorScript : MonoBehaviour
                 foreach (Animator t in Animators) { t.SetBool("playerRun", playerRun); }
             }
         }
-        Debug.Log("Movin state: " + playerRun);
     }
     void Attack()
     {
@@ -67,6 +66,7 @@ public class AnimatorScript : MonoBehaviour
         {
             transform.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
             transform.Find("d_c_torso").GetComponent<Animator>().SetTrigger("Attack");
+            transform.Find("u_c_torso").GetComponent<Animator>().SetTrigger("Attack");
         }
     }
 
@@ -99,20 +99,15 @@ public class AnimatorScript : MonoBehaviour
             {
                 if (PlayerRb.velocity.x < PlayerRb.velocity.y) // 1,1
                 {
-                    //spritesup
-                    print("up");
                     Index = 2;
                 }
                 else if (PlayerRb.velocity.x < PlayerRb.velocity.y * -1) //1,-1
                 {
                     //spritesdown
-                    print("down");
                     Index = 1;
                 }
                 else
                 {
-                    //spritesright
-                    print("right");
                     Index = 3;
                 }
             }
@@ -120,20 +115,14 @@ public class AnimatorScript : MonoBehaviour
             {
                 if (PlayerRb.velocity.x > PlayerRb.velocity.y * -1) // -1,1
                 {
-                    //spritesup
-                    print("up");
                     Index = 2;
                 }
                 else if (PlayerRb.velocity.x > PlayerRb.velocity.y) //-1,-1
                 {
-                    //spritesdown
-                    print("down");
                     Index = 1;
                 }
                 else
                 {
-                    //spritesleft
-                    print("left");
                     Index = 0;
                 }
             }
@@ -141,14 +130,10 @@ public class AnimatorScript : MonoBehaviour
             {
                 if (PlayerRb.velocity.y > 0) // -1,1
                 {
-                    //spritesup
-                    print("up");
                     Index = 2;
                 }
                 else if (PlayerRb.velocity.y < 0) //-1,-1
                 {
-                    //spritesdown
-                    print("down");
                     Index = 1;
                 }
             }

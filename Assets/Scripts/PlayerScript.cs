@@ -36,7 +36,6 @@ public class PlayerScript : MonoBehaviour
         //pate on paras
         Hand = new ItemManager(SidewaysHand);
         Damage = 30;
-        /*AnimatorScript material*/
     }
 
     void Update()           
@@ -141,8 +140,12 @@ public class PlayerScript : MonoBehaviour
             }
             if (Handstate == 2) //upwards
             {
-                /*REQUIRES SETTINGS*/
+                Quaternion rotation = Quaternion.Euler(0, 0, 32.8f);
+                Copy.transform.SetParent(Hand);
                 Copy.transform.position = Hand.position;
+                Copy.transform.localRotation = rotation;
+                Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+                Copy.GetComponent<SpriteRenderer>().sortingOrder = 8;
             }
         }
 
@@ -176,7 +179,12 @@ public class PlayerScript : MonoBehaviour
                             }
                         case "u_l_hand":
                             {
+                                Quaternion rotation = Quaternion.Euler(0, 0, 32.8f);
+                                Copy.transform.SetParent(Hand);
                                 Copy.transform.position = Hand.position;
+                                Copy.transform.localRotation = rotation;
+                                Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+                                Copy.GetComponent<SpriteRenderer>().sortingOrder = 8;
                                 break;
                             }
                         case "d_r_hand":

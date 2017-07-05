@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 
-public class PathFinder /*: MonoBehaviour*/
+public class PathFinder 
 {
     public enum Dir
     {
@@ -19,42 +19,12 @@ public class PathFinder /*: MonoBehaviour*/
     private static readonly int Width = 60;
     private static readonly int Height = 60;
     List<List<BreadthFirstSearch.tiles>> realMap;
-    //private TileType[,] testMap = new TileType[Height, Width];
     public Dir[,] dirs = new Dir[Height, Width];
     public bool run = false;
 
     public int GoalX;
     public int GoalY;
     public Texture2D GoalTexture2D;
-
-    //private void OnDrawGizmos()
-    //{
-    //    if (run)
-    //    {
-    //        Gizmos.color = Color.black;
-
-    //        for (int y = 0; y < Height; y++)
-    //        {
-    //            for (int x = 0; x < Width; x++)
-    //            {
-    //                var pos = new Vector3(x + 1, y + 1);    // tiilen origo
-    //                Gizmos.DrawLine(pos, (GetDir(dirs[y, x]) + pos));
-    //                Gizmos.DrawCube(GetDir(dirs[y, x]) + pos, new Vector3(0.1f, 0.1f));
-    //            }
-    //        }
-
-    //        for (int yy = 0; yy < Height; yy++)
-    //        {
-    //            for (int xx = 0; xx < Width; xx++)
-    //            {
-    //                var pos = new Vector3(xx + 1f, yy + 1f);    // tiilen origo
-    //                Gizmos.DrawWireCube(pos, new Vector3(1f, 1f));
-    //            }
-    //        }
-
-    //        Gizmos.DrawGUITexture(new Rect(GoalX + 1f, GoalY + 2f, 1f, -1f), GoalTexture2D);
-    //    }
-    //}
 
     Vector3 GetDir(Dir dir)
     {
@@ -75,19 +45,6 @@ public class PathFinder /*: MonoBehaviour*/
         return Vector2.zero;
     }
 
-    //void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.T))
-    //    {
-    //        dirs[0, 0] = Dir.Up;
-    //        dirs[0, 1] = Dir.Up;
-    //    }
-
-    //    if (Input.GetKeyDown(KeyCode.G))
-    //    {
-    //       Search();
-    //    }
-    //}
 
 
     static readonly Vec2[] Neighbours = new Vec2[]

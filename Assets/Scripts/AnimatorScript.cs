@@ -99,19 +99,16 @@ public class AnimatorScript : MonoBehaviour
                 if (PlayerRb.velocity.x < PlayerRb.velocity.y) // 1,1
                 {
                     //spritesup
-                    print("up");
                     Index = 2;
                 }
                 else if (PlayerRb.velocity.x < PlayerRb.velocity.y * -1) //1,-1
                 {
                     //spritesdown
-                    print("down");
                     Index = 1;
                 }
                 else
                 {
                     //spritesright
-                    print("right");
                     Index = 3;
                 }
             }
@@ -120,7 +117,6 @@ public class AnimatorScript : MonoBehaviour
                 if (PlayerRb.velocity.x > PlayerRb.velocity.y * -1) // -1,1
                 {
                     //spritesup
-                    print("up");
                     Index = 2;
                 }
                 else if (PlayerRb.velocity.x > PlayerRb.velocity.y) //-1,-1
@@ -132,7 +128,6 @@ public class AnimatorScript : MonoBehaviour
                 else
                 {
                     //spritesleft
-                    print("left");
                     Index = 0;
                 }
             }

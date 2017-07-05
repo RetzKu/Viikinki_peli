@@ -12,74 +12,19 @@ public class MobsControl : MonoBehaviour
 
     }
 
-    //List<GameObject> Mobs;
     public int Mob_Amount;
     public GameObject EnemyPrefab;
-    //public GameObject enemyChild;
     List<GameObject> Boids;
 
     public GameObject player;
 
-    //List<GameObject> wolfBoids;
-    //List<GameObject> archerBoids;
-
     List<spawn> spawner = new List<spawn>();
-    //[HideInInspector]
 
-
-    // Use this for initialization
     void Start()
     {
-        //print("Starting spawning");
-        //Mobs = new List<GameObject>(Mob_Amount);
-        //spawner = new List<Vector4>(1);
+
         Boids = new List<GameObject>(Mob_Amount); // mah fix
-        //wolfBoids = new List< GameObject > (Mob_Amount);
-        ////archerBoids = new List< GameObject > (Mob_Amount);
-        //for (int i = 0; i < Mob_Amount; i++)
-        //{
 
-        //    PathFinder.Dir k;
-        //    float x = 0;
-        //    float y = 0;
-
-            //do
-            //{
-            //    x = Random.Range(10f, 40f); // KORJAA
-            //    y = Random.Range(10f, 40f); // KORJAA
-            //    k = player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(x, y)); // korjaa
-            //}
-            //while (k == PathFinder.Dir.NoDir);
-
-            //do
-            //{
-            //    x = Random.Range(10f, 40f);
-            //    y = Random.Range(10f, 40f);
-            //}
-            //while (Physics2D.OverlapCircleAll(new Vector2(x, y), 0.5f).Length != 0);  // EETU TRIGGER
-
-
-           // var go = Instantiate(EnemyPrefab, new Vector2(x, y), Quaternion.identity);
-            //var ga = Instantiate(enemyChild, new Vector2(x, y), Quaternion.identity);
-
-            //ga.transform.parent = go.transform;
-
-            //if (i <= Mob_Amount/2)
-            //{
-            //    go.GetComponent<EnemyAI>().InitStart(x, y,EnemyType.Archer);
-            //    go.layer = 8; // enemy
-            //    //archerBoids.Add(go);
-            //}
-            //else
-            //{
-            //    go.GetComponent<EnemyAI>().InitStart(x, y, EnemyType.Wolf);
-            //    go.layer = 8; // enemy
-            //    //wolfBoids.Add(go);
-            //}
-            //Boids.Add(go);
-        //}
-
-        //print("mob amount" + " " + Boids.Count);
     }
 
     // Update is called once per frame
@@ -113,7 +58,14 @@ public class MobsControl : MonoBehaviour
                 while (k == PathFinder.Dir.NoDir);
 
                 var go = Instantiate(EnemyPrefab, new Vector2(x, y), Quaternion.identity);
+                if(Boids.Count % 2 == 0)
+                {
                 go.GetComponent<EnemyAI>().InitStart(x, y,EnemyType.Wolf);
+                }
+                else
+                {
+                    go.GetComponent<EnemyAI>().InitStart(x, y, EnemyType.Archer);
+                }
                 //wolfBoids.Add(go);
                 Boids.Add(go);
 
@@ -124,17 +76,25 @@ public class MobsControl : MonoBehaviour
                 spawner.Remove(spawner[0]);
             }
         }
-        for (int i = 0; i < Boids.Count; i++)
+
+        int ind = 0;
+
+        while (ind < Boids.Count)
         {
-            //if (Boids[i].GetComponent<EnemyAI>().myType == EnemyType.Wolf)
-            //{
-            Boids[i].GetComponent<EnemyAI>().UpdatePosition(Boids);
-            //}
-            //else if(Boids[i].GetComponent<EnemyAI>().myType == EnemyType.Archer)
-            //{
-            //    Boids[i].GetComponent<EnemyAI>().UpdatePosition(archerBoids);
-            //}
+            if (Boids[ind].GetComponent<EnemyAI>().killMyself())
+            {
+                Destroy(Boids[ind]);
+                Boids.Remove(Boids[ind]);
+                
+               
+            }
+            else
+            {
+            Boids[ind].GetComponent<EnemyAI>().UpdatePosition(Boids);
+            ind++;
+            }
         }
+
     }
     public void SpawnBoids(float x, float y, float radius, int amount)
     {

@@ -24,18 +24,7 @@ public enum collision
     none
 }
 
-public enum enemyDir
-{
-    Right,
-    Left,
-    Down,
-    Up,
-    LU,
-    LD,
-    RU,
-    RD,
-    Still
-}
+
 
 [Flags]
 public enum behavior
@@ -64,43 +53,44 @@ public enum behavior
 
 public class EnemyAI : MonoBehaviour
 {
-    enemyDir myDir {get;set;}
+    //enemyDir myDir {get;set;}
 
     float collideDist = 1f;
     collision CollState = collision.none;
-
     [HideInInspector]
-    public float spawnX;
+    public float spawnX { get; set; }
     [HideInInspector]
-    public float spawnY;
+    public float spawnY { get; set; }
     [HideInInspector]
     public bool agro = false;
     [HideInInspector]
     public bool inAttack = false;
-    public float attackDist = 4.0f;
-    public float leapDist = 10.0f;
+    public bool bite = false;
+    public float attackDist { get; set; }
+    public float leapDist { get; set; }
 
-    public float MaxSpeed = 0.05f;
-    public float MaxSteeringForce = 0.001f; // higher = better steering
-    public float ArriveRadius = 0.3f;      // slowdown beginning
+    public float MaxSpeed { get; set; }
+    public float MaxSteeringForce { get; set; }    // higher = better steering
+    public float ArriveRadius { get; set; }    // slowdown beginning
     //ai
-    public float IdleRadius = 60.0f;
-    public float IdleBallDistance = 100.0f;
-    public int IdleRefreshRate = 100;
+    public float IdleRadius { get; set; }
+    public float IdleBallDistance { get; set; }
+    public int IdleRefreshRate { get; set; }
     private int counter = 0;
     private int attackCounter = 0;
     private int attackUptade = 100;
     bool GiveStartTarget = true;
 
+    public enemyDir myDir { get { return rotation._myDir; } }
 
     private Rigidbody2D body;
 
-    public float desiredseparation = 0.7f;
-    public float alingmentDistance = 1.0f;
+    public float desiredseparation { get; set; }
+    public float alingmentDistance { get; set; }
 
-    public float sepF = 0.1f;
-    public float aliF = 0.2f;
-    public float cohF = 0.1f;
+    public float sepF { get; set; }
+    public float aliF { get; set; }
+    public float cohF { get; set; }
 
     public Vector2 velocity = new Vector2(); //An object’s PVector velocity will remain constant if it is in a state of equilibrium.
     Vector2 target = new Vector2();
@@ -111,13 +101,15 @@ public class EnemyAI : MonoBehaviour
 
     EnemyMovement Physics = new EnemyMovement();
     private GameObject player;
+    EnemyRotater rotation = new EnemyRotater();
     // Use this for initialization
     public void InitStart(float x, float y,EnemyType type)
     {
         //var pl = GameObject.FindGameObjectWithTag("Player");
 
         myType = type;
-        myDir = enemyDir.Still;
+        rotation.init(myType);
+        //myDir = enemyDir.Still;
         switch (myType)
         {
             case EnemyType.Wolf:
@@ -176,90 +168,15 @@ public class EnemyAI : MonoBehaviour
         body.MovePosition(new Vector2(spawnX, spawnY));
         velocity = new Vector2(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f));
         Physics.InitRules(sepF, aliF, cohF, desiredseparation, alingmentDistance, IdleRadius, IdleBallDistance, ArriveRadius, MaxSteeringForce, MaxSpeed);
-        Physics.MaxSpeed = MaxSpeed;
+        Physics._maxSpeed = MaxSpeed;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    void uptadeDir4() // tämä voidaan tehdä myös keskiarvolla
-    {
-        float xx = Mathf.Abs(velocity.x);
-        float yy = Mathf.Abs(velocity.y);
-
-        if(xx >= yy)
-        {
-            if (xx >= 0)
-            {
-                myDir = enemyDir.Up;
-            }
-            else
-            {
-                myDir = enemyDir.Left;
-            }
-        }
-        else
-        {
-            if (yy <= 0)
-            {
-                myDir = enemyDir.Right;
-            }
-            else
-            {
-                myDir = enemyDir.Left;
-            }
-        }
-    }
-    void uptadeDir6() // tämä voidaan tehdä myös keskiarvolla
-    {
-        float xx = Mathf.Abs(velocity.x);
-        float yy = Mathf.Abs(velocity.y);
-
-        if (xx >= yy)
-        {
-            if (xx >= 0)
-            {
-                myDir = enemyDir.Right;
-            }
-            else
-            {
-                myDir = enemyDir.Left;
-            }
-        }
-        else
-        {
-            if (yy <= 0)
-            {
-                if(xx >= 0)
-                {
-                    myDir = enemyDir.RU;
-                }
-                else
-                {
-                    myDir = enemyDir.RD;
-                }
-            }
-            else
-            {
-                if (xx >= 0)
-                {
-                    myDir = enemyDir.LU;
-                }
-                else
-                {
-                    myDir = enemyDir.LD;
-                }
-            }
-        }
-    }
+    
+    
     public void UpdatePosition(List<GameObject> Mobs)
     {
-        if(myType == EnemyType.Archer)
-        {
-            uptadeDir4();
-        }
-        else
-        {
-            uptadeDir6();
-        }
+        rotation.UpdateRotation(velocity,body.position);
         LayerMask mask = new LayerMask();
 
         mask = LayerMask.GetMask("Enemy");
@@ -280,7 +197,8 @@ public class EnemyAI : MonoBehaviour
         if (!agro)
         {
             wander(HeardArray);
-            //findPath();
+            rotation.rotToPl = false;
+            rotation.Lock = false;
         }
         else if (agro)
         {
@@ -295,11 +213,8 @@ public class EnemyAI : MonoBehaviour
             {
                 archerPattern(dist, playerPos);
             }
-            //findPath();
         }
-        //flags = (int)flags | (int)behavior.separate;
-        //RayCollide();
-        //flags = (int)flags | (int)behavior.Collide; 
+
         powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags,CollState);
         target = powers[1];
         velocity = powers[0];
@@ -308,31 +223,52 @@ public class EnemyAI : MonoBehaviour
     }
     void archerPattern(Vector2 dist, Vector2 playerPos)
     {
-        //desiredseparation = 4f;
-        Physics.sepF = 1f;
+        Physics._sepF = 0.25f;
         if (dist.magnitude >= attackDist)
         {
-            Physics.desiredseparation = 1.3f;
-            Physics.MaxSpeed = 0.06f;
+            rotation.rotToPl = true;
+            rotation.playerPos = playerPos;
+            Physics._desiredseparation = 0.7f;
+            Physics._maxSpeed = 0.06f;
             findPath();
         }
         else
         {
-            Physics.desiredseparation = 0.7f;
-            Physics.MaxSpeed = 0.02f;
+            if(velocity.magnitude == 0)
+            {
+                rotation.playerPos = playerPos;
+                rotation.rotToPl = true;
+            }
+            else
+            {
+                rotation.rotToPl = false;
+            }
+            Physics._desiredseparation = 1.0f;
+            Physics._maxSpeed = 0.04f;
             followPlayer(dist, playerPos);
         }
-        Physics.MaxSteeringForce = 0.1f; //EETU TRIGGER
+        Physics._maxSteeringForce = 0.1f; //EETU TRIGGER
     }
 
     void leapingPattern(Vector2 dist,Vector2 playerPos)
-    {
+    { 
         if (dist.magnitude <= attackDist || inAttack || velocity.magnitude == 0)
         {
             if (!inAttack && attackCounter > attackUptade)
             {
+                rotation.rotToPl = false;
+                Physics._maxSpeed = MaxSpeed * 4;
                 //start leap
-                Physics.MaxSpeed = MaxSpeed * 4;
+                if(dist.magnitude > 0.7f)
+                {
+                Vector2 plVec = player.GetComponent<Rigidbody2D>().velocity;
+                playerPos += plVec * 0.5f; // muokkaa
+
+                dist = body.position - playerPos;
+                }
+
+
+
                 dist.Normalize();
                 dist *= 5;
                 dist *= -1.0f;
@@ -342,19 +278,36 @@ public class EnemyAI : MonoBehaviour
             }
             else if (inAttack)
             {
+                rotation.Lock = true;
                 //leaping
                 Vector2 t = target - body.position;
                 flags = (int)behavior.seekAndArrive;
                 if (velocity.magnitude == 0)
                 {
-                    Physics.MaxSpeed = MaxSpeed;
+                    Physics._maxSpeed = MaxSpeed;
                     inAttack = false;
                     attackCounter = 0;
+                    bite = false;
+                    rotation.Lock = false;
+                }
+                else if (dist.magnitude < velocity.magnitude * 5 && !bite)// muokkaa
+                {
+                    target = body.position + (velocity * 4);
+                    bite = true;
                 }
             }
             else
             {
                 //follow player
+                if(velocity.magnitude == 0)
+                {
+                    rotation.playerPos = playerPos;
+                    rotation.rotToPl = true;
+                }
+                else
+                {
+                    rotation.rotToPl = false;
+                }
                 attackCounter++;
                 followPlayer(dist, playerPos);
             }
@@ -365,10 +318,13 @@ public class EnemyAI : MonoBehaviour
             attackCounter++;
             if(dist.magnitude <= attackDist)
             {
+                rotation.rotToPl = false;
                 followPlayer(dist, playerPos);
             }
             else
             {
+                rotation.playerPos = playerPos;
+                rotation.rotToPl = true;
                 findPath();
             }
             //attackCounter = attackUptade;
@@ -382,16 +338,12 @@ public class EnemyAI : MonoBehaviour
         dist *= attackDist;
         target = playerPos + dist;
         flags = (int)behavior.seekAndArrive | (int)behavior.separate;
-        Physics.sepF = sepF * 2;
+        Physics._sepF = sepF * 2;
     }
     void findPath()
     {
-        
-
-        // missä olen
         PathFinder.Dir k =  player.GetComponent<UpdatePathFind>().path.getTileDir(body.position);
-        //print(k.ToString());
-        //BreadthFirstSearch.states k = BreadthFirstSearch.states.right;
+
         if (k == PathFinder.Dir.NoDir /*|| k == BreadthFirstSearch.states.wall || k == BreadthFirstSearch.states.unVisited*/)
         {
             flags = 0;
@@ -470,17 +422,14 @@ public class EnemyAI : MonoBehaviour
         Vector2 second = (main + (perpendicular * -1));
         if(Physics2D.Raycast(body.position,main, collideDist, mask).collider != null)
         {
-            //print("COLLIDING MAIN");
             CollState = collision.Main;
         }
         else if (Physics2D.Raycast(body.position, first, collideDist, mask).collider != null)
         {
-            //print("COLLIDING RIGHT");
             CollState = collision.Right;
         }
         else if (Physics2D.Raycast(body.position, second, collideDist, mask).collider != null)
         {
-            //print("COLLIDING LEFT");
             CollState = collision.Left;
         }
 
@@ -488,6 +437,8 @@ public class EnemyAI : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        Gizmos.color = Color.white;
+
         Vector2 main = velocity;
         main.Normalize();
         main *= collideDist; // EETU TRIGGER
@@ -496,10 +447,61 @@ public class EnemyAI : MonoBehaviour
         Vector2 first = (main + perpendicular);
         Vector2 second = (main + (perpendicular * -1));
 
-        Gizmos.DrawLine(body.position, body.position+main); // piirretään viiva visualisoimaan toimivuutta 
+        //Gizmos.DrawLine(body.position, body.position+main); // piirretään viiva visualisoimaan toimivuutta 
         Gizmos.DrawLine(body.position, body.position + first);
         Gizmos.DrawLine(body.position, body.position + second);
+        Gizmos.DrawLine(body.position, body.position + velocity*30);
+        if (rotation.rotToPl)
+        {
+        Gizmos.color = Color.red;
+        }
+        else
+        {
+            Gizmos.color = Color.blue;
+        }
+        switch (rotation._myDir)
+        {
+            case enemyDir.Down:
+                Gizmos.DrawLine(body.position, body.position + new Vector2(0,-1));
+                break;
+            case enemyDir.Up:
+                Gizmos.DrawLine(body.position, body.position + new Vector2(0, 1));
+                break;
+            case enemyDir.Left:
+                Gizmos.DrawLine(body.position, body.position + new Vector2(-1, 0));
+                break;
+            case enemyDir.Right:
+                Gizmos.DrawLine(body.position, body.position + new Vector2(1, 0));
+                break;
+            case enemyDir.LD:
+                Gizmos.DrawLine(body.position, body.position + new Vector2(-1, -1));
+                break;
+            case enemyDir.LU:
+                Gizmos.DrawLine(body.position, body.position + new Vector2(-1, 1));
+                break;
+            case enemyDir.RD:
+                Gizmos.DrawLine(body.position, body.position + new Vector2(1, -1));
+                break;
+            case enemyDir.RU:
+                Gizmos.DrawLine(body.position, body.position + new Vector2(1, 1));
+                break;
+            case enemyDir.Still:
+                Gizmos.DrawSphere(body.position, 0.3f);
+                break;
 
+
+        }
+    }
+
+    public bool killMyself()
+    {
+        int[] ind =  player.GetComponent<UpdatePathFind>().path.calculateIndex(body.position);
+
+        if(ind[0] < 0 || ind[0] > 59 || ind[1] < 0 || ind[1] > 59)
+        {
+            return true;
+        }
+        return false;
     }
 
 }

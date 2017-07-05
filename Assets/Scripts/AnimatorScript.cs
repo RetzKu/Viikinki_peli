@@ -137,6 +137,21 @@ public class AnimatorScript : MonoBehaviour
                     Index = 0;
                 }
             }
+            else if (PlayerRb.velocity.y != 0) // X negative
+            {
+                if (PlayerRb.velocity.y > 0) // -1,1
+                {
+                    //spritesup
+                    print("up");
+                    Index = 2;
+                }
+                else if (PlayerRb.velocity.y < 0) //-1,-1
+                {
+                    //spritesdown
+                    print("down");
+                    Index = 1;
+                }
+            }
             EnableSprites(Index);
         }
         void EnableSprites(int SpriteNum)

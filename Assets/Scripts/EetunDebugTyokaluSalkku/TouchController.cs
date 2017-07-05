@@ -1,10 +1,13 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TouchController : MonoBehaviour
 {
     public RuneHolder RuneHolder;
-    private Vec2[] runeIndices = new Vec2[9];
+
+    private static readonly int maxRuneIndices = 9;
+    private Vec2[] runeIndices = new Vec2[maxRuneIndices];
     public Sprite BulletSprite;
 
     public int amountOfSpheres = 3;
@@ -34,6 +37,64 @@ public class TouchController : MonoBehaviour
 
     public float screenX = 600f;
 
+
+    // TODO: ^^^ CLEANUP ^^^
+    private int SlashLineIndex = 0;
+    private Vector3[] SlashLineIndices = new Vector3[15];
+    private int LineIndex = 0;
+    private Vector3[] LineIndices = new Vector3[100];
+
+    public float LineIndexDistance = 0.10f;
+
+    void AddSlashLineIndex(Vector3 position)
+    {
+        SlashLineIndices[SlashLineIndex] = position;
+        lineRenderer.numPositions = SlashLineIndex + 1;
+        lineRenderer.SetPosition(SlashLineIndex, SlashLineIndices[SlashLineIndex]);
+
+        SlashLineIndex++;
+    }
+
+    void ResetSlashLineIndices()
+    {
+        SlashLineIndex = 0;
+    }
+
+    void DrawToMouse(Vector2 mouse)
+    {
+        lineRenderer.numPositions = SlashLineIndex + 1;
+        lineRenderer.SetPosition(SlashLineIndex, mouse);
+    }
+
+
+    //void AddLineIndices(Vector2 position)
+    //{
+    //    if (LineIndex != 0)
+    //    {
+    //        if (Vector2.Distance(position, LineIndices[LineIndex - 1]) > LineIndexDistance)
+    //        {
+    //            if (LineIndex < LineIndices.Length)
+    //            {
+    //                LineIndices[LineIndex] = new Vector3(position.x, position.y, 2f);
+    //                LineIndex++;
+    //            }
+    //        }
+    //    }
+    //    else
+    //    {
+    //        LineIndices[LineIndex] = new Vector3(position.x, position.y, 2f);
+    //        LineIndex++;
+    //    }
+
+    //    lineRenderer.numPositions = LineIndex;
+    //    lineRenderer.SetPosition(LineIndex - 1, LineIndices[LineIndex - 1]);
+    //}
+
+    //void ResetLineRenderer()
+    //{
+    //    lineRenderer.numPositions = 0;
+    //}
+
     void OnDrawGizmos()
     {
         for (int y = 0; y < amountOfSpheres; y++)
@@ -49,9 +110,6 @@ public class TouchController : MonoBehaviour
     void Start()
     {
         screenX = Screen.width / 2;
-        // start.x = 0f;
-        // start.y = 0f;
-
         lineRenderer = GetComponent<LineRenderer>();
         positions = new Vector3[10];
         lineRenderer.SetPositions(positions);
@@ -80,7 +138,6 @@ public class TouchController : MonoBehaviour
                 point.x = x;
                 point.y = y;
 
-
                 ii++;
                 // _colliders[index].transform.position = new Vector3(start.x + x * offset, start.y + y * offset, 0);
                 // _colliders[index].radius = Radius;
@@ -88,25 +145,19 @@ public class TouchController : MonoBehaviour
         }
         lineRenderer.material = lineMaterial;
         lineRenderer.sortingOrder = 1;
-        lineRenderer.sortingLayerName = "Line";
+        lineRenderer.sortingLayerName = "Foreground";
 
-        for(int i = 0; i < 10; i++)
+        for (int i = 0; i < maxRuneIndices; i++)
         {
-            // KruneIndices[i] = new Vec2(0, 0);
+            runeIndices[i] = new Vec2(0, 0);
         }
         index = 0;
     }
-
-
     private int FingerId = -1000;
 
     void Update()
     {
-        // LineRenderer.SetPositions(positions);
-        // draw spheres
-        // print(mousePos);
-        // positions[index] = new Vector3(mousePos.x, mousePos.y, 0);
-
+#if false               // MOBILERLKj
         Touch[] myTouches = Input.touches;
         for (int i = 0; i < Input.touchCount; i++)
         {
@@ -152,31 +203,31 @@ public class TouchController : MonoBehaviour
                 }
             }
         }
+#endif
+        //if (myTouches.Length == 0)
+        //{
+        //    TrafficLights.GetComponent<SpriteRenderer>().material.color = Color.red;
+        //}
+        //else if (myTouches.Length == 1)
+        //{
+        //    TrafficLights.GetComponent<SpriteRenderer>().material.color = Color.blue;
+        //}
+        //else if (myTouches.Length >= 2)
+        //{
+        //    TrafficLights.GetComponent<SpriteRenderer>().material.color = Color.green;
+        //}
 
-        if (myTouches.Length == 0)
-        {
-            TrafficLights.GetComponent<SpriteRenderer>().material.color = Color.red;
-        }
-        else if (myTouches.Length == 1)
-        {
-            TrafficLights.GetComponent<SpriteRenderer>().material.color = Color.blue;
-        }
-        else if (myTouches.Length >= 2)
-        {
-            TrafficLights.GetComponent<SpriteRenderer>().material.color = Color.green;
-        }
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    Vector2 touchDeltaVector = new Vector2(1, 1);
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Vector2 touchDeltaVector = new Vector2(1, 1);
-
-            var bulletGo = Instantiate(new GameObject());
-            bulletGo.transform.position = Character.transform.position;
-            var bullet = bulletGo.AddComponent<Bullet>();
-            bullet.velocity = touchDeltaVector.normalized;
-            var renderer = bulletGo.AddComponent<SpriteRenderer>();
-            renderer.sprite = BulletSprite;
-        }
+        //    var bulletGo = Instantiate(new GameObject());
+        //    bulletGo.transform.position = Character.transform.position;
+        //    var bullet = bulletGo.AddComponent<Bullet>();
+        //    bullet.velocity = touchDeltaVector.normalized;
+        //    var renderer = bulletGo.AddComponent<SpriteRenderer>();
+        //    renderer.sprite = BulletSprite;
+        //}
 
         //Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical"));
         //if (movement.x != 0 || movement.y != 0)
@@ -185,19 +236,17 @@ public class TouchController : MonoBehaviour
         //    Activate(movement * 3 * Time.deltaTime);
         //}
 
-        if (Input.GetMouseButton(1) || Input.GetMouseButton(0) /*|| Input.GetTouch(0).*/ )
+        if (Input.GetMouseButton(0) /*|| Input.GetTouch(0).*/ )
         {
-            if (LineFadeEffectRunning)
-            {
-                StopCoroutine(LineFadeEffect());
-                lineRenderer.widthMultiplier = LineStartWidth;
-                //lineRenderer.positionCount = 0;
-                //lineRenderer.positionCount = 0;
-                lineRenderer.numPositions = index + 1;
-                index = 0;
-                LineFadeEffectRunning = false;
-                lineActive = false;
-            }    
+
+            //if (LineFadeEffectRunning)
+            //StopCoroutine(LineFadeEffect());
+            //lineRenderer.widthMultiplier = LineStartWidth;
+            //lineRenderer.positionCount = 0;
+            //lineRenderer.numPositions = 0;
+            //index = 0;
+            //LineFadeEffectRunning = false;
+            //lineActive = false;
 
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 2;
@@ -206,49 +255,62 @@ public class TouchController : MonoBehaviour
             touchCollider.transform.position = mousePos;
 
             _touching = true;
+            DrawToMouse((mousePos));
         }
         else
         {
+            RuneHolder.SendIndices(runeIndices, index);
+            index = 0;
+
             touchCollider.GetComponent<Collider2D>().enabled = false;
             _touching = false;
             _timer -= 200;
+            ResetColliders();
+
+
+            // sormi poesa
+            ResetSlashLineIndices();
         }
 
         // Reset LineRenderer
-        if (lineActive && _timer < Time.time)
+        if (_timer < Time.time)
         {
-            if (!LineFadeEffectRunning)
-                StartCoroutine(LineFadeEffect());
+            index = 0;
+            LineIndex = 0;
+            ResetSlashLineIndices();
+            ResetColliders();
+            ResetSlashLineIndices();
         }
-   }
-
-    private bool lineActive = false;
-    private bool LineFadeEffectRunning = false;
-    public float TotalLineFadeEffectTime = 0.4f;
-    IEnumerator LineFadeEffect()                        // TODO: Hianompaa effectiä
-    {
-        // MVP: Kommunikaatio Runejen laukaisun kannsa
-        RuneHolder.SendIndices(runeIndices, index);
-
-        LineFadeEffectRunning = true;
-        Color color = new Color(170, 170, 170, 120);
-        lineRenderer.material.color = color;
-        ResetColliders();
-        
-        // larger line every frame? 
-        for (float i = 0; i < 30; i++)
-        {
-            lineRenderer.widthMultiplier = Mathf.Lerp(LineStartWidth, MaxWidht, (float)i / 30);
-            yield return new WaitForSeconds(TotalLineFadeEffectTime / 30);
-        }
-
-        lineRenderer.widthMultiplier = LineStartWidth;
-        //lineRenderer.positionCount = 0;
-        lineRenderer.numPositions = index + 1;
-        index = 0;
-        LineFadeEffectRunning = false;
-        lineActive = false;
     }
+
+    // private bool lineActive = false;
+    // private bool LineFadeEffectRunning = false;
+    // public float TotalLineFadeEffectTime = 0.4f;
+    // IEnumerator LineFadeEffect()                        // TODO: Hianompaa effectiä
+    // {
+    //     // MVP: Kommunikaatio Runejen laukaisun kannsa
+
+    //    LineFadeEffectRunning = true;
+    //    Color color = new Color(170, 170, 170, 120);
+    //    lineRenderer.material.color = color;
+    //    ResetColliders();
+
+    //    // larger line every frame? 
+    //    for (float i = 0; i < 30; i++)
+    //    {
+    //        lineRenderer.widthMultiplier = Mathf.Lerp(LineStartWidth, MaxWidht, (float)i / 30);
+    //        yield return new WaitForSeconds(TotalLineFadeEffectTime / 30);
+    //    }
+
+    //    lineRenderer.widthMultiplier = LineStartWidth;
+
+    //    lineRenderer.numPositions = 0;
+
+    //    index = 0;
+    //    LineFadeEffectRunning = false;
+    //    lineActive = false;
+    //}
+
 
     private GameObject GetFromArray(int x, int y)
     {
@@ -263,44 +325,16 @@ public class TouchController : MonoBehaviour
         }
     }
 
-    // make line
-    private void Activate(Vector2 movement)
+    public void OnTouchDetected(int x, int y, Vector3 realTransform)
     {
-        for (int i = 0; i < index; i++)
-        {
-            positions[i].x += movement.x;
-            positions[i].y += movement.y;
-            lineRenderer.SetPosition(i, positions[i]);
-        }
-    }
+        ResetColliders();
 
-    public void OnTouchDetected(int x, int y)
-    {
-        lineActive = true;
-        // var go = GetFromArray(x, y);
-        if (_touching && index < 9)
+        if (_touching && index < maxRuneIndices)
         {
             positions[index] = new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f);
-            //print("x: " + x + " y: " + y);
-            runeIndices[index] = new Vec2(x, y);
-            
-            //LineRenderer.positionCount = index + 1;
-            //LineRenderer.positionCount = index + 1;
-            //LineRenderer.positionCount = index + 1;
-            //LineRenderer.positionCount = index + 1;
-            //LineRenderer.positionCount = index + 1;
-            //lineRenderer.positionCount = index + 1;
-            //lineRenderer.positionCount = index + 1;
-            // lineRenderer.positionCount = index + 1;
-            lineRenderer.numPositions = index + 1;
-
-            lineRenderer.SetPosition(index, positions[index]);
-            lineRenderer.sortingLayerName = "Foreground";
+            AddSlashLineIndex(new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f));
             index++;
         }
-
-        // Add timer? 
         _timer = Time.time + lineResetTime;
     }
-    // fix: LineRenderer.numPositions = index + 1;
 }

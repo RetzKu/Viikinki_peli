@@ -122,12 +122,17 @@ public class CustomJoystick : MonoBehaviour
         return (endposition - startPosition);
     }
 
-    Vector2 GetInputVector()
+    public Vector2 GetInputVector()
     {
         Vector2 pos = endposition - startPosition;
-        pos.x *= (Map(pos.magnitude, 0f, maxLength, 0f, 1f)) / 2f;
-        pos.y *= (Map(pos.magnitude, 0f, maxLength, 0f, 1f)) / 2f;
-        return pos;
+
+        if (endposition.x != 0 && endposition.y != 0)
+        {
+            pos.x *= (Map(pos.magnitude, 0f, maxLength, 0f, 1f)) / 2f;
+            pos.y *= (Map(pos.magnitude, 0f, maxLength, 0f, 1f)) / 2f;
+            return pos;
+        }
+        return new Vector2(0f, 0f);
     }
 
     public float Map(float x, float in_min, float in_max, float out_min, float out_max)

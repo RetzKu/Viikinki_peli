@@ -283,12 +283,13 @@ public class TouchController : MonoBehaviour
             positions[index] = new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f);
             //print("x: " + x + " y: " + y);
             runeIndices[index] = new Vec2(x, y);
-            
+
             //LineRenderer.positionCount = index + 1;
             //LineRenderer.positionCount = index + 1;
             //LineRenderer.positionCount = index + 1;
             //LineRenderer.positionCount = index + 1;
             //LineRenderer.positionCount = index + 1;
+            //lineRenderer.positionCount = index + 1;
             //lineRenderer.positionCount = index + 1;
             //lineRenderer.positionCount = index + 1;
             lineRenderer.numPositions = index + 1;

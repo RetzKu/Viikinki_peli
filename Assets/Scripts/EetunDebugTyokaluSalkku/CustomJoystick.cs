@@ -15,19 +15,32 @@ public class CustomJoystick : MonoBehaviour
     private bool touching = false;
     private bool touchingLastFrame = false;
 
+
+    public Vector2 offsets = new Vector2(0, 0);
+
     public Sprite JoystickSprite;
     public float maxLength;
-   
-
     public ControllerType controlScheme = ControllerType.Mouse;
-
-    private SpriteRenderer renderer;
     public Rect HitBox;
+    public Transform Player;
+    private Vector3 lastPos;
+
+
+    private bool FirstTouchSuccess = false;
+
+    SpriteRenderer renderer;
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
-        Gizmos.DrawLine(startPosition, (Vector3)startPosition + (Vector3)GetTouchVector().normalized );
+        Gizmos.DrawLine(startPosition, (Vector3)startPosition + (Vector3)GetTouchVector().normalized);
+
+        Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
+        HitBox.x = bottomLeft.x + offsets.x;
+        HitBox.y = bottomLeft.y + offsets.y;
+
+        Vector3 position = Camera.main.transform.position + (Vector3)HitBox.center;
+        Gizmos.DrawWireCube(position, new Vector3(HitBox.width, HitBox.height));
     }
 
     void Start()
@@ -37,39 +50,65 @@ public class CustomJoystick : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         renderer.sprite = JoystickSprite;
 
-        HitBox.Set(transform.position.x + HitBox.x, transform.position.y + HitBox.y, HitBox.width, HitBox.height);
+        //HitBox.Set(transform.position.x + HitBox.x, transform.position.y + HitBox.y, HitBox.width, HitBox.height);
     }
 
     void Update()
     {
+        Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
+        HitBox.x = bottomLeft.x + offsets.x;
+        HitBox.y = bottomLeft.y + offsets.y;
+
+
+        lastPos = transform.position;
+
         touching = Input.GetMouseButton(0);
 
+        //  Vector3 worldPosition = Input.mousePosition;
         Vector3 currentPotition = Camera.main.ScreenToWorldPoint(Input.mousePosition); // sormi
 
-        //if (HitBox.Contains(currentPotition))
+        Vector3 cameraPos = Camera.main.transform.position;
+        Rect ScreenView = new Rect(cameraPos.x + HitBox.x, cameraPos.y + HitBox.y, HitBox.width, HitBox.height);
+
+        if (Input.GetMouseButtonDown(0))    // eka 
         {
-            if (touching && !touchingLastFrame)
+            if (touching && !touchingLastFrame && ScreenView.Contains(currentPotition))
             {
                 startPosition = currentPotition;
                 transform.position = startPosition;
+                touching = true;
+                FirstTouchSuccess = true;
             }
-            if (touching)
+            else
             {
-                endposition = currentPotition;
+                FirstTouchSuccess = false;
             }
-
-            touchingLastFrame = touching;
-
-            Vector2 touchVector = GetTouchVector();
-            if (touchVector.magnitude > maxLength)
-            {
-                endposition = startPosition + (touchVector.normalized * maxLength);
-            }
-
-            transform.position = endposition;
-           // HitBox.Set(transform.position.x + HitBox.x, transform.position.y + HitBox.y, HitBox.width, HitBox.height);
-            UpdateVisuals();
         }
+        else
+        {
+            if (touching && FirstTouchSuccess)    // toka
+            {
+                if (touching && touchingLastFrame)
+                {
+                    endposition = currentPotition;
+                    transform.position = endposition;
+                }
+
+                Vector2 touchVector = GetTouchVector();
+                if (touchVector.magnitude > maxLength && touchingLastFrame)
+                {
+                    endposition = startPosition + (touchVector.normalized * maxLength);
+                    transform.position = endposition;
+                }
+            }
+            else
+            {
+                touching = false;
+            }
+        }
+
+        touchingLastFrame = touching;
+        UpdateVisuals();
     }
 
     void UpdateVisuals()
@@ -80,7 +119,7 @@ public class CustomJoystick : MonoBehaviour
 
     Vector2 GetTouchVector()
     {
-        return (endposition - startPosition);   
+        return (endposition - startPosition);
     }
 
     Vector2 GetInputVector()

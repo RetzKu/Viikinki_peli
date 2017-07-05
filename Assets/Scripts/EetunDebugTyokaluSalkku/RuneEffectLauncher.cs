@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class RuneEffectLauncher : MonoBehaviour
 {
-    private ParticleSystem _particleSystem;
+    //private ParticleSystem _particleSystem;
 
     void Start()
     {
-        _particleSystem =  GetComponent<ParticleSystem>();
+        //_particleSystem =  GetComponent<ParticleSystem>();
     }
 
     public void Fire(Sprite sprite)

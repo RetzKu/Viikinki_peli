@@ -284,7 +284,6 @@ public class TileMap : MonoBehaviour
     {
         for (int iY = 0; iY < 3; iY++)
         {
-            Chunk dest = _chunks[iY, destX];
             Chunk from = _chunks[iY, fromX];
 
             for (int y = 0; y < Chunk.CHUNK_SIZE; y++)

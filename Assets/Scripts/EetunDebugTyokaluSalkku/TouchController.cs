@@ -238,6 +238,7 @@ public class TouchController : MonoBehaviour
 
         if (Input.GetMouseButton(0) /*|| Input.GetTouch(0).*/ )
         {
+
             //if (LineFadeEffectRunning)
             //StopCoroutine(LineFadeEffect());
             //lineRenderer.widthMultiplier = LineStartWidth;
@@ -310,6 +311,7 @@ public class TouchController : MonoBehaviour
     //    lineActive = false;
     //}
 
+
     private GameObject GetFromArray(int x, int y)
     {
         return _colliders[y * amountOfSpheres + x];
@@ -330,8 +332,6 @@ public class TouchController : MonoBehaviour
         if (_touching && index < maxRuneIndices)
         {
             positions[index] = new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f);
-            runeIndices[index] = new Vec2(x, y);
-
             AddSlashLineIndex(new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f));
             index++;
         }

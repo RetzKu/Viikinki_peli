@@ -21,26 +21,26 @@ public class debugGiz : MonoBehaviour {
             {
                 for (int x = 0; x < copy.moveTiles.Count; x++)
                 {
-                    switch (copy.moveTiles[y][x].tileState)
+                    switch (copy.panther.dirs[y,x])
                     {
-                        case BreadthFirstSearch.states.down:
+                        case PathFinder.Dir.Down:
                             Gizmos.DrawLine(new Vector2(x, y + plus), new Vector2(x, y - plus));
                             Gizmos.DrawLine(new Vector2(x - (plus/2), y - plus), new Vector2(x + (plus / 2), y - plus));
                             break;
-                        case BreadthFirstSearch.states.up:
+                        case PathFinder.Dir.Up:
                             Gizmos.DrawLine(new Vector2(x, y + plus), new Vector2(x, y - plus));
                             Gizmos.DrawLine(new Vector2(x - (plus / 2), y + plus), new Vector2(x + (plus / 2), y + plus));
                             break;
-                        case BreadthFirstSearch.states.left:
+                        case PathFinder.Dir.Left:
                             Gizmos.DrawLine(new Vector2(x + plus, y ), new Vector2(x - plus, y ));
                             Gizmos.DrawLine(new Vector2(x - plus, y - (plus / 2)), new Vector2(x - plus,y +(plus / 2)));
 
                             break;
-                        case BreadthFirstSearch.states.right:
+                        case PathFinder.Dir.Right:
                             Gizmos.DrawLine(new Vector2(x+ plus, y ), new Vector2(x - plus, y));
                             Gizmos.DrawLine(new Vector2(x + plus, y - (plus / 2)), new Vector2(x + plus, y + (plus / 2)));
                             break;
-                        case BreadthFirstSearch.states.goal:
+                        case PathFinder.Dir.NoDir:
                             //Gizmos.DrawLine(new Vector2(x + plus, y), new Vector2(x - plus, y));
                             Gizmos.DrawSphere(new Vector2(x, y), 0.5f);
                             break;

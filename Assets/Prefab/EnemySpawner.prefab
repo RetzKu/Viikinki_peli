@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9418c05cae37f464d93db17dca2da32e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mob_Amount: 80
+  Mob_Amount: 10
   EnemyPrefab: {fileID: 1925071990572098, guid: a2ccd4b9edf717045b278594c3228d6e,
     type: 2}
-  enemyChild: {fileID: 0}
+  player: {fileID: 0}

@@ -3,58 +3,53 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UpdatePathFind : MonoBehaviour {
+
+    private Rigidbody2D body;
+
+
     public BreadthFirstSearch path;
-    debugGiz Giz = new debugGiz();
+    //debugGiz Giz;
 
     bool uptade = true;
 
-
+    int[] LasPos = new int[2];
 
     bool pressed = false;
     Vector2 midPoint = new Vector2(10f, 10f);
     public TileMap terveisin;
-    // joku lastile
 
     // Use this for initialization
     void Start ()
     {
         path = new BreadthFirstSearch();
         path.map = terveisin;
-
-        //path.uptadeTiles(midPoint, terveisin);
-        //bool colid = TileMap.Collides(terveisin.GetTileFast(y, j));
+        body = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update() {
-        // if in new tile -> uptade
-
         if (uptade)
         {
             path.uptadeTiles(midPoint, terveisin); //get tile map
             uptade = false;
-            Giz.init(path);
+            //Giz.init(path);
         }
 
-        if (Input.GetKeyDown("y"))          
-            {
-                midPoint.x++;
+        int[] m = path.calculateIndex(body.position);
+        
 
-                path.uptadeTiles(midPoint, terveisin); //get tile map
-                pressed = true;
-            }
-        if (Input.GetKeyDown("u"))
+        if(LasPos[0] != m[0] || LasPos[1] != m[1])
         {
-            midPoint.y++;
-
-            path.uptadeTiles(midPoint, terveisin); //get tile map
-            pressed = true;
+            path.uptadeTiles(m[0],m[1], terveisin);
+            LasPos = m;
         }
 
+
     }
 
-    void OnDrawGizmos()
-    {
-        Giz.OnDrawGizmosPate();
-    }
+    //void OnDrawGizmos()
+    //{
+    //    Giz.OnDrawGizmosPate();
+
+
+    //}
 }

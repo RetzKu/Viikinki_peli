@@ -4,41 +4,39 @@ using UnityEngine;
 
 
 //pate
-public class EnemyMovement /*: MonoBehaviour*/
+public class EnemyMovement 
 {
-    [HideInInspector]
-    public float spawnX;
-    [HideInInspector]
-    public float spawnY;
+    public float _maxSpeed { set { MaxSpeed = value; } }
+    float MaxSpeed;
 
-    //private Rigidbody2D body;
-    [HideInInspector]
-    public float MaxSpeed = 0.2f;
-    [HideInInspector]
-    public float MaxSteeringForce = 0.001f; // higher = better steering
-    [HideInInspector]
-    public float ArriveRadius = 0.3f;      // slowdown beginning
+    public float _maxSteeringForce { set { MaxSteeringForce = value; } }
+    float MaxSteeringForce;              // higher = better steering
 
+    public float _arriveRadius { set { ArriveRadius = value; } }
+    float ArriveRadius;     // slowdown beginning
     //ai
-    [HideInInspector]
-    public float IdleRadius = 60.0f;
-    [HideInInspector]
-    public float IdleBallDistance = 100.0f;
-    //[HideInInspector]
-    //public int IdleRefreshRate = 100;
-    //private int counter;
-    //bool GiveStartTarget = true;
-    [HideInInspector]
-    public float desiredseparation = 0.7f;
-    [HideInInspector]
-    public float alingmentDistance = 1.0f;
+    public float _idleRadius { set { IdleRadius = value; } }
+    float IdleRadius;
 
-    [HideInInspector]
-    public float sepF = 0.1f;
-    [HideInInspector]
-    public float aliF = 0.2f;
-    [HideInInspector]
-    public float cohF = 0.1f;
+    public float _idleBallDistance { set { IdleBallDistance = value; } }
+    float IdleBallDistance;
+
+    public float _desiredseparation { set { desiredseparation = value; } }
+    float desiredseparation;
+
+    public float _alingmentDistance { set { alingmentDistance = value; } }
+    float alingmentDistance;
+
+    public float _sepF { set { sepF = value; } }
+    float sepF;
+
+    public float _aliF { set { aliF = value; } }
+    float aliF;
+
+    public float _cohF { set { cohF = value; } }
+    float cohF;
+
+
 
 
 

@@ -1,87 +1,30 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
-using System.Runtime.Remoting.Channels;
-using System.Security.Cryptography.X509Certificates;
-using JetBrains.Annotations;
-using UnityEditor.Callbacks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Vecori2
-{
-    public int X;
-    public int Y;
 
-    public Vecori2(int x, int y)
-    {
-        this.X = x;
-        this.Y = y;
-    }
-}
 
-//[System.Serializable]
-public class tmp
-{
-    public int asdf;
-    public int y;
-
-    public tmp(int asdf, int y)
-    {
-        this.asdf = asdf;
-        this.y = y;
-    }
-}
-
-public class PathFinder : MonoBehaviour
+public class PathFinder 
 {
     public enum Dir
     {
         NoDir,
+        NoWayOut,
         Up,
         Right,
         Down,
-        Left
+        Left,
+
     }
 
     private static readonly int Width = 60;
     private static readonly int Height = 60;
-    private TileType[,] testMap = new TileType[Height, Width];
-    private Dir[,] dirs = new Dir[Height, Width];
+    List<List<BreadthFirstSearch.tiles>> realMap;
+    public Dir[,] dirs = new Dir[Height, Width];
     public bool run = false;
 
     public int GoalX;
     public int GoalY;
     public Texture2D GoalTexture2D;
-
-    private void OnDrawGizmos()
-    {
-        if (run)
-        {
-            Gizmos.color = Color.black;
-
-            for (int y = 0; y < Height; y++)
-            {
-                for (int x = 0; x < Width; x++)
-                {
-                    var pos = new Vector3(x + 1, y + 1);    // tiilen origo
-                    Gizmos.DrawLine(pos, (GetDir(dirs[y, x]) + pos));
-                    Gizmos.DrawCube(GetDir(dirs[y, x]) + pos, new Vector3(0.1f, 0.1f));
-                }
-            }
-
-            for (int yy = 0; yy < Height; yy++)
-            {
-                for (int xx = 0; xx < Width; xx++)
-                {
-                    var pos = new Vector3(xx + 1f, yy + 1f);    // tiilen origo
-                    Gizmos.DrawWireCube(pos, new Vector3(1f, 1f));
-                }
-            }
-
-            Gizmos.DrawGUITexture(new Rect(GoalX + 1f, GoalY + 2f, 1f, -1f), GoalTexture2D);
-        }
-    }
 
     Vector3 GetDir(Dir dir)
     {
@@ -102,19 +45,6 @@ public class PathFinder : MonoBehaviour
         return Vector2.zero;
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            dirs[0, 0] = Dir.Up;
-            dirs[0, 1] = Dir.Up;
-        }
-
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-           Search();
-        }
-    }
 
 
     static readonly Vec2[] Neighbours = new Vec2[]
@@ -126,12 +56,10 @@ public class PathFinder : MonoBehaviour
     List<Vec2> GetNeighbours(Vec2 location)
     {
         List<Vec2> value = new List<Vec2>(4);
-
-        int i = 0;
         foreach (Vec2 offset in Neighbours)
         {
             Vec2 next = new Vec2(location.X + offset.X, location.Y + offset.Y);
-            if (InBounds(next))     // passable jne......
+            if (InBounds(next) && realMap[next.Y][next.X].tileState != BreadthFirstSearch.states.wall)     // passable jne......
             {
                 value.Add(next);
             }
@@ -156,8 +84,11 @@ public class PathFinder : MonoBehaviour
     }
 
 
-    void Search()
+    public void Search(List<List<BreadthFirstSearch.tiles>> moveTiles, int goalX, int goalY)
     {
+        this.GoalX = goalX;
+        this.GoalY = goalY;
+        realMap = moveTiles;
         Queue<Vec2> frontier = new Queue<Vec2>();
 
         Vec2 start = new Vec2(GoalX, GoalY);
@@ -165,6 +96,8 @@ public class PathFinder : MonoBehaviour
 
         Dictionary<Vec2, Vec2> cameFrom = new Dictionary<Vec2, Vec2>();
         cameFrom[start] = start;
+
+        dirs = new Dir[Height, Width];
 
         while (frontier.Count > 0)
         {
@@ -179,7 +112,7 @@ public class PathFinder : MonoBehaviour
                     frontier.Enqueue(next);
                     cameFrom[next] = current;
                 }
-           }
+            }
         }
 
         GeneratePaths(cameFrom);
@@ -187,12 +120,18 @@ public class PathFinder : MonoBehaviour
 
     private void GeneratePaths(Dictionary<Vec2, Vec2> cameFrom)
     {
-        for (int y = 0; y < Height; y++)
+        for (int y = 1; y < Height - 1; y++)
         {
-            for (int x = 0; x < Width; x++)
+            for (int x = 1; x < Width - 1; x++)
             {
-                var safe = cameFrom[new Vec2(x, y)];
-                dirs[y, x] = GetDirection(new Vec2(x, y), safe);
+                if (realMap[y][x].tileState != BreadthFirstSearch.states.wall && dirs[y, x] != Dir.NoWayOut)
+                {
+                    Vec2 vec = new Vec2(x, y);
+                    Vec2 value;
+                    bool safe = cameFrom.TryGetValue(vec, out value);
+                    if (safe)
+                        dirs[y, x] = GetDirection(vec, value);
+                }
             }
         }
     }

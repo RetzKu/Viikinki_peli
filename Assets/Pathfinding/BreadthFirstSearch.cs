@@ -9,6 +9,8 @@ public class BreadthFirstSearch
     int goalX, goalY;
     public List<List<tiles>>  moveTiles = new List<List<tiles>>();
 
+    public PathFinder panther = new PathFinder();
+
     public TileMap map;
 
     public class tiles
@@ -31,22 +33,22 @@ public class BreadthFirstSearch
         left
     }
 
-    public states getTileDir(Vector2 k)
+    public PathFinder.Dir getTileDir(Vector2 k)
     {
         if (inited)
         {
             int[] j = calculateIndex(k);              
-            return moveTiles[j[1]][j[0]].tileState; // palauttaa movement laskujen mukaan x y position
+            return panther.dirs[j[1],j[0]]; // palauttaa movement laskujen mukaan x y position
         }
         else
         {
-            return states.wall;                     // EETU TRIGGER
+            return PathFinder.Dir.NoDir;                     // EETU TRIGGER
         }
     }
 
 
 
-    int[] calculateIndex(Vector2 k)
+    public int[] calculateIndex(Vector2 k)
     {
        Vector3 j = map.GetGameObjectFast(0, 0).transform.position;
        Vector2 i = j;
@@ -67,8 +69,6 @@ public class BreadthFirstSearch
     public void uptadeTiles(int playerX, int playerY, TileMap tileMap)
     {
         inited = true;
-        playerX--; // KORJAA
-        playerY--; // KORJAA
         map = tileMap; //EETU TRIGGER, mah ei tarvi korjata
         moveTiles.Clear(); 
         for (int y = 0; y < TileMap.TotalHeight; y++)
@@ -87,41 +87,43 @@ public class BreadthFirstSearch
         goalX = playerX;
         goalY = playerY;
 
-        Dictionary<tiles, int> toimii = new Dictionary<tiles, int>();
+        panther.Search(moveTiles,goalX,goalY);
 
-        Queue<tiles> hue = new Queue<tiles>(100);
-        hue.Enqueue(moveTiles[playerY][playerX]);
+        //Dictionary<tiles, int> toimii = new Dictionary<tiles, int>();
+
+        //Queue<tiles> hue = new Queue<tiles>(100);
+        //hue.Enqueue(moveTiles[playerY][playerX]);
 
 
-        while (hue.Count != 0)
-        {
-            tiles current = hue.Dequeue();
+        //while (hue.Count != 0)
+        //{
+        //    tiles current = hue.Dequeue();
 
-            if (current.x - 1 >= 0 && moveTiles[current.y][current.x - 1].tileState == states.unVisited)
-            {
-                tiles tile = moveTiles[current.y][current.x - 1];
-                hue.Enqueue(tile);
-                tile.tileState = states.right;
-            }
-            if (current.x + 1 <= 59 && moveTiles[current.y][current.x + 1].tileState == states.unVisited)
-            {
-                tiles tile = moveTiles[current.y][current.x + 1];
-                hue.Enqueue(tile);
-                tile.tileState = states.left;
-            }
-            if (current.y + 1 <= 59 && moveTiles[current.y + 1][current.x].tileState == states.unVisited)
-            {
-                tiles tile = moveTiles[current.y + 1][current.x];
-                hue.Enqueue(tile);
-                tile.tileState = states.down;
-            }
-            if (current.y - 1 >= 0 && moveTiles[current.y - 1][current.x].tileState == states.unVisited)
-            {
-                tiles tile = moveTiles[current.y-1][current.x];
-                hue.Enqueue(tile);
-                tile.tileState = states.up;
-            }
-        }
+        //    if (current.x - 1 >= 0 && moveTiles[current.y][current.x - 1].tileState == states.unVisited)
+        //    {
+        //        tiles tile = moveTiles[current.y][current.x - 1];
+        //        hue.Enqueue(tile);
+        //        tile.tileState = states.right;
+        //    }
+        //    if (current.x + 1 <= 59 && moveTiles[current.y][current.x + 1].tileState == states.unVisited)
+        //    {
+        //        tiles tile = moveTiles[current.y][current.x + 1];
+        //        hue.Enqueue(tile);
+        //        tile.tileState = states.left;
+        //    }
+        //    if (current.y + 1 <= 59 && moveTiles[current.y + 1][current.x].tileState == states.unVisited)
+        //    {
+        //        tiles tile = moveTiles[current.y + 1][current.x];
+        //        hue.Enqueue(tile);
+        //        tile.tileState = states.down;
+        //    }
+        //    if (current.y - 1 >= 0 && moveTiles[current.y - 1][current.x].tileState == states.unVisited)
+        //    {
+        //        tiles tile = moveTiles[current.y-1][current.x];
+        //        hue.Enqueue(tile);
+        //        tile.tileState = states.up;
+        //    }
+        //}
 
 
     }

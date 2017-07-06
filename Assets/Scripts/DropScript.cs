@@ -4,27 +4,28 @@ using UnityEngine;
 
 public class DropScript : MonoBehaviour
 {
-
     public List<Drops> DropsList;
     private DropCheck DropChecker;
 
     void Start()
     {
-        DropChecker = GameObject.Find("Passive").GetComponent<DropCheck>();
+        // DropChecker = GameObject.Find("Passive").GetComponent<DropCheck>();
     }
     
-    private void OnDestroy()
-    {
-        Drop();
-    }
+    // resurrsit osaavat dropata itse itsensä
+    //private void OnDestroy()
+    //{
+    //    Drop();
+    //}
         
     public void Drop()
     {
-        bool night = DropChecker.NightDrops(); // is it night drops time
+        // TODO: korjaan kun on päivä yö cycle
+        // bool night = DropChecker.NightDrops(); // is it night drops time
+        bool night = false;
 
         for (int i = 0; i < DropsList.Count; i++) //Loop x times in objects drop list
         {
-
             if (DropsList[i].NightItem == night || DropsList[i].NightItem == false) // misses if item is nightitem and it is daytime
             {
                 if (Random.Range(0, 100) <= DropsList[i].DropChance) //did rng jesus bless ye
@@ -32,6 +33,9 @@ public class DropScript : MonoBehaviour
                     GameObject Copy = Instantiate(DropsList[i].Item) as GameObject; //Copy item from droplist with correct index
                     Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player"; // changes layer so it shows to player and not under the map
                     Copy.transform.position = transform.position; //drop it at destroyed objects position
+
+                    // TODO: HUOMIO FREEFALL ON T}}LL}}
+                    Copy.AddComponent<ObjectFaller>().StartFreeFall(1.5f);
                 }
             }
         }

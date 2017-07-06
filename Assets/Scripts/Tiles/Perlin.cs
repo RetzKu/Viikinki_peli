@@ -496,10 +496,6 @@ public class Perlin : MonoBehaviour
     //  - 40
     //   - lisää ?
 
-
-    // noise:
-    // 
-
     bool[,] GenerateObjectsPosition(float[,] objectNoise) // suurempi kuin R
     {
         sampler = new PoissonDiscSampler(samplerWidth, samplerHeigth, 1.5f); // GG

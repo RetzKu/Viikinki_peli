@@ -31,6 +31,11 @@ public class CustomJoystick : MonoBehaviour
     private bool FirstTouchSuccess = false;
     SpriteRenderer renderer;
 
+    public Sprite Head;
+    // public Sprite BaseSprite;
+
+    public GameObject Base;
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
@@ -49,7 +54,8 @@ public class CustomJoystick : MonoBehaviour
         renderer.sprite = JoystickSprite;
 
         position = new Vector3(0f, 0f, 0f);
-        //HitBox.Set(transform.position.x + HitBox.x, transform.position.y + HitBox.y, HitBox.width, HitBox.height);
+        renderer.sprite = Head;
+
     }
 
     void Update()
@@ -67,12 +73,14 @@ public class CustomJoystick : MonoBehaviour
         Vector3 cameraPos = Camera.main.transform.position;
         Rect ScreenView = new Rect(cameraPos.x + HitBox.x, cameraPos.y + HitBox.y, HitBox.width, HitBox.height);
 
+        Base.transform.position = startPosition;
 
         if (Input.GetMouseButtonUp(0))
         {
             FirstTouchSuccess = false;
-            startPosition = new Vector2(0f, 0f);
-            endposition = new Vector2(0f, 0f);
+            startPosition = Vector2.zero;
+            endposition = Vector2.zero;
+            transform.position = Vector3.zero;
         }
 
         if (Input.GetMouseButtonDown(0))    // eka 
@@ -114,7 +122,6 @@ public class CustomJoystick : MonoBehaviour
         }
 
         touchingLastFrame = touching;
-        UpdateVisuals();
     }
 
     void UpdateVisuals()

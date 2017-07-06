@@ -39,6 +39,7 @@ public class TouchController : MonoBehaviour
 
 
     // TODO: ^^^ CLEANUP ^^^
+
     private int SlashLineIndex = 0;
     public static readonly  int MaxLineIndices = 15;
     private Vector3[] SlashLineIndices = new Vector3[MaxLineIndices];

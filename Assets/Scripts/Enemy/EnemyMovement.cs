@@ -83,7 +83,7 @@ public class EnemyMovement
             Vector2.Angle(target, target);
             //counter = 0;
             float angle = Random.Range(0.0f, 1.0f) * Mathf.PI * 2;
-            float x = Mathf.Cos(angle) * IdleRadius;        // KATO VOITKO KORJATA
+            float x = Mathf.Cos(angle) * IdleRadius;        // KATO VOITKO KORJATA // En, pitäisi kirjoittaa koko koodi uudestaan t:eetu #triggered
             float y = Mathf.Sin(angle) * IdleRadius;        // KATO VOITKO KORJATA
 
             Vector2 arm = new Vector2(x + target.x, y + target.y);
@@ -279,8 +279,8 @@ public class EnemyMovement
         for (int i = 0; i < array.Length; i++)
         {
             Vector2 temp = new Vector2(0f, 0f);
-            temp = bodyPosition - array[i].transform.GetComponent<EnemyAI>().getPosition();
-            average = average + array[i].GetComponent<EnemyAI>().velocity;
+            temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();
+            average = average + array[i].GetComponent<generalAi>().velocity;
         }
 
 
@@ -314,9 +314,9 @@ public class EnemyMovement
         for (int i = 0; i < array.Length; i++)
         {
             Vector2 temp = new Vector2(0f, 0f);
-            temp = bodyPosition - array[i].transform.GetComponent<EnemyAI>().getPosition();
+            temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();
 
-            average = average + array[i].GetComponent<EnemyAI>().getPosition();
+            average = average + array[i].GetComponent<generalAi>().getPosition();
         }
 
         if (array.Length > 1)
@@ -339,7 +339,7 @@ public class EnemyMovement
 
         for (int i = 0; i < array.Length; i++)
         {
-            Vector2 temp = bodyPosition - array[i].transform.GetComponent<EnemyAI>().getPosition();
+            Vector2 temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();
             float d = temp.magnitude;
 
             if (d > 0)

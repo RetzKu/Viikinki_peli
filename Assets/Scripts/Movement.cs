@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
             public float max_spd = 3;
 
     public bool Keyboard = true;
+    public CustomJoystick Joystick;
 
     void Start()
     {
@@ -28,13 +29,18 @@ public class Movement : MonoBehaviour
 
     Vector2 Input_checker()
     {
-        Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical")).normalized;
+        // Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical")).normalized;
+
+
+        Vector2 movement = Joystick.GetInputVector();
+
 
         if (movement.x == 0 && movement.y == 0) {rb.drag = slowdown;}
         else {rb.drag = 2;}
 
         return movement;
     }
+
     Vector2 SpeedLimitChecker()
     {
         Vector2 added_spd = Input_checker();

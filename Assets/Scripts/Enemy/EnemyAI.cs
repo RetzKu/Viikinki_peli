@@ -3,51 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyType
-{
-    Wolf,
-    Archer
-}
-public enum Dir
-{
-    Right,
-    Left,
-    Up,
-    Down,
-    Basic
-}
-public enum collision
-{
-    Main,
-    Right,
-    Left,
-    none
-}
-
-
-
-[Flags]
-public enum behavior
-{
-    separate = 1,
-    alingment = 2,
-    cohesion = 4,
-    wander = 8,
-    giveWanderingTargetSolo = 16,
-    changeSoloDIr = 32,
-    seek = 64,
-    arrive = 128,
-    moveToAttRange = 256,
-    Inleap = 512,
-    startLeap = 1024,
-    Collide = 2048,
-    wanderGroup = separate | alingment | cohesion,
-    startWanderingSolo = wander | giveWanderingTargetSolo,
-    changeSoloWanderDir = wander | changeSoloDIr,
-    seekAndArrive = seek | arrive,
-    findPath = seek | separate,
-    //getInPosition = seek | arrive
-}
+/*
+ * ÄLÄ KÄYTÄ TÄTÄ TAI TULEN JA SUUTUN SINULLE
+ * ÄLÄ KÄYTÄ TÄTÄ TAI TULEN JA SUUTUN SINULLE
+ * ÄLÄ KÄYTÄ TÄTÄ TAI TULEN JA SUUTUN SINULLE
+ * ÄLÄ KÄYTÄ TÄTÄ TAI TULEN JA SUUTUN SINULLE
+ * ÄLÄ KÄYTÄ TÄTÄ TAI TULEN JA SUUTUN SINULLE t:pate
+ * ÄLÄ KÄYTÄ TÄTÄ TAI TULEN JA SUUTUN SINULLE
+ * ÄLÄ KÄYTÄ TÄTÄ TAI TULEN JA SUUTUN SINULLE
+ * ÄLÄ KÄYTÄ TÄTÄ TAI TULEN JA SUUTUN SINULLE
+*/
 
 
 
@@ -103,7 +68,7 @@ public class EnemyAI : MonoBehaviour
     private GameObject player;
     EnemyRotater rotation = new EnemyRotater();
     // Use this for initialization
-    public void InitStart(float x, float y,EnemyType type)
+    public void InitStart(float x, float y,EnemyType type) // jokaselle
     {
         //var pl = GameObject.FindGameObjectWithTag("Player");
 
@@ -174,7 +139,7 @@ public class EnemyAI : MonoBehaviour
 
     
     
-    public void UpdatePosition(List<GameObject> Mobs)
+    public void UpdatePosition(List<GameObject> Mobs) // jokaselle
     {
         rotation.UpdateRotation(velocity,body.position);
         LayerMask mask = new LayerMask();
@@ -221,7 +186,7 @@ public class EnemyAI : MonoBehaviour
         body.MovePosition(body.position + velocity);
 
     }
-    void archerPattern(Vector2 dist, Vector2 playerPos)
+    void archerPattern(Vector2 dist, Vector2 playerPos) // spe
     {
         Physics._sepF = 0.25f;
         if (dist.magnitude >= attackDist)
@@ -250,7 +215,7 @@ public class EnemyAI : MonoBehaviour
         Physics._maxSteeringForce = 0.1f; //EETU TRIGGER
     }
 
-    void leapingPattern(Vector2 dist,Vector2 playerPos)
+    void leapingPattern(Vector2 dist,Vector2 playerPos) //spe
     { 
         if (dist.magnitude <= attackDist || inAttack || velocity.magnitude == 0)
         {
@@ -332,7 +297,7 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    void followPlayer(Vector2 dist, Vector2 playerPos)
+    void followPlayer(Vector2 dist, Vector2 playerPos) // gen
     {
         dist.Normalize();
         dist *= attackDist;
@@ -340,7 +305,7 @@ public class EnemyAI : MonoBehaviour
         flags = (int)behavior.seekAndArrive | (int)behavior.separate;
         Physics._sepF = sepF * 2;
     }
-    void findPath()
+    void findPath() //gen
     {
         PathFinder.Dir k =  player.GetComponent<UpdatePathFind>().path.getTileDir(body.position);
 
@@ -376,7 +341,7 @@ public class EnemyAI : MonoBehaviour
         }
         //minne menen
     }
-    void wander(Collider2D[] HeardArray)
+    void wander(Collider2D[] HeardArray) //gen
     {
         if (HeardArray.Length > 1)
         {
@@ -404,12 +369,12 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    public Vector2 getPosition()
+    public Vector2 getPosition() // tulee jokaselle
     {
         return body.position;
     }
 
-    void RayCollide()
+    void RayCollide() // gen
     {
         CollState = collision.none;
         LayerMask mask = LayerMask.GetMask("Collide");
@@ -435,7 +400,7 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    void OnDrawGizmos()
+    void OnDrawGizmos() // tulee jokaselle
     {
         Gizmos.color = Color.white;
 
@@ -493,7 +458,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    public bool killMyself()
+    public bool killMyself() //general
     {
         int[] ind =  player.GetComponent<UpdatePathFind>().path.calculateIndex(body.position);
 

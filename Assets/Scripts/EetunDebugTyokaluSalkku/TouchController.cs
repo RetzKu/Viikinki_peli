@@ -54,7 +54,7 @@ public class TouchController : MonoBehaviour
         if (SlashLineIndex < MaxLineIndices)
         {
             SlashLineIndices[SlashLineIndex] = position;
-            lineRenderer.numPositions = SlashLineIndex + 1;
+            lineRenderer.positionCount = SlashLineIndex + 1;
             lineRenderer.SetPosition(SlashLineIndex, SlashLineIndices[SlashLineIndex]);
 
             SlashLineIndex++;
@@ -68,7 +68,7 @@ public class TouchController : MonoBehaviour
 
     void DrawToMouse(Vector2 mouse)
     {
-        lineRenderer.numPositions = SlashLineIndex + 1;
+        lineRenderer.positionCount = SlashLineIndex + 1;
         lineRenderer.SetPosition(SlashLineIndex, mouse);
     }
 

@@ -9,6 +9,13 @@ public class PlayerScript : MonoBehaviour
     private GameObject InventoryChild;
     private GameObject EquipChild;
 
+    // List<Item> invontory;
+
+    private weaponScript current;
+    
+
+
+
     Vector3 startPoint;
     Vector3 endPoint;
 
@@ -19,7 +26,7 @@ public class PlayerScript : MonoBehaviour
     public Transform DownwardsHand;
 
     private ItemManager Hand;
-    public int Damage;
+    //public int Damage;
 
     private int Direction;
 
@@ -35,7 +42,7 @@ public class PlayerScript : MonoBehaviour
         DownwardsHand = transform.Find("d_c_torso").Find("d_r_upper_arm").GetChild(0).GetChild(0);
         //pate on paras
         Hand = new ItemManager(SidewaysHand);
-        Damage = 30;
+        //Damage = 30;
     }
 
     void Update()           
@@ -89,7 +96,7 @@ public class PlayerScript : MonoBehaviour
         if (Trig.gameObject.tag == "puu")
         {
             Debug.Log("BONK");
-            Trig.transform.parent.GetComponent<TreeHP>().hp -= Damage;
+            //Trig.transform.parent.GetComponent<TreeHP>().hp -= Damage;
         }
     }
 
@@ -204,7 +211,7 @@ public class PlayerScript : MonoBehaviour
 
     }
 
-    void AddToInventory(Collider2D Item)
+    public void AddToInventory(Collider2D Item)
     {
         int it = 0;
         if (EquipChild.transform.childCount == 0)

@@ -13,7 +13,8 @@ public class MobsControl : MonoBehaviour
     }
 
     public int Mob_Amount;
-    public GameObject EnemyPrefab;
+    public GameObject Wolf;
+    public GameObject Archer;
     List<GameObject> Boids;
 
     public GameObject player;
@@ -57,14 +58,18 @@ public class MobsControl : MonoBehaviour
                 }
                 while (k == PathFinder.Dir.NoDir);
 
-                var go = Instantiate(EnemyPrefab, new Vector2(x, y), Quaternion.identity);
+
+                GameObject go;
+
                 if(Boids.Count % 2 == 0)
                 {
-                go.GetComponent<EnemyAI>().InitStart(x, y,EnemyType.Wolf);
+                    go = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
+                    go.GetComponent<generalAi>().InitStart(x, y,EnemyType.Wolf);
                 }
                 else
                 {
-                    go.GetComponent<EnemyAI>().InitStart(x, y, EnemyType.Archer);
+                    go = Instantiate(Archer, new Vector2(x, y), Quaternion.identity);
+                    go.GetComponent<generalAi>().InitStart(x, y, EnemyType.Archer);
                 }
                 //wolfBoids.Add(go);
                 Boids.Add(go);
@@ -81,7 +86,7 @@ public class MobsControl : MonoBehaviour
 
         while (ind < Boids.Count)
         {
-            if (Boids[ind].GetComponent<EnemyAI>().killMyself())
+            if (Boids[ind].GetComponent<generalAi>().killMyself())
             {
                 Destroy(Boids[ind]);
                 Boids.Remove(Boids[ind]);
@@ -90,8 +95,8 @@ public class MobsControl : MonoBehaviour
             }
             else
             {
-            Boids[ind].GetComponent<EnemyAI>().UpdatePosition(Boids);
-            ind++;
+                Boids[ind].GetComponent<generalAi>().UpdatePosition(Boids);
+                ind++;
             }
         }
 

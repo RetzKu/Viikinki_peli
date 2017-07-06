@@ -187,6 +187,18 @@ Prefab:
       propertyPath: Mob_Amount
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114082371090620650, guid: 2b5b440fa7b64344ea4718be6cea3e4e,
+        type: 2}
+      propertyPath: Archer
+      value: 
+      objectReference: {fileID: 1919206030925854, guid: aec341a3d2395384b9ad59b82b8232b3,
+        type: 2}
+    - target: {fileID: 114082371090620650, guid: 2b5b440fa7b64344ea4718be6cea3e4e,
+        type: 2}
+      propertyPath: Wolf
+      value: 
+      objectReference: {fileID: 1392101450600622, guid: 455473e3b8b99ab43b6202c786593fd1,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b5b440fa7b64344ea4718be6cea3e4e, type: 2}
   m_IsPrefabParent: 0

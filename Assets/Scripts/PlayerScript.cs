@@ -77,13 +77,7 @@ public class PlayerScript : MonoBehaviour
         endPoint = Camera.main.ScreenToWorldPoint(mousePos); // Hiiren osoittama kohta
 
     }
-    void OnDrawGizmos()
-    {
-        if (running == true)
-        {
-            Gizmos.DrawLine(startPoint, endPoint); // piirretään viiva visualisoimaan toimivuutta
-        }
-    }
+
 
     void OnTriggerEnter2D(Collider2D Trig)
     {

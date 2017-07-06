@@ -40,19 +40,24 @@ public class TouchController : MonoBehaviour
 
     // TODO: ^^^ CLEANUP ^^^
     private int SlashLineIndex = 0;
-    private Vector3[] SlashLineIndices = new Vector3[15];
+    public static readonly  int MaxLineIndices = 15;
+    private Vector3[] SlashLineIndices = new Vector3[MaxLineIndices];
     private int LineIndex = 0;
     private Vector3[] LineIndices = new Vector3[100];
 
     public float LineIndexDistance = 0.10f;
 
+
     void AddSlashLineIndex(Vector3 position)
     {
-        SlashLineIndices[SlashLineIndex] = position;
-        lineRenderer.numPositions = SlashLineIndex + 1;
-        lineRenderer.SetPosition(SlashLineIndex, SlashLineIndices[SlashLineIndex]);
+        if (SlashLineIndex < MaxLineIndices)
+        {
+            SlashLineIndices[SlashLineIndex] = position;
+            lineRenderer.numPositions = SlashLineIndex + 1;
+            lineRenderer.SetPosition(SlashLineIndex, SlashLineIndices[SlashLineIndex]);
 
-        SlashLineIndex++;
+            SlashLineIndex++;
+        }
     }
 
     void ResetSlashLineIndices()
@@ -329,12 +334,18 @@ public class TouchController : MonoBehaviour
     {
         ResetColliders();
 
-        if (_touching && index < maxRuneIndices)
+        if (_touching)
         {
-            positions[index] = new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f);
             AddSlashLineIndex(new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f));
-            index++;
+
+            if (index < maxRuneIndices)
+            {
+                runeIndices[index] = new Vec2(x, y);
+                positions[index] = new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f);
+                index++;
+            }
         }
         _timer = Time.time + lineResetTime;
+
     }
 }

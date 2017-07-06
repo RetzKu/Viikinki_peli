@@ -22,12 +22,13 @@ public class CustomJoystick : MonoBehaviour
     public float maxLength;
     public ControllerType controlScheme = ControllerType.Mouse;
     public Rect HitBox;
-    public Transform Player;
-    private Vector3 lastPos;
 
+    public Transform Player;
+
+    private Vector3 lastPos;
+    private Vector3 position;
 
     private bool FirstTouchSuccess = false;
-
     SpriteRenderer renderer;
 
     void OnDrawGizmos()
@@ -36,9 +37,6 @@ public class CustomJoystick : MonoBehaviour
         Gizmos.DrawLine(startPosition, (Vector3)startPosition + (Vector3)GetTouchVector().normalized);
 
         Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
-        HitBox.x = bottomLeft.x + offsets.x;
-        HitBox.y = bottomLeft.y + offsets.y;
-
         Vector3 position = Camera.main.transform.position + (Vector3)HitBox.center;
         Gizmos.DrawWireCube(position, new Vector3(HitBox.width, HitBox.height));
     }
@@ -50,25 +48,32 @@ public class CustomJoystick : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         renderer.sprite = JoystickSprite;
 
+        position = new Vector3(0f, 0f, 0f);
         //HitBox.Set(transform.position.x + HitBox.x, transform.position.y + HitBox.y, HitBox.width, HitBox.height);
     }
 
     void Update()
     {
         Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
-        HitBox.x = bottomLeft.x + offsets.x;
-        HitBox.y = bottomLeft.y + offsets.y;
 
+        // transform.Translate(lastPos - transform.position);
+        Vector3 movVec = Player.transform.position - position;
+        startPosition = startPosition + (Vector2)movVec;
+        endposition = endposition + (Vector2)movVec;
 
-        lastPos = transform.position;
-
+        position = Player.transform.position;
         touching = Input.GetMouseButton(0);
-
-        //  Vector3 worldPosition = Input.mousePosition;
         Vector3 currentPotition = Camera.main.ScreenToWorldPoint(Input.mousePosition); // sormi
-
         Vector3 cameraPos = Camera.main.transform.position;
         Rect ScreenView = new Rect(cameraPos.x + HitBox.x, cameraPos.y + HitBox.y, HitBox.width, HitBox.height);
+
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            FirstTouchSuccess = false;
+            startPosition = new Vector2(0f, 0f);
+            endposition = new Vector2(0f, 0f);
+        }
 
         if (Input.GetMouseButtonDown(0))    // eka 
         {
@@ -78,6 +83,7 @@ public class CustomJoystick : MonoBehaviour
                 transform.position = startPosition;
                 touching = true;
                 FirstTouchSuccess = true;
+                position = Player.transform.position;
             }
             else
             {
@@ -126,11 +132,15 @@ public class CustomJoystick : MonoBehaviour
     {
         Vector2 pos = endposition - startPosition;
 
-        if (endposition.x != 0 && endposition.y != 0)
+        if (pos.y != 0 && pos.x != 0)
         {
-            pos.x *= (Map(pos.magnitude, 0f, maxLength, 0f, 1f)) / 2f;
-            pos.y *= (Map(pos.magnitude, 0f, maxLength, 0f, 1f)) / 2f;
-            return pos;
+            if (pos.magnitude < maxLength * 2)
+            {
+                pos.x *= (Map(pos.magnitude, 0f, maxLength, 0f, 1f)) / 2f;
+                pos.y *= (Map(pos.magnitude, 0f, maxLength, 0f, 1f)) / 2f;
+
+                return pos;
+            }
         }
         return new Vector2(0f, 0f);
     }

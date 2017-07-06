@@ -79,13 +79,13 @@ public class WolfAI : generalAi
                 rotation.rotToPl = false;
                 Physics._maxSpeed = MaxSpeed * 4;
                 //start leap
-                if (dist.magnitude > 0.7f)
-                {
-                    Vector2 plVec = player.GetComponent<Rigidbody2D>().velocity;
-                    playerPos += plVec * 0.5f; // muokkaa
-
-                    dist = body.position - playerPos;
-                }
+                //if (dist.magnitude > 1.2f)  // velocityn mukaan leap
+                //{
+                //    Vector2 plVec = player.GetComponent<Rigidbody2D>().velocity;
+                //    playerPos += plVec * 0.5f; // muokkaa
+                    
+                //    dist = body.position - playerPos;
+                //}
 
 
 

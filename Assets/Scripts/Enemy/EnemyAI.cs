@@ -167,7 +167,7 @@ public class EnemyAI : MonoBehaviour
         }
         else if (agro)
         {
-            Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
+            Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition(); // .tranform.position
 
             Vector2 dist = body.position - playerPos;
             if (myType == EnemyType.Wolf)

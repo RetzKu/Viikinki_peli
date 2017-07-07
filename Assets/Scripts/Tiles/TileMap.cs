@@ -481,8 +481,8 @@ public class TileMap : MonoBehaviour
     // 0
     public GameObject GetGameObjectFast(int x, int y)
     {
-        int ix = x / 20;
-        int iy = y / 20;
+        int ix = x / Chunk.CHUNK_SIZE;
+        int iy = y / Chunk.CHUNK_SIZE;
         return _chunks[iy, ix].GetGameObject(x - ChunkSize * ix, y - ChunkSize * iy);
     }
 
@@ -493,8 +493,8 @@ public class TileMap : MonoBehaviour
 
     public TileType GetTileFast(int x, int y)
     {
-        int ix = x / 20;
-        int iy = y / 20;
+        int ix = x / Chunk.CHUNK_SIZE;
+        int iy = y / Chunk.CHUNK_SIZE;
         return _chunks[iy, ix].GetTile(x - ChunkSize * ix, y - ChunkSize * iy);
     }
 

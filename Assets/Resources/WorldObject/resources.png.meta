@@ -1,17 +1,17 @@
 fileFormatVersion: 2
 guid: faa82b914e9b57e459e4ffa41a7e5ae0
-timeCreated: 1499338047
+timeCreated: 1499431217
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: resources_0
-    21300002: resources_1
-    21300004: resources_2
-    21300006: resources_3
-    21300008: resources_4
-    21300010: resources_5
-    21300012: resources_6
-    21300014: resources_7
+    21300000: resources_Bone
+    21300002: resources_Tooth
+    21300004: resources_BearFur
+    21300006: resources_Food
+    21300008: resources_Wood
+    21300010: resources_Hemp
+    21300012: resources_Feather
+    21300014: resources_Pine
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -134,7 +134,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: resources_0
+      name: resources_Bone
       rect:
         serializedVersion: 2
         x: 0
@@ -142,12 +142,12 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_1
+      name: resources_Tooth
       rect:
         serializedVersion: 2
         x: 21
@@ -155,12 +155,12 @@ TextureImporter:
         width: 8
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_2
+      name: resources_BearFur
       rect:
         serializedVersion: 2
         x: 34
@@ -168,12 +168,12 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_3
+      name: resources_Food
       rect:
         serializedVersion: 2
         x: 0
@@ -181,12 +181,12 @@ TextureImporter:
         width: 16
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_4
+      name: resources_Wood
       rect:
         serializedVersion: 2
         x: 17
@@ -194,12 +194,12 @@ TextureImporter:
         width: 16
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_5
+      name: resources_Hemp
       rect:
         serializedVersion: 2
         x: 0
@@ -207,12 +207,12 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_6
+      name: resources_Feather
       rect:
         serializedVersion: 2
         x: 17
@@ -220,12 +220,12 @@ TextureImporter:
         width: 15
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_7
+      name: resources_Pine
       rect:
         serializedVersion: 2
         x: 0
@@ -233,7 +233,7 @@ TextureImporter:
         width: 16
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

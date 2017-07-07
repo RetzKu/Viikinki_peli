@@ -16,6 +16,7 @@ TagManager:
   - Enemy
   - TouchPoint
   - ResourceEffectEmitter
+  - WorldResource
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - TileMapBorders
   - objectLeftovers
   - ObjectLayer
-  - 
+  - WorldResource
   - 
   - 
   - 

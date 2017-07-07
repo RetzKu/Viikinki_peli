@@ -92,7 +92,6 @@ public class CustomJoystick : MonoBehaviour
 
         Base.transform.position = startPosition;
 
-
 #if MOUSE
         if (Input.GetMouseButtonUp(0) )
 #else

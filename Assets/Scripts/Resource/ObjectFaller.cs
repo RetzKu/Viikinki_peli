@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 // Dropperille apu luokka 
 // TODO: PARAMETRISOI DROPPERILLE
 public class ObjectFaller : MonoBehaviour
@@ -15,6 +16,11 @@ public class ObjectFaller : MonoBehaviour
         StartCoroutine(FallToGround(timer));
         body = GetComponent<Rigidbody2D>();
         rotation = Random.Range(-4f, 4f);
+    }
+
+    public void SetStartForce(Vector2 force)
+    {
+        body.AddForce(force);
     }
 
      void Update()

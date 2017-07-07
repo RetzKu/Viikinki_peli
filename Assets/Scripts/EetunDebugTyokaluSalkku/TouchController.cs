@@ -5,9 +5,10 @@ using UnityEngine;
 public class TouchController : MonoBehaviour
 {
     public RuneHolder RuneHolder;
+    public RuneHolder CraftingManagerHolder;
 
     private static readonly int maxRuneIndices = 9;
-    private Vec2[] runeIndices = new Vec2[maxRuneIndices];
+    public Vec2[] runeIndices = new Vec2[maxRuneIndices];
     public Sprite BulletSprite;
 
     public int amountOfSpheres = 3;
@@ -24,7 +25,7 @@ public class TouchController : MonoBehaviour
     private LineRenderer lineRenderer;
 
     private Vector3[] positions;
-    private int index = 0;
+    public int index = 0;
     private GameObject[] _colliders = new GameObject[9]; // yhdeksän kosketus kohtaa
     private bool _touching = false;
 
@@ -48,13 +49,32 @@ public class TouchController : MonoBehaviour
 
     public float LineIndexDistance = 0.10f;
 
+    public enum Mode
+    {
+        Crafting,
+        RuneCasting
+    }
+
+    public Mode ControllerMode = Mode.Crafting;
+
+    void SendIndices()
+    {
+        if (ControllerMode == Mode.RuneCasting)
+        {
+            RuneHolder.SendIndices(runeIndices, index);
+        }
+        else if (ControllerMode == Mode.Crafting)
+        {
+            CraftingManagerHolder.SendIndices(runeIndices, index);
+        }
+    }
 
     void AddSlashLineIndex(Vector3 position)
     {
         if (SlashLineIndex < MaxLineIndices)
         {
             SlashLineIndices[SlashLineIndex] = position;
-            lineRenderer.positionCount = SlashLineIndex + 1;
+            lineRenderer.numPositions = SlashLineIndex + 1;
             lineRenderer.SetPosition(SlashLineIndex, SlashLineIndices[SlashLineIndex]);
 
             SlashLineIndex++;
@@ -68,7 +88,7 @@ public class TouchController : MonoBehaviour
 
     void DrawToMouse(Vector2 mouse)
     {
-        lineRenderer.positionCount = SlashLineIndex + 1;
+        lineRenderer.numPositions = SlashLineIndex + 1;
         lineRenderer.SetPosition(SlashLineIndex, mouse);
     }
 
@@ -115,7 +135,7 @@ public class TouchController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        screenX = Screen.width / 2;
+        screenX = Screen.width / 2f;
         lineRenderer = GetComponent<LineRenderer>();
         positions = new Vector3[10];
         lineRenderer.SetPositions(positions);
@@ -125,11 +145,14 @@ public class TouchController : MonoBehaviour
         parent.transform.parent = this.transform;
 
         int ii = 0;
+
         for (int y = 0; y < amountOfSpheres; y++)
         {
             for (int x = 0; x < amountOfSpheres; x++)
             {
-                var go = Instantiate(new GameObject(), parent.transform);
+                var go  = new GameObject();
+                go.layer = LayerMask.NameToLayer("TouchController");
+                go.transform.parent = transform;
                 var coll = go.AddComponent<CircleCollider2D>();
                 coll.transform.position = new Vector3(x * offset + transform.position.x, y * offset + transform.position.y, 0);
                 coll.radius = Radius;
@@ -149,6 +172,7 @@ public class TouchController : MonoBehaviour
                 // _colliders[index].radius = Radius;
             }
         }
+
         lineRenderer.material = lineMaterial;
         lineRenderer.sortingOrder = 1;
         lineRenderer.sortingLayerName = "Foreground";
@@ -158,6 +182,10 @@ public class TouchController : MonoBehaviour
             runeIndices[i] = new Vec2(0, 0);
         }
         index = 0;
+
+        // Setup Crafting System
+        CraftingManagerHolder = CraftingManager.Instance.GetComponent<RuneHolder>();
+
     }
     private int FingerId = -1000;
 
@@ -265,13 +293,15 @@ public class TouchController : MonoBehaviour
         }
         else
         {
-            RuneHolder.SendIndices(runeIndices, index);
+            SendIndices();
             index = 0;
 
             touchCollider.GetComponent<Collider2D>().enabled = false;
             _touching = false;
             _timer -= 200;
             ResetColliders();
+
+            lineRenderer.numPositions = 0;
 
 
             // sormi poesa
@@ -285,7 +315,6 @@ public class TouchController : MonoBehaviour
             LineIndex = 0;
             ResetSlashLineIndices();
             ResetColliders();
-            ResetSlashLineIndices();
         }
     }
 

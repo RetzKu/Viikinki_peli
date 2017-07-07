@@ -20,7 +20,7 @@ public class EnemyRotater {
     Vector2[] middles = new Vector2[10];
 
     Vector2 middleVec = new Vector2(0,0);
-
+    
     public Vector2 playerPos { get; set; }
 
     EnemyType MyType;

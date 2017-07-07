@@ -53,7 +53,9 @@ public class TouchController : MonoBehaviour
         if (SlashLineIndex < MaxLineIndices)
         {
             SlashLineIndices[SlashLineIndex] = position;
+
             lineRenderer.numPositions = SlashLineIndex + 1;
+
             lineRenderer.SetPosition(SlashLineIndex, SlashLineIndices[SlashLineIndex]);
 
             SlashLineIndex++;

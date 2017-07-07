@@ -1,0 +1,52 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class s_c_torsoScript : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+        
+	}
+	
+	// Update is called once per frame
+	void Update ()
+    {
+		if(alive()) // Suoritetaan jos hitbox on ylipäätään elossa
+        {
+            OnTriggerEnter2D(GetComponent<Collider2D>());
+        }
+	}
+
+    bool alive()
+    {
+        if(GetComponent<Collider2D>().enabled == true)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    void OnTriggerEnter2D(Collider2D trig)
+    {
+        if (trig.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            // Tässä vaiheessa pitäisi tarkistaa keneltä viholliselta otetaan damagea
+            // --> Paten scriptiä ei ole vielä commitettu
+            // if (getcomponent<generalaitjsp>().myType == jokuEnum.archer){} 
+
+            // Nämä damaget ladataan myöhemmin suoraan vihollisten prefabeista
+            if (trig.gameObject.tag == "puu")
+            {
+                GetComponentInParent<combat>().takeDamage(20.0f);
+            }
+        }
+
+
+        if (trig.transform.tag == "Item")
+        {
+            GetComponentInParent<PlayerScript>().AddToInventory(trig);
+            Debug.Log(trig.transform.name + " Picked up");
+        }
+    }
+}

@@ -19,10 +19,8 @@ public class TouchScreenPoint : MonoBehaviour
         {
             if (_touchController != null)
             {
-                _touchController.OnTouchDetected(x, y);
+                _touchController.OnTouchDetected(x, y, transform.position);
                 GetComponent<CircleCollider2D>().enabled = false;
-                Debug.LogFormat("{0} {1}", x, y);
-                
             }
         }
     }

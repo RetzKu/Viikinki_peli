@@ -1,10 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security;
 using UnityEngine;
-
-using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 
 /// Poisson-disc sampling using Bridson's algorithm.
@@ -25,7 +22,7 @@ using System.Collections.Generic;
 /// Released in the public domain
 public class PoissonDiscSampler
 {
-    private const int k = 30;  // Maximum number of attempts before marking a sample as inactive.
+    private const int k = 20;  // Maximum number of attempts before marking a sample as inactive.
 
     private readonly Rect rect;
     private readonly float radius2;  // radius squared
@@ -65,7 +62,7 @@ public class PoissonDiscSampler
             bool found = false;
             for (int j = 0; j < k; ++j)
             {
-
+                 
                 float angle = 2 * Mathf.PI * Random.value;
                 float r = Mathf.Sqrt(Random.value * 3 * radius2 + radius2); // See: http://stackoverflow.com/questions/9048095/create-random-number-within-an-annulus/9048443#9048443
                 Vector2 candidate = sample + r * new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
@@ -88,14 +85,56 @@ public class PoissonDiscSampler
         }
     }
 
+    public List<Vector2> GetSamples()
+    {
+        List<Vector2> solution = new List<Vector2>(200);
+        AddSample(new Vector2(Random.value * rect.width, Random.value * rect.height));
+
+        while (activeSamples.Count > 0)
+        {
+
+            // Pick a random active sample
+            int i = (int)Random.value * activeSamples.Count;
+            Vector2 sample = activeSamples[i];
+
+            // Try `k` random candidates between [radius, 2 * radius] from that sample.
+            bool found = false;
+            for (int j = 0; j < k; ++j)
+            {
+
+                float angle = 2 * Mathf.PI * Random.value;
+                float r = Mathf.Sqrt(Random.value * 3 * radius2 + radius2); // See: http://stackoverflow.com/questions/9048095/create-random-number-within-an-annulus/9048443#9048443
+                Vector2 candidate = sample + r * new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+
+                // Accept candidates if it's inside the rect and farther than 2 * radius to any existing sample.
+                if (rect.Contains(candidate) && IsFarEnough(candidate))
+                {
+                    found = true;
+                    // yield return AddSample(candidate);
+                    solution.Add(AddSample(candidate));
+                    break;
+                }
+            }
+
+            // If we couldn't find a valid candidate after k attempts, remove this sample from the active samples queue
+            if (!found)
+            {
+                activeSamples[i] = activeSamples[activeSamples.Count - 1];
+                activeSamples.RemoveAt(activeSamples.Count - 1);
+            }
+        }
+
+        return solution;
+    }
+
     private bool IsFarEnough(Vector2 sample)
     {
-        GridPos pos = new GridPos(sample, cellSize);
+        Vec2 pos = CalculateGridPos(sample, cellSize);
 
-        int xmin = Mathf.Max(pos.x - 2, 0);
-        int ymin = Mathf.Max(pos.y - 2, 0);
-        int xmax = Mathf.Min(pos.x + 2, grid.GetLength(0) - 1);
-        int ymax = Mathf.Min(pos.y + 2, grid.GetLength(1) - 1);
+        int xmin = Mathf.Max(pos.X - 2, 0);
+        int ymin = Mathf.Max(pos.Y - 2, 0);
+        int xmax = Mathf.Min(pos.X + 2, grid.GetLength(0) - 1);
+        int ymax = Mathf.Min(pos.Y + 2, grid.GetLength(1) - 1);
 
         for (int y = ymin; y <= ymax; y++)
         {
@@ -121,21 +160,31 @@ public class PoissonDiscSampler
     private Vector2 AddSample(Vector2 sample)
     {
         activeSamples.Add(sample);
-        GridPos pos = new GridPos(sample, cellSize);
-        grid[pos.x, pos.y] = sample;
+
+        //GridPos pos = new GridPos(sample, cellSize);
+        //grid[pos.x, pos.y] = sample;
+
+        Vec2 pos = CalculateGridPos(sample, cellSize);
+        grid[pos.X, pos.Y] = sample;
+
         return sample;
     }
 
-    /// Helper struct to calculate the x and y indices of a sample in the grid
-    private struct GridPos
+    private Vec2 CalculateGridPos(Vector2 sample, float cellSize)
     {
-        public int x;
-        public int y;
-
-        public GridPos(Vector2 sample, float cellSize)
-        {
-            x = (int)(sample.x / cellSize);
-            y = (int)(sample.y / cellSize);
-        }
+        return new Vec2((int)(sample.x / cellSize), (int)(sample.y / cellSize));
     }
+
+    ///// Helper struct to calculate the x and y indices of a sample in the grid
+    //private struct GridPos
+    //{
+    //    public int x;
+    //    public int y;
+
+    //    public GridPos(Vector2 sample, float cellSize)
+    //    {
+    //        x = (int)(sample.x / cellSize);
+    //        y = (int)(sample.y / cellSize);
+    //    }
+    //}
 }

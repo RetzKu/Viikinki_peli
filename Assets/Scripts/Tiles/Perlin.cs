@@ -378,7 +378,7 @@ public class Perlin : MonoBehaviour
     {
         if (octaves == 0)
         {
-            octaves = this.Octaves; float[,] blueNoise = GenerateBlueNoise(100, 100);
+            octaves = this.Octaves; 
         }
         if (lacuranity == 0f)
         {
@@ -505,7 +505,7 @@ public class Perlin : MonoBehaviour
         sampler = new PoissonDiscSampler(samplerWidth, samplerHeigth, 1.5f); // GG
         bool[,] result = new bool[samplerHeigth, samplerWidth];
 
-        foreach (Vector2 sample in sampler.Samples()) // 20, 20 alueelta pisteitä muuta indekseiksi
+        foreach (Vector2 sample in sampler.GetSamples()) // 20, 20 alueelta pisteitä muuta indekseiksi
         {
             float a = objectNoise[(int)sample.y, (int)sample.x];
             if (a > 0.45f)

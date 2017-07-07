@@ -40,7 +40,7 @@ public class FreezeRune : Rune
 public class WeaponBuffRune : Rune
 {
     // effect?
-    private GameObject owner;
+    //private GameObject owner;
     public float Range = 10f;
 
     public float duration;
@@ -56,7 +56,7 @@ public class WeaponBuffRune : Rune
 
     public override void init(GameObject owner)
     {
-        this.owner = owner;     // Launcheriin visuaalinene efectio jos on sellainen 
+        //this.owner = owner;     // Launcheriin visuaalinene efectio jos on sellainen 
     }
 
     public override void Fire()

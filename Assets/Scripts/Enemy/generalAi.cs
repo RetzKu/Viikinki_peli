@@ -23,7 +23,14 @@ public enum collision
     Left,
     none
 }
-
+public enum action
+{
+    Attack,
+    LeapStart,
+    LeapEnd,
+    Moving,
+    Idle
+}
 [Flags]
 public enum behavior
 {

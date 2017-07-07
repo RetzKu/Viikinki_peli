@@ -4,7 +4,7 @@ using System.Net;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public abstract class Rune : ScriptableObject 
+public abstract class Rune : ScriptableObject
 {
     [SerializeField]
     public Vec2[] Indices;

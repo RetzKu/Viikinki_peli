@@ -4,44 +4,70 @@ using UnityEngine;
 
 public class arrow : Projectile {
 
-    float lerpTime = 1f;
+    float lerpTime = 0.3f;
     float currentLerpTime;
-
-    float moveDistance = 0f;
+    float moveDistance = 8f;
 
     Vector2 start;
-    Vector3 end;
+    Vector2 end;
+    bool started = false;
 
     void Start()
     {
         init();
         Player = GameObject.FindGameObjectWithTag("Player");
-        body.MovePosition(Player.transform.position);
-        start = body.position;
-        end = transform.position + transform.up * moveDistance;
+        print(Player.transform.position);
+
+        body.transform.position = Player.transform.position;
+        start = body.transform.position;
     }
 
-    //public override void init()
-    //{
 
-    //}
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (started)
         {
-            currentLerpTime = 0f;
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                currentLerpTime = 0f;
+            }
+            currentLerpTime += Time.deltaTime;
+            if (currentLerpTime > lerpTime)
+            {
+                currentLerpTime = lerpTime;
+            }
+
+            float t = currentLerpTime / lerpTime;
+            //t = t * t * t * (t * (6f * t - 15f) + 10f);
+            //t = t * t * (3f - 2f * t);
+            //t = 1f - Mathf.Cos(t * Mathf.PI * 0.5f);
+            //t *= t;
+
+
+            Vector2 d = lerPate(start, end, t);
+            body.MovePosition(d);
         }
-        currentLerpTime += Time.deltaTime;
-        if (currentLerpTime > lerpTime)
+        else
         {
-            currentLerpTime = lerpTime;
+            if (Input.GetButtonDown("Fire1"))
+            {
+                end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                float angle = Vector2.Angle(start, end);
+                
+                Vector2 temp = end - start;
+                temp.Normalize();
+                temp *= moveDistance;
+                end = start + temp;
+                //end.Normalize();
+                //end *= moveDistance;
+                started = true;
+                //transform.LookAt((end - (Vector3)start).normalized);
+
+                //transform.rotation = Quaternion.LookRotation(end);
+
+                transform.up = (Vector3)end - transform.position;
+            }
         }
-
-        float perc = currentLerpTime / lerpTime;
-
-        Vector2 d = lerPate(start, end, perc);
-
-        body.MovePosition(d);
     }
 }

@@ -195,8 +195,8 @@ public class TouchController : MonoBehaviour
                         var bulletGo = Instantiate(new GameObject());
                         bulletGo.transform.position = Character.transform.position;
                         var bullet = bulletGo.AddComponent<Bullet>();
-                        bullet.velocity = touchDeltaVector.normalized;
-                        bullet.Speed = bulletSpeed;
+                        //bullet.velocity = touchDeltaVector.normalized;
+                        //bullet.Speed = bulletSpeed;
 
                         var renderer = bulletGo.AddComponent<SpriteRenderer>();
                         renderer.sprite = BulletSprite;
@@ -224,6 +224,32 @@ public class TouchController : MonoBehaviour
         //    TrafficLights.GetComponent<SpriteRenderer>().material.color = Color.green;
         //}
 
+
+        if (myTouches.Length == 0)
+        {
+            TrafficLights.GetComponent<SpriteRenderer>().material.color = Color.red;
+        }
+        else if (myTouches.Length == 1)
+        {
+            TrafficLights.GetComponent<SpriteRenderer>().material.color = Color.blue;
+        }
+        else if (myTouches.Length >= 2)
+        {
+            TrafficLights.GetComponent<SpriteRenderer>().material.color = Color.green;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Vector2 touchDeltaVector = new Vector2(1, 1);
+
+            var bulletGo = Instantiate(new GameObject());
+            bulletGo.transform.position = Character.transform.position;
+            var bullet = bulletGo.AddComponent<Bullet>();
+            //bullet.velocity = touchDeltaVector.normalized;
+            var renderer = bulletGo.AddComponent<SpriteRenderer>();
+            renderer.sprite = BulletSprite;
+        }
+
         //if (Input.GetKeyDown(KeyCode.E))
         //{
         //    Vector2 touchDeltaVector = new Vector2(1, 1);
@@ -235,6 +261,7 @@ public class TouchController : MonoBehaviour
         //    var renderer = bulletGo.AddComponent<SpriteRenderer>();
         //    renderer.sprite = BulletSprite;
         //}
+
 
         //Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical"));
         //if (movement.x != 0 || movement.y != 0)

@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RenderTarget: {fileID: 4433194363785122}
-  DrawMode: 3
+  DrawMode: 2
   Step: 0.1
   Exp: 11.7
   WaterTreshold: 0.2
@@ -178,7 +178,9 @@ MonoBehaviour:
   blueNoiseLacunarity: 58.88
   blueNoisePersistance: 0.65
   ObjectRValue: 0
+  SpawnSettings: {fileID: 11400000, guid: 655ce7f831845be4f9535528f9e15f11, type: 2}
   TreeTrefab: {fileID: 1384798036243720, guid: 1d6b060ef40a3664da1b12583f13f561, type: 2}
+  settings: {fileID: 11400000, guid: 969c536d7bb4979439a339ee5d529bdd, type: 2}
 --- !u!114 &114672467721544216
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -17,6 +17,8 @@ public class combat : MonoBehaviour {
 
     private string dirObjectName;
 
+    private Sprite Fx;
+
     // Use this for initialization
     void Start ()
     {
@@ -32,6 +34,7 @@ public class combat : MonoBehaviour {
         }
 
         dirObjectName = getDirectionObject();
+        transform.GetComponent<FxScript>().FxUpdate(Fx); /*KUN Fx SPRITEÄ MUUTTAA FxUpdate KATSOO ONKO SE ERINLAINEN FX KUIN AIKAISEMPI JA JOS ON NIIN VAIHTAA. VOI SIIRTÄÄ MYÖS POIS UPDATESTA*/
     }
 
     string getDirectionObject() // Lataa pelaajalle oikeat hitboxit

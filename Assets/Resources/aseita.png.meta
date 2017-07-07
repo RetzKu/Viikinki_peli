@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: d6bf80a471b016c4e97bb0be2a66eb2e
-timeCreated: 1498062008
-licenseType: Free
+timeCreated: 1499425549
+licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
     21300000: Axe
@@ -45,7 +45,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -141,7 +141,7 @@ TextureImporter:
         x: 108
         y: 74
         width: 3
-        height: 22
+        height: 23
       alignment: 9
       pivot: {x: 0.5468928, y: 0.21225566}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -1784,6 +1784,7 @@ GameObject:
   - component: {fileID: 880415708}
   - component: {fileID: 880415707}
   - component: {fileID: 880415706}
+  - component: {fileID: 880415714}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -1945,6 +1946,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &880415714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 880415705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28dc31792c65a714894c8247c8347523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BareHandSprite: {fileID: 21300020, guid: f43c53a45dee3724793fb23c5164e286, type: 3}
+  LifeTime: 0.1
+  MaxDistance: 0.3
+  EffectOffSet: {x: 0, y: 0.3, z: 0}
 --- !u!1 &885569496
 GameObject:
   m_ObjectHideFlags: 0
@@ -2407,6 +2423,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114363438173767434, guid: 35764e4d543fde043827530306412ee0,
+        type: 2}
+      propertyPath: Fx
+      value: 
+      objectReference: {fileID: 21300010, guid: f43c53a45dee3724793fb23c5164e286,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 35764e4d543fde043827530306412ee0, type: 2}
   m_IsPrefabParent: 0

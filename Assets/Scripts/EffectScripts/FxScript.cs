@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class FxScript : MonoBehaviour {
 
-    public Sprite DefaultSprite;
-
+    public Sprite BareHandSprite;
     private GameObject Fx;
     private GameObject CopyFx;
-        public float LifeTime;
-        public float MaxDistance;
-        public Vector3 EffectOffSet;
+    [Header("Effect settings")]
+    public float LifeTime;
+    public float MaxDistance;
+    [Header("Default x: 0, y: 0.3, z: 0")]
+    public Vector3 EffectOffSet;
 
     private Vector3 MousePoint;
     private Vector3 Base;
@@ -19,7 +20,7 @@ public class FxScript : MonoBehaviour {
 	void Start ()
     {
         Fx = new GameObject("Fx");
-        Fx.AddComponent<SpriteRenderer>().sprite = DefaultSprite;
+        Fx.AddComponent<SpriteRenderer>().sprite = BareHandSprite;
         Fx.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0);
 
 	}
@@ -35,7 +36,7 @@ public class FxScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) == true)
+        if (Input.GetKeyDown(KeyCode.Mouse0) == true) // Myöhemmin tämä tarkistetaan eri paikasta
         {
             CopyFx = Instantiate(Fx);
             CopyFx.AddComponent<DestroyOnTime>().lifetime = LifeTime;
@@ -52,10 +53,10 @@ public class FxScript : MonoBehaviour {
         Copy.transform.position = Base + MouseDir; 
         GetAngleDegress(Copy);
     }
-    void OnDrawGizmos()
-    {
-         Gizmos.DrawLine(Base, Base + MouseDir); // piirretään viiva visualisoimaan toimivuutta
-    }
+    //void OnDrawGizmos()
+    //{
+    //     Gizmos.DrawLine(Base, Base + MouseDir); // piirretään viiva visualisoimaan toimivuutta
+    //}
     void GetAngleDegress(GameObject Copy)
     {
         Vector3 Mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);

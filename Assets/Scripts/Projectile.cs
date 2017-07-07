@@ -16,11 +16,15 @@ public abstract class Projectile : MonoBehaviour {
     }
     protected Vector2 lerPate(Vector2 start, Vector2 end, float smooth)
     {
-        float d = lerPate(start.magnitude, end.magnitude, smooth);
-        Vector2 temp = start - end;
+        float d = lerPate(0, (start-end).magnitude, smooth);
+        Vector2 temp = end - start;
         temp.Normalize();
         temp *= d;
-        return temp;
+        start += temp;
+
+        //Instantiate(this, Quaternion.LookRotation())
+            
+        return start;
     }
     protected float lerPate(float start,float end,float smooth)
     {

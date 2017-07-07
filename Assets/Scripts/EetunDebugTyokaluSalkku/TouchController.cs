@@ -137,8 +137,8 @@ public class TouchController : MonoBehaviour
                         var bulletGo = Instantiate(new GameObject());
                         bulletGo.transform.position = Character.transform.position;
                         var bullet = bulletGo.AddComponent<Bullet>();
-                        bullet.velocity = touchDeltaVector.normalized;
-                        bullet.Speed = bulletSpeed;
+                        //bullet.velocity = touchDeltaVector.normalized;
+                        //bullet.Speed = bulletSpeed;
 
                         var renderer = bulletGo.AddComponent<SpriteRenderer>();
                         renderer.sprite = BulletSprite;
@@ -173,7 +173,7 @@ public class TouchController : MonoBehaviour
             var bulletGo = Instantiate(new GameObject());
             bulletGo.transform.position = Character.transform.position;
             var bullet = bulletGo.AddComponent<Bullet>();
-            bullet.velocity = touchDeltaVector.normalized;
+            //bullet.velocity = touchDeltaVector.normalized;
             var renderer = bulletGo.AddComponent<SpriteRenderer>();
             renderer.sprite = BulletSprite;
         }

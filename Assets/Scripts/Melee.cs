@@ -8,4 +8,9 @@ public class Melee : weaponStats
     {
 
     }
+    void trigger()
+    {
+        //trigger torso short melee trigger
+    }
+    // Täällä tarvittava animaatio lyhyelle meleelle
 }

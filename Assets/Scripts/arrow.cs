@@ -16,7 +16,7 @@ public class arrow : Projectile {
     {
         init();
         Player = GameObject.FindGameObjectWithTag("Player");
-        print(Player.transform.position);
+        //print(Player.transform.position);
 
         body.transform.position = Player.transform.position;
         start = body.transform.position;

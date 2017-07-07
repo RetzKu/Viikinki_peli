@@ -34,7 +34,7 @@ public class MobsControl : MonoBehaviour
         if (Input.GetKeyDown("y"))
         {
             var pl = player.GetComponent<Rigidbody2D>().position;
-            SpawnBoids(pl.x, pl.y, 15f, Mob_Amount);          
+            SpawnBoids(pl.x, pl.y, 1f, Mob_Amount);          
         }
         if (Input.GetKeyDown("m"))
         {
@@ -61,16 +61,16 @@ public class MobsControl : MonoBehaviour
 
                 GameObject go;
 
-                if(Boids.Count % 2 == 0)
-                {
+                //if(Boids.Count % 2 == 0)
+                //{
                     go = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
                     go.GetComponent<generalAi>().InitStart(x, y,EnemyType.Wolf);
-                }
-                else
-                {
-                    go = Instantiate(Archer, new Vector2(x, y), Quaternion.identity);
-                    go.GetComponent<generalAi>().InitStart(x, y, EnemyType.Archer);
-                }
+                //}
+                //else
+                //{
+                //    go = Instantiate(Archer, new Vector2(x, y), Quaternion.identity);
+                //    go.GetComponent<generalAi>().InitStart(x, y, EnemyType.Archer);
+                //}
                 //wolfBoids.Add(go);
                 Boids.Add(go);
 

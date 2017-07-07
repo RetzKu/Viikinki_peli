@@ -20,7 +20,7 @@ public class WolfAI : generalAi
 
     public override void InitStart(float x, float y, EnemyType type) // jokaselle
     {
-        attackDist = UnityEngine.Random.Range(2f, 4f);
+        attackDist = UnityEngine.Random.Range(5f, 8f);
         myType = type;
         rotation.init(myType);
         body = GetComponent<Rigidbody2D>();
@@ -36,6 +36,7 @@ public class WolfAI : generalAi
     public override void UpdatePosition(List<GameObject> Mobs) // jokaselle
     {
         rotation.UpdateRotation(velocity, body.position);
+        GetComponent<WolfAnimatorScript>().SpriteDirection(myDir);
         LayerMask mask = new LayerMask();
 
         mask = LayerMask.GetMask("Enemy");
@@ -44,8 +45,11 @@ public class WolfAI : generalAi
         var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
         Vector2[] powers = new Vector2[2];
 
-        if (agro)   // agro jokainen vihu lähellä
+        if (agro && HeardArray.Length > 1)   // agro jokainen vihu lähellä
         {
+            print(HeardArray[0].transform.name);
+            print(HeardArray[1].transform.name);
+
             for (int i = 0; i < HeardArray.Length; i++)
             {
                 HeardArray[i].GetComponent<generalAi>().agro = true; // check if eetu lies
@@ -76,6 +80,7 @@ public class WolfAI : generalAi
         {
             if (!inAttack && attackCounter > attackUptade)
             {
+                GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapStart);
                 rotation.rotToPl = false;
                 Physics._maxSpeed = MaxSpeed * 4;
                 //start leap
@@ -90,7 +95,7 @@ public class WolfAI : generalAi
 
 
                 dist.Normalize();
-                dist *= 5;
+                dist *= 8;//5
                 dist *= -1.0f;
                 target = body.position + dist;
                 flags = (int)behavior.seek;
@@ -104,6 +109,7 @@ public class WolfAI : generalAi
                 flags = (int)behavior.seekAndArrive;
                 if (velocity.magnitude == 0)
                 {
+                    GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
                     Physics._maxSpeed = MaxSpeed;
                     inAttack = false;
                     attackCounter = 0;
@@ -112,6 +118,7 @@ public class WolfAI : generalAi
                 }
                 else if (dist.magnitude < velocity.magnitude * 5 && !bite)// muokkaa
                 {
+                    GetComponent<WolfAnimatorScript>().AnimationTrigger(action.Attack);
                     target = body.position + (velocity * 4);
                     bite = true;
                 }

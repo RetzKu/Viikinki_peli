@@ -279,11 +279,11 @@ Prefab:
         type: 2}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1815068458}
     - target: {fileID: 114082371090620650, guid: 2b5b440fa7b64344ea4718be6cea3e4e,
         type: 2}
       propertyPath: Mob_Amount
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114082371090620650, guid: 2b5b440fa7b64344ea4718be6cea3e4e,
         type: 2}
@@ -295,7 +295,7 @@ Prefab:
         type: 2}
       propertyPath: Wolf
       value: 
-      objectReference: {fileID: 1392101450600622, guid: 455473e3b8b99ab43b6202c786593fd1,
+      objectReference: {fileID: 1975485080313304, guid: 31464838671e49b4585d82d7b87b4a3e,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b5b440fa7b64344ea4718be6cea3e4e, type: 2}
@@ -346,7 +346,11 @@ Prefab:
       objectReference: {fileID: 1472106373}
     - target: {fileID: 1977754839611798, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
       propertyPath: m_Name
-      value: Player (1)
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1977754839611798, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
@@ -654,6 +658,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ba8cfce009a3764ba416b37c8f039af, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1815068458 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1977754839611798, guid: b5405cc59ec405e42ac26438ef1b066d,
+    type: 2}
+  m_PrefabInternal: {fileID: 763703216}
 --- !u!1 &1889939612
 GameObject:
   m_ObjectHideFlags: 0

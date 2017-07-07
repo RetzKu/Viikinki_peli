@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class longMelee : weaponStats
 {
-
-	void Start () {
-		
+    public Sprite Fx;
+	void Start ()
+    {
+		transform.Find("Player").GetComponent<FxFade>
 	}
 
     // täällä ois animaatio pitkälle meleelle

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class TileMap : MonoBehaviour
@@ -195,45 +195,11 @@ public class TileMap : MonoBehaviour
 
             if (chunkDtX < 0) // vasen
             {
-                swapColumn(2, 1);
-                // SwapColumnsViews(2, 1);
-
-                swapColumn(1, 0);
-                // SwapColumnsViews(1, 0);
-
-                // ResetTileViews();
-
-                // SwapLeft();
-
-                for (int i = -1; i < 2; i++)    // -1
-                {
-                    _chunks[i + 1, 0].disableChunkCollision();
-                    GenerateChunk(0, i + 1, chunkOffsetX - 1, chunkOffsetY + i);
-                    _chunks[i + 1, 0].MoveChunk(-3, 0); // moves gos
-                }
-
-                // SpriteController.InitChunkSprites(21, 58, this, 1, 1);
-
-                SpriteController.SetTileSprites(22, 58, this, 1, 1);
+                StartCoroutine(ThreeFrameUpdateLeft(chunkOffsetX, chunkOffsetY));
             }
             else if (chunkDtX > 0)      // oikealle
             {
-                swapColumn(1, 0);
-                // SwapColumnsViews(2, 1);
-                swapColumn(2, 1);
-                // SwapColumnsViews(1, 0);
-                // ResetTileViews();
-                // SwapRight();
-
-                for (int i = -1; i < 2; i++)    // -1
-                {
-                    _chunks[i + 1, 2].disableChunkCollision();
-
-                    GenerateChunk(2, i + 1, chunkOffsetX + 1, chunkOffsetY + i);
-                    _chunks[i + 1, 2].MoveChunk(3, 0);
-                }
-
-                SpriteController.SetTileSprites(58, 58, this, 38, 1);
+                StartCoroutine(ThreeFrameUpdateRight(chunkOffsetX, chunkOffsetY));
             }
             if (chunkDtY < 0)
             {
@@ -279,6 +245,51 @@ public class TileMap : MonoBehaviour
         _chunks[1, 1].offsetX = chunkOffsetX;   // ainoastaa center chunk on oikeassa chunkissa atm
         _chunks[1, 1].offsetY = chunkOffsetY;
     }
+
+
+
+
+    IEnumerator ThreeFrameUpdateRight(int chunkOffsetX, int chunkOffsetY)
+    {
+        swapColumn(1, 0);
+        // SwapColumnsViews(2, 1);
+        swapColumn(2, 1);
+        // SwapColumnsViews(1, 0);
+        // ResetTileViews();
+        // SwapRight();
+
+        for (int i = -1; i < 2; i++)    // -1
+        {
+            _chunks[i + 1, 2].disableChunkCollision();
+
+            GenerateChunk(2, i + 1, chunkOffsetX + 1, chunkOffsetY + i);
+            _chunks[i + 1, 2].MoveChunk(3, 0);
+            yield return null;
+        }
+        // TODO: WARNING HETKINEN
+        SpriteController.SetTileSprites(58, 48, this, 38, 1);
+        yield return null;
+        SpriteController.SetTileSprites(58, 58, this, 38, 1);
+    }
+
+    IEnumerator ThreeFrameUpdateLeft(int chunkOffsetX, int chunkOffsetY)
+    {
+        swapColumn(2, 1);
+        swapColumn(1, 0);
+
+        for (int i = -1; i < 2; i++)    // -1
+        {
+            _chunks[i + 1, 0].disableChunkCollision();
+            GenerateChunk(0, i + 1, chunkOffsetX - 1, chunkOffsetY + i);
+            _chunks[i + 1, 0].MoveChunk(-3, 0); // moves gos
+            yield return null;
+        }
+
+        SpriteController.SetTileSprites(22, 58, this, 1, 1);
+    }
+
+
+
 
     void SwapColumnsViews(int destX, int fromX)
     {
@@ -407,7 +418,7 @@ public class TileMap : MonoBehaviour
             SpriteController.SetTileSprites(TotalWidth - 2, TotalHeight - 2, this, 1, 1);
         }
 
-       
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             _chunks[1, 1].Save();
@@ -498,7 +509,7 @@ public class TileMap : MonoBehaviour
         return _chunks[iy, ix].GetTile(x - ChunkSize * ix, y - ChunkSize * iy);
     }
 
-    
+
 
     public GameObject GetTileGameObject(float x, float y)
     {

@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Security;
+﻿using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 
@@ -30,18 +29,48 @@ public class PoissonDiscSampler
     private Vector2[,] grid;
     private List<Vector2> activeSamples = new List<Vector2>();
 
+
+    private static PoissonDiscSampler _instance = null;
+    public static PoissonDiscSampler Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new PoissonDiscSampler(20f, 20f, 1.5f);
+            }
+            return _instance;
+        }
+    }
+
+
+
     /// Create a sampler with the following parameters:
     ///
     /// width:  each sample's x coordinate will be between [0, width]
     /// height: each sample's y coordinate will be between [0, height]
     /// radius: each sample will be at least `radius` units away from any other sample, and at most 2 * `radius`.
+    private int w, h;
+    private float r;
+    
     public PoissonDiscSampler(float width, float height, float radius)
     {
+        r = radius;
+        w = (int)width;
+        h = (int)height;
         rect = new Rect(0, 0, width, height);
         radius2 = radius * radius;
         cellSize = radius / Mathf.Sqrt(2);
         grid = new Vector2[Mathf.CeilToInt(width / cellSize),
                            Mathf.CeilToInt(height / cellSize)];
+
+
+        for (int i = 0; i < 10; i++)
+        {
+            preCalculatedSamples[i] = GetSamples();
+        }
+
+        // Instance = this;
     }
 
     /// Return a lazy sequence of samples. You typically want to call this in a foreach loop, like so:
@@ -84,6 +113,70 @@ public class PoissonDiscSampler
             }
         }
     }
+
+
+    private List<Vector2>[] preCalculatedSamples = new List<Vector2>[10];
+    private int index = 0;
+
+
+    // worker
+    private Thread PoissonSamplerThread;
+
+
+    public List<Vector2> GetThreadedSamples()
+    {
+        CheckJobs();
+        List<Vector2> value = preCalculatedSamples[index];
+
+        // lauch job
+        GenerateSamples(index);
+
+        index++;
+
+        if (index == 9)
+        {
+            index = 0;
+        }
+        
+        return value; // VAROITUS !!!
+    }
+    // k k k g g g g g g g g t t t
+
+    private int workIndex = 0;
+    Job[] workers = new Job[3];
+
+    private void GenerateSamples(int preCalcArrayIndex)
+    {
+        workers[workIndex] = new Job(preCalcArrayIndex, w, h, r);
+        var worker = workers[workIndex];
+
+        workIndex++;
+        if (workIndex == 3)
+        {
+            workIndex = 0;
+        }
+        worker.Start();
+    }
+
+    private void CheckJobs()
+    {
+        for (int i = 0; i < workers.Length; i++)
+        {
+            var worker = workers[i];
+            if (worker != null)
+            {
+                if (worker.Update())
+                {
+                    // job done!
+                    preCalculatedSamples[worker.Index] = worker.OutData;
+                    worker = null;
+                }
+            }
+        }
+    }
+
+   
+
 
     public List<Vector2> GetSamples()
     {

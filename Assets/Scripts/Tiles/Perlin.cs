@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Remoting.Messaging;
 using UnityEngine;
-using UnityEngine.Assertions.Comparers;
 using Random = UnityEngine.Random;
 
 
@@ -16,7 +13,7 @@ public class Perlin : MonoBehaviour
     private Dictionary<TileType, TilemapObjectSpawnSettings> TileSpawnSettings = new Dictionary<TileType, TilemapObjectSpawnSettings>((int)TileType.Max);
 
     // Sampler for Trees 
-    private PoissonDiscSampler sampler;
+    // private PoissonDiscSampler sampler;
     private int samplerWidth = 20;
     private int samplerHeigth = 20;
     private int samplerRadius = 2;
@@ -108,7 +105,13 @@ public class Perlin : MonoBehaviour
 
         InitSettings();
 
-        sampler = new PoissonDiscSampler(samplerWidth, samplerHeigth, samplerRadius);
+        // sampler = new PoissonDiscSampler(samplerWidth, samplerHeigth, samplerRadius);
+    }
+
+    private bool started = false;
+    void Update()
+    {
+        started = true;
     }
 
     void InitSettings()
@@ -272,7 +275,7 @@ public class Perlin : MonoBehaviour
 
                 for (int yn = yc - R; yn <= yc + R; yn++)
                 {
-                    for (int xn = xc - R; xn <= xc + R; xn++) 
+                    for (int xn = xc - R; xn <= xc + R; xn++)
                     {
                         if (xn < 0 || yn < 0 || xn >= sizeX || yn >= sizeY)
                             continue;
@@ -378,7 +381,7 @@ public class Perlin : MonoBehaviour
     {
         if (octaves == 0)
         {
-            octaves = this.Octaves; 
+            octaves = this.Octaves;
         }
         if (lacuranity == 0f)
         {
@@ -465,26 +468,34 @@ public class Perlin : MonoBehaviour
             type = TileType.GrassLand; // atm kaikki grasslandikisi jos ei löydy
         }
 
-        var setting = TileSpawnSettings[type];
-
-        if (setting.SpawnableObjects.Length != 0)
+        TilemapObjectSpawnSettings setting;
+        if (TileSpawnSettings.TryGetValue(type, out setting))
         {
-            float roll = Random.Range(0f, 100f);
-            float totalCount = 0;
+            // var setting = TileSpawnSettings[type];
 
-            for (int i = 0; i < setting.SpawnableObjects.Length; i++)
+            if (setting.SpawnableObjects.Length != 0)
             {
-                float spawnRate = setting.SpawnableObjects[i].SpawnRate;
-                if (totalCount + (spawnRate) >= roll)
+                float roll = Random.Range(0f, 100f);
+                float totalCount = 0;
+
+                for (int i = 0; i < setting.SpawnableObjects.Length; i++)
                 {
-                    GameObject prefab = setting.SpawnableObjects[i].ObjectPrefab;
-                    var go = Instantiate(prefab, parent);
-                    go.transform.localScale *= Random.Range(0.90f, 1.10f);
-                    go.transform.position = spawnPosition;
-                    break; // ei montaa samaan kohtaan
+                    float spawnRate = setting.SpawnableObjects[i].SpawnRate;
+                    if (totalCount + (spawnRate) >= roll)
+                    {
+                        GameObject prefab = setting.SpawnableObjects[i].ObjectPrefab;
+                        var go = Instantiate(prefab, parent);
+                        go.transform.localScale *= Random.Range(0.90f, 1.10f);
+                        go.transform.position = spawnPosition;
+                        break; // ei montaa samaan kohtaan
+                    }
+                    totalCount += spawnRate;
                 }
-               totalCount += spawnRate;
             }
+        }
+        else
+        {
+
         }
     }
 
@@ -496,15 +507,24 @@ public class Perlin : MonoBehaviour
     //  - 40
     //   - lisää ?
 
+    // PoissonDiscSampler _sampler = new PoissonDiscSampler(20f, 20f, 1.5f); // GG
+
     bool[,] GenerateObjectsPosition(float[,] objectNoise) // suurempi kuin R
     {
-        sampler = new PoissonDiscSampler(samplerWidth, samplerHeigth, 1.5f); // GG
         bool[,] result = new bool[samplerHeigth, samplerWidth];
-
-        foreach (Vector2 sample in sampler.GetSamples()) // 20, 20 alueelta pisteitä muuta indekseiksi
+        List<Vector2> value = new List<Vector2>();
+        if (started)
         {
-            float a = objectNoise[(int)sample.y, (int)sample.x];
-            if (a > 0.45f)
+             value = PoissonDiscSampler.Instance.GetThreadedSamples();
+        }
+        else
+        {
+            value = PoissonDiscSampler.Instance.GetSamples();
+        }
+        foreach (Vector2 sample in value) // 20, 20 alueelta pisteitä muuta indekseiksi
+        {
+            // float a = objectNoise[(int)sample.y, (int)sample.x];
+            // if (a > 0.45f)
             {
                 result[(int)sample.x, (int)sample.y] = true;   // myohemmin generaatio voisi suoraan olla tähän
             }
@@ -549,6 +569,7 @@ public class Perlin : MonoBehaviour
 
         // float[,] blueNoise = GenerateBlueNoise(20, 20);
         // bool[,] trees = PlaceTrees(blueNoise, 20, 20, types); // kutsu suoraan tuolla niin ei tarvita uutta arrayta
+
         bool[,] trees = GenerateObjectsPosition(moisture);
 
         float startZ = (float)offsetY;

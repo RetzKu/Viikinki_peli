@@ -20,7 +20,7 @@ public class WolfAI : generalAi
 
     public override void InitStart(float x, float y, EnemyType type) // jokaselle
     {
-        attackDist = UnityEngine.Random.Range(5f, 8f);
+        attackDist = UnityEngine.Random.Range(3f, 5f);
         myType = type;
         rotation.init(myType);
         body = GetComponent<Rigidbody2D>();
@@ -81,7 +81,7 @@ public class WolfAI : generalAi
             if (!inAttack && attackCounter > attackUptade)
             {
                 GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapStart);
-                rotation.rotToPl = false;
+                rotation.rotToPl = true;
                 Physics._maxSpeed = MaxSpeed * 4;
                 //start leap
                 //if (dist.magnitude > 1.2f)  // velocityn mukaan leap
@@ -116,10 +116,10 @@ public class WolfAI : generalAi
                     bite = false;
                     rotation.Lock = false;
                 }
-                else if (dist.magnitude < velocity.magnitude * 5 && !bite)// muokkaa
+                else if (dist.magnitude < velocity.magnitude * 16 && !bite)// muokkaa
                 {
                     GetComponent<WolfAnimatorScript>().AnimationTrigger(action.Attack);
-                    target = body.position + (velocity * 4);
+                    target = body.position + (velocity * 10);
                     bite = true;
                 }
             }

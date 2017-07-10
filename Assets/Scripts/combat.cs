@@ -8,12 +8,15 @@ public class combat : MonoBehaviour {
 
     public float hp = 100.0f;
     public float dmgBase = 5.0f;
+    public float rangedBaseDmg = 0.0f;
     public float movementSpeed = 100.0f;
     public float attackSpeed = 1.0f;
     public float armor = 1.0f;
 
     private enum Directions { Left, Down, Up, Right }
     private Directions Direction;
+
+    public enum WeaponType { noWeapon, meleeWeapon, longMeleeWeapon, rangedWeapon }
 
     private string dirObjectName;
 	private Sprite Fx;
@@ -31,9 +34,11 @@ public class combat : MonoBehaviour {
         {
             death(); // tarkistetaan onko pelaaja elossa
         }
+        //weaponInHand();
+        //OnTriggerEnter2D(GetComponent<Collider2D>());
 
         dirObjectName = getDirectionObject();
-		transform.GetComponent<FxScript>().FxUpdate(Fx); /*KUN Fx SPRITEÄ MUUTTAA FxUpdate KATSOO ONKO SE ERINLAINEN FX KUIN AIKAISEMPI JA JOS ON NIIN VAIHTAA. VOI SIIRTÄÄ MYÖS POIS UPDATESTA*/
+		//transform.GetComponent<FxScript>().FxUpdate(Fx); /*KUN Fx SPRITEÄ MUUTTAA FxUpdate KATSOO ONKO SE ERINLAINEN FX KUIN AIKAISEMPI JA JOS ON NIIN VAIHTAA. VOI SIIRTÄÄ MYÖS POIS UPDATESTA*/
     }
 
     string getDirectionObject() // Lataa pelaajalle oikeat hitboxit
@@ -66,6 +71,23 @@ public class combat : MonoBehaviour {
         return tmpName;
     }
 
+    public Collider2D activeCollider()
+    {
+        string tmpTorso = getDirectionObject();
+        return transform.Find(tmpTorso).GetComponent<Collider2D>();
+    }
+
+    void OnTriggerEnter2D(Collider2D Trigger)
+    {
+        Debug.LogWarning("Trigger111");
+        print("trigger");
+        if (Trigger.IsTouchingLayers(LayerMask.NameToLayer("Player")) == true)
+        {
+            Debug.LogWarning("Koskee pelaajaaan");
+            GetComponent<PlayerScript>().AddToInventory(Trigger);
+        }
+    }
+
     public float hit()
     {
         float damage = dmgBase;
@@ -77,6 +99,24 @@ public class combat : MonoBehaviour {
          */
 
         return damage;
+    }
+
+    public WeaponType weaponInHand()
+    {
+        WeaponType weapon = WeaponType.noWeapon;
+
+        //int tmpSide = transform.GetComponent<AnimatorScript>().PlayerDir();
+
+        if (transform.Find("Equip").childCount != 0)
+        {
+            if (transform.Find("Equip").GetChild(0).GetComponent<Ranged>() != null) { weapon = WeaponType.rangedWeapon; }
+            else if (transform.Find("Equip").GetChild(0).GetComponent<Melee>() != null) { weapon = WeaponType.meleeWeapon; }
+            else if (transform.Find("Equip").GetChild(0).GetComponent<longMelee>() != null) { weapon = WeaponType.longMeleeWeapon; }
+            else{ }
+        }
+        else { weapon = WeaponType.noWeapon; }
+
+        return weapon;
     }
 
     public void takeDamage(float rawTakenDamage)

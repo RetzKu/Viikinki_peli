@@ -15,6 +15,7 @@ public class s_c_torsoScript : MonoBehaviour {
 		if(alive()) // Suoritetaan jos hitbox on ylipäätään elossa
         {
             OnTriggerEnter2D(GetComponent<Collider2D>());
+            OnTriggerExit2D(GetComponent<Collider2D>());
         }
 	}
 
@@ -46,7 +47,15 @@ public class s_c_torsoScript : MonoBehaviour {
         if (trig.transform.tag == "Item")
         {
             GetComponentInParent<PlayerScript>().AddToInventory(trig);
-            Debug.Log(trig.transform.name + " Picked up");
+            Debug.LogWarning(trig.transform.name + " Picked up");
+        }
+    }
+    void OnTriggerExit2D(Collider2D Trig)
+    {
+        if (Trig.transform.tag == "Dropped")
+        {
+            Trig.transform.tag = "Item";
+            print("escaped dropped item");
         }
     }
 }

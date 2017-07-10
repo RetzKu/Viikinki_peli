@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,8 +15,8 @@ public class Perlin : MonoBehaviour
 
     // Sampler for Trees 
     // private PoissonDiscSampler sampler;
-    private int samplerWidth = 20;
-    private int samplerHeigth = 20;
+    private int samplerWidth = Chunk.CHUNK_SIZE;
+    private int samplerHeigth = Chunk.CHUNK_SIZE;
     private int samplerRadius = 2;
 
     #region Fields
@@ -108,10 +109,8 @@ public class Perlin : MonoBehaviour
         // sampler = new PoissonDiscSampler(samplerWidth, samplerHeigth, samplerRadius);
     }
 
-    private bool started = false;
     void Update()
     {
-        started = true;
     }
 
     void InitSettings()
@@ -481,12 +480,15 @@ public class Perlin : MonoBehaviour
                 for (int i = 0; i < setting.SpawnableObjects.Length; i++)
                 {
                     float spawnRate = setting.SpawnableObjects[i].SpawnRate;
+
+                    GameObject prefab = setting.SpawnableObjects[i].ObjectPrefab;
                     if (totalCount + (spawnRate) >= roll)
                     {
-                        GameObject prefab = setting.SpawnableObjects[i].ObjectPrefab;
-                        var go = Instantiate(prefab, parent);
+                        var go = ObjectPool.instance.GetObjectForType(prefab.name, true); // ??????????????????
+
                         go.transform.localScale *= Random.Range(0.90f, 1.10f);
                         go.transform.position = spawnPosition;
+
                         break; // ei montaa samaan kohtaan
                     }
                     totalCount += spawnRate;
@@ -512,16 +514,10 @@ public class Perlin : MonoBehaviour
     bool[,] GenerateObjectsPosition(float[,] objectNoise) // suurempi kuin R
     {
         bool[,] result = new bool[samplerHeigth, samplerWidth];
-        List<Vector2> value = new List<Vector2>();
-        if (started)
-        {
-             value = PoissonDiscSampler.Instance.GetThreadedSamples();
-        }
-        else
-        {
-            value = PoissonDiscSampler.Instance.GetSamples();
-        }
-        foreach (Vector2 sample in value) // 20, 20 alueelta pisteitä muuta indekseiksi
+
+        List<Vector2> samples = PoissonDiscSampler.Instance.GetThreadedSamples();
+
+        foreach (Vector2 sample in samples) // 20, 20 alueelta pisteitä muuta indekseiksi
         {
             // float a = objectNoise[(int)sample.y, (int)sample.x];
             // if (a > 0.45f)
@@ -537,8 +533,8 @@ public class Perlin : MonoBehaviour
         int chunkSize = Chunk.CHUNK_SIZE;
 
         // TODO: KORJAA API ihmisen luettavaksi
-        OffsetX = .20f * (float)offsetX;
-        OffsetY = .20f * (float)offsetY;
+        OffsetX = .17f * (float)offsetX; // yolo
+        OffsetY = .17f * (float)offsetY;
 
         float[,] elevation = new float[chunkSize, chunkSize];
         float[,] moisture = new float[chunkSize, chunkSize];
@@ -556,7 +552,8 @@ public class Perlin : MonoBehaviour
                 TileType type = GetBiomeWSettings(elevation[y, x], moisture[y, x]);
 
                 types[y, x] = type;
-                go.GetComponent<Renderer>().material.color = BiomeToColor(type);
+
+                // go.GetComponent<Renderer>().material.color = BiomeToColor(type);
 
                 if (TileMap.Collides(type)) // disable atm TileMap.cs
                 {
@@ -573,15 +570,15 @@ public class Perlin : MonoBehaviour
         bool[,] trees = GenerateObjectsPosition(moisture);
 
         float startZ = (float)offsetY;
-        for (int y = 0; y < 20; y++)
+        for (int y = 0; y < Chunk.CHUNK_SIZE; y++)
         {
-            for (int x = 0; x < 20; x++)    // offsetY
+            for (int x = 0; x < Chunk.CHUNK_SIZE; x++)    // offsetY
             {
                 if (trees[y, x])
                 {
-                    Vector3 spawnPosition = new Vector3(offsetX * 20 + x + Random.Range(-0.4f, 0.4f), offsetY * 20 + y + Random.Range(-0.4f, 0.4f), startZ);
+                    Vector3 spawnPosition = new Vector3(offsetX * Chunk.CHUNK_SIZE + x + Random.Range(-0.4f, 0.4f), offsetY * Chunk.CHUNK_SIZE + y + Random.Range(-0.4f, 0.4f), startZ);
                     SpawnObject(spawnPosition, this.trees.transform, types[y, x]);
-                    startZ += 0.001f;
+                    startZ += 0.001f; // Z tween/interpolation funktio
                 }
             }
         }
@@ -596,8 +593,8 @@ public class Perlin : MonoBehaviour
         int chunkSize = Chunk.CHUNK_SIZE;
 
         // TODO: KORJAA API ihmisen luettavaksi
-        OffsetX = .20f * (float)offsetX;
-        OffsetY = .20f * (float)offsetY;
+        OffsetX = .17f * (float)offsetX;
+        OffsetY = .17f * (float)offsetY;
 
         float[,] elevation = new float[chunkSize, chunkSize];
         float[,] moisture = new float[chunkSize, chunkSize];

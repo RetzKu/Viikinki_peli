@@ -21,11 +21,11 @@ using UnityEngine;
 /// Released in the public domain
 public class PoissonDiscSampler
 {
-    private const int k = 20;  // Maximum number of attempts before marking a sample as inactive.
+    private const int k = 25;  // Maximum number of attempts before marking a sample as inactive.
 
-    private readonly Rect rect;
-    private readonly float radius2;  // radius squared
-    private readonly float cellSize;
+    private  Rect rect;
+    private  float radius2;  // radius squared
+    private  float cellSize;
     private Vector2[,] grid;
     private List<Vector2> activeSamples = new List<Vector2>();
 
@@ -37,7 +37,7 @@ public class PoissonDiscSampler
         {
             if (_instance == null)
             {
-                _instance = new PoissonDiscSampler(20f, 20f, 1.5f);
+                _instance = new PoissonDiscSampler((float)Chunk.CHUNK_SIZE, (float)Chunk.CHUNK_SIZE, 1.5f);
             }
             return _instance;
         }
@@ -68,9 +68,24 @@ public class PoissonDiscSampler
         for (int i = 0; i < 10; i++)
         {
             preCalculatedSamples[i] = GetSamples();
+            ReInit(radius, (int)width, (int)height);
+            activeSamples.Clear();
         }
 
         // Instance = this;
+    }
+
+    public void ReInit(float radius, int width, int height)
+    {
+        
+        r = radius;
+        w = (int)width;
+        h = (int)height;
+        rect = new Rect(0, 0, width, height);
+        radius2 = radius * radius;
+        cellSize = radius / Mathf.Sqrt(2);
+        grid = new Vector2[Mathf.CeilToInt(width / cellSize),
+                           Mathf.CeilToInt(height / cellSize)];
     }
 
     /// Return a lazy sequence of samples. You typically want to call this in a foreach loop, like so:

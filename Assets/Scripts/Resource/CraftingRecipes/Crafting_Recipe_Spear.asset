@@ -9,18 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b11ebac4e06919847abf467de307184f, type: 3}
-  m_Name: Crafting_Recipe_Axe
+  m_Name: Crafting_Recipe_Spear
   m_EditorClassIdentifier: 
-  Indices:
-  - X: 0
-    Y: 2
-  - X: 0
-    Y: 1
-  - X: 1
-    Y: 1
+  Indices: []
   Sound: {fileID: 0}
   sprite: {fileID: 0}
-  Prefab: {fileID: 1031800583617284, guid: ce35163152400a141a41ea7652a32222, type: 2}
+  Prefab: {fileID: 1500902554411140, guid: 35764e4d543fde043827530306412ee0, type: 2}
   Materials:
   - Type: 3
     Count: 1
@@ -28,5 +22,11 @@ MonoBehaviour:
     Count: 1
   - Type: 2
     Count: 1
+  - Type: 4
+    Count: 1
+  - Type: 6
+    Count: 1
   - Type: 0
+    Count: 1
+  - Type: 3
     Count: 1

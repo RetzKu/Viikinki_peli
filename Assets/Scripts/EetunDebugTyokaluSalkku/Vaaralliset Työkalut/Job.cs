@@ -42,7 +42,7 @@ public class Job : ThreadedJob
     protected override void OnFinished()
     {
         // This is executed by the Unity main thread when the job is finished
-        Debug.Log("job done");
+        // Debug.Log("job done");
     }
 
     private const int k = 20;  // Maximum number of attempts before marking a sample as inactive.

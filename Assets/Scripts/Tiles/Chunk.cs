@@ -44,7 +44,7 @@ public class View<T>
 
 public class Chunk      // sub array
 {
-    public static int CHUNK_SIZE = 20;
+    public static readonly int CHUNK_SIZE = 17;
     public static TileType[,] Tiles;
     public static GameObject[,] TileGameObjects;
 
@@ -81,8 +81,8 @@ public class Chunk      // sub array
     public void Init(int chunkOffsetX, int chunkOffsetY, Transform tilemap, TileType[,] tiles, GameObject[,] gameobjects, int viewStartXIndex, int viewStartYIndex)
     {
         // Debug.Log("x: " + viewStartXIndex);
-        TilemapTilesView = new View<TileType>(tiles, viewStartXIndex, viewStartYIndex, 20); // 0 1 2    // SETVIEW;
-        GameObjectView = new View<GameObject>(gameobjects, viewStartXIndex, viewStartYIndex, 20);
+        TilemapTilesView = new View<TileType>(tiles, viewStartXIndex, viewStartYIndex, CHUNK_SIZE); // 0 1 2    // SETVIEW;
+        GameObjectView   = new View<GameObject>(gameobjects, viewStartXIndex, viewStartYIndex, CHUNK_SIZE);
 
         chunkOffsetX *= CHUNK_SIZE;
         chunkOffsetY *= CHUNK_SIZE;
@@ -138,9 +138,9 @@ public class Chunk      // sub array
 
         FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
         BinaryWriter bw = new BinaryWriter(fs);
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < Chunk.CHUNK_SIZE; i++)
         {
-            for (int j = 0; j < 20; j++)
+            for (int j = 0; j < CHUNK_SIZE; j++)
             {
                 bw.Write((int)Tiles[i, j]);
             }
@@ -176,6 +176,7 @@ public class Chunk      // sub array
             }
         }
     }
+
 
     public void MoveChunk(int x, int y)
     {

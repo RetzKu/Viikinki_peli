@@ -14,7 +14,8 @@ public class Bullet : MonoBehaviour
         if (transform.position.x < 0 || transform.position.x > 200 || transform.position.y < 0 ||
             transform.position.y > 200)
         {
-            Destroy(this.gameObject);
+            ObjectPool.instance.PoolObject(this.gameObject);
+            // Destroy(this.gameObject);
         }
     }
 }

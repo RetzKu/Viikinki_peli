@@ -11,7 +11,7 @@ public enum IngredientType
     Hemp,
     Tooth,
     BearFur,
-    Food,
+    Stone,
     Feather,
     Max
 }

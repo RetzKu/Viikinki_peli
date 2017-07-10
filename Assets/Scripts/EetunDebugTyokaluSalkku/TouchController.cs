@@ -75,7 +75,8 @@ public class TouchController : MonoBehaviour
         {
             SlashLineIndices[SlashLineIndex] = position;
             //lineRenderer.positionCount = SlashLineIndex + 1;  // <-- uudempi unity kuin 5.5.1f1
-            lineRenderer.positionCount = SlashLineIndex + 1;     // <-- unity 5.5.1f1
+            lineRenderer.numPositions = SlashLineIndex + 1;     // <-- unity 5.5.1f1
+
             lineRenderer.SetPosition(SlashLineIndex, SlashLineIndices[SlashLineIndex]);
 
             SlashLineIndex++;
@@ -90,7 +91,7 @@ public class TouchController : MonoBehaviour
     void DrawToMouse(Vector2 mouse)
     {
         //lineRenderer.positionCount = SlashLineIndex + 1;  // <-- uudempi unity kuin 5.5.1f1
-        lineRenderer.positionCount = SlashLineIndex + 1;     // <-- unity 5.5.1f1
+        lineRenderer.numPositions = SlashLineIndex + 1;     // <-- unity 5.5.1f1
         lineRenderer.SetPosition(SlashLineIndex, mouse);
     }
 
@@ -303,7 +304,7 @@ public class TouchController : MonoBehaviour
             _timer -= 200;
             ResetColliders();
 
-            lineRenderer.positionCount = 0;
+            lineRenderer.numPositions = 0;
 
 
             // sormi poesa

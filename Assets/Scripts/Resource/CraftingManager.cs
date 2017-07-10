@@ -131,8 +131,32 @@ public class CraftingManager : MonoBehaviour
 
         var ingredient = go.GetComponent<Ingredient>();
         AddToInventory(ingredient.Type);
-
+        
         Destroy(go); // Lopussa himmennystä
     }
 
+
+
+    public GridPositions[] positions;
+    public Vec2 GetCraftingIndexes(IngredientType type)
+    {
+        foreach (var gridGridPosition in positions)
+        {
+            if (gridGridPosition.type == type)
+            {
+                return gridGridPosition.index;
+            }
+        }
+
+        Debug.LogWarning("Warning type: " + type + " not found in CraftingManagerSettings");
+        return new Vec2(-1, -1);
+    }
+
+    [System.Serializable]
+    public class GridPositions
+    {
+        public Vec2 index;
+        public IngredientType type;
+    }
 }
+

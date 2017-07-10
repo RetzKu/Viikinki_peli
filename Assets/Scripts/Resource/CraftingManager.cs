@@ -5,7 +5,7 @@ using UnityEngine;
 public class CraftingManager : MonoBehaviour
 {
     // ota playerriin reffi, jossain vaiheessa niin saadaan itemssit
-    private GameObject Player;
+    public GameObject Player;
 
     public static CraftingManager Instance = null;
 

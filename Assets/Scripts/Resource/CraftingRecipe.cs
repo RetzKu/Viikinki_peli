@@ -8,11 +8,22 @@ using UnityEngine;
 public class CraftingRecipe : Rune
 {
     public GameObject Prefab;
+
+    [Header("No need to Use Indices by hand")]
     public List<Cost> Materials;
 
     public override void init(GameObject owner)
     {
         // Launcheriin, jokin cool effect, joka tulee kun craftaat + ääni
+
+
+        // Gettaa order -> laita indices oikein
+        Indices = new Vec2[Materials.Count];
+        for (int i = 0; i < Materials.Count; i++)
+        {
+            Vec2 vec = CraftingManager.Instance.GetCraftingIndexes(Materials[i].Type);
+            Indices[i] = vec;
+        }
     }
 
     public override void Fire()

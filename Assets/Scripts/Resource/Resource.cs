@@ -17,7 +17,13 @@ public abstract class Resource : MonoBehaviour
 
             // StartCoroutine(StartDropTimer());
 
+
+
+            // puu ja runko erilleen prefabeissä
             OnDead();
+
+            // ObjectPool.instance.pooledObjects
+            // TODO: KUINKA PUUT Poolataan takaisin !!!
             Destroy(gameObject);
         }
         else
@@ -58,7 +64,9 @@ public abstract class Resource : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = false;
 
         yield return new WaitForSeconds(deathTimer);
-        Destroy(gameObject);
+
+        ObjectPool.instance.PoolObject(this.gameObject);
+        // Destroy(gameObject);
     }
 
     // TODO: tee resuille oma partikkelie effect

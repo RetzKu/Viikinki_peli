@@ -475,50 +475,6 @@ public class TileSpriteController : MonoBehaviour
         return true;
     }
 
-    //public void DoubleLayerBorders(List<Vec2> borderTiles, TileType[,] tiles, GameObject[,] gameobjects, TileMap map) // border tile list 
-    //{
-    //    Debug.Log("meilla on: " + borderTiles.Count);
-    //    for (int i = 0; i < borderTiles.Count; i++)
-    //    {
-    //        if (true) // TODO: REAL WEIGHTING
-    //        {
-    //            var neighbour = GetFirstDifferentNeighbour(tiles, borderTiles[i].X, borderTiles[i].Y);
-    //            //if (i % 10 == 0)
-    //            //    Debug.Log(tile.ToString());
-
-    //            if (i < 100)
-    //            {
-    //                var renderer = temporarySecondLayer[i].GetComponent<SpriteRenderer>(); //  gameobjects[borderTiles[i].Y, borderTiles[i].X].GetComponent<SpriteRenderer>();
-
-    //                if (neighbour == TileType.Forest)
-    //                {
-    //                    renderer.sprite = ForesFiller;
-    //                }
-    //                else if (neighbour == TileType.GrassLand)
-    //                {
-    //                    renderer.sprite = grassFiller;
-    //                }
-
-    //                renderer.transform.position = new Vector3(borderTiles[i].X, borderTiles[i].Y);
-    //                renderer.gameObject.SetActive(true);
-
-    //                SetNeighbours(borderTiles[i].X, borderTiles[i].Y, map, tiles[borderTiles[i].Y, borderTiles[i].X]);
-    //            }
-    //        }
-    //    }
-    //}
-
-    //public void SetNeighbours(int x, int y, TileMap map, TileType backgroundTile)
-    //{
-    //    foreach (var pos in neighbours)
-    //    {
-    //        if (TileType.GrassLand == map.Tiles[y, x])
-    //        {
-    //            map.TileGameObjects[y + pos.Y, x + pos.X].GetComponent<SpriteRenderer>().sprite = grassFiller;
-    //            Debug.LogWarning("called");
-    //        }
-    //    }
-    //}
 
     // oletetaan että biomeja on vain kahta eriä vierekkäin
     public TileType GetFirstDifferentNeighbour(TileType[,] tiles, int x, int y)

@@ -193,7 +193,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GrassSprite: {fileID: 21300012, guid: 4e0d0f811b9b117428e6d2cd3132ef5c, type: 3}
-  ChunkSize: 20
   Width: 100
   Heigth: 60
   tilemapPrototypeLayout: 0

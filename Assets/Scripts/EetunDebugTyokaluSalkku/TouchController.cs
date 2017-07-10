@@ -76,6 +76,7 @@ public class TouchController : MonoBehaviour
             SlashLineIndices[SlashLineIndex] = position;
             //lineRenderer.positionCount = SlashLineIndex + 1;  // <-- uudempi unity kuin 5.5.1f1
             lineRenderer.numPositions = SlashLineIndex + 1;     // <-- unity 5.5.1f1
+
             lineRenderer.SetPosition(SlashLineIndex, SlashLineIndices[SlashLineIndex]);
 
             SlashLineIndex++;

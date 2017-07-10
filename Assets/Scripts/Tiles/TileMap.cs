@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class TileMap : MonoBehaviour
@@ -8,9 +8,9 @@ public class TileMap : MonoBehaviour
     private Perlin _perlinGenerator;
     public Chunk[,] _chunks;
 
-    public const int TotalWidth = 60;
-    public const int TotalHeight = 60;
-    public int ChunkSize = 20;
+    public static readonly int TotalWidth = Chunk.CHUNK_SIZE * 3;
+    public static readonly int TotalHeight = Chunk.CHUNK_SIZE * 3;
+    private int ChunkSize = Chunk.CHUNK_SIZE;
     public TileType[,] Tiles = new TileType[TotalHeight, TotalWidth]; // todo: w h laskeminen koosta
     public GameObject[,] TileGameObjects = new GameObject[TotalHeight, TotalWidth];
 
@@ -195,45 +195,11 @@ public class TileMap : MonoBehaviour
 
             if (chunkDtX < 0) // vasen
             {
-                swapColumn(2, 1);
-                // SwapColumnsViews(2, 1);
-
-                swapColumn(1, 0);
-                // SwapColumnsViews(1, 0);
-
-                // ResetTileViews();
-
-                // SwapLeft();
-
-                for (int i = -1; i < 2; i++)    // -1
-                {
-                    _chunks[i + 1, 0].disableChunkCollision();
-                    GenerateChunk(0, i + 1, chunkOffsetX - 1, chunkOffsetY + i);
-                    _chunks[i + 1, 0].MoveChunk(-3, 0); // moves gos
-                }
-
-                // SpriteController.InitChunkSprites(21, 58, this, 1, 1);
-
-                SpriteController.SetTileSprites(22, 58, this, 1, 1);
+                StartCoroutine(ThreeFrameUpdateLeft(chunkOffsetX, chunkOffsetY));
             }
             else if (chunkDtX > 0)      // oikealle
             {
-                swapColumn(1, 0);
-                // SwapColumnsViews(2, 1);
-                swapColumn(2, 1);
-                // SwapColumnsViews(1, 0);
-                // ResetTileViews();
-                // SwapRight();
-
-                for (int i = -1; i < 2; i++)    // -1
-                {
-                    _chunks[i + 1, 2].disableChunkCollision();
-
-                    GenerateChunk(2, i + 1, chunkOffsetX + 1, chunkOffsetY + i);
-                    _chunks[i + 1, 2].MoveChunk(3, 0);
-                }
-
-                SpriteController.SetTileSprites(58, 58, this, 38, 1);
+                StartCoroutine(ThreeFrameUpdateRight(chunkOffsetX, chunkOffsetY));
             }
             if (chunkDtY < 0)
             {
@@ -251,7 +217,7 @@ public class TileMap : MonoBehaviour
 
                 }
 
-                SpriteController.SetTileSprites(58, 22, this, 1, 1);
+                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE - 3, this, 1, 1);
             }
             else if (chunkDtY > 0)  // ylös
             {
@@ -268,7 +234,7 @@ public class TileMap : MonoBehaviour
                     _chunks[2, i + 1].MoveChunk(0, 3);
                 }
 
-                SpriteController.SetTileSprites(58, 58, this, 1, 38);
+                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE * 3 - 3, this, 1, Chunk.CHUNK_SIZE * 2 - 3);
             }
             SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position;
 
@@ -280,6 +246,50 @@ public class TileMap : MonoBehaviour
         _chunks[1, 1].offsetY = chunkOffsetY;
     }
 
+
+
+
+    IEnumerator ThreeFrameUpdateRight(int chunkOffsetX, int chunkOffsetY)
+    {
+        swapColumn(1, 0);
+        // SwapColumnsViews(2, 1);
+        swapColumn(2, 1);
+        // SwapColumnsViews(1, 0);
+        // ResetTileViews();
+        // SwapRight();
+
+        for (int i = -1; i < 2; i++)    // -1
+        {
+            _chunks[i + 1, 2].disableChunkCollision();
+
+            GenerateChunk(2, i + 1, chunkOffsetX + 1, chunkOffsetY + i);
+            _chunks[i + 1, 2].MoveChunk(3, 0);
+            yield return null;
+        }
+
+        // TODO: WARNING HETKINEN
+        SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE * 3 - 3, this, Chunk.CHUNK_SIZE * 2 - 3, 1);
+    }
+
+    IEnumerator ThreeFrameUpdateLeft(int chunkOffsetX, int chunkOffsetY)
+    {
+        swapColumn(2, 1);
+        swapColumn(1, 0);
+
+        for (int i = -1; i < 2; i++)    // -1
+        {
+            _chunks[i + 1, 0].disableChunkCollision();
+            GenerateChunk(0, i + 1, chunkOffsetX - 1, chunkOffsetY + i);
+            _chunks[i + 1, 0].MoveChunk(-3, 0); // moves gos
+            yield return null;
+        }
+
+        SpriteController.SetTileSprites(Chunk.CHUNK_SIZE - 3, Chunk.CHUNK_SIZE * 3 - 3, this, 1, 1);
+    }
+
+
+
+
     void SwapColumnsViews(int destX, int fromX)
     {
         for (int iY = 0; iY < 3; iY++)
@@ -290,7 +300,7 @@ public class TileMap : MonoBehaviour
             {
                 for (int x = 0; x < Chunk.CHUNK_SIZE; x++)
                 {
-                    Tiles[iY * 20, destX * 20 + x] = from.TilemapTilesView[y, x];
+                    Tiles[iY * Chunk.CHUNK_SIZE, destX * Chunk.CHUNK_SIZE + x] = from.TilemapTilesView[y, x];
                 }
             }
         }
@@ -407,7 +417,7 @@ public class TileMap : MonoBehaviour
             SpriteController.SetTileSprites(TotalWidth - 2, TotalHeight - 2, this, 1, 1);
         }
 
-       
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             _chunks[1, 1].Save();
@@ -429,10 +439,10 @@ public class TileMap : MonoBehaviour
     {
         for (int y = 0; y < 3; y++)
         {
-            for (int x = 0; x < 20; x++)
+            for (int x = 0; x < Chunk.CHUNK_SIZE; x++)
             {
-                Tiles[y, x] = Tiles[y, x + 20];
-                Tiles[y, x + 20] = Tiles[y, x + 40];
+                Tiles[y, x] = Tiles[y, x + Chunk.CHUNK_SIZE];
+                Tiles[y, x + Chunk.CHUNK_SIZE] = Tiles[y, x + 40];
             }
         }
     }
@@ -443,8 +453,8 @@ public class TileMap : MonoBehaviour
         {
             for (int x = 59; x > 39; x--)
             {
-                Tiles[y, x] = Tiles[y, x - 20];
-                Tiles[y, x - 20] = Tiles[y, x - 40];
+                Tiles[y, x] = Tiles[y, x - Chunk.CHUNK_SIZE];
+                Tiles[y, x - Chunk.CHUNK_SIZE] = Tiles[y, x - 40];
             }
         }
     }
@@ -497,8 +507,6 @@ public class TileMap : MonoBehaviour
         int iy = y / Chunk.CHUNK_SIZE;
         return _chunks[iy, ix].GetTile(x - ChunkSize * ix, y - ChunkSize * iy);
     }
-
-    
 
     public GameObject GetTileGameObject(float x, float y)
     {

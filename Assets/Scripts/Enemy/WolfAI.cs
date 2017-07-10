@@ -14,13 +14,14 @@ public class WolfAI : generalAi
    
     bool bite = false;
 
-
+    float currentTime = 2;
+    float animTime = 2;
     
     //generalAi AI = new generalAi();
 
     public override void InitStart(float x, float y, EnemyType type) // jokaselle
     {
-        attackDist = UnityEngine.Random.Range(3f, 5f);
+        attackDist = UnityEngine.Random.Range(leapDist-1f, leapDist+1f);
         myType = type;
         rotation.init(myType);
         body = GetComponent<Rigidbody2D>();
@@ -47,8 +48,8 @@ public class WolfAI : generalAi
 
         if (agro && HeardArray.Length > 1)   // agro jokainen vihu lähellä
         {
-            print(HeardArray[0].transform.name);
-            print(HeardArray[1].transform.name);
+            //print(HeardArray[0].transform.name);
+            //print(HeardArray[1].transform.name);
 
             for (int i = 0; i < HeardArray.Length; i++)
             {
@@ -80,6 +81,7 @@ public class WolfAI : generalAi
         {
             if (!inAttack && attackCounter > attackUptade)
             {
+                //GetComponent<WolfAnimatorScript>().AnimationState(action.Moving);
                 GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapStart);
                 rotation.rotToPl = true;
                 Physics._maxSpeed = MaxSpeed * 4;
@@ -116,10 +118,11 @@ public class WolfAI : generalAi
                     bite = false;
                     rotation.Lock = false;
                 }
-                else if (dist.magnitude < velocity.magnitude * 16 && !bite)// muokkaa
+                else if (dist.magnitude < velocity.magnitude * 5 && !bite)// muokkaa
                 {
+                    GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
                     GetComponent<WolfAnimatorScript>().AnimationTrigger(action.Attack);
-                    target = body.position + (velocity * 10);
+                    target = body.position + (velocity * 2);
                     bite = true;
                 }
             }
@@ -208,9 +211,9 @@ public class WolfAI : generalAi
             case enemyDir.RU:
                 Gizmos.DrawLine(body.position, body.position + new Vector2(1, 1));
                 break;
-            case enemyDir.Still:
-                Gizmos.DrawSphere(body.position, 0.3f);
-                break;
+            //case enemyDir.Still:
+            //    Gizmos.DrawSphere(body.position, 0.3f);
+            //    break;
 
 
         }
@@ -226,5 +229,10 @@ public class WolfAI : generalAi
         return false;
     }
 
+    bool timer()
+    {  
+             
+        return currentTime > animTime;
+    }
   
 }

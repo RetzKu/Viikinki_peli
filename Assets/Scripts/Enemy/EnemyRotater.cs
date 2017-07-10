@@ -12,7 +12,12 @@ public enum enemyDir
     LD,
     RU,
     RD,
-    Still
+    StillR,
+    StillL,
+    StillRD,
+    StillRU,
+    StillLD,
+    StillLU
 }
 
 public class EnemyRotater {
@@ -31,7 +36,7 @@ public class EnemyRotater {
 	// Use this for initialization
 	public void init (EnemyType type) {
         MyType = type;
-        myDir = enemyDir.Still;
+        myDir = enemyDir.StillR;
 	}
 	
 	// Update is called once per frame
@@ -51,7 +56,7 @@ public class EnemyRotater {
             }
             else
             {
-                rotateToPlayer(ownPos);
+                rotateToPlayer(ownPos,velocity);
             }
         }
 	}
@@ -87,11 +92,16 @@ public class EnemyRotater {
     {
         float xx = Mathf.Abs(velocity.x);
         float yy = Mathf.Abs(velocity.y);
-        if(velocity.magnitude == 0 && !rotToPl)
-        {
-            myDir = enemyDir.Still;
-            return;
-        }
+        //if(velocity.magnitude == 0 && !rotToPl)
+        //{
+        //    myDir = enemyDir.Still;
+        //    return;
+        //}
+        //if (velocity.magnitude == 0 && rotToPl)
+        //{
+        //    myDir = enemyDir.Still;
+        //    return;
+        //}
         if (xx >= yy)
         {
             if (velocity.x >= 0)
@@ -129,17 +139,43 @@ public class EnemyRotater {
             }
         }
     }
-    void rotateToPlayer(Vector2 ownPos)
+    void rotateToPlayer(Vector2 ownPos,Vector2 velocity)
     {
         Vector2 dir = playerPos - ownPos;
 
         if(MyType == EnemyType.Wolf)
         {
             uptadeDir6(dir);
+            if(velocity.magnitude == 0)
+            {
+                switch (myDir)
+                {
+                    case enemyDir.Right:
+                        myDir = enemyDir.StillR;
+                        break;
+                    case enemyDir.Left:
+                        myDir = enemyDir.StillL;
+                        break;
+                    case enemyDir.RD:
+                        myDir = enemyDir.StillRD;
+                        break;
+                    case enemyDir.RU:
+                        myDir = enemyDir.StillRU;
+                        break;
+                    case enemyDir.LD:
+                        myDir = enemyDir.StillLD;
+                        break;
+                    case enemyDir.LU:
+                        myDir = enemyDir.StillLU;
+                        break;
+                }
+            }
         }
         else
         {
             uptadeDir4(dir);
         }
     }
+
+
 }

@@ -10,7 +10,6 @@ public class WolfAnimatorScript : MonoBehaviour
 
     bool flip = false;
     int Rotation = 0;
-
     void Start()
     {
         WolfAnimator = transform.GetComponent<Animator>();
@@ -44,14 +43,22 @@ public class WolfAnimatorScript : MonoBehaviour
         
         switch(Dir)
         {
-            case enemyDir.Right: { flip = true;     Rotation = 0;    break; }
-            case enemyDir.Left:  { flip = false;    Rotation = 0;    break; }
-            case enemyDir.LD:    { flip = false;    Rotation = 45;   break; }
-            case enemyDir.LU:    { flip = false;    Rotation = -45;  break; }
-            case enemyDir.RU:    { flip = true;     Rotation = 45;   break; }
-            case enemyDir.RD:    { flip = true;     Rotation = -45;  break; }
+            case enemyDir.Right: { flip = true;     Rotation = 0; WolfAnimator.SetBool("Moving", true); break; }
+            case enemyDir.Left:  { flip = false;    Rotation = 0; WolfAnimator.SetBool("Moving", true); break; }
+            case enemyDir.LD:    { flip = false;    Rotation = 45; WolfAnimator.SetBool("Moving", true); break; }
+            case enemyDir.LU:    { flip = false;    Rotation = -45; WolfAnimator.SetBool("Moving", true); break; }
+            case enemyDir.RU:    { flip = true;     Rotation = 45; WolfAnimator.SetBool("Moving", true); break; }
+            case enemyDir.RD:    { flip = true;     Rotation = -45; WolfAnimator.SetBool("Moving", true); break; }
+            case enemyDir.StillR: { flip = true; WolfAnimator.SetBool("Moving", false); break; }
+            case enemyDir.StillL: { flip = false; WolfAnimator.SetBool("Moving", false); break; }
+            case enemyDir.StillRU: { flip = true; Rotation = 45; WolfAnimator.SetBool("Moving", false); break; }
+            case enemyDir.StillRD: { flip = true; Rotation = -45; WolfAnimator.SetBool("Moving", false); break; }
+            case enemyDir.StillLU: { flip = false; Rotation = -45; WolfAnimator.SetBool("Moving", false); break; }
+            case enemyDir.StillLD: { flip = false; Rotation = 45; WolfAnimator.SetBool("Moving", false); break; }
+
+
         }
-        if(flip == true) { transform.localScale = new Vector3(-1, 1, 1); }
+        if (flip == true) { transform.localScale = new Vector3(-1, 1, 1); }
         else { transform.localScale = new Vector3(1, 1, 1); }
 
         transform.localEulerAngles = new Vector3(0, 0, Rotation);

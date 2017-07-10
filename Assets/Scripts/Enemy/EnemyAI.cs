@@ -450,9 +450,9 @@ public class EnemyAI : MonoBehaviour
             case enemyDir.RU:
                 Gizmos.DrawLine(body.position, body.position + new Vector2(1, 1));
                 break;
-            case enemyDir.Still:
-                Gizmos.DrawSphere(body.position, 0.3f);
-                break;
+            //case enemyDir.Still:
+            //    Gizmos.DrawSphere(body.position, 0.3f);
+            //    break;
 
 
         }

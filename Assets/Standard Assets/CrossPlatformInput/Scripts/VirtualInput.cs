@@ -37,6 +37,7 @@ namespace UnityStandardAssets.CrossPlatformInput
             {
                 Debug.LogError("There is already a virtual axis named " + axis.name + " registered.");
             }
+
             else
             {
                 // add any new axes

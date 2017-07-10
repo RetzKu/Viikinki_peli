@@ -34,7 +34,7 @@ public class MobsControl : MonoBehaviour
         if (Input.GetKeyDown("y"))
         {
             var pl = player.GetComponent<Rigidbody2D>().position;
-            SpawnBoids(pl.x, pl.y, 1f, Mob_Amount);          
+            SpawnBoids(pl.x, pl.y, 4f, Mob_Amount);          
         }
         if (Input.GetKeyDown("m"))
         {

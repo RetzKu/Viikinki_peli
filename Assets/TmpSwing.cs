@@ -54,7 +54,7 @@ public class TmpSwing : MonoBehaviour {
     {
         Vector3 Mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var n = 180 - (Mathf.Atan2(transform.position.y - Copy.transform.position.y, transform.position.x - Copy.transform.position.x)) * 180 / Mathf.PI;
-        // print(n);
+        //print(n); // Saatana mikä pritti :<
         Copy.transform.Rotate(0, 0, n * -1);
     }
    

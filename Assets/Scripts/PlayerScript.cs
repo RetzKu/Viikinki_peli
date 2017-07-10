@@ -28,7 +28,7 @@ public class PlayerScript : MonoBehaviour
     private ItemManager Hand;
     //public int Damage;
 
-    private int Direction;
+    public int Direction;
 
     void Start()
     {
@@ -81,26 +81,27 @@ public class PlayerScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D Trig)
     {
-        if (Trig.transform.tag == "Item")
-        {
-            AddToInventory(Trig);
-            Debug.Log(Trig.transform.name + " Picked up");
-        }
+        //Trig = GetComponent<combat>().activeCollider();
 
-        if (Trig.gameObject.tag == "puu")
-        {
-            Debug.Log("BONK");
-            //Trig.transform.parent.GetComponent<TreeHP>().hp -= Damage;
-        }
+        //if (Trig.IsTouchingLayers(LayerMask.NameToLayer("Resource")))
+        //{
+        //    AddToInventory(Trig);
+        //}
+
+        //if (Trig.transform.tag == "Item")
+        //{
+        //    AddToInventory(Trig);
+        //    Debug.Log(Trig.transform.name + " Picked up");
+        //}
     }
 
     void OnTriggerExit2D(Collider2D Trig)
     {
-        if (Trig.transform.tag == "Dropped")
-        {
-            Trig.transform.tag = "Item";
-            print("escaped dropped item");
-        }
+        //if (Trig.transform.tag == "Dropped")
+        //{
+        //    Trig.transform.tag = "Item";
+        //    print("escaped dropped item");
+        //}
     }
 
     /*WHEN TIME, TRANSFER DEFAULT METHODS TO THIS CLASS*/

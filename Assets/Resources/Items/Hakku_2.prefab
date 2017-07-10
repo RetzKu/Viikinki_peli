@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212173859978504190}
   - component: {fileID: 61448057116583986}
   - component: {fileID: 114796982805190886}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Hakku_2
   m_TagString: Item
   m_Icon: {fileID: 0}

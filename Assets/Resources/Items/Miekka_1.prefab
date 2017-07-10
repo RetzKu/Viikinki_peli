@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212140991886089822}
   - component: {fileID: 61260072766762386}
   - component: {fileID: 114619203189581000}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Miekka_1
   m_TagString: Item
   m_Icon: {fileID: 0}

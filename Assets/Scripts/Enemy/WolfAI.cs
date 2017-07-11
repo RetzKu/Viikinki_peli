@@ -16,8 +16,11 @@ public class WolfAI : generalAi
 
     float currentTime = 0;
     float animTime = 0.7f;
-    float leapAnim = 10f;
-    
+    float leapAnim = 8f;
+    float biteRange = 2f; // just bite
+    float biteTime = 1f;
+    float biteTimer = 0f;
+    bool justBite = false;
     //generalAi AI = new generalAi();
 
     public override void InitStart(float x, float y, EnemyType type) // jokaselle
@@ -39,8 +42,11 @@ public class WolfAI : generalAi
     public override void UpdatePosition(List<GameObject> Mobs) // jokaselle
     {
         //print(MaxSpeed);
+        if (!justBite)
+        {
         rotation.UpdateRotation(velocity, body.position);
         GetComponent<WolfAnimatorScript>().SpriteDirection(myDir);
+        }
         LayerMask mask = new LayerMask();
 
         mask = LayerMask.GetMask("Enemy");
@@ -84,7 +90,7 @@ public class WolfAI : generalAi
             
         }
         velocity *= Time.deltaTime;
-        print(velocity.magnitude);
+        //print(velocity.magnitude);
         body.MovePosition(body.position + velocity);
     }
     void leapingPattern(Vector2 dist, Vector2 playerPos) //spe
@@ -93,30 +99,47 @@ public class WolfAI : generalAi
         {
             if (!inAttack && attackCounter > attackUptade)
             {
+
+                if (dist.magnitude < biteRange)
+                {
+                    rotation.rotToPl = true;
+                    justBite = true;
+                    inAttack = true;
+                    Physics._maxSpeed = MaxSpeed * 0.4f;
+                    rotation.playerPos = playerPos;
+                    rotation.HardRotate( body.position, velocity);
+                    GetComponent<WolfAnimatorScript>().AnimationTrigger(action.Attack);
+                    GetComponent<WolfAnimatorScript>().AnimationState(action.Idle);
+
+                }
+                else
+                {
+                    GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapStart);
+                    rotation.rotToPl = true;
+                    //Physics._maxSpeed = MaxSpeed * 4;
+                    //start leap
+                    //if (dist.magnitude > 1.2f)  // velocityn mukaan leap
+                    //{
+                    //    Vector2 plVec = player.GetComponent<Rigidbody2D>().velocity;
+                    //    playerPos += plVec * 0.5f; // muokkaa
+                        
+                    //    dist = body.position - playerPos;
+                    //}
+
+
+
+                    dist.Normalize();
+                    dist *= attackDist +1 ;//5
+                    dist *= -1.0f;
+                    target = body.position + dist;
+                    flags = (int)behavior.seek;
+                    inAttack = true;
+                    currentTime = 0;
+                    justBite = false;
+                }
                 //GetComponent<WolfAnimatorScript>().AnimationState(action.Moving);
-                GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapStart);
-                rotation.rotToPl = true;
-                //Physics._maxSpeed = MaxSpeed * 4;
-                //start leap
-                //if (dist.magnitude > 1.2f)  // velocityn mukaan leap
-                //{
-                //    Vector2 plVec = player.GetComponent<Rigidbody2D>().velocity;
-                //    playerPos += plVec * 0.5f; // muokkaa
-                    
-                //    dist = body.position - playerPos;
-                //}
-
-
-
-                dist.Normalize();
-                dist *= attackDist +1 ;//5
-                dist *= -1.0f;
-                target = body.position + dist;
-                flags = (int)behavior.seek;
-                inAttack = true;
-                currentTime = 0;
             }
-            else if (inAttack)
+            else if (inAttack && !justBite)
             {
                 bool go = timer();
                 rotation.Lock = true;
@@ -132,17 +155,35 @@ public class WolfAI : generalAi
                     bite = false;
                     rotation.Lock = false;
                 }
-                else if (dist.magnitude < velocity.magnitude * leapAnim && !bite && go)// muokkaa purase
+                else if (dist.magnitude < velocity.magnitude * leapAnim && !bite && go )// muokkaa purase
                 {
                     //GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
                     GetComponent<WolfAnimatorScript>().AnimationTrigger(action.Attack);
-                    target = body.position + (velocity * 5);
+                    target = body.position + (velocity * 4.5f);
                     bite = true;
                 }
                 if( dist.magnitude < velocity.magnitude * leapAnim && go)
                 {
                     GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
                 }
+            }
+            else if (justBite)
+            {
+                biteTimer += Time.deltaTime;
+                if(biteTimer >= biteTime)
+                {
+                    inAttack = false;
+                    justBite = false;
+                    rotation.rotToPl = false;
+                    Physics._maxSpeed = MaxSpeed;
+                    biteTimer = 0f;
+                    attackCounter = 0;
+                    rotation.Lock = false;
+                    GetComponent<WolfAnimatorScript>().AnimationState(action.Moving);
+
+
+                }
+
             }
             else
             {

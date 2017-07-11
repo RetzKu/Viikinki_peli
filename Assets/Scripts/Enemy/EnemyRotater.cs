@@ -176,6 +176,10 @@ public class EnemyRotater {
             uptadeDir4(dir);
         }
     }
-
+    public void HardRotate(Vector2 ownPos,Vector2 velocity)
+    {
+        rotateToPlayer(ownPos,velocity);
+        Lock = true;
+    }
 
 }

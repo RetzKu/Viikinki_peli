@@ -10,7 +10,7 @@ public class WolfAnimatorScript : MonoBehaviour
 
     bool flip = false;
     int Rotation = 0;
-    void Start()
+    void Awake()
     {
         WolfAnimator = transform.GetComponent<Animator>();
         WolfTransform = transform;

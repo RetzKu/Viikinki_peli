@@ -16,10 +16,10 @@ public class RuneHolder : MonoBehaviour
 	
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            runes[0].Fire();
-        }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    runes[0].Fire();
+        //}
 	}
 
     public void SendIndices(Vec2[] positions, int realSize)

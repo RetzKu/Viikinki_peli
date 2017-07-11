@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+
 public abstract class Resource : MonoBehaviour
 {
     protected static readonly float TileWidth = 1f;
@@ -16,8 +17,6 @@ public abstract class Resource : MonoBehaviour
             GetComponent<DropScript>().Drop(); // Ehkä static dropper, jossain vaiheessa
 
             // StartCoroutine(StartDropTimer());
-
-
 
             // puu ja runko erilleen prefabeissä
             OnDead();

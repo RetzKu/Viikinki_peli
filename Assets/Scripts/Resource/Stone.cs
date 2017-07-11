@@ -9,6 +9,14 @@ public class Stone : Resource
 
     public override void OnDead()
     {
-        
+        // TODO: ERIKOISTA
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Hit(25);
+        }
     }
 }

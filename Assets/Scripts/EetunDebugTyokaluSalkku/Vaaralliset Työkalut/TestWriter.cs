@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 
 public class TestWriter : MonoBehaviour
 {
@@ -28,41 +29,57 @@ public class TestWriter : MonoBehaviour
 
     void Update()
     {
-        TileType[,] a = new TileType[3,3];
-        a[1,1] = TileType.Beach;
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Save(a, "terve");
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            Load("terve");
-        }
+        //TileType[,] a = new TileType[Chunk.CHUNK_SIZE, Chunk.CHUNK_SIZE];
+        //a[1,1] = TileType.Beach;
+
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    Save(a, "terve");
+        //}
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    Load("terve");
+        //}
     }
 
     public static void Save(TileType[,] chunk, string name)
     {
+
+        string path = Application.persistentDataPath + "/" + name + ".sav";
+
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(name + ".sav");
+        FileStream file = File.Create(path);
         bf.Serialize(file, chunk);
         file.Close();
 
-        Debug.Log("Saved chunk: " + chunk);
+        // Debug.Log("Saved chunk: " + chunk);
+        // Debug.Log(Application.persistentDataPath);
     }
 
-    public static void Load(string chunkName)
+    public static TileType[,] Load(string chunkName)
     {
-        if (File.Exists(chunkName + ".sav"))
+        if (File.Exists(Application.persistentDataPath + "/" + chunkName + ".sav"))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(chunkName + ".sav", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + "/" + chunkName + ".sav", FileMode.Open);
             TileType[,] loaded = (TileType[,])bf.Deserialize(file);
 
             PrintTile(loaded);
 
             file.Close();
+            // Debug.Log("Loaded Chunk: " + chunkName);
 
-            Debug.Log("Loaded Chunk: " + chunkName);
+            return loaded;
+        }
+        else
+        {
+            Debug.LogError("Couldn't load Chunk: " + chunkName);
+            return new TileType[17, 17];
         }
     }
 

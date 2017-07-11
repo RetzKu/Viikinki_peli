@@ -62,11 +62,7 @@ public class CustomJoystick : MonoBehaviour
 
         position = new Vector3(0f, 0f, 0f);
         renderer.sprite = Head;
-
     }
-
-
-
 
     void Update()
     {

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Reflection.Emit;
 using UnityEngine;
 
 // must change start once scrolling
@@ -15,10 +16,7 @@ public class View<T>
         _startX = startX;
         _startY = startY;
         Size = size;
-
     }
-
-
 
     public T this[int y, int x]
     {
@@ -116,57 +114,46 @@ public class Chunk      // sub array
         offsetY = chunkOffsetY;
     }
 
-    public string path = "testChunkSaveFile.data";
-    public void Save()
+    private TileType[,] GetArray()
     {
-        //StreamWriter w;
-        //if (!f.Exists)
-        //{
-        //    w = f.CreateText();
-        //}
-        //else
-        //{
-        //    f.Delete();
-        //    w = f.CreateText();
-        //}
-        //w.WriteLine(Tiles[0,0]);
-        //w.Close();
-        //  var test = (byte)Tiles[0,0];
-        //File.WriteAllBytes("test.data", (byte[])Tiles);
-
-        //TileType[] array = new TileType[10];
-
-        FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
-        BinaryWriter bw = new BinaryWriter(fs);
-        for (int i = 0; i < Chunk.CHUNK_SIZE; i++)
+        TileType[,] value = new TileType[CHUNK_SIZE, CHUNK_SIZE];
+        for (int i = 0; i < CHUNK_SIZE; i++)
         {
             for (int j = 0; j < CHUNK_SIZE; j++)
             {
-                bw.Write((int)Tiles[i, j]);
+                value[i, j] = TilemapTilesView[i, j];
             }
         }
-        bw.Close();
-        fs.Close();
-        //File.WriteAllBytes("ads", (int[,])Tiles); 
+        return value;
+    }
+
+    private void SetTypes(TileType[,] types)
+    {
+        for (int i = 0; i < CHUNK_SIZE; i++)
+        {
+            for (int j = 0; j < CHUNK_SIZE; j++)
+            {
+                TilemapTilesView[i, j] = types[i, j];
+            }
+        }
+    }
+
+    public string GetPath()
+    {
+        return "chunkdata" + offsetX.ToString() + "_" + offsetY.ToString();
     }
 
     public void Load()
     {
-        //using (BinaryReader b = new BinaryReader(File.Open(path, FileMode.Open)))
-        //{
-        //    int pos = 0;
-        //    int length = (int)b.BaseStream.Length;
-        //    while (pos < length)
-        //    {
-        //        int v = b.ReadInt32();
-        //        Debug.Log(v);
-        //        pos += sizeof(int);
-        //    }
-        //}
+         SetTypes(TestWriter.Load(GetPath()));
     }
 
+    public void Save()
+    {
+        TestWriter.Save(GetArray(), GetPath());
+    }
 
-    public void disableChunkCollision()
+    public void DisableChunkCollision()
     {
         for (int y = 0; y < GameObjectView.Size; y++)
         {

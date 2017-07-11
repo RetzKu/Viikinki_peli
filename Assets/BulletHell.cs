@@ -13,18 +13,18 @@ public class BulletHell : MonoBehaviour
 	
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            GameObject bullet = ObjectPool.instance.GetObjectForType("Bullet", true);
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    GameObject bullet = ObjectPool.instance.GetObjectForType("Bullet", true);
 
-            if (bullet != null)
-            {
-                bullet.transform.position = transform.position;
-                var bul = bullet.GetComponent<Bullet>();
+        //    if (bullet != null)
+        //    {
+        //        bullet.transform.position = transform.position;
+        //        var bul = bullet.GetComponent<Bullet>();
 
-                bul.Speed = 2;
-                bul.velocity = Random.insideUnitCircle;
-            }
-        }
+        //        bul.Speed = 2;
+        //        bul.velocity = Random.insideUnitCircle;
+        //    }
+        //}
 	}
 }

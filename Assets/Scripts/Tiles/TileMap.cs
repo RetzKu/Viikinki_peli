@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TileMap : MonoBehaviour
@@ -210,7 +211,7 @@ public class TileMap : MonoBehaviour
 
                 for (int i = -1; i < 2; i++)    // -1
                 {
-                    _chunks[0, i + 1].disableChunkCollision();
+                    _chunks[0, i + 1].DisableChunkCollision();
 
                     GenerateChunk(i + 1, 0, chunkOffsetX + i, chunkOffsetY - 1);
                     _chunks[0, i + 1].MoveChunk(0, -3);
@@ -228,7 +229,7 @@ public class TileMap : MonoBehaviour
 
                 for (int i = -1; i < 2; i++)    // -1
                 {
-                    _chunks[2, i + 1].disableChunkCollision();
+                    _chunks[2, i + 1].DisableChunkCollision();
 
                     GenerateChunk(i + 1, 2, chunkOffsetX + i, chunkOffsetY + 1);
                     _chunks[2, i + 1].MoveChunk(0, 3);
@@ -260,7 +261,7 @@ public class TileMap : MonoBehaviour
 
         for (int i = -1; i < 2; i++)    // -1
         {
-            _chunks[i + 1, 2].disableChunkCollision();
+            _chunks[i + 1, 2].DisableChunkCollision();
 
             GenerateChunk(2, i + 1, chunkOffsetX + 1, chunkOffsetY + i);
             _chunks[i + 1, 2].MoveChunk(3, 0);
@@ -278,7 +279,7 @@ public class TileMap : MonoBehaviour
 
         for (int i = -1; i < 2; i++)    // -1
         {
-            _chunks[i + 1, 0].disableChunkCollision();
+            _chunks[i + 1, 0].DisableChunkCollision();
             GenerateChunk(0, i + 1, chunkOffsetX - 1, chunkOffsetY + i);
             _chunks[i + 1, 0].MoveChunk(-3, 0); // moves gos
             yield return null;
@@ -377,9 +378,27 @@ public class TileMap : MonoBehaviour
         //Chunk.SwapViews(_chunks[offsetY, offsetX], _chunks[newOffsetY, newOffsetX]);
     }
 
+
+    Dictionary<Vec2, bool> SavedChunks = new Dictionary<Vec2, bool>(25);
+
     void GenerateChunk(int offsetX, int offsetY, int perlinOffsetX, int perlinOffsetY)
     {
-        _perlinGenerator.GenerateChunk(_chunks[offsetY, offsetX], perlinOffsetX, perlinOffsetY);
+        // tallenna entinen
+        var chunk = _chunks[offsetY, offsetX];
+        SavedChunks[new Vec2(chunk.offsetY, chunk.offsetX)] = true;
+        chunk.Save();
+
+        bool exist = false;
+        if (SavedChunks.TryGetValue(new Vec2(perlinOffsetX, perlinOffsetY), out exist))
+        {
+            chunk.offsetX = perlinOffsetX;
+            chunk.offsetY = perlinOffsetY;
+            chunk.Load();
+        }
+        else
+        {
+            _perlinGenerator.GenerateChunk(_chunks[offsetY, offsetX], perlinOffsetX, perlinOffsetY);
+        }
     }
 
 
@@ -397,15 +416,15 @@ public class TileMap : MonoBehaviour
         //    Destroy(this.gameObject);            
         //}
 
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            RandomizeAllTiles();
-        }
+        //if (Input.GetKeyDown(KeyCode.F1))
+        //{
+        //    RandomizeAllTiles();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            ResetColor();
-        }
+        //if (Input.GetKeyDown(KeyCode.F2))
+        //{
+        //    ResetColor();
+        //}
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -417,7 +436,6 @@ public class TileMap : MonoBehaviour
             SpriteController.SetTileSprites(TotalWidth - 2, TotalHeight - 2, this, 1, 1);
         }
 
-
         if (Input.GetKeyDown(KeyCode.Q))
         {
             _chunks[1, 1].Save();
@@ -426,6 +444,7 @@ public class TileMap : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             _chunks[1, 1].Load();
+            
         }
     }
 

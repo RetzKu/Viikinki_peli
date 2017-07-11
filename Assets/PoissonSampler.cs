@@ -128,11 +128,11 @@ public class PoissonSampler : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Active.Clear();
-            ResetAll();
-        }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    Active.Clear();
+        //    ResetAll();
+        //}
     }
 
     private void ResetAll()

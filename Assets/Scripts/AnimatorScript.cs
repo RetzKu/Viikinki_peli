@@ -45,16 +45,10 @@ public class AnimatorScript : MonoBehaviour
     {
         if (Player.velocity.x < -SpeedEdge || Player.velocity.y < -SpeedEdge || Player.velocity.x > SpeedEdge || Player.velocity.y > SpeedEdge)
         {
-            if(transform.Find("Equip").GetChild(0).GetComponent<Ranged>() != null) { foreach (Animator t in Animators) { t.SetBool("BowWalk", true); } }
-            else
-            {
-                foreach (Animator t in Animators) { t.SetBool("playerRun", true); }
-                foreach(Animator t in Animators) { t.SetBool("BowWalk", false); }
-            }
+            foreach (Animator t in Animators) { t.SetBool("playerRun", true); }
         }
         else
         {
-            foreach(Animator t in Animators) { t.SetBool("BowWalk", false); }
             foreach (Animator t in Animators) { t.SetBool("playerRun", false); }
         }
     }

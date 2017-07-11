@@ -2,38 +2,63 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
+[System.Serializable]
 public class inventory
 {
-    public List<GameObject> Inventory;
+    [SerializeField]
+    public List<GameObject> InventoryData;
+    public Equipped EquipData;
     public int InventorySize;
-    public Equipped EquipInventory;
 
-    
-    public inventory(int _InventorySize) { InventorySize = _InventorySize; Inventory = new List<GameObject>(InventorySize); EquipInventory = new Equipped();}
+    public inventory(int _InventorySize) { InventorySize = _InventorySize; InventoryData = new List<GameObject>(InventorySize); EquipData = new Equipped();}
+
+    internal bool Changed = false;
 
     public void AddToInventory(GameObject Item)
     {
-        if(EquipInventory.EquippedTool() == null) { EquipInventory.SetTool(Item); }
-        else if(Inventory.Count < InventorySize) { Inventory.Add(Item); }
-        Item.SetActive(false);
+        if(EquipData.Tool == null) { EquipData.SetTool(Item); Item.SetActive(false); Changed = true; }
+        else if(InventoryData.Count < InventorySize) { InventoryData.Add(Item); Item.SetActive(false); }
+        else { Debug.Log("Inventory Täynnä"); }
+
     }
 
     public void EquipItem(int Slot)
-    {
-        GameObject Item = Inventory[Slot];
-        Inventory[Slot] = EquipInventory.SwapItem(Item);
+    { 
+        if (InventoryData.ElementAtOrDefault(Slot) != null)
+        {
+            GameObject Item = InventoryData[Slot];
+            GameObject ReturnedItem = EquipData.SwapItem(Item);
+            if(ReturnedItem == null) { InventoryData.RemoveAt(Slot); }
+            else { InventoryData[Slot] = ReturnedItem; }
+            Debug.Log(Item + " Vaihdettiin Objektin: " + ReturnedItem + " kanssa!");
+            Changed = true;
+        }
     }
 
     public void DropItem()
     {
-
+        GameObject DroppedTool = EquipData.EmptyHand();
+        if (DroppedTool != null)
+        {
+            DroppedTool.transform.position = GameObject.Find("Player").transform.position;
+            DroppedTool.SetActive(true);
+            DroppedTool.tag = "Dropped";
+            Changed = true;
+        }
     }
 
+    [System.Serializable]
     public class Equipped
     {
+        [SerializeField]
         private GameObject _ChestPiece;
+        [SerializeField]
         private GameObject _Tool;
+
+        public GameObject Tool { get { return _Tool; } }
+
 
         public Equipped() { _ChestPiece = null; _Tool = null; }
 
@@ -46,7 +71,9 @@ public class inventory
 
             return ReturnedItem;
         }
-        public GameObject EquippedTool() { return _Tool; }
+
+        public GameObject EmptyHand() { GameObject RemovedTool = _Tool; _Tool = null; return RemovedTool; }
+        public GameObject GetTool() { return _Tool; }
         public void SetTool(GameObject Tool) { _Tool = Tool; }
     }
 }

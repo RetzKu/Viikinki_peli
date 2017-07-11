@@ -13,6 +13,8 @@ public class PlayerScript : MonoBehaviour
 
     private weaponScript current;
 
+    [Header("Inventory Data")]
+    [SerializeField]
     internal inventory Inventory;
 
     Vector3 startPoint;
@@ -43,7 +45,7 @@ public class PlayerScript : MonoBehaviour
         DownwardsHand = transform.Find("d_c_torso").Find("d_r_upper_arm").GetChild(0).GetChild(0);
         //pate on paras
         Hand = new ItemManager(SidewaysHand);
-        //Damage = 30;
+        //Damage = 30
     }
 
     void Update()
@@ -52,10 +54,27 @@ public class PlayerScript : MonoBehaviour
         Side();
         Direction = transform.GetComponent<AnimatorScript>().PlayerDir();
         RefreshHand();
+        InventoryInput();
     }
+    
     void RefreshHand()
     {
-        if(Inventory.EquipInventory.EquippedTool().name != Hand.Copy.name) { Hand.Equip(Inventory.EquipInventory.EquippedTool()); }
+        if (Inventory.Changed == true)
+        {
+            if (Inventory.EquipData.Tool != null)
+            {
+                if (Hand.Copy == null)
+                {
+                    Hand.Equip(Inventory.EquipData.Tool);
+                }
+                else if (Inventory.EquipData.Tool.name != Hand.Copy.name)
+                {
+                    Hand.Equip(Inventory.EquipData.Tool);
+                }
+            }
+            else { Hand.EmptyHand(); }
+            Inventory.Changed = false;
+        }
     }
     void Side()
     {
@@ -81,11 +100,12 @@ public class PlayerScript : MonoBehaviour
 
     }
 
-    void SwapItem()
+    void InventoryInput()
     {
-        if (Input.GetKeyDown("1") == true) { }
-        if (Input.GetKeyDown("2") == true) { }
-        if (Input.GetKeyDown("3") == true) { }
+        if (Input.GetKeyDown("1") == true) { Inventory.EquipItem(0); }
+        if (Input.GetKeyDown("2") == true) { Inventory.EquipItem(1); }
+        if (Input.GetKeyDown("3") == true) { Inventory.EquipItem(2); }
+        if(Input.GetKeyDown("f") == true) { Inventory.DropItem(); }
     }
 
     void OnTriggerEnter2D(Collider2D Trig)
@@ -129,6 +149,7 @@ public class PlayerScript : MonoBehaviour
             }
 
             Copy = Instantiate(Item) as GameObject;
+            Copy.SetActive(true);
             Copy.name = Item.transform.name;
             Copy.transform.SetParent(Hand);
 

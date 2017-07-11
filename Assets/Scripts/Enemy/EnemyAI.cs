@@ -462,7 +462,7 @@ public class EnemyAI : MonoBehaviour
     {
         int[] ind =  player.GetComponent<UpdatePathFind>().path.calculateIndex(body.position);
 
-        if(ind[0] < 0 || ind[0] > 59 || ind[1] < 0 || ind[1] > 59)
+        if(ind[0] < 0 || ind[0] > Chunk.CHUNK_SIZE || ind[1] < 0 || ind[1] > Chunk.CHUNK_SIZE )
         {
             return true;
         }

@@ -16,8 +16,8 @@ public class PathFinder
 
     }
 
-    private static readonly int Width = 60;
-    private static readonly int Height = 60;
+    private static readonly int Width = TileMap.TotalWidth;
+    private static readonly int Height = TileMap.TotalHeight;
     List<List<BreadthFirstSearch.tiles>> realMap;
     public Dir[,] dirs = new Dir[Height, Width];
     public bool run = false;

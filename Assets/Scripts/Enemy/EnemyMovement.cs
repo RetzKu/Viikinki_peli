@@ -107,7 +107,6 @@ public class EnemyMovement
         bodyPosition = position;
 
 
-
         if ((flags & (int)behavior.separate) == (int)behavior.separate)
         {
             Vector2 sepaV = separate(CollisionMobs);

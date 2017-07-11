@@ -13,8 +13,7 @@ public class PlayerScript : MonoBehaviour
 
     private weaponScript current;
 
-
-
+    internal inventory Inventory;
 
     Vector3 startPoint;
     Vector3 endPoint;
@@ -32,9 +31,11 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
+
         /*Get Inventory parents*/
         InventoryChild = gameObject.transform.Find("Inventory").gameObject;
         EquipChild = gameObject.transform.Find("Equip").gameObject;
+        Inventory = new inventory(InventorySize);
 
         /*Get Player Gameobjects hands*/
         SidewaysHand = transform.Find("s_c_torso").Find("s_l_upper_arm").GetChild(0).GetChild(0);
@@ -48,12 +49,14 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         tmpswing();
-        Equip();
-        Drop();
         Side();
         Direction = transform.GetComponent<AnimatorScript>().PlayerDir();
+        RefreshHand();
     }
-
+    void RefreshHand()
+    {
+        if(Inventory.EquipInventory.EquippedTool().name != Hand.Copy.name) { Hand.Equip(Inventory.EquipInventory.EquippedTool()); }
+    }
     void Side()
     {
         if (Direction == 2) { Hand.Handstate = 2; Hand.SetHand(UpwardsHand); }
@@ -78,13 +81,18 @@ public class PlayerScript : MonoBehaviour
 
     }
 
+    void SwapItem()
+    {
+        if (Input.GetKeyDown("1") == true) { }
+        if (Input.GetKeyDown("2") == true) { }
+        if (Input.GetKeyDown("3") == true) { }
+    }
 
     void OnTriggerEnter2D(Collider2D Trig)
     {
         if (Trig.transform.tag == "Item")
         {
-            AddToInventory(Trig);
-            Debug.Log(Trig.transform.name + " Picked up");
+            Inventory.AddToInventory(Trig.gameObject);
         }
 
         if (Trig.gameObject.tag == "puu")
@@ -106,8 +114,10 @@ public class PlayerScript : MonoBehaviour
     /*WHEN TIME, TRANSFER DEFAULT METHODS TO THIS CLASS*/
     public class ItemManager
     {
+
         private Transform Hand;
         public int Handstate = 0;
+        public GameObject Copy;
 
         public ItemManager(Transform _Hand) { Hand = _Hand; } //default builder requires atleast 1 hand at the start
 
@@ -117,7 +127,8 @@ public class PlayerScript : MonoBehaviour
             {
                 EmptyHand();
             }
-            GameObject Copy = Instantiate(Item) as GameObject;
+
+            Copy = Instantiate(Item) as GameObject;
             Copy.name = Item.transform.name;
             Copy.transform.SetParent(Hand);
 
@@ -129,7 +140,6 @@ public class PlayerScript : MonoBehaviour
                 Copy.transform.localRotation = rotation;
                 Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                 Copy.GetComponent<SpriteRenderer>().sortingOrder = 20;
-                if(Copy.GetComponent<Ranged>() != null){ Copy.GetComponent<Ranged>().Reposition(Hand); } /*CHECK IF ITS RANGED WEAPON AND IF IT IS, REPOSITION IT*/
             }
             if (Handstate == 1) // downwards
             {
@@ -140,7 +150,6 @@ public class PlayerScript : MonoBehaviour
                 Copy.transform.localRotation = rotation;
                 Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                 Copy.GetComponent<SpriteRenderer>().sortingOrder = 16;
-                if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
             }
             if (Handstate == 2) //upwards
             {
@@ -150,8 +159,8 @@ public class PlayerScript : MonoBehaviour
                 Copy.transform.localRotation = rotation;
                 Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                 Copy.GetComponent<SpriteRenderer>().sortingOrder = 8;
-                if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
             }
+            if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
         }
 
         public void EmptyHand()
@@ -212,79 +221,4 @@ public class PlayerScript : MonoBehaviour
         }
 
     }
-    public void AddToInventory(Collider2D Item)
-    {
-        int it = 0;
-        if (EquipChild.transform.childCount == 0)
-        {
-
-            GameObject Copy = Instantiate(Item.gameObject, EquipChild.transform) as GameObject;
-            Copy.name = Item.transform.name;
-            Hand.Equip(Copy);
-            Destroy(Item.gameObject);
-        }
-        else
-        {
-            if (InventoryChild.transform.childCount < InventorySize)
-            {
-                Item.transform.position = GameObject.Find("Player").transform.position;
-                Instantiate(Item.gameObject, InventoryChild.transform);
-
-                switch (InventoryChild.transform.childCount)
-                {
-                    case 1: { it = 0; break; }
-                    case 2: { it = 1; break; }
-                    case 3: { it = 2; break; }
-                }
-                InventoryChild.transform.GetChild(it).name = Item.transform.name;
-                Destroy(Item.gameObject);
-            }
-        }
-    }
-
-    void Drop()
-    {
-        if (Input.GetKeyDown("f") == true)
-        {
-            if (EquipChild.transform.childCount > 0)
-            {
-                Hand.EmptyHand();
-                GameObject EquipCopy = EquipChild.transform.GetChild(0).gameObject;
-                EquipCopy.transform.tag = "Dropped";
-                Instantiate(EquipCopy, gameObject.transform.position, EquipCopy.transform.rotation).transform.name = EquipCopy.transform.name;
-                Destroy(EquipCopy);
-            }
-        }
-    }
-
-    void Equip()
-    {
-        bool swap = false;
-        int it = 0;
-        if (Input.GetKeyDown("1") == true) { if (InventoryChild.transform.childCount > 0) { swap = true; it = 0; } }
-        if (Input.GetKeyDown("2") == true) { if (InventoryChild.transform.childCount > 1) { swap = true; it = 1; } }
-        if (Input.GetKeyDown("3") == true) { if (InventoryChild.transform.childCount > 2) { swap = true; it = 2; } }
-
-        if (swap == true)
-        {
-            GameObject InventoryCopy = InventoryChild.transform.GetChild(it).gameObject;
-
-            if (EquipChild.transform.childCount != 0)
-            {
-                GameObject EquipCopy = EquipChild.transform.GetChild(0).gameObject;
-                Instantiate(EquipCopy, InventoryChild.transform).transform.name = EquipCopy.transform.name;
-                Destroy(EquipCopy);
-            }
-
-            InventoryCopy.transform.position = GameObject.Find("Player").transform.position;
-            GameObject Copy = Instantiate(InventoryCopy, EquipChild.transform) as GameObject;
-            Copy.transform.name = InventoryCopy.name;
-
-            Destroy(InventoryCopy);
-
-            Hand.Equip(Copy);
-        }
-    }
-
-
 }

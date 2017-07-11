@@ -3,30 +3,50 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class inventory : MonoBehaviour
+public class inventory
 {
+    public List<GameObject> Inventory;
+    public int InventorySize;
+    public Equipped EquipInventory;
 
-    public List<Items> Tools;
-    internal GameObject ChestPiece;
+    
+    public inventory(int _InventorySize) { InventorySize = _InventorySize; Inventory = new List<GameObject>(InventorySize); EquipInventory = new Equipped();}
 
-    void Start()
+    public void AddToInventory(GameObject Item)
     {
-        Tools = new List<Items>();
+        if(EquipInventory.EquippedTool() == null) { EquipInventory.SetTool(Item); }
+        else if(Inventory.Count < InventorySize) { Inventory.Add(Item); }
+        Item.SetActive(false);
     }
 
-    void Update()
+    public void EquipItem(int Slot)
+    {
+        GameObject Item = Inventory[Slot];
+        Inventory[Slot] = EquipInventory.SwapItem(Item);
+    }
+
+    public void DropItem()
     {
 
     }
 
-    internal void AddItem(GameObject Item)
+    public class Equipped
     {
-        Tools.Add(new Items(Item));
-    }
-    public class Items
-    {
-        public GameObject Item;
+        private GameObject _ChestPiece;
+        private GameObject _Tool;
 
-        public Items(GameObject _Item) { Item = _Item; }
+        public Equipped() { _ChestPiece = null; _Tool = null; }
+
+        public GameObject SwapItem(GameObject Item)
+        {
+            GameObject ReturnedItem;
+
+            ReturnedItem = _Tool;
+            _Tool = Item;
+
+            return ReturnedItem;
+        }
+        public GameObject EquippedTool() { return _Tool; }
+        public void SetTool(GameObject Tool) { _Tool = Tool; }
     }
 }

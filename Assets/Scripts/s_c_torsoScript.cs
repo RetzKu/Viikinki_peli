@@ -14,8 +14,7 @@ public class s_c_torsoScript : MonoBehaviour {
     {
 		if(alive()) // Suoritetaan jos hitbox on ylipäätään elossa
         {
-            OnTriggerEnter2D(GetComponent<Collider2D>());
-            OnTriggerExit2D(GetComponent<Collider2D>());
+            
         }
 	}
 
@@ -55,7 +54,7 @@ public class s_c_torsoScript : MonoBehaviour {
         if (Trig.transform.tag == "Dropped")
         {
             Trig.transform.tag = "Item";
-            print("escaped dropped item");
+            //print("escaped dropped item");
         }
     }
 }

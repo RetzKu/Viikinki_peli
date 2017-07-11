@@ -29,10 +29,10 @@ public class Movement : MonoBehaviour
 
     Vector2 Input_checker()
     {
-        // Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical")).normalized;
+        //Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical")).normalized; // ???
+        Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized; // WASD liikkuminen koneella
 
-
-        Vector2 movement = Joystick.GetInputVector();
+        //Vector2 movement = Joystick.GetInputVector(); // Kun buildataan phonelle
 
 
         if (movement.x == 0 && movement.y == 0) {rb.drag = slowdown;}

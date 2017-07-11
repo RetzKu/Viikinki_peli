@@ -62,11 +62,12 @@ public class AnimatorScript : MonoBehaviour
     }
     void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0)==true)
+        if (GetComponent<combat>().attackBoolean() == true)
         {
             transform.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
             transform.Find("d_c_torso").GetComponent<Animator>().SetTrigger("Attack");
             transform.Find("u_c_torso").GetComponent<Animator>().SetTrigger("Attack");
+            GetComponent<FxScript>().instantiateFx();
         }
     }
 

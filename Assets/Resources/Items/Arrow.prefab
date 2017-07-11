@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4416869397740614}
   - component: {fileID: 212226017487040714}
   - component: {fileID: 61954963030344882}
-  m_Layer: 20
+  m_Layer: 21
   m_Name: Arrow
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1442913211837032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 24.116495, y: 25.447338, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,9 +52,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: -0.0014067842, y: 0.063303754}
+  m_Offset: {x: -0.002, y: 0.103}
   serializedVersion: 2
-  m_Size: {x: 0.03, y: 0.22}
+  m_Size: {x: 0.047, y: 0.361}
 --- !u!212 &212226017487040714
 SpriteRenderer:
   m_ObjectHideFlags: 1

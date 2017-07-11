@@ -73,6 +73,7 @@ public class PlayerScript : MonoBehaviour
                 }
             }
             else { Hand.EmptyHand(); }
+            /*JOONA FX TÄHÄ, THNX :3*/ 
             Inventory.Changed = false;
         }
     }

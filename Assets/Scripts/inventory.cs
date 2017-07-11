@@ -20,8 +20,6 @@ public class inventory
     {
         if(EquipData.Tool == null) { EquipData.SetTool(Item); Item.SetActive(false); Changed = true; }
         else if(InventoryData.Count < InventorySize) { InventoryData.Add(Item); Item.SetActive(false); }
-        else { Debug.Log("Inventory Täynnä"); }
-
     }
 
     public void EquipItem(int Slot)
@@ -32,7 +30,6 @@ public class inventory
             GameObject ReturnedItem = EquipData.SwapItem(Item);
             if(ReturnedItem == null) { InventoryData.RemoveAt(Slot); }
             else { InventoryData[Slot] = ReturnedItem; }
-            Debug.Log(Item + " Vaihdettiin Objektin: " + ReturnedItem + " kanssa!");
             Changed = true;
         }
     }
@@ -51,7 +48,9 @@ public class inventory
 
     [System.Serializable]
     public class Equipped
-    {
+    {       
+        public enum WeaponType { noWeapon, meleeWeapon, longMeleeWeapon, rangedWeapon }
+       
         [SerializeField]
         private GameObject _ChestPiece;
         [SerializeField]
@@ -65,13 +64,23 @@ public class inventory
         public GameObject SwapItem(GameObject Item)
         {
             GameObject ReturnedItem;
-
             ReturnedItem = _Tool;
             _Tool = Item;
-
             return ReturnedItem;
         }
 
+        public WeaponType EquippedType()
+        {
+            if(Tool != null)
+            {
+                if (Tool.GetComponent<Ranged>() != null) { return WeaponType.rangedWeapon; }
+                else if (Tool.GetComponent<longMelee>() != null) { return WeaponType.longMeleeWeapon; }
+                else if (Tool.GetComponent<Melee>() != null) { return WeaponType.meleeWeapon; }
+                else { return WeaponType.noWeapon; }
+                
+            }
+            else { return WeaponType.noWeapon; }
+        }
         public GameObject EmptyHand() { GameObject RemovedTool = _Tool; _Tool = null; return RemovedTool; }
         public GameObject GetTool() { return _Tool; }
         public void SetTool(GameObject Tool) { _Tool = Tool; }

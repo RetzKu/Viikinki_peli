@@ -7,7 +7,7 @@ public class WolfAI : generalAi
 {
 
 
-    public float leapDist = 2.0f;
+    public float leapDist = 1.0f;
 
     private int attackCounter = 300;
     private int attackUptade = 300;
@@ -44,8 +44,8 @@ public class WolfAI : generalAi
         //print(MaxSpeed);
         if (!justBite)
         {
-        rotation.UpdateRotation(velocity, body.position);
-        GetComponent<WolfAnimatorScript>().SpriteDirection(myDir);
+            rotation.UpdateRotation(velocity, body.position);
+            GetComponent<WolfAnimatorScript>().SpriteDirection(myDir);
         }
         LayerMask mask = new LayerMask();
 
@@ -76,14 +76,21 @@ public class WolfAI : generalAi
             Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
 
             Vector2 dist = body.position - playerPos;
-
+            //if(dist.magnitude < biteRange*0.2f)
+            //{
+            //    player.GetComponent<Movement>().max_spd = 1;
+            //}
+            //else
+            //{
+            //    player.GetComponent<Movement>().max_spd = 3;
+            //}
             leapingPattern(dist, playerPos);
         }
         powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags, CollState);
         target = powers[1];
         velocity = powers[0];
 
-        if (currentTime > animTime)
+        if (currentTime > animTime) //??
         {
             currentTime = animTime;
             Physics._maxSpeed = MaxSpeed * leapSpeed;
@@ -105,9 +112,10 @@ public class WolfAI : generalAi
                     rotation.rotToPl = true;
                     justBite = true;
                     inAttack = true;
-                    Physics._maxSpeed = MaxSpeed * 0.4f;
+                    Physics._maxSpeed = MaxSpeed * 0.3f;
                     rotation.playerPos = playerPos;
                     rotation.HardRotate( body.position, velocity);
+                    GetComponent<WolfAnimatorScript>().SpriteDirection(myDir);
                     GetComponent<WolfAnimatorScript>().AnimationTrigger(action.Attack);
                     GetComponent<WolfAnimatorScript>().AnimationState(action.Idle);
 
@@ -180,8 +188,6 @@ public class WolfAI : generalAi
                     attackCounter = 0;
                     rotation.Lock = false;
                     GetComponent<WolfAnimatorScript>().AnimationState(action.Moving);
-
-
                 }
 
             }

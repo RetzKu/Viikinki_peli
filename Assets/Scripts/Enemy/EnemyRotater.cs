@@ -17,7 +17,9 @@ public enum enemyDir
     StillRD,
     StillRU,
     StillLD,
-    StillLU
+    StillLU,
+    StillUp,
+    StillDown
 }
 
 public class EnemyRotater {
@@ -143,10 +145,10 @@ public class EnemyRotater {
     {
         Vector2 dir = playerPos - ownPos;
 
-        if(MyType == EnemyType.Wolf)
+        if (MyType == EnemyType.Wolf)
         {
             uptadeDir6(dir);
-            if(velocity.magnitude == 0)
+            if (velocity.magnitude == 0)
             {
                 switch (myDir)
                 {
@@ -174,6 +176,24 @@ public class EnemyRotater {
         else
         {
             uptadeDir4(dir);
+            if (velocity.magnitude == 0)
+            {
+                switch (myDir)
+                {
+                    case enemyDir.Right:
+                        myDir = enemyDir.StillR;
+                        break;
+                    case enemyDir.Left:
+                        myDir = enemyDir.StillL;
+                        break;
+                    case enemyDir.Up:
+                        myDir = enemyDir.StillUp;
+                        break;
+                    case enemyDir.Down:
+                        myDir = enemyDir.StillDown;
+                        break;
+                }
+            }
         }
     }
     public void HardRotate(Vector2 ownPos,Vector2 velocity)

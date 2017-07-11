@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class ArcherAI : generalAi {
 
-    private int attackCounter = 0;
-    private int attackUptade = 100;
-
+    private float attackCounter = 0f;
+    private float attackUptade = 5f;
+    float chargeCounter = 0f;
+    float shootTime = 1f;
 
     public override void InitStart(float x, float y, EnemyType type)
     {
@@ -60,38 +61,69 @@ public class ArcherAI : generalAi {
         powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags, CollState);
         target = powers[1];
         velocity = powers[0];
+
+
+        velocity *= Time.deltaTime;
+        print(velocity.magnitude);
         body.MovePosition(body.position + velocity);
 
     }
     void archerPattern(Vector2 dist, Vector2 playerPos) // spe
     {
-        Physics._sepF = 0.25f;
-        if (dist.magnitude >= attackDist)
+        attackCounter += Time.deltaTime;
+        if(attackCounter < attackUptade && !inAttack)
         {
-            rotation.rotToPl = true;
-            rotation.playerPos = playerPos;
-            Physics._desiredseparation = 0.7f;
-            Physics._maxSpeed = 0.06f;
-            findPath(ref flags,ref velocity,ref target,player,body);
-        }
-        else
-        {
-            if (velocity.magnitude == 0)
+            if (dist.magnitude >= attackDist)
             {
-                rotation.playerPos = playerPos;
                 rotation.rotToPl = true;
+                rotation.playerPos = playerPos;
+                Physics._desiredseparation = 0.7f;
+                Physics._maxSpeed = 0.06f;
+                findPath(ref flags,ref velocity,ref target,player,body);
             }
             else
             {
-                rotation.rotToPl = false;
+                if (velocity.magnitude == 0)
+                {
+                    rotation.playerPos = playerPos;
+                    rotation.rotToPl = true;
+                }
+                else
+                {
+                    rotation.rotToPl = false;
+                }
+                Physics._desiredseparation = 1.0f;
+                Physics._maxSpeed = 0.04f;
+                followPlayer(ref dist, playerPos,attackDist,ref target,ref flags,Physics,sepF);
             }
-            Physics._desiredseparation = 1.0f;
-            Physics._maxSpeed = 0.04f;
-            followPlayer(ref dist, playerPos,attackDist,ref target,ref flags,Physics,sepF);
         }
-        Physics._maxSteeringForce = 0.1f; //EETU TRIGGER
+        else
+        {
+            inAttack = true;
+            attackCounter = 0;
+            clock(playerPos);
+        }
+        Physics._sepF = sepF * 1.5f;
+        Physics._maxSteeringForce = MaxSteeringForce * 0.1f; //EETU TRIGGER
     }
-
+    void clock(Vector2 playerPos)
+    {
+        chargeCounter += Time.deltaTime;
+        if(chargeCounter > shootTime)
+        {
+            print("SHOOOOOOT");
+            chargeCounter = 0;
+            inAttack = false;
+            rotation.Lock = false;
+            Physics._maxSpeed = MaxSpeed;
+        }
+        else
+        {
+            rotation.playerPos = playerPos;
+            rotation.HardRotate(body.position, velocity);
+            Physics._maxSpeed = MaxSpeed * 0.1f;
+        }
+    }
 
     void OnDrawGizmos() // tulee jokaselle
     {

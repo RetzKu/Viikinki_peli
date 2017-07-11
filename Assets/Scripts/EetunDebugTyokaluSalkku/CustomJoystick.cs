@@ -10,8 +10,6 @@ public enum ControllerType
     Mouse
 }
 
-
-
 public class CustomJoystick : MonoBehaviour
 {
     public Vector2 startPosition;
@@ -94,6 +92,7 @@ public class CustomJoystick : MonoBehaviour
         for (int i = 0; i < touches.Length; i++)
         {
             currentPotition = Camera.main.ScreenToWorldPoint(touches[i].position);
+
 
             if (fingerId == touches[i].fingerId && touches[i].phase == TouchPhase.Ended)
 #endif

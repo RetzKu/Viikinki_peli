@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 86e218568da6d3946a1ffdceee9efe41
-timeCreated: 1499145850
+timeCreated: 1499758160
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -185,8 +185,8 @@ TextureImporter:
       name: pine_falling
       rect:
         serializedVersion: 2
-        x: 167
-        y: 416
+        x: 165
+        y: 415
         width: 56
         height: 90
       alignment: 7

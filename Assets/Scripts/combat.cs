@@ -84,7 +84,7 @@ public class combat : MonoBehaviour {
         if (Trigger.IsTouchingLayers(LayerMask.NameToLayer("Player")) == true)
         {
             Debug.LogWarning("Koskee pelaajaaan");
-            GetComponent<PlayerScript>().AddToInventory(Trigger);
+            GetComponent<PlayerScript>().Inventory.AddToInventory(Trigger.gameObject);
         }
     }
 

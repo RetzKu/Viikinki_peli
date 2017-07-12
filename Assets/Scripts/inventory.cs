@@ -18,7 +18,7 @@ public class inventory
 
     public void AddToInventory(GameObject Item)
     {
-        if(EquipData.Tool == null) { EquipData.SetTool(Item); Item.SetActive(false); Changed = true; }
+        if(EquipData.Tool == null) { EquipData.SetTool(Item); Item.SetActive(false); Changed = true; } // Onko equipissa tilaa, jos on niin laita sinne;
         else if(InventoryData.Count < InventorySize) { InventoryData.Add(Item); Item.SetActive(false); }
     }
 
@@ -49,7 +49,6 @@ public class inventory
     [System.Serializable]
     public class Equipped
     {       
-        public enum WeaponType { noWeapon, meleeWeapon, longMeleeWeapon, rangedWeapon }
        
         [SerializeField]
         private GameObject _ChestPiece;
@@ -57,6 +56,7 @@ public class inventory
         private GameObject _Tool;
 
         public GameObject Tool { get { return _Tool; } }
+        public WeaponType Type { get { return EquippedType(); } }
 
 
         public Equipped() { _ChestPiece = null; _Tool = null; }
@@ -82,7 +82,6 @@ public class inventory
             else { return WeaponType.noWeapon; }
         }
         public GameObject EmptyHand() { GameObject RemovedTool = _Tool; _Tool = null; return RemovedTool; }
-        public GameObject GetTool() { return _Tool; }
         public void SetTool(GameObject Tool) { _Tool = Tool; }
     }
 }

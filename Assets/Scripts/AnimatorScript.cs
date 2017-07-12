@@ -7,10 +7,11 @@ public class AnimatorScript : MonoBehaviour
     private Rigidbody2D Player;
 
     private List<Animator> Animators;
-    private bool playerRun = false;
     private float SpeedEdge = 0.3f;
 
     private SpriteChanger Sprites;
+
+    internal WeaponType Type;
 
     void Start()
     {
@@ -45,11 +46,13 @@ public class AnimatorScript : MonoBehaviour
     {
         if (Player.velocity.x < -SpeedEdge || Player.velocity.y < -SpeedEdge || Player.velocity.x > SpeedEdge || Player.velocity.y > SpeedEdge)
         {
-            foreach (Animator t in Animators) { t.SetBool("playerRun", true); }
+            foreach (Animator t in Animators) { t.SetBool(WalkType(), true); }
+            foreach(Animator t in Animators) { t.SetBool("Walking", true); }
         }
         else
         {
-            foreach (Animator t in Animators) { t.SetBool("playerRun", false); }
+            foreach (Animator t in Animators) { t.SetBool(WalkType(), false); }
+            foreach (Animator t in Animators) { t.SetBool("Walking", false); }
         }
     }
 
@@ -57,9 +60,39 @@ public class AnimatorScript : MonoBehaviour
     {
         if (GetComponent<combat>().attackBoolean() == true)
         {
-            foreach (Animator t in Animators) { t.SetTrigger("MeleeAttack"); }
+            foreach (Animator t in Animators) { t.SetTrigger(AttackType()); }
             GetComponent<FxScript>().instantiateFx();
         }
+    }
+
+    public void ResetStates()
+    {
+        foreach (Animator t in Animators) { t.SetBool("MeleeWalk", false); }
+        foreach (Animator t in Animators) { t.SetBool("LongMeleeWalk", false); }
+        foreach (Animator t in Animators) { t.SetBool("RangedWalk", false); }
+        foreach (Animator t in Animators) { t.SetBool("FistWalk", false); }
+    }
+
+    public string AttackType()
+    {
+        switch(Type)
+        {
+            case WeaponType.meleeWeapon: { return "MeleeAttack"; }
+            case WeaponType.longMeleeWeapon: { return "LongMeleeAttack"; }
+            case WeaponType.rangedWeapon: { return "RangedAttack"; }
+        }
+        return "Fist";
+    }
+
+    public string WalkType()
+    {
+        switch (Type)
+        {
+            case WeaponType.meleeWeapon: { return "MeleeWalk"; }
+            case WeaponType.longMeleeWeapon: { return "LongMeleeWalk"; }
+            case WeaponType.rangedWeapon: { return "RangedWalk"; }
+        }
+        return "FistWalk";
     }
 
     public void BowUse()

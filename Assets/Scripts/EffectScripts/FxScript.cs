@@ -26,6 +26,11 @@ public class FxScript : MonoBehaviour {
         Fx.transform.localScale = SpriteScale;
 	}
 
+    public void Default()
+    {
+        Fx.GetComponent<SpriteRenderer>().sprite = BareHandSprite;
+    }
+
     public void FxUpdate(Sprite NewFx)
     {
         if(NewFx != null && NewFx.name != Fx.GetComponent<SpriteRenderer>().name)

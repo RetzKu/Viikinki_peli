@@ -58,6 +58,7 @@ public class SpriteCombiner : MonoBehaviour
         return value;
     }
 
+
     void SaveToFile(string filePath, Texture2D texture)
     {
         byte[] png = texture.EncodeToPNG();

@@ -1792,7 +1792,7 @@ MonoBehaviour:
   offsets: {x: -1.05, y: 0}
   JoystickSprite: {fileID: 0}
   maxLength: 2
-  controlScheme: 0
+  controlScheme: 1
   HitBox:
     serializedVersion: 2
     x: -6.98
@@ -1801,7 +1801,7 @@ MonoBehaviour:
     height: 8.05
   Player: {fileID: 4173307104970268}
   Head: {fileID: 21300002, guid: 35c448380fea7ab48a2f173ae429e9f2, type: 3}
-  Base: {fileID: 1088981193441894}
+  Base: {fileID: 0}
 --- !u!114 &114116883331461336
 MonoBehaviour:
   m_ObjectHideFlags: 1

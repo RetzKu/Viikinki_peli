@@ -2,6 +2,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public enum ControllerType
@@ -36,7 +37,7 @@ public class CustomJoystick : MonoBehaviour
     public Sprite Head;
     // public Sprite BaseSprite;
 
-    public GameObject Base;
+    private GameObject Base;
 
     private static readonly int NO_FINGER = -1000;
     private int fingerId = NO_FINGER;
@@ -60,10 +61,20 @@ public class CustomJoystick : MonoBehaviour
 
         position = new Vector3(0f, 0f, 0f);
         renderer.sprite = Head;
+
+        Base = Instantiate(Resources.Load<GameObject>("Prefab/Ui/JoystickBase"));
     }
 
+    // TODO: Cleanup
     void Update()
     {
+        if (controlScheme == ControllerType.Mouse)
+        {
+            MouseUpdate();
+            return;
+        }
+
+
         Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
 
         // transform.Translate(lastPos - transform.position);
@@ -111,7 +122,7 @@ public class CustomJoystick : MonoBehaviour
 #endif
             {
 #if !MOUSE
-            fingerId = touches[i].fingerId;
+                fingerId = touches[i].fingerId;
 #endif
 
 #if MOUSE
@@ -154,10 +165,90 @@ public class CustomJoystick : MonoBehaviour
                 }
             }
 #if !MOUSE
-    }
+        }
 #endif
         touchingLastFrame = touching;
+
+
+
     }
+
+
+
+    void MouseUpdate()
+    {
+        Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
+
+        // transform.Translate(lastPos - transform.position);
+        Vector3 movVec = Player.transform.position - position;
+        startPosition = startPosition + (Vector2)movVec;
+        endposition = endposition + (Vector2)movVec;
+
+        position = Player.transform.position;
+
+        touching = Input.GetMouseButton(0);
+
+        Vector3 currentPotition = Camera.main.ScreenToWorldPoint(Input.mousePosition); // sormi
+        Vector3 cameraPos = Camera.main.transform.position;
+        Rect ScreenView = new Rect(cameraPos.x + HitBox.x, cameraPos.y + HitBox.y, HitBox.width, HitBox.height);
+
+        Base.transform.position = startPosition;
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            FirstTouchSuccess = false;
+            startPosition = Vector2.zero;
+            endposition = Vector2.zero;
+            transform.position = Vector3.zero;
+            fingerId = NO_FINGER;
+        }
+
+        if (Input.GetMouseButtonDown(0)) // eka 
+        {
+
+
+            if (touching && !touchingLastFrame && ScreenView.Contains(currentPotition))
+            {
+                startPosition = currentPotition;
+                transform.position = startPosition;
+                touching = true;
+                FirstTouchSuccess = true;
+                position = Player.transform.position;
+            }
+            else
+            {
+                FirstTouchSuccess = false;
+            }
+        }
+        else
+        {
+            if (touching && FirstTouchSuccess)    // toka
+            {
+                if (touching && touchingLastFrame)
+                {
+                    endposition = currentPotition;
+                    transform.position = endposition;
+                }
+
+                Vector2 touchVector = GetTouchVector();
+                if (touchVector.magnitude > maxLength && touchingLastFrame)
+                {
+                    endposition = startPosition + (touchVector.normalized * maxLength);
+                    transform.position = endposition;
+                }
+            }
+            else
+            {
+                touching = false;
+            }
+        }
+
+        touchingLastFrame = touching;
+    }
+
+
+
+
 
     void UpdateVisuals()
     {

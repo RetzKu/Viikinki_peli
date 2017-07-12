@@ -339,26 +339,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 114566626612954154, guid: b5405cc59ec405e42ac26438ef1b066d,
+    - target: {fileID: 114018929817778856, guid: b5405cc59ec405e42ac26438ef1b066d,
         type: 2}
       propertyPath: terveisin
       value: 
       objectReference: {fileID: 1472106373}
-    - target: {fileID: 1977754839611798, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1977754839611798, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1149592091031696, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
-      propertyPath: m_Layer
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1821546709912930, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
-      propertyPath: m_Layer
-      value: 20
+    - target: {fileID: 114045789875886112, guid: b5405cc59ec405e42ac26438ef1b066d,
+        type: 2}
+      propertyPath: amountToBuffer.Array.data[1]
+      value: 5000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
@@ -671,6 +660,18 @@ GameObject:
   m_PrefabParentObject: {fileID: 1977754839611798, guid: b5405cc59ec405e42ac26438ef1b066d,
     type: 2}
   m_PrefabInternal: {fileID: 763703216}
+--- !u!114 &1815068469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1815068458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 137c1b2f65ad1ab40815f0a9a4a21588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aggroDist: 5
 --- !u!1 &1889939612
 GameObject:
   m_ObjectHideFlags: 0

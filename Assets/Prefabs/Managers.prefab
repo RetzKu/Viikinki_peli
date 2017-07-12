@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4724982979588228}
   - component: {fileID: 114067160158167116}
   m_Layer: 0
-  m_Name: pooooool
+  m_Name: Pool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,9 +112,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPrefabs:
-  - {fileID: 1766191967266646, guid: 2bd036398d6d3be4aa4c954be90eb2ff, type: 2}
+  - {fileID: 1888296700722606, guid: 9167ff82794ffca4c8a432a22aad6bdf, type: 2}
   - {fileID: 1384798036243720, guid: 1d6b060ef40a3664da1b12583f13f561, type: 2}
-  amountToBuffer: 0a000000f4010000
+  - {fileID: 1734588554688894, guid: 8eabe4dee9d57654592c6fd72afc4ff3, type: 2}
+  - {fileID: 1734588554688894, guid: 8eabe4dee9d57654592c6fd72afc4ff3, type: 2}
+  amountToBuffer: f4010000e80300003200000032000000
   defaultBufferAmount: 3
 --- !u!114 &114235837633677902
 MonoBehaviour:

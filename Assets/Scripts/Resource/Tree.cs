@@ -3,6 +3,36 @@ using Random = UnityEngine.Random;
 
 public class Tree : Resource
 {
+    public override void Init()
+    {
+        SetCollidersInChilds(false);
+        var trunk = transform.GetChild(0);
+        trunk.GetComponent<CircleCollider2D>().enabled = true;
+
+        GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<DropScript>().enabled = true;
+        GetComponent<Tree>().enabled = true;
+    }
+
+    public void StubInit()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<DropScript>().enabled = false;
+        GetComponent<Tree>().enabled = false;
+
+        // Warning  prefabien eka on trunk
+        var trunk = transform.GetChild(0);
+        trunk.GetComponent<CircleCollider2D>().enabled = true;
+    }
+
+
+    public void CopyStub()
+    {
+        var go = Instantiate(transform.GetChild(0));
+        go.transform.position = transform.position;
+        // TODO: set parent
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -14,17 +44,32 @@ public class Tree : Resource
     public override void OnDead()
     {
         StartFalling();
+        CopyStub();
     }
+    
 
+    private void SetCollidersInChilds(bool state)
+    {
+        foreach (var renderer in GetComponentsInChildren<SpriteRenderer>())
+        {
+            renderer.enabled = state;
+        }
+
+        foreach (var body in GetComponentsInChildren<Rigidbody2D>())
+        {
+            body.simulated = state;
+        }
+    }
     // NOTE: Puilla täytyy olla oikea rigidbody setup toimiakseen!!!
     // ks Pine
-    void StartFalling()
+    private void StartFalling()
     {
         var capsule = GetComponentInChildren<CapsuleCollider2D>();
         if (capsule != null)
         {
             capsule.enabled = true;
         }
+
         var box = GetComponentInChildren<BoxCollider2D>();
         if (box != null)
         {
@@ -50,10 +95,9 @@ public class Tree : Resource
             }
         }
 
-        // gameObject.SetActive(false);     // todo: pool // mutta puilla on hyvin oma sydeemi bodyen kannsa 
-        transform.DetachChildren();
-
-        // gameObject.SetActive(false);
-        // Destroy(gameObject);                // todo: disable / pool
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<DropScript>().enabled = false;
+        GetComponent<Tree>().enabled = false;
+        StartCoroutine(StartDropTimer());
     }
 }

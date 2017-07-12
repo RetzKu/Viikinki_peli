@@ -12,19 +12,19 @@ public class TestWriter : MonoBehaviour
     private const int FileSize = 10 * 1024 * 1024;
     void Start()
     {
-        var path = Path.Combine(Application.persistentDataPath, "bigfile.dat");
-        try
-        {
-            File.WriteAllBytes(path, new byte[FileSize]);
-            TestFileStream(path);
-            TestBinaryReaders(path);
-        }
-        finally
-        {
-            File.Delete(path);
-        }
+        //var path = Path.Combine(Application.persistentDataPath, "bigfile.dat");
+        //try
+        //{
+        //    File.WriteAllBytes(path, new byte[FileSize]);
+        //    TestFileStream(path);
+        //    TestBinaryReaders(path);
+        //}
+        //finally
+        //{
+        //    File.Delete(path);
+        //}
 
-        Chunk t = new Chunk();
+        //Chunk t = new Chunk();
     }
 
     void Update()
@@ -159,4 +159,5 @@ public class TestWriter : MonoBehaviour
             Debug.Log(log);
         }
     }
+
 }

@@ -45,7 +45,7 @@ public class s_c_torsoScript : MonoBehaviour {
 
         if (trig.transform.tag == "Item")
         {
-            GetComponentInParent<PlayerScript>().AddToInventory(trig);
+            GetComponentInParent<PlayerScript>().Inventory.AddToInventory(trig.gameObject);
             Debug.LogWarning(trig.transform.name + " Picked up");
         }
     }
@@ -54,7 +54,7 @@ public class s_c_torsoScript : MonoBehaviour {
         if (Trig.transform.tag == "Dropped")
         {
             Trig.transform.tag = "Item";
-            //print("escaped dropped item");
+            print("escaped dropped item");
         }
     }
 }

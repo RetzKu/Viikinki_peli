@@ -45,30 +45,26 @@ public class AnimatorScript : MonoBehaviour
     {
         if (Player.velocity.x < -SpeedEdge || Player.velocity.y < -SpeedEdge || Player.velocity.x > SpeedEdge || Player.velocity.y > SpeedEdge)
         {
-            if (playerRun == false)
-            {
-                playerRun = true;
-                foreach (Animator t in Animators) { t.SetBool("playerRun", playerRun); }
-            }
+            foreach (Animator t in Animators) { t.SetBool("playerRun", true); }
         }
         else
         {
-            if (playerRun == true)
-            {
-                playerRun = false;
-                foreach (Animator t in Animators) { t.SetBool("playerRun", playerRun); }
-            }
+            foreach (Animator t in Animators) { t.SetBool("playerRun", false); }
         }
     }
+
     void Attack()
     {
         if (GetComponent<combat>().attackBoolean() == true)
         {
-            transform.Find("s_c_torso").GetComponent<Animator>().SetTrigger("playerAttack");
-            transform.Find("d_c_torso").GetComponent<Animator>().SetTrigger("Attack");
-            transform.Find("u_c_torso").GetComponent<Animator>().SetTrigger("Attack");
+            foreach (Animator t in Animators) { t.SetTrigger("MeleeAttack"); }
             GetComponent<FxScript>().instantiateFx();
         }
+    }
+
+    public void BowUse()
+    {
+        foreach (Animator t in Animators) { t.SetTrigger("BowAttack"); }
     }
 
     public class SpriteChanger
@@ -77,8 +73,8 @@ public class AnimatorScript : MonoBehaviour
         enum Directions { Left, Right, Down, Up }
 
         Transform PlayerTransform;
-            List<SpriteRenderer[]> Sprites;
-            Transform Torso;
+        List<SpriteRenderer[]> Sprites;
+        Transform Torso;
         Rigidbody2D PlayerRb;
 
         int LastSpriteNum;
@@ -170,7 +166,7 @@ public class AnimatorScript : MonoBehaviour
                             t.enabled = false;
                         }
                     }
-                } 
+                }
             }
             LastSpriteNum = SpriteNum;
         }

@@ -7,7 +7,6 @@ public class AnimatorScript : MonoBehaviour
     private Rigidbody2D Player;
 
     private List<Animator> Animators;
-    private bool playerRun = false;
     private float SpeedEdge = 0.3f;
 
     private SpriteChanger Sprites;
@@ -48,10 +47,12 @@ public class AnimatorScript : MonoBehaviour
         if (Player.velocity.x < -SpeedEdge || Player.velocity.y < -SpeedEdge || Player.velocity.x > SpeedEdge || Player.velocity.y > SpeedEdge)
         {
             foreach (Animator t in Animators) { t.SetBool(WalkType(), true); }
+            foreach(Animator t in Animators) { t.SetBool("Walking", true); }
         }
         else
         {
             foreach (Animator t in Animators) { t.SetBool(WalkType(), false); }
+            foreach (Animator t in Animators) { t.SetBool("Walking", false); }
         }
     }
 

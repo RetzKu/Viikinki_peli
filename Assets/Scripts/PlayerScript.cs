@@ -29,7 +29,7 @@ public class PlayerScript : MonoBehaviour
     private ItemManager Hand;
     //public int Damage;
     public inventory.Equipped EquipInventory { get { return Inventory.EquipData; } }
-    
+
     public WeaponType EquippedType;
 
     [System.NonSerialized]
@@ -85,8 +85,8 @@ public class PlayerScript : MonoBehaviour
                     Hand.Equip(Inventory.EquipData.Tool);
                 }
             }
-            else { Hand.EmptyHand(); }
-            /*JOONA FX TÄHÄ, THNX :3*/ 
+            else { GetComponent<FxScript>().Default(); Hand.EmptyHand(); }
+            /*JOONA FX TÄHÄ, THNX :3*/
             Inventory.Changed = false;
         }
     }
@@ -116,12 +116,12 @@ public class PlayerScript : MonoBehaviour
 
     void InventoryInput()
     {
-        for(int i = 0; i <= InventorySize;i++)
+        for (int i = 0; i <= InventorySize; i++)
         {
             string n = i.ToString();
-            if(Input.GetKeyDown(i.ToString()) == true) { Inventory.EquipItem(i-1); }
+            if (Input.GetKeyDown(i.ToString()) == true) { Inventory.EquipItem(i - 1); }
         }
-        if(Input.GetKeyDown("f") == true) { Inventory.DropItem(); }
+        if (Input.GetKeyDown("f") == true) { Inventory.DropItem(); }
     }
 
     /*WHEN TIME, TRANSFER DEFAULT METHODS TO THIS CLASS*/
@@ -158,7 +158,7 @@ public class PlayerScript : MonoBehaviour
             if (Handstate == 1) // downwards
             {
                 Quaternion rotation = Quaternion.Euler(0, 0, 103.594f);
-                
+
                 Copy.transform.SetParent(Hand);
                 Copy.transform.position = Hand.position;
                 Copy.transform.localRotation = rotation;
@@ -198,38 +198,37 @@ public class PlayerScript : MonoBehaviour
                     switch (Hand.transform.name)
                     {
                         case "s_l_hand":
-                        {
-                            Quaternion rotation = Quaternion.Euler(0, 0, -90);
-                            Copy.transform.position = Hand.position;
-                            Copy.transform.localRotation = rotation;
-                            Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-                            Copy.GetComponent<SpriteRenderer>().sortingOrder = 20;
-                            if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
-                            break;
-                        }
+                            {
+                                Quaternion rotation = Quaternion.Euler(0, 0, -90);
+                                Copy.transform.position = Hand.position;
+                                Copy.transform.localRotation = rotation;
+                                Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+                                Copy.GetComponent<SpriteRenderer>().sortingOrder = 20;
+                                break;
+                            }
                         case "u_l_hand":
-                        {
-                            Quaternion rotation = Quaternion.Euler(0, 0, 32.8f);
-                            Copy.transform.SetParent(Hand);
-                            Copy.transform.position = Hand.position;
-                            Copy.transform.localRotation = rotation;
-                            Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-                            Copy.GetComponent<SpriteRenderer>().sortingOrder = 8;
-                            if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
-                            break;
-                        }
+                            {
+                                Quaternion rotation = Quaternion.Euler(0, 0, 32.8f);
+                                Copy.transform.SetParent(Hand);
+                                Copy.transform.position = Hand.position;
+                                Copy.transform.localRotation = rotation;
+                                Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+                                Copy.GetComponent<SpriteRenderer>().sortingOrder = 8;
+                                break;
+                            }
                         case "d_r_hand":
-                        {
-                            Quaternion rotation = Quaternion.Euler(0, 0, 103.594f);
-                            Copy.transform.SetParent(Hand);
-                            Copy.transform.position = Hand.position;
-                            Copy.transform.localRotation = rotation;
-                            Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-                            Copy.GetComponent<SpriteRenderer>().sortingOrder = 16;
-                            if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
-                            break;
-                        }
+                            {
+                                Quaternion rotation = Quaternion.Euler(0, 0, 103.594f);
+                                Copy.transform.SetParent(Hand);
+                                Copy.transform.position = Hand.position;
+                                Copy.transform.localRotation = rotation;
+                                Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+                                Copy.GetComponent<SpriteRenderer>().sortingOrder = 16;
+                                break;
+                            }
                     }
+                    if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
+
                 }
             }
         }

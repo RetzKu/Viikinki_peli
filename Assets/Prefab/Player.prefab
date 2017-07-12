@@ -996,7 +996,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977754839611798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.2, y: 24.2, z: 0}
+  m_LocalPosition: {x: 41.96, y: 31.47, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 4701210339847834}
@@ -2149,7 +2149,6 @@ MonoBehaviour:
     height: 8.05
   Player: {fileID: 4173307104970268}
   Head: {fileID: 21300002, guid: 35c448380fea7ab48a2f173ae429e9f2, type: 3}
-  Base: {fileID: 1088981193441894}
 --- !u!114 &114059903257671084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2186,6 +2185,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InventorySize: 5
+  Inventory:
+    InventoryData: []
+    EquipData:
+      _ChestPiece: {fileID: 0}
+      _Tool: {fileID: 0}
+    InventorySize: 0
   running: 1
   SidewaysHand: {fileID: 4334774280397600}
   UpwardsHand: {fileID: 4440870551386460}
@@ -2229,7 +2234,6 @@ MonoBehaviour:
   x: 0
   y: 0
 --- !u!114 &114216893217373730
-
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2383,6 +2387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   dmgBase: 5
+  DefaultAttackLength: 0.2
   rangedBaseDmg: 0
   movementSpeed: 100
   attackSpeed: 1

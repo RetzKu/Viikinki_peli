@@ -67,23 +67,17 @@ public class PlayerScript : MonoBehaviour
             {
                 if (Hand.Copy == null)
                 {
+                    GetComponent<FxScript>().FxUpdate(Inventory.EquipData.Tool.GetComponent<weaponStats>().weaponEffect);
                     Hand.Equip(Inventory.EquipData.Tool);
                 }
                 else if (Inventory.EquipData.Tool.name != Hand.Copy.name)
                 {
+                    GetComponent<FxScript>().FxUpdate(Inventory.EquipData.Tool.GetComponent<weaponStats>().weaponEffect);
                     Hand.Equip(Inventory.EquipData.Tool);
                 }
             }
-            else { Hand.EmptyHand(); }
-            if (GetComponent<PlayerScript>().weaponInHand != null)
-            {
-                GameObject tempWeapon = GetComponent<PlayerScript>().weaponInHand;
-                GetComponent<FxScript>().FxUpdate(tempWeapon.GetComponent<weaponStats>().weaponEffect);
-            }
-            else
-            {
-                GetComponent<FxScript>().FxUpdate(GetComponent<FxScript>().BareHandSprite);
-            }
+            else { transform.GetComponent<FxScript>().Default(); Hand.EmptyHand(); }
+
             Inventory.Changed = false;
         }
     }

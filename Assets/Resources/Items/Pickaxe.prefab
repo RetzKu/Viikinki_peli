@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61762726418950662}
   - component: {fileID: 114868535431459582}
   m_Layer: 21
-  m_Name: pickaxe
+  m_Name: Pickaxe
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,8 +69,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 4
   attackWeight: 10
-  DefaultAttackLength: 0.2
   weaponEffect: {fileID: 21300000, guid: f43c53a45dee3724793fb23c5164e286, type: 3}
+  onRange: 0
+  weaponEffectScale: {x: 1, y: 1, z: 1}
 --- !u!212 &212840684736596094
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -15,15 +15,7 @@ public abstract class Resource : MonoBehaviour
         if (Hp <= 0)
         {
             GetComponent<DropScript>().Drop(); // Ehkä static dropper, jossain vaiheessa
-
-            // StartCoroutine(StartDropTimer());
-
-            // puu ja runko erilleen prefabeissä
             OnDead();
-
-            // ObjectPool.instance.pooledObjects
-            // TODO: KUINKA PUUT Poolataan takaisin !!!
-            Destroy(gameObject);
         }
         else
         {
@@ -32,9 +24,11 @@ public abstract class Resource : MonoBehaviour
     }
 
     public abstract void OnDead();
+    public abstract void Init();
+
 
 // yleiset efektit, joita voi käyttää
-#region Effects
+ #region Effects
     protected IEnumerator Fibrate(float seconds, float fibrationRange)  // TODO: MIETI iteraatiot oikein perf
     {
         int iterations = 45;
@@ -57,7 +51,6 @@ public abstract class Resource : MonoBehaviour
         transform.position = startingPosition;
     }
 
-    // TODO: Pool Implementation
     protected IEnumerator StartDropTimer()
     {
         GetComponent<SpriteRenderer>().enabled = false;
@@ -65,7 +58,6 @@ public abstract class Resource : MonoBehaviour
         yield return new WaitForSeconds(deathTimer);
 
         ObjectPool.instance.PoolObject(this.gameObject);
-        // Destroy(gameObject);
     }
 
     // TODO: tee resuille oma partikkelie effect

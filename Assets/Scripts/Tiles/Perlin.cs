@@ -462,6 +462,7 @@ public class Perlin : MonoBehaviour
         // choose object to spawn
         // TODO: jokaiselle biomelle omat spawnsettingits
         // type = TileType.GrassLand;
+
         if (!IsImplementedSetting(type))
         {
             type = TileType.GrassLand; // atm kaikki grasslandikisi jos ei löydy
@@ -485,6 +486,7 @@ public class Perlin : MonoBehaviour
                     if (totalCount + (spawnRate) >= roll)
                     {
                         var go = ObjectPool.instance.GetObjectForType(prefab.name, true); // ??????????????????
+                        go.GetComponent<Resource>().Init();
 
                         go.transform.localScale *= Random.Range(0.90f, 1.10f);
                         go.transform.position = spawnPosition;
@@ -509,7 +511,6 @@ public class Perlin : MonoBehaviour
     //  - 40
     //   - lisää ?
 
-    // PoissonDiscSampler _sampler = new PoissonDiscSampler(20f, 20f, 1.5f); // GG
 
     bool[,] GenerateObjectsPosition(float[,] objectNoise) // suurempi kuin R
     {

@@ -13,16 +13,18 @@ public class TileSpriteController : MonoBehaviour
 
     public SpriteControllerSettings Settings;
 
-    int[]  TileCount    = new int[(int)TileType.Max];
+    int[] TileCount = new int[(int)TileType.Max];
     bool[] Implemented = new bool[(int)TileType.Max];
 
     private static readonly int StringEndNumberCount = 9;
 
-    private string[] EnumNames = new string[(int) TileType.Max];
+    private string[] EnumNames = new string[(int)TileType.Max];
     private string[] numbers = new string[StringEndNumberCount];
 
 
 
+    // TODO: ONKO T}YNN};s
+    private List<GameObject> borders = new List<GameObject>(500);
 
     private Dictionary<TileType, Sprite[]> _textures2 = new Dictionary<TileType, Sprite[]>(10);
 
@@ -32,7 +34,7 @@ public class TileSpriteController : MonoBehaviour
         // nopeampiakin ratkaisuja olisi
         _textures = new Dictionary<string, Sprite>(16);
         //Sprite[] sprites = Resources.LoadAll<Sprite>("Tiles/");
-        
+
         for (int i = 0; i < temporarySecondLayer.Length; i++)
         {
             temporarySecondLayer[i] = new GameObject();
@@ -50,10 +52,10 @@ public class TileSpriteController : MonoBehaviour
             Implemented[(int)tile.Type] = true;
 
             string name = tile.Type.ToString();
-            TileCount[(int) tile.Type] = tile.Sprites.Length;
+            TileCount[(int)tile.Type] = tile.Sprites.Length;
 
             int count = 0;
-            
+
             Sprite[] spritesArray = new Sprite[13];
             for (int i = 0; i < tile.Sprites.Length - 4; i++)
             {
@@ -61,7 +63,7 @@ public class TileSpriteController : MonoBehaviour
                 spritesArray[i] = tile.Sprites[i];
                 count++;
             }
-            TileCount[(int) tile.Type] = count;
+            TileCount[(int)tile.Type] = count;
 
             for (int i = tile.Sprites.Length - 4, stringEndIndex = 9; i < tile.Sprites.Length; i++, stringEndIndex++)
             {
@@ -293,38 +295,39 @@ public class TileSpriteController : MonoBehaviour
                 //TileType type = tilemap.GetTileFast(x, y); 
                 //int value = GetAssetNameBitmaskNoStr(x, y, tilemap, type);
 
-#if false
-                int value = 0;
-                bool found;
+                //#if false
+                //                int value = 0;
+                //                bool found;
 
-                TileType type = tilemap.GetTileFast(x, y);  
-                string assetName = GetAssetNameBitmask(x, y, tilemap, type, out value, out found);
-#endif
+                //                TileType type = tilemap.GetTileFast(x, y);  
+                //                string assetName = GetAssetNameBitmask(x, y, tilemap, type, out value, out found);
+                //#endif
 
 
-                // Sprite sprite;  // perus 
+                //                // Sprite sprite;  // perus 
 
-#if false
-                if (!found)
-                    assetName = "GrassLand_";
-                assetName += GetNumberName(Random.Range(0, GetAssetCount(type)));    // max count smt smt 
-#endif
-#if false
-                if (_textures.TryGetValue(assetName, out sprite))
-                {
-                    tilemap.GetGameObjectFast(x, y).GetComponent<SpriteRenderer>().sprite = sprite;
-                }
-                else
-                {
-                    Debug.LogWarning("Texture: " + assetName + " Missing!");
-                }
-#else
-                TileType type = tilemap.GetTileFast(x, y); 
+                //#if false
+                //                if (!found)
+
+                // "safkjdlsaf"
+                //                    assetName = "GrassLand_";
+                //                assetName += GetNumberName(Random.Range(0, GetAssetCount(type)));    // max count smt smt 
+                //#endif
+                //#if false
+                //                if (_textures.TryGetValue(assetName, out sprite))
+                //                {
+                //                    tilemap.GetGameObjectFast(x, y).GetComponent<SpriteRenderer>().sprite = sprite;
+                //                }
+                //                else
+                //                {
+                //                    Debug.LogWarning("Texture: " + assetName + " Missing!");
+                //                }
+                //#else
+                TileType type = tilemap.GetTileFast(x, y);
                 int value = GetAssetNameBitmaskNoStr(x, y, tilemap, type);
 
                 if (IsImplemented(type))
                     tilemap.GetGameObjectFast(x, y).GetComponent<SpriteRenderer>().sprite = _textures2[type][(Random.Range(0, GetAssetCount(type)))];
-#endif
 
                 if (value == 15)    // ei voi tulla enää reunoja
                 {
@@ -334,8 +337,12 @@ public class TileSpriteController : MonoBehaviour
                 // lisää: reunat
                 // 4-bit directions
                 // North, west, east, south
+
+#if false
                 if (tempIndex < temporarySecondLayer.Length - 1)
                 {
+                    ObjectPool.instance.GetObjectForType("Border", true);
+
                     string border = "GrassLand_";
 
                     if (IsImplemented(type))
@@ -371,15 +378,67 @@ public class TileSpriteController : MonoBehaviour
                         temporarySecondLayer[tempIndex].SetActive(true);
                         tempIndex++;
                     }
+#else
+
+                string border = "GrassLand_";
+
+                if (IsImplemented(type))
+                {
+                    border = GetEnumName(type);
                 }
+
+                if ((value & (1 << 1 - 1)) == 0)            // TODO: TEXTURES2 TÄNNE
+                {
+                    var go = ObjectPool.instance.GetObjectForType("Border", true);
+                    go.GetComponent<SpriteRenderer>().sprite = _textures[border + "N0"];
+                    go.transform.position = new Vector3(x + offsetX, y + offsetY + 1);
+                    borders.Add(go);
+                }
+
+                if ((value & (1 << 2 - 1)) == 0)
+                {
+                    var go = ObjectPool.instance.GetObjectForType("Border", true);
+                    go.GetComponent<SpriteRenderer>().sprite = _textures[border + "W0"];
+                    go.transform.position = new Vector3(x + offsetX - 1, y + offsetY);
+                    borders.Add(go);
+                }
+
+                if ((value & (1 << 3 - 1)) == 0)
+                {
+                    var go = ObjectPool.instance.GetObjectForType("Border", true);
+                    go.GetComponent<SpriteRenderer>().sprite = _textures[border + "E0"];
+                    go.transform.position = new Vector3(x + offsetX + 1, y + offsetY);
+                    borders.Add(go);
+                }
+
+                if ((value & (1 << 4 - 1)) == 0)
+                {
+                    var go = ObjectPool.instance.GetObjectForType("Border", true);
+                    go.GetComponent<SpriteRenderer>().sprite = _textures[border + "S0"];
+                    go.transform.position = new Vector3(x + offsetX, y + offsetY - 1);
+                    borders.Add(go);
+                }
+#endif
             }
         }
 
-        for (int i = tempIndex; i < temporarySecondLayer.Length; i++)
+        // tarkista rajat
+        for(int i = 0; i < borders.Count; i++)
         {
-            temporarySecondLayer[i].SetActive(false);
+            var border = borders[i];
+            if (offsetX > border.transform.position.x || 
+                offsetX + TileMap.TotalWidth < border.transform.position.x  ||
+                offsetY > border.transform.position.y ||
+                offsetY + TileMap.TotalHeight < border.transform.position.y)
+            {
+                ObjectPool.instance.PoolObject(border);
+                borders.RemoveAt(i);
+                --i;
+                // fuck fuck
+            }
         }
     }
+
 
     [Obsolete]
     public void InitChunkSprites(int width, int height, TileMap tilemap, int startX, int startY)

@@ -46,6 +46,7 @@ public class s_c_torsoScript : MonoBehaviour {
 
         if (trig.transform.tag == "Item")
         {
+<<<<<<< HEAD
             GetComponentInParent<PlayerScript>().AddToInventory(trig);
             Debug.LogWarning(trig.transform.name + " Picked up");
         }
@@ -56,6 +57,10 @@ public class s_c_torsoScript : MonoBehaviour {
         {
             Trig.transform.tag = "Item";
             print("escaped dropped item");
+=======
+            GetComponentInParent<PlayerScript>().Inventory.AddToInventory(trig.gameObject);
+            Debug.Log(trig.transform.name + " Picked up");
+>>>>>>> BowRota
         }
     }
 }

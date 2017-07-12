@@ -2,31 +2,87 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public class inventory : MonoBehaviour
+[System.Serializable]
+public class inventory
 {
+    [SerializeField]
+    public List<GameObject> InventoryData;
+    public Equipped EquipData;
+    public int InventorySize;
 
-    public List<Items> Tools;
-    internal GameObject ChestPiece;
+    public inventory(int _InventorySize) { InventorySize = _InventorySize; InventoryData = new List<GameObject>(InventorySize); EquipData = new Equipped();}
 
-    void Start()
+    internal bool Changed = false;
+
+    public void AddToInventory(GameObject Item)
     {
-        Tools = new List<Items>();
+        if(EquipData.Tool == null) { EquipData.SetTool(Item); Item.SetActive(false); Changed = true; }
+        else if(InventoryData.Count < InventorySize) { InventoryData.Add(Item); Item.SetActive(false); }
     }
 
-    void Update()
-    {
-
+    public void EquipItem(int Slot)
+    { 
+        if (InventoryData.ElementAtOrDefault(Slot) != null)
+        {
+            GameObject Item = InventoryData[Slot];
+            GameObject ReturnedItem = EquipData.SwapItem(Item);
+            if(ReturnedItem == null) { InventoryData.RemoveAt(Slot); }
+            else { InventoryData[Slot] = ReturnedItem; }
+            Changed = true;
+        }
     }
 
-    internal void AddItem(GameObject Item)
+    public void DropItem()
     {
-        Tools.Add(new Items(Item));
+        GameObject DroppedTool = EquipData.EmptyHand();
+        if (DroppedTool != null)
+        {
+            DroppedTool.transform.position = GameObject.Find("Player").transform.position;
+            DroppedTool.SetActive(true);
+            DroppedTool.tag = "Dropped";
+            Changed = true;
+        }
     }
-    public class Items
-    {
-        public GameObject Item;
 
-        public Items(GameObject _Item) { Item = _Item; }
+    [System.Serializable]
+    public class Equipped
+    {       
+        public enum WeaponType { noWeapon, meleeWeapon, longMeleeWeapon, rangedWeapon }
+       
+        [SerializeField]
+        private GameObject _ChestPiece;
+        [SerializeField]
+        private GameObject _Tool;
+
+        public GameObject Tool { get { return _Tool; } }
+
+
+        public Equipped() { _ChestPiece = null; _Tool = null; }
+
+        public GameObject SwapItem(GameObject Item)
+        {
+            GameObject ReturnedItem;
+            ReturnedItem = _Tool;
+            _Tool = Item;
+            return ReturnedItem;
+        }
+
+        public WeaponType EquippedType()
+        {
+            if(Tool != null)
+            {
+                if (Tool.GetComponent<Ranged>() != null) { return WeaponType.rangedWeapon; }
+                else if (Tool.GetComponent<longMelee>() != null) { return WeaponType.longMeleeWeapon; }
+                else if (Tool.GetComponent<Melee>() != null) { return WeaponType.meleeWeapon; }
+                else { return WeaponType.noWeapon; }
+                
+            }
+            else { return WeaponType.noWeapon; }
+        }
+        public GameObject EmptyHand() { GameObject RemovedTool = _Tool; _Tool = null; return RemovedTool; }
+        public GameObject GetTool() { return _Tool; }
+        public void SetTool(GameObject Tool) { _Tool = Tool; }
     }
 }

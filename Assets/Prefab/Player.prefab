@@ -97,6 +97,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
+<<<<<<< HEAD
   m_IsActive: 0
 --- !u!1 &1004745085069592
 GameObject:
@@ -116,6 +117,10 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!1 &1006537330737472
+=======
+  m_IsActive: 1
+--- !u!1 &1169960874123470
+>>>>>>> BowRota
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -561,6 +566,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
+<<<<<<< HEAD
   m_IsActive: 0
 --- !u!1 &1033859622027398
 GameObject:
@@ -580,6 +586,10 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!1 &1034304604979934
+=======
+  m_IsActive: 1
+--- !u!1 &1654260093326904
+>>>>>>> BowRota
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -685,6 +695,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
+<<<<<<< HEAD
   m_IsActive: 0
 --- !u!1 &1039861638566404
 GameObject:
@@ -705,6 +716,10 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!1 &1041232058311286
+=======
+  m_IsActive: 1
+--- !u!1 &1823202196439058
+>>>>>>> BowRota
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -921,6 +936,7 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4834912198909330}
@@ -1005,6 +1021,53 @@ GameObject:
   m_IsActive: 0
 --- !u!1 &1060315701771650
 GameObject:
+=======
+  m_GameObject: {fileID: 1243797850715246}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -11.600951, y: -10.203468, z: 0}
+  m_LocalScale: {x: 0.5555556, y: 0.5555556, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4173307104970268}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4095532164946586
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1923542294446004}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.111464955, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4297616009532620}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4173307104970268
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1977754839611798}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 41.96, y: 31.47, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_Children:
+  - {fileID: 4701210339847834}
+  - {fileID: 4847921948867958}
+  - {fileID: 4952880469315076}
+  - {fileID: 4781549184960538}
+  - {fileID: 4223519397402306}
+  - {fileID: 4297616009532620}
+  - {fileID: 4073087926101666}
+  - {fileID: 4802695294378772}
+  - {fileID: 4519102563130468}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4201036808860920
+Transform:
+>>>>>>> BowRota
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -1452,6 +1515,7 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4758055342802028}
@@ -1466,6 +1530,18 @@ GameObject:
   m_IsActive: 0
 --- !u!1 &1087520520895342
 GameObject:
+=======
+  m_GameObject: {fileID: 1951805851346122}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4173307104970268}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4798353101904466
+Transform:
+>>>>>>> BowRota
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -1505,6 +1581,7 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4586847751438264}
@@ -1520,6 +1597,18 @@ GameObject:
   m_IsActive: 0
 --- !u!1 &1092110741417660
 GameObject:
+=======
+  m_GameObject: {fileID: 1288486528977630}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4173307104970268}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4828611239462450
+Transform:
+>>>>>>> BowRota
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -1594,6 +1683,7 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4042924511464708}
@@ -1624,6 +1714,19 @@ GameObject:
   m_IsActive: 0
 --- !u!1 &1097654280001992
 GameObject:
+=======
+  m_GameObject: {fileID: 1823202196439058}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.06, y: 0.10146292, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4453284374597758}
+  m_Father: {fileID: 4297616009532620}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4901382838066290
+Transform:
+>>>>>>> BowRota
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -1785,6 +1888,7 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4798353101904466}
@@ -1870,6 +1974,33 @@ GameObject:
   m_IsActive: 0
 --- !u!1 &1110830941198582
 GameObject:
+=======
+  m_GameObject: {fileID: 1941610706479234}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!61 &61219592829931726
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1977754839611798}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0.045}
+  serializedVersion: 2
+  m_Size: {x: 0.18, y: 0.31}
+--- !u!81 &81727744800495822
+AudioListener:
+>>>>>>> BowRota
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -91815,12 +91946,179 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1593682653
   m_SortingOrder: 0
+<<<<<<< HEAD
   m_Sprite: {fileID: 21300004, guid: 86e218568da6d3946a1ffdceee9efe41, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!212 &212933446448615478
 SpriteRenderer:
+=======
+  m_Time: 0.22
+  m_Parameters:
+    serializedVersion: 2
+    widthMultiplier: 1
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.2553196
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.4974113
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0.26032442
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    colorGradient:
+      key0:
+        serializedVersion: 2
+        rgba: 4294967295
+      key1:
+        serializedVersion: 2
+        rgba: 4294967295
+      key2:
+        serializedVersion: 2
+        rgba: 0
+      key3:
+        serializedVersion: 2
+        rgba: 0
+      key4:
+        serializedVersion: 2
+        rgba: 0
+      key5:
+        serializedVersion: 2
+        rgba: 0
+      key6:
+        serializedVersion: 2
+        rgba: 0
+      key7:
+        serializedVersion: 2
+        rgba: 0
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    numCornerVertices: 0
+    numCapVertices: 0
+    alignment: 0
+    textureMode: 0
+  m_MinVertexDistance: 0.45
+  m_Autodestruct: 0
+--- !u!114 &114043215955215906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1243797850715246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8966a576a9f973f4687c9f3d0cf96033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPosition: {x: 0, y: 0}
+  endposition: {x: 0, y: 0}
+  offsets: {x: 0, y: 0}
+  JoystickSprite: {fileID: 0}
+  maxLength: 0
+  controlScheme: 1
+  HitBox:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  Player: {fileID: 4173307104970268}
+  Head: {fileID: 21300002, guid: 35c448380fea7ab48a2f173ae429e9f2, type: 3}
+  Base: {fileID: 0}
+--- !u!114 &114116883331461336
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1977754839611798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a2ac7d8b08d63145aa35a27ad3854a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventorySize: 3
+  running: 1
+  SidewaysHand: {fileID: 0}
+  UpwardsHand: {fileID: 0}
+  DownwardsHand: {fileID: 0}
+--- !u!114 &114179764291991634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1673174589472642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602a66cc43821a5428bd9d8eaf449add, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runes:
+  - {fileID: 11400000, guid: 8cd7e8a1ab8e2bc41a396fea7b202396, type: 2}
+--- !u!114 &114286256747533024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1977754839611798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79301afa6bbc93e439e6700014b81b82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowdown: 10
+  thrust: 15
+  max_spd: 3
+  Keyboard: 1
+  Joystick: {fileID: 114043215955215906}
+--- !u!114 &114507850236751794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1977754839611798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602a66cc43821a5428bd9d8eaf449add, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runes:
+  - {fileID: 11400000, guid: 6d19112c5faec534d92ac23bf9a0afa0, type: 2}
+--- !u!114 &114595929073258388
+MonoBehaviour:
+>>>>>>> BowRota
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -92134,6 +92432,7 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+<<<<<<< HEAD
 --- !u!212 &212948974027248238
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -92170,6 +92469,9 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
 --- !u!212 &212952560971146766
+=======
+--- !u!212 &212083602968852584
+>>>>>>> BowRota
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -92939,6 +93241,7 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+<<<<<<< HEAD
 --- !u!212 &212981914064325746
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -92975,6 +93278,9 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
 --- !u!212 &212983314568034568
+=======
+--- !u!212 &212550939369839952
+>>>>>>> BowRota
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -93009,6 +93315,7 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+<<<<<<< HEAD
 --- !u!212 &212985167551567176
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -93045,6 +93352,9 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
 --- !u!212 &212987086905677168
+=======
+--- !u!212 &212584630480753980
+>>>>>>> BowRota
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

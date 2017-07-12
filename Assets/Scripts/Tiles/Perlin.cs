@@ -5,7 +5,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 
-// TODO: Paljon hienosäätöä biomet voisi vaihtaa samaksi Tile enumiksi, mapin scrollaus, tuolla Texture2D voisi tehdä minimapin
+// TODO: Texture2D voisi olla minimappers
 
 public class Perlin : MonoBehaviour
 {
@@ -457,7 +457,7 @@ public class Perlin : MonoBehaviour
     }
 
     public TilemapObjectSpawnSettings SpawnSettings;
-    public void SpawnObject(Vector3 spawnPosition, Transform parent, TileType type)
+    public void SpawnObject(Vector3 spawnPosition, Transform parent, TileType type, Chunk chunk, int x, int y)
     {
         // choose object to spawn
         // TODO: jokaiselle biomelle omat spawnsettingits
@@ -487,9 +487,10 @@ public class Perlin : MonoBehaviour
                     {
                         var go = ObjectPool.instance.GetObjectForType(prefab.name, true); // ??????????????????
                         go.GetComponent<Resource>().Init();
-
                         go.transform.localScale *= Random.Range(0.90f, 1.10f);
                         go.transform.position = spawnPosition;
+
+                        chunk.AddObject(x, y, go);
 
                         break; // ei montaa samaan kohtaan
                     }
@@ -579,7 +580,7 @@ public class Perlin : MonoBehaviour
                 {
                     Vector3 spawnPosition = new Vector3(offsetX * Chunk.CHUNK_SIZE + x + Random.Range(-0.4f, 0.4f), offsetY * Chunk.CHUNK_SIZE + y + Random.Range(-0.4f, 0.4f), startZ);
                     startZ += 0.001f; // Z tween/interpolation funktio
-                    SpawnObject(spawnPosition, this.trees.transform, types[y, x]);
+                    SpawnObject(spawnPosition, this.trees.transform, types[y, x], chunk, x, y);
                 }
             }
         }

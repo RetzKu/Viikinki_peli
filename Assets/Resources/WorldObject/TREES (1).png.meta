@@ -1,39 +1,42 @@
 fileFormatVersion: 2
 guid: 86e218568da6d3946a1ffdceee9efe41
-timeCreated: 1499758160
+timeCreated: 1499863383
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: TREES (1)_0
-    21300002: pine
-    21300004: pine_falling
-    21300006: TREES (1)_3
-    21300008: TREES (1)_4
-    21300010: TREES (1)_5
-    21300012: TREES (1)_6
-    21300014: TREES (1)_7
-    21300016: TREES (1)_8
-    21300018: TREES (1)_9
-    21300020: TREES (1)_10
-    21300022: TREES (1)_11
-    21300024: TREES (1)_12
-    21300026: TREES (1)_13
-    21300028: TREES (1)_14
-    21300030: TREES (1)_15
-    21300032: TREES (1)_16
-    21300034: TREES (1)_17
-    21300036: TREES (1)_18
-    21300038: TREES (1)_19
-    21300040: TREES (1)_20
-    21300042: TREES (1)_21
-    21300044: pine_trunk
-    21300046: TREES (1)_23
-    21300048: TREES (1)_24
-    21300050: TREES (1)_25
-    21300052: TREES (1)_26
-    21300054: TREES (1)_27
-    21300056: TREES (1)_28
-    21300058: TREES (1)_29
+    21300000: birch0
+    21300002: birch0
+    21300004: birch0_falling
+    21300006: willow0
+    21300008: willow0_falling
+    21300010: lime0
+    21300012: lime0_falling
+    21300014: birch0_falling
+    21300016: birch1
+    21300018: birch1_falling
+    21300020: willow1
+    21300022: willow1_falling
+    21300024: lime1
+    21300026: lime1_falling
+    21300028: birch_trunk
+    21300030: birch2
+    21300032: birch2_falling
+    21300034: willow2
+    21300036: willow2_falling
+    21300038: lime2
+    21300040: lime2_falling
+    21300042: spruce0
+    21300044: birch_trunk
+    21300046: willow_trunk
+    21300048: lime_trunk
+    21300050: spruce0_falling
+    21300052: spruce1
+    21300054: spruce1_falling
+    21300056: spruce0_trunk
+    21300058: spruce_trunk
+    21300060: pine
+    21300062: pine_falling
+    21300064: pine_trunk
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -156,7 +159,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TREES (1)_0
+      name: pine
       rect:
         serializedVersion: 2
         x: 28
@@ -169,7 +172,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: pine
+      name: birch0
       rect:
         serializedVersion: 2
         x: 101
@@ -182,7 +185,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: pine_falling
+      name: birch0_falling
       rect:
         serializedVersion: 2
         x: 165
@@ -195,7 +198,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_3
+      name: willow0
       rect:
         serializedVersion: 2
         x: 232
@@ -208,7 +211,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_4
+      name: willow0_falling
       rect:
         serializedVersion: 2
         x: 298
@@ -221,10 +224,10 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_5
+      name: lime0
       rect:
         serializedVersion: 2
-        x: 364
+        x: 363
         y: 394
         width: 61
         height: 105
@@ -234,7 +237,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_6
+      name: lime0_falling
       rect:
         serializedVersion: 2
         x: 436
@@ -247,7 +250,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_7
+      name: pine_falling
       rect:
         serializedVersion: 2
         x: 28
@@ -260,7 +263,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_8
+      name: birch1
       rect:
         serializedVersion: 2
         x: 101
@@ -273,7 +276,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_9
+      name: birch1_falling
       rect:
         serializedVersion: 2
         x: 165
@@ -286,7 +289,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_10
+      name: willow1
       rect:
         serializedVersion: 2
         x: 232
@@ -299,7 +302,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_11
+      name: willow1_falling
       rect:
         serializedVersion: 2
         x: 298
@@ -312,7 +315,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_12
+      name: lime1
       rect:
         serializedVersion: 2
         x: 364
@@ -325,7 +328,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_13
+      name: lime1_falling
       rect:
         serializedVersion: 2
         x: 436
@@ -338,7 +341,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_14
+      name: pine_trunk
       rect:
         serializedVersion: 2
         x: 51
@@ -351,11 +354,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_15
+      name: birch2
       rect:
         serializedVersion: 2
-        x: 105
-        y: 178
+        x: 104
+        y: 179
         width: 47
         height: 98
       alignment: 9
@@ -364,7 +367,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_16
+      name: birch2_falling
       rect:
         serializedVersion: 2
         x: 169
@@ -377,7 +380,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_17
+      name: willow2
       rect:
         serializedVersion: 2
         x: 236
@@ -390,7 +393,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_18
+      name: willow2_falling
       rect:
         serializedVersion: 2
         x: 299
@@ -403,7 +406,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_19
+      name: lime2
       rect:
         serializedVersion: 2
         x: 370
@@ -416,7 +419,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_20
+      name: lime2_falling
       rect:
         serializedVersion: 2
         x: 444
@@ -429,7 +432,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_21
+      name: spruce0
       rect:
         serializedVersion: 2
         x: 43
@@ -442,7 +445,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: pine_trunk
+      name: birch_trunk
       rect:
         serializedVersion: 2
         x: 182
@@ -455,7 +458,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_23
+      name: willow_trunk
       rect:
         serializedVersion: 2
         x: 318
@@ -468,11 +471,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_24
+      name: lime_trunk
       rect:
         serializedVersion: 2
         x: 461
-        y: 168
+        y: 169
         width: 11
         height: 15
       alignment: 9
@@ -481,7 +484,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_25
+      name: spruce0_falling
       rect:
         serializedVersion: 2
         x: 43
@@ -494,7 +497,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_26
+      name: spruce1
       rect:
         serializedVersion: 2
         x: 104
@@ -507,7 +510,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_27
+      name: spruce1_falling
       rect:
         serializedVersion: 2
         x: 104
@@ -520,7 +523,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_28
+      name: spruce0_trunk
       rect:
         serializedVersion: 2
         x: 56
@@ -533,7 +536,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TREES (1)_29
+      name: spruce_trunk
       rect:
         serializedVersion: 2
         x: 122

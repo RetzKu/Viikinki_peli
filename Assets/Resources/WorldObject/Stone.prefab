@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114847636538803384}
   - component: {fileID: 114707181552644232}
   - component: {fileID: 212536873287173378}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,6 +56,7 @@ MonoBehaviour:
   Hp: 100
   defaultFibrateTimer: 0.1
   deathTimer: 4
+  type: 0
 --- !u!114 &114847636538803384
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1,6 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
+// TODO: muillekin tyypeille prefab enumi tallenuksen onnistumiseen
+public enum ResourceType
+{
+    Stone,
+    Tree,
+}
 
 public abstract class Resource : MonoBehaviour
 {
@@ -8,6 +16,7 @@ public abstract class Resource : MonoBehaviour
     public int Hp = 100;
     public float defaultFibrateTimer = 0.1f;
     public float deathTimer = 4f;
+    public ResourceType type;
 
     public virtual void Hit(int damage)
     {
@@ -71,4 +80,16 @@ public abstract class Resource : MonoBehaviour
         //particleSystem.Stop();
     }
 #endregion
+
+    public static string GetResourcePrefabName(ResourceType keyvaluepairValue)
+    {
+        switch (keyvaluepairValue)
+        {
+            case ResourceType.Stone: return "Stone";
+            case ResourceType.Tree: return "SpawnableTree";
+            default:
+                Debug.LogWarning("RESOURCE TO PREFAB MAPPIN NOT FOUND IN RESOURCE.cs");
+                return "null";
+        }
+    }
 }

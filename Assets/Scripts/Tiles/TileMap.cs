@@ -33,12 +33,21 @@ public class TileMap : MonoBehaviour
     public Color tint;
     private Color last;
 
-    // TODO: object pool for general object trees, rocks jne...
+
+
+
+
+
+
+
+
+
+
+
     void Start()
     {
         SpriteController = FindObjectOfType<TileSpriteController>();
 
-        Chunk.GrassSprite = chunkTestSprites[0];
 
         _perlinGenerator = GetComponent<Perlin>();
         _chunks = new Chunk[3, 3];
@@ -117,28 +126,31 @@ public class TileMap : MonoBehaviour
         }
     }
 
+
+    // TODO: puut pathfinding collideen
     public static bool Collides(TileType type)
     {
         return (type <= TileType.CollisionTiles);
     }
 
-    void OnDrawGizmos()
-    {
-        if (running)
-        {
-            for (int y = 0; y < 3; y++)
-            {
-                for (int x = 0; x < 3; x++)
-                {
-                    int halfChunk = Chunk.CHUNK_SIZE / 2;
-                    Vector3 center = new Vector3(halfChunk + x * Chunk.CHUNK_SIZE - 0.5f, halfChunk + y * Chunk.CHUNK_SIZE - 0.5f);
-                    Vector3 bounds = new Vector3(Chunk.CHUNK_SIZE, Chunk.CHUNK_SIZE);
-                    Gizmos.color = Color.red;
-                    Gizmos.DrawWireCube(center, bounds);
-                }
-            }
-        }
-    }
+
+    //void OnDrawGizmos()
+    //{
+    //    if (running)
+    //    {
+    //        for (int y = 0; y < 3; y++)
+    //        {
+    //            for (int x = 0; x < 3; x++)
+    //            {
+    //                int halfChunk = Chunk.CHUNK_SIZE / 2;
+    //                Vector3 center = new Vector3(halfChunk + x * Chunk.CHUNK_SIZE - 0.5f, halfChunk + y * Chunk.CHUNK_SIZE - 0.5f);
+    //                Vector3 bounds = new Vector3(Chunk.CHUNK_SIZE, Chunk.CHUNK_SIZE);
+    //                Gizmos.color = Color.red;
+    //                Gizmos.DrawWireCube(center, bounds);
+    //            }
+    //        }
+    //    }
+    //}
 
     public Sprite[] TestTiles;
     void RandomizeAllTiles()
@@ -243,8 +255,8 @@ public class TileMap : MonoBehaviour
             //SpriteController.SetTileSprites(59, 59, this, 1, 1);
         }
 
-        _chunks[1, 1].offsetX = chunkOffsetX;   // ainoastaa center chunk on oikeassa chunkissa atm
-        _chunks[1, 1].offsetY = chunkOffsetY;
+        // _chunks[1, 1].offsetX = chunkOffsetX;   // ainoastaa center chunk on oikeassa chunkissa atm
+        // _chunks[1, 1].offsetY = chunkOffsetY;
     }
 
 
@@ -280,6 +292,7 @@ public class TileMap : MonoBehaviour
         for (int i = -1; i < 2; i++)    // -1
         {
             _chunks[i + 1, 0].DisableChunkCollision();
+
             GenerateChunk(0, i + 1, chunkOffsetX - 1, chunkOffsetY + i);
             _chunks[i + 1, 0].MoveChunk(-3, 0); // moves gos
             yield return null;
@@ -384,9 +397,12 @@ public class TileMap : MonoBehaviour
     void GenerateChunk(int offsetX, int offsetY, int perlinOffsetX, int perlinOffsetY)
     {
         // tallenna entinen
-        var chunk = _chunks[offsetY, offsetX];
-        SavedChunks[new Vec2(chunk.offsetY, chunk.offsetX)] = true;
+        var chunk = _chunks[offsetY, offsetX]; // missä kohdalla _chunkeissa
+
+        SavedChunks[new Vec2(chunk.offsetX, chunk.offsetY)] = true;
         chunk.Save();
+
+        chunk.OnChunkChangedCleanup();
 
         bool exist = false;
         if (SavedChunks.TryGetValue(new Vec2(perlinOffsetX, perlinOffsetY), out exist))
@@ -399,6 +415,8 @@ public class TileMap : MonoBehaviour
         {
             _perlinGenerator.GenerateChunk(_chunks[offsetY, offsetX], perlinOffsetX, perlinOffsetY);
         }
+        chunk.offsetX = perlinOffsetX;
+        chunk.offsetY = perlinOffsetY;
     }
 
 
@@ -425,6 +443,26 @@ public class TileMap : MonoBehaviour
         //{
         //    ResetColor();
         //}
+
+        //if (Input.GetKeyDown(KeyCode.N))
+        //{
+        //    var go = ObjectPool.instance.GetObjectForType("SpawnableTree", true);
+        //    go.transform.position = new Vector3(18, 25);
+        //    _chunks[1, 1].AddObject(1, 8, go);
+
+        //}
+        //if (Input.GetKeyDown(KeyCode.U))
+        //{
+        //    var go = ObjectPool.instance.GetObjectForType("SpawnableTree", true);
+        //    go.transform.position = new Vector3(18, 20);
+        //    _chunks[1, 1].AddObject(1, 3, go);
+
+        //}
+        //if (Input.GetKeyDown(KeyCode.J))
+        //{
+        //    _chunks[1, 1].OnChunkChangedCleanup();
+        //
+
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

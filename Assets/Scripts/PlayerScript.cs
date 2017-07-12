@@ -111,20 +111,6 @@ public class PlayerScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D Trig)
     {
-<<<<<<< HEAD
-        //Trig = GetComponent<combat>().activeCollider();
-
-        //if (Trig.IsTouchingLayers(LayerMask.NameToLayer("Resource")))
-        //{
-        //    AddToInventory(Trig);
-        //}
-
-        //if (Trig.transform.tag == "Item")
-        //{
-        //    AddToInventory(Trig);
-        //    Debug.Log(Trig.transform.name + " Picked up");
-        //}
-=======
         if (Trig.transform.tag == "Item")
         {
             Inventory.AddToInventory(Trig.gameObject);
@@ -135,7 +121,6 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("BONK");
             //Trig.transform.parent.GetComponent<TreeHP>().hp -= Damage;
         }
->>>>>>> BowRota
     }
 
     void OnTriggerExit2D(Collider2D Trig)

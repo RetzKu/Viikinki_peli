@@ -14,8 +14,7 @@ public class s_c_torsoScript : MonoBehaviour {
     {
 		if(alive()) // Suoritetaan jos hitbox on ylipäätään elossa
         {
-            OnTriggerEnter2D(GetComponent<Collider2D>());
-            OnTriggerExit2D(GetComponent<Collider2D>());
+            
         }
 	}
 
@@ -46,8 +45,7 @@ public class s_c_torsoScript : MonoBehaviour {
 
         if (trig.transform.tag == "Item")
         {
-<<<<<<< HEAD
-            GetComponentInParent<PlayerScript>().AddToInventory(trig);
+            GetComponentInParent<PlayerScript>().Inventory.AddToInventory(trig.gameObject);
             Debug.LogWarning(trig.transform.name + " Picked up");
         }
     }
@@ -57,10 +55,6 @@ public class s_c_torsoScript : MonoBehaviour {
         {
             Trig.transform.tag = "Item";
             print("escaped dropped item");
-=======
-            GetComponentInParent<PlayerScript>().Inventory.AddToInventory(trig.gameObject);
-            Debug.Log(trig.transform.name + " Picked up");
->>>>>>> BowRota
         }
     }
 }

@@ -9,7 +9,7 @@ public class WolfAI : generalAi
 
     public float leapDist = 1.0f;
 
-    private int attackCounter = 300;
+    private int attackCounter = 300; // EETU TRIGGER
     private int attackUptade = 300;
     float leapSpeed = 4;
     bool bite = false;
@@ -93,8 +93,7 @@ public class WolfAI : generalAi
         if (currentTime > animTime) //??
         {
             currentTime = animTime;
-            Physics._maxSpeed = MaxSpeed * leapSpeed;
-            
+            Physics._maxSpeed = MaxSpeed * leapSpeed;            
         }
         velocity *= Time.deltaTime;
         //print(velocity.magnitude);
@@ -311,4 +310,12 @@ public class WolfAI : generalAi
 
     }
 
+    public override void resetValues()
+    {
+        agro = true;
+        justBite = false;
+        biteTimer = 0f;
+        currentTime = 0;
+        attackCounter = 0;
+    }
 }

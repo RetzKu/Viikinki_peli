@@ -15,6 +15,7 @@ public class MobsControl : MonoBehaviour
     public int Mob_Amount;
     public GameObject Wolf;
     public GameObject Archer;
+    public GameObject MeleeDude;
     List<GameObject> Boids;
 
     public GameObject player;
@@ -61,9 +62,9 @@ public class MobsControl : MonoBehaviour
 
                 GameObject go;
 
-                //if(Boids.Count % 2 == 0)
+                //if (Boids.Count % 2 == 0)
                 //{
-                    go = Instantiate(Archer, new Vector2(x, y), Quaternion.identity);
+                    go = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
                     go.GetComponent<generalAi>().InitStart(x, y,EnemyType.Archer);
                 //}
                 //else

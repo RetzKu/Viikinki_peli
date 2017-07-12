@@ -17,6 +17,7 @@ TagManager:
   - TouchPoint
   - ResourceEffectEmitter
   - WorldResource
+  - projectileManager
   layers:
   - Default
   - TransparentFX

@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Projectile : MonoBehaviour {
 
     protected float moveDistance = 8f;
-    protected float lerpTime = 0.3f;
+    protected float lerpTime = 0.5f;
     protected float currentLerpTime = 0;
     protected Rigidbody2D body;
     protected Vector2 from = new Vector2();
@@ -16,10 +16,14 @@ public abstract class Projectile : MonoBehaviour {
     public virtual void init(Vector2 from, Vector2 where)
     {
         body = GetComponent<Rigidbody2D>();
-        where.Normalize();
-        this.where = where * moveDistance;
         this.from = from;
         transform.position = from;
+        Vector2 temp =  where -from;
+        temp.Normalize();
+        temp *= moveDistance;
+        this.where = from + temp;
+        //where.Normalize();
+        //this.where = body.position + (where * moveDistance);
         transform.up = (Vector3)where - transform.position;
     }
     protected Vector2 lerPate(Vector2 start, Vector2 end, float smooth)

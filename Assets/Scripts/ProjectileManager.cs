@@ -30,5 +30,6 @@ public class ProjectileManager : MonoBehaviour {
     {
         var go = Instantiate(arrow,new Vector2(0,0), Quaternion.identity);
         go.GetComponent<Projectile>().init(from,where);
+        pro_tiles.Add(go);
     }
 }

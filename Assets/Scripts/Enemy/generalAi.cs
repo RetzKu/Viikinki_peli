@@ -66,11 +66,12 @@ public abstract class generalAi : MonoBehaviour
     public bool inAttack = false;
     [HideInInspector]
     public bool agro = false;
-
+    protected bool knocked = false;
+    bool knockInit = false;
     public enemyDir myDir { get { return rotation._myDir; } }
-
     public float attackDist;
     public float MaxSpeed = 0.04f;
+    public float knockDist = 3f;
     protected bool GiveStartTarget = true;
 
     protected int counter = 0;
@@ -94,7 +95,6 @@ public abstract class generalAi : MonoBehaviour
 
     public Vector2 velocity = new Vector2(); //An object’s PVector velocity will remain constant if it is in a state of equilibrium.
     protected Vector2 target = new Vector2();
-
 
     public EnemyType MyType { get { return myType; } }
     protected EnemyType myType;
@@ -207,5 +207,18 @@ public abstract class generalAi : MonoBehaviour
     {
         return body.position;
     }
+    public virtual void KnockBack()
+    {
+        if (!knockInit)
+        {
+            rotation.Lock = true; 
+            resetValues();
+            knockInit = true;
+            Vector2 knock = player.GetComponent<DetectEnemies>().getPosition() - body.position;
+            knock.Normalize();
+            knock *= knockDist;
+        }
+    }
+    public abstract void resetValues();
     public abstract bool killMyself();
 }

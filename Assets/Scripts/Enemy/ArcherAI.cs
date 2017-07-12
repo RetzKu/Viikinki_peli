@@ -5,9 +5,10 @@ using UnityEngine;
 public class ArcherAI : generalAi {
 
     private float attackCounter = 0f;
-    private float attackUptade = 5f;
+    private float attackUptade = 2f;
     float chargeCounter = 0f;
     float shootTime = 1f;
+    GameObject proManager;
 
     public override void InitStart(float x, float y, EnemyType type)
     {
@@ -22,6 +23,8 @@ public class ArcherAI : generalAi {
         Physics.InitRules(sepF, aliF, cohF, desiredseparation, alingmentDistance, IdleRadius, IdleBallDistance, ArriveRadius, MaxSteeringForce, MaxSpeed);
         Physics._maxSpeed = MaxSpeed;
         player = GameObject.FindGameObjectWithTag("Player");
+        proManager = GameObject.FindGameObjectWithTag("projectileManager");
+
     }
 
     public override void UpdatePosition(List<GameObject> Mobs)
@@ -64,21 +67,21 @@ public class ArcherAI : generalAi {
 
 
         velocity *= Time.deltaTime;
-        print(velocity.magnitude);
+        //print(velocity.magnitude);
         body.MovePosition(body.position + velocity);
 
     }
     void archerPattern(Vector2 dist, Vector2 playerPos) // spe
     {
         attackCounter += Time.deltaTime;
-        if(attackCounter < attackUptade && !inAttack)
+        if(attackCounter < attackUptade &&  !inAttack)
         {
             if (dist.magnitude >= attackDist)
             {
                 rotation.rotToPl = true;
                 rotation.playerPos = playerPos;
                 Physics._desiredseparation = 0.7f;
-                Physics._maxSpeed = 0.06f;
+                Physics._maxSpeed = MaxSpeed * 1.5f;
                 findPath(ref flags,ref velocity,ref target,player,body);
             }
             else
@@ -93,7 +96,7 @@ public class ArcherAI : generalAi {
                     rotation.rotToPl = false;
                 }
                 Physics._desiredseparation = 1.0f;
-                Physics._maxSpeed = 0.04f;
+                Physics._maxSpeed =MaxSpeed* 0.8f;
                 followPlayer(ref dist, playerPos,attackDist,ref target,ref flags,Physics,sepF);
             }
         }
@@ -101,17 +104,27 @@ public class ArcherAI : generalAi {
         {
             inAttack = true;
             attackCounter = 0;
-            clock(playerPos);
+            clock(playerPos,dist);
         }
         Physics._sepF = sepF * 1.5f;
         Physics._maxSteeringForce = MaxSteeringForce * 0.1f; //EETU TRIGGER
     }
-    void clock(Vector2 playerPos)
+    void clock(Vector2 playerPos,Vector2 dist)
     {
         chargeCounter += Time.deltaTime;
         if(chargeCounter > shootTime)
         {
-            print("SHOOOOOOT");
+
+            //print("SHOOOOOOT");
+            if(dist.magnitude > 1.5f)
+            {
+                Vector2 r =  Random.insideUnitCircle * Random.Range(0f, 2.5f) + playerPos;
+                proManager.GetComponent<ProjectileManager>().spawnProjectile(body.position, r);
+            }
+            else
+            {
+                proManager.GetComponent<ProjectileManager>().spawnProjectile(body.position, playerPos);
+            }
             chargeCounter = 0;
             inAttack = false;
             rotation.Lock = false;
@@ -192,5 +205,12 @@ public class ArcherAI : generalAi {
             return true;
         }
         return false;
+    }
+    public override void resetValues()
+    {
+        attackCounter = 0f;
+        chargeCounter = 0f;
+        agro = true;
+        inAttack = false;
     }
 }

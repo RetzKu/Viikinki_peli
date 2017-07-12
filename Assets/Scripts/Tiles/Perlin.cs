@@ -578,8 +578,8 @@ public class Perlin : MonoBehaviour
                 if (trees[y, x])
                 {
                     Vector3 spawnPosition = new Vector3(offsetX * Chunk.CHUNK_SIZE + x + Random.Range(-0.4f, 0.4f), offsetY * Chunk.CHUNK_SIZE + y + Random.Range(-0.4f, 0.4f), startZ);
-                    SpawnObject(spawnPosition, this.trees.transform, types[y, x]);
                     startZ += 0.001f; // Z tween/interpolation funktio
+                    SpawnObject(spawnPosition, this.trees.transform, types[y, x]);
                 }
             }
         }

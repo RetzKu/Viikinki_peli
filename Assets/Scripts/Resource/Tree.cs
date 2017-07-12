@@ -9,9 +9,12 @@ public class Tree : Resource
         var trunk = transform.GetChild(0);
         trunk.GetComponent<CircleCollider2D>().enabled = true;
 
-        GetComponent<SpriteRenderer>().enabled = true;
+    var spriteRenderer = GetComponent<SpriteRenderer>(); 
+        spriteRenderer.enabled = true;
         GetComponent<DropScript>().enabled = true;
         GetComponent<Tree>().enabled = true;
+
+        ZlayerManager.SetSortingOrder(transform, spriteRenderer);
     }
 
     public void StubInit()

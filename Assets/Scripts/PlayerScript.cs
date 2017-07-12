@@ -61,6 +61,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (Inventory.Changed == true)
         {
+            Inventory.EquipData.Tool.GetType();
             if (Inventory.EquipData.Tool != null)
             {
                 if (Hand.Copy == null)

@@ -82,7 +82,6 @@ public class inventory
             else { return WeaponType.noWeapon; }
         }
         public GameObject EmptyHand() { GameObject RemovedTool = _Tool; _Tool = null; return RemovedTool; }
-        public GameObject GetTool() { return _Tool; }
         public void SetTool(GameObject Tool) { _Tool = Tool; }
     }
 }

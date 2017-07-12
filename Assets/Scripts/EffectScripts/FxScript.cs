@@ -10,6 +10,7 @@ public class FxScript : MonoBehaviour {
     [Header("Effect settings")]
     public float LifeTime;
     public float MaxDistance;
+    public Vector3 SpriteScale = new Vector3(1f, 1f, 1f);
     [Header("Default x: 0, y: 0.3, z: 0")]
     public Vector3 EffectOffSet;
 
@@ -22,7 +23,7 @@ public class FxScript : MonoBehaviour {
         Fx = new GameObject("Fx");
         Fx.AddComponent<SpriteRenderer>().sprite = BareHandSprite;
         Fx.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0);
-
+        Fx.transform.localScale = SpriteScale;
 	}
 
     public void FxUpdate(Sprite NewFx)
@@ -40,6 +41,15 @@ public class FxScript : MonoBehaviour {
         CopyFx.AddComponent<FxFade>().Duration = LifeTime;
         ObjectPosition(CopyFx);
         CopyFx.transform.SetParent(transform);
+        if (GetComponent<PlayerScript>().weaponInHand != null)
+        {
+            GameObject tempWeapon = GetComponent<PlayerScript>().weaponInHand;
+            CopyFx.transform.localScale = tempWeapon.GetComponent<weaponStats>().weaponEffectScale;
+        }
+        else
+        {
+            CopyFx.transform.localScale = SpriteScale;
+        }
     }
 
     void ObjectPosition(GameObject Copy)

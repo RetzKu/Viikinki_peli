@@ -1,0 +1,832 @@
+fileFormatVersion: 2
+guid: c93d488bcad6fba41bcdb47ca2d08898
+timeCreated: 1499847159
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: spear_bone
+    21300002: axe_stone
+    21300004: club
+    21300006: hammer_stone
+    21300008: sword_metal
+    21300010: longsword_metal
+    21300012: bow_tier1
+    21300014: pickaxe
+    21300016: hammer_metal
+    21300018: sword_metal_night
+    21300020: bow_tier2
+    21300022: axe_metal_night
+    21300024: mace_metal
+    21300026: hammer_metal_night
+    21300028: longsword_metal_night
+    21300030: spear_metal_night
+    21300032: battleaxe_metal
+    21300034: mace_metal_night
+    21300036: bow_tier3
+    21300038: battleaxe_metal_night
+    21300040: axe_stone_bloody
+    21300042: club_bloody
+    21300044: hammer_stone_bloody
+    21300046: sword_metal_bloody
+    21300048: longsword_metal_bloody
+    21300050: axe_metal_bloody
+    21300052: pickaxe_bloody
+    21300054: hammer_metal_bloody
+    21300056: sword_metal_night_bloody
+    21300058: axe_metal_night_bloody
+    21300060: mace_metal_bloody
+    21300062: hammer_metal_night_bloody
+    21300064: longsword_metal_night_bloody
+    21300066: spear_metal_night_bloody
+    21300068: battleaxe_metal_bloody
+    21300070: mace_metal_night_bloody
+    21300072: battleaxe_metal_night_bloody
+    21300074: bow_tier1_anim1
+    21300076: bow_tier1_anim2
+    21300078: bow_tier2_anim1
+    21300080: bow_tier2_anim2
+    21300082: bow_tier3_anim1
+    21300084: bow_tier3_anim2
+    21300086: spear_metal
+    21300088: arrow_metal
+    21300090: arrow_bone
+    21300092: arrow_bloody
+    21300094: spear_bone_bloody
+    21300096: spear_metal_bloody
+    21300098: axe_metal
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: tvOS
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+  - buildTarget: Tizen
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Samsung TV
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: spear_bone
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 469
+        width: 3
+        height: 41
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: axe_stone
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 487
+        width: 10
+        height: 19
+      alignment: 9
+      pivot: {x: 0.25, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: club
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 485
+        width: 7
+        height: 19
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: hammer_stone
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 484
+        width: 9
+        height: 20
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sword_metal
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 479
+        width: 5
+        height: 26
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: longsword_metal
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 464
+        width: 7
+        height: 40
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bow_tier1
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 469
+        width: 6
+        height: 36
+      alignment: 9
+      pivot: {x: 0.7, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pickaxe
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 460
+        width: 17
+        height: 19
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: hammer_metal
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 460
+        width: 9
+        height: 20
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sword_metal_night
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 442
+        width: 5
+        height: 28
+      alignment: 9
+      pivot: {x: 0.5, y: 0.14}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bow_tier2
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 422
+        width: 6
+        height: 42
+      alignment: 9
+      pivot: {x: 0.7, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: axe_metal_night
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 437
+        width: 10
+        height: 21
+      alignment: 9
+      pivot: {x: 0.25, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mace_metal
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 430
+        width: 7
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: hammer_metal_night
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 433
+        width: 11
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: longsword_metal_night
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 417
+        width: 7
+        height: 40
+      alignment: 9
+      pivot: {x: 0.5, y: 0.15}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: spear_metal_night
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 376
+        width: 7
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: battleaxe_metal
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 405
+        width: 11
+        height: 25
+      alignment: 9
+      pivot: {x: 0.25, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mace_metal_night
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 399
+        width: 9
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bow_tier3
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 378
+        width: 7
+        height: 42
+      alignment: 9
+      pivot: {x: 0.65, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: battleaxe_metal_night
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 374
+        width: 11
+        height: 25
+      alignment: 9
+      pivot: {x: 0.25, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: axe_stone_bloody
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 345
+        width: 10
+        height: 19
+      alignment: 9
+      pivot: {x: 0.25, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: club_bloody
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 343
+        width: 7
+        height: 19
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: hammer_stone_bloody
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 342
+        width: 9
+        height: 20
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sword_metal_bloody
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 337
+        width: 5
+        height: 26
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: longsword_metal_bloody
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 322
+        width: 7
+        height: 40
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: axe_metal_bloody
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 320
+        width: 10
+        height: 19
+      alignment: 9
+      pivot: {x: 0.25, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pickaxe_bloody
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 318
+        width: 17
+        height: 19
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: hammer_metal_bloody
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 318
+        width: 9
+        height: 20
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sword_metal_night_bloody
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 300
+        width: 5
+        height: 28
+      alignment: 9
+      pivot: {x: 0.5, y: 0.14}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: axe_metal_night_bloody
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 295
+        width: 10
+        height: 21
+      alignment: 9
+      pivot: {x: 0.25, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mace_metal_bloody
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 288
+        width: 7
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: hammer_metal_night_bloody
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 291
+        width: 11
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: longsword_metal_night_bloody
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 275
+        width: 7
+        height: 40
+      alignment: 9
+      pivot: {x: 0.5, y: 0.15}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: spear_metal_night_bloody
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 234
+        width: 7
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: battleaxe_metal_bloody
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 263
+        width: 11
+        height: 25
+      alignment: 9
+      pivot: {x: 0.25, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mace_metal_night_bloody
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 257
+        width: 9
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: battleaxe_metal_night_bloody
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 232
+        width: 11
+        height: 25
+      alignment: 9
+      pivot: {x: 0.25, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bow_tier1_anim1
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 192
+        width: 15
+        height: 34
+      alignment: 9
+      pivot: {x: 0.898, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bow_tier1_anim2
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 192
+        width: 18
+        height: 34
+      alignment: 9
+      pivot: {x: 0.92, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bow_tier2_anim1
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 189
+        width: 15
+        height: 40
+      alignment: 9
+      pivot: {x: 0.89, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bow_tier2_anim2
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 190
+        width: 18
+        height: 38
+      alignment: 9
+      pivot: {x: 0.92, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bow_tier3_anim1
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 189
+        width: 15
+        height: 39
+      alignment: 9
+      pivot: {x: 0.823, y: 0.51}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bow_tier3_anim2
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 192
+        width: 18
+        height: 34
+      alignment: 9
+      pivot: {x: 0.86, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: spear_metal
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 426
+        width: 3
+        height: 41
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: arrow_metal
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 383
+        width: 3
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: arrow_bone
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 382
+        width: 3
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: arrow_bloody
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 335
+        width: 3
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: spear_bone_bloody
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 327
+        width: 3
+        height: 41
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: spear_metal_bloody
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 284
+        width: 3
+        height: 41
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: axe_metal
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 462
+        width: 10
+        height: 19
+      alignment: 9
+      pivot: {x: 0.25, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+public enum WeaponType { noWeapon, meleeWeapon, longMeleeWeapon, rangedWeapon }
+
 public class PlayerScript : MonoBehaviour
 {
 
@@ -27,13 +29,13 @@ public class PlayerScript : MonoBehaviour
     public Transform DownwardsHand;
 
     private ItemManager Hand;
+    public GameObject weaponInHand { get { return Hand.Copy; } }
     //public int Damage;
 
     public int Direction;
 
     void Start()
     {
-
         /*Get Inventory parents*/
         InventoryChild = gameObject.transform.Find("Inventory").gameObject;
         EquipChild = gameObject.transform.Find("Equip").gameObject;
@@ -73,7 +75,15 @@ public class PlayerScript : MonoBehaviour
                 }
             }
             else { Hand.EmptyHand(); }
-            /*JOONA FX TÄHÄ, THNX :3*/ 
+            if (GetComponent<PlayerScript>().weaponInHand != null)
+            {
+                GameObject tempWeapon = GetComponent<PlayerScript>().weaponInHand;
+                GetComponent<FxScript>().FxUpdate(tempWeapon.GetComponent<weaponStats>().weaponEffect);
+            }
+            else
+            {
+                GetComponent<FxScript>().FxUpdate(GetComponent<FxScript>().BareHandSprite);
+            }
             Inventory.Changed = false;
         }
     }
@@ -86,6 +96,7 @@ public class PlayerScript : MonoBehaviour
 
     void tmpswing()
     {
+        
         var mousePos = Input.mousePosition;
         mousePos.z = 10;
         Vector3 playerPosition = new Vector3(transform.position.x, transform.position.y, 0.0f); // Pelaajan positio
@@ -109,28 +120,19 @@ public class PlayerScript : MonoBehaviour
         if(Input.GetKeyDown("f") == true) { Inventory.DropItem(); }
     }
 
-    void OnTriggerEnter2D(Collider2D Trig)
-    {
-        if (Trig.transform.tag == "Item")
-        {
-            Inventory.AddToInventory(Trig.gameObject);
-        }
+    //void OnTriggerEnter2D(Collider2D Trig)
+    //{
+    //   
+    //}
 
-        if (Trig.gameObject.tag == "puu")
-        {
-            Debug.Log("BONK");
-            //Trig.transform.parent.GetComponent<TreeHP>().hp -= Damage;
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D Trig)
-    {
+    //void OnTriggerExit2D(Collider2D Trig)
+    //{
         //if (Trig.transform.tag == "Dropped")
         //{
         //    Trig.transform.tag = "Item";
         //    print("escaped dropped item");
         //}
-    }
+    //}
 
     /*WHEN TIME, TRANSFER DEFAULT METHODS TO THIS CLASS*/
     public class ItemManager

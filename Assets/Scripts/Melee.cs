@@ -4,14 +4,30 @@ using UnityEngine;
 
 public class Melee : weaponStats
 {
-    /*void Awake()
+    void OnTriggerEnter2D(Collider2D Trigger)
     {
-        if (weaponEffect)
+        if (Trigger.gameObject.tag == "Enemy")
         {
-            Debug.Log("asdtoimii");
-            GameObject.Find("Player").GetComponent<FxScript>().FxUpdate(weaponEffect);
+            onRange = true;
         }
-    }*/
 
-    // Täällä tarvittava animaatio lyhyelle meleelle
+    }
+
+    void OnTriggerStay2D(Collider2D Trigger)
+    {
+        if (Trigger.gameObject.tag == "Enemy")
+        {
+            onRange = true;
+        }
+        
+   } 
+    void OnTriggerExit2D(Collider2D Trigger)
+    {
+        onRange = false;
+    }
+
+    public override bool Get()
+    {
+        return onRange;
+    }
 }

@@ -8,21 +8,18 @@ public class combat : MonoBehaviour {
 
     public float hp = 100.0f;
     public float dmgBase = 5.0f;
-    public float DefaultAttackLength = 0.2f;
     public float rangedBaseDmg = 0.0f;
     public float movementSpeed = 100.0f;
     public float attackSpeed = 1.0f;
     public float armor = 1.0f;
+    public float DefaultAttackLength = 0.2f;
 
     private float attackSpeedTime = 0.0f;
-    private float atmAttackTime = 0.0f;
+    public float atmAttackTime = 0.0f;
     private bool damageDone = false;
     
-
     private enum Directions { Left, Down, Up, Right }
     private Directions Direction;
-
-    public enum WeaponType { noWeapon, meleeWeapon, longMeleeWeapon, rangedWeapon }
 
     private string dirObjectName;
 	private Sprite Fx;
@@ -40,11 +37,36 @@ public class combat : MonoBehaviour {
         {
             death(); // tarkistetaan onko pelaaja elossa
         }
-        //weaponInHand();
-        //OnTriggerEnter2D(GetComponent<Collider2D>());
 
-        dirObjectName = getDirectionObject();
+        if (atmAttackTime < Time.time && Time.time < (atmAttackTime + DefaultAttackLength))
+        {
+            if (GetComponent<PlayerScript>().weaponInHand != null)
+            {
+                GameObject tempWeapon = GetComponent<PlayerScript>().weaponInHand;
+                
+                
+
+                if (tempWeapon.GetComponent<weaponStats>().onRange)
+                {
+
+                    if (damageDone == false)
+                    {
+                        Debug.Log("Player damage: ");
+                        Debug.Log(countPlayerDamage());
+                        damageDone = true;
+                    }
+                }
+            }
+        }
+
+
+            dirObjectName = getDirectionObject();
 		//transform.GetComponent<FxScript>().FxUpdate(Fx); /*KUN Fx SPRITEÄ MUUTTAA FxUpdate KATSOO ONKO SE ERINLAINEN FX KUIN AIKAISEMPI JA JOS ON NIIN VAIHTAA. VOI SIIRTÄÄ MYÖS POIS UPDATESTA*/
+    }
+
+    void FixedUpdate()
+    {
+        
     }
 
     string getDirectionObject() // Lataa pelaajalle oikeat hitboxit
@@ -77,6 +99,11 @@ public class combat : MonoBehaviour {
         return tmpName;
     }
 
+    /*void weaponCheck()
+    {
+        WeaponType atmWeapon = (WeaponType)GetComponent<inventory>().EquipData.EquippedType();
+    }*/
+
     public Collider2D activeCollider()
     {
         string tmpTorso = getDirectionObject();
@@ -91,7 +118,7 @@ public class combat : MonoBehaviour {
 
     }
 
-    void OnTriggerStay2D(Collider2D Trigger)
+    /*void OnTriggerStay2D(Collider2D Trigger)
     {
         if (Trigger.tag == "Enemy")
         {
@@ -99,12 +126,27 @@ public class combat : MonoBehaviour {
             {
                 if (damageDone == false)
                 {
-                    Debug.Log("Wolf takes dmg");
+                    Debug.Log("Wolf takes dmg: ");
+                    Debug.Log(countPlayerDamage());
                     damageDone = true;
                 }
             }
         }
-    }
+    }*/
+
+    //public void dealDamage()
+    //{
+    //    GameObject tempWeapon = GetComponent<PlayerScript>().weaponInHand;
+    //    if (atmAttackTime < Time.time && Time.time < (atmAttackTime + DefaultAttackLength) && tempWeapon.GetComponent<weaponStats>().onRange)
+    //    {
+    //        if (damageDone == false)
+    //        {
+    //            Debug.Log("Dmg: ");
+    //            Debug.Log(countPlayerDamage());
+    //            damageDone = true;
+    //        }
+    //    }
+    //}
 
     private bool isAttackLegal()
     {
@@ -112,6 +154,7 @@ public class combat : MonoBehaviour {
         {
             damageDone = false;
             atmAttackTime = Time.time; // lyödään juuri tähän aikaan
+            atmAttackTime -= 0.00001f;
             attackSpeedTime = Time.time + attackSpeed; // tähän lisätään aseen weight
             return true;
         }
@@ -121,7 +164,13 @@ public class combat : MonoBehaviour {
     public float countPlayerDamage()
     {
         float playerDamage = dmgBase;
-        // tässä lasketaan mikan UUDESTA equipista weapon damage
+
+        if (GetComponent<PlayerScript>().Inventory.EquipData.Tool != null)
+        {
+            GameObject tempWeapon = GetComponent<PlayerScript>().Inventory.EquipData.Tool;
+            playerDamage += tempWeapon.GetComponent<weaponStats>().damage;
+        }
+
         return playerDamage;
     }
 

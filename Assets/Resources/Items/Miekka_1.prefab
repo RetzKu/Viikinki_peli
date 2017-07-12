@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212140991886089822}
   - component: {fileID: 61260072766762386}
   - component: {fileID: 114619203189581000}
-  m_Layer: 20
+  m_Layer: 21
   m_Name: Miekka_1
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1089087590087088}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 24.147516, y: 25.522814, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

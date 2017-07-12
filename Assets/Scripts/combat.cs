@@ -8,10 +8,16 @@ public class combat : MonoBehaviour {
 
     public float hp = 100.0f;
     public float dmgBase = 5.0f;
+    public float DefaultAttackLength = 0.2f;
     public float rangedBaseDmg = 0.0f;
     public float movementSpeed = 100.0f;
     public float attackSpeed = 1.0f;
     public float armor = 1.0f;
+
+    private float attackSpeedTime = 0.0f;
+    private float atmAttackTime = 0.0f;
+    private bool damageDone = false;
+    
 
     private enum Directions { Left, Down, Up, Right }
     private Directions Direction;
@@ -77,15 +83,59 @@ public class combat : MonoBehaviour {
         return transform.Find(tmpTorso).GetComponent<Collider2D>();
     }
 
+
     void OnTriggerEnter2D(Collider2D Trigger)
     {
-        Debug.LogWarning("Trigger111");
-        print("trigger");
-        if (Trigger.IsTouchingLayers(LayerMask.NameToLayer("Player")) == true)
+        
+        // 
+
+    }
+
+    void OnTriggerStay2D(Collider2D Trigger)
+    {
+        if (Trigger.tag == "Enemy")
         {
-            Debug.LogWarning("Koskee pelaajaaan");
-            GetComponent<PlayerScript>().Inventory.AddToInventory(Trigger.gameObject);
+            if (atmAttackTime < Time.time && Time.time < (atmAttackTime + DefaultAttackLength))
+            {
+                if (damageDone == false)
+                {
+                    Debug.Log("Wolf takes dmg");
+                    damageDone = true;
+                }
+            }
         }
+    }
+
+    private bool isAttackLegal()
+    {
+        if(Time.time > attackSpeedTime)
+        {
+            damageDone = false;
+            atmAttackTime = Time.time; // lyödään juuri tähän aikaan
+            attackSpeedTime = Time.time + attackSpeed; // tähän lisätään aseen weight
+            return true;
+        }
+        return false;
+    }
+
+    public float countPlayerDamage()
+    {
+        float playerDamage = dmgBase;
+        // tässä lasketaan mikan UUDESTA equipista weapon damage
+        return playerDamage;
+    }
+
+    public bool attackBoolean()
+    {
+        // Tähän voisi tehdä pari riviä koodia joka tarkistaa onko kyseessä android vai pc inputit ja sen mukaan ohjaisi
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (isAttackLegal()) // PC
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public float hit()

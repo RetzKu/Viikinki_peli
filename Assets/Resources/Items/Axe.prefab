@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212546430751044890}
   - component: {fileID: 61171579945581680}
   - component: {fileID: 114467666287106744}
-  m_Layer: 20
+  m_Layer: 21
   m_Name: Axe
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1031800583617284}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.4307, y: 29.231346, z: 0}
+  m_LocalPosition: {x: 23.985254, y: 25.256552, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,9 +53,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0.02391472, y: 0.0534565}
+  m_Offset: {x: 0.0376, y: 0.0839}
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.19}
+  m_Size: {x: 0.155, y: 0.297}
 --- !u!114 &114467666287106744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,8 +67,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0f944e20637e74295b18c250700a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 2.6
   attackWeight: 10
+  weaponEffect: {fileID: 0}
 --- !u!212 &212546430751044890
 SpriteRenderer:
   m_ObjectHideFlags: 1

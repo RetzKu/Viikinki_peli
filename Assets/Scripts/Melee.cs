@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Melee : weaponStats
 {
-    void start()
+    /*void Awake()
     {
+        if (weaponEffect)
+        {
+            Debug.Log("asdtoimii");
+            GameObject.Find("Player").GetComponent<FxScript>().FxUpdate(weaponEffect);
+        }
+    }*/
 
-    }
-    void trigger()
-    {
-        //trigger torso short melee trigger
-    }
     // Täällä tarvittava animaatio lyhyelle meleelle
 }

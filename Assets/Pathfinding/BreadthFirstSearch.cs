@@ -86,7 +86,6 @@ public class BreadthFirstSearch
         } 
         goalX = playerX;
         goalY = playerY;
-
         panther.Search(moveTiles,goalX,goalY);
 
         //Dictionary<tiles, int> toimii = new Dictionary<tiles, int>();

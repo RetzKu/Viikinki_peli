@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+public enum WeaponType { noWeapon, meleeWeapon, longMeleeWeapon, rangedWeapon }
+
 public class PlayerScript : MonoBehaviour
 {
 
@@ -20,15 +22,17 @@ public class PlayerScript : MonoBehaviour
     Vector3 startPoint;
     Vector3 endPoint;
 
-    public bool running = true;
-
     public Transform SidewaysHand;
     public Transform UpwardsHand;
     public Transform DownwardsHand;
 
     private ItemManager Hand;
     //public int Damage;
+    public inventory.Equipped EquipInventory { get { return Inventory.EquipData; } }
+    
+    public WeaponType EquippedType;
 
+    [System.NonSerialized]
     public int Direction;
 
     void Start()
@@ -56,12 +60,20 @@ public class PlayerScript : MonoBehaviour
         RefreshHand();
         InventoryInput();
     }
-    
+
     void RefreshHand()
     {
         if (Inventory.Changed == true)
         {
-            Inventory.EquipData.Tool.GetType();
+
+            if (EquippedType != Inventory.EquipData.Type)
+            {
+                Debug.Log(EquipInventory.Tool);
+                EquippedType = Inventory.EquipData.Type;
+                GetComponent<AnimatorScript>().ResetStates();
+                GetComponent<AnimatorScript>().Type = EquipInventory.Type;
+            }
+
             if (Inventory.EquipData.Tool != null)
             {
                 if (Hand.Copy == null)
@@ -104,33 +116,12 @@ public class PlayerScript : MonoBehaviour
 
     void InventoryInput()
     {
-        if (Input.GetKeyDown("1") == true) { Inventory.EquipItem(0); }
-        if (Input.GetKeyDown("2") == true) { Inventory.EquipItem(1); }
-        if (Input.GetKeyDown("3") == true) { Inventory.EquipItem(2); }
+        for(int i = 0; i <= InventorySize;i++)
+        {
+            string n = i.ToString();
+            if(Input.GetKeyDown(i.ToString()) == true) { Inventory.EquipItem(i-1); }
+        }
         if(Input.GetKeyDown("f") == true) { Inventory.DropItem(); }
-    }
-
-    void OnTriggerEnter2D(Collider2D Trig)
-    {
-        if (Trig.transform.tag == "Item")
-        {
-            Inventory.AddToInventory(Trig.gameObject);
-        }
-
-        if (Trig.gameObject.tag == "puu")
-        {
-            Debug.Log("BONK");
-            //Trig.transform.parent.GetComponent<TreeHP>().hp -= Damage;
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D Trig)
-    {
-        //if (Trig.transform.tag == "Dropped")
-        //{
-        //    Trig.transform.tag = "Item";
-        //    print("escaped dropped item");
-        //}
     }
 
     /*WHEN TIME, TRANSFER DEFAULT METHODS TO THIS CLASS*/

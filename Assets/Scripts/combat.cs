@@ -22,8 +22,6 @@ public class combat : MonoBehaviour {
     private enum Directions { Left, Down, Up, Right }
     private Directions Direction;
 
-    public enum WeaponType { noWeapon, meleeWeapon, longMeleeWeapon, rangedWeapon }
-
     private string dirObjectName;
 	private Sprite Fx;
 

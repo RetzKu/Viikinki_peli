@@ -25,7 +25,7 @@ public class TmpSwing : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) == false)
+        if (!GetComponent<combat>().attackBoolean())
         {
             CopyFx = Instantiate(Fx);
             CopyFx.AddComponent<DestroyOnTime>().lifetime = LifeTime;

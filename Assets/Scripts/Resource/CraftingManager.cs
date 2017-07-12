@@ -69,9 +69,7 @@ public class CraftingManager : MonoBehaviour
 
             // TODO: Minne instantioin craftatun itemin
             var go = Instantiate(prefab);
-
             go.tag = "Dropped";
-
             go.transform.position = Player.transform.position;
             var faller = go.AddComponent<ObjectFaller>();
             faller.StartFreeFall(2.4f);

@@ -497,7 +497,7 @@ MonoBehaviour:
   aliF: 0.2
   cohF: 0.1
   velocity: {x: 0, y: 0}
-  leapDist: 4
+  leapDist: 5
 --- !u!114 &114693461594013910
 MonoBehaviour:
   m_ObjectHideFlags: 1

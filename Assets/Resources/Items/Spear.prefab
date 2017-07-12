@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212190493381623272}
   - component: {fileID: 114363438173767434}
   - component: {fileID: 61927950636106076}
-  m_Layer: 20
+  m_Layer: 21
   m_Name: Spear
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1500902554411140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 23.938328, y: 24.730547, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,9 +53,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0.09003197}
+  m_Offset: {x: 0, y: 0.1404}
   serializedVersion: 2
-  m_Size: {x: 0.03, y: 0.41}
+  m_Size: {x: 0.047, y: 0.641}
 --- !u!114 &114363438173767434
 MonoBehaviour:
   m_ObjectHideFlags: 1

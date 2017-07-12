@@ -55,9 +55,10 @@ public class AnimatorScript : MonoBehaviour
 
     void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) == true)
+        if (GetComponent<combat>().attackBoolean() == true)
         {
             foreach (Animator t in Animators) { t.SetTrigger("MeleeAttack"); }
+            GetComponent<FxScript>().instantiateFx();
         }
     }
 

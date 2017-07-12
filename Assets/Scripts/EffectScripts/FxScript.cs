@@ -33,18 +33,15 @@ public class FxScript : MonoBehaviour {
         } 
     }
 
-	// Update is called once per frame
-	void Update ()
+    public void instantiateFx()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) == true) // Myöhemmin tämä tarkistetaan eri paikasta
-        {
-            CopyFx = Instantiate(Fx);
-            CopyFx.AddComponent<DestroyOnTime>().lifetime = LifeTime;
-            CopyFx.AddComponent<FxFade>().Duration = LifeTime;
-            ObjectPosition(CopyFx);
-            CopyFx.transform.SetParent(transform);
-        }
-	}
+        CopyFx = Instantiate(Fx);
+        CopyFx.AddComponent<DestroyOnTime>().lifetime = LifeTime;
+        CopyFx.AddComponent<FxFade>().Duration = LifeTime;
+        ObjectPosition(CopyFx);
+        CopyFx.transform.SetParent(transform);
+    }
+
     void ObjectPosition(GameObject Copy)
     {
         MousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition); // hiiren sijainti

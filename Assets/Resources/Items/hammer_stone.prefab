@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4260204326548848}
   - component: {fileID: 212073438719054240}
   - component: {fileID: 114454903548593788}
-  - component: {fileID: 61527271090478178}
   m_Layer: 21
   m_Name: hammer_stone
   m_TagString: Item
@@ -42,20 +41,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61527271090478178
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1830157689502956}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0.059999995}
-  serializedVersion: 2
-  m_Size: {x: 0.09, y: 0.2}
 --- !u!114 &114454903548593788
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,12 +52,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0f944e20637e74295b18c250700a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 0.45
   damage: 5
   attackWeight: 10
   weaponEffect: {fileID: 21300000, guid: f43c53a45dee3724793fb23c5164e286, type: 3}
   onRange: 0
+  distance: 0.4
   weaponEffectScale: {x: 0.45, y: 0.45, z: 1}
+  effectOffSet: {x: 0, y: 0.2, z: 0}
 --- !u!212 &212073438719054240
 SpriteRenderer:
   m_ObjectHideFlags: 1

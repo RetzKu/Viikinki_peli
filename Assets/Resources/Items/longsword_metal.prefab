@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4254257402086996}
   - component: {fileID: 212810035415197274}
   - component: {fileID: 114286263348603950}
-  - component: {fileID: 61165941594480930}
   m_Layer: 21
   m_Name: longsword_metal
   m_TagString: Item
@@ -42,20 +41,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61165941594480930
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1192870776797376}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0.13600007}
-  serializedVersion: 2
-  m_Size: {x: 0.07, y: 0.40000004}
 --- !u!114 &114286263348603950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,12 +52,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0f944e20637e74295b18c250700a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 0.6
   damage: 9
   attackWeight: 10
   weaponEffect: {fileID: 21300000, guid: f43c53a45dee3724793fb23c5164e286, type: 3}
   onRange: 0
+  distance: 0.6
   weaponEffectScale: {x: 0.8, y: 0.8, z: 1}
+  effectOffSet: {x: 0, y: 0.2, z: 0}
 --- !u!212 &212810035415197274
 SpriteRenderer:
   m_ObjectHideFlags: 1

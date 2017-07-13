@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4759603097724434}
   - component: {fileID: 212654023957112154}
-  - component: {fileID: 61670824758882748}
   - component: {fileID: 114196203010628020}
   m_Layer: 21
   m_Name: axe_metal
@@ -42,20 +41,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61670824758882748
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1554091243190564}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0.025000002, y: 0.057000127}
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.19}
 --- !u!114 &114196203010628020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,12 +52,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0f944e20637e74295b18c250700a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 0.4
   damage: 7
   attackWeight: 10
   weaponEffect: {fileID: 21300000, guid: f43c53a45dee3724793fb23c5164e286, type: 3}
   onRange: 0
+  distance: 0.4
   weaponEffectScale: {x: 0.45, y: 0.45, z: 1}
+  effectOffSet: {x: 0, y: 0.2, z: 0}
 --- !u!212 &212654023957112154
 SpriteRenderer:
   m_ObjectHideFlags: 1

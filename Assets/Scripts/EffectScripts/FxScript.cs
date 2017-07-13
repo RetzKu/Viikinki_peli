@@ -42,8 +42,9 @@ public class FxScript : MonoBehaviour {
     public void instantiateFx()
     {
         CopyFx = Instantiate(Fx);
-        CopyFx.AddComponent<DestroyOnTime>().lifetime = LifeTime;
+        Destroy(CopyFx, LifeTime);
         CopyFx.AddComponent<FxFade>().Duration = LifeTime;
+        CopyFx.AddComponent<BoxCollider2D>().isTrigger = true;
         ObjectPosition(CopyFx);
         CopyFx.transform.SetParent(transform);
         if (GetComponent<PlayerScript>().weaponInHand != null)
@@ -64,11 +65,20 @@ public class FxScript : MonoBehaviour {
         if (GetComponent<PlayerScript>().weaponInHand != null)
         {
             GameObject tempWeapon = GetComponent<PlayerScript>().weaponInHand;
-            MaxDistance = tempWeapon.GetComponent<weaponStats>().maxDistance;
+            MaxDistance = tempWeapon.GetComponent<weaponStats>().distance;
         }
         else
         {
             MaxDistance = 0.3f;
+        }
+        if (GetComponent<PlayerScript>().weaponInHand != null)
+        {
+            GameObject tempWeapon = GetComponent<PlayerScript>().weaponInHand;
+            EffectOffSet = tempWeapon.GetComponent<weaponStats>().effectOffSet;
+        }
+        else
+        {
+            EffectOffSet = new Vector3(0f, 0.3f, 0f);
         }
         MouseDir = (MousePoint - transform.position - EffectOffSet).normalized * MaxDistance; //mikä on hiiren suunta
         Copy.transform.position = Base + MouseDir; 
@@ -86,4 +96,34 @@ public class FxScript : MonoBehaviour {
         Copy.transform.Rotate(0, 0, n * -1);
     }
    
+    void OnTriggerEnter2D(Collider2D trig)
+    {
+        if (trig.gameObject.tag == "Enemy")
+        {
+            if (GetComponent<PlayerScript>().weaponInHand != null)
+            {
+                GetComponentInChildren<weaponStats>().onRange = true;
+            }
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D trig)
+    {
+        if (trig.gameObject.tag == "Enemy")
+        {
+            if (GetComponent<PlayerScript>().weaponInHand != null)
+            {
+                GetComponentInChildren<weaponStats>().onRange = true;
+            }
+        }
+
+    }
+    void OnTriggerExit2D(Collider2D trig)
+    {
+        if (GetComponent<PlayerScript>().weaponInHand != null)
+        {
+            GetComponentInChildren<weaponStats>().onRange = false;
+        }
+    }
+
 }

@@ -15,6 +15,7 @@ public class combat : MonoBehaviour {
     public float DefaultAttackLength = 0.2f;
 
     private float attackSpeedTime = 0.0f;
+    [HideInInspector]
     public float atmAttackTime = 0.0f;
     private bool damageDone = false;
     
@@ -48,12 +49,14 @@ public class combat : MonoBehaviour {
 
                 if (tempWeapon.GetComponent<weaponStats>().onRange)
                 {
-
-                    if (damageDone == false)
+                    if (tempWeapon.GetComponent<weaponStats>().onRange == true)
                     {
-                        Debug.Log("Player damage: ");
-                        Debug.Log(countPlayerDamage());
-                        damageDone = true;
+                        if (damageDone == false)
+                        {
+                            Debug.Log("Player damage: ");
+                            Debug.Log(countPlayerDamage());
+                            damageDone = true;
+                        }
                     }
                 }
             }

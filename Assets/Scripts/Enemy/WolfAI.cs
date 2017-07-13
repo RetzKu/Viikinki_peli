@@ -327,9 +327,12 @@ public class WolfAI : generalAi
     public override void resetValues()
     {
         agro = true;
+        inAttack = false;
         justBite = false;
         biteTimer = 0f;
         currentTime = 0;
         attackCounter = 0;
+        GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
+
     }
 }

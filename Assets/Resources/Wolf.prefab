@@ -486,6 +486,7 @@ MonoBehaviour:
   agro: 0
   attackDist: 0
   MaxSpeed: 3
+  knockTime: 0.2
   IdleRefreshRate: 100
   IdleRadius: 60
   IdleBallDistance: 100

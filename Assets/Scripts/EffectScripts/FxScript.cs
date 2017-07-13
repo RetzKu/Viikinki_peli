@@ -71,6 +71,7 @@ public class FxScript : MonoBehaviour {
             MaxDistance = 0.3f;
         }
         MouseDir = (MousePoint - transform.position - EffectOffSet).normalized * MaxDistance; //mikä on hiiren suunta
+        rotatePate(MouseDir);
         Copy.transform.position = Base + MouseDir; 
         GetAngleDegress(Copy);
     }
@@ -85,5 +86,33 @@ public class FxScript : MonoBehaviour {
         //print(n);
         Copy.transform.Rotate(0, 0, n * -1);
     }
-   
+   void rotatePate(Vector2 MouseDir)
+   {
+        PlayerDir temp = PlayerDir.def;
+        if (Mathf.Abs( MouseDir.x) >= Mathf.Abs(MouseDir.y))
+        {
+            if (MouseDir.x < 0)
+            {
+                temp = PlayerDir.left;
+            }
+            else
+            {
+                temp = PlayerDir.right;
+            }
+        }
+        else if (Mathf.Abs(MouseDir.y) >= Mathf.Abs(MouseDir.x))
+        {
+            if (MouseDir.y < 0)
+            {
+                temp = PlayerDir.down;
+            }
+            else
+            {
+                temp = PlayerDir.up;
+            }
+
+        }
+
+        GetComponent<Movement>().UpPateDir(temp);
+    }
 }

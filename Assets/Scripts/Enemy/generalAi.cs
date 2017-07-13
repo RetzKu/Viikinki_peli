@@ -213,14 +213,14 @@ public abstract class generalAi : MonoBehaviour
     {
         if (!knocked)
         {
-        knocked = true;
-        rotation.Lock = true; 
-        resetValues();
-        knock = body.position - player.GetComponent<DetectEnemies>().getPosition();
-        knock.Normalize();
-        knock *= knockDist;
-        flags = (int)behavior.seek;
-        Physics._maxSpeed = MaxSpeed * 5;
+            knocked = true;
+            rotation.Lock = true; 
+            resetValues();
+            knock = body.position - player.GetComponent<DetectEnemies>().getPosition();
+            knock.Normalize();
+            knock *= knockDist;
+            flags = (int)behavior.seek;
+            Physics._maxSpeed = MaxSpeed * 5;
         }
         
     }

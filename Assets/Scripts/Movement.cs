@@ -3,23 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-
+public enum PlayerDir
+{
+    right = 3,
+    left = 0,
+    up = 2,
+    down = 1,
+    def = 5
+}
 
 public class Movement : MonoBehaviour
 {
+    PlayerDir pd = PlayerDir.def;
+    PlayerDir fx = PlayerDir.def;
     private Rigidbody2D rb;
         private Vector2 movement;
             public float slowdown = 10;
             public float thrust = 15;
             public float max_spd = 3;
-            public float min_spd_pate = 0.5f;
+            public float min_spd_pate = 0.2f;
             public float max_spd_pate = 3;
-
+            bool inAttack = false;
     public bool Keyboard = true;
     public CustomJoystick Joystick;
     public bool lerpUp = true;
     float currentlerpate = 0f;
     float lerpateTime = 0.5f;
+    float attackTime = 0.6f;
+    float attackTimer = 0f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,6 +38,10 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (inAttack)
+        {
+            pateClock();
+        }
         lerpate();
         //print(max_spd);
         Vector2 SpeedLimiter = SpeedLimitChecker();
@@ -56,7 +71,7 @@ public class Movement : MonoBehaviour
         if (rb.velocity.y > max_spd) { added_spd.y -= ((rb.velocity.y / max_spd) - 1) * max_spd; }
         if (rb.velocity.x < -max_spd) { added_spd.x += ((rb.velocity.x / -max_spd) -1) *max_spd; }
         if (rb.velocity.y < -max_spd) { added_spd.y += ((rb.velocity.y / -max_spd) - 1) * max_spd; }
-
+        getRotation(added_spd);
         return added_spd;
 
     }
@@ -85,10 +100,62 @@ public class Movement : MonoBehaviour
 
         max_spd = min_spd_pate + ((max_spd_pate - min_spd_pate) * t);
 
+    }
+    public void UpPateDir(PlayerDir dir)
+    {
+        fx = dir;
+        if (dir == pd)
+        {
+            return;
+        }
+        else
+        {
+            inAttack = true;
+            GetComponent<AnimatorScript>().Sprites.EnableSprites((int)dir);
+            GetComponent<AnimatorScript>()._Lock = true;
+        }
+    }
+    void pateClock()
+    {
+        attackTimer += Time.deltaTime;
+        if (attackTimer > attackTime)
+        {
+            lerpUp = true;
+            inAttack = false;
+            attackTimer = 0f;
+            GetComponent<AnimatorScript>()._Lock = false;
+        }
+        else
+        {
+            lerpUp = false;
+        }
+    }
+    void getRotation(Vector2 velocity)
+    {
+        PlayerDir temp = PlayerDir.def;
+        if (Mathf.Abs(velocity.x) >= Mathf.Abs(velocity.y))
+        {
+            if (velocity.x < 0)
+            {
+                temp = PlayerDir.left;
+            }
+            else
+            {
+                temp = PlayerDir.right;
+            }
+        }
+        else if (Mathf.Abs(velocity.y) >= Mathf.Abs(velocity.x))
+        {
+            if (velocity.y < 0)
+            {
+                temp = PlayerDir.down;
+            }
+            else
+            {
+                temp = PlayerDir.up;
+            }
 
-    //protected float lerPate(float start, float end, float smooth)
-    //{
-    //    return start + ((end - start) * smooth);
-    //}
+        }
+        pd = temp;
     }
 }

@@ -5,11 +5,12 @@ using UnityEngine;
 public class AnimatorScript : MonoBehaviour
 {
     private Rigidbody2D Player;
-
+    bool Lock = false;
+    public bool _Lock {set { Lock = value; } }
     private List<Animator> Animators;
     private float SpeedEdge = 0.3f;
 
-    private SpriteChanger Sprites;
+    internal SpriteChanger Sprites;
 
     internal WeaponType Type;
 
@@ -32,10 +33,12 @@ public class AnimatorScript : MonoBehaviour
     void Update()
     {
         CheckVelocity();
-        Sprites.DirectionCheck();
+        if (!Lock)
+        {
+            Sprites.DirectionCheck();
+        }
         Attack();
     }
-
     public int PlayerDir()
     {
         int tmp = Sprites.Index;
@@ -129,16 +132,16 @@ public class AnimatorScript : MonoBehaviour
             {
                 if (PlayerRb.velocity.x < PlayerRb.velocity.y) // 1,1
                 {
-                    Index = 2;
+                    Index = 2; // ylös
                 }
                 else if (PlayerRb.velocity.x < PlayerRb.velocity.y * -1) //1,-1
                 {
                     //spritesdown
-                    Index = 1;
+                    Index = 1; // alas
                 }
                 else
                 {
-                    Index = 3;
+                    Index = 3; // oikea
                 }
             }
             else if (PlayerRb.velocity.x < 0) // X negative
@@ -153,7 +156,7 @@ public class AnimatorScript : MonoBehaviour
                 }
                 else
                 {
-                    Index = 0;
+                    Index = 0; // vasen
                 }
             }
             else if (PlayerRb.velocity.y != 0) // X negative
@@ -169,7 +172,7 @@ public class AnimatorScript : MonoBehaviour
             }
             EnableSprites(Index);
         }
-        void EnableSprites(int SpriteNum)
+        public void EnableSprites(int SpriteNum)
         {
             bool changed = false;
             if (SpriteNum != LastSpriteNum)
@@ -204,4 +207,5 @@ public class AnimatorScript : MonoBehaviour
             LastSpriteNum = SpriteNum;
         }
     }
+
 }

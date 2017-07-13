@@ -75,7 +75,7 @@ public abstract class generalAi : MonoBehaviour
     float knockCounter = 0f;
     Vector2 knock = new Vector2(0, 0);
     protected bool GiveStartTarget = true;
-
+    protected bool kys = false;
     protected int counter = 0;
     public int IdleRefreshRate = 100;
     public float IdleRadius = 60.0f;
@@ -211,14 +211,18 @@ public abstract class generalAi : MonoBehaviour
     }
     public virtual void KnockBack()
     {
+        if (!knocked)
+        {
         knocked = true;
         rotation.Lock = true; 
         resetValues();
         knock = body.position - player.GetComponent<DetectEnemies>().getPosition();
         knock.Normalize();
         knock *= knockDist;
-        flags = (int)behavior.seekAndArrive;
-        Physics._maxSpeed = MaxSpeed * 3;
+        flags = (int)behavior.seek;
+        Physics._maxSpeed = MaxSpeed * 5;
+        }
+        
     }
     protected void knocktimer()
     {
@@ -226,6 +230,10 @@ public abstract class generalAi : MonoBehaviour
 
         if(knockCounter < knockTime)
         {
+            float t = knockCounter / knockTime;
+            float k =  lerpate(MaxSpeed * 5, 0, t);
+            //print(k);
+            Physics._maxSpeed = k;
             target = body.position + knock;
         }
         else
@@ -236,6 +244,14 @@ public abstract class generalAi : MonoBehaviour
             knockCounter = 0;
             rotation.Lock = false;
         }
+    }
+    float lerpate(float start, float end, float smooth)
+    {
+        return start + ((end - start) * smooth);
+    }
+    public void killMePls()
+    {
+        kys = true;
     }
     public abstract void resetValues();
     public abstract bool killMyself();

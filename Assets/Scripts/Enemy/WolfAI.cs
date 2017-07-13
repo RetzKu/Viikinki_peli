@@ -291,13 +291,20 @@ public class WolfAI : generalAi
     }
     public override bool killMyself()
     {
-        int[] ind = player.GetComponent<UpdatePathFind>().path.calculateIndex(body.position);
+        if (!kys)
+        {
+            int[] ind = player.GetComponent<UpdatePathFind>().path.calculateIndex(body.position);
 
-        if (ind[0] < 0 || ind[0] > 59 || ind[1] < 0 || ind[1] > 59)
+            if (ind[0] < 0 || ind[0] > 59 || ind[1] < 0 || ind[1] > 59)
+            {
+                return true;
+            }
+            return false;
+        }
+        else
         {
             return true;
         }
-        return false;
     }
 
     bool timer()

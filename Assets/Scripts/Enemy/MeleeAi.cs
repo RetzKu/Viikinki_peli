@@ -5,8 +5,8 @@ using UnityEngine;
 public class MeleeAi : generalAi {
 
     float swingDist = 1f;
-    float attackCounter = 5f; 
-    private float attackUptade = 5f; // how often attack happens
+    //float attackCounter = 5f; 
+    //private float attackUptade = 5f; // how often attack happens
     float attRefresh = 2f;
     float attCount = 0f;
     bool attack = true;
@@ -57,11 +57,17 @@ public class MeleeAi : generalAi {
         {
             knocktimer();
         }
+
         powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags, CollState);
         target = powers[1];
         velocity = powers[0];
 
         velocity *= Time.deltaTime;
+        //if (knocked)
+        //{
+        //    print(velocity.magnitude);
+        //}
+
         body.MovePosition(body.position + velocity);
     }
 
@@ -142,13 +148,20 @@ public class MeleeAi : generalAi {
 
     public override bool killMyself()
     {
-        int[] ind = player.GetComponent<UpdatePathFind>().path.calculateIndex(body.position);
+        if (!kys)
+        {
+            int[] ind = player.GetComponent<UpdatePathFind>().path.calculateIndex(body.position);
 
-        if (ind[0] < 0 || ind[0] > 59 || ind[1] < 0 || ind[1] > 59)
+            if (ind[0] < 0 || ind[0] > 59 || ind[1] < 0 || ind[1] > 59)
+            {
+                return true;
+            }
+        return false;
+        }
+        else
         {
             return true;
         }
-        return false;
     }
     public override void resetValues()
     {

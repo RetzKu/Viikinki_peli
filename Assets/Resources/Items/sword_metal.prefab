@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4300514292108580}
   - component: {fileID: 212326957663030660}
   - component: {fileID: 114818606266224884}
+  - component: {fileID: 61112887593380042}
   m_Layer: 21
   m_Name: sword_metal
   m_TagString: Item
@@ -41,6 +42,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &61112887593380042
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1376086916310134}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0.077999875}
+  serializedVersion: 2
+  m_Size: {x: 0.05, y: 0.26}
 --- !u!114 &114818606266224884
 MonoBehaviour:
   m_ObjectHideFlags: 1

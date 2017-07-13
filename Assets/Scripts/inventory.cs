@@ -54,10 +54,11 @@ public class inventory
         private GameObject _ChestPiece;
         [SerializeField]
         private GameObject _Tool;
+        private int _ArrowCount;
 
         public GameObject Tool { get { return _Tool; } }
         public WeaponType Type { get { return EquippedType(); } }
-
+        public int ArrowCount { get { return _ArrowCount; } set { _ArrowCount = value; } }
 
         public Equipped() { _ChestPiece = null; _Tool = null; }
 
@@ -83,5 +84,6 @@ public class inventory
         }
         public GameObject EmptyHand() { GameObject RemovedTool = _Tool; _Tool = null; return RemovedTool; }
         public void SetTool(GameObject Tool) { _Tool = Tool; }
+        public bool UsedArrow(){if (ArrowCount > 1){ArrowCount -= 1; return true; } else { return false; }}
     }
 }

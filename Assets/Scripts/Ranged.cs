@@ -23,7 +23,7 @@ public class Ranged : weaponStats
     {
         Weapon = transform.gameObject;
 
-        if (Hand.name == "u_l_hand") { Weapon.transform.localRotation = Quaternion.Euler(0, 0, -73); Weapon.transform.localPosition = new Vector3(0.032f, 0.019f, 0); }
+        if (Hand.name == "u_l_hand") { Weapon.transform.localRotation = Quaternion.Euler(0, 0, -260); Weapon.transform.localPosition = new Vector3(0.032f, 0.019f, 0); }
         if (Hand.name == "d_r_hand") { Weapon.transform.localRotation = Quaternion.Euler(0, 0, -105); }
         if (Hand.name == "s_l_hand") { Weapon.transform.localRotation = Quaternion.Euler(0, 0, -67); }
 

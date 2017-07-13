@@ -45,8 +45,16 @@ public class s_c_torsoScript : MonoBehaviour {
 
         if (trig.transform.tag == "Item")
         {
-            GetComponentInParent<PlayerScript>().Inventory.AddToInventory(trig.gameObject);
-            Debug.LogWarning(trig.transform.name + " Picked up");
+            if(trig.transform.name == "Arrow")
+            {
+                GetComponent<PlayerScript>().EquippedTool.ArrowCount++;
+                Destroy(trig.gameObject);
+            }
+            else
+            { 
+               GetComponentInParent<PlayerScript>().Inventory.AddToInventory(trig.gameObject);
+               Debug.LogWarning(trig.transform.name + " Picked up");
+            }
         }
     }
     void OnTriggerExit2D(Collider2D Trig)

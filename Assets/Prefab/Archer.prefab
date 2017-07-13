@@ -76,7 +76,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.5
 --- !u!114 &114423998820674782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -91,7 +91,7 @@ MonoBehaviour:
   inAttack: 0
   agro: 0
   attackDist: 4.815528
-  MaxSpeed: 0.04
+  MaxSpeed: 2
   IdleRefreshRate: 100
   IdleRadius: 60
   IdleBallDistance: 100

@@ -9,76 +9,76 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1413759944923202}
+  m_RootGameObject: {fileID: 1023655488813636}
   m_IsPrefabParent: 1
---- !u!1 &1413759944923202
+--- !u!1 &1023655488813636
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4488153893756244}
-  - component: {fileID: 212840684736596094}
-  - component: {fileID: 61762726418950662}
-  - component: {fileID: 114868535431459582}
+  - component: {fileID: 4094366119374212}
+  - component: {fileID: 212582413484210810}
+  - component: {fileID: 61777673938800498}
+  - component: {fileID: 114139099716931168}
   m_Layer: 21
-  m_Name: Pickaxe
+  m_Name: bow_tier1
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4488153893756244
+--- !u!4 &4094366119374212
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1413759944923202}
+  m_GameObject: {fileID: 1023655488813636}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.526, y: 23.412, z: 0}
+  m_LocalPosition: {x: 24.19956, y: 25.976852, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61762726418950662
+--- !u!61 &61777673938800498
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1413759944923202}
+  m_GameObject: {fileID: 1023655488813636}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0.057000127}
+  m_Offset: {x: -0.01199997, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.17, y: 0.19}
---- !u!114 &114868535431459582
+  m_Size: {x: 0.06, y: 0.36}
+--- !u!114 &114139099716931168
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1413759944923202}
+  m_GameObject: {fileID: 1023655488813636}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d0f944e20637e74295b18c250700a94, type: 3}
+  m_Script: {fileID: 11500000, guid: b15fe2e1555ab584cb343bda26a0a4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 0.4
-  damage: 4
+  maxDistance: -0.3
+  damage: 1
   attackWeight: 10
-  weaponEffect: {fileID: 21300000, guid: f43c53a45dee3724793fb23c5164e286, type: 3}
+  weaponEffect: {fileID: 21300040, guid: f43c53a45dee3724793fb23c5164e286, type: 3}
   onRange: 0
-  weaponEffectScale: {x: 0.4, y: 0.4, z: 1}
---- !u!212 &212840684736596094
+  weaponEffectScale: {x: 0.3, y: 0.3, z: 1}
+--- !u!212 &212582413484210810
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1413759944923202}
+  m_GameObject: {fileID: 1023655488813636}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -104,7 +104,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300014, guid: c93d488bcad6fba41bcdb47ca2d08898, type: 3}
+  m_Sprite: {fileID: 21300012, guid: c93d488bcad6fba41bcdb47ca2d08898, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

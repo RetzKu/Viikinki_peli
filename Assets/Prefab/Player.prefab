@@ -1070,6 +1070,7 @@ GameObject:
   - component: {fileID: 114037182199660584}
   - component: {fileID: 114216893217373730}
   - component: {fileID: 114226087637341638}
+  - component: {fileID: 114282770370633434}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -1190,7 +1191,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977754839611798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41.96, y: 31.47, z: 0}
+  m_LocalPosition: {x: 33.00464, y: 29.885303, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 4701210339847834}
@@ -2625,10 +2626,11 @@ MonoBehaviour:
       _ChestPiece: {fileID: 0}
       _Tool: {fileID: 0}
     InventorySize: 5
+  running: 1
   SidewaysHand: {fileID: 4334774280397600}
   UpwardsHand: {fileID: 4440870551386460}
   DownwardsHand: {fileID: 4936626758937170}
-  EquippedType: 0
+  Direction: 0
 --- !u!114 &114135886502828906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2730,6 +2732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aggroDist: 5
+  slowDown: 0.2
 --- !u!114 &114226087637341638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2744,7 +2747,21 @@ MonoBehaviour:
   BareHandSprite: {fileID: 21300020, guid: f43c53a45dee3724793fb23c5164e286, type: 3}
   LifeTime: 0.15
   MaxDistance: 0.4
+  SpriteScale: {x: 1, y: 1, z: 1}
   EffectOffSet: {x: 0, y: 0.3, z: 0}
+--- !u!114 &114282770370633434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1977754839611798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 137c1b2f65ad1ab40815f0a9a4a21588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aggroDist: 5
+  slowDown: 0.3
 --- !u!114 &114286256747533024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2759,8 +2776,11 @@ MonoBehaviour:
   slowdown: 10
   thrust: 15
   max_spd: 3
+  min_spd_pate: 0.5
+  max_spd_pate: 3
   Keyboard: 1
   Joystick: {fileID: 114043215955215906}
+  lerpUp: 1
 --- !u!114 &114371828299425804
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2885,7 +2905,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346d15d1fa97b8d4f98a2b1aa2c13c7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 1
 --- !u!114 &114613662104883584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2899,11 +2918,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   dmgBase: 5
-  DefaultAttackLength: 0.2
   rangedBaseDmg: 0
   movementSpeed: 100
   attackSpeed: 1
   armor: 1
+  DefaultAttackLength: 0.2
+  atmAttackTime: 0
 --- !u!114 &114616782320242740
 MonoBehaviour:
   m_ObjectHideFlags: 1

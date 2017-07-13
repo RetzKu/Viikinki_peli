@@ -7,9 +7,9 @@ public class WolfAI : generalAi
 {
 
 
-    public float leapDist = 2.0f;
+    public float leapDist = 1.0f;
 
-    private int attackCounter = 300;
+    private int attackCounter = 300; // EETU TRIGGER
     private int attackUptade = 300;
     float leapSpeed = 4;
     bool bite = false;
@@ -44,8 +44,8 @@ public class WolfAI : generalAi
         //print(MaxSpeed);
         if (!justBite)
         {
-        rotation.UpdateRotation(velocity, body.position);
-        GetComponent<WolfAnimatorScript>().SpriteDirection(myDir);
+            rotation.UpdateRotation(velocity, body.position);
+            GetComponent<WolfAnimatorScript>().SpriteDirection(myDir);
         }
         LayerMask mask = new LayerMask();
 
@@ -65,29 +65,42 @@ public class WolfAI : generalAi
                 HeardArray[i].GetComponent<generalAi>().agro = true; // check if eetu lies
             }
         }
-        if (!agro)
+        if (!knocked)
         {
-            wander(HeardArray, ref flags, ref GiveStartTarget, ref counter, IdleRefreshRate);
-            rotation.rotToPl = false;
-            rotation.Lock = false;
+            if (!agro)
+            {
+                wander(HeardArray, ref flags, ref GiveStartTarget, ref counter, IdleRefreshRate);
+                rotation.rotToPl = false;
+                rotation.Lock = false;
+            }
+            else if (agro)
+            {
+                Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
+
+                Vector2 dist = body.position - playerPos;
+                //if(dist.magnitude < biteRange*0.2f)
+                //{
+                //    player.GetComponent<Movement>().max_spd = 1;
+                //}
+                //else
+                //{
+                //    player.GetComponent<Movement>().max_spd = 3;
+                //}
+                leapingPattern(dist, playerPos);
+            }
         }
-        else if (agro)
+        else
         {
-            Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
-
-            Vector2 dist = body.position - playerPos;
-
-            leapingPattern(dist, playerPos);
+            knocktimer();
         }
         powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags, CollState);
         target = powers[1];
         velocity = powers[0];
 
-        if (currentTime > animTime)
+        if (currentTime > animTime) //??
         {
             currentTime = animTime;
-            Physics._maxSpeed = MaxSpeed * leapSpeed;
-            
+            Physics._maxSpeed = MaxSpeed * leapSpeed;            
         }
         velocity *= Time.deltaTime;
         //print(velocity.magnitude);
@@ -105,9 +118,10 @@ public class WolfAI : generalAi
                     rotation.rotToPl = true;
                     justBite = true;
                     inAttack = true;
-                    Physics._maxSpeed = MaxSpeed * 0.4f;
+                    Physics._maxSpeed = MaxSpeed * 0.3f;
                     rotation.playerPos = playerPos;
                     rotation.HardRotate( body.position, velocity);
+                    GetComponent<WolfAnimatorScript>().SpriteDirection(myDir);
                     GetComponent<WolfAnimatorScript>().AnimationTrigger(action.Attack);
                     GetComponent<WolfAnimatorScript>().AnimationState(action.Idle);
 
@@ -180,8 +194,6 @@ public class WolfAI : generalAi
                     attackCounter = 0;
                     rotation.Lock = false;
                     GetComponent<WolfAnimatorScript>().AnimationState(action.Moving);
-
-
                 }
 
             }
@@ -305,4 +317,12 @@ public class WolfAI : generalAi
 
     }
 
+    public override void resetValues()
+    {
+        agro = true;
+        justBite = false;
+        biteTimer = 0f;
+        currentTime = 0;
+        attackCounter = 0;
+    }
 }

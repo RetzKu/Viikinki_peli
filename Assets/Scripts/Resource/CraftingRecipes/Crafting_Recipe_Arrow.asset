@@ -20,7 +20,7 @@ MonoBehaviour:
     Y: 0
   Sound: {fileID: 0}
   sprite: {fileID: 0}
-  Prefab: {fileID: 1442913211837032, guid: 008965e054cf0a94c84b820e12ee658a, type: 2}
+  Prefab: {fileID: 1941705026831842, guid: 167dd15b75951fa46aeaf9cc64271c9d, type: 2}
   Materials:
   - Type: 4
     Count: 1

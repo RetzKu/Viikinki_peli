@@ -6,7 +6,7 @@ public class Stone : Resource
 {
     //[System.Serializable]
     //public static Sprite[] Sprites;
-    public override void Init()
+    public override void Init(bool destroyed)
     {
         
     }

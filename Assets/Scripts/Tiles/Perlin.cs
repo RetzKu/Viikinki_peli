@@ -485,8 +485,8 @@ public class Perlin : MonoBehaviour
                     GameObject prefab = setting.SpawnableObjects[i].ObjectPrefab;
                     if (totalCount + (spawnRate) >= roll)
                     {
-                        var go = ObjectPool.instance.GetObjectForType(prefab.name, true); // ??????????????????
-                        go.GetComponent<Resource>().Init();
+                        var go = ObjectPool.instance.GetObjectForType(prefab.name, false); // ??????????????????
+                        go.GetComponent<Resource>().Init(false);
                         go.transform.localScale *= Random.Range(0.90f, 1.10f);
                         go.transform.position = spawnPosition;
 

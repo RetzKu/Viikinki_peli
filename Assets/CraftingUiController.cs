@@ -4,6 +4,15 @@ using UnityEngine.UI;
 
 public class CraftingUiController : MonoBehaviour
 {
+    public enum ButtonState
+    {
+        Default,
+        Craft,
+        Light,
+        OutOf,
+        Max,
+    }
+
     // Lapsena 9 Imagea
     private Image[] _hudImages = new Image[9];
     private Text[] _hudItemCounts = new Text[9];
@@ -22,9 +31,17 @@ public class CraftingUiController : MonoBehaviour
     private Dictionary<IngredientType, int> IndexMappings = new Dictionary<IngredientType, int>((int)IngredientType.Max);
 
 
+    public Sprite[] DefaultSprites;
+    public Sprite[] CraftSprites;
+    public Sprite[] LightSprites;
+    public Sprite[] OutOfSprites;
+
+    private Dictionary<ButtonState, Sprite[]> buttonStateSprites;
+    private readonly int maxButtons = 9;
+
     void Start()
     {
-        _hudImages     = Images.GetComponentsInChildren<Image>();
+        _hudImages = Images.GetComponentsInChildren<Image>();
         _hudItemCounts = Numbers.GetComponentsInChildren<Text>();
 
         for (int i = 0; i < _hudImages.Length; i++)
@@ -40,6 +57,29 @@ public class CraftingUiController : MonoBehaviour
         CraftingManager.Instance.OnResourceCountChanged += CheckResourceNumbers;
 
         SetAllCounts();
+
+        buttonStateSprites = new Dictionary<ButtonState, Sprite[]>(4);
+        buttonStateSprites[ButtonState.Default] = DefaultSprites;
+        buttonStateSprites[ButtonState.Craft] = CraftSprites;
+        buttonStateSprites[ButtonState.Light] = LightSprites;
+        buttonStateSprites[ButtonState.OutOf] = OutOfSprites;
+
+        SetAllButtonsImages(ButtonState.Default);
+    }
+
+
+    void SetAllButtonsImages(ButtonState state)
+    {
+        Sprite[] sprites = buttonStateSprites[state];
+        for (int i = 0; i < maxButtons; i++)
+        {
+            _hudImages[i].sprite = sprites[i];
+        }
+    }
+
+    void SetButtonImage(ButtonState state, int x, int y)
+    {
+        _hudImages[y * 3 + x].sprite = buttonStateSprites[state][y * 3 + x];
     }
 
     void SetAllCounts()
@@ -56,24 +96,21 @@ public class CraftingUiController : MonoBehaviour
         SetAllCounts();
     }
 
-    //void SetCounts()
-    //{
-        
-    //}
-
-    //void SetImages(Sprite[] sprites)
-    //{
-        
-    //}
-
+    private int count = 0;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.I)) // set active
         {
-            _inventoryActive = !_inventoryActive;
+            //_inventoryActive = !_inventoryActive;
+            //{
+            //    Images.gameObject.SetActive(_inventoryActive);
+            //    Numbers.gameObject.SetActive(_inventoryActive);
+            //}
+
+            SetAllButtonsImages((ButtonState)count++);
+            if (count == (int) ButtonState.Max)
             {
-                Images.gameObject.SetActive(_inventoryActive);
-                Numbers.gameObject.SetActive(_inventoryActive);
+                count = 0;
             }
         }
     }

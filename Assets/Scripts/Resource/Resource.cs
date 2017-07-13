@@ -3,10 +3,12 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-// TODO: muillekin tyypeille prefab enumi tallenuksen onnistumiseen
+// ResourceManager.cs hoitaa enumit stringeiksi poolausta/latausta varten
+// WARNING WARNING Enumi järjestyksen rikkominen / väliin lisäys särkee kaikein lisää aina maxin alle
 public enum ResourceType
 {
-    Stone,
+    stone0,
+    stone1,
     t_birch0,
     t_birch1,
     t_birch2,
@@ -19,8 +21,35 @@ public enum ResourceType
     t_willow2,
     t_spruce0,
     t_spruce1,
+
+    t_trunkStart,
+
+    t_birch0_trunk,
+    t_birch1_trunk,
+    t_birch2_trunk,
+
+    t_lime0_trunk,
+    t_lime1_trunk,
+    t_lime2_trunk,
+
+    t_pine0_trunk,
+
+    t_willow0_trunk,
+    t_willow1_trunk,
+    t_willow2_trunk,
+
+    t_spruce0_trunk,
+    t_spruce1_trunk,
+
+    t_trunkEnd,
+
+    campfire_fire,
+    campfire_ember,
+    campfire_noFire,
+
     Max,
 }
+// WARNING WARNING Enumi järjestyksen rikkominen / väliin lisäys särkee kaikein lisää aina maxin alle
 
 public abstract class Resource : MonoBehaviour
 {
@@ -45,7 +74,12 @@ public abstract class Resource : MonoBehaviour
     }
 
     public abstract void OnDead();
-    public abstract void Init();
+    public abstract void Init(bool destroyedVersion);
+
+    public virtual void DeActivate()
+    {
+        ObjectPool.instance.PoolObject(this.gameObject);
+    }
 
 
 // yleiset efektit, joita voi käyttää
@@ -78,7 +112,8 @@ public abstract class Resource : MonoBehaviour
 
         yield return new WaitForSeconds(deathTimer);
 
-        ObjectPool.instance.PoolObject(this.gameObject);
+        DeActivate();
+        // de-activate! / pool jne...
     }
 
     // TODO: tee resuille oma partikkelie effect

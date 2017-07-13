@@ -22,3 +22,6 @@ MonoBehaviour:
   - ObjectPrefab: {fileID: 1734588554688894, guid: 8eabe4dee9d57654592c6fd72afc4ff3,
       type: 2}
     SpawnRate: 2
+  - ObjectPrefab: {fileID: 1734588554688894, guid: ec8b66b3baf88cd4fb742ec8923e90a0,
+      type: 2}
+    SpawnRate: 4

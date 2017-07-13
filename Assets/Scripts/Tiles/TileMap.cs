@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+
 public class TileMap : MonoBehaviour
 {
     public Sprite GrassSprite; // Note(Eetu): Spritet kannattaa varmaan eroitella toiseen scriptiin (ehkä?)
@@ -12,6 +15,7 @@ public class TileMap : MonoBehaviour
     public static readonly int TotalWidth = Chunk.CHUNK_SIZE * 3;
     public static readonly int TotalHeight = Chunk.CHUNK_SIZE * 3;
     private int ChunkSize = Chunk.CHUNK_SIZE;
+
     public TileType[,] Tiles = new TileType[TotalHeight, TotalWidth]; // todo: w h laskeminen koosta
     public GameObject[,] TileGameObjects = new GameObject[TotalHeight, TotalWidth];
 
@@ -133,6 +137,12 @@ public class TileMap : MonoBehaviour
         return (type <= TileType.CollisionTiles);
     }
 
+    public bool GetTileAndObjectCollision(int x, int y)
+    {
+        int ix = x / Chunk.CHUNK_SIZE;
+        int iy = y / Chunk.CHUNK_SIZE;
+        return Collides(_chunks[iy, ix].GetTile(x - ChunkSize * ix, y - ChunkSize * iy)) || _chunks[iy, ix].TileCollides(x - ChunkSize * ix, y - ChunkSize * iy);
+    }
 
     //void OnDrawGizmos()
     //{
@@ -283,6 +293,7 @@ public class TileMap : MonoBehaviour
         // TODO: WARNING HETKINEN
         SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE * 3 - 3, this, Chunk.CHUNK_SIZE * 2 - 3, 1);
     }
+
 
     IEnumerator ThreeFrameUpdateLeft(int chunkOffsetX, int chunkOffsetY)
     {

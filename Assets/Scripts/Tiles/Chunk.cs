@@ -88,7 +88,6 @@ public class Chunk      // sub array
         worldObjects.Clear();
     }
 
-
     public static void SwapViews(Chunk a, Chunk b)
     {
         View<TileType> temp = a.TilemapTilesView;
@@ -184,8 +183,20 @@ public class Chunk      // sub array
         foreach (var keyvaluepair in types)
         {
             Vec2 v = keyvaluepair.Key;
-            var go = ObjectPool.instance.GetObjectForType(Resource.GetResourcePrefabName(keyvaluepair.Value), false);
-            Debug.Log(ResourceManager.Instance.GetResourceTypeName(keyvaluepair.Value));
+            ResourceType type = keyvaluepair.Value;
+
+            GameObject go = null;
+            if (ResourceManager.Instance.IsTrunkType(type)) // kaikki destroyed 
+            {
+                go = ObjectPool.instance.GetObjectForType(Resource.GetResourcePrefabName(type), false);
+                go.gameObject.GetComponent<Resource>().Init(true);
+            }
+            else
+            {
+                go = ObjectPool.instance.GetObjectForType(Resource.GetResourcePrefabName(type), false);
+                go.gameObject.GetComponent<Resource>().Init(false);
+            }
+
             go.transform.position = new Vector3(v.X + offsetX * CHUNK_SIZE, v.Y + offsetY * CHUNK_SIZE);
             worldObjects[keyvaluepair.Key] = go;
         }

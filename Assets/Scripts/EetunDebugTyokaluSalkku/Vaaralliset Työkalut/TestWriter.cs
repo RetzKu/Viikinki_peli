@@ -74,6 +74,7 @@ public class TestWriter : MonoBehaviour
                 writer.Write(keyvaluePair.Key.Y);
                 writer.Write((int)keyvaluePair.Value.GetComponent<Resource>().type);
                 c++;
+                // Debug.Log((int)keyvaluePair.Value.GetComponent<Resource>().type);
             }
 
             // Debug.Log("save " + name + " " + c);

@@ -268,7 +268,7 @@ MonoBehaviour:
   Hp: 100
   defaultFibrateTimer: 0.1
   deathTimer: 2.34
-  type: 5
+  type: 6
 --- !u!212 &212536944604973006
 SpriteRenderer:
   m_ObjectHideFlags: 1

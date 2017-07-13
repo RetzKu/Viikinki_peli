@@ -71,7 +71,7 @@ MonoBehaviour:
   Hp: 100
   defaultFibrateTimer: 0.1
   deathTimer: 4
-  type: 0
+  type: 1
 --- !u!114 &114847636538803384
 MonoBehaviour:
   m_ObjectHideFlags: 1

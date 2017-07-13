@@ -79,8 +79,12 @@ public class BreadthFirstSearch
                 if (x == playerX && y == playerY)
                         temp.Add(new tiles() { x = x, y = y, tileState = states.goal});
                 else
-                        temp.Add(new tiles() { x = x, y = y, tileState = TileMap.Collides(tileMap.GetTileFast(x, y)) ? states.wall : states.unVisited});   /*GET WALL INFO*/
-                
+#if true
+                    temp.Add(new tiles() { x = x, y = y, tileState = tileMap.GetTileAndObjectCollision(x, y) ? states.wall : states.unVisited});   /*GET WALL INFO*/
+#else
+                    temp.Add(new tiles() { x = x, y = y, tileState = TileMap.Collides(tileMap.GetTileFast(x, y)) ? states.wall : states.unVisited});   /*GET WALL INFO*/
+#endif
+
             }
             moveTiles.Add(temp);
         } 

@@ -22,8 +22,9 @@ GameObject:
   - component: {fileID: 114847636538803384}
   - component: {fileID: 114707181552644232}
   - component: {fileID: 212536873287173378}
+  - component: {fileID: 58391843508906346}
   m_Layer: 19
-  m_Name: Stone
+  m_Name: stone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,12 +37,26 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1734588554688894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 56.204094, y: 21.269905, z: 0}
+  m_LocalPosition: {x: 119.36, y: -5.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &58391843508906346
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1734588554688894}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.58
 --- !u!114 &114707181552644232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,7 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DropsList:
   - Item: {fileID: 1315745760049726, guid: fa86f3a92b6697e459feed2a1aa11d1d, type: 2}
-    DropChance: 100
+    DropChance: 50
     NightItem: 0
 --- !u!212 &212536873287173378
 SpriteRenderer:
@@ -103,7 +118,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1593682653
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: aad8c21fbe733c546902dfeb34c03a26, type: 3}
+  m_Sprite: {fileID: 21300002, guid: aad8c21fbe733c546902dfeb34c03a26, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

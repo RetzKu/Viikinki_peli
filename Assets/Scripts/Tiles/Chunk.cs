@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection.Emit;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 // must change start once scrolling
@@ -93,7 +94,7 @@ public class Chunk      // sub array
         View<TileType> temp = a.TilemapTilesView;
         a.TilemapTilesView = b.TilemapTilesView;
         b.TilemapTilesView = temp;
-    
+
 
         //View<GameObject> tmp = a.GameObjectView;
         //a.GameObjectView = b.GameObjectView;
@@ -113,7 +114,7 @@ public class Chunk      // sub array
     {
         // Debug.Log("x: " + viewStartXIndex);
         TilemapTilesView = new View<TileType>(tiles, viewStartXIndex, viewStartYIndex, CHUNK_SIZE); // 0 1 2    // SETVIEW;
-        GameObjectView   = new View<GameObject>(gameobjects, viewStartXIndex, viewStartYIndex, CHUNK_SIZE);
+        GameObjectView = new View<GameObject>(gameobjects, viewStartXIndex, viewStartYIndex, CHUNK_SIZE);
 
         offsetX = chunkOffsetX;
         offsetY = chunkOffsetY;
@@ -184,6 +185,7 @@ public class Chunk      // sub array
         {
             Vec2 v = keyvaluepair.Key;
             var go = ObjectPool.instance.GetObjectForType(Resource.GetResourcePrefabName(keyvaluepair.Value), false);
+            Debug.Log(ResourceManager.Instance.GetResourceTypeName(keyvaluepair.Value));
             go.transform.position = new Vector3(v.X + offsetX * CHUNK_SIZE, v.Y + offsetY * CHUNK_SIZE);
             worldObjects[keyvaluepair.Key] = go;
         }

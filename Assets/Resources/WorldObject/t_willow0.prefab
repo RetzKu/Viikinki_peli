@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114721178487755548}
   - component: {fileID: 114440716149751156}
   m_Layer: 19
-  m_Name: SpawnableTree 6
+  m_Name: t_willow0
   m_TagString: puu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -268,7 +268,7 @@ MonoBehaviour:
   Hp: 100
   defaultFibrateTimer: 0.1
   deathTimer: 2.34
-  type: 1
+  type: 8
 --- !u!212 &212536944604973006
 SpriteRenderer:
   m_ObjectHideFlags: 1

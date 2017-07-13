@@ -7,7 +7,19 @@ using Random = UnityEngine.Random;
 public enum ResourceType
 {
     Stone,
-    Tree,
+    t_birch0,
+    t_birch1,
+    t_birch2,
+    t_lime0,
+    t_lime1,
+    t_lime2,
+    t_pine0,
+    t_willow0,
+    t_willow1,
+    t_willow2,
+    t_spruce0,
+    t_spruce1,
+    Max,
 }
 
 public abstract class Resource : MonoBehaviour
@@ -81,15 +93,8 @@ public abstract class Resource : MonoBehaviour
     }
 #endregion
 
-    public static string GetResourcePrefabName(ResourceType keyvaluepairValue)
+    public static string GetResourcePrefabName(ResourceType type)
     {
-        switch (keyvaluepairValue)
-        {
-            case ResourceType.Stone: return "Stone";
-            case ResourceType.Tree: return "SpawnableTree";
-            default:
-                Debug.LogWarning("RESOURCE TO PREFAB MAPPIN NOT FOUND IN RESOURCE.cs");
-                return "null";
-        }
+        return ResourceManager.Instance.GetResourceTypeName(type);
     }
 }

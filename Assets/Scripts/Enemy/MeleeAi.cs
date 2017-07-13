@@ -35,23 +35,31 @@ public class MeleeAi : generalAi {
         var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
         Vector2[] powers = new Vector2[2];
 
+
+        if (!knocked)
+        {
+            if (!agro)
+            {
+                wander(HeardArray, ref flags, ref GiveStartTarget, ref counter, IdleRefreshRate);
+                rotation.rotToPl = false;
+                rotation.Lock = false;
+            }
+            else if (agro)
+            {
+                Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
+
+                Vector2 dist = body.position - playerPos;
+
+                meleePattern(dist, playerPos);           
+            }
+        }
+        else
+        {
+            knocktimer();
+        }
         powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags, CollState);
         target = powers[1];
         velocity = powers[0];
-        if (!agro)
-        {
-            wander(HeardArray, ref flags, ref GiveStartTarget, ref counter, IdleRefreshRate);
-            rotation.rotToPl = false;
-            rotation.Lock = false;
-        }
-        else if (agro)
-        {
-            Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
-
-            Vector2 dist = body.position - playerPos;
-
-            meleePattern(dist, playerPos);           
-        }
 
         velocity *= Time.deltaTime;
         body.MovePosition(body.position + velocity);

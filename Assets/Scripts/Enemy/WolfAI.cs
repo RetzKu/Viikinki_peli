@@ -65,26 +65,33 @@ public class WolfAI : generalAi
                 HeardArray[i].GetComponent<generalAi>().agro = true; // check if eetu lies
             }
         }
-        if (!agro)
+        if (!knocked)
         {
-            wander(HeardArray, ref flags, ref GiveStartTarget, ref counter, IdleRefreshRate);
-            rotation.rotToPl = false;
-            rotation.Lock = false;
-        }
-        else if (agro)
-        {
-            Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
+            if (!agro)
+            {
+                wander(HeardArray, ref flags, ref GiveStartTarget, ref counter, IdleRefreshRate);
+                rotation.rotToPl = false;
+                rotation.Lock = false;
+            }
+            else if (agro)
+            {
+                Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
 
-            Vector2 dist = body.position - playerPos;
-            //if(dist.magnitude < biteRange*0.2f)
-            //{
-            //    player.GetComponent<Movement>().max_spd = 1;
-            //}
-            //else
-            //{
-            //    player.GetComponent<Movement>().max_spd = 3;
-            //}
-            leapingPattern(dist, playerPos);
+                Vector2 dist = body.position - playerPos;
+                //if(dist.magnitude < biteRange*0.2f)
+                //{
+                //    player.GetComponent<Movement>().max_spd = 1;
+                //}
+                //else
+                //{
+                //    player.GetComponent<Movement>().max_spd = 3;
+                //}
+                leapingPattern(dist, playerPos);
+            }
+        }
+        else
+        {
+            knocktimer();
         }
         powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags, CollState);
         target = powers[1];

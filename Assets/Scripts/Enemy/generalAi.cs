@@ -67,11 +67,13 @@ public abstract class generalAi : MonoBehaviour
     [HideInInspector]
     public bool agro = false;
     protected bool knocked = false;
-    bool knockInit = false;
     public enemyDir myDir { get { return rotation._myDir; } }
     public float attackDist;
     public float MaxSpeed = 0.04f;
-    public float knockDist = 3f;
+    float knockDist = 3f;
+    public float knockTime = 0.1f;
+    float knockCounter = 0f;
+    Vector2 knock = new Vector2(0, 0);
     protected bool GiveStartTarget = true;
 
     protected int counter = 0;
@@ -85,7 +87,7 @@ public abstract class generalAi : MonoBehaviour
 
     public float desiredseparation = 0.7f; // def
     public float alingmentDistance = 1.0f; // def
-
+    
     public float sepF = 0.1f;                // def
     public float aliF = 0.2f;                // def
     public float cohF = 0.1f;                // def
@@ -209,14 +211,30 @@ public abstract class generalAi : MonoBehaviour
     }
     public virtual void KnockBack()
     {
-        if (!knockInit)
+        knocked = true;
+        rotation.Lock = true; 
+        resetValues();
+        knock = body.position - player.GetComponent<DetectEnemies>().getPosition();
+        knock.Normalize();
+        knock *= knockDist;
+        flags = (int)behavior.seekAndArrive;
+        Physics._maxSpeed = MaxSpeed * 3;
+    }
+    protected void knocktimer()
+    {
+        knockCounter += Time.deltaTime;
+
+        if(knockCounter < knockTime)
         {
-            rotation.Lock = true; 
-            resetValues();
-            knockInit = true;
-            Vector2 knock = player.GetComponent<DetectEnemies>().getPosition() - body.position;
-            knock.Normalize();
-            knock *= knockDist;
+            target = body.position + knock;
+        }
+        else
+        {
+            print("end knockback");
+            knocked = false;
+            Physics._maxSpeed = MaxSpeed;
+            knockCounter = 0;
+            rotation.Lock = false;
         }
     }
     public abstract void resetValues();

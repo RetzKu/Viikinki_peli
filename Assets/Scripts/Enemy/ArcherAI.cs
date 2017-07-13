@@ -46,19 +46,26 @@ public class ArcherAI : generalAi {
                 HeardArray[i].GetComponent<generalAi>().agro = true;
             }
         }
-        if (!agro)
+        if (!knocked)
         {
-            wander(HeardArray,ref flags,ref GiveStartTarget,ref counter,IdleRefreshRate);
-            rotation.rotToPl = false;
-            rotation.Lock = false;
-        }
-        else if (agro)
-        {
-            Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
+            if (!agro)
+            {
+                wander(HeardArray,ref flags,ref GiveStartTarget,ref counter,IdleRefreshRate);
+                rotation.rotToPl = false;
+                rotation.Lock = false;
+            }
+            else if (agro)
+            {
+                Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
 
-            Vector2 dist = body.position - playerPos;
+                Vector2 dist = body.position - playerPos;
            
-            archerPattern(dist, playerPos);         
+                archerPattern(dist, playerPos);         
+            }
+        }
+        else
+        {
+            knocktimer();
         }
 
         powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags, CollState);

@@ -62,7 +62,6 @@ public class s_c_torsoScript : MonoBehaviour {
         if (Trig.transform.tag == "Dropped")
         {
             Trig.transform.tag = "Item";
-            print("escaped dropped item");
         }
     }
 }

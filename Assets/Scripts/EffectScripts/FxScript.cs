@@ -18,6 +18,9 @@ public class FxScript : MonoBehaviour {
     private Vector3 Base;
     private Vector3 MouseDir;
 
+    public bool handEffectOnrange = false;
+    public GameObject lastHittedEnemy;
+
 	void Start ()
     {
         Fx = new GameObject("Fx");
@@ -42,6 +45,7 @@ public class FxScript : MonoBehaviour {
     public void instantiateFx()
     {
         CopyFx = Instantiate(Fx);
+        
         Destroy(CopyFx, LifeTime);
         CopyFx.AddComponent<FxFade>().Duration = LifeTime;
         CopyFx.AddComponent<BoxCollider2D>().isTrigger = true;
@@ -100,9 +104,14 @@ public class FxScript : MonoBehaviour {
     {
         if (trig.gameObject.tag == "Enemy")
         {
-            if (GetComponent<PlayerScript>().weaponInHand != null)
+            lastHittedEnemy = trig.gameObject;
+            if(GetComponent<PlayerScript>().weaponInHand != null)
             {
                 GetComponentInChildren<weaponStats>().onRange = true;
+            }
+            else
+            {
+                handEffectOnrange = true;
             }
         }
     }
@@ -111,18 +120,26 @@ public class FxScript : MonoBehaviour {
     {
         if (trig.gameObject.tag == "Enemy")
         {
+            lastHittedEnemy = trig.gameObject;
             if (GetComponent<PlayerScript>().weaponInHand != null)
             {
                 GetComponentInChildren<weaponStats>().onRange = true;
             }
+            else
+            {
+                handEffectOnrange = true;
+            }
         }
-
     }
     void OnTriggerExit2D(Collider2D trig)
     {
         if (GetComponent<PlayerScript>().weaponInHand != null)
         {
             GetComponentInChildren<weaponStats>().onRange = false;
+        }
+        else
+        {
+            handEffectOnrange = false;
         }
     }
 

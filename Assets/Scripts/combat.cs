@@ -44,26 +44,32 @@ public class combat : MonoBehaviour {
             if (GetComponent<PlayerScript>().weaponInHand != null)
             {
                 GameObject tempWeapon = GetComponent<PlayerScript>().weaponInHand;
-                
-                
 
                 if (tempWeapon.GetComponent<weaponStats>().onRange)
                 {
-                    if (tempWeapon.GetComponent<weaponStats>().onRange == true)
+                    if (damageDone == false)
                     {
-                        if (damageDone == false)
-                        {
-                            Debug.Log("Player damage: ");
-                            Debug.Log(countPlayerDamage());
-                            damageDone = true;
-                        }
+                        GetComponent<FxScript>().lastHittedEnemy.GetComponent<enemyStats>().takeDamage(countPlayerDamage());
+                        Debug.Log("Dmg given to: " + GetComponent<FxScript>().lastHittedEnemy.name + " " + countPlayerDamage() + ". HP left: " + GetComponent<FxScript>().lastHittedEnemy.GetComponent<wolfStats>().hp);
+                        damageDone = true;
+                    }
+                }
+            }
+            else
+            {
+                if (GetComponent<FxScript>().handEffectOnrange)
+                {
+                    if (damageDone == false)
+                    {
+                        GetComponent<FxScript>().lastHittedEnemy.GetComponent<enemyStats>().takeDamage(countPlayerDamage());
+                        Debug.Log("Dmg given to: " + GetComponent<FxScript>().lastHittedEnemy.name + " " + countPlayerDamage() + ". HP left: " + GetComponent<FxScript>().lastHittedEnemy.GetComponent<wolfStats>().hp);
+                        damageDone = true;
                     }
                 }
             }
         }
 
-
-            dirObjectName = getDirectionObject();
+        dirObjectName = getDirectionObject();
 		//transform.GetComponent<FxScript>().FxUpdate(Fx); /*KUN Fx SPRITEÄ MUUTTAA FxUpdate KATSOO ONKO SE ERINLAINEN FX KUIN AIKAISEMPI JA JOS ON NIIN VAIHTAA. VOI SIIRTÄÄ MYÖS POIS UPDATESTA*/
     }
 

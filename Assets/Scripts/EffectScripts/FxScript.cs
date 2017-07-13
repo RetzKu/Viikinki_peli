@@ -61,6 +61,15 @@ public class FxScript : MonoBehaviour {
     {
         MousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition); // hiiren sijainti
         Base = transform.position + EffectOffSet; //Missä on pelaajan base jonka ympärillä efekti rotatee
+        if (GetComponent<PlayerScript>().weaponInHand != null)
+        {
+            GameObject tempWeapon = GetComponent<PlayerScript>().weaponInHand;
+            MaxDistance = tempWeapon.GetComponent<weaponStats>().maxDistance;
+        }
+        else
+        {
+            MaxDistance = 0.3f;
+        }
         MouseDir = (MousePoint - transform.position - EffectOffSet).normalized * MaxDistance; //mikä on hiiren suunta
         Copy.transform.position = Base + MouseDir; 
         GetAngleDegress(Copy);

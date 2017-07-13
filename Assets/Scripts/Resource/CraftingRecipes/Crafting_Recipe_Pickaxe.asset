@@ -11,10 +11,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11ebac4e06919847abf467de307184f, type: 3}
   m_Name: Crafting_Recipe_Pickaxe
   m_EditorClassIdentifier: 
-  Indices: []
+  Indices:
+  - X: 0
+    Y: 0
+  - X: 0
+    Y: 1
+  - X: 0
+    Y: 2
+  - X: 1
+    Y: 1
+  - X: 0
+    Y: 1
   Sound: {fileID: 0}
   sprite: {fileID: 0}
-  Prefab: {fileID: 1907452012851240, guid: 836b2d4b3a84dff4e96ac8a2ce3458cb, type: 2}
+  Prefab: {fileID: 1413759944923202, guid: 166f2988e83639e4b871c5e3d63ade68, type: 2}
   Materials:
   - Type: 3
     Count: 1

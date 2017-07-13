@@ -11,10 +11,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11ebac4e06919847abf467de307184f, type: 3}
   m_Name: Crafting_Recipe_Spear
   m_EditorClassIdentifier: 
-  Indices: []
+  Indices:
+  - X: 0
+    Y: 0
+  - X: 0
+    Y: 1
+  - X: 0
+    Y: 2
+  - X: 1
+    Y: 2
+  - X: 0
+    Y: 1
+  - X: 1
+    Y: 1
+  - X: 0
+    Y: 0
   Sound: {fileID: 0}
   sprite: {fileID: 0}
-  Prefab: {fileID: 1500902554411140, guid: 35764e4d543fde043827530306412ee0, type: 2}
+  Prefab: {fileID: 1133136836472450, guid: cf3155f8e68c2884ea8556a2c83afe20, type: 2}
   Materials:
   - Type: 3
     Count: 1

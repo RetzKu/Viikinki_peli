@@ -6,6 +6,7 @@ public abstract class weaponStats : MonoBehaviour
 {
     [Header("Weapon stats")]
 
+    public float maxDistance;
     public float damage = 1.0f;
     public float attackWeight = 10.0f;
     public Sprite weaponEffect;

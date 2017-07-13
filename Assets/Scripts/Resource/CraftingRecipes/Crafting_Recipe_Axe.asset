@@ -13,14 +13,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Indices:
   - X: 0
-    Y: 2
+    Y: 0
   - X: 0
     Y: 1
+  - X: 0
+    Y: 2
   - X: 1
     Y: 1
   Sound: {fileID: 0}
   sprite: {fileID: 0}
-  Prefab: {fileID: 1031800583617284, guid: ce35163152400a141a41ea7652a32222, type: 2}
+  Prefab: {fileID: 1554091243190564, guid: cfbeb5838cd5b284490ea59363dd11d9, type: 2}
   Materials:
   - Type: 3
     Count: 1

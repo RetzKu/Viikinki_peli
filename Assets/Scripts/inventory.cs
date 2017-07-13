@@ -48,13 +48,15 @@ public class inventory
 
     [System.Serializable]
     public class Equipped
-    {       
-       
+    {
+
         [SerializeField]
         private GameObject _ChestPiece;
         [SerializeField]
         private GameObject _Tool;
+        [SerializeField]
         private int _ArrowCount;
+        
 
         public GameObject Tool { get { return _Tool; } }
         public WeaponType Type { get { return EquippedType(); } }

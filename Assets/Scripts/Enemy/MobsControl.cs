@@ -15,12 +15,13 @@ public class MobsControl : MonoBehaviour
     public int Mob_Amount;
     public GameObject Wolf;
     public GameObject Archer;
+    public GameObject MeleeDude;
     List<GameObject> Boids;
 
     public GameObject player;
 
     List<spawn> spawner = new List<spawn>();
-
+    bool knock = false;
     void Start()
     {
 
@@ -39,6 +40,10 @@ public class MobsControl : MonoBehaviour
         if (Input.GetKeyDown("m"))
         {
             DeleteAllCurrentMobs();
+        }
+        if (Input.GetKeyDown("k"))
+        {
+            knock = true;
         }
 
 
@@ -61,10 +66,10 @@ public class MobsControl : MonoBehaviour
 
                 GameObject go;
 
-                //if(Boids.Count % 2 == 0)
+                //if (Boids.Count % 2 == 0)
                 //{
-                    go = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
-                    go.GetComponent<generalAi>().InitStart(x, y,EnemyType.Wolf);
+                    go = Instantiate(Archer, new Vector2(x, y), Quaternion.identity);
+                    go.GetComponent<generalAi>().InitStart(x, y,EnemyType.Archer);
                 //}
                 //else
                 //{
@@ -95,11 +100,19 @@ public class MobsControl : MonoBehaviour
             }
             else
             {
+                if (knock)
+                {
+                    Boids[ind].GetComponent<generalAi>().KnockBack();
+                    print("knock");
+                }
                 Boids[ind].GetComponent<generalAi>().UpdatePosition(Boids);
                 ind++;
             }
         }
-
+        if (knock)
+        {
+            knock = false;
+        }
     }
     public void SpawnBoids(float x, float y, float radius, int amount)
     {

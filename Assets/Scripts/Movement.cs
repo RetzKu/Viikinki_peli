@@ -12,10 +12,14 @@ public class Movement : MonoBehaviour
             public float slowdown = 10;
             public float thrust = 15;
             public float max_spd = 3;
+            public float min_spd_pate = 0.5f;
+            public float max_spd_pate = 3;
 
     public bool Keyboard = true;
     public CustomJoystick Joystick;
-
+    public bool lerpUp = true;
+    float currentlerpate = 0f;
+    float lerpateTime = 0.5f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,6 +27,8 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
+        lerpate();
+        //print(max_spd);
         Vector2 SpeedLimiter = SpeedLimitChecker();
         rb.velocity += new Vector2(SpeedLimiter.x, SpeedLimiter.y);
     }
@@ -53,5 +59,36 @@ public class Movement : MonoBehaviour
 
         return added_spd;
 
+    }
+    void lerpate()
+    {
+        if (lerpUp)
+        {
+            currentlerpate += Time.deltaTime;
+            if (currentlerpate > lerpateTime)
+            {
+                currentlerpate = lerpateTime;
+            }
+        }
+        else
+        {
+            {
+                currentlerpate -= Time.deltaTime;
+                if (currentlerpate < 0)
+                {
+                    currentlerpate = 0;
+                    max_spd = min_spd_pate;
+                }
+            }
+        }
+        float t = currentlerpate / lerpateTime;
+
+        max_spd = min_spd_pate + ((max_spd_pate - min_spd_pate) * t);
+
+
+    //protected float lerPate(float start, float end, float smooth)
+    //{
+    //    return start + ((end - start) * smooth);
+    //}
     }
 }

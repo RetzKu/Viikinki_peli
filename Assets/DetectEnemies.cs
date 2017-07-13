@@ -7,7 +7,7 @@ public class DetectEnemies : MonoBehaviour
 
     private Rigidbody2D body;
     public float aggroDist = 5.0f;
-
+    public float slowDown = 0.2f;
     // Use this for initialization
     void Start()
     {
@@ -26,7 +26,15 @@ public class DetectEnemies : MonoBehaviour
             // tähän check että ei ole minkään takana
             aggroArray[i].transform.root.GetComponent<generalAi>().agro = true;
         }
-        
+        var slowArray = Physics2D.OverlapCircleAll(body.position, slowDown, mask); // , mask);
+        if(slowArray.Length > 0)
+        {
+            GetComponent<Movement>().lerpUp = false;
+        }
+        else
+        {
+            GetComponent<Movement>().lerpUp = true;
+        }
     }
     public Vector2 getPosition()
     {

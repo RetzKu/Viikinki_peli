@@ -4439,31 +4439,6 @@ Prefab:
       propertyPath: terveisin
       value: 
       objectReference: {fileID: 1358475835}
-    - target: {fileID: 114226087637341638, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: MaxDistance
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114226087637341638, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: SpriteScale.x
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114226087637341638, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: SpriteScale.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114226087637341638, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: SpriteScale.z
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114613662104883584, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: attackSpeed
-      value: 0.17
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
   m_IsPrefabParent: 0

@@ -238,7 +238,6 @@ public abstract class generalAi : MonoBehaviour
         }
         else
         {
-            print("end knockback");
             knocked = false;
             Physics._maxSpeed = MaxSpeed;
             knockCounter = 0;

@@ -130,7 +130,7 @@ public class MobsControl : MonoBehaviour
         {
             Destroy(kakka);
         }
-        Boids.Clear(); // EETU TRIGGER might
-        spawner.Clear(); // EETU TRIGGER might
+        Boids.Clear();
+        spawner.Clear(); 
     }
 }

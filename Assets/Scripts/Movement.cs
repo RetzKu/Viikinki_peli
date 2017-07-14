@@ -17,13 +17,14 @@ public class Movement : MonoBehaviour
     PlayerDir pd = PlayerDir.def;
     PlayerDir fx = PlayerDir.def;
     private Rigidbody2D rb;
-        private Vector2 movement;
+        //private Vector2 movement;
             public float slowdown = 10;
             public float thrust = 15;
-            public float max_spd = 3;
-            public float min_spd_pate = 0.2f;
-            public float max_spd_pate = 3;
+            private float max_spd = 3;
+            private float min_spd_pate = 0.2f;
+            private float max_spd_pate = 3;
             bool inAttack = false;
+    bool knockBack = false;
     public bool Keyboard = true;
     public CustomJoystick Joystick;
     public bool lerpUp = true;
@@ -31,6 +32,12 @@ public class Movement : MonoBehaviour
     float lerpateTime = 0.5f;
     float attackTime = 0.6f;
     float attackTimer = 0f;
+    float knockTime = 1f;
+    float knockTimer = 0f;
+
+    Vector2 knockDir = new Vector2(0f, 0f);
+    // 2 max drag
+    // 0 min drag
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -38,14 +45,22 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (inAttack)
+        if (!knockBack)
         {
-            pateClock();
+            if (inAttack)
+            {
+                pateClock();
+            }
+            lerpate();
+            //print(max_spd);
+            Vector2 SpeedLimiter = SpeedLimitChecker();
+            rb.velocity += new Vector2(SpeedLimiter.x, SpeedLimiter.y);
         }
-        lerpate();
-        //print(max_spd);
-        Vector2 SpeedLimiter = SpeedLimitChecker();
-        rb.velocity += new Vector2(SpeedLimiter.x, SpeedLimiter.y);
+        else
+        {
+            knockClock();
+        }
+
     }
 
     Vector2 Input_checker()
@@ -75,6 +90,32 @@ public class Movement : MonoBehaviour
         return added_spd;
 
     }
+    public void KnockBack(Vector2 dir)
+    {
+        if (!knockBack)
+        {
+            knockBack = true;
+            knockDir = dir;
+            GetComponent<AnimatorScript>()._Lock = true;
+        }
+    }
+    void knockClock()
+    {
+        knockTimer += Time.deltaTime;
+        if(knockTimer > knockTime)
+        {
+
+        }
+        else
+        {
+            GetComponent<AnimatorScript>()._Lock = false;
+            knockBack = false;
+        }
+    }
+    float lerp(float min,float max,float t)
+    {
+        return max_spd = min_spd_pate + ((max_spd_pate - min_spd_pate) * t);
+    }
     void lerpate()
     {
         if (lerpUp)
@@ -98,7 +139,7 @@ public class Movement : MonoBehaviour
         }
         float t = currentlerpate / lerpateTime;
 
-        max_spd = min_spd_pate + ((max_spd_pate - min_spd_pate) * t);
+        max_spd = lerp(min_spd_pate, max_spd_pate,t);
 
     }
     public void UpPateDir(PlayerDir dir)

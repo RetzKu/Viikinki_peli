@@ -19,8 +19,8 @@ public class CraftingUiController : MonoBehaviour
 
     private GameObject[] _hudGameObjects = new GameObject[9];
 
-    private Cost[] _cost = new Cost[9];
-    private bool _inventoryActive = true;
+    // private Cost[] _cost = new Cost[9];
+    // private bool _inventoryActive = true;
 
     public Transform Images;
     public Transform Numbers;
@@ -56,7 +56,6 @@ public class CraftingUiController : MonoBehaviour
 
         CraftingManager.Instance.OnResourceCountChanged += CheckResourceNumbers;
 
-        SetAllCounts();
 
         buttonStateSprites = new Dictionary<ButtonState, Sprite[]>(4);
         buttonStateSprites[ButtonState.Default] = DefaultSprites;
@@ -65,6 +64,32 @@ public class CraftingUiController : MonoBehaviour
         buttonStateSprites[ButtonState.OutOf] = OutOfSprites;
 
         SetAllButtonsImages(ButtonState.Default);
+        SetAllActiveState(false);
+
+        BaseManager.Instance.RegisterOnBaseEnter(OnBaseEnter);
+        BaseManager.Instance.RegisterOnBaseExit(OnBaseExit);
+
+        SetAllCounts();
+    }
+
+    void OnBaseEnter()
+    {
+        SetAllButtonsImages(ButtonState.Craft);
+        SetAllActiveState(true);
+
+        SetAllCounts();
+    }
+
+    void OnBaseExit()
+    {
+        SetAllButtonsImages(ButtonState.Default);
+        SetAllActiveState(false);
+    }
+
+    void SetAllActiveState(bool state)
+    {
+        Images.gameObject.SetActive(state);
+        Numbers.gameObject.SetActive(state);
     }
 
 
@@ -87,7 +112,12 @@ public class CraftingUiController : MonoBehaviour
         for (int i = 0; i < (int)IngredientType.Max; i++)
         {
             int index = IndexMappings[(IngredientType)i];
-            _hudItemCounts[index].text = CraftingManager.Instance.GetInventoryCount((IngredientType)i).ToString();
+            int count = CraftingManager.Instance.GetInventoryCount((IngredientType)i);
+            _hudItemCounts[index].text = count.ToString();
+
+            int x = i % 3;
+            int y = (i - x) / 3;
+            SetButtonImage(count <= 0 ? ButtonState.OutOf : ButtonState.Craft, x, y);
         }
     }
 
@@ -108,7 +138,7 @@ public class CraftingUiController : MonoBehaviour
             //}
 
             SetAllButtonsImages((ButtonState)count++);
-            if (count == (int) ButtonState.Max)
+            if (count == (int)ButtonState.Max)
             {
                 count = 0;
             }

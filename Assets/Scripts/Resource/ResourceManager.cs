@@ -32,10 +32,6 @@ public class ResourceManager : MonoBehaviour
 
     public string GetResourceTypeName(ResourceType type)
     {
-        if ((int) type > (int)ResourceType.Max)
-        {
-            int a = 0;
-        }
         return resourceTypeLookupTable[(int) type];
     }
 

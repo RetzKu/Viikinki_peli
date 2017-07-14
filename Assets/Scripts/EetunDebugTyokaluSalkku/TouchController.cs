@@ -9,7 +9,6 @@ public class TouchController : MonoBehaviour
 
     private static readonly int maxRuneIndices = 9;
     public Vec2[] runeIndices = new Vec2[maxRuneIndices];
-    public Sprite BulletSprite;
 
     public int amountOfSpheres = 3;
     public float offset = 10f;
@@ -44,8 +43,8 @@ public class TouchController : MonoBehaviour
     private int SlashLineIndex = 0;
     public static readonly  int MaxLineIndices = 15;
     private Vector3[] SlashLineIndices = new Vector3[MaxLineIndices];
-    private int LineIndex = 0;
-    private Vector3[] LineIndices = new Vector3[100];
+    // private int LineIndex = 0;
+    // private Vector3[] LineIndices = new Vector3[100];
 
     public float LineIndexDistance = 0.10f;
 
@@ -73,9 +72,10 @@ public class TouchController : MonoBehaviour
     {
         if (SlashLineIndex < MaxLineIndices)
         {
+            print(SlashLineIndex);
             SlashLineIndices[SlashLineIndex] = position;
             //lineRenderer.positionCount = SlashLineIndex + 1;  // <-- uudempi unity kuin 5.5.1f1
-            lineRenderer.numPositions = SlashLineIndex + 1;     // <-- unity 5.5.1f1
+            lineRenderer.positionCount = SlashLineIndex + 1;     // <-- unity 5.5.1f1
 
             lineRenderer.SetPosition(SlashLineIndex, SlashLineIndices[SlashLineIndex]);
 
@@ -91,38 +91,9 @@ public class TouchController : MonoBehaviour
     void DrawToMouse(Vector2 mouse)
     {
         //lineRenderer.positionCount = SlashLineIndex + 1;  // <-- uudempi unity kuin 5.5.1f1
-        lineRenderer.numPositions = SlashLineIndex + 1;     // <-- unity 5.5.1f1
-        lineRenderer.SetPosition(SlashLineIndex, mouse);
+        lineRenderer.positionCount = SlashLineIndex + 1;     // <-- unity 5.5.1f1
+        lineRenderer.SetPosition(SlashLineIndex, new Vector3(mouse.x, mouse.y, 4f));
     }
-
-
-    //void AddLineIndices(Vector2 position)
-    //{
-    //    if (LineIndex != 0)
-    //    {
-    //        if (Vector2.Distance(position, LineIndices[LineIndex - 1]) > LineIndexDistance)
-    //        {
-    //            if (LineIndex < LineIndices.Length)
-    //            {
-    //                LineIndices[LineIndex] = new Vector3(position.x, position.y, 2f);
-    //                LineIndex++;
-    //            }
-    //        }
-    //    }
-    //    else
-    //    {
-    //        LineIndices[LineIndex] = new Vector3(position.x, position.y, 2f);
-    //        LineIndex++;
-    //    }
-
-    //    lineRenderer.numPositions = LineIndex;
-    //    lineRenderer.SetPosition(LineIndex - 1, LineIndices[LineIndex - 1]);
-    //}
-
-    //void ResetLineRenderer()
-    //{
-    //    lineRenderer.numPositions = 0;
-    //}
 
     void OnDrawGizmos()
     {
@@ -183,14 +154,40 @@ public class TouchController : MonoBehaviour
         for (int i = 0; i < maxRuneIndices; i++)
         {
             runeIndices[i] = new Vec2(0, 0);
+            SlashLineIndices[i] = new Vector3(0f, 0f);
         }
         index = 0;
+        SlashLineIndex = 0;
+        SetLineRendererCount(0);
 
         // Setup Crafting System
         CraftingManagerHolder = CraftingManager.Instance.GetComponent<RuneHolder>();
 
+        BaseManager.Instance.RegisterOnBaseEnter(OnBaseEnter);
+        BaseManager.Instance.RegisterOnBaseExit(OnBaseExit);
+
+        ControllerMode = Mode.RuneCasting;
+
+        // aka pelaaja
+        RuneHolder = GameObject.FindWithTag("Player").GetComponent<RuneHolder>();
     }
-    private int FingerId = -1000;
+
+    void OnBaseEnter()
+    {
+       ControllerMode = Mode.Crafting;
+    }
+
+    void OnBaseExit()
+    {
+        ControllerMode = Mode.RuneCasting;
+    }
+
+    void SetLineRendererCount(int i)
+    {
+        lineRenderer.positionCount = i;
+    }
+
+    // private int FingerId = -1000;
 
     void Update()
     {
@@ -304,8 +301,7 @@ public class TouchController : MonoBehaviour
             _timer -= 200;
             ResetColliders();
 
-            lineRenderer.numPositions = 0;
-
+            lineRenderer.positionCount = 0;
 
             // sormi poesa
             ResetSlashLineIndices();
@@ -315,7 +311,6 @@ public class TouchController : MonoBehaviour
         if (_timer < Time.time)
         {
             index = 0;
-            LineIndex = 0;
             ResetSlashLineIndices();
             ResetColliders();
         }
@@ -379,6 +374,5 @@ public class TouchController : MonoBehaviour
             }
         }
         _timer = Time.time + lineResetTime;
-
-    }
+   }
 }

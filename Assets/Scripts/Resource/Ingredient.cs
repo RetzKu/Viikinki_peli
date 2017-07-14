@@ -6,14 +6,15 @@ public enum IngredientType
 {
     // Stone,
     Wood,
-    Pine,
     Bone,
     Hemp,
     Tooth,
     BearFur,
     Stone,
     Feather,
-    Max
+    SeaWeed,
+    FishScale,
+    Max,
 }
 
 [RequireComponent(typeof(SpriteRenderer))]

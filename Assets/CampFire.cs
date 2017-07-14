@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class CampFire : Resource
 {
-    private SpriteRenderer renderer;
     private Animator FireAnimation;
 
-    public Sprite CampfireNoFireSprite;
 
     public enum FireState
     {
@@ -19,7 +17,6 @@ public class CampFire : Resource
 
     void Start()
     {
-        renderer = GetComponent<SpriteRenderer>();
         FireAnimation = GetComponent<Animator>();
     }
      

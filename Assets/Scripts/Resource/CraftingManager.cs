@@ -136,8 +136,6 @@ public class CraftingManager : MonoBehaviour
         Destroy(go); // Lopussa himmennystä
     }
 
-
-
     public GridPositions[] positions;
     public Vec2 GetCraftingIndexes(IngredientType type)
     {

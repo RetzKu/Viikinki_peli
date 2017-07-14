@@ -14,13 +14,18 @@ public class Tree : Resource
         GetComponent<DropScript>().enabled = true;
         GetComponent<Tree>().enabled = true;
 
-        ZlayerManager.SetSortingOrder(transform, spriteRenderer);
+        // ZlayerManager.SetSortingOrder(transform, spriteRenderer);
 
         if (destroyed)
         {
             type = ResourceManager.Instance.GetTrunk(type);
             StubInit();
         }
+
+        spriteRenderer.sortingOrder = 0;
+
+        float z = ZlayerManager.GetZFromY(transform.position);
+        transform.position = new Vector3(transform.position.x, transform.position.y, z);
     }
 
     public void StubInit()

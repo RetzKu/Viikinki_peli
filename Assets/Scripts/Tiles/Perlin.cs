@@ -17,7 +17,7 @@ public class Perlin : MonoBehaviour
     // private PoissonDiscSampler sampler;
     private int samplerWidth = Chunk.CHUNK_SIZE;
     private int samplerHeigth = Chunk.CHUNK_SIZE;
-    private int samplerRadius = 2;
+    // private int samplerRadius = 2;
 
     #region Fields
     public enum NoiseMode
@@ -486,9 +486,9 @@ public class Perlin : MonoBehaviour
                     if (totalCount + (spawnRate) >= roll)
                     {
                         var go = ObjectPool.instance.GetObjectForType(prefab.name, false); // ??????????????????
-                        go.GetComponent<Resource>().Init(false);
                         go.transform.localScale *= Random.Range(0.90f, 1.10f);
                         go.transform.position = spawnPosition;
+                        go.GetComponent<Resource>().Init(false);
 
                         chunk.AddObject(x, y, go);
 

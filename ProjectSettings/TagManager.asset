@@ -17,6 +17,8 @@ TagManager:
   - TouchPoint
   - ResourceEffectEmitter
   - WorldResource
+  - BaseChecker
+  - Base
   layers:
   - Default
   - TransparentFX
@@ -40,7 +42,7 @@ TagManager:
   - ObjectLayer
   - WorldResource
   - Item
-  - 
+  - Base
   - 
   - 
   - 

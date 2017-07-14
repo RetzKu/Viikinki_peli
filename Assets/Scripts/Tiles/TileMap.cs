@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-
 public class TileMap : MonoBehaviour
 {
     public Sprite GrassSprite; // Note(Eetu): Spritet kannattaa varmaan eroitella toiseen scriptiin (ehkä?)
@@ -36,16 +33,6 @@ public class TileMap : MonoBehaviour
 
     public Color tint;
     private Color last;
-
-
-
-
-
-
-
-
-
-
 
 
     void Start()

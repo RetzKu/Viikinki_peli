@@ -211,6 +211,6 @@ public class combat : MonoBehaviour {
     void death()
     {
         // Kuoleman jälkeiset asiat tänne
-        Debug.Log("Kuolit");
+        Debug.LogError("Kuolit");
     }
 }

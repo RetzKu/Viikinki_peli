@@ -12,6 +12,11 @@ public class MobsControl : MonoBehaviour
 
     }
 
+    // JOONAN BOOL MUUTTUJA, PATE NÄPIT IRTI, THX
+    [Header("Enemies deal dmg")]
+    public bool enemiesDealDamage = true;
+    
+
     public int Mob_Amount;
     public GameObject Wolf;
     public GameObject Archer;

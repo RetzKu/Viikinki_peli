@@ -33,13 +33,22 @@ public class wolfStats : enemyStats {
         }
     }
 
+    // Suden hyökkäys metodi
     public void attack()
     {
-        GameObject hitbox = GameObject.Find("head_1").gameObject;
-        hitbox.layer = LayerMask.NameToLayer("notPateEnemy");
-        hitbox.tag = "Enemy";
-        hitbox.AddComponent<BoxCollider2D>().isTrigger = true;
-        hitbox.AddComponent<wolfHeadScript>();
-        DestroyObject(hitbox.GetComponent<BoxCollider2D>(), 0.4f);
+        // Etsitään suden pää gameobject
+        if (gameObject.transform.GetChild(0).GetChild(0).GetChild(0).gameObject != null)
+            {
+            // 3x GetChild(0) tarkoittaa Wolf -> back -> neck -> head_1
+            GameObject hitbox = gameObject.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
+            hitbox.layer = LayerMask.NameToLayer("notPateEnemy");
+            hitbox.tag = "Enemy";
+            // Lisätään hitboxi ja scripti päälle
+            hitbox.AddComponent<BoxCollider2D>().isTrigger = true;
+            hitbox.AddComponent<wolfHeadScript>();
+            // Tuhotaan molemmat gameobjectit ajan mukaan
+            DestroyObject(hitbox.GetComponent<BoxCollider2D>(), 0.2f);
+            DestroyObject(hitbox.GetComponent<wolfHeadScript>(), 0.2f);
+            }
     }
 }

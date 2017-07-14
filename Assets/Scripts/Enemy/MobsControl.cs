@@ -68,8 +68,8 @@ public class MobsControl : MonoBehaviour
 
                 //if (Boids.Count % 2 == 0)
                 //{
-                    go = Instantiate(Archer, new Vector2(x, y), Quaternion.identity);
-                    go.GetComponent<generalAi>().InitStart(x, y,EnemyType.Archer);
+                    go = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
+                    go.GetComponent<generalAi>().InitStart(x, y,EnemyType.Wolf);
                 //}
                 //else
                 //{

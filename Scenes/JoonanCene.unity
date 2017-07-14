@@ -4313,6 +4313,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 212840684736596094, guid: 166f2988e83639e4b871c5e3d63ade68,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212840684736596094, guid: 166f2988e83639e4b871c5e3d63ade68,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212840684736596094, guid: 166f2988e83639e4b871c5e3d63ade68,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 166f2988e83639e4b871c5e3d63ade68, type: 2}
   m_IsPrefabParent: 0
@@ -4443,6 +4458,11 @@ Prefab:
         type: 2}
       propertyPath: SpriteScale.z
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114613662104883584, guid: b5405cc59ec405e42ac26438ef1b066d,
+        type: 2}
+      propertyPath: attackSpeed
+      value: 0.17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}

@@ -23,7 +23,7 @@ public class WolfAI : generalAi
     bool justBite = false;
     //generalAi AI = new generalAi();
 
-    public override void InitStart(float x, float y, EnemyType type) // jokaselle
+    public override void InitStart(float x, float y, EnemyType type,GameObject player) // jokaselle
     {
         attackDist = UnityEngine.Random.Range(leapDist-1f, leapDist+1f);
         //print(attackDist);
@@ -36,7 +36,7 @@ public class WolfAI : generalAi
         velocity = new Vector2(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f));
         Physics.InitRules(sepF, aliF, cohF, desiredseparation, alingmentDistance, IdleRadius, IdleBallDistance, ArriveRadius, MaxSteeringForce, MaxSpeed);
         Physics._maxSpeed = MaxSpeed;
-        player = GameObject.FindGameObjectWithTag("Player");
+        this.player = player;
     }
 
     public override void UpdatePosition(List<GameObject> Mobs) // jokaselle

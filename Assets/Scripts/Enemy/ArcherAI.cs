@@ -10,7 +10,7 @@ public class ArcherAI : generalAi {
     float shootTime = 1f;
     GameObject proManager;
 
-    public override void InitStart(float x, float y, EnemyType type)
+    public override void InitStart(float x, float y, EnemyType type,GameObject player)
     {
         attackDist = UnityEngine.Random.Range(4f, 6f);
         myType = type;
@@ -22,7 +22,7 @@ public class ArcherAI : generalAi {
         velocity = new Vector2(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f));
         Physics.InitRules(sepF, aliF, cohF, desiredseparation, alingmentDistance, IdleRadius, IdleBallDistance, ArriveRadius, MaxSteeringForce, MaxSpeed);
         Physics._maxSpeed = MaxSpeed;
-        player = GameObject.FindGameObjectWithTag("Player");
+        this.player = player;
         proManager = GameObject.FindGameObjectWithTag("projectileManager");
 
     }

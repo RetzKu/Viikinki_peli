@@ -70,6 +70,7 @@ public class TouchController : MonoBehaviour
         if (LineController.GetLinePointCount() == 1)
         {
 
+
             SetLineRendererCount(0);
             knob.transform.position = new Vector3(-100, -100, -100);
         }
@@ -81,7 +82,6 @@ public class TouchController : MonoBehaviour
             knob.transform.position = LineController.GetLastPointPosition();
         }
     }
-
     void OnDrawGizmos()
     {
         for (int y = 0; y < amountOfSpheres; y++)

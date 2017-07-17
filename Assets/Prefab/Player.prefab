@@ -449,7 +449,6 @@ GameObject:
   - component: {fileID: 4570807231277618}
   - component: {fileID: 114595929073258388}
   - component: {fileID: 120099981774990974}
-  - component: {fileID: 114044920883822344}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -2588,17 +2587,6 @@ MonoBehaviour:
     height: 8.05
   Player: {fileID: 4173307104970268}
   Head: {fileID: 21300002, guid: 35c448380fea7ab48a2f173ae429e9f2, type: 3}
---- !u!114 &114044920883822344
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1385788105028174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef9f25770c8deb4449bdb0ca40a3bf30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114059903257671084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2828,9 +2816,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowdown: 10
   thrust: 15
-  max_spd: 3
-  min_spd_pate: 0.5
-  max_spd_pate: 3
   Keyboard: 1
   Joystick: {fileID: 114043215955215906}
   lerpUp: 1

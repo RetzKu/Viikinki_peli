@@ -25,5 +25,13 @@ public class Melee : weaponStats
     {
         onRange = false;
     }*/
+    public void Reposition(Transform Hand)
+    {
+        GameObject Weapon = transform.gameObject;
+
+        if (Hand.name == "u_l_hand") {}
+        if (Hand.name == "d_r_hand") {}
+        if (Hand.name == "s_l_hand") {}
+    }
 
 }

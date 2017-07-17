@@ -33,6 +33,10 @@ public class EnemyAnimator : MonoBehaviour {
         Torsos.Add(transform.Find("s_c_torso").gameObject);
         Torsos.Add(transform.Find("d_c_torso").gameObject);
         Torsos.Add(transform.Find("u_c_torso").gameObject);
+
+        /*Finding Animators*/
+        Animators = new List<Animator>(3);
+        foreach (GameObject t in Torsos) { Animators.Add(t.GetComponent<Animator>()); }
     }
 
     public class SpriteChanger
@@ -42,6 +46,26 @@ public class EnemyAnimator : MonoBehaviour {
 
     private class HandRoot
     {
+        private Transform _Hand;
+        private GameObject _Weapon;
+
+        public HandRoot(Transform Hand, GameObject Weapon) { _Hand = Hand; _Weapon = Weapon; }
+
+        public void SwapHand(DirectionState Direction)
+        {
+            switch (Direction)
+            {
+                case DirectionState.Left: { break; }
+                case DirectionState.Down: { break; }
+                case DirectionState.Up: { break; }
+                case DirectionState.Right: { break; }
+            }
+        }
+
+        private void WeaponSettings(DirectionState Direction)
+        {
+            if(_Weapon.GetComponent<Melee>() != null) { _Weapon.GetComponent<Melee>().Reposition(); }
+        }
 
     }
 }

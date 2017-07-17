@@ -228,6 +228,5 @@ public class PlayerScript : MonoBehaviour
                 }
             }
         }
-
     }
 }

@@ -96,10 +96,12 @@ public class FxScript : MonoBehaviour {
     void GetAngleDegress(GameObject Copy)
     {
         Vector3 Mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var n = 0 - (Mathf.Atan2(Base.y - Base.y + MouseDir.y,Base.x - Base.x + MouseDir.x)) * 180 / Mathf.PI; //origin - target
+        var n = 0 - (Mathf.Atan2(MouseDir.y, MouseDir.x)) * 180 / Mathf.PI;
+        //var n = 0 - (Mathf.Atan2(Base.y - Base.y + MouseDir.y,Base.x - Base.x + MouseDir.x)) * 180 / Mathf.PI; //origin - target
         //print(n);
         Copy.transform.Rotate(0, 0, n * -1);
     }
+
    void rotatePate(Vector2 MouseDir)
    {
         PlayerDir temp = PlayerDir.def;

@@ -202,5 +202,4 @@ public class AnimatorScript : MonoBehaviour
             LastSpriteNum = SpriteNum;
         }
     }
-
 }

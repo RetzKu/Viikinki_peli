@@ -119,7 +119,7 @@ public class Movement : MonoBehaviour
             dir -= rb.position;
             knockBack = true;
             dir.Normalize();
-            dir *= 10f;
+            dir *= -10f;
             knockDir = /*rb.position +*/ dir; // korjaa maybebebe
             GetComponent<AnimatorScript>()._Lock = true;
         }

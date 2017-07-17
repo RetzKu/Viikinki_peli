@@ -5,13 +5,13 @@ public class CurvedLineRendererController : MonoBehaviour
 {
     public GameObject[] LinePoints = new GameObject[15];
     private int _pointIndex = 0;
-    public int  MaxPoints = 15;
+    private int  MaxPoints = 15;
 
     public void Start()
     {
         for (int i = 0; i < LinePoints.Length; i++)
         {
-            LinePoints[i] = ObjectPool.instance.GetObjectForType("point1", true);
+
             LinePoints[i].SetActive(false);
         }
     }

@@ -154,7 +154,9 @@ public class TouchController : MonoBehaviour
 
         // aka pelaaja
         RuneHolder = GameObject.FindWithTag("Player").GetComponent<RuneHolder>();
-        LineController = GetComponent<CurvedLineRendererController>();
+
+        var linecontroller = Instantiate(Resources.Load<GameObject>("Prefab/Ui/LineController"));
+        LineController = linecontroller.GetComponent<CurvedLineRendererController>();
 
         if (LineController == null)
         {

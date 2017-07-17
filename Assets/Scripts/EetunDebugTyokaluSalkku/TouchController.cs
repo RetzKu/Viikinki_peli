@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class TouchController : MonoBehaviour
 {
-    public RuneHolder RuneHolder;
-    public RuneHolder CraftingManagerHolder;
 
     private static readonly int maxRuneIndices = 9;
     public Vec2[] runeIndices = new Vec2[maxRuneIndices];
-    public Sprite BulletSprite;
 
     public int amountOfSpheres = 3;
     public float offset = 10f;
@@ -30,24 +27,18 @@ public class TouchController : MonoBehaviour
     private bool _touching = false;
 
     public GameObject touchCollider;
-
-    public GameObject TrafficLights;
     public GameObject Character;
 
-    public Material lineMaterial;
 
     public float screenX = 600f;
 
 
     // TODO: ^^^ CLEANUP ^^^
 
-    private int SlashLineIndex = 0;
-    public static readonly  int MaxLineIndices = 15;
-    private Vector3[] SlashLineIndices = new Vector3[MaxLineIndices];
-    private int LineIndex = 0;
-    private Vector3[] LineIndices = new Vector3[100];
 
-    public float LineIndexDistance = 0.10f;
+    public RuneHolder RuneHolder;
+    public RuneHolder CraftingManagerHolder;
+    private GameObject knob;
 
     public enum Mode
     {
@@ -56,6 +47,8 @@ public class TouchController : MonoBehaviour
     }
 
     public Mode ControllerMode = Mode.Crafting;
+    private CurvedLineRendererController LineController;
+
 
     void SendIndices()
     {
@@ -69,60 +62,25 @@ public class TouchController : MonoBehaviour
         }
     }
 
-    void AddSlashLineIndex(Vector3 position)
-    {
-        if (SlashLineIndex < MaxLineIndices)
-        {
-            SlashLineIndices[SlashLineIndex] = position;
-            //lineRenderer.positionCount = SlashLineIndex + 1;  // <-- uudempi unity kuin 5.5.1f1
-            lineRenderer.numPositions = SlashLineIndex + 1;     // <-- unity 5.5.1f1
-
-            lineRenderer.SetPosition(SlashLineIndex, SlashLineIndices[SlashLineIndex]);
-
-            SlashLineIndex++;
-        }
-    }
-
-    void ResetSlashLineIndices()
-    {
-        SlashLineIndex = 0;
-    }
-
     void DrawToMouse(Vector2 mouse)
     {
-        //lineRenderer.positionCount = SlashLineIndex + 1;  // <-- uudempi unity kuin 5.5.1f1
-        lineRenderer.numPositions = SlashLineIndex + 1;     // <-- unity 5.5.1f1
-        lineRenderer.SetPosition(SlashLineIndex, mouse);
+        // lineRenderer.positionCount = SlashLineIndex + 1;  // <-- uudempi unity kuin 5.5.1f1
+        // lineRenderer.positionCount = SlashLineIndex + 1;     // <-- unity 5.5.1f1
+        // lineRenderer.SetPosition(SlashLineIndex, new Vector3(mouse.x, mouse.y, 4f));
+        if (LineController.GetLinePointCount() == 1)
+        {
+
+            SetLineRendererCount(0);
+            knob.transform.position = new Vector3(-100, -100, -100);
+        }
+        else
+        {
+            SetLineRendererCount(2);
+            lineRenderer.SetPosition(0, LineController.GetLastPointPosition());
+            lineRenderer.SetPosition(1, new Vector3(mouse.x, mouse.y, 4f));
+            knob.transform.position = LineController.GetLastPointPosition();
+        }
     }
-
-
-    //void AddLineIndices(Vector2 position)
-    //{
-    //    if (LineIndex != 0)
-    //    {
-    //        if (Vector2.Distance(position, LineIndices[LineIndex - 1]) > LineIndexDistance)
-    //        {
-    //            if (LineIndex < LineIndices.Length)
-    //            {
-    //                LineIndices[LineIndex] = new Vector3(position.x, position.y, 2f);
-    //                LineIndex++;
-    //            }
-    //        }
-    //    }
-    //    else
-    //    {
-    //        LineIndices[LineIndex] = new Vector3(position.x, position.y, 2f);
-    //        LineIndex++;
-    //    }
-
-    //    lineRenderer.numPositions = LineIndex;
-    //    lineRenderer.SetPosition(LineIndex - 1, LineIndices[LineIndex - 1]);
-    //}
-
-    //void ResetLineRenderer()
-    //{
-    //    lineRenderer.numPositions = 0;
-    //}
 
     void OnDrawGizmos()
     {
@@ -176,7 +134,6 @@ public class TouchController : MonoBehaviour
             }
         }
 
-        lineRenderer.material = lineMaterial;
         lineRenderer.sortingOrder = 1;
         lineRenderer.sortingLayerName = "Foreground";
 
@@ -185,12 +142,49 @@ public class TouchController : MonoBehaviour
             runeIndices[i] = new Vec2(0, 0);
         }
         index = 0;
+        SetLineRendererCount(0);
 
         // Setup Crafting System
         CraftingManagerHolder = CraftingManager.Instance.GetComponent<RuneHolder>();
 
+        BaseManager.Instance.RegisterOnBaseEnter(OnBaseEnter);
+        BaseManager.Instance.RegisterOnBaseExit(OnBaseExit);
+
+        ControllerMode = Mode.RuneCasting;
+
+        // aka pelaaja
+        RuneHolder = GameObject.FindWithTag("Player").GetComponent<RuneHolder>();
+        LineController = GetComponent<CurvedLineRendererController>();
+
+        if (LineController == null)
+        {
+            Debug.LogError("Please add CurvedLineRendererController to player/TouchControls/Controller object");
+        }
+
+        knob = Instantiate(Resources.Load<GameObject>("Prefab/Ui/LineRendererEndPoint"));
+
+        if (knob == null)
+        {
+            Debug.LogWarning("Cannot load LineRendererEndPoint plz tell Eetu");
+        }
     }
-    private int FingerId = -1000;
+
+    void OnBaseEnter()
+    {
+       ControllerMode = Mode.Crafting;
+    }
+
+    void OnBaseExit()
+    {
+        ControllerMode = Mode.RuneCasting;
+    }
+
+    void SetLineRendererCount(int i)
+    {
+        lineRenderer.numPositions = i;
+    }
+
+    // private int FingerId = -1000;
 
     void Update()
     {
@@ -241,50 +235,9 @@ public class TouchController : MonoBehaviour
             }
         }
 #endif
-        //if (myTouches.Length == 0)
-        //{
-        //    TrafficLights.GetComponent<SpriteRenderer>().material.color = Color.red;
-        //}
-        //else if (myTouches.Length == 1)
-        //{
-        //    TrafficLights.GetComponent<SpriteRenderer>().material.color = Color.blue;
-        //}
-        //else if (myTouches.Length >= 2)
-        //{
-        //    TrafficLights.GetComponent<SpriteRenderer>().material.color = Color.green;
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    Vector2 touchDeltaVector = new Vector2(1, 1);
-
-        //    var bulletGo = Instantiate(new GameObject());
-        //    bulletGo.transform.position = Character.transform.position;
-        //    var bullet = bulletGo.AddComponent<Bullet>();
-        //    bullet.velocity = touchDeltaVector.normalized;
-        //    var renderer = bulletGo.AddComponent<SpriteRenderer>();
-        //    renderer.sprite = BulletSprite;
-        //}
-
-        //Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical"));
-        //if (movement.x != 0 || movement.y != 0)
-        //{
-        //    Character.transform.Translate(movement * 3 * Time.deltaTime);
-        //    Activate(movement * 3 * Time.deltaTime);
-        //}
 
         if (Input.GetMouseButton(0) /*|| Input.GetTouch(0).*/ )
         {
-
-            //if (LineFadeEffectRunning)
-            //StopCoroutine(LineFadeEffect());
-            //lineRenderer.widthMultiplier = LineStartWidth;
-            //lineRenderer.positionCount = 0;
-            //lineRenderer.numPositions = 0;
-            //index = 0;
-            //LineFadeEffectRunning = false;
-            //lineActive = false;
-
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 2;
 
@@ -304,51 +257,21 @@ public class TouchController : MonoBehaviour
             _timer -= 200;
             ResetColliders();
 
-            lineRenderer.numPositions = 0;
-
+            SetLineRendererCount(0);
 
             // sormi poesa
-            ResetSlashLineIndices();
+            LineController.ResetPoints();
         }
 
         // Reset LineRenderer
         if (_timer < Time.time)
         {
             index = 0;
-            LineIndex = 0;
-            ResetSlashLineIndices();
             ResetColliders();
+
+            LineController.ResetPoints();
         }
     }
-
-    // private bool lineActive = false;
-    // private bool LineFadeEffectRunning = false;
-    // public float TotalLineFadeEffectTime = 0.4f;
-    // IEnumerator LineFadeEffect()                        // TODO: Hianompaa effectiä
-    // {
-    //     // MVP: Kommunikaatio Runejen laukaisun kannsa
-
-    //    LineFadeEffectRunning = true;
-    //    Color color = new Color(170, 170, 170, 120);
-    //    lineRenderer.material.color = color;
-    //    ResetColliders();
-
-    //    // larger line every frame? 
-    //    for (float i = 0; i < 30; i++)
-    //    {
-    //        lineRenderer.widthMultiplier = Mathf.Lerp(LineStartWidth, MaxWidht, (float)i / 30);
-    //        yield return new WaitForSeconds(TotalLineFadeEffectTime / 30);
-    //    }
-
-    //    lineRenderer.widthMultiplier = LineStartWidth;
-
-    //    lineRenderer.numPositions = 0;
-
-    //    index = 0;
-    //    LineFadeEffectRunning = false;
-    //    lineActive = false;
-    //}
-
 
     private GameObject GetFromArray(int x, int y)
     {
@@ -369,16 +292,14 @@ public class TouchController : MonoBehaviour
 
         if (_touching)
         {
-            AddSlashLineIndex(new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f));
+            LineController.SetPoint(new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f));
 
             if (index < maxRuneIndices)
             {
                 runeIndices[index] = new Vec2(x, y);
-                positions[index] = new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f);
                 index++;
             }
         }
         _timer = Time.time + lineResetTime;
-
-    }
+   }
 }

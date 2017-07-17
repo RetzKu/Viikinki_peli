@@ -95,7 +95,7 @@ public class CraftingManager : MonoBehaviour
 
     void AddToInventory(IngredientType type, int count = 1)
     {
-        print("added: " + type.ToString());
+        // print("added: " + type.ToString());
         CraftingInventory[type] = GetInventoryCount(type) + count;
 
         if (OnResourceCountChanged != null)
@@ -135,8 +135,6 @@ public class CraftingManager : MonoBehaviour
         
         Destroy(go); // Lopussa himmennystä
     }
-
-
 
     public GridPositions[] positions;
     public Vec2 GetCraftingIndexes(IngredientType type)

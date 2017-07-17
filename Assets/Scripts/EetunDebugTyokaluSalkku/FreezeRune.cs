@@ -13,6 +13,11 @@ public class FreezeRune : Rune
     {
         this.owner = owner;
         this.launcher = owner.GetComponent<RuneEffectLauncher>();
+
+        if (launcher == null)
+        {
+            Debug.LogError("Laita RuneEffectLaucher.cs omistajalle (pelaaja?)");
+        }
     }
 
     // TODO: varmaan object pool olisi hyvä idis

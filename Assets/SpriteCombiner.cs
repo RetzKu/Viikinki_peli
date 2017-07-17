@@ -23,7 +23,7 @@ public class SpriteCombiner : MonoBehaviour
 
         SaveToFile("Kuvia/uusiKuva.png", Combine(center, corner, 0, 0));
 
-        Sprite up = TileSprites[10];
+        // Sprite up = TileSprites[10];
 
         SaveToFile("Kuvia/aki.png", Combine(center, corner, 0, 40));
     }

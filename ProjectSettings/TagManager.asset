@@ -19,6 +19,10 @@ TagManager:
   - WorldResource
   - BaseChecker
   - Base
+  - projectileManager
+  - notPatePlayer
+  - LinePoint
+  - LineController
   layers:
   - Default
   - TransparentFX

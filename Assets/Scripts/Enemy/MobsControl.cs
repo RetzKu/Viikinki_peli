@@ -74,7 +74,8 @@ public class MobsControl : MonoBehaviour
                 //if (Boids.Count % 2 == 0)
                 //{
                     go = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
-                    go.GetComponent<generalAi>().InitStart(x, y,EnemyType.Wolf);
+
+                    go.GetComponent<generalAi>().InitStart(x, y,EnemyType.Wolf,player);
                 //}
                 //else
                 //{
@@ -135,7 +136,7 @@ public class MobsControl : MonoBehaviour
         {
             Destroy(kakka);
         }
-        Boids.Clear(); // EETU TRIGGER might
-        spawner.Clear(); // EETU TRIGGER might
+        Boids.Clear();
+        spawner.Clear(); 
     }
 }

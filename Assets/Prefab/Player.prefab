@@ -1074,6 +1074,7 @@ GameObject:
   - component: {fileID: 114226087637341638}
   - component: {fileID: 114282770370633434}
   - component: {fileID: 114210843949519274}
+  - component: {fileID: 114264761283226734}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -2598,8 +2599,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9f25770c8deb4449bdb0ca40a3bf30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LinePoints: []
-  MaxPoints: 15
 --- !u!114 &114059903257671084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2791,6 +2790,18 @@ MonoBehaviour:
   EffectOffSet: {x: 0, y: 0.3, z: 0}
   handEffectOnrange: 0
   lastHittedEnemy: {fileID: 0}
+--- !u!114 &114264761283226734
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1977754839611798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2857d99b4172d4fb5c1bbcecbec059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CraftRange: 4
 --- !u!114 &114282770370633434
 MonoBehaviour:
   m_ObjectHideFlags: 1

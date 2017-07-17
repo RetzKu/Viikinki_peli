@@ -19,7 +19,7 @@ public class pateDebug : MonoBehaviour {
             print("knockingback");
             Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 temp = (Vector2)pz - body.position;
-            GetComponent<Movement>().KnockBack(temp);
+            GetComponent<Movement>().KnockBack(pz);
            // GetComponent<Movement>()._Lock = true;
         }
     }

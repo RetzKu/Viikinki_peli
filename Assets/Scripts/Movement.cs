@@ -32,13 +32,33 @@ public class Movement : MonoBehaviour
     float lerpateTime = 0.5f;
     float attackTime = 0.6f;
     float attackTimer = 0f;
-    float knockTime = 1f;
+    float knockTime = 0.2f;
     float knockTimer = 0f;
-
+    float steerForce = 1f;
     Vector2 knockDir = new Vector2(0f, 0f);
     Vector2 vel = new Vector2(0f, 0f);
+    Vector2 acc = new Vector2(0f, 0f);
     // 2 max drag
     // 0 min drag
+
+    void applyForce(Vector2 force)
+    {
+        acc += force;
+    }
+    void updateMovement()
+    {
+        acc *= Time.deltaTime;
+        vel += acc;
+        if(vel.magnitude > max_spd_pate)
+        {
+            vel.Normalize();
+            vel *= max_spd_pate;
+            //print("limiting speed");
+        }
+        //vel*=Time.deltaTime;
+        rb.MovePosition(rb.position + vel);
+        acc *= 0;
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -92,14 +112,15 @@ public class Movement : MonoBehaviour
         return added_spd;
 
     }
-    public void KnockBack(Vector2 dir)
+    public void KnockBack(Vector2 dir)//takes enemyposition
     {
         if (!knockBack)
         {
+            dir -= rb.position;
             knockBack = true;
             dir.Normalize();
             dir *= 10f;
-            knockDir = dir;
+            knockDir = /*rb.position +*/ dir; // korjaa maybebebe
             GetComponent<AnimatorScript>()._Lock = true;
         }
     }
@@ -108,20 +129,23 @@ public class Movement : MonoBehaviour
         knockTimer += Time.deltaTime;
         if(knockTimer < knockTime)
         {
-            Vector2 des = knockDir - rb.position;
-            des.Normalize();
-            des *= max_spd_pate;
-            Vector2 steer = des - vel;
-            if(steer.magnitude > max_spd_pate)
-            {
-                steer.Normalize();
-                steer *= max_spd_pate;
-            }
-            //float t = knockTimer / knockTime;
-            //float spd = lerp(max_spd_pate*0.1f, 0, t);
-            //knockDir.Normalize();
-            //knockDir *= spd;
-            //rb.MovePosition(rb.position + knockDir);
+            //Vector2 des = knockDir - rb.position;
+            //des.Normalize();
+            //des *= max_spd_pate;
+            //Vector2 steer = des - vel;
+            //if(steer.magnitude > steerForce)
+            //{
+            //    steer.Normalize();
+            //    steer *= steerForce;
+            //}
+
+            //applyForce(steer);
+            //updateMovement();
+            float t = knockTimer / knockTime;
+            float spd = lerp(max_spd_pate * 0.1f, 0, t);
+            knockDir.Normalize();
+            knockDir *= spd;
+            rb.MovePosition(rb.position + knockDir);
         }
         else
         {

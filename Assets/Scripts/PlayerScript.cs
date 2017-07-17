@@ -170,6 +170,7 @@ public class PlayerScript : MonoBehaviour
                 Copy.GetComponent<SpriteRenderer>().sortingOrder = 1;
             }
             if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
+            if (Copy.GetComponent<longMelee>() != null) { Copy.GetComponent<longMelee>().Reposition(Hand); }
         }
 
         public void EmptyHand()
@@ -200,7 +201,8 @@ public class PlayerScript : MonoBehaviour
                             Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                             Copy.GetComponent<SpriteRenderer>().sortingOrder = 20;
                             if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
-                            break;
+                            if (Copy.GetComponent<longMelee>() != null) { Copy.GetComponent<longMelee>().Reposition(Hand); }
+                                break;
                         }
                         case "u_l_hand":
                         {
@@ -211,6 +213,7 @@ public class PlayerScript : MonoBehaviour
                             Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                             Copy.GetComponent<SpriteRenderer>().sortingOrder = 8;
                             if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
+                            if (Copy.GetComponent<longMelee>() != null) { Copy.GetComponent<longMelee>().Reposition(Hand); }
                             break;
                         }
                         case "d_r_hand":
@@ -222,6 +225,7 @@ public class PlayerScript : MonoBehaviour
                             Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                             Copy.GetComponent<SpriteRenderer>().sortingOrder = 16;
                             if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
+                            if (Copy.GetComponent<longMelee>() != null) { Copy.GetComponent<longMelee>().Reposition(Hand); }
                             break;
                         }
                     }

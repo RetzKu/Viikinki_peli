@@ -23,6 +23,7 @@ TagManager:
   - notPatePlayer
   - LinePoint
   - LineController
+  - CampFire
   layers:
   - Default
   - TransparentFX

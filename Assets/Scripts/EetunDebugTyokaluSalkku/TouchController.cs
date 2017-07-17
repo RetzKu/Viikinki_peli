@@ -49,7 +49,6 @@ public class TouchController : MonoBehaviour
     public Mode ControllerMode = Mode.Crafting;
     private CurvedLineRendererController LineController;
 
-
     void SendIndices()
     {
         if (ControllerMode == Mode.RuneCasting)
@@ -123,6 +122,7 @@ public class TouchController : MonoBehaviour
                 // go.layer = SortingLayer.GetLayerValueFromName("TouchController");
 
                 // TouchScreenPoint newPoint = new TouchScreenPoint(x, y);
+
                 go.AddComponent(typeof(TouchScreenPoint));
                 var point = go.GetComponent<TouchScreenPoint>();
                 point.x = x;
@@ -248,6 +248,8 @@ public class TouchController : MonoBehaviour
 
             _touching = true;
             DrawToMouse((mousePos));
+
+            LineController.transform.position = transform.position;
         }
         else
         {
@@ -266,13 +268,12 @@ public class TouchController : MonoBehaviour
         }
 
         // Reset LineRenderer
-        if (_timer < Time.time)
-        {
-            index = 0;
-            ResetColliders();
-
-            LineController.ResetPoints();
-        }
+        //if (_timer < Time.time)
+        //{
+        //    index = 0;
+        //    ResetColliders();
+        //    LineController.ResetPoints();
+        //}
     }
 
     private GameObject GetFromArray(int x, int y)
@@ -291,7 +292,7 @@ public class TouchController : MonoBehaviour
     public void OnTouchDetected(int x, int y, Vector3 realTransform)
     {
         ResetColliders();
-
+        print("hello");
         if (_touching)
         {
             LineController.SetPoint(new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f));

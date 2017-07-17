@@ -11,7 +11,6 @@ public class CurvedLineRendererController : MonoBehaviour
     {
         for (int i = 0; i < LinePoints.Length; i++)
         {
-
             LinePoints[i].SetActive(false);
         }
     }

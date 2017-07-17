@@ -28,25 +28,25 @@ public class BaseManager : MonoBehaviour
         
     public void RegisterOnBaseEnter(Action func)
     {
-        if (_baseChecker != null)
+        // if (_baseChecker != null)
             _baseChecker.OnCampFireEnter += func;
     }
 
     public void RegisterOnBaseExit(Action func)
     {
-        if (_baseChecker != null)
+        // if (_baseChecker != null)
             _baseChecker.OnCampFireExit += func;
     }
 
     public void UnRegisterOnBaseEnter(Action func)
     {
-        if (_baseChecker != null)
+        // if (_baseChecker != null)
             _baseChecker.OnCampFireExit -= func;
     }
 
     public void UnRegisterOnBaseExit(Action func)
     {
-        if (_baseChecker != null)
+        // if (_baseChecker != null)
             _baseChecker.OnCampFireExit -= func;
     }
 

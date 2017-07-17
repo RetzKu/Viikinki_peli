@@ -15,17 +15,16 @@ public class BaseChecker : MonoBehaviour
 
     void Start()
     {
+        // 
     }
 
     void Update()
     {
         int mask = LayerMask.GetMask("Base");
-        var hit = Physics2D.CircleCast(transform.position, CraftRange, Vector2.zero, mask);
+        var hit = Physics2D.CircleCast(transform.position, CraftRange, Vector2.zero, 0f, mask);
 
         if (hit)
         {
-            if (hit.transform.gameObject.tag == "Base")
-            {
                 // TODO: Callback crafting thingy	        
                 if (!lastFrameOnBase && OnCampFireEnter != null)
                 {
@@ -33,7 +32,6 @@ public class BaseChecker : MonoBehaviour
                     OnCampFireEnter();
                     lastFrameOnBase = true;
                 }
-            }
         }
         else
         {

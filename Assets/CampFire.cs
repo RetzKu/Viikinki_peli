@@ -22,7 +22,7 @@ public class CampFire : Resource
      
     public override void OnDead()
     {
-        Destroy(this.gameObject);
+        // Destroy(this.gameObject);
     }
 
     public void SetFire(FireState state)

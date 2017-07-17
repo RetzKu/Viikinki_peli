@@ -32,7 +32,9 @@ public class CustomJoystick : MonoBehaviour
     private Vector3 position;
 
     private bool FirstTouchSuccess = false;
+#pragma warning disable 108,114
     SpriteRenderer renderer;
+#pragma warning restore 108,114
 
     public Sprite Head;
     // public Sprite BaseSprite;
@@ -47,7 +49,7 @@ public class CustomJoystick : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(startPosition, (Vector3)startPosition + (Vector3)GetTouchVector().normalized);
 
-        Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
+        // Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
         Vector3 position = Camera.main.transform.position + (Vector3)HitBox.center;
         Gizmos.DrawWireCube(position, new Vector3(HitBox.width, HitBox.height));
     }
@@ -62,7 +64,9 @@ public class CustomJoystick : MonoBehaviour
         position = new Vector3(0f, 0f, 0f);
         renderer.sprite = Head;
 
+
         Base = Instantiate(Resources.Load<GameObject>("Prefab/Ui/JoystickBase"));
+
     }
 
     // TODO: Cleanup
@@ -75,7 +79,7 @@ public class CustomJoystick : MonoBehaviour
         }
 
 
-        Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
+        // Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
 
         // transform.Translate(lastPos - transform.position);
         Vector3 movVec = Player.transform.position - position;
@@ -177,7 +181,7 @@ public class CustomJoystick : MonoBehaviour
 
     void MouseUpdate()
     {
-        Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
+        // Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
 
         // transform.Translate(lastPos - transform.position);
         Vector3 movVec = Player.transform.position - position;

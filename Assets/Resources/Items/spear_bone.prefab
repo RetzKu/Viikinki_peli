@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4258879620080432}
   - component: {fileID: 212041027871574104}
   - component: {fileID: 114694192628820414}
-  - component: {fileID: 61161352141961820}
+  - component: {fileID: 61264558335329564}
   m_Layer: 21
   m_Name: spear_bone
   m_TagString: Item
@@ -42,7 +42,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61161352141961820
+--- !u!61 &61264558335329564
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -67,12 +67,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2139d76ef8c41046bfc5c4d3e009a3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 1.3
   damage: 1
   attackWeight: 10
   weaponEffect: {fileID: 21300010, guid: f43c53a45dee3724793fb23c5164e286, type: 3}
   onRange: 0
+  distance: 1.2
   weaponEffectScale: {x: 0.4, y: 0.4, z: 1}
+  effectOffSet: {x: 0, y: 0, z: 0}
 --- !u!212 &212041027871574104
 SpriteRenderer:
   m_ObjectHideFlags: 1

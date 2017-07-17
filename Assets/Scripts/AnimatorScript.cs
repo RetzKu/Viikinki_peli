@@ -98,11 +98,6 @@ public class AnimatorScript : MonoBehaviour
         return "FistWalk";
     }
 
-    public void BowUse()
-    {
-        foreach (Animator t in Animators) { t.SetTrigger("BowAttack"); }
-    }
-
     public class SpriteChanger
     {
 

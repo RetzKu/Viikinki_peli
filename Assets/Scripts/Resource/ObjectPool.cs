@@ -22,10 +22,7 @@ public class ObjectPool : MonoBehaviour
     void Awake ()
     {
         instance = this;
-    }
-   
-    void Start ()
-    {
+
         containerObject = new GameObject("ObjectPool");
         containerObject.transform.parent = transform;
 
@@ -55,7 +52,7 @@ public class ObjectPool : MonoBehaviour
             i++;
         }
     }
-
+   
     //private Dictionary<string, int> namesToIndex = new Dictionary<string, int>(2);
 
     //int GetIndexWithName(string name)
@@ -79,7 +76,7 @@ public class ObjectPool : MonoBehaviour
                     GameObject pooledObject = pooledObjects[i][0];
                     pooledObjects[i].RemoveAt(0);
                     pooledObject.transform.parent = null;
-                    pooledObject.SetActiveRecursively(true);
+                    pooledObject.SetActive(true);
                    
                     return pooledObject;
                    
@@ -104,7 +101,7 @@ public class ObjectPool : MonoBehaviour
         {
             if(objectPrefabs[i].name == obj.name)
             {
-                obj.SetActiveRecursively(false);
+                obj.SetActive(false);
                 obj.transform.parent = containerObject.transform;
                 pooledObjects[i].Add(obj);
                 return;

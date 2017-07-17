@@ -12,6 +12,11 @@ public class MobsControl : MonoBehaviour
 
     }
 
+    // JOONAN BOOL MUUTTUJA, PATE NÄPIT IRTI, THX
+    [Header("Enemies deal dmg")]
+    public bool enemiesDealDamage = true;
+    
+
     public int Mob_Amount;
     public GameObject Wolf;
     public GameObject Archer;
@@ -69,6 +74,7 @@ public class MobsControl : MonoBehaviour
                 //if (Boids.Count % 2 == 0)
                 //{
                     go = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
+
                     go.GetComponent<generalAi>().InitStart(x, y,EnemyType.Wolf,player);
                 //}
                 //else

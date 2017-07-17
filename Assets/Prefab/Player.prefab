@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 70989200074635580}
   m_Layer: 10
   m_Name: d_c_torso
-  m_TagString: Untagged
+  m_TagString: notPatePlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 70103911513326906}
   m_Layer: 10
   m_Name: s_c_torso
-  m_TagString: Untagged
+  m_TagString: notPatePlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -449,6 +449,7 @@ GameObject:
   - component: {fileID: 4570807231277618}
   - component: {fileID: 114595929073258388}
   - component: {fileID: 120099981774990974}
+  - component: {fileID: 114044920883822344}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -551,7 +552,7 @@ GameObject:
   - component: {fileID: 70218858162413130}
   m_Layer: 10
   m_Name: u_c_torso
-  m_TagString: Untagged
+  m_TagString: notPatePlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -828,6 +829,7 @@ GameObject:
   - component: {fileID: 92994299900895954}
   - component: {fileID: 124492256471606136}
   - component: {fileID: 81727744800495822}
+  - component: {fileID: 114187861965533252}
   m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1071,6 +1073,8 @@ GameObject:
   - component: {fileID: 114216893217373730}
   - component: {fileID: 114226087637341638}
   - component: {fileID: 114282770370633434}
+  - component: {fileID: 114210843949519274}
+  - component: {fileID: 114264761283226734}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -1191,7 +1195,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977754839611798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.00464, y: 29.885303, z: 0}
+  m_LocalPosition: {x: 25.2, y: 24.2, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 4701210339847834}
@@ -2584,6 +2588,17 @@ MonoBehaviour:
     height: 8.05
   Player: {fileID: 4173307104970268}
   Head: {fileID: 21300002, guid: 35c448380fea7ab48a2f173ae429e9f2, type: 3}
+--- !u!114 &114044920883822344
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1385788105028174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef9f25770c8deb4449bdb0ca40a3bf30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114059903257671084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2625,6 +2640,7 @@ MonoBehaviour:
     EquipData:
       _ChestPiece: {fileID: 0}
       _Tool: {fileID: 0}
+      _ArrowCount: 0
     InventorySize: 5
   running: 1
   SidewaysHand: {fileID: 4334774280397600}
@@ -2681,6 +2697,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 0
   y: 1
+--- !u!114 &114187861965533252
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1821540224787276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: b7cffcccd9bed124b92089dcafe4415e, type: 2}
 --- !u!114 &114192508057530998
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2720,6 +2748,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 0
   y: 0
+--- !u!114 &114210843949519274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1977754839611798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b036b3c0df7fc164d902c9b2867b4de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114216893217373730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2746,9 +2785,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BareHandSprite: {fileID: 21300020, guid: f43c53a45dee3724793fb23c5164e286, type: 3}
   LifeTime: 0.15
-  MaxDistance: 0.4
-  SpriteScale: {x: 1, y: 1, z: 1}
+  MaxDistance: 0.3
+  SpriteScale: {x: 0.4, y: 0.4, z: 0.4}
   EffectOffSet: {x: 0, y: 0.3, z: 0}
+  handEffectOnrange: 0
+  lastHittedEnemy: {fileID: 0}
+--- !u!114 &114264761283226734
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1977754839611798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2857d99b4172d4fb5c1bbcecbec059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CraftRange: 4
 --- !u!114 &114282770370633434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2857,8 +2910,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13daf9aadcfbadf48a52c656e64398c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RuneHolder: {fileID: 0}
-  CraftingManagerHolder: {fileID: 0}
   runeIndices:
   - X: 0
     Y: 0
@@ -2878,7 +2929,6 @@ MonoBehaviour:
     Y: 0
   - X: 0
     Y: 0
-  BulletSprite: {fileID: 21300000, guid: 99d412a553ad16c4a936acb3f892544c, type: 3}
   amountOfSpheres: 3
   offset: 1.44
   Radius: 0.57
@@ -2888,11 +2938,10 @@ MonoBehaviour:
   lineResetTime: 1
   index: 0
   touchCollider: {fileID: 1941610706479234}
-  TrafficLights: {fileID: 0}
   Character: {fileID: 1977754839611798}
-  lineMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   screenX: 133.5
-  LineIndexDistance: 0.1
+  RuneHolder: {fileID: 0}
+  CraftingManagerHolder: {fileID: 0}
   ControllerMode: 0
 --- !u!114 &114596991943841444
 MonoBehaviour:
@@ -2920,7 +2969,7 @@ MonoBehaviour:
   dmgBase: 5
   rangedBaseDmg: 0
   movementSpeed: 100
-  attackSpeed: 1
+  attackSpeed: 0.17
   armor: 1
   DefaultAttackLength: 0.2
   atmAttackTime: 0

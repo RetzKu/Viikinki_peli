@@ -1,5 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Reflection.Emit;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 // must change start once scrolling
@@ -48,19 +51,49 @@ public class Chunk      // sub array
 
     public int offsetX;
     public int offsetY;
-    FileInfo f;
 
     public View<TileType> TilemapTilesView;
     public View<GameObject> GameObjectView;
 
-    public static Sprite GrassSprite;
+
+    private Dictionary<Vec2, GameObject> worldObjects = new Dictionary<Vec2, GameObject>(10);
+
+    public bool TileCollides(int x, int y)
+    {
+        GameObject value;
+        return worldObjects.TryGetValue(new Vec2(x, y), out value);
+    }
+
+    public GameObject GetTileGameObject(int x, int y)
+    {
+        GameObject value;
+        if (worldObjects.TryGetValue(new Vec2(x, y), out value))
+        {
+            return value;
+        }
+        return null;
+    }
+
+    public void AddObject(int x, int y, GameObject go)
+    {
+        worldObjects.Add(new Vec2(x, y), go);
+    }
+
+    public void OnChunkChangedCleanup()
+    {
+        foreach (var keypairvalue in worldObjects)
+        {
+            ObjectPool.instance.PoolObject(keypairvalue.Value);
+        }
+        worldObjects.Clear();
+    }
 
     public static void SwapViews(Chunk a, Chunk b)
     {
         View<TileType> temp = a.TilemapTilesView;
         a.TilemapTilesView = b.TilemapTilesView;
         b.TilemapTilesView = temp;
-    
+
 
         //View<GameObject> tmp = a.GameObjectView;
         //a.GameObjectView = b.GameObjectView;
@@ -80,7 +113,10 @@ public class Chunk      // sub array
     {
         // Debug.Log("x: " + viewStartXIndex);
         TilemapTilesView = new View<TileType>(tiles, viewStartXIndex, viewStartYIndex, CHUNK_SIZE); // 0 1 2    // SETVIEW;
-        GameObjectView   = new View<GameObject>(gameobjects, viewStartXIndex, viewStartYIndex, CHUNK_SIZE);
+        GameObjectView = new View<GameObject>(gameobjects, viewStartXIndex, viewStartYIndex, CHUNK_SIZE);
+
+        offsetX = chunkOffsetX;
+        offsetY = chunkOffsetY;
 
         chunkOffsetX *= CHUNK_SIZE;
         chunkOffsetY *= CHUNK_SIZE;
@@ -102,16 +138,12 @@ public class Chunk      // sub array
                 GameObjectView[y, x] = tileObject;
 
                 SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
-                spriteRenderer.sprite = GrassSprite; // GrassSprite[Random.Range(0, GrassSprite.Length)];                        // HUOM SPRITE CONTROLLER!!!!!
                 spriteRenderer.sortingLayerName = "TileMap";
-
 
                 var collider = tileObject.AddComponent<BoxCollider2D>();
                 collider.enabled = false;
             }
         }
-        offsetX = chunkOffsetX;
-        offsetY = chunkOffsetY;
     }
 
     private TileType[,] GetArray()
@@ -145,12 +177,34 @@ public class Chunk      // sub array
 
     public void Load()
     {
-         SetTypes(TestWriter.Load(GetPath()));
+        Dictionary<Vec2, ResourceType> types = new Dictionary<Vec2, ResourceType>();
+        SetTypes(TestWriter.Load(GetPath(), out types));
+
+        foreach (var keyvaluepair in types)
+        {
+            Vec2 v = keyvaluepair.Key;
+            ResourceType type = keyvaluepair.Value;
+
+            GameObject go = null;
+            if (ResourceManager.Instance.IsTrunkType(type)) // kaikki destroyed 
+            {
+                go = ObjectPool.instance.GetObjectForType(Resource.GetResourcePrefabName(type), false);
+                go.gameObject.GetComponent<Resource>().Init(true);
+            }
+            else
+            {
+                go = ObjectPool.instance.GetObjectForType(Resource.GetResourcePrefabName(type), false);
+                go.gameObject.GetComponent<Resource>().Init(false);
+            }
+
+            go.transform.position = new Vector3(v.X + offsetX * CHUNK_SIZE, v.Y + offsetY * CHUNK_SIZE);
+            worldObjects[keyvaluepair.Key] = go;
+        }
     }
 
     public void Save()
     {
-        TestWriter.Save(GetArray(), GetPath());
+        TestWriter.Save(GetArray(), worldObjects, GetPath());
     }
 
     public void DisableChunkCollision()
@@ -163,7 +217,6 @@ public class Chunk      // sub array
             }
         }
     }
-
 
     public void MoveChunk(int x, int y)
     {

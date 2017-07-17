@@ -6,6 +6,7 @@ public class combat : MonoBehaviour {
 
     [Header("Player base stats")]
 
+    // Pelaajan default statsit
     public float hp = 100.0f;
     public float dmgBase = 5.0f;
     public float rangedBaseDmg = 0.0f;
@@ -14,8 +15,11 @@ public class combat : MonoBehaviour {
     public float armor = 1.0f;
     public float DefaultAttackLength = 0.2f;
 
+    // Attack cd muuttuja, muuta attackSpeed muuttujaa jos haluat muokata attackspeediä
     private float attackSpeedTime = 0.0f;
+    [HideInInspector]
     public float atmAttackTime = 0.0f;
+    // Flagi jolla tarkistetaan onko lyönnillä JO tehty damagea
     private bool damageDone = false;
     
     private enum Directions { Left, Down, Up, Right }
@@ -24,71 +28,79 @@ public class combat : MonoBehaviour {
     private string dirObjectName;
 	private Sprite Fx;
 
-    // Use this for initialization
-    void Start ()
-    {
-		
-	}
-	
-	// Update is called once per frame
+
 	void Update ()
     {
+        // Tarkistetaan onko pelaaja elossa
         if(hp <= 0)
         {
-            death(); // tarkistetaan onko pelaaja elossa
+            death();
         }
 
+        // If lauseke jolla tarkistetaan lyöntiä
+        // Tarkistetaan onko lyönnin CD
         if (atmAttackTime < Time.time && Time.time < (atmAttackTime + DefaultAttackLength))
         {
+            // Onko pelajaalla asetta
             if (GetComponent<PlayerScript>().weaponInHand != null)
             {
                 GameObject tempWeapon = GetComponent<PlayerScript>().weaponInHand;
-                
-                
 
+                // Onko vihu efektin hitboxissa
                 if (tempWeapon.GetComponent<weaponStats>().onRange)
                 {
-
-                    if (damageDone == false)
+                    // Onko jo tehty damagea tällä lyönnillä ja vihollinen olemassa
+                    if (damageDone == false && GetComponent<FxScript>().lastHittedEnemy != null)
                     {
-                        Debug.Log("Player damage: ");
-                        Debug.Log(countPlayerDamage());
+                        // Tehään viholliseen damagea
+                        GetComponent<FxScript>().lastHittedEnemy.GetComponent<enemyStats>().takeDamage(countPlayerDamage());
+                        Debug.Log("Dmg given to: " + GetComponent<FxScript>().lastHittedEnemy.name + " " + countPlayerDamage() + ". HP left: " + GetComponent<FxScript>().lastHittedEnemy.GetComponent<wolfStats>().hp);
+                        damageDone = true;
+                    }
+                }
+            }
+            else
+            {
+                // Jos ei ole asetta, pelaaja käsin
+                if (GetComponent<FxScript>().handEffectOnrange)
+                {
+                    // Onko jo tehty damagea tällä lyönnillä ja vihollinen olemassa
+                    if (damageDone == false && GetComponent<FxScript>().lastHittedEnemy != null)
+                    {
+                        // Tehään viholliseen damagea
+                        GetComponent<FxScript>().lastHittedEnemy.GetComponent<enemyStats>().takeDamage(countPlayerDamage());
+                        Debug.Log("Dmg given to: " + GetComponent<FxScript>().lastHittedEnemy.name + " " + countPlayerDamage() + ". HP left: " + GetComponent<FxScript>().lastHittedEnemy.GetComponent<wolfStats>().hp);
                         damageDone = true;
                     }
                 }
             }
         }
 
-
-            dirObjectName = getDirectionObject();
-		//transform.GetComponent<FxScript>().FxUpdate(Fx); /*KUN Fx SPRITEÄ MUUTTAA FxUpdate KATSOO ONKO SE ERINLAINEN FX KUIN AIKAISEMPI JA JOS ON NIIN VAIHTAA. VOI SIIRTÄÄ MYÖS POIS UPDATESTA*/
+        // Lataa pelaajalle oikein hitboxin suunnan mukaan
+        dirObjectName = getDirectionObject();
     }
 
-    void FixedUpdate()
-    {
-        
-    }
-
-    string getDirectionObject() // Lataa pelaajalle oikeat hitboxit
+    // Lataa pelaajalle oikeat hitboxit
+    public string getDirectionObject()
     {
         string tmpName = "";
         int tmpDir = GetComponent<AnimatorScript>().PlayerDir();
 
-        if(tmpDir == 0 || tmpDir == 3) // 0 sivu
+        if(tmpDir == 0 || tmpDir == 3) // Liikutaan sivulle
         { 
             tmpName = "s_c_torso";
             transform.Find(tmpName).GetComponent<Collider2D>().enabled = true;
             transform.Find("u_c_torso").GetComponent<Collider2D>().enabled = false;
             transform.Find("d_c_torso").GetComponent<Collider2D>().enabled = false;
         }
-        else if (tmpDir == 2) // 2 ylös
+        else if (tmpDir == 2) // Liikutaan ylös
         {
             tmpName = "u_c_torso";
             transform.Find(tmpName).GetComponent<Collider2D>().enabled = true;
             transform.Find("s_c_torso").GetComponent<Collider2D>().enabled = false;
             transform.Find("d_c_torso").GetComponent<Collider2D>().enabled = false;
         }
-        else if (tmpDir == 1) // 1 alas
+        else if (tmpDir == 1) // Liikutaan alas
         {
             tmpName = "d_c_torso";
             transform.Find(tmpName).GetComponent<Collider2D>().enabled = true;
@@ -99,55 +111,25 @@ public class combat : MonoBehaviour {
         return tmpName;
     }
 
-    /*void weaponCheck()
-    {
-        WeaponType atmWeapon = (WeaponType)GetComponent<inventory>().EquipData.EquippedType();
-    }*/
-
     public Collider2D activeCollider()
     {
         string tmpTorso = getDirectionObject();
         return transform.Find(tmpTorso).GetComponent<Collider2D>();
     }
 
-
-    void OnTriggerEnter2D(Collider2D Trigger)
-    {
-        
-        // 
-
-    }
-
-    /*void OnTriggerStay2D(Collider2D Trigger)
-    {
-        if (Trigger.tag == "Enemy")
-        {
-            if (atmAttackTime < Time.time && Time.time < (atmAttackTime + DefaultAttackLength))
-            {
-                if (damageDone == false)
-                {
-                    Debug.Log("Wolf takes dmg: ");
-                    Debug.Log(countPlayerDamage());
-                    damageDone = true;
-                }
-            }
-        }
-    }*/
-
-    //public void dealDamage()
+    //void OnTriggerEnter2D(Collider2D Trigger)
     //{
-    //    GameObject tempWeapon = GetComponent<PlayerScript>().weaponInHand;
-    //    if (atmAttackTime < Time.time && Time.time < (atmAttackTime + DefaultAttackLength) && tempWeapon.GetComponent<weaponStats>().onRange)
-    //    {
-    //        if (damageDone == false)
-    //        {
-    //            Debug.Log("Dmg: ");
-    //            Debug.Log(countPlayerDamage());
-    //            damageDone = true;
-    //        }
-    //    }
+         
+
     //}
 
+    //void OnTriggerStay2D(Collider2D Trigger)
+    //{
+
+
+    //}
+
+    // Onko lyönti cooldownilla
     private bool isAttackLegal()
     {
         if(Time.time > attackSpeedTime)
@@ -161,6 +143,7 @@ public class combat : MonoBehaviour {
         return false;
     }
 
+    // Lasketaan pelaajan damage ottaen ase huomioon
     public float countPlayerDamage()
     {
         float playerDamage = dmgBase;
@@ -174,6 +157,7 @@ public class combat : MonoBehaviour {
         return playerDamage;
     }
 
+    // Metodi jolla tarkistetaan onko painettu lyöty ja lyönti pois CD
     public bool attackBoolean()
     {
         // Tähän voisi tehdä pari riviä koodia joka tarkistaa onko kyseessä android vai pc inputit ja sen mukaan ohjaisi
@@ -186,6 +170,7 @@ public class combat : MonoBehaviour {
         }
         return false;
     }
+
 
     public float hit()
     {
@@ -200,11 +185,10 @@ public class combat : MonoBehaviour {
         return damage;
     }
 
-    public WeaponType weaponInHand()
+    // VANHA, UUSI VASTAAVA PLAYERSCRIPTISSÄ public GameObject weaponInHand
+    /*public WeaponType weaponInHand()
     {
         WeaponType weapon = WeaponType.noWeapon;
-
-        //int tmpSide = transform.GetComponent<AnimatorScript>().PlayerDir();
 
         if (transform.Find("Equip").childCount != 0)
         {
@@ -216,8 +200,9 @@ public class combat : MonoBehaviour {
         else { weapon = WeaponType.noWeapon; }
 
         return weapon;
-    }
+    }*/
 
+    // Metodi jolla pelaaja ottaa damagea
     public void takeDamage(float rawTakenDamage)
     {
         hp = hp - (rawTakenDamage / armor);
@@ -225,7 +210,7 @@ public class combat : MonoBehaviour {
 
     void death()
     {
-        // kuoleman jälkeiset asiat
-        Debug.Log("kuolit");
+        // Kuoleman jälkeiset asiat tänne
+        Debug.LogError("Kuolit");
     }
 }

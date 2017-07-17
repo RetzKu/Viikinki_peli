@@ -33,7 +33,19 @@ public class WolfAnimatorScript : MonoBehaviour
     {
         switch(Action)
         {
-            case action.Attack:      { WolfAnimator.SetTrigger("Attack"); break; }
+            case action.Attack:
+                {
+                    WolfAnimator.SetTrigger("Attack");
+                    if(GetComponent<wolfStats>() != null)
+                    {
+                        GetComponent<wolfStats>().attack();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Missing object wolfStats.cs");
+                    }
+                    break;
+                }
             case action.LeapStart:   { WolfAnimator.SetBool("Leap", true); break; }
             case action.LeapEnd:     { WolfAnimator.SetBool("Leap", false); break; }
         }

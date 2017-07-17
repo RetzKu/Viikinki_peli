@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Melee : weaponStats
 {
-    void OnTriggerEnter2D(Collider2D Trigger)
+    /*void OnTriggerEnter2D(Collider2D Trigger)
     {
         if (Trigger.gameObject.tag == "Enemy")
         {
@@ -24,10 +24,6 @@ public class Melee : weaponStats
     void OnTriggerExit2D(Collider2D Trigger)
     {
         onRange = false;
-    }
+    }*/
 
-    public override bool Get()
-    {
-        return onRange;
-    }
 }

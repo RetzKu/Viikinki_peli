@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04dc6761d973d26478f4b5b7179a0081, type: 3}
+  m_Name: Forest
+  m_EditorClassIdentifier: 
+  Type: 6
+  SpawnableObjects:
+  - ObjectPrefab: {fileID: 1384798036243720, guid: 87a5d89e7e91fe140aed70d5faeb1875,
+      type: 2}
+    SpawnRate: 10
+  - ObjectPrefab: {fileID: 1384798036243720, guid: c6fec3c5a295d194198e4aaf0f4b9fd3,
+      type: 2}
+    SpawnRate: 22
+  - ObjectPrefab: {fileID: 1734588554688894, guid: 8eabe4dee9d57654592c6fd72afc4ff3,
+      type: 2}
+    SpawnRate: 2
+  - ObjectPrefab: {fileID: 1734588554688894, guid: ec8b66b3baf88cd4fb742ec8923e90a0,
+      type: 2}
+    SpawnRate: 4

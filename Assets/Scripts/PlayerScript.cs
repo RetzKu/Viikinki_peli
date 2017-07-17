@@ -19,6 +19,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     internal inventory Inventory;
 
+    public inventory.Equipped EquippedTool { get { return Inventory.EquipData; } } //saa helposti equipatun tavaran tiedota, scriptien sisällöt etc.
+    public int Arrows { get { return EquippedTool.ArrowCount; } }
+
     Vector3 startPoint;
     Vector3 endPoint;
 
@@ -29,8 +32,7 @@ public class PlayerScript : MonoBehaviour
     public Transform DownwardsHand;
 
     private ItemManager Hand;
-    public GameObject weaponInHand { get { return Hand.Copy; } }
-    //public int Damage;
+    public GameObject weaponInHand { get { return Hand.Copy; } } //jos haluaa collisioniin koskea tai tehdä collision tarkastuksia
 
     public int Direction;
 
@@ -78,6 +80,8 @@ public class PlayerScript : MonoBehaviour
             }
             else { transform.GetComponent<FxScript>().Default(); Hand.EmptyHand(); }
 
+            GetComponent<AnimatorScript>().ResetStates();
+            GetComponent<AnimatorScript>().Type = EquippedTool.Type;
             Inventory.Changed = false;
         }
     }
@@ -108,25 +112,12 @@ public class PlayerScript : MonoBehaviour
 
     void InventoryInput()
     {
-        if (Input.GetKeyDown("1") == true) { Inventory.EquipItem(0); }
-        if (Input.GetKeyDown("2") == true) { Inventory.EquipItem(1); }
-        if (Input.GetKeyDown("3") == true) { Inventory.EquipItem(2); }
+        for(int i = 1; i <= InventorySize;i++)
+        {
+            if(Input.GetKeyDown(i.ToString()) == true) { Inventory.EquipItem(i-1); }
+        }
         if(Input.GetKeyDown("f") == true) { Inventory.DropItem(); }
     }
-
-    //void OnTriggerEnter2D(Collider2D Trig)
-    //{
-    //   
-    //}
-
-    //void OnTriggerExit2D(Collider2D Trig)
-    //{
-        //if (Trig.transform.tag == "Dropped")
-        //{
-        //    Trig.transform.tag = "Item";
-        //    print("escaped dropped item");
-        //}
-    //}
 
     /*WHEN TIME, TRANSFER DEFAULT METHODS TO THIS CLASS*/
     public class ItemManager
@@ -176,7 +167,7 @@ public class PlayerScript : MonoBehaviour
                 Copy.transform.position = Hand.position;
                 Copy.transform.localRotation = rotation;
                 Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-                Copy.GetComponent<SpriteRenderer>().sortingOrder = 8;
+                Copy.GetComponent<SpriteRenderer>().sortingOrder = 1;
             }
             if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
         }

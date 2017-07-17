@@ -3866,6 +3866,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 61165941594480930, guid: bd771d4617c99d149ad6c9dd912fcb49,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4254257402086996, guid: bd771d4617c99d149ad6c9dd912fcb49, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd771d4617c99d149ad6c9dd912fcb49, type: 2}
   m_IsPrefabParent: 0
@@ -4304,6 +4313,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 212840684736596094, guid: 166f2988e83639e4b871c5e3d63ade68,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212840684736596094, guid: 166f2988e83639e4b871c5e3d63ade68,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212840684736596094, guid: 166f2988e83639e4b871c5e3d63ade68,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 166f2988e83639e4b871c5e3d63ade68, type: 2}
   m_IsPrefabParent: 0
@@ -4415,26 +4439,6 @@ Prefab:
       propertyPath: terveisin
       value: 
       objectReference: {fileID: 1358475835}
-    - target: {fileID: 114226087637341638, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: MaxDistance
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114226087637341638, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: SpriteScale.x
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114226087637341638, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: SpriteScale.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114226087637341638, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: SpriteScale.z
-      value: 0.4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
   m_IsPrefabParent: 0

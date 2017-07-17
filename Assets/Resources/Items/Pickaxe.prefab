@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4488153893756244}
   - component: {fileID: 212840684736596094}
-  - component: {fileID: 61762726418950662}
   - component: {fileID: 114868535431459582}
+  - component: {fileID: 61612567722439856}
   m_Layer: 21
   m_Name: Pickaxe
   m_TagString: Item
@@ -42,7 +42,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61762726418950662
+--- !u!61 &61612567722439856
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -67,12 +67,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0f944e20637e74295b18c250700a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 0.4
   damage: 4
   attackWeight: 10
   weaponEffect: {fileID: 21300000, guid: f43c53a45dee3724793fb23c5164e286, type: 3}
   onRange: 0
+  distance: 0.4
   weaponEffectScale: {x: 0.4, y: 0.4, z: 1}
+  effectOffSet: {x: 0, y: 0.2, z: 0}
 --- !u!212 &212840684736596094
 SpriteRenderer:
   m_ObjectHideFlags: 1

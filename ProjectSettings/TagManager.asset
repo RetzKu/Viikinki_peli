@@ -17,7 +17,12 @@ TagManager:
   - TouchPoint
   - ResourceEffectEmitter
   - WorldResource
+  - BaseChecker
+  - Base
   - projectileManager
+  - notPatePlayer
+  - LinePoint
+  - LineController
   layers:
   - Default
   - TransparentFX
@@ -41,7 +46,7 @@ TagManager:
   - ObjectLayer
   - WorldResource
   - Item
-  - 
+  - Base
   - 
   - 
   - 

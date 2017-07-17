@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 50322408245312828}
   - component: {fileID: 114693461594013910}
   - component: {fileID: 114397628786894056}
+  - component: {fileID: 114413969714695196}
   m_Layer: 8
   m_Name: Wolf
   m_TagString: Enemy
@@ -499,6 +500,20 @@ MonoBehaviour:
   cohF: 0.1
   velocity: {x: 0, y: 0}
   leapDist: 5
+--- !u!114 &114413969714695196
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1975485080313304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c97c968f8872f24f8ab005c75e5ca36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  hp: 100
+  armor: 1
 --- !u!114 &114693461594013910
 MonoBehaviour:
   m_ObjectHideFlags: 1

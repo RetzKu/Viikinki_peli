@@ -14,7 +14,7 @@ public class BaseManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        _baseCheckerGo = GameObject.FindWithTag("BaseChecker");
+        _baseCheckerGo = GameObject.FindWithTag("Player");
         _baseChecker = _baseCheckerGo.GetComponent<BaseChecker>();
 
         if (_baseCheckerGo == null || _baseChecker == null)
@@ -28,22 +28,26 @@ public class BaseManager : MonoBehaviour
         
     public void RegisterOnBaseEnter(Action func)
     {
-        _baseChecker.OnCampFireEnter += func;
+        if (_baseChecker != null)
+            _baseChecker.OnCampFireEnter += func;
     }
 
     public void RegisterOnBaseExit(Action func)
     {
-        _baseChecker.OnCampFireExit += func;
+        if (_baseChecker != null)
+            _baseChecker.OnCampFireExit += func;
     }
 
     public void UnRegisterOnBaseEnter(Action func)
     {
-        _baseChecker.OnCampFireExit -= func;
+        if (_baseChecker != null)
+            _baseChecker.OnCampFireExit -= func;
     }
 
     public void UnRegisterOnBaseExit(Action func)
     {
-        _baseChecker.OnCampFireExit -= func;
+        if (_baseChecker != null)
+            _baseChecker.OnCampFireExit -= func;
     }
 
 }

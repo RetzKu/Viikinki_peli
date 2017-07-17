@@ -3,7 +3,7 @@
 // Apuluokka TouchControllerille
 public class CurvedLineRendererController : MonoBehaviour
 {
-    public GameObject[] LinePoints;
+    public GameObject[] LinePoints = new GameObject[15];
     private int _pointIndex = 0;
     public int  MaxPoints = 15;
 

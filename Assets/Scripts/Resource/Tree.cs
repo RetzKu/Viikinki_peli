@@ -3,15 +3,29 @@ using Random = UnityEngine.Random;
 
 public class Tree : Resource
 {
-    public override void Init()
+    public override void Init(bool destroyed)
     {
         SetCollidersInChilds(false);
         var trunk = transform.GetChild(0);
         trunk.GetComponent<CircleCollider2D>().enabled = true;
 
-        GetComponent<SpriteRenderer>().enabled = true;
+        var spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.enabled = true;
         GetComponent<DropScript>().enabled = true;
         GetComponent<Tree>().enabled = true;
+
+        // ZlayerManager.SetSortingOrder(transform, spriteRenderer);
+
+        if (destroyed)
+        {
+            type = ResourceManager.Instance.GetTrunk(type);
+            StubInit();
+        }
+
+        spriteRenderer.sortingOrder = 0;
+
+        float z = ZlayerManager.GetZFromY(transform.position);
+        transform.position = new Vector3(transform.position.x, transform.position.y, z);
     }
 
     public void StubInit()
@@ -23,6 +37,13 @@ public class Tree : Resource
         // Warning  prefabien eka on trunk
         var trunk = transform.GetChild(0);
         trunk.GetComponent<CircleCollider2D>().enabled = true;
+        trunk.GetComponent<SpriteRenderer>().enabled = true;
+
+        var platform = transform.GetChild(1);
+        platform.gameObject.SetActive(false);
+
+        var falling = transform.GetChild(2);
+        falling.gameObject.SetActive(false);
     }
 
 
@@ -43,10 +64,18 @@ public class Tree : Resource
 
     public override void OnDead()
     {
+        type = ResourceManager.Instance.GetTrunk(type);
         StartFalling();
-        CopyStub();
+
+        // CopyStub();
     }
-    
+
+    public override void DeActivate()
+    {
+        StubInit();
+    }
+
+
 
     private void SetCollidersInChilds(bool state)
     {

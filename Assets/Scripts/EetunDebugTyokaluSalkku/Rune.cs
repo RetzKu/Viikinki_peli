@@ -32,5 +32,5 @@ public abstract class Rune : ScriptableObject
 
     public abstract void init(GameObject owner);
     public abstract void Fire();
-
 }
+

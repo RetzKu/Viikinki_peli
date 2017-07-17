@@ -284,7 +284,7 @@ public class TileSpriteController : MonoBehaviour
 
     public void SetTileSprites(int width, int height, TileMap tilemap, int startX, int startY)
     {
-        int tempIndex = 0;
+        // int tempIndex = 0;
         float offsetX = transform.position.x;
         float offsetY = transform.position.y;
 

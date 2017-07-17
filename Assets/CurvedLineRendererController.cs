@@ -5,7 +5,7 @@ public class CurvedLineRendererController : MonoBehaviour
 {
     public GameObject[] LinePoints;
     private int _pointIndex = 0;
-    public int MaxPoints = 15;
+    public int  MaxPoints = 15;
 
     public void Start()
     {

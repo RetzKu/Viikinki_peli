@@ -45,4 +45,5 @@ public class BaseManager : MonoBehaviour
     {
         _baseChecker.OnCampFireExit -= func;
     }
+
 }

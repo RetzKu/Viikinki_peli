@@ -8,30 +8,35 @@ public class DamageVisual : MonoBehaviour
     private PostProcessingBehaviour postProcessingBehaviour;
     public float DefaultVigietteIntensity = 0.45f;
     private Coroutine fader;
-	// Use this for initialization
-	void Start ()
-	{
-	    postProcessingBehaviour = Camera.main.GetComponent<PostProcessingBehaviour>();
-	    postProcessingBehaviour.profile.vignette.enabled = false;
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	    if (Input.GetKeyDown(KeyCode.H))
-	    {
-	        postProcessingBehaviour.profile.vignette.enabled = true;
+    // Use this for initialization
+    void Start()
+    {
+        postProcessingBehaviour = Camera.main.GetComponent<PostProcessingBehaviour>();
+        postProcessingBehaviour.profile.vignette.enabled = false;
+    }
 
-	        VignetteModel.Settings s = postProcessingBehaviour.profile.vignette.settings; //  = DefaultVigietteIntensity;
-	        s.intensity = DefaultVigietteIntensity;
-            postProcessingBehaviour.profile.vignette.settings = s;
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            TakeDamage();
+        }
+    }
+
+    public void TakeDamage()
+    {
+        postProcessingBehaviour.profile.vignette.enabled = true;
+
+        VignetteModel.Settings s = postProcessingBehaviour.profile.vignette.settings; //  = DefaultVigietteIntensity;
+        s.intensity = DefaultVigietteIntensity;
+        postProcessingBehaviour.profile.vignette.settings = s;
 
 
-            if (fader != null)
-                StopCoroutine(fader);
-	        fader = StartCoroutine(FadeOut(s));
-	    }
-	}
+        if (fader != null)
+            StopCoroutine(fader);
+        fader = StartCoroutine(FadeOut(s));
+    }
 
     IEnumerator FadeOut(VignetteModel.Settings s)
     {
@@ -43,6 +48,6 @@ public class DamageVisual : MonoBehaviour
             postProcessingBehaviour.profile.vignette.settings = s;
             yield return new WaitForSeconds(amount);
         }
-	    postProcessingBehaviour.profile.vignette.enabled = false;
+        postProcessingBehaviour.profile.vignette.enabled = false;
     }
 }

@@ -36,6 +36,7 @@ public class Movement : MonoBehaviour
     float knockTimer = 0f;
 
     Vector2 knockDir = new Vector2(0f, 0f);
+    Vector2 vel = new Vector2(0f, 0f);
     // 2 max drag
     // 0 min drag
     void Start()
@@ -87,6 +88,7 @@ public class Movement : MonoBehaviour
         if (rb.velocity.x < -max_spd) { added_spd.x += ((rb.velocity.x / -max_spd) -1) *max_spd; }
         if (rb.velocity.y < -max_spd) { added_spd.y += ((rb.velocity.y / -max_spd) - 1) * max_spd; }
         getRotation(added_spd);
+        vel = added_spd;
         return added_spd;
 
     }
@@ -95,6 +97,8 @@ public class Movement : MonoBehaviour
         if (!knockBack)
         {
             knockBack = true;
+            dir.Normalize();
+            dir *= 10f;
             knockDir = dir;
             GetComponent<AnimatorScript>()._Lock = true;
         }
@@ -102,19 +106,34 @@ public class Movement : MonoBehaviour
     void knockClock()
     {
         knockTimer += Time.deltaTime;
-        if(knockTimer > knockTime)
+        if(knockTimer < knockTime)
         {
-
+            Vector2 des = knockDir - rb.position;
+            des.Normalize();
+            des *= max_spd_pate;
+            Vector2 steer = des - vel;
+            if(steer.magnitude > max_spd_pate)
+            {
+                steer.Normalize();
+                steer *= max_spd_pate;
+            }
+            //float t = knockTimer / knockTime;
+            //float spd = lerp(max_spd_pate*0.1f, 0, t);
+            //knockDir.Normalize();
+            //knockDir *= spd;
+            //rb.MovePosition(rb.position + knockDir);
         }
         else
         {
             GetComponent<AnimatorScript>()._Lock = false;
             knockBack = false;
+            knockTimer = 0f;
+            rb.drag = slowdown; // Tarkista 
         }
     }
     float lerp(float min,float max,float t)
     {
-        return max_spd = min_spd_pate + ((max_spd_pate - min_spd_pate) * t);
+        return  min + ((max - min) * t);
     }
     void lerpate()
     {

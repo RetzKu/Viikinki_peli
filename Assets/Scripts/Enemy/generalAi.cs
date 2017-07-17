@@ -106,7 +106,7 @@ public abstract class generalAi : MonoBehaviour
     protected EnemyRotater rotation = new EnemyRotater();
 
     public abstract void UpdatePosition(List<GameObject> Mobs);
-    public abstract void InitStart(float x,float y, EnemyType type);
+    public abstract void InitStart(float x,float y, EnemyType type,GameObject player);
 
     public void followPlayer(ref Vector2 dist, Vector2 playerPos, float attackDist,ref Vector2 target,ref int flags,EnemyMovement Physics,float sepF)
     {

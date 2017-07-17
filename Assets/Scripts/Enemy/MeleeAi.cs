@@ -11,7 +11,7 @@ public class MeleeAi : generalAi {
     float attCount = 0f;
     bool attack = true;
 
-    public override void InitStart(float x, float y, EnemyType type)
+    public override void InitStart(float x, float y, EnemyType type,GameObject player)
     {
         attackDist = UnityEngine.Random.Range(swingDist - 0.2f, swingDist + 0.2f);
         myType = type;
@@ -23,7 +23,7 @@ public class MeleeAi : generalAi {
         velocity = new Vector2(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f));
         Physics.InitRules(sepF, aliF, cohF, desiredseparation, alingmentDistance, IdleRadius, IdleBallDistance, ArriveRadius, MaxSteeringForce, MaxSpeed);
         Physics._maxSpeed = MaxSpeed;
-        player = GameObject.FindGameObjectWithTag("Player");
+        this.player = player;
     }
     public override void UpdatePosition(List<GameObject> Mobs)
     {

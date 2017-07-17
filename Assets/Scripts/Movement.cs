@@ -34,7 +34,8 @@ public class Movement : MonoBehaviour
     float attackTimer = 0f;
     float knockTime = 0.2f;
     float knockTimer = 0f;
-    float steerForce = 1f;
+    float steerForce = 0.05f;
+    float steerSPD = 0.2f;
     Vector2 knockDir = new Vector2(0f, 0f);
     Vector2 vel = new Vector2(0f, 0f);
     Vector2 acc = new Vector2(0f, 0f);
@@ -47,15 +48,16 @@ public class Movement : MonoBehaviour
     }
     void updateMovement()
     {
-        acc *= Time.deltaTime;
+        //acc *= Time.deltaTime;
         vel += acc;
-        if(vel.magnitude > max_spd_pate)
+        //vel*=Time.deltaTime;
+        if(vel.magnitude > steerSPD)
         {
             vel.Normalize();
-            vel *= max_spd_pate;
+            vel *= steerSPD;
             //print("limiting speed");
         }
-        //vel*=Time.deltaTime;
+       
         rb.MovePosition(rb.position + vel);
         acc *= 0;
     }
@@ -75,7 +77,8 @@ public class Movement : MonoBehaviour
             lerpate();
             //print(max_spd);
             Vector2 SpeedLimiter = SpeedLimitChecker();
-            rb.velocity += new Vector2(SpeedLimiter.x, SpeedLimiter.y);
+            vel = rb.velocity += SpeedLimiter;
+            
         }
         else
         {
@@ -108,7 +111,7 @@ public class Movement : MonoBehaviour
         if (rb.velocity.x < -max_spd) { added_spd.x += ((rb.velocity.x / -max_spd) -1) *max_spd; }
         if (rb.velocity.y < -max_spd) { added_spd.y += ((rb.velocity.y / -max_spd) - 1) * max_spd; }
         getRotation(added_spd);
-        vel = added_spd;
+        //vel = added_spd;
         return added_spd;
 
     }
@@ -131,9 +134,9 @@ public class Movement : MonoBehaviour
         {
             //Vector2 des = knockDir - rb.position;
             //des.Normalize();
-            //des *= max_spd_pate;
+            //des *= steerSPD;
             //Vector2 steer = des - vel;
-            //if(steer.magnitude > steerForce)
+            //if (steer.magnitude > steerForce)
             //{
             //    steer.Normalize();
             //    steer *= steerForce;

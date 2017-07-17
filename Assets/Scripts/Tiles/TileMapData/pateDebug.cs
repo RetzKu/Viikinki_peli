@@ -6,6 +6,7 @@ public class pateDebug : MonoBehaviour {
 
     // Use this for initialization
     Rigidbody2D body;
+    public GameObject blood;
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
@@ -16,11 +17,11 @@ public class pateDebug : MonoBehaviour {
     void Update () {
         if (Input.GetKeyDown("o"))
         {
-            print("knockingback");
+            print("splattering");
             Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 temp = (Vector2)pz - body.position;
-            GetComponent<Movement>().KnockBack(pz);
-           // GetComponent<Movement>()._Lock = true;
+            var newBlood = Instantiate(blood, new Vector2(0, 0), Quaternion.identity);
+            newBlood.GetComponent<destroyMe>().initParticle(pz,body.position);
+            // GetComponent<Movement>()._Lock = true;
         }
     }
 }

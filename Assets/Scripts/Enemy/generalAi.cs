@@ -94,7 +94,7 @@ public abstract class generalAi : MonoBehaviour
 
     protected int flags = 0;
 
-
+    [HideInInspector]
     public Vector2 velocity = new Vector2(); //An object’s PVector velocity will remain constant if it is in a state of equilibrium.
     protected Vector2 target = new Vector2();
 

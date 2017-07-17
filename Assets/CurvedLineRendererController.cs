@@ -11,6 +11,7 @@ public class CurvedLineRendererController : MonoBehaviour
     {
         for (int i = 0; i < LinePoints.Length; i++)
         {
+            LinePoints[i] = ObjectPool.instance.GetObjectForType("point1", true);
             LinePoints[i].SetActive(false);
         }
     }

@@ -35,6 +35,7 @@ public class CraftingUiController : MonoBehaviour
     public Sprite[] CraftSprites;
     public Sprite[] LightSprites;
     public Sprite[] OutOfSprites;
+    public Transform ResourceEndLocation;
 
     private Dictionary<ButtonState, Sprite[]> buttonStateSprites;
     private readonly int maxButtons = 9;
@@ -55,6 +56,8 @@ public class CraftingUiController : MonoBehaviour
         }
 
         CraftingManager.Instance.OnResourceCountChanged += CheckResourceNumbers;
+        // CraftingManager.Instance.SetResourcePickupEndLocation(Camera.main.ScreenToWorldPoint(ResourceEndLocation.position));
+
 
 
         buttonStateSprites = new Dictionary<ButtonState, Sprite[]>(4);

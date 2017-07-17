@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TouchController : MonoBehaviour
 {
@@ -39,6 +37,8 @@ public class TouchController : MonoBehaviour
     public RuneHolder RuneHolder;
     public RuneHolder CraftingManagerHolder;
     private GameObject knob;
+
+    private Vector3 lastPosition;
 
     public enum Mode
     {
@@ -169,6 +169,8 @@ public class TouchController : MonoBehaviour
         {
             Debug.LogWarning("Cannot load LineRendererEndPoint plz tell Eetu");
         }
+
+        lastPosition = transform.position;
     }
 
     void OnBaseEnter()
@@ -190,7 +192,7 @@ public class TouchController : MonoBehaviour
 
     void Update()
     {
-#if false               // MOBILERLKj
+#if false               // Mobile
         Touch[] myTouches = Input.touches;
         for (int i = 0; i < Input.touchCount; i++)
         {
@@ -253,6 +255,8 @@ public class TouchController : MonoBehaviour
         }
         else
         {
+            // sormi poesa
+
             SendIndices();
             index = 0;
 
@@ -263,9 +267,15 @@ public class TouchController : MonoBehaviour
 
             SetLineRendererCount(0);
 
-            // sormi poesa
             LineController.ResetPoints();
+
+
+            // TODO: linejen position fix
+            // if (lastPosition != transform.position)
+                // LineController.TranslatePoints(lastPosition - transform.position);
+
         }
+        lastPosition = transform.position;
 
         // Reset LineRenderer
         //if (_timer < Time.time)

@@ -24,9 +24,7 @@ public class FreezeRune : Rune
     public override void Fire()
     {
         launcher.Fire(sprite);
-
         Vector2 pos = owner.transform.position;
-
 
         LayerMask mask = LayerMask.GetMask("Enemy");
         var colliders = Physics2D.CircleCastAll(pos, Range, new Vector2(0, 0), 0, mask);
@@ -35,11 +33,12 @@ public class FreezeRune : Rune
             Destroy(collider.transform.gameObject);
         }
         Debug.Log("FreezeRune lähettää terveisensä");
-
     }
+
     // Rune effect funktio, jota kutsuttaisiin Launcherista takaisin
     // OnStart Ja OnRuneEnd, joihin laitettaisiin esim buffin statsit ja rune effectiä voisi myös kutsua coroutinellä takaisin
 }
+
 
 [CreateAssetMenu(menuName = "Runes/BuffRune NOT IMPLEMENTED!")]
 public class WeaponBuffRune : Rune
@@ -70,3 +69,5 @@ public class WeaponBuffRune : Rune
         // laita timer joka lopettaa buffing keston
     }
 }
+
+

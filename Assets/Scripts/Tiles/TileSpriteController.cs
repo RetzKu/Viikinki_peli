@@ -22,9 +22,32 @@ public class TileSpriteController : MonoBehaviour
     private string[] numbers = new string[StringEndNumberCount];
 
 
+    public enum CurrentPool
+    {
+        Border,
+        Border1,
+        Border2,
+        Max
+    }
+    private CurrentPool currentPool = CurrentPool.Border;
+
+    string GetCurrentPool()
+    {
+        if (currentPool == CurrentPool.Max)
+        {
+            currentPool = CurrentPool.Border;
+        }
+        return currentPool++.ToString();
+    }
+
 
     // TODO: ONKO T}YNN};s
     private List<GameObject> borders = new List<GameObject>(500);
+    private List<GameObject> borders1 = new List<GameObject>(250);
+    private List<GameObject> borders2 = new List<GameObject>(250);
+
+
+
 
     private Dictionary<TileType, Sprite[]> _textures2 = new Dictionary<TileType, Sprite[]>(10);
 
@@ -281,48 +304,19 @@ public class TileSpriteController : MonoBehaviour
         return TileCount[(int)type];
     }
 
-
     public void SetTileSprites(int width, int height, TileMap tilemap, int startX, int startY)
     {
         // int tempIndex = 0;
         float offsetX = transform.position.x;
         float offsetY = transform.position.y;
 
+        // sstring currentPool = GetCurrentPool();
+        string currentPool = "Border";
+
         for (int y = startY; y < height; y++)
         {
             for (int x = startX; x < width; x++)
             {
-                //TileType type = tilemap.GetTileFast(x, y); 
-                //int value = GetAssetNameBitmaskNoStr(x, y, tilemap, type);
-
-                //#if false
-                //                int value = 0;
-                //                bool found;
-
-                //                TileType type = tilemap.GetTileFast(x, y);  
-                //                string assetName = GetAssetNameBitmask(x, y, tilemap, type, out value, out found);
-                //#endif
-
-
-                //                // Sprite sprite;  // perus 
-
-                //#if false
-                //                if (!found)
-
-                // "safkjdlsaf"
-                //                    assetName = "GrassLand_";
-                //                assetName += GetNumberName(Random.Range(0, GetAssetCount(type)));    // max count smt smt 
-                //#endif
-                //#if false
-                //                if (_textures.TryGetValue(assetName, out sprite))
-                //                {
-                //                    tilemap.GetGameObjectFast(x, y).GetComponent<SpriteRenderer>().sprite = sprite;
-                //                }
-                //                else
-                //                {
-                //                    Debug.LogWarning("Texture: " + assetName + " Missing!");
-                //                }
-                //#else
                 TileType type = tilemap.GetTileFast(x, y);
                 int value = GetAssetNameBitmaskNoStr(x, y, tilemap, type);
 
@@ -389,7 +383,7 @@ public class TileSpriteController : MonoBehaviour
 
                 if ((value & (1 << 1 - 1)) == 0)            // TODO: TEXTURES2 TÄNNE
                 {
-                    var go = ObjectPool.instance.GetObjectForType("Border", true);
+                    var go = ObjectPool.instance.GetObjectForType(currentPool, true);
                     go.GetComponent<SpriteRenderer>().sprite = _textures[border + "N0"];
                     go.transform.position = new Vector3(x + offsetX, y + offsetY + 1);
                     borders.Add(go);
@@ -397,7 +391,7 @@ public class TileSpriteController : MonoBehaviour
 
                 if ((value & (1 << 2 - 1)) == 0)
                 {
-                    var go = ObjectPool.instance.GetObjectForType("Border", true);
+                    var go = ObjectPool.instance.GetObjectForType(currentPool, true);
                     go.GetComponent<SpriteRenderer>().sprite = _textures[border + "W0"];
                     go.transform.position = new Vector3(x + offsetX - 1, y + offsetY);
                     borders.Add(go);
@@ -405,7 +399,7 @@ public class TileSpriteController : MonoBehaviour
 
                 if ((value & (1 << 3 - 1)) == 0)
                 {
-                    var go = ObjectPool.instance.GetObjectForType("Border", true);
+                    var go = ObjectPool.instance.GetObjectForType(currentPool, true);
                     go.GetComponent<SpriteRenderer>().sprite = _textures[border + "E0"];
                     go.transform.position = new Vector3(x + offsetX + 1, y + offsetY);
                     borders.Add(go);
@@ -413,7 +407,7 @@ public class TileSpriteController : MonoBehaviour
 
                 if ((value & (1 << 4 - 1)) == 0)
                 {
-                    var go = ObjectPool.instance.GetObjectForType("Border", true);
+                    var go = ObjectPool.instance.GetObjectForType(currentPool, true);
                     go.GetComponent<SpriteRenderer>().sprite = _textures[border + "S0"];
                     go.transform.position = new Vector3(x + offsetX, y + offsetY - 1);
                     borders.Add(go);
@@ -433,11 +427,12 @@ public class TileSpriteController : MonoBehaviour
             {
                 ObjectPool.instance.PoolObject(border);
                 borders.RemoveAt(i);
-                --i;
+                i--;
                 // fuck fuck
             }
         }
     }
+
 
 
     [Obsolete]
@@ -496,7 +491,6 @@ public class TileSpriteController : MonoBehaviour
             //    Debug.LogWarning("Texture: " + assetName + " Missing!");
             //}
 
-            // TODO: FUNKTIO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
             //for(int i = 0; i < neighbours.Length; i++)
             //{

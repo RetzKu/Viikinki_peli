@@ -7,7 +7,6 @@ public class CampFire : Resource
 {
     private Animator FireAnimation;
 
-
     public enum FireState
     {
         OnFire,
@@ -18,6 +17,7 @@ public class CampFire : Resource
     void Start()
     {
         FireAnimation = GetComponent<Animator>();
+        BaseManager.Instance.AddBase(this.gameObject); // milloin pois ? /- ei ikinä ?
     }
      
     public override void OnDead()

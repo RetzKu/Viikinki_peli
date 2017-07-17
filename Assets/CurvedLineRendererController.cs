@@ -29,6 +29,7 @@ public class CurvedLineRendererController : MonoBehaviour
     {
         for (int i = 0; i < _pointIndex; i++)
         {
+            // LinePoints[i].transform.position = new Vector3(0f, 0f, 0f);
             LinePoints[i].SetActive(false);
         }
         _pointIndex = 0;
@@ -47,4 +48,9 @@ public class CurvedLineRendererController : MonoBehaviour
     {
         return _pointIndex + 1;
     }
+
+    // public void TranslatePoints(Vector3 vector)
+    // {
+// 
+    // }
 }

@@ -20,7 +20,7 @@ public class wolfStats : enemyStats {
         hp = hp - (rawDamageTaken / armor);
         GetComponent<generalAi>().KnockBack();
         foreach (SpriteRenderer t in GetComponentsInChildren<SpriteRenderer>()) {t.color = new Color(255f, 0f, 0f, 255f); }
-        
+        print(gameObject + " has " + hp + " hp left.");
         checkAlive();
     }
 
@@ -30,6 +30,7 @@ public class wolfStats : enemyStats {
         if(hp <= 0)
         {
             GetComponent<generalAi>().killMePls();
+            print(gameObject.name + "died.");
         }
     }
 

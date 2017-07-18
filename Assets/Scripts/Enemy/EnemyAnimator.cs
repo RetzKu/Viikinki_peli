@@ -64,7 +64,7 @@ public class EnemyAnimator : MonoBehaviour {
 
         private void WeaponSettings(DirectionState Direction)
         {
-            if(_Weapon.GetComponent<Melee>() != null) { _Weapon.GetComponent<Melee>().Reposition(); }
+            //if(_Weapon.GetComponent<Melee>() != null) { _Weapon.GetComponent<Melee>().Reposition(); }
         }
 
     }

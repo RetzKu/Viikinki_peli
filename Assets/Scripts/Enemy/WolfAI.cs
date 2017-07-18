@@ -21,6 +21,7 @@ public class WolfAI : generalAi
     float biteTime = 1f;
     float biteTimer = 0f;
     bool justBite = false;
+    float holderDist = 0;
     //generalAi AI = new generalAi();
 
     public override void InitStart(float x, float y, EnemyType type,GameObject player) // jokaselle
@@ -64,6 +65,10 @@ public class WolfAI : generalAi
             {
                 HeardArray[i].GetComponent<generalAi>().agro = true; // check if eetu lies
             }
+        }
+        if (slow)
+        {
+            SlowRuneTimer();
         }
         if (!knocked)
         {
@@ -334,5 +339,39 @@ public class WolfAI : generalAi
         attackCounter = 0;
         GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
 
+    }
+    public override void SlowRune(float time, float slowPercent)
+    {
+        if (!slow)
+        {
+            ParticleSpawner.inctance.SpawSlow(this.gameObject, time);
+            if (inAttack)
+            {
+                GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
+                inAttack = false;
+                attackCounter = 0;
+                rotation.Lock = false;
+            }
+            holderSpeed = MaxSpeed;
+            MaxSpeed *= slowPercent;
+            Physics._maxSpeed = MaxSpeed;
+            slowTime = time;
+            slow = true;
+            holderDist = attackDist;
+            attackDist *= slowPercent;
+            print(attackDist);
+        }
+    }
+    protected override void SlowRuneTimer()
+    {
+        slowTimer += Time.deltaTime;
+        if (slowTimer > slowTime)
+        {
+            //print("freed");
+            Physics._maxSpeed = MaxSpeed = holderSpeed;
+            slowTimer = 0f;
+            slow = false;
+            attackDist = holderDist;
+        }
     }
 }

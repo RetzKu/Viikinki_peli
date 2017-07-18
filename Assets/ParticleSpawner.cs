@@ -6,11 +6,11 @@ public class ParticleSpawner : MonoBehaviour {
 
     public GameObject Largeblood;
     public GameObject SmallBlood;
+    public GameObject Slow;
     public static ParticleSpawner inctance;
-
-    void start()
+    void Start()
     {
-        if(inctance != null)
+        if(inctance == null)
         {
             inctance = this;
         }
@@ -24,6 +24,11 @@ public class ParticleSpawner : MonoBehaviour {
     {
         var newBlood = Instantiate(SmallBlood, new Vector2(0, 0), Quaternion.identity);
         newBlood.GetComponent<destroyMe>().initParticle(from, where);
+    }
+    public void SpawSlow(GameObject father,float time)
+    {
+        var ss = Instantiate(Slow);
+        ss.GetComponent<buffParticle>().init(father, time);
     }
 
 }

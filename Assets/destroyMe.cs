@@ -28,6 +28,7 @@ public class destroyMe : MonoBehaviour {
 
         direction.Normalize();
         angle = Mathf.Atan2(-direction.y, -direction.x);
+        //print(Quaternion.Euler(angle * Mathf.Rad2Deg, -90, -90));// Quaternion.Euler(angle, -90, -90););
         transform.rotation = Quaternion.Euler(angle * Mathf.Rad2Deg, -90, -90);// Quaternion.Euler(angle, -90, -90);
     }
 	void Update()
@@ -37,11 +38,11 @@ public class destroyMe : MonoBehaviour {
             counter += Time.deltaTime;
             if(counter > lifeTime && !visited)
             {
+                Debug.Log("destroy blood");
                 GetComponent<ParticleSystem>().Pause();
                 Destroy(this.gameObject, 5f);
                 visited = true;
             }
-
             
         }
         

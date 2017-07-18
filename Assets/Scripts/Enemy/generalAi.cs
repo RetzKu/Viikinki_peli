@@ -10,10 +10,10 @@ public enum EnemyType
 }
 public enum Dir
 {
-    Right,
     Left,
-    Up,
     Down,
+    Up,
+    Right,
     Basic
 }
 public enum collision

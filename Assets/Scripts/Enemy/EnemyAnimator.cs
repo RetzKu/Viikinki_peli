@@ -49,26 +49,25 @@ public class EnemyAnimator : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) == true) { ChangeDirection(enemyDir.Left); }
-        if (Input.GetKeyDown(KeyCode.W) == true) { ChangeDirection(enemyDir.Up); }
-        if (Input.GetKeyDown(KeyCode.S) == true) { ChangeDirection(enemyDir.Down); }
-        if (Input.GetKeyDown(KeyCode.D) == true) { ChangeDirection(enemyDir.Right); }
-        if (Input.GetKeyDown(KeyCode.Mouse0) == true) { Attack(); }
-        if (Input.GetKeyDown(KeyCode.F) == true) { Movin = true; }
+        //if (Input.GetKeyDown(KeyCode.A) == true) { ChangeDirection(enemyDir.Left); }
+        //if (Input.GetKeyDown(KeyCode.W) == true) { ChangeDirection(enemyDir.Up); }
+        //if (Input.GetKeyDown(KeyCode.S) == true) { ChangeDirection(enemyDir.Down); }
+        //if (Input.GetKeyDown(KeyCode.D) == true) { ChangeDirection(enemyDir.Right); }
+        //if (Input.GetKeyDown(KeyCode.Mouse0) == true) { Attack(); }
+        //if (Input.GetKeyDown(KeyCode.F) == true) { Movin = true; }
         CheckVelocity();
-    }
-
-    public void ChangeDirection(enemyDir Dir, bool MovinToggle)
-    {
-        Hand.SwapHand(Dir);
-        Movin = MovinToggle;
-        SpriteController.EnableSprites(Dir);
     }
 
     public void ChangeDirection(enemyDir Dir)
     {
-        Hand.SwapHand(Dir);
-        SpriteController.EnableSprites(Dir);
+        switch(Dir)
+        {
+            case enemyDir.StillDown: { Hand.SwapHand(enemyDir.Down); SpriteController.EnableSprites(enemyDir.Down); Movin = false;    break; }
+            case enemyDir.StillL: { Hand.SwapHand(enemyDir.Left); SpriteController.EnableSprites(enemyDir.Left); Movin = false;    break; }
+            case enemyDir.StillR: { Hand.SwapHand(enemyDir.Right); SpriteController.EnableSprites(enemyDir.Right); Movin = false;    break; }
+            case enemyDir.StillUp: { Hand.SwapHand(enemyDir.Up); SpriteController.EnableSprites(enemyDir.Up); Movin = false;    break; }
+            default: { Hand.SwapHand(Dir); SpriteController.EnableSprites(Dir); Movin = true; break; }
+        }
     }
 
     private WeaponType CheckWeaponType()

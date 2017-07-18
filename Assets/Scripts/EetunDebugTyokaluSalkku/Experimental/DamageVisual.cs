@@ -30,6 +30,7 @@ public class DamageVisual : MonoBehaviour
 
         VignetteModel.Settings s = postProcessingBehaviour.profile.vignette.settings; //  = DefaultVigietteIntensity;
         s.intensity = DefaultVigietteIntensity;
+
         postProcessingBehaviour.profile.vignette.settings = s;
 
 

@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Name: Crafting_Recipe_Arrow
   m_EditorClassIdentifier: 
   Indices:
-  - X: 1
-    Y: 2
-  - X: 1
+  - X: 2
     Y: 1
   - X: 1
-    Y: 0
+    Y: 1
+  - X: 2
+    Y: 2
   Sound: {fileID: 0}
   sprite: {fileID: 0}
   Prefab: {fileID: 1941705026831842, guid: 167dd15b75951fa46aeaf9cc64271c9d, type: 2}
   Materials:
-  - Type: 4
+  - Type: 3
     Count: 1
   - Type: 0
     Count: 1
-  - Type: 7
+  - Type: 6
     Count: 1

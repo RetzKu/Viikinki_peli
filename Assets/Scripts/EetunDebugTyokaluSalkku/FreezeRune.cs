@@ -1,33 +1,50 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Runes/FreezeRune")]
+[CreateAssetMenu(menuName = "Runes/Aoe rune")]
 public class FreezeRune : Rune
 {
     public float Range = 10f;
-    private GameObject owner;
-    private RuneEffectLauncher launcher;
+
+
+    private GameObject _owner;
+    private RuneEffectLauncher _launcher;
+    private LayerMask _collisionMask;
+
+    public Buff BuffToApply;
+
+    [Header("if length == 0 | mask = Enemy")]
+    public string[] CollisionMaskValues;
+
 
     public override void init(GameObject owner)
     {
-        this.owner = owner;
-        this.launcher = owner.GetComponent<RuneEffectLauncher>();
+        this._owner = owner;
+        this._launcher = owner.GetComponent<RuneEffectLauncher>();
 
-        if (launcher == null)
+        if (_launcher == null)
         {
             Debug.LogError("Laita RuneEffectLaucher.cs omistajalle (pelaaja?)");
         }
+
+        if (CollisionMaskValues != null)
+        {
+            _collisionMask = LayerMask.GetMask(CollisionMaskValues);
+        }
+        else
+        {
+            _collisionMask = LayerMask.GetMask("Enemy");
+        }
     }
 
-    // TODO: varmaan object pool olisi hyvä idis
     public override void Fire()
     {
-        launcher.Fire(sprite);
-        Vector2 pos = owner.transform.position;
+        _launcher.Fire(sprite);
+        Vector2 pos = _owner.transform.position;
 
-        LayerMask mask = LayerMask.GetMask("Enemy");
-        var colliders = Physics2D.CircleCastAll(pos, Range, new Vector2(0, 0), 0, mask);
+        var colliders = Physics2D.CircleCastAll(pos, Range, new Vector2(0, 0), 0, _collisionMask);
         foreach (var collider in colliders)
         {
             Destroy(collider.transform.gameObject);
@@ -46,7 +63,6 @@ public class WeaponBuffRune : Rune
     // effect?
     //private GameObject owner;
     public float Range = 10f;
-
     public float duration;
 
     // statsit:

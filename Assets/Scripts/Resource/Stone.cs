@@ -8,14 +8,14 @@ public class Stone : Resource
     //public static Sprite[] Sprites;
     public override void Init(bool destroyed)
     {
-        
+
     }
 
     public override void OnDead()
     {
         // TODO: ERIKOISTA
+        GetComponent<DropScript>().Drop();
         ObjectPool.instance.PoolObject(this.gameObject);
-
     }
 
     void Update()

@@ -2,7 +2,6 @@
 
 public class TouchController : MonoBehaviour
 {
-
     private static readonly int maxRuneIndices = 9;
     public Vec2[] runeIndices = new Vec2[maxRuneIndices];
 
@@ -39,6 +38,8 @@ public class TouchController : MonoBehaviour
     private GameObject knob;
 
     private Vector3 lastPosition;
+
+    private CraftingUiController _craftingUiController;
 
     public enum Mode
     {
@@ -170,6 +171,9 @@ public class TouchController : MonoBehaviour
             Debug.LogWarning("Cannot load LineRendererEndPoint plz tell Eetu");
         }
 
+        _craftingUiController = GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>();
+
+
         lastPosition = transform.position;
     }
 
@@ -269,6 +273,8 @@ public class TouchController : MonoBehaviour
 
             LineController.ResetPoints();
 
+            if (Mode.Crafting == ControllerMode)
+                _craftingUiController.SetAllCounts();
 
             // TODO: linejen position fix
             // if (lastPosition != transform.position)
@@ -297,12 +303,15 @@ public class TouchController : MonoBehaviour
         {
             colliderGO.GetComponent<CircleCollider2D>().enabled = true;
         }
+
     }
 
     public void OnTouchDetected(int x, int y, Vector3 realTransform)
     {
         ResetColliders();
-        print("hello");
+
+        _craftingUiController.SetButtonImage(CraftingUiController.ButtonState.Light, x, y);
+
         if (_touching)
         {
             LineController.SetPoint(new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f));

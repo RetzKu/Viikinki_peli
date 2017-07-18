@@ -83,6 +83,7 @@ public class Chunk      // sub array
     {
         foreach (var keypairvalue in worldObjects)
         {
+            keypairvalue.Value.transform.localScale = new Vector3(1f, 1f, 1f);
             ObjectPool.instance.PoolObject(keypairvalue.Value);
         }
         worldObjects.Clear();
@@ -248,9 +249,5 @@ public class Chunk      // sub array
     public GameObject GetGameObject(int x, int y)
     {
         return GameObjectView[y, x];
-    }
-
-    public void OnDrawGizmos()
-    {
     }
 }

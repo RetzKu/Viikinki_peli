@@ -431,9 +431,9 @@ public class TileSpriteController : MonoBehaviour
                 // fuck fuck
             }
         }
+
+
     }
-
-
 
     [Obsolete]
     public void InitChunkSprites(int width, int height, TileMap tilemap, int startX, int startY)

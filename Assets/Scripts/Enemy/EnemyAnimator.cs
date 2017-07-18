@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAnimator : MonoBehaviour {
 
     private HandRoot Hand;
-        private List<Transform> Hands;
+        static internal List<Transform> Hands { get { return Hands; } set { Hands = new List<Transform>(3); } }
 
     public GameObject Weapon;
         private WeaponType Type;
@@ -23,7 +23,6 @@ public class EnemyAnimator : MonoBehaviour {
     private void Start()
     {
         /*Finding enemy hands*/
-        Hands = new List<Transform>(3);
         Hands.Add(transform.FindChild("s_l_hand"));
         Hands.Add(transform.FindChild("d_r_hand"));
         Hands.Add(transform.FindChild("u_l_hand"));
@@ -37,6 +36,9 @@ public class EnemyAnimator : MonoBehaviour {
         /*Finding Animators*/
         Animators = new List<Animator>(3);
         foreach (GameObject t in Torsos) { Animators.Add(t.GetComponent<Animator>()); }
+
+        /*Building New HandRoot Component*/
+        Hand = new HandRoot(Hands[0], Weapon);
     }
 
     public class SpriteChanger
@@ -55,16 +57,18 @@ public class EnemyAnimator : MonoBehaviour {
         {
             switch (Direction)
             {
-                case DirectionState.Left: { break; }
-                case DirectionState.Down: { break; }
-                case DirectionState.Up: { break; }
-                case DirectionState.Right: { break; }
+                case DirectionState.Left:   { _Hand = Hands[(int)Direction];  break; }
+                case DirectionState.Down:   { _Hand = Hands[(int)Direction]; break; }
+                case DirectionState.Up:     { _Hand = Hands[(int)Direction]; break; }
+                case DirectionState.Right:  { _Hand = Hands[0]; break; }
             }
         }
 
-        private void WeaponSettings(DirectionState Direction)
+        private void WeaponSettings()
         {
-            if(_Weapon.GetComponent<Melee>() != null) { _Weapon.GetComponent<Melee>().Reposition(); }
+            if(_Weapon.GetComponent<Melee>() != null) { _Weapon.GetComponent<Melee>().Reposition(_Hand); }
+            else if (_Weapon.GetComponent<longMelee>() != null) { _Weapon.GetComponent<longMelee>().Reposition(_Hand); }
+            else if (_Weapon.GetComponent<Ranged>() != null) { _Weapon.GetComponent<Ranged>().Reposition(_Hand); }
         }
 
     }

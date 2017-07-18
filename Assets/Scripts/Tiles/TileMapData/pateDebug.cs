@@ -21,7 +21,6 @@ public class pateDebug : MonoBehaviour {
             Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var newBlood = Instantiate(blood, new Vector2(0, 0), Quaternion.identity);
             newBlood.GetComponent<destroyMe>().initParticle(pz,body.position);
-            // GetComponent<Movement>()._Lock = true;
         }
     }
 }

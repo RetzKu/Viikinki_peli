@@ -14,6 +14,9 @@ public class destroyMe : MonoBehaviour {
 
 	void Awake () {
         GetComponent<ParticleSystem>().Pause();
+        //GetComponent<ParticleSystem>().emission.SetBursts(new ParticleSystem.Burst[] 
+        //{ new ParticleSystem.Burst(0.0f, 50, 50)/*, new ParticleSystem.Burst(1.0f, 10, 20) */});
+
     }
 
     public void initParticle(Vector2 from,Vector2 spawn)

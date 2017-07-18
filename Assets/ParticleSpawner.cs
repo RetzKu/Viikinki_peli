@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ParticleSpawner : MonoBehaviour {
 
-    public GameObject blood;
-
+    public GameObject Largeblood;
+    public GameObject SmallBlood;
     public static ParticleSpawner inctance;
 
     void start()
@@ -15,10 +15,15 @@ public class ParticleSpawner : MonoBehaviour {
             inctance = this;
         }
     }
-    public void SpawnBlood(Vector2 from,Vector2 where)
+    public void SpawnLargeBlood(Vector2 from,Vector2 where)
     {
-        var newBlood = Instantiate(blood, new Vector2(0, 0), Quaternion.identity);
+        var newBlood = Instantiate(Largeblood, new Vector2(0, 0), Quaternion.identity);
         newBlood.GetComponent<destroyMe>().initParticle(from, where);
     }
-    
+    public void SpawSmallBlood(Vector2 from, Vector2 where)
+    {
+        var newBlood = Instantiate(SmallBlood, new Vector2(0, 0), Quaternion.identity);
+        newBlood.GetComponent<destroyMe>().initParticle(from, where);
+    }
+
 }

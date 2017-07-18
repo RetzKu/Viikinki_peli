@@ -38,7 +38,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35f96abd17dd7404797d9e060d7479d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blood: {fileID: 1593606135807078, guid: 86256631849893542978f06a8931337b, type: 2}
+  Largeblood: {fileID: 1593606135807078, guid: 86256631849893542978f06a8931337b, type: 2}
+  SmallBlood: {fileID: 1944270308619096, guid: 541b230e1b65dff4093af9ead1021112, type: 2}
 --- !u!224 &224908573280637090
 RectTransform:
   m_ObjectHideFlags: 1

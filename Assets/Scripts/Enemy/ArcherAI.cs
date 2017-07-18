@@ -46,6 +46,10 @@ public class ArcherAI : generalAi {
                 HeardArray[i].GetComponent<generalAi>().agro = true;
             }
         }
+        if (slow)
+        {
+            SlowRuneTimer();
+        }
         if (!knocked)
         {
             if (!agro)

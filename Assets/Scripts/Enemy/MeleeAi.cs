@@ -35,7 +35,10 @@ public class MeleeAi : generalAi {
         var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
         Vector2[] powers = new Vector2[2];
 
-
+        if (slow)
+        {
+            SlowRuneTimer();
+        }
         if (!knocked)
         {
             if (!agro)

@@ -110,7 +110,8 @@ public abstract class generalAi : MonoBehaviour
 
     protected float slowTime;
     protected float slowTimer;
-    protected float holderSpeed;
+    protected float slowPercent;
+    //protected float holderSpeed;
     protected bool slow = false;
     public void followPlayer(ref Vector2 dist, Vector2 playerPos, float attackDist,ref Vector2 target,ref int flags,EnemyMovement Physics,float sepF)
     {
@@ -259,9 +260,9 @@ public abstract class generalAi : MonoBehaviour
     }
     public virtual void SlowRune(float time,float slowPercent)
     {
+        this.slowPercent = slowPercent;
         if (!slow)
-        {
-            holderSpeed = MaxSpeed;
+        {          
             MaxSpeed *= slowPercent;
             Physics._maxSpeed = MaxSpeed;
             slowTime = time;
@@ -274,7 +275,7 @@ public abstract class generalAi : MonoBehaviour
         if(slowTimer> slowTime)
         {
             print("freed");
-            Physics._maxSpeed = MaxSpeed = holderSpeed;
+            Physics._maxSpeed = MaxSpeed /= slowPercent;
             slowTimer = 0f;
             slow = false;
         }

@@ -449,7 +449,6 @@ GameObject:
   - component: {fileID: 4570807231277618}
   - component: {fileID: 114595929073258388}
   - component: {fileID: 120099981774990974}
-  - component: {fileID: 114044920883822344}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -1196,7 +1195,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977754839611798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.5, y: 32.87, z: 0}
+  m_LocalPosition: {x: 25.2, y: 24.2, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 4701210339847834}
@@ -2589,33 +2588,6 @@ MonoBehaviour:
     height: 8.05
   Player: {fileID: 4173307104970268}
   Head: {fileID: 21300002, guid: 35c448380fea7ab48a2f173ae429e9f2, type: 3}
---- !u!114 &114044920883822344
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1385788105028174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef9f25770c8deb4449bdb0ca40a3bf30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LinePoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &114059903257671084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2859,7 +2831,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859abfb1546e9a74d969c99f50f3ff08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blood: {fileID: 1593606135807078, guid: 86256631849893542978f06a8931337b, type: 2}
 --- !u!114 &114371828299425804
 MonoBehaviour:
   m_ObjectHideFlags: 1

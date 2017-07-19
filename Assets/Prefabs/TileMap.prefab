@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe7d1aef62cba44e98493997c79bf35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GrassSprite: {fileID: 21300012, guid: 4e0d0f811b9b117428e6d2cd3132ef5c, type: 3}
+  GrassSprite: {fileID: 21300000, guid: e729c6087417a504eb4ba8e9d21ad19d, type: 3}
   Width: 100
   Heigth: 60
   tilemapPrototypeLayout: 0

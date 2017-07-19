@@ -10,6 +10,8 @@ public class ResourceManager : MonoBehaviour
 
     private readonly int resourceTypeToTrunk = (int) (ResourceType.t_trunkEnd - ResourceType.t_trunkStart);
 
+    public List<DropScript.Drops> CorpseDrops;
+
     void Awake()
     {
         Instance = this;
@@ -28,6 +30,9 @@ public class ResourceManager : MonoBehaviour
             string str = ((ResourceType) i).ToString();
             resourceTypeLookupTable[i] = str.Substring(0, str.Length - 6); // _ t r u n k == 6
         }
+
+        // Inisoi rakkaat ruumit
+         Corpse.CorpseSprites = Resources.LoadAll<Sprite>("WorldObject/corpses");
     }
 
     public string GetResourceTypeName(ResourceType type)
@@ -47,5 +52,10 @@ public class ResourceManager : MonoBehaviour
     public bool IsTrunkType(ResourceType type)
     {
         return (ResourceType.t_trunkStart < type && ResourceType.t_trunkEnd > type);
+    }
+
+    public List<DropScript.Drops> GetCorpseDrops()
+    {
+        return CorpseDrops;
     }
 }

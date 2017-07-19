@@ -13,7 +13,14 @@ public class ObjectFaller : MonoBehaviour
 
     public void StartFreeFall(float timer)
     {
-        StartCoroutine(FallToGround(timer));
+        StartCoroutine(FallToGround(timer, new Vector2(-1, 1)));
+        body = GetComponent<Rigidbody2D>();
+        rotation = Random.Range(-4f, 4f);
+    }
+
+    public void StartFreeFall(float timer, Vector2 maxDirections)
+    {
+        StartCoroutine(FallToGround(timer, maxDirections));
         body = GetComponent<Rigidbody2D>();
         rotation = Random.Range(-4f, 4f);
     }
@@ -36,11 +43,11 @@ public class ObjectFaller : MonoBehaviour
         }
     }
 
-    IEnumerator FallToGround(float timer)
+    IEnumerator FallToGround(float timer, Vector2 maxDirections)
     {
         var body = gameObject.AddComponent<Rigidbody2D>();
-        Vector2 randomForceDircetion = new Vector2(Random.Range(-1f, 1f), Random.Range(0f, 1f)).normalized;
-        body.AddForce(randomForceDircetion * 500f);
+        Vector2 randomForceDircetion = new Vector2(Random.Range(maxDirections.x, maxDirections.y), Random.Range(0f, 1f)).normalized;
+        body.AddForce(randomForceDircetion * Random.Range(450f, 600f));
 
         yield return new WaitForSeconds(timer);
 

@@ -47,6 +47,9 @@ public enum ResourceType
     campfire_ember,
     campfire_noFire,
 
+    corpse,
+    corpse_dead,
+
     Max,
 }
 // WARNING WARNING Enumi järjestyksen rikkominen / väliin lisäys särkee kaikein lisää aina maxin alle
@@ -64,7 +67,7 @@ public abstract class Resource : MonoBehaviour
         Hp -= damage;
         if (Hp <= 0)
         {
-            GetComponent<DropScript>().Drop(); // Ehkä static dropper, jossain vaiheessa
+             // Ehkä static dropper, jossain vaiheessa
             OnDead();
         }
         else

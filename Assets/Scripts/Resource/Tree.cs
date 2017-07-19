@@ -16,6 +16,10 @@ public class Tree : Resource
 
         // ZlayerManager.SetSortingOrder(transform, spriteRenderer);
 
+        var rigid = trunk.GetComponent<Rigidbody2D>();
+        rigid.simulated = true;
+        rigid.bodyType = RigidbodyType2D.Kinematic;
+
         if (destroyed)
         {
             type = ResourceManager.Instance.GetTrunk(type);
@@ -38,6 +42,9 @@ public class Tree : Resource
         var trunk = transform.GetChild(0);
         trunk.GetComponent<CircleCollider2D>().enabled = true;
         trunk.GetComponent<SpriteRenderer>().enabled = true;
+        var rigid = trunk.GetComponent<Rigidbody2D>();
+        rigid.simulated = true;
+        rigid.bodyType = RigidbodyType2D.Kinematic;
 
         var platform = transform.GetChild(1);
         platform.gameObject.SetActive(false);
@@ -67,7 +74,7 @@ public class Tree : Resource
         type = ResourceManager.Instance.GetTrunk(type);
         StartFalling();
 
-        // CopyStub();
+        GetComponent<DropScript>().Drop();
     }
 
     public override void DeActivate()

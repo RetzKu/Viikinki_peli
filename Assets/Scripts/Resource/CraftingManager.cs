@@ -23,6 +23,12 @@ public class CraftingManager : MonoBehaviour
     // GUI 
     // Ota viestit vastaan rune castaukselta
     // Lataa spritet awakessa niin saadaan ne GUILLE
+    private Vector3 _resourcePickupEndPosition = new Vector3(0f, 0f, 0f);
+
+    public void SetResourcePickupEndLocation(Vector3 position)
+    {
+        _resourcePickupEndPosition = position;
+    }
 
     void Awake()
     {

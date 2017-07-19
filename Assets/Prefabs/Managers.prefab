@@ -172,7 +172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPrefabs:
-  - {fileID: 1888296700722606, guid: 9167ff82794ffca4c8a432a22aad6bdf, type: 2}
   - {fileID: 1734588554688894, guid: 8eabe4dee9d57654592c6fd72afc4ff3, type: 2}
   - {fileID: 1734588554688894, guid: ec8b66b3baf88cd4fb742ec8923e90a0, type: 2}
   - {fileID: 1384798036243720, guid: 1d6b060ef40a3664da1b12583f13f561, type: 2}
@@ -187,7 +186,11 @@ MonoBehaviour:
   - {fileID: 1384798036243720, guid: bd63c70937d074c4caa464ff63ee6c72, type: 2}
   - {fileID: 1384798036243720, guid: a803c25dafc1a2644b8d94a7bda308b0, type: 2}
   - {fileID: 1325004336931294, guid: e3b877485a021d24285a016944ae5143, type: 2}
-  amountToBuffer: b0040000320000003200000032000000320000003200000032000000320000003200000032000000320000003200000032000000320000000f000000
+  - {fileID: 1888296700722606, guid: 9167ff82794ffca4c8a432a22aad6bdf, type: 2}
+  - {fileID: 1888296700722606, guid: 2f1e7e6972d9cbb4e9bdc7742a7fcb5b, type: 2}
+  - {fileID: 1888296700722606, guid: 9d30e18ad84a3fa4692359fe38466cb2, type: 2}
+  - {fileID: 1734588554688894, guid: 2b72ec655812ec14c88addbe2234ae56, type: 2}
+  amountToBuffer: 3200000032000000320000003200000032000000320000003200000032000000640000006400000032000000320000003200000032000000e8030000f4010000f401000032000000
   defaultBufferAmount: 10
 --- !u!114 &114068536526147762
 MonoBehaviour:
@@ -200,6 +203,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3392ccd266d224f469c4823886e7ec18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CorpseDrops:
+  - Item: {fileID: 1093993870452012, guid: 4fed55b4841709f429a0550704b75d0d, type: 2}
+    DropChance: 10
+    NightItem: 0
+  - Item: {fileID: 1093993870452012, guid: 37250574206757b49afebae937254610, type: 2}
+    DropChance: 10
+    NightItem: 0
+  - Item: {fileID: 1413759944923202, guid: 166f2988e83639e4b871c5e3d63ade68, type: 2}
+    DropChance: 10
+    NightItem: 0
+  - Item: {fileID: 1192870776797376, guid: bd771d4617c99d149ad6c9dd912fcb49, type: 2}
+    DropChance: 10
+    NightItem: 0
+  - Item: {fileID: 1442913211837032, guid: 008965e054cf0a94c84b820e12ee658a, type: 2}
+    DropChance: 10
+    NightItem: 0
+  - Item: {fileID: 1830157689502956, guid: 243c70e89a75e7f43895e031aebe4ac0, type: 2}
+    DropChance: 10
+    NightItem: 0
+  - Item: {fileID: 1017973806840300, guid: a138be7d1acea3b408a0a2570e8a51b1, type: 2}
+    DropChance: 10
+    NightItem: 0
+  - Item: {fileID: 1133136836472450, guid: cf3155f8e68c2884ea8556a2c83afe20, type: 2}
+    DropChance: 10
+    NightItem: 0
 --- !u!114 &114235837633677902
 MonoBehaviour:
   m_ObjectHideFlags: 1

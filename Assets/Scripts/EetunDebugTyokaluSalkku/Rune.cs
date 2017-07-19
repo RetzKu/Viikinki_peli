@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Net;
-using System.Runtime.InteropServices;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Rune : ScriptableObject
 {
@@ -33,4 +29,3 @@ public abstract class Rune : ScriptableObject
     public abstract void init(GameObject owner);
     public abstract void Fire();
 }
-

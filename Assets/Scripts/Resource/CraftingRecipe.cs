@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,7 +41,7 @@ public class CraftingRecipe : Rune
     }
 }
 
-[System.Serializable]
+[Serializable]
 public struct Cost
 {
     public IngredientType Type;

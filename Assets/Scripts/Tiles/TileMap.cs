@@ -39,7 +39,6 @@ public class TileMap : MonoBehaviour
     {
         SpriteController = FindObjectOfType<TileSpriteController>();
 
-
         _perlinGenerator = GetComponent<Perlin>();
         _chunks = new Chunk[3, 3];
 
@@ -72,21 +71,8 @@ public class TileMap : MonoBehaviour
             for (int x = 0; x < initWidth; x++)
             {
                 GenerateChunk(x, y); // ei vällii?      // vanhaa koodia? 
-                // SpriteController.InitChunkSprites(_chunks[y, x]);
-
             }
         }
-        // reunin maisille joku placeholder tekstuura
-
-        //for (int y = 0; y < TotalHeight; y++)
-        //{
-        //    for (int x = 0; x < TotalWidth; x++)
-        //    {
-        //        var go = TileGameObjects[y,x] = new GameObject();
-        //        var rend = go.AddComponent<SpriteRenderer>();
-        //        rend.sprite = GrassSprite;
-        //    }
-        //}
 
         for (int x = 0; x < TotalWidth; x++)
         {
@@ -96,7 +82,6 @@ public class TileMap : MonoBehaviour
             TileGameObjects[x, TotalWidth - 1].GetComponent<SpriteRenderer>().sprite = GrassSprite;
         }
 
-        // SpriteController.InitChunkSprites(TotalWidth - 1, TotalHeight - 1, this, 1, 1);
         SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position;
         SpriteController.SetTileSprites(TotalWidth - 2, TotalHeight - 2, this, 1, 1);
         running = true;
@@ -117,8 +102,6 @@ public class TileMap : MonoBehaviour
         }
     }
 
-
-    // TODO: puut pathfinding collideen
     public static bool Collides(TileType type)
     {
         return (type <= TileType.CollisionTiles);
@@ -130,24 +113,6 @@ public class TileMap : MonoBehaviour
         int iy = y / Chunk.CHUNK_SIZE;
         return Collides(_chunks[iy, ix].GetTile(x - ChunkSize * ix, y - ChunkSize * iy)) || _chunks[iy, ix].TileCollides(x - ChunkSize * ix, y - ChunkSize * iy);
     }
-
-    //void OnDrawGizmos()
-    //{
-    //    if (running)
-    //    {
-    //        for (int y = 0; y < 3; y++)
-    //        {
-    //            for (int x = 0; x < 3; x++)
-    //            {
-    //                int halfChunk = Chunk.CHUNK_SIZE / 2;
-    //                Vector3 center = new Vector3(halfChunk + x * Chunk.CHUNK_SIZE - 0.5f, halfChunk + y * Chunk.CHUNK_SIZE - 0.5f);
-    //                Vector3 bounds = new Vector3(Chunk.CHUNK_SIZE, Chunk.CHUNK_SIZE);
-    //                Gizmos.color = Color.red;
-    //                Gizmos.DrawWireCube(center, bounds);
-    //            }
-    //        }
-    //    }
-    //}
 
     public Sprite[] TestTiles;
     void RandomizeAllTiles()
@@ -298,9 +263,6 @@ public class TileMap : MonoBehaviour
 
         SpriteController.SetTileSprites(Chunk.CHUNK_SIZE - 3, Chunk.CHUNK_SIZE * 3 - 3, this, 1, 1);
     }
-
-
-
 
     void SwapColumnsViews(int destX, int fromX)
     {

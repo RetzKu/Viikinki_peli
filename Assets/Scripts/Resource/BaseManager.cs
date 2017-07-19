@@ -11,6 +11,8 @@ public class BaseManager : MonoBehaviour
     private GameObject _baseCheckerGo;
     private BaseChecker _baseChecker;
 
+    private List<GameObject> bases = new List<GameObject>(3);
+
     void Awake()
     {
         Instance = this;
@@ -23,31 +25,42 @@ public class BaseManager : MonoBehaviour
         }
     }
 
-    // FastTravel menut jne tänne
+    // FastTravel menut jne tänne: vaatii chunkkien uudestaan inilisoinnin tilemapissa
     // lisää unlockatut campit tänne
-        
+
     public void RegisterOnBaseEnter(Action func)
     {
-        if (_baseChecker != null)
-            _baseChecker.OnCampFireEnter += func;
+        _baseChecker.OnCampFireEnter += func;
     }
 
     public void RegisterOnBaseExit(Action func)
     {
-        if (_baseChecker != null)
-            _baseChecker.OnCampFireExit += func;
+        _baseChecker.OnCampFireExit += func;
     }
 
     public void UnRegisterOnBaseEnter(Action func)
     {
-        if (_baseChecker != null)
-            _baseChecker.OnCampFireExit -= func;
+        _baseChecker.OnCampFireExit -= func;
     }
 
     public void UnRegisterOnBaseExit(Action func)
     {
-        if (_baseChecker != null)
-            _baseChecker.OnCampFireExit -= func;
+        _baseChecker.OnCampFireExit -= func;
     }
 
+    public GameObject GetClosestBase()
+    {
+        // vain yksi vielä
+        if (bases.Count == 0)
+        {
+            Debug.LogError("BaseManager.cs: no bases when requesting closest base");
+            return null;
+        }
+        return bases[0];
+    }
+
+    public void AddBase(GameObject go)
+    {
+        bases.Add(go);
+    }
 }

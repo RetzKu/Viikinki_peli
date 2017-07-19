@@ -40,6 +40,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Largeblood: {fileID: 1593606135807078, guid: 86256631849893542978f06a8931337b, type: 2}
   SmallBlood: {fileID: 1944270308619096, guid: 541b230e1b65dff4093af9ead1021112, type: 2}
+  Slow: {fileID: 1839687116176722, guid: a045cba614df5ec43a3a1fcba1985225, type: 2}
+  CastEffect: {fileID: 1283451824446608, guid: 39027584d7a334c4d86c927b021382b4, type: 2}
 --- !u!224 &224908573280637090
 RectTransform:
   m_ObjectHideFlags: 1

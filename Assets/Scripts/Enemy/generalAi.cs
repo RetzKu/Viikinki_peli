@@ -105,7 +105,7 @@ public abstract class generalAi : MonoBehaviour
     protected GameObject player;
     protected EnemyRotater rotation = new EnemyRotater();
 
-    public abstract void UpdatePosition(List<GameObject> Mobs);
+    public abstract void UpdatePosition();
     public abstract void InitStart(float x,float y, EnemyType type,GameObject player);
 
     protected float slowTime;

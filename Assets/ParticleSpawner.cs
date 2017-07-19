@@ -7,12 +7,13 @@ public class ParticleSpawner : MonoBehaviour {
     public GameObject Largeblood;
     public GameObject SmallBlood;
     public GameObject Slow;
-    public static ParticleSpawner inctance;
+    public GameObject CastEffect;
+    public static ParticleSpawner instance;
     void Start()
     {
-        if(inctance == null)
+        if(instance == null)
         {
-            inctance = this;
+            instance = this;
         }
     }
     public void SpawnLargeBlood(Vector2 from,Vector2 where)
@@ -29,6 +30,11 @@ public class ParticleSpawner : MonoBehaviour {
     {
         var ss = Instantiate(Slow);
         ss.GetComponent<buffParticle>().init(father, time);
+    }
+    public void CastSpell(GameObject father)
+    {
+        var ss = Instantiate(CastEffect);
+        ss.GetComponent<castingBuff>().init(father);
     }
 
 }

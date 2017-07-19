@@ -110,7 +110,7 @@ public class MobsControl : MonoBehaviour
                     Boids[ind].GetComponent<generalAi>().SlowRune(5f,0.5f);
                     print("slow");
                 }
-                Boids[ind].GetComponent<generalAi>().UpdatePosition(Boids);
+                Boids[ind].GetComponent<generalAi>().UpdatePosition();
                 ind++;
             }
         }

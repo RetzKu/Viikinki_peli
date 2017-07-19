@@ -25,7 +25,7 @@ public class MeleeAi : generalAi {
         Physics._maxSpeed = MaxSpeed;
         this.player = player;
     }
-    public override void UpdatePosition(List<GameObject> Mobs)
+    public override void UpdatePosition()
     {
         rotation.UpdateRotation(velocity, body.position);
         LayerMask mask = new LayerMask();

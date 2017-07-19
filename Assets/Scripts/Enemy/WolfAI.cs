@@ -40,9 +40,9 @@ public class WolfAI : generalAi
         this.player = player;
     }
 
-    public override void UpdatePosition(List<GameObject> Mobs) // jokaselle
+    public override void UpdatePosition() // jokaselle
     {
-        print(inAttack);
+        //print(inAttack);
         if (!justBite)
         {
             rotation.UpdateRotation(velocity, body.position);
@@ -337,15 +337,15 @@ public class WolfAI : generalAi
         bite = false;
         biteTimer = 0f;
         currentTime = 0;
+        attackCounter = 0f;
         if (inAttack)
         {
-            attackCounter = 0f;
+            GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
         }
         //else
         //{
         //    attackCounter = attackUptade / 1.5f;
         //}
-        GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
 
     }
     public override void SlowRune(float time, float slowPercent)
@@ -353,7 +353,7 @@ public class WolfAI : generalAi
         this.slowPercent = slowPercent;
         if (!slow)
         {
-            ParticleSpawner.inctance.SpawSlow(this.gameObject, time);
+            ParticleSpawner.instance.SpawSlow(this.gameObject, time);
             if (inAttack)
             {
                 GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);

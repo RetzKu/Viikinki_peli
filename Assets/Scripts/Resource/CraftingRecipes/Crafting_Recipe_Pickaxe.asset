@@ -26,13 +26,13 @@ MonoBehaviour:
   sprite: {fileID: 0}
   Prefab: {fileID: 1413759944923202, guid: 166f2988e83639e4b871c5e3d63ade68, type: 2}
   Materials:
-  - Type: 3
-    Count: 1
-  - Type: 6
-    Count: 1
   - Type: 2
+    Count: 1
+  - Type: 5
+    Count: 1
+  - Type: 1
     Count: 1
   - Type: 0
     Count: 1
-  - Type: 6
-    Count: 1
+  - Type: 5
+    Count: 0

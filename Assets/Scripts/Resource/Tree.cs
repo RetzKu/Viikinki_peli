@@ -20,6 +20,7 @@ public class Tree : Resource
         rigid.simulated = true;
         rigid.bodyType = RigidbodyType2D.Kinematic;
 
+        dead = destroyed;
         if (destroyed)
         {
             type = ResourceManager.Instance.GetTrunk(type);

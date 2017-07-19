@@ -9,6 +9,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e824d191f37ac0449529d547f13689b, type: 3}
-  m_Name: Slo
+  m_Name: buff_Slow
   m_EditorClassIdentifier: 
   Duration: 0

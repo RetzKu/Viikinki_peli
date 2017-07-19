@@ -310,7 +310,7 @@ public class TouchController : MonoBehaviour
     {
         ResetColliders();
 
-        _craftingUiController.SetButtonImage(CraftingUiController.ButtonState.Light, x, y);
+        _craftingUiController.SetButtonImageInvertedY(CraftingUiController.ButtonState.Light, x, y);
 
         if (_touching)
         {

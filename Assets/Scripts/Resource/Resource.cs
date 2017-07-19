@@ -50,6 +50,9 @@ public enum ResourceType
     corpse,
     corpse_dead,
 
+    hemp_tree_0,
+    hemp_tree_1,
+
     Max,
 }
 // WARNING WARNING Enumi järjestyksen rikkominen / väliin lisäys särkee kaikein lisää aina maxin alle
@@ -62,13 +65,16 @@ public abstract class Resource : MonoBehaviour
     public float deathTimer = 4f;
     public ResourceType type;
 
+    protected bool dead = false;
+
     public virtual void Hit(int damage)
     {
         Hp -= damage;
-        if (Hp <= 0)
+        if (Hp <= 0 && !dead)
         {
              // Ehkä static dropper, jossain vaiheessa
             OnDead();
+            dead = true;
         }
         else
         {

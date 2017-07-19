@@ -57,15 +57,17 @@ public enum ResourceType
 }
 // WARNING WARNING Enumi järjestyksen rikkominen / väliin lisäys särkee kaikein lisää aina maxin alle
 
+
 public abstract class Resource : MonoBehaviour
 {
     protected static readonly float TileWidth = 1f;
     public int Hp = 100;
-    public float defaultFibrateTimer = 0.1f;
+    public float defaultFibrateTimer = 0.015f;
     public float deathTimer = 4f;
     public ResourceType type;
 
     protected bool dead = false;
+    private Coroutine _fibrateEffect;
 
     public virtual void Hit(int damage)
     {
@@ -78,7 +80,16 @@ public abstract class Resource : MonoBehaviour
         }
         else
         {
-            StartCoroutine(Fibrate(defaultFibrateTimer, TileWidth / 100f)); // general vibrate
+            Vector3 startPosition = transform.position;
+            if (_fibrateEffect != null)
+            {
+                startPosition = transform.position;
+                /// topCoroutine(Fibrate(defaultFibrateTimer, TileWidth / 100f, startPosition)); // general vibrate
+            }
+            else
+            {
+                _fibrateEffect = StartCoroutine(Fibrate(defaultFibrateTimer, TileWidth / 100f, startPosition));
+            }
         }
     }
 
@@ -93,10 +104,11 @@ public abstract class Resource : MonoBehaviour
 
 // yleiset efektit, joita voi käyttää
  #region Effects
-    protected IEnumerator Fibrate(float seconds, float fibrationRange)  // TODO: MIETI iteraatiot oikein perf
+    protected IEnumerator Fibrate(float seconds, float fibrationRange, Vector3 startPosition)  // TODO: MIETI iteraatiot oikein 
     {
-        int iterations = 45;
-        float waitTime = seconds / iterations;
+        transform.position = startPosition;
+        int iterations = 30;
+        float waitTime = seconds / (float)iterations;
 
         Vector3 startingPosition = transform.position;
 
@@ -113,6 +125,7 @@ public abstract class Resource : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
         }
         transform.position = startingPosition;
+        _fibrateEffect = null;
     }
 
     protected IEnumerator StartDropTimer()

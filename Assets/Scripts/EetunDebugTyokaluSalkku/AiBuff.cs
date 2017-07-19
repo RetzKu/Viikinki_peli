@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Runes/Buff/Aibuff")]
-public class AiBuff : Buff
+[CreateAssetMenu(menuName = "Runes/Buff/Aibuff/Slow")]
+public class AiSlow : Buff
 {
-    // enumsi XD
+    public float Time;
+    public float SlowPercent;
 
     public override void Apply(GameObject target)
     {
-        // target.getcompoenent keneral ai . float () 
+        // target.GetComponent<generalAi>().runeSlow(SlowPercent, Time);
+        Destroy(target);
+        Debug.Log("Slow buff lähettää terveisensä! \nVihollinen "+ target.gameObject.name +" tuhottu");
     }
 }

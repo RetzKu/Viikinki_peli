@@ -1,0 +1,2596 @@
+fileFormatVersion: 2
+guid: 629e1517d153c074595eb344f3509beb
+timeCreated: 1500466799
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: VIKINGS_0
+    21300002: VIKINGS_1
+    21300004: VIKINGS_2
+    21300006: VIKINGS_3
+    21300008: VIKINGS_4
+    21300010: d_c_bewbs
+    21300012: u_c_bewbs
+    21300014: s_c_bewbs
+    21300016: d_r_upper_arm
+    21300018: d_c_head
+    21300020: d_l_upper_arm
+    21300022: u_l_upper_arm
+    21300024: u_c_head
+    21300026: u_r_upper_arm
+    21300028: s_r_upper_arm
+    21300030: s_c_head
+    21300032: s_l_upper_arm
+    21300034: d_c_leather
+    21300036: u_c_leather
+    21300038: s_c_leather
+    21300040: d_r_lower_arm
+    21300042: d_l_lower_arm
+    21300044: u_l_lower_arm
+    21300046: u_r_lower_arm
+    21300048: s_r_lower_arm
+    21300050: s_l_lower_arm
+    21300052: d_r_leg
+    21300054: d_c_torso
+    21300056: d_l_leg
+    21300058: u_l_leg
+    21300060: u_c_torso
+    21300062: u_r_leg
+    21300064: s_r_upper_leg
+    21300066: s_c_torso
+    21300068: s_l_upper_leg
+    21300070: d_c_chain
+    21300072: u_c_chain
+    21300074: s_c_chain
+    21300076: s_r_lower_leg
+    21300078: s_l_boot
+    21300080: d_c_head_enemy_1
+    21300082: u_c_head_enemy_1
+    21300084: s_c_head_enemy_1
+    21300086: d_c_head_enemy_11
+    21300088: u_c_head_enemy_11
+    21300090: s_c_head_enemy_11
+    21300092: d_c_torso_enemy_1
+    21300094: u_c_torso_enemy_1
+    21300096: s_c_torso_enemy_1
+    21300098: d_c_head_enemy_2
+    21300100: u_c_head_enemy_2
+    21300102: s_c_head_enemy_2
+    21300104: d_c_head_enemy_12
+    21300106: u_c_head_enemy_12
+    21300108: s_c_head_enemy_12
+    21300110: d_c_torso_enemy_2
+    21300112: u_c_torso_enemy_2
+    21300114: s_c_torso_enemy_2
+    21300116: d_c_head_enemy_3
+    21300118: u_c_head_enemy_3
+    21300120: s_c_head_enemy_3
+    21300122: d_c_head_enemy_13
+    21300124: u_c_head_enemy_13
+    21300126: s_c_head_enemy_13
+    21300128: d_c_torso_enemy_3
+    21300130: u_c_torso_enemy_3
+    21300132: s_c_torso_enemy_3
+    21300134: d_c_head_enemy_4
+    21300136: u_c_head_enemy_4
+    21300138: s_c_head_enemy_4
+    21300140: d_c_head_enemy_14
+    21300142: u_c_head_enemy_14
+    21300144: s_c_head_enemy_14
+    21300146: d_c_torso_enemy_4
+    21300148: u_c_torso_enemy_4
+    21300150: s_c_torso_enemy_4
+    21300152: d_c_head_enemy_5
+    21300154: u_c_head_enemy_5
+    21300156: s_c_head_enemy_5
+    21300158: d_c_head_enemy_15
+    21300160: u_c_head_enemy_15
+    21300162: s_c_head_enemy_15
+    21300164: d_c_torso_enemy_5
+    21300166: u_c_torso_enemy_5
+    21300168: s_c_torso_enemy_5
+    21300170: d_c_head_enemy_6
+    21300172: u_c_head_enemy_6
+    21300174: s_c_head_enemy_6
+    21300176: d_c_head_enemy_16
+    21300178: u_c_head_enemy_16
+    21300180: s_c_head_enemy_16
+    21300182: d_c_torso_enemy_6
+    21300184: u_c_torso_enemy_6
+    21300186: s_c_torso_enemy_6
+    21300188: d_c_head_enemy_7
+    21300190: u_c_head_enemy_7
+    21300192: s_c_head_enemy_7
+    21300194: d_c_head_enemy_17
+    21300196: u_c_head_enemy_17
+    21300198: s_c_head_enemy_17
+    21300200: VIKINGS_100
+    21300202: VIKINGS_101
+    21300204: VIKINGS_102
+    21300206: VIKINGS_103
+    21300208: VIKINGS_104
+    21300210: VIKINGS_105
+    21300212: d_c_head_enemy_8
+    21300214: u_c_head_enemy_8
+    21300216: s_c_head_enemy_8
+    21300218: d_c_head_enemy_18
+    21300220: u_c_head_enemy_18
+    21300222: s_c_head_enemy_18
+    21300224: VIKINGS_112
+    21300226: VIKINGS_113
+    21300228: VIKINGS_114
+    21300230: VIKINGS_115
+    21300232: VIKINGS_116
+    21300234: VIKINGS_117
+    21300236: VIKINGS_118
+    21300238: VIKINGS_119
+    21300240: VIKINGS_120
+    21300242: VIKINGS_121
+    21300244: VIKINGS_122
+    21300246: VIKINGS_123
+    21300248: d_c_head_enemy_9
+    21300250: u_c_head_enemy_9
+    21300252: s_c_head_enemy_9
+    21300254: d_c_head_enemy_19
+    21300256: u_c_head_enemy_19
+    21300258: s_c_head_enemy_19
+    21300260: VIKINGS_130
+    21300262: VIKINGS_131
+    21300264: VIKINGS_132
+    21300266: VIKINGS_133
+    21300268: VIKINGS_134
+    21300270: VIKINGS_135
+    21300272: d_c_head_enemy_10
+    21300274: u_c_head_enemy_10
+    21300276: s_c_head_enemy_10
+    21300278: d_c_head_enemy_20
+    21300280: u_c_head_enemy_20
+    21300282: s_c_head_enemy_20
+    21300284: VIKINGS_142
+    21300286: VIKINGS_143
+    21300288: VIKINGS_144
+    21300290: VIKINGS_145
+    21300292: VIKINGS_146
+    21300294: VIKINGS_147
+    21300296: VIKINGS_148
+    21300298: VIKINGS_149
+    21300300: VIKINGS_150
+    21300302: VIKINGS_151
+    21300304: VIKINGS_152
+    21300306: VIKINGS_153
+    21300308: d_r_hand
+    21300310: d_l_hand
+    21300312: u_l_hand
+    21300314: u_r_hand
+    21300316: s_r_arm
+    21300318: s_r_boot
+    21300320: s_l_lower_leg
+    21300322: s_l_arm
+    21300324: VIKINGS_162
+    21300326: VIKINGS_163
+    21300328: VIKINGS_164
+    21300330: VIKINGS_165
+    21300332: VIKINGS_166
+    21300334: VIKINGS_167
+    21300336: VIKINGS_168
+    21300338: VIKINGS_169
+    21300340: VIKINGS_170
+    21300342: VIKINGS_171
+    21300344: VIKINGS_172
+    21300346: VIKINGS_173
+    21300348: VIKINGS_174
+    21300350: VIKINGS_175
+    21300352: VIKINGS_176
+    21300354: VIKINGS_177
+    21300356: VIKINGS_178
+    21300358: VIKINGS_179
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: VIKINGS_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 224
+        width: 16
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_1
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 224
+        width: 10
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_2
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 224
+        width: 16
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_3
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 224
+        width: 16
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_4
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 224
+        width: 16
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_bewbs
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 231
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_bewbs
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 231
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_bewbs
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 231
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_r_upper_arm
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 216
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 209
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_l_upper_arm
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 216
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_l_upper_arm
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 216
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 209
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_r_upper_arm
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 216
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_r_upper_arm
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 216
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 209
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_l_upper_arm
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 216
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_leather
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 209
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_leather
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 209
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_leather
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 209
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_r_lower_arm
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 209
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_l_lower_arm
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 209
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_l_lower_arm
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 209
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_r_lower_arm
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 209
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_r_lower_arm
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 209
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_l_lower_arm
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 209
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_r_leg
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 192
+        width: 5
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_torso
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 195
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_l_leg
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 192
+        width: 5
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_l_leg
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 192
+        width: 5
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_torso
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 195
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_r_leg
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 192
+        width: 5
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_r_upper_leg
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 198
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_torso
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 195
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_l_upper_leg
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 198
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_chain
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 194
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_chain
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 194
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_chain
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 194
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_r_lower_leg
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 191
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_l_boot
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 191
+        width: 6
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_1
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 162
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_1
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 162
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_1
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 162
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_11
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 162
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_11
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 162
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_11
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 162
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_torso_enemy_1
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 162
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_torso_enemy_1
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 162
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_torso_enemy_1
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 162
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_2
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 146
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_2
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 146
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_2
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 146
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_12
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 146
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_12
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 146
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_12
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 146
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_torso_enemy_2
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 146
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_torso_enemy_2
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 146
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_torso_enemy_2
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 146
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_3
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 132
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_3
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 130
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_3
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 130
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_13
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 132
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_13
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 130
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_13
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 130
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_torso_enemy_3
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 130
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_torso_enemy_3
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 130
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_torso_enemy_3
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 130
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_4
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 116
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_4
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 114
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_4
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 114
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_14
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 116
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_14
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 114
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_14
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 114
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_torso_enemy_4
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 115
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_torso_enemy_4
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 115
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_torso_enemy_4
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 115
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_5
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 100
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_5
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 101
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_5
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 100
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_15
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 100
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_15
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 101
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_15
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 100
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_torso_enemy_5
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 100
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_torso_enemy_5
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 100
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_torso_enemy_5
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 100
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_6
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 86
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_6
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 87
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_6
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 86
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_16
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 86
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_16
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 84
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_16
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 84
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_torso_enemy_6
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 85
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_torso_enemy_6
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 85
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_torso_enemy_6
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 85
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_7
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 72
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_7
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 73
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_7
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 72
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_17
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 72
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_17
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 70
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_17
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 70
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_100
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 77
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_101
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 77
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_102
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 77
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_103
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 77
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_104
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 77
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_105
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 77
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_8
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 56
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_8
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 56
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_8
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 56
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_18
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 55
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_18
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 55
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_18
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 55
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_112
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 70
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_113
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 70
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_114
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 70
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_115
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 70
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_116
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 70
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_117
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 70
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_118
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 58
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_119
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 58
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_120
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 58
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_121
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 58
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_122
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 58
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_123
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 58
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_9
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 42
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_9
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 43
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_9
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 42
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_19
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 41
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_19
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 42
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_19
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 41
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_130
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 51
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_131
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 51
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_132
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 51
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_133
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 51
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_134
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 51
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_135
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 51
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_10
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 28
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_10
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 26
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_10
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 26
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_c_head_enemy_20
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 28
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_c_head_enemy_20
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 26
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_c_head_enemy_20
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 26
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_142
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 39
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_143
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 39
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_144
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 39
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_145
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 39
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_146
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 39
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_147
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 39
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_148
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 32
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_149
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 32
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_150
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 32
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_151
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 32
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_152
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 32
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_153
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 32
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_r_hand
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 205
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: d_l_hand
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 205
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_l_hand
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 205
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: u_r_hand
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 205
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_r_arm
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 205
+        width: 4
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_r_boot
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 191
+        width: 6
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_l_lower_leg
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 191
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: s_l_arm
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 205
+        width: 4
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_162
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 66
+        width: 4
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_163
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 66
+        width: 4
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_164
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 66
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_165
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 66
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_166
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 66
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_167
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 66
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_168
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 47
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_169
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 47
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_170
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 47
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_171
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 47
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_172
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 47
+        width: 4
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_173
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 47
+        width: 4
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_174
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 28
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_175
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 28
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_176
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 28
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_177
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 28
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_178
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 28
+        width: 4
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VIKINGS_179
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 28
+        width: 4
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

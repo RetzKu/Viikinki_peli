@@ -349,6 +349,18 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1815068458}
+    - target: {fileID: 114681852154156112, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: MeleeDude
+      value: 
+      objectReference: {fileID: 1977754839611798, guid: 66ccf3f92aecc84449b5c277bcd38483,
+        type: 2}
+    - target: {fileID: 114686813999961138, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: Slow
+      value: 
+      objectReference: {fileID: 1555529482691730, guid: f860d2bca251dbe4cb93c2e225fbfecc,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 317101aad9860994d946e75d103c65d0, type: 2}
   m_IsPrefabParent: 0
@@ -559,6 +571,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 859abfb1546e9a74d969c99f50f3ff08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1815068475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1815068458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c499b1efb0997e42b0cfb500150534b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1889939612

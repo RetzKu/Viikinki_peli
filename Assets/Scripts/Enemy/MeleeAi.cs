@@ -28,6 +28,7 @@ public class MeleeAi : generalAi {
     public override void UpdatePosition()
     {
         rotation.UpdateRotation(velocity, body.position);
+        GetComponent<EnemyAnimator>().ChangeDirection(myDir);
         LayerMask mask = new LayerMask();
         mask = LayerMask.GetMask("Enemy");
 
@@ -60,7 +61,7 @@ public class MeleeAi : generalAi {
         {
             knocktimer();
         }
-
+        print((behavior)flags);
         powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags, CollState);
         target = powers[1];
         velocity = powers[0];
@@ -76,34 +77,52 @@ public class MeleeAi : generalAi {
 
     void meleePattern(Vector2 dist, Vector2 playerPos)
     {
-        //attackCounter += Time.deltaTime;
-        clock();// sets attack
-        //if (attackCounter <= attackUptade &&!inAttack)
-        if (attack && dist.magnitude <= attackDist * 1.1f)
-        {
-            //anim
-            print("ATTTTAAAAAAAACK");
-            attack = false;
-        }
+        findPath(ref flags, ref velocity, ref target, player, body);
+        //LayerMask mask = new LayerMask();
+        //mask = LayerMask.GetMask("ObjectLayer");
+        //bool find = false;
+        //if(Physics2D.Raycast(body.position, player.transform.position, dist.magnitude, mask).collider != null)
         //{
-            if(dist.magnitude > attackDist)
-            {
-                Physics._maxSteeringForce = MaxSteeringForce * 0.01f;
-                //follow player
-                if (velocity.magnitude == 0)
-                {
-                    rotation.playerPos = playerPos;
-                    rotation.rotToPl = true;
-                }
-                else
-                {
-                    rotation.rotToPl = false;
-                }
-                followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
-            //}
-            
-            //else ?
-        }
+        //    find = true;
+        //}
+        ////attackCounter += Time.deltaTime;
+        //clock();// sets attack
+        ////if (attackCounter <= attackUptade &&!inAttack)
+        //if (attack && dist.magnitude <= attackDist * 1.1f && !find)
+        //{
+        //    //anim
+        //    GetComponent<EnemyAnimator>().Attack();
+        //    print("ATTTTAAAAAAAACK");
+        //    attack = false;
+        //}
+        ////{
+        //if(dist.magnitude > attackDist)
+        //{
+        //    //Physics._maxSteeringForce = MaxSteeringForce * 0.01f;
+        //    //follow player
+        //    if (velocity.magnitude == 0)
+        //    {
+        //        rotation.playerPos = playerPos;
+        //        rotation.rotToPl = true;
+        //    }
+        //    else
+        //    {
+        //        rotation.rotToPl = false;
+        //    }
+
+        //    if (!find)
+        //    {
+        //        //followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
+        //        findPath(ref flags, ref velocity, ref target, player, body);
+        //    }
+        //    else
+        //    {
+        //        findPath(ref flags, ref velocity, ref target, player, body);
+        //    }
+        //    //}
+
+        //    //else ?
+        //}
         //else
         //{
         //    attackCounter = 0;

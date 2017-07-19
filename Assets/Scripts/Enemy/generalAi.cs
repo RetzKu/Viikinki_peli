@@ -131,6 +131,8 @@ public abstract class generalAi : MonoBehaviour
         {
             flags = 0;
             velocity *= 0;
+            print("im STUCK");
+
         }
         else if (k == PathFinder.Dir.Right)
         {
@@ -156,6 +158,7 @@ public abstract class generalAi : MonoBehaviour
         {
             flags = 0;
             velocity *= 0;
+            print("im STUCK");
         }
     }
 
@@ -260,9 +263,10 @@ public abstract class generalAi : MonoBehaviour
     }
     public virtual void SlowRune(float time,float slowPercent)
     {
-        this.slowPercent = slowPercent;
         if (!slow)
         {          
+            this.slowPercent = slowPercent;
+            ParticleSpawner.instance.SpawSlow(this.gameObject, time);
             MaxSpeed *= slowPercent;
             Physics._maxSpeed = MaxSpeed;
             slowTime = time;

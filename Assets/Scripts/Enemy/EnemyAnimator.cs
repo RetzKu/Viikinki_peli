@@ -21,7 +21,7 @@ public class EnemyAnimator : MonoBehaviour {
     private List<Sprite> Chests;
 
 
-    private void Start()
+    private void Awake()
     {
         /*Finding enemy hands*/
         Hands = new List<Transform>(3);

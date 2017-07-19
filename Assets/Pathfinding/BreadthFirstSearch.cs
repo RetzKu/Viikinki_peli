@@ -91,7 +91,17 @@ public class BreadthFirstSearch
         goalX = playerX;
         goalY = playerY;
         panther.Search(moveTiles,goalX,goalY);
+        for(int y = 0; y < moveTiles.Count; y++)
+        {
+            for (int x = 0; x < moveTiles.Count; x++)
+            {
+                if(moveTiles[y][x].tileState == states.wall)
+                {
+                    tileMap.GetGameObjectFast(x, y).GetComponent<SpriteRenderer>().color = Color.clear;
+                }
 
+            }
+        }
         //Dictionary<tiles, int> toimii = new Dictionary<tiles, int>();
 
         //Queue<tiles> hue = new Queue<tiles>(100);

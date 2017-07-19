@@ -21,6 +21,8 @@ public class combat : MonoBehaviour {
     public float atmAttackTime = 0.0f;
     // Flagi jolla tarkistetaan onko lyönnillä JO tehty damagea
     private bool damageDone = false;
+
+    private Vector2 lastEnemyHitPosition = new Vector2(0f, 0f);
     
     private enum Directions { Left, Down, Up, Right }
     private Directions Direction;
@@ -150,8 +152,8 @@ public class combat : MonoBehaviour {
 
         if (GetComponent<PlayerScript>().Inventory.EquipData.Tool != null)
         {
-            GameObject tempWeapon = GetComponent<PlayerScript>().Inventory.EquipData.Tool;
-            playerDamage += tempWeapon.GetComponent<weaponStats>().damage;
+                GameObject tempWeapon = GetComponent<PlayerScript>().Inventory.EquipData.Tool;
+                playerDamage += tempWeapon.GetComponent<weaponStats>().damage;
         }
 
         return playerDamage;
@@ -165,12 +167,21 @@ public class combat : MonoBehaviour {
         {
             if (isAttackLegal()) // PC
             {
+                if (GetComponent<PlayerScript>().Inventory.EquipData.Tool != null)
+                {
+                    if (GetComponent<PlayerScript>().Inventory.EquipData.Tool.name == "bow_tier1")
+                    {
+                        Vector2 tempo = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                        Vector2 tempo2 = new Vector2 ((tempo.x - transform.position.x), (tempo.y - transform.position.y));
+                        tempo2.Normalize();
+                        GameObject.Find("projectileManager").GetComponent<ProjectileManager>().spawnProjectile(transform.position, new Vector2(transform.position.x + tempo2.x * 6, transform.position.y + tempo2.y * 6));
+                    }
+                }
                 return true;
             }
         }
         return false;
     }
-
 
     public float hit()
     {
@@ -202,10 +213,17 @@ public class combat : MonoBehaviour {
         return weapon;
     }*/
 
+
+    public void setHitPosition(Vector2 position)
+    {
+        lastEnemyHitPosition = position;
+    }
+
     // Metodi jolla pelaaja ottaa damagea
     public void takeDamage(float rawTakenDamage)
     {
         hp = hp - (rawTakenDamage / armor);
+        GetComponent<Movement>().KnockBack(lastEnemyHitPosition);
     }
 
     void death()

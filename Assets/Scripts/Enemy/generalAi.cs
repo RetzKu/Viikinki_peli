@@ -10,10 +10,10 @@ public enum EnemyType
 }
 public enum Dir
 {
-    Right,
     Left,
-    Up,
     Down,
+    Up,
+    Right,
     Basic
 }
 public enum collision
@@ -94,7 +94,7 @@ public abstract class generalAi : MonoBehaviour
 
     protected int flags = 0;
 
-
+    [HideInInspector]
     public Vector2 velocity = new Vector2(); //An object’s PVector velocity will remain constant if it is in a state of equilibrium.
     protected Vector2 target = new Vector2();
 
@@ -106,7 +106,7 @@ public abstract class generalAi : MonoBehaviour
     protected EnemyRotater rotation = new EnemyRotater();
 
     public abstract void UpdatePosition(List<GameObject> Mobs);
-    public abstract void InitStart(float x,float y, EnemyType type);
+    public abstract void InitStart(float x,float y, EnemyType type,GameObject player);
 
     public void followPlayer(ref Vector2 dist, Vector2 playerPos, float attackDist,ref Vector2 target,ref int flags,EnemyMovement Physics,float sepF)
     {
@@ -213,14 +213,14 @@ public abstract class generalAi : MonoBehaviour
     {
         if (!knocked)
         {
-        knocked = true;
-        rotation.Lock = true; 
-        resetValues();
-        knock = body.position - player.GetComponent<DetectEnemies>().getPosition();
-        knock.Normalize();
-        knock *= knockDist;
-        flags = (int)behavior.seek;
-        Physics._maxSpeed = MaxSpeed * 5;
+            knocked = true;
+            rotation.Lock = true; 
+            resetValues();
+            knock = body.position - player.GetComponent<DetectEnemies>().getPosition();
+            knock.Normalize();
+            knock *= knockDist;
+            flags = (int)behavior.seek;
+            Physics._maxSpeed = MaxSpeed * 5;
         }
         
     }

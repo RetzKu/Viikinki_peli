@@ -49,6 +49,7 @@ public class wolfStats : enemyStats {
             // Tuhotaan molemmat gameobjectit ajan mukaan
             DestroyObject(hitbox.GetComponent<BoxCollider2D>(), 0.2f);
             DestroyObject(hitbox.GetComponent<wolfHeadScript>(), 0.2f);
+            GameObject.Find("Player").GetComponent<combat>().setHitPosition(transform.localPosition);
             }
     }
 }

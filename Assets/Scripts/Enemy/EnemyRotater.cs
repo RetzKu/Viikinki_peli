@@ -4,10 +4,10 @@ using UnityEngine;
 
 public enum enemyDir
 {
-    Right,
-    Left,
-    Down,
-    Up,
+    Left,   //
+    Down,   // ÄLÄ VAIHDA JÄRJESTYSTÄ
+    Up,     //
+    Right,  //
     LU,
     LD,
     RU,
@@ -171,6 +171,7 @@ public class EnemyRotater {
                         myDir = enemyDir.StillLU;
                         break;
                 }
+                // 
             }
         }
         else
@@ -193,6 +194,11 @@ public class EnemyRotater {
                         myDir = enemyDir.StillDown;
                         break;
                 }
+                
+            }
+            else
+            {
+                
             }
         }
     }

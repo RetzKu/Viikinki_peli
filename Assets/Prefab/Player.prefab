@@ -1636,7 +1636,7 @@ TrailRenderer:
   m_Time: 0.22
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 1
+    widthMultiplier: 0.2
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -1905,6 +1905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runes:
   - {fileID: 11400000, guid: 6d19112c5faec534d92ac23bf9a0afa0, type: 2}
+  - {fileID: 11400000, guid: e16a8ceb4df570c4981a2e42bbb8567c, type: 2}
 --- !u!114 &114595929073258388
 MonoBehaviour:
   m_ObjectHideFlags: 1

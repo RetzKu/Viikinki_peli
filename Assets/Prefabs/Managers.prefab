@@ -205,13 +205,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CorpseDrops:
   - Item: {fileID: 1093993870452012, guid: 4fed55b4841709f429a0550704b75d0d, type: 2}
-    DropChance: 20
+    DropChance: 10
     NightItem: 0
   - Item: {fileID: 1093993870452012, guid: 37250574206757b49afebae937254610, type: 2}
-    DropChance: 20
+    DropChance: 10
     NightItem: 0
-  - Item: {fileID: 1315745760049726, guid: fa86f3a92b6697e459feed2a1aa11d1d, type: 2}
-    DropChance: 20
+  - Item: {fileID: 1413759944923202, guid: 166f2988e83639e4b871c5e3d63ade68, type: 2}
+    DropChance: 10
+    NightItem: 0
+  - Item: {fileID: 1192870776797376, guid: bd771d4617c99d149ad6c9dd912fcb49, type: 2}
+    DropChance: 10
+    NightItem: 0
+  - Item: {fileID: 1442913211837032, guid: 008965e054cf0a94c84b820e12ee658a, type: 2}
+    DropChance: 10
+    NightItem: 0
+  - Item: {fileID: 1830157689502956, guid: 243c70e89a75e7f43895e031aebe4ac0, type: 2}
+    DropChance: 10
+    NightItem: 0
+  - Item: {fileID: 1017973806840300, guid: a138be7d1acea3b408a0a2570e8a51b1, type: 2}
+    DropChance: 10
+    NightItem: 0
+  - Item: {fileID: 1133136836472450, guid: cf3155f8e68c2884ea8556a2c83afe20, type: 2}
+    DropChance: 10
     NightItem: 0
 --- !u!114 &114235837633677902
 MonoBehaviour:

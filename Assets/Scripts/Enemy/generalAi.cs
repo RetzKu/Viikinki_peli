@@ -105,11 +105,17 @@ public abstract class generalAi : MonoBehaviour
     protected GameObject player;
     protected EnemyRotater rotation = new EnemyRotater();
 
-    public abstract void UpdatePosition(List<GameObject> Mobs);
+    public abstract void UpdatePosition();
     public abstract void InitStart(float x,float y, EnemyType type,GameObject player);
 
+    protected float slowTime;
+    protected float slowTimer;
+    protected float slowPercent;
+    //protected float holderSpeed;
+    protected bool slow = false;
     public void followPlayer(ref Vector2 dist, Vector2 playerPos, float attackDist,ref Vector2 target,ref int flags,EnemyMovement Physics,float sepF)
     {
+        //print(attackDist);
         dist.Normalize();
         dist *= attackDist;
         target = playerPos + dist;
@@ -251,6 +257,28 @@ public abstract class generalAi : MonoBehaviour
     public void killMePls()
     {
         kys = true;
+    }
+    public virtual void SlowRune(float time,float slowPercent)
+    {
+        this.slowPercent = slowPercent;
+        if (!slow)
+        {          
+            MaxSpeed *= slowPercent;
+            Physics._maxSpeed = MaxSpeed;
+            slowTime = time;
+            slow = true;
+        }
+    }
+    protected virtual void SlowRuneTimer()
+    {
+        slowTimer += Time.deltaTime;
+        if(slowTimer> slowTime)
+        {
+            print("freed");
+            Physics._maxSpeed = MaxSpeed /= slowPercent;
+            slowTimer = 0f;
+            slow = false;
+        }
     }
     public abstract void resetValues();
     public abstract bool killMyself();

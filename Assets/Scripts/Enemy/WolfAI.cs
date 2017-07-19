@@ -9,8 +9,8 @@ public class WolfAI : generalAi
 
     public float leapDist = 1.0f;
 
-    private int attackCounter = 300; // EETU TRIGGER
-    private int attackUptade = 300;
+    private float attackCounter = 5f; // EETU TRIGGER
+    private float attackUptade = 5f;
     float leapSpeed = 4;
     bool bite = false;
 
@@ -18,9 +18,10 @@ public class WolfAI : generalAi
     float animTime = 0.7f;
     float leapAnim = 8f;
     float biteRange = 2f; // just bite
-    float biteTime = 1f;
-    float biteTimer = 0f;
+    float biteTime = 1f; // kuinka kauan vain purasu kestää
+    float biteTimer = 0f; 
     bool justBite = false;
+    float holderDist = 0;
     //generalAi AI = new generalAi();
 
     public override void InitStart(float x, float y, EnemyType type,GameObject player) // jokaselle
@@ -39,9 +40,9 @@ public class WolfAI : generalAi
         this.player = player;
     }
 
-    public override void UpdatePosition(List<GameObject> Mobs) // jokaselle
+    public override void UpdatePosition() // jokaselle
     {
-        //print(MaxSpeed);
+        //print(inAttack);
         if (!justBite)
         {
             rotation.UpdateRotation(velocity, body.position);
@@ -64,6 +65,10 @@ public class WolfAI : generalAi
             {
                 HeardArray[i].GetComponent<generalAi>().agro = true; // check if eetu lies
             }
+        }
+        if (slow)
+        {
+            SlowRuneTimer();
         }
         if (!knocked)
         {
@@ -209,14 +214,14 @@ public class WolfAI : generalAi
                 {
                     rotation.rotToPl = false;
                 }
-                attackCounter++;
+                attackCounter+= Time.deltaTime;
                 followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
             }
         }
         else
         {
             //follow player
-            attackCounter++;
+            attackCounter += Time.deltaTime;
             if (dist.magnitude <= attackDist)
             {
                 rotation.rotToPl = false;
@@ -307,7 +312,7 @@ public class WolfAI : generalAi
         }
     }
 
-    bool timer()
+    bool timer() // leapin start hidastus
     {
         currentTime += Time.deltaTime;
         if (currentTime > animTime)
@@ -329,10 +334,52 @@ public class WolfAI : generalAi
         agro = true;
         inAttack = false;
         justBite = false;
+        bite = false;
         biteTimer = 0f;
         currentTime = 0;
-        attackCounter = 0;
-        GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
+        attackCounter = 0f;
+        if (inAttack)
+        {
+            GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
+        }
+        //else
+        //{
+        //    attackCounter = attackUptade / 1.5f;
+        //}
 
+    }
+    public override void SlowRune(float time, float slowPercent)
+    {
+        this.slowPercent = slowPercent;
+        if (!slow)
+        {
+            ParticleSpawner.instance.SpawSlow(this.gameObject, time);
+            if (inAttack)
+            {
+                GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
+                inAttack = false;
+                attackCounter = 0;
+                rotation.Lock = false;
+            }
+            MaxSpeed *= slowPercent;
+            Physics._maxSpeed = MaxSpeed;
+            slowTime = time;
+            slow = true;
+            holderDist = attackDist;
+            attackDist *= slowPercent;
+            print(attackDist);
+        }
+    }
+    protected override void SlowRuneTimer()
+    {
+        slowTimer += Time.deltaTime;
+        if (slowTimer > slowTime)
+        {
+            //print("freed");
+            Physics._maxSpeed = MaxSpeed /= slowPercent;
+            slowTimer = 0f;
+            slow = false;
+            attackDist = holderDist;
+        }
     }
 }

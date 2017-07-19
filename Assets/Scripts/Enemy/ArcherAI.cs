@@ -27,7 +27,7 @@ public class ArcherAI : generalAi {
 
     }
 
-    public override void UpdatePosition(List<GameObject> Mobs)
+    public override void UpdatePosition()
     {
         rotation.UpdateRotation(velocity, body.position);
 
@@ -45,6 +45,10 @@ public class ArcherAI : generalAi {
             {
                 HeardArray[i].GetComponent<generalAi>().agro = true;
             }
+        }
+        if (slow)
+        {
+            SlowRuneTimer();
         }
         if (!knocked)
         {

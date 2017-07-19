@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class arrow : Projectile {
 
-
-
     public override void UpdateMovement()
     {
 

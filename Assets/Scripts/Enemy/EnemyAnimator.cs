@@ -44,19 +44,23 @@ internal class EnemyAnimator : MonoBehaviour {
         SpriteController = new SpriteChanger(Torsos);
 
         /*Building New HandRoot Component*/
-        Hand = new HandRoot(Hands[0], Weapon,Hands);
+        Hand = new HandRoot(Hands[0], SpriteFinderScript.Instance.RandomMeleeWeapon(),Hands);
 
-        Heads = GameObject.Find("Passive").GetComponent<SpriteFinderScript>().RandomHead().HeadSprites();
+        Heads = SpriteFinderScript.Instance.RandomHead();
+        Chests = SpriteFinderScript.Instance.RandomTorso();
+
+        transform.Find("s_c_torso").Find("s_c_head").GetComponent<SpriteRenderer>().sprite = Heads[0];
+        transform.Find("u_c_torso").Find("u_c_head").GetComponent<SpriteRenderer>().sprite = Heads[1];
+        transform.Find("d_c_torso").Find("d_c_head").GetComponent<SpriteRenderer>().sprite = Heads[2];
+
+        transform.Find("s_c_torso").GetComponent<SpriteRenderer>().sprite = Chests[0];
+        transform.Find("u_c_torso").GetComponent<SpriteRenderer>().sprite = Chests[1];
+        transform.Find("d_c_torso").GetComponent<SpriteRenderer>().sprite = Chests[2];
+
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) == true) { ChangeDirection(enemyDir.Left); }
-        if (Input.GetKeyDown(KeyCode.W) == true) { ChangeDirection(enemyDir.Up); }
-        if (Input.GetKeyDown(KeyCode.S) == true) { ChangeDirection(enemyDir.Down); }
-        if (Input.GetKeyDown(KeyCode.D) == true) { ChangeDirection(enemyDir.Right); }
-        if (Input.GetKeyDown(KeyCode.Mouse0) == true) { Attack(); }
-        if (Input.GetKeyDown(KeyCode.F) == true) { Movin = true; }
         CheckVelocity();
     }
 

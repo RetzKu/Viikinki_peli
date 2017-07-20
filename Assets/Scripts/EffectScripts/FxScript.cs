@@ -148,16 +148,19 @@ public class FxScript : MonoBehaviour {
         }
         else if (trig.gameObject.layer == LayerMask.NameToLayer("ObjectLayer"))
         {
-            var resourceGo = trig.gameObject.GetComponent<Resource>();
-
-            // puuPrefabit toimivat hieman eri tavalla kuin muut resurrsit / sama pitää tällä tavalla niin tulevaisuudessa jos tulee eksoottinen prefab
-            if (resourceGo == null)
+            if( GetComponent<combat>().IsAttacking())
             {
-                   trig.gameObject.transform.parent.GetComponent<Resource>().Hit((int) GetComponent<combat>().countPlayerDamage());
-            }
-            else
-            {
-                resourceGo.Hit( (int)GetComponent<combat>().countPlayerDamage());
+                var resourceGo = trig.gameObject.GetComponent<Resource>();
+                // puuPrefabit toimivat hieman eri tavalla kuin muut resurrsit / sama pitää tällä tavalla niin tulevaisuudessa jos tulee eksoottinen prefab
+                if (resourceGo == null)
+                {
+                    trig.gameObject.transform.parent.GetComponent<Resource>()
+                        .Hit((int) GetComponent<combat>().countPlayerDamage());
+                }
+                else
+                {
+                    resourceGo.Hit((int) GetComponent<combat>().countPlayerDamage());
+                }
             }
         }
     }

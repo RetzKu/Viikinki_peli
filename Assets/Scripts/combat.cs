@@ -145,6 +145,12 @@ public class combat : MonoBehaviour {
         return false;
     }
 
+    public bool IsAttacking()
+    {
+        return Time.time < (atmAttackTime + DefaultAttackLength);
+    }
+
+
     // Lasketaan pelaajan damage ottaen ase huomioon
     public float countPlayerDamage()
     {

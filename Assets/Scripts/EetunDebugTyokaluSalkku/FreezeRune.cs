@@ -15,7 +15,7 @@ public struct AoeEffectData
     public float EndScale;
     public int Frames;
     public Rune AfterEffect;
-
+// Donezo
     public Vector2 MovementDir;
     public float Speed;
 }
@@ -29,13 +29,13 @@ public class FreezeRune : Rune
 
     // public Tyyppi tyyppi;
     public AoeEffectData EffectData;
-    [Header("TODO: frameille parimpi korvaus (aika)")]
+    [Header("TODO: frameille parempi korvaus (aika)")]
 
     // esim
     // spublic Buff EffectAreaBuff;
     // public float EffectAreaApplyTimer;
 
-    [Header("if length == 0 | mask = Enemy")]
+    [Header("if size == 0; mask = Enemy")]
     public string[] CollisionMaskValues;
 
     public override void init(GameObject owner)
@@ -63,14 +63,12 @@ public class FreezeRune : Rune
         // launcheri tekee likaisen työn maailman kanssa visuaalinen collision
         _launcher.FireAoeEffect(sprite, EffectData, _collisionMask);
         Vector2 pos = _owner.transform.position;
+
         Debug.Log("FreezeRune lähettää terveisensä!");
+
         // Laukaise cast efecti
         // tyyppi.cast(_owner);
-
-        // if (leaves effect)
     }
-    // Rune effect funktio, jota kutsuttaisiin Launcherista takaisin
-    // OnStart Ja OnRuneEnd, joihin laitettaisiin esim buffin statsit ja rune effectiä voisi myös kutsua coroutinellä takaisin
 }
 
 
@@ -102,5 +100,3 @@ public class WeaponBuffRune : Rune
         // laita timer joka lopettaa buffing keston
     }
 }
-
-

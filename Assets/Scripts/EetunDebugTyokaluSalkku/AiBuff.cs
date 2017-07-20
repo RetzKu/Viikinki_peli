@@ -13,6 +13,6 @@ public class AiSlow : Buff
     {
         // target.GetComponent<generalAi>().runeSlow(SlowPercent, Time);
         Destroy(target);
-        Debug.Log("Slow buff lähettää terveisensä! \nVihollinen "+ target.gameObject.name +" tuhottu");
+        Debug.Log("Slow buff lähettää terveisensä! \nVihollinen "+ target.gameObject.name + " tuhottu");
     }
 }

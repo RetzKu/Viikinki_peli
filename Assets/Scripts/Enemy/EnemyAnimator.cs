@@ -44,7 +44,7 @@ internal class EnemyAnimator : MonoBehaviour {
         SpriteController = new SpriteChanger(Torsos);
 
         /*Building New HandRoot Component*/
-        Hand = new HandRoot(Hands[0], Weapon);
+        Hand = new HandRoot(Hands[0], Weapon,Hands);
 
         Heads = GameObject.Find("Passive").GetComponent<SpriteFinderScript>().RandomHead().HeadSprites();
     }

@@ -52,6 +52,7 @@ public class BreadthFirstSearch
     {
        Vector3 j = map.GetGameObjectFast(0, 0).transform.position;
        Vector2 i = j;
+       k += new Vector2(0.5f, 0.5f);
        Vector2 temp = k - i;
 
         int[] h = new int[2];
@@ -65,7 +66,12 @@ public class BreadthFirstSearch
     {
         uptadeTiles((int)position.x, (int)position.y, tileMap);
     }
-
+    public Vector2 getTileTrans(Vector2 k)
+    {
+        int[] h = calculateIndex(k);
+        
+        return map.GetGameObjectFast(h[0], h[1]).transform.position;
+    }
     public void uptadeTiles(int playerX, int playerY, TileMap tileMap)
     {
         inited = true;
@@ -91,7 +97,17 @@ public class BreadthFirstSearch
         goalX = playerX;
         goalY = playerY;
         panther.Search(moveTiles,goalX,goalY);
+        //for(int y = 0; y < moveTiles.Count; y++)
+        //{
+        //    for (int x = 0; x < moveTiles.Count; x++)
+        //    {
+        //        if(moveTiles[y][x].tileState == states.wall)
+        //        {
+        //            tileMap.GetGameObjectFast(x, y).GetComponent<SpriteRenderer>().color = Color.clear;
+        //        }
 
+        //    }
+        //}
         //Dictionary<tiles, int> toimii = new Dictionary<tiles, int>();
 
         //Queue<tiles> hue = new Queue<tiles>(100);

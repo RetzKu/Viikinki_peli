@@ -48,8 +48,8 @@ public class UpdatePathFind : MonoBehaviour {
 
     }
 
-    void OnDrawGizmos()
-    {
-        Giz.OnDrawGizmosPate();
-    }
+    //void OnDrawGizmos() // käytä pathfind debuggaukseen
+    //{
+    //    Giz.OnDrawGizmosPate();
+    //}
 }

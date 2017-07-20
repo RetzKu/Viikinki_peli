@@ -572,6 +572,7 @@ GameObject:
   - component: {fileID: 50487489244100106}
   - component: {fileID: 70305166460511146}
   - component: {fileID: 114886004865924286}
+  - component: {fileID: 114508786296571636}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -1170,6 +1171,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114508786296571636
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1977754839611798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e910de642766774d84284eac151aafe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  hp: 100
+  armor: 1
 --- !u!114 &114728105960161014
 MonoBehaviour:
   m_ObjectHideFlags: 1

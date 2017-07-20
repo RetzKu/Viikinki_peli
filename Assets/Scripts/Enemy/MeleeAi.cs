@@ -61,7 +61,7 @@ public class MeleeAi : generalAi {
         {
             knocktimer();
         }
-        print((behavior)flags);
+       // print((behavior)flags);
         powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags, CollState);
         target = powers[1];
         velocity = powers[0];
@@ -77,7 +77,7 @@ public class MeleeAi : generalAi {
 
     void meleePattern(Vector2 dist, Vector2 playerPos)
     {
-        findPath(ref flags, ref velocity, ref target, player, body);
+       findPath(ref flags, ref velocity, ref target, player, body);
         //LayerMask mask = new LayerMask();
         //mask = LayerMask.GetMask("ObjectLayer");
         //bool find = false;

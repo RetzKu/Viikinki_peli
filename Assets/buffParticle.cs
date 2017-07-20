@@ -24,6 +24,7 @@ public class buffParticle : MonoBehaviour {
             }
         }
 	}
+    //public void res
     public void init(GameObject FatherMichael,float time)
     {
         q = transform.rotation;

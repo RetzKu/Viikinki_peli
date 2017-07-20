@@ -71,7 +71,7 @@ public abstract class generalAi : MonoBehaviour
     public float attackDist;
     public float MaxSpeed = 0.04f;
     float knockDist = 3f;
-    public float knockTime = 0.1f;
+    public float knockTime = 0.2f;
     float knockCounter = 0f;
     Vector2 knock = new Vector2(0, 0);
     protected bool GiveStartTarget = true;
@@ -127,35 +127,43 @@ public abstract class generalAi : MonoBehaviour
     {
         PathFinder.Dir k = player.GetComponent<UpdatePathFind>().path.getTileDir(body.position);
 
+        //print(k);
         if (k == PathFinder.Dir.NoDir)
         {
             flags = 0;
             velocity *= 0;
+           // print("im STUCK");
+
         }
         else if (k == PathFinder.Dir.Right)
         {
             flags = (int)behavior.findPath;
-            target = new Vector2(body.position.x + 1, body.position.y);
+            //target = new Vector2(body.position.x + 1, body.position.y);
+            target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x +1, body.position.y));
         }
         else if (k == PathFinder.Dir.Left)
         {
             flags = (int)behavior.findPath;
-            target = new Vector2(body.position.x - 1, body.position.y);
+            //target = new Vector2(body.position.x - 1, body.position.y);
+            target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x -1, body.position.y));
         }
         else if (k == PathFinder.Dir.Up)
         {
             flags = (int)behavior.findPath;
-            target = new Vector2(body.position.x, body.position.y + 1);
+            //target = new Vector2(body.position.x, body.position.y + 1);
+            target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x, body.position.y + 1));
         }
         else if (k == PathFinder.Dir.Down)
         {
             flags = (int)behavior.findPath;
-            target = new Vector2(body.position.x, body.position.y - 1);
+            //target = new Vector2(body.position.x, body.position.y - 1);
+            target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x, body.position.y - 1));
         }
         else
         {
             flags = 0;
             velocity *= 0;
+            //print("im STUCK");
         }
     }
 
@@ -258,15 +266,22 @@ public abstract class generalAi : MonoBehaviour
     {
         kys = true;
     }
-    public virtual void SlowRune(float time,float slowPercent)
+    public virtual void SlowRune(float time,float slowPercent,bool reset = false)
     {
-        this.slowPercent = slowPercent;
+        
         if (!slow)
         {          
+            this.slowPercent = slowPercent;
+            ParticleSpawner.instance.SpawSlow(this.gameObject, time);
             MaxSpeed *= slowPercent;
             Physics._maxSpeed = MaxSpeed;
             slowTime = time;
             slow = true;
+        }
+        if (reset)
+        {
+            slowTimer = 0;
+            slowTime = time;
         }
     }
     protected virtual void SlowRuneTimer()

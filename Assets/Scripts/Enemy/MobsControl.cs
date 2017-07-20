@@ -72,9 +72,9 @@ public class MobsControl : MonoBehaviour
 
                 //if (Boids.Count % 2 == 0)
                 //{
-                    go = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
+                    go = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
 
-                    go.GetComponent<generalAi>().InitStart(x, y,EnemyType.Wolf,player);
+                    go.GetComponent<generalAi>().InitStart(x, y,EnemyType.Archer, player);
                 //}
                 //else
                 //{

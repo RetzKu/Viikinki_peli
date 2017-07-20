@@ -54,6 +54,7 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Mouse0) == true) { GameObject.Find("Wolf(Clone)").GetComponent<Animator>().SetTrigger("Ded"); }
         tmpswing();
         Side();
         Direction = transform.GetComponent<AnimatorScript>().PlayerDir();

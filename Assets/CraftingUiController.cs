@@ -35,9 +35,12 @@ public class CraftingUiController : MonoBehaviour
     public Sprite[] CraftSprites;
     public Sprite[] LightSprites;
     public Sprite[] OutOfSprites;
+    public Transform ResourceEndLocation;
 
     private Dictionary<ButtonState, Sprite[]> buttonStateSprites;
     private readonly int maxButtons = 9;
+
+    private ButtonState current;
 
     void Start()
     {
@@ -55,6 +58,8 @@ public class CraftingUiController : MonoBehaviour
         }
 
         CraftingManager.Instance.OnResourceCountChanged += CheckResourceNumbers;
+        // CraftingManager.Instance.SetResourcePickupEndLocation(Camera.main.ScreenToWorldPoint(ResourceEndLocation.position));
+
 
 
         buttonStateSprites = new Dictionary<ButtonState, Sprite[]>(4);
@@ -64,6 +69,7 @@ public class CraftingUiController : MonoBehaviour
         buttonStateSprites[ButtonState.OutOf] = OutOfSprites;
 
         SetAllButtonsImages(ButtonState.Default);
+        current = ButtonState.Default;
         SetAllActiveState(false);
 
         BaseManager.Instance.RegisterOnBaseEnter(OnBaseEnter);
@@ -76,6 +82,7 @@ public class CraftingUiController : MonoBehaviour
     {
         SetAllButtonsImages(ButtonState.Craft);
         SetAllActiveState(true);
+        current = ButtonState.Craft;
 
         SetAllCounts();
     }
@@ -83,6 +90,7 @@ public class CraftingUiController : MonoBehaviour
     void OnBaseExit()
     {
         SetAllButtonsImages(ButtonState.Default);
+        current = ButtonState.Default;
         SetAllActiveState(false);
     }
 
@@ -92,22 +100,22 @@ public class CraftingUiController : MonoBehaviour
         Numbers.gameObject.SetActive(state);
     }
 
-
-    void SetAllButtonsImages(ButtonState state)
+    public void SetAllButtonsImages(ButtonState state)
     {
         Sprite[] sprites = buttonStateSprites[state];
         for (int i = 0; i < maxButtons; i++)
         {
+
             _hudImages[i].sprite = sprites[i];
         }
     }
 
-    void SetButtonImage(ButtonState state, int x, int y)
+    public void SetButtonImage(ButtonState state, int x, int y)
     {
         _hudImages[y * 3 + x].sprite = buttonStateSprites[state][y * 3 + x];
     }
 
-    void SetAllCounts()
+    public void SetAllCounts()
     {
         for (int i = 0; i < (int)IngredientType.Max; i++)
         {

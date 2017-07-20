@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TouchController : MonoBehaviour
 {
-
     private static readonly int maxRuneIndices = 9;
     public Vec2[] runeIndices = new Vec2[maxRuneIndices];
 
@@ -40,6 +37,10 @@ public class TouchController : MonoBehaviour
     public RuneHolder CraftingManagerHolder;
     private GameObject knob;
 
+    private Vector3 lastPosition;
+
+    private CraftingUiController _craftingUiController;
+
     public enum Mode
     {
         Crafting,
@@ -48,7 +49,6 @@ public class TouchController : MonoBehaviour
 
     public Mode ControllerMode = Mode.Crafting;
     private CurvedLineRendererController LineController;
-
 
     void SendIndices()
     {
@@ -123,6 +123,7 @@ public class TouchController : MonoBehaviour
                 // go.layer = SortingLayer.GetLayerValueFromName("TouchController");
 
                 // TouchScreenPoint newPoint = new TouchScreenPoint(x, y);
+
                 go.AddComponent(typeof(TouchScreenPoint));
                 var point = go.GetComponent<TouchScreenPoint>();
                 point.x = x;
@@ -169,6 +170,11 @@ public class TouchController : MonoBehaviour
         {
             Debug.LogWarning("Cannot load LineRendererEndPoint plz tell Eetu");
         }
+
+        _craftingUiController = GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>();
+
+
+        lastPosition = transform.position;
     }
 
     void OnBaseEnter()
@@ -190,7 +196,7 @@ public class TouchController : MonoBehaviour
 
     void Update()
     {
-#if false               // MOBILERLKj
+#if false               // Mobile
         Touch[] myTouches = Input.touches;
         for (int i = 0; i < Input.touchCount; i++)
         {
@@ -248,9 +254,13 @@ public class TouchController : MonoBehaviour
 
             _touching = true;
             DrawToMouse((mousePos));
+
+            LineController.transform.position = transform.position;
         }
         else
         {
+            // sormi poesa
+
             SendIndices();
             index = 0;
 
@@ -261,18 +271,25 @@ public class TouchController : MonoBehaviour
 
             SetLineRendererCount(0);
 
-            // sormi poesa
             LineController.ResetPoints();
+
+            if (Mode.Crafting == ControllerMode)
+                _craftingUiController.SetAllCounts();
+
+            // TODO: linejen position fix
+            // if (lastPosition != transform.position)
+                // LineController.TranslatePoints(lastPosition - transform.position);
+
         }
+        lastPosition = transform.position;
 
         // Reset LineRenderer
-        if (_timer < Time.time)
-        {
-            index = 0;
-            ResetColliders();
-
-            LineController.ResetPoints();
-        }
+        //if (_timer < Time.time)
+        //{
+        //    index = 0;
+        //    ResetColliders();
+        //    LineController.ResetPoints();
+        //}
     }
 
     private GameObject GetFromArray(int x, int y)
@@ -286,11 +303,14 @@ public class TouchController : MonoBehaviour
         {
             colliderGO.GetComponent<CircleCollider2D>().enabled = true;
         }
+
     }
 
     public void OnTouchDetected(int x, int y, Vector3 realTransform)
     {
         ResetColliders();
+
+        _craftingUiController.SetButtonImage(CraftingUiController.ButtonState.Light, x, y);
 
         if (_touching)
         {

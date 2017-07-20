@@ -3002,6 +3002,12 @@ Prefab:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 114728105960161014, guid: 66ccf3f92aecc84449b5c277bcd38483,
+        type: 2}
+      propertyPath: Weapon
+      value: 
+      objectReference: {fileID: 1133136836472450, guid: cf3155f8e68c2884ea8556a2c83afe20,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 66ccf3f92aecc84449b5c277bcd38483, type: 2}
   m_IsPrefabParent: 0

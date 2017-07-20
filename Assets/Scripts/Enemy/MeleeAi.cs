@@ -25,7 +25,7 @@ public class MeleeAi : generalAi {
         Physics._maxSpeed = MaxSpeed;
         this.player = player;
     }
-    public override void UpdatePosition(List<GameObject> Mobs)
+    public override void UpdatePosition()
     {
         rotation.UpdateRotation(velocity, body.position);
         LayerMask mask = new LayerMask();
@@ -35,7 +35,10 @@ public class MeleeAi : generalAi {
         var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
         Vector2[] powers = new Vector2[2];
 
-
+        if (slow)
+        {
+            SlowRuneTimer();
+        }
         if (!knocked)
         {
             if (!agro)

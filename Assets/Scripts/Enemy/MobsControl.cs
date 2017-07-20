@@ -15,8 +15,8 @@ public class MobsControl : MonoBehaviour
     // JOONAN BOOL MUUTTUJA, PATE NÄPIT IRTI, THX
     [Header("Enemies deal dmg")]
     public bool enemiesDealDamage = true;
-    
 
+    bool slow = false; // DEBUG
     public int Mob_Amount;
     public GameObject Wolf;
     public GameObject Archer;
@@ -26,7 +26,6 @@ public class MobsControl : MonoBehaviour
     public GameObject player;
 
     List<spawn> spawner = new List<spawn>();
-    bool knock = false;
     void Start()
     {
 
@@ -48,7 +47,7 @@ public class MobsControl : MonoBehaviour
         }
         if (Input.GetKeyDown("k"))
         {
-            knock = true;
+            slow = true;
         }
 
 
@@ -106,18 +105,18 @@ public class MobsControl : MonoBehaviour
             }
             else
             {
-                if (knock)
+                if (slow)
                 {
-                    Boids[ind].GetComponent<generalAi>().KnockBack();
-                    print("knock");
+                    Boids[ind].GetComponent<generalAi>().SlowRune(5f,0.5f);
+                    print("slow");
                 }
-                Boids[ind].GetComponent<generalAi>().UpdatePosition(Boids);
+                Boids[ind].GetComponent<generalAi>().UpdatePosition();
                 ind++;
             }
         }
-        if (knock)
+        if (slow)
         {
-            knock = false;
+            slow = false;
         }
     }
     public void SpawnBoids(float x, float y, float radius, int amount)
@@ -139,4 +138,5 @@ public class MobsControl : MonoBehaviour
         Boids.Clear();
         spawner.Clear(); 
     }
+
 }

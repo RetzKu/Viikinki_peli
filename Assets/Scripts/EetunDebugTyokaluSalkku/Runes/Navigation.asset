@@ -8,16 +8,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d29ad83f4a1014ab9b37d6a2d6e346, type: 3}
-  m_Name: Pate
+  m_Script: {fileID: 11500000, guid: 8f72788ca512f684b9cbd27a66ac4010, type: 3}
+  m_Name: Navigation
   m_EditorClassIdentifier: 
   Indices:
   - X: 0
-    Y: 0
-  - X: 0
-    Y: 1
+    Y: 2
   - X: 1
     Y: 1
+  - X: 2
+    Y: 2
   Sound: {fileID: 0}
-  sprite: {fileID: 21300006, guid: d6bf80a471b016c4e97bb0be2a66eb2e, type: 3}
-  Range: 10
+  sprite: {fileID: 21300008, guid: d6bf80a471b016c4e97bb0be2a66eb2e, type: 3}

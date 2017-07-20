@@ -28,7 +28,7 @@ public class MeleeAi : generalAi {
     public override void UpdatePosition()
     {
         rotation.UpdateRotation(velocity, body.position);
-        GetComponent<EnemyAnimator>().ChangeDirection(myDir);
+        transform.GetComponent<EnemyAnimator>().ChangeDirection(myDir);
         LayerMask mask = new LayerMask();
         mask = LayerMask.GetMask("Enemy");
 

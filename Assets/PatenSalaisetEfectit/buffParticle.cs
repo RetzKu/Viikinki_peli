@@ -34,5 +34,10 @@ public class buffParticle : MonoBehaviour {
         this.time = time;
         inited = true;
     }
+    public void resetTime(float time)
+    {
+        timer = 0;
+        this.time = time;
+    }
 
 }

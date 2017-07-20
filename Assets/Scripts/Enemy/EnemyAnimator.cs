@@ -49,12 +49,6 @@ internal class EnemyAnimator : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) == true) { ChangeDirection(enemyDir.Left); }
-        if (Input.GetKeyDown(KeyCode.W) == true) { ChangeDirection(enemyDir.Up); }
-        if (Input.GetKeyDown(KeyCode.S) == true) { ChangeDirection(enemyDir.Down); }
-        if (Input.GetKeyDown(KeyCode.D) == true) { ChangeDirection(enemyDir.Right); }
-        if (Input.GetKeyDown(KeyCode.Mouse0) == true) { Attack(); }
-        if (Input.GetKeyDown(KeyCode.F) == true) { Movin = true; }
         CheckVelocity();
     }
 

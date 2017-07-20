@@ -8,6 +8,7 @@ public class ParticleSpawner : MonoBehaviour {
     public GameObject SmallBlood;
     public GameObject Slow;
     public GameObject CastEffect;
+    public GameObject Explosion;
     public static ParticleSpawner instance;
     void Start()
     {
@@ -36,5 +37,9 @@ public class ParticleSpawner : MonoBehaviour {
         var ss = Instantiate(CastEffect);
         ss.GetComponent<castingBuff>().init(father);
     }
-
+    public void SpawnExplosion(Vector2 position,float time = 3f)
+    {
+        var ss = Instantiate(Explosion);
+        ss.GetComponent<SecretExplosion>().init(position,time);
+    }
 }

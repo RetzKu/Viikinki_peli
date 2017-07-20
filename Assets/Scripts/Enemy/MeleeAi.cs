@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MeleeAi : generalAi {
 
-    float swingDist = 1f;
     //float attackCounter = 5f; 
     //private float attackUptade = 5f; // how often attack happens
     float attRefresh = 2f;

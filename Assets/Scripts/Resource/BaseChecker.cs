@@ -28,7 +28,7 @@ public class BaseChecker : MonoBehaviour
                 // TODO: Callback crafting thingy	        
                 if (!lastFrameOnBase && OnCampFireEnter != null)
                 {
-                    print("on enter");
+                    print("Base on range");
                     OnCampFireEnter();
                     lastFrameOnBase = true;
                 }
@@ -41,7 +41,7 @@ public class BaseChecker : MonoBehaviour
             {
                 OnCampFireExit();
                 lastFrameOnBase = false;
-                print("on exit");
+                print("Base out of range");
             }
         }
     }

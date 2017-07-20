@@ -164,6 +164,12 @@ public class combat : MonoBehaviour {
         return playerDamage;
     }
 
+    public void setPlayerOnFire()
+    {
+        ParticleSpawner.instance.SpawSlow(GameObject.Find("Player"), 2.5f);
+        takeDamage(10f);
+    }
+
     // Metodi jolla tarkistetaan onko painettu lyöty ja lyönti pois CD
     public bool attackBoolean()
     {
@@ -175,26 +181,22 @@ public class combat : MonoBehaviour {
                 // VÄÄRÄSSÄ PAIKASSA ATM MUTTA TOIMII =D
                 if(GetComponent<PlayerScript>().EquippedTool.Type == WeaponType.rangedWeapon)
                 {
+                    // Ammu nuoli, vähentää pelaajan inventorystä nuolen
                     if(GetComponent<PlayerScript>().EquippedTool.UsedArrow() == true)
                     {
-                        //ammu nuoli
+                        Vector2 tempo = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                        Vector2 tempo2 = new Vector2((tempo.x - transform.position.x), (tempo.y - transform.position.y));
+                        tempo2.Normalize();
+                        GameObject.Find("projectileManager").GetComponent<ProjectileManager>().spawnProjectile(transform.position, new Vector2(transform.position.x + tempo2.x * 6, transform.position.y + tempo2.y * 6));
+                        // Tähän voisi laittaa efektin vaihtumaan bowi efektiin
                     }
                     else
                     {
-                        // älä ammu
+                        // Tähän voisi laittaa efektin vaihtumaan lyönti efektiin
                     }
                 }
-                if (GetComponent<PlayerScript>().Inventory.EquipData.Tool != null)
-                {
-                    if (GetComponent<PlayerScript>().Inventory.EquipData.Tool.name == "bow_tier1")
-                    {
-                        Vector2 tempo = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                        Vector2 tempo2 = new Vector2 ((tempo.x - transform.position.x), (tempo.y - transform.position.y));
-                        tempo2.Normalize();
-                        GameObject.Find("projectileManager").GetComponent<ProjectileManager>().spawnProjectile(transform.position, new Vector2(transform.position.x + tempo2.x * 6, transform.position.y + tempo2.y * 6));
-                    }
-                }
-                // // // //
+                // // // // // // // // //
+
                 return true;
             }
         }

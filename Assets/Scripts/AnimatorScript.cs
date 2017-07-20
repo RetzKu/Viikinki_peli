@@ -143,11 +143,11 @@ public class AnimatorScript : MonoBehaviour
             {
                 if (PlayerRb.velocity.x > PlayerRb.velocity.y * -1) // -1,1
                 {
-                    Index = 2;
+                    Index = 2; // ylös
                 }
                 else if (PlayerRb.velocity.x > PlayerRb.velocity.y) //-1,-1
                 {
-                    Index = 1;
+                    Index = 1; // alas
                 }
                 else
                 {
@@ -158,27 +158,28 @@ public class AnimatorScript : MonoBehaviour
             {
                 if (PlayerRb.velocity.y > 0) // -1,1
                 {
-                    Index = 2;
+                    Index = 2; // ylös
                 }
                 else if (PlayerRb.velocity.y < 0) //-1,-1
                 {
-                    Index = 1;
+                    Index = 1; // alas
                 }
             }
             EnableSprites(Index);
         }
+
         public void EnableSprites(int SpriteNum)
         {
             bool changed = false;
             if (SpriteNum != LastSpriteNum)
             {
-                if (SpriteNum == 3)
+                if (SpriteNum == 0)
                 {
-                    Torso.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    Torso.GetComponent<Transform>().localScale = new Vector3(-1.0f, 1.0f, 1.0f);
                 }
                 else
                 {
-                    Torso.GetComponent<Transform>().localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+                    Torso.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 }
                 for (int i = 0; i < 3; i++)
                 {

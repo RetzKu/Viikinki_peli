@@ -178,8 +178,9 @@ public class combat : MonoBehaviour {
         {
             if (isAttackLegal()) // PC
             {
+                
                 // VÄÄRÄSSÄ PAIKASSA ATM MUTTA TOIMII =D
-                if(GetComponent<PlayerScript>().EquippedTool.Type == WeaponType.rangedWeapon)
+                if (GetComponent<PlayerScript>().EquippedTool.Type == WeaponType.rangedWeapon)
                 {
                     // Ammu nuoli, vähentää pelaajan inventorystä nuolen
                     if(GetComponent<PlayerScript>().EquippedTool.UsedArrow() == true)
@@ -207,7 +208,6 @@ public class combat : MonoBehaviour {
     {
         float damage = dmgBase;
 
-        
 
         /*
          *  Tässä kohtaa voitaisiin etsiä itemeitä / buffeja / tjsp ja lisätä se kokonais damageen, jos tarpeen
@@ -228,6 +228,7 @@ public class combat : MonoBehaviour {
         GetComponent<Movement>().KnockBack(lastEnemyHitPosition);
         Debug.Log("Player has " + hp + " hp left.");
         GetComponent<DamageVisual>().TakeDamage();
+        //ParticleSpawner.instance.SpawSmallBlood(lastEnemyHitPosition, transform.position);
     }
 
     void death()

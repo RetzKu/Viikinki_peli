@@ -27,7 +27,6 @@ public class buffParticle : MonoBehaviour {
     public void init(GameObject FatherMichael,float time)
     {
         q = transform.rotation;
-        print(GetComponent<ParticleSystem>().isPlaying);
         transform.parent =  FatherMichael.transform;
         transform.position = FatherMichael.transform.position;
         this.time = time;

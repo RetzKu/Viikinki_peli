@@ -348,7 +348,7 @@ public class WolfAI : generalAi
         //}
 
     }
-    public override void SlowRune(float time, float slowPercent)
+    public override void SlowRune(float time, float slowPercent, bool s = true)//todo
     {
         this.slowPercent = slowPercent;
         if (!slow)

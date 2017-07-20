@@ -93,6 +93,7 @@ public class EnemyAnimator : MonoBehaviour {
         }
         else
         {
+            ResetStates();
             foreach (Animator t in Animators) { t.SetBool(WalkType(), false); }
             foreach (Animator t in Animators) { t.SetBool("Walking", false); }
         }

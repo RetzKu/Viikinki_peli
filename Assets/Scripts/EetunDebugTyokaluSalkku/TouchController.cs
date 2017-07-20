@@ -189,7 +189,7 @@ public class TouchController : MonoBehaviour
 
     void SetLineRendererCount(int i)
     {
-        lineRenderer.positionCount = i;
+        lineRenderer.numPositions = i;
     }
 
     // private int FingerId = -1000;

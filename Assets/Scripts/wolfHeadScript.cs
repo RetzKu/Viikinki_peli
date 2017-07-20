@@ -36,7 +36,6 @@ public class wolfHeadScript : MonoBehaviour {
             {
                 float temp = GetComponentInParent<enemyStats>().damage;
                 GameObject.Find("Player").GetComponent<combat>().takeDamage(GetComponentInParent<enemyStats>().damage);
-                Debug.Log("Wolf dealed " + GetComponentInParent<enemyStats>().damage + "damage, player has " + GameObject.Find("Player").GetComponent<combat>().hp + " hp left!");
             }
             else // Poista else "optimointivaiheessa"
             {

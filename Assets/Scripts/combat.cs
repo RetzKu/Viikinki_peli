@@ -30,7 +30,6 @@ public class combat : MonoBehaviour {
     private string dirObjectName;
 	private Sprite Fx;
 
-
 	void Update ()
     {
         // Tarkistetaan onko pelaaja elossa
@@ -167,6 +166,18 @@ public class combat : MonoBehaviour {
         {
             if (isAttackLegal()) // PC
             {
+                // VÄÄRÄSSÄ PAIKASSA ATM MUTTA TOIMII =D
+                if(GetComponent<PlayerScript>().EquippedTool.Type == WeaponType.rangedWeapon)
+                {
+                    if(GetComponent<PlayerScript>().EquippedTool.UsedArrow() == true)
+                    {
+                        //ammu nuoli
+                    }
+                    else
+                    {
+                        // älä ammu
+                    }
+                }
                 if (GetComponent<PlayerScript>().Inventory.EquipData.Tool != null)
                 {
                     if (GetComponent<PlayerScript>().Inventory.EquipData.Tool.name == "bow_tier1")
@@ -177,6 +188,7 @@ public class combat : MonoBehaviour {
                         GameObject.Find("projectileManager").GetComponent<ProjectileManager>().spawnProjectile(transform.position, new Vector2(transform.position.x + tempo2.x * 6, transform.position.y + tempo2.y * 6));
                     }
                 }
+                // // // //
                 return true;
             }
         }
@@ -196,24 +208,6 @@ public class combat : MonoBehaviour {
         return damage;
     }
 
-    // VANHA, UUSI VASTAAVA PLAYERSCRIPTISSÄ public GameObject weaponInHand
-    /*public WeaponType weaponInHand()
-    {
-        WeaponType weapon = WeaponType.noWeapon;
-
-        if (transform.Find("Equip").childCount != 0)
-        {
-            if (transform.Find("Equip").GetChild(0).GetComponent<Ranged>() != null) { weapon = WeaponType.rangedWeapon; }
-            else if (transform.Find("Equip").GetChild(0).GetComponent<Melee>() != null) { weapon = WeaponType.meleeWeapon; }
-            else if (transform.Find("Equip").GetChild(0).GetComponent<longMelee>() != null) { weapon = WeaponType.longMeleeWeapon; }
-            else{ }
-        }
-        else { weapon = WeaponType.noWeapon; }
-
-        return weapon;
-    }*/
-
-
     public void setHitPosition(Vector2 position)
     {
         lastEnemyHitPosition = position;
@@ -224,6 +218,8 @@ public class combat : MonoBehaviour {
     {
         hp = hp - (rawTakenDamage / armor);
         GetComponent<Movement>().KnockBack(lastEnemyHitPosition);
+        Debug.Log("Player has " + hp + " hp left.");
+        GetComponent<DamageVisual>().TakeDamage();
     }
 
     void death()

@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 50022844973424622}
   - component: {fileID: 58980898545527068}
   - component: {fileID: 114423998820674782}
+  - component: {fileID: 114501016306932266}
   m_Layer: 8
   m_Name: Archer
   m_TagString: Enemy
@@ -92,6 +93,7 @@ MonoBehaviour:
   agro: 0
   attackDist: 4.815528
   MaxSpeed: 2
+  knockTime: 0.1
   IdleRefreshRate: 100
   IdleRadius: 60
   IdleBallDistance: 100
@@ -103,6 +105,20 @@ MonoBehaviour:
   aliF: 0.2
   cohF: 0.1
   velocity: {x: 0, y: 0}
+--- !u!114 &114501016306932266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1919206030925854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08dbe15d63643234995e0a18a8102916, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 4
+  hp: 100
+  armor: 1
 --- !u!212 &212092326159391664
 SpriteRenderer:
   m_ObjectHideFlags: 1

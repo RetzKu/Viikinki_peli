@@ -71,7 +71,7 @@ MonoBehaviour:
   attackWeight: 10
   weaponEffect: {fileID: 21300040, guid: f43c53a45dee3724793fb23c5164e286, type: 3}
   onRange: 0
-  distance: -0.2
+  distance: 0.2
   weaponEffectScale: {x: 0.3, y: 0.3, z: 1}
   effectOffSet: {x: 0, y: 0.2, z: 0}
 --- !u!212 &212582413484210810

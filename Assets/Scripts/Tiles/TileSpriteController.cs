@@ -412,6 +412,7 @@ public class TileSpriteController : MonoBehaviour
                     go.transform.position = new Vector3(x + offsetX, y + offsetY - 1);
                     borders.Add(go);
                 }
+
 #endif
             }
         }

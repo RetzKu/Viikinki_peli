@@ -1,9 +1,11 @@
 fileFormatVersion: 2
 guid: f64e790e17309b141a2faa72541a81a1
-timeCreated: 1500372753
+timeCreated: 1500442942
 licenseType: Pro
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: hemp_tree_0
+    21300002: hemp_tree_1
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -124,7 +126,33 @@ TextureImporter:
     overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: hemp_tree_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 3
+        width: 14
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: hemp_tree_1
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 3
+        width: 14
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
     outline: []
   spritePackingTag: 
   userData: 

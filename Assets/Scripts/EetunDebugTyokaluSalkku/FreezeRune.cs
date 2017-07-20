@@ -3,21 +3,40 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
+[System.Serializable]
+public struct AoeEffectData
+{
+    // Buff BuffToApply
+    public Buff BuffToApply;
+    public float ExpansionTime;
+    public float TotalRotation;
+    public bool LeavesEffectArea;
+    public float StartScale;
+    public float EndScale;
+    public int Frames;
+    public Rune AfterEffect;
+// Donezo
+    public Vector2 MovementDir;
+    public float Speed;
+}
+
 [CreateAssetMenu(menuName = "Runes/Aoe rune")]
 public class FreezeRune : Rune
 {
-    public float Range = 10f;
-
-
     private GameObject _owner;
     private RuneEffectLauncher _launcher;
     private LayerMask _collisionMask;
 
-    public Buff BuffToApply;
+    // public Tyyppi tyyppi;
+    public AoeEffectData EffectData;
+    [Header("TODO: frameille parempi korvaus (aika)")]
 
-    [Header("if length == 0 | mask = Enemy")]
+    // esim
+    // spublic Buff EffectAreaBuff;
+    // public float EffectAreaApplyTimer;
+
+    [Header("if size == 0; mask = Enemy")]
     public string[] CollisionMaskValues;
-
 
     public override void init(GameObject owner)
     {
@@ -41,19 +60,15 @@ public class FreezeRune : Rune
 
     public override void Fire()
     {
-        _launcher.Fire(sprite);
+        // launcheri tekee likaisen työn maailman kanssa visuaalinen collision
+        _launcher.FireAoeEffect(sprite, EffectData, _collisionMask);
         Vector2 pos = _owner.transform.position;
 
-        var colliders = Physics2D.CircleCastAll(pos, Range, new Vector2(0, 0), 0, _collisionMask);
-        foreach (var collider in colliders)
-        {
-            Destroy(collider.transform.gameObject);
-        }
-        Debug.Log("FreezeRune lähettää terveisensä");
-    }
+        Debug.Log("FreezeRune lähettää terveisensä!");
 
-    // Rune effect funktio, jota kutsuttaisiin Launcherista takaisin
-    // OnStart Ja OnRuneEnd, joihin laitettaisiin esim buffin statsit ja rune effectiä voisi myös kutsua coroutinellä takaisin
+        // Laukaise cast efecti
+        // tyyppi.cast(_owner);
+    }
 }
 
 
@@ -85,5 +100,3 @@ public class WeaponBuffRune : Rune
         // laita timer joka lopettaa buffing keston
     }
 }
-
-

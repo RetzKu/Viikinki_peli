@@ -83,6 +83,9 @@ TagManager:
   - name: ObjectLayer
     uniqueID: 1593682653
     locked: 0
+  - name: ObjectShadow
+    uniqueID: 3272270773
+    locked: 0
   - name: Player
     uniqueID: 3664509369
     locked: 0
@@ -94,4 +97,7 @@ TagManager:
     locked: 0
   - name: ParticleLayer
     uniqueID: 632902071
+    locked: 0
+  - name: New Layer
+    uniqueID: 1508341271
     locked: 0

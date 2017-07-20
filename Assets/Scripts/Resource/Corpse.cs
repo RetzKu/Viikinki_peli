@@ -27,6 +27,8 @@ public class Corpse : Resource
         var sr = GetComponent<SpriteRenderer>();
         sr.sprite = sprite;
 
+        dead = destroyedVersion;
+
         if (destroyedVersion)
             canDrop = false;
     }

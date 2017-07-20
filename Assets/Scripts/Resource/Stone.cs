@@ -8,7 +8,7 @@ public class Stone : Resource
     //public static Sprite[] Sprites;
     public override void Init(bool destroyed)
     {
-
+        dead = destroyed;
     }
 
     public override void OnDead()

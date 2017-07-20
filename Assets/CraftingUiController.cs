@@ -30,7 +30,6 @@ public class CraftingUiController : MonoBehaviour
     // 1 -> toiseens
     private Dictionary<IngredientType, int> IndexMappings = new Dictionary<IngredientType, int>((int)IngredientType.Max);
 
-
     public Sprite[] DefaultSprites;
     public Sprite[] CraftSprites;
     public Sprite[] LightSprites;
@@ -59,8 +58,6 @@ public class CraftingUiController : MonoBehaviour
 
         CraftingManager.Instance.OnResourceCountChanged += CheckResourceNumbers;
         // CraftingManager.Instance.SetResourcePickupEndLocation(Camera.main.ScreenToWorldPoint(ResourceEndLocation.position));
-
-
 
         buttonStateSprites = new Dictionary<ButtonState, Sprite[]>(4);
         buttonStateSprites[ButtonState.Default] = DefaultSprites;
@@ -115,6 +112,12 @@ public class CraftingUiController : MonoBehaviour
         _hudImages[y * 3 + x].sprite = buttonStateSprites[state][y * 3 + x];
     }
 
+    public void SetButtonImageInvertedY(ButtonState state, int x, int y)
+    {
+        int yy = 2 - y;
+        _hudImages[yy * 3 + x].sprite = buttonStateSprites[state][yy * 3 + x];
+    }
+
     public void SetAllCounts()
     {
         for (int i = 0; i < (int)IngredientType.Max; i++)
@@ -123,8 +126,8 @@ public class CraftingUiController : MonoBehaviour
             int count = CraftingManager.Instance.GetInventoryCount((IngredientType)i);
             _hudItemCounts[index].text = count.ToString();
 
-            int x = i % 3;
-            int y = (i - x) / 3;
+            int x = index % 3;
+            int y = (index - x) / 3;
             SetButtonImage(count <= 0 ? ButtonState.OutOf : ButtonState.Craft, x, y);
         }
     }

@@ -27,11 +27,36 @@ public class Melee : weaponStats
     }*/
     public void Reposition(Transform Hand)
     {
+         
         GameObject Weapon = transform.gameObject;
 
-        if (Hand.name == "u_l_hand") {}
-        if (Hand.name == "d_r_hand") {}
-        if (Hand.name == "s_l_hand") {}
+        switch (Hand.transform.name)
+        {
+            case "s_l_hand":
+                {
+                    Quaternion rotation = Quaternion.Euler(0, 0, -90);
+                    Weapon.transform.position = Hand.position;
+                    Weapon.transform.localRotation = rotation;
+                    Weapon.GetComponent<SpriteRenderer>().sortingOrder = 20;
+                    break;
+                }
+            case "u_l_hand":
+                {
+                    Quaternion rotation = Quaternion.Euler(0, 0, 32.8f);
+                    Weapon.transform.SetParent(Hand);
+                    Weapon.transform.position = Hand.position;
+                    Weapon.transform.localRotation = rotation;
+                    Weapon.GetComponent<SpriteRenderer>().sortingOrder = 8;
+                    break;
+                }
+            case "d_r_hand":
+                {
+                    Quaternion rotation = Quaternion.Euler(0, 0, 103.594f);
+                    Weapon.transform.position = Hand.position;
+                    Weapon.transform.localRotation = rotation;
+                    Weapon.GetComponent<SpriteRenderer>().sortingOrder = 16;
+                    break;
+                }
+        }
     }
-
 }

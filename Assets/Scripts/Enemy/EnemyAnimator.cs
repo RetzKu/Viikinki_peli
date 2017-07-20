@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAnimator : MonoBehaviour {
+internal class EnemyAnimator : MonoBehaviour {
 
     private HandRoot Hand;
-    static internal List<Transform> Hands;
+    private List<Transform> Hands;
 
     [SerializeField]
     private GameObject Weapon;
     private WeaponType Type;
 
-    static private List<GameObject> Torsos;
-    static private List<Animator> Animators;
+    private List<GameObject> Torsos;
+    private List<Animator> Animators;
     public bool Movin;
 
     private SpriteChanger SpriteController;
@@ -25,15 +25,15 @@ public class EnemyAnimator : MonoBehaviour {
     {
         /*Finding enemy hands*/
         Hands = new List<Transform>(3);
-        Hands.Add(transform.Find("s_c_torso").Find("s_l_upper_arm").GetChild(0).GetChild(0));
-        Hands.Add(transform.Find("d_c_torso").Find("d_r_upper_arm").GetChild(0).GetChild(0));
-        Hands.Add(transform.Find("u_c_torso").Find("u_l_upper_arm").GetChild(0).GetChild(0));
+        Hands.Add(transform.GetChild(0).GetChild(1).GetChild(0).GetChild(0));
+        Hands.Add(transform.GetChild(1).GetChild(3).GetChild(0).GetChild(0));
+        Hands.Add(transform.GetChild(2).GetChild(3).GetChild(0).GetChild(0));
 
         /*Finding enemy Torsos*/
         Torsos = new List<GameObject>(3);
-        Torsos.Add(transform.Find("s_c_torso").gameObject);
-        Torsos.Add(transform.Find("d_c_torso").gameObject);
-        Torsos.Add(transform.Find("u_c_torso").gameObject);
+        Torsos.Add(transform.GetChild(0).gameObject);
+        Torsos.Add(transform.GetChild(1).gameObject);
+        Torsos.Add(transform.GetChild(2).gameObject);
 
         /*Finding Animators*/
         Animators = new List<Animator>(3);
@@ -41,20 +41,20 @@ public class EnemyAnimator : MonoBehaviour {
 
         Type = CheckWeaponType();
 
-        SpriteController = new SpriteChanger();
+        SpriteController = new SpriteChanger(Torsos);
 
         /*Building New HandRoot Component*/
-        Hand = new HandRoot(Hands[0], Weapon);
+        Hand = new HandRoot(Hands[0], Weapon, Hands);
     }
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.A) == true) { ChangeDirection(enemyDir.Left); }
-        //if (Input.GetKeyDown(KeyCode.W) == true) { ChangeDirection(enemyDir.Up); }
-        //if (Input.GetKeyDown(KeyCode.S) == true) { ChangeDirection(enemyDir.Down); }
-        //if (Input.GetKeyDown(KeyCode.D) == true) { ChangeDirection(enemyDir.Right); }
-        //if (Input.GetKeyDown(KeyCode.Mouse0) == true) { Attack(); }
-        //if (Input.GetKeyDown(KeyCode.F) == true) { Movin = true; }
+        if (Input.GetKeyDown(KeyCode.A) == true) { ChangeDirection(enemyDir.Left); }
+        if (Input.GetKeyDown(KeyCode.W) == true) { ChangeDirection(enemyDir.Up); }
+        if (Input.GetKeyDown(KeyCode.S) == true) { ChangeDirection(enemyDir.Down); }
+        if (Input.GetKeyDown(KeyCode.D) == true) { ChangeDirection(enemyDir.Right); }
+        if (Input.GetKeyDown(KeyCode.Mouse0) == true) { Attack(); }
+        if (Input.GetKeyDown(KeyCode.F) == true) { Movin = true; }
         CheckVelocity();
     }
 
@@ -134,8 +134,9 @@ public class EnemyAnimator : MonoBehaviour {
     public class SpriteChanger
     {
         enemyDir LastDir;
+        private List<GameObject> Torsos;
 
-        public SpriteChanger() { LastDir = enemyDir.Right; }
+        public SpriteChanger(List<GameObject> TorsoList) { LastDir = enemyDir.Right; Torsos = TorsoList; }
 
         public void EnableSprites(enemyDir SpriteDir)
         {
@@ -178,8 +179,14 @@ public class EnemyAnimator : MonoBehaviour {
     {
         private Transform _Hand;
         private GameObject _Weapon;
+        private List<Transform> Hands;
 
-        public HandRoot(Transform Hand, GameObject Weapon) { _Hand = Hand; _Weapon = Instantiate(Weapon); DestroyObject(_Weapon.GetComponent<Collider2D>()); }
+        public HandRoot(Transform Hand, GameObject Weapon, List<Transform> HandsList) {
+            _Hand = Hand;
+            _Weapon = Instantiate(Weapon);
+            DestroyObject(_Weapon.GetComponent<Collider2D>());
+            Hands = HandsList;
+        }
 
         public void SwapHand(enemyDir Direction)
         {

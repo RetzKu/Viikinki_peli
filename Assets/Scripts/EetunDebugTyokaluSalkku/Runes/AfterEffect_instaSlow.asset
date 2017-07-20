@@ -9,20 +9,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0d29ad83f4a1014ab9b37d6a2d6e346, type: 3}
-  m_Name: FreezeAfterEffect
+  m_Name: AfterEffect_instaSlow
   m_EditorClassIdentifier: 
   Indices: []
   Sound: {fileID: 0}
-  sprite: {fileID: 21300058, guid: c93d488bcad6fba41bcdb47ca2d08898, type: 3}
+  sprite: {fileID: 21300000, guid: 28dffb1a1e3099b44bf86546fac686c0, type: 3}
   EffectData:
-    BuffToApply: {fileID: 0}
+    BuffToApply: {fileID: 11400000, guid: 487efebaf77f39e4796fd3f80a0f462f, type: 2}
     ExpansionTime: 0
-    TotalRotation: 360
+    TotalRotation: 0
     LeavesEffectArea: 0
-    StartScale: 1
-    EndScale: 2
-    Frames: 60
-    AfterEffect: {fileID: 11400000, guid: e16a8ceb4df570c4981a2e42bbb8567c, type: 2}
-    MovementDir: {x: -1, y: 1}
-    Speed: 15
+    StartScale: 10
+    EndScale: 8
+    Frames: 10
+    AfterEffect: {fileID: 0}
+    MovementDir: {x: 0, y: 0}
+    Speed: 0
   CollisionMaskValues: []

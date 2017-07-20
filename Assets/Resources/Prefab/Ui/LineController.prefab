@@ -642,8 +642,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e1bb087ca99f084ba6151abc022fdf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineSegmentSize: 0.15
-  lineWidth: 0.1
+  lineSegmentSize: 0.2
+  lineWidth: 0.25
   showGizmos: 1
   gizmoSize: 0.1
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -752,7 +752,7 @@ LineRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1933337197854564}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0
@@ -860,10 +860,10 @@ LineRenderer:
     colorGradient:
       key0:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4282863435
       key1:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4283257936
       key2:
         serializedVersion: 2
         rgba: 0

@@ -53,6 +53,10 @@ public enum ResourceType
     hemp_tree_0,
     hemp_tree_1,
 
+    rune_z,
+    rune_y,
+    rune_p,
+
     Max,
 }
 // WARNING WARNING Enumi järjestyksen rikkominen / väliin lisäys särkee kaikein lisää aina maxin alle
@@ -74,27 +78,31 @@ public abstract class Resource : MonoBehaviour
         Hp -= damage;
         if (Hp <= 0 && !dead)
         {
-             // Ehkä static dropper, jossain vaiheessa
+            // Ehkä static dropper, jossain vaiheessa
             OnDead();
             dead = true;
         }
         else
         {
-            Vector3 startPosition = transform.position;
-            if (_fibrateEffect != null)
-            {
-                startPosition = transform.position;
-                /// topCoroutine(Fibrate(defaultFibrateTimer, TileWidth / 100f, startPosition)); // general vibrate
-            }
-            else
-            {
-                _fibrateEffect = StartCoroutine(Fibrate(defaultFibrateTimer, TileWidth / 100f, startPosition));
-            }
+            Fibrate();
         }
     }
 
     public abstract void OnDead();
     public abstract void Init(bool destroyedVersion);
+
+    public void Fibrate()
+    {
+        Vector3 startPosition = transform.position;
+        if (_fibrateEffect != null)
+        {
+            startPosition = transform.position;
+        }
+        else
+        {
+            _fibrateEffect = StartCoroutine(Fibrate(defaultFibrateTimer, TileWidth / 100f, startPosition));
+        }
+    }
 
     public virtual void DeActivate()
     {
@@ -102,8 +110,8 @@ public abstract class Resource : MonoBehaviour
     }
 
 
-// yleiset efektit, joita voi käyttää
- #region Effects
+    // yleiset efektit, joita voi käyttää
+    #region Effects
     protected IEnumerator Fibrate(float seconds, float fibrationRange, Vector3 startPosition)  // TODO: MIETI iteraatiot oikein 
     {
         transform.position = startPosition;
@@ -114,7 +122,7 @@ public abstract class Resource : MonoBehaviour
 
         for (int i = 0; i < iterations; i++)
         {
-            if (i % 2 == 0) 
+            if (i % 2 == 0)
             {
                 transform.Translate(Random.Range(-fibrationRange, fibrationRange), Random.Range(-fibrationRange, fibrationRange), 0f);
             }
@@ -148,7 +156,7 @@ public abstract class Resource : MonoBehaviour
         yield return new WaitForSeconds(seconds);   // Voi hoitaa kokonaan ParticleSystemissä
         //particleSystem.Stop();
     }
-#endregion
+    #endregion
 
     public static string GetResourcePrefabName(ResourceType type)
     {

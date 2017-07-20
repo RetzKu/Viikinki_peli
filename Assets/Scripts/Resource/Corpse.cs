@@ -6,11 +6,11 @@ using UnityEngine;
 public class Corpse : Resource
 {
     public static Sprite[] CorpseSprites;
-    private bool canDrop = true;
+    private bool _canDrop = true;
 
     public override void OnDead()
     {
-        if (canDrop)
+        if (_canDrop)
         {
             // TODO: tehokkaampi drop
             for(int i = 0; i < 10; i++)
@@ -30,6 +30,6 @@ public class Corpse : Resource
         dead = destroyedVersion;
 
         if (destroyedVersion)
-            canDrop = false;
+            _canDrop = false;
     }
 }

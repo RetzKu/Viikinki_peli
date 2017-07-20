@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
-using UnityEngine.UI;
 
 // Myöhemmin hoitamaan runejen cd:t jne...
 public class RuneEffectLauncher : MonoBehaviour
@@ -11,7 +9,6 @@ public class RuneEffectLauncher : MonoBehaviour
     private bool _aoeEffectRunning = false;
     private float _aoeEffectRadius = 0f;
     private Vector2 _aoeStartPoint = new Vector2(0f, 0f);
-
     private List<Rune> _afterEffects = new List<Rune>(4);
 
     void Start()

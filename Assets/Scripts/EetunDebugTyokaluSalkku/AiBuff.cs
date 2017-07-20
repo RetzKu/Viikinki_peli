@@ -11,8 +11,20 @@ public class AiSlow : Buff
 
     public override void Apply(GameObject target)
     {
-        // target.GetComponent<generalAi>().runeSlow(SlowPercent, Time);
-        Destroy(target);
-        Debug.Log("Slow buff lähettää terveisensä! \nVihollinen "+ target.gameObject.name + " tuhottu");
+        target.GetComponent<generalAi>().SlowRune(Time, SlowPercent);
+        // Debug.Log("Slow buff lähettää terveisensä! \nVihollinen "+ target.gameObject.name + " slowtatu");
+    }
+}
+
+[CreateAssetMenu(menuName = "Runes/Buff/Aibuff/Debuff")]
+public class AiDebuff : Buff
+{
+    public float Time;
+    public float SlowPercent;
+
+    public override void Apply(GameObject target)
+    {
+        target.GetComponent<generalAi>().SlowRune(Time, SlowPercent);
+        // Debug.Log("Slow buff lähettää terveisensä! \nVihollinen "+ target.gameObject.name + " slowtatu");
     }
 }

@@ -1,14 +1,12 @@
 fileFormatVersion: 2
-guid: 8edd916d88ccfa74ea8a0ccba0d00cf6
-timeCreated: 1500548302
+guid: 53fabbd733482cb469eb80502e969678
+timeCreated: 1500539331
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: castarea_0
-    21300002: castarea_1
-    21300004: castarea_circle
-    21300006: castarea_3
-    21300008: castarea_2
+    21300000: runepillars_0
+    21300002: runepillars_1
+    21300004: runepillars_2
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -131,67 +129,41 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: castarea_0
+      name: runepillars_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 34
-        width: 15
-        height: 28
+        x: 0
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: castarea_1
+      name: runepillars_1
       rect:
         serializedVersion: 2
-        x: 46
-        y: 34
-        width: 16
-        height: 28
+        x: 64
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: castarea_circle
+      name: runepillars_2
       rect:
         serializedVersion: 2
-        x: 26
-        y: 26
-        width: 12
-        height: 12
+        x: 128
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: castarea_3
-      rect:
-        serializedVersion: 2
-        x: 46
-        y: 2
-        width: 16
-        height: 28
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: castarea_2
-      rect:
-        serializedVersion: 2
-        x: 3
-        y: 2
-        width: 16
-        height: 28
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

@@ -1,48 +1,64 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseChecker : MonoBehaviour
 {
-
     public float CraftRange = 4f;
+    public Action OnEnter;
+    public Action OnExit;
 
-    public Action OnCampFireEnter;
-    public Action OnCampFireExit;
-
-    private bool lastFrameOnBase = false;
+    private bool _lastFrameOnBase = false;
+    private int _baseMask;
 
     void Start()
     {
-        // 
+        // _baseMask = LayerMask.GetMask(CheckMask);
     }
 
-    void Update()
+    public void SetMask(params string[] checkMask)
     {
-        int mask = LayerMask.GetMask("Base");
-        var hit = Physics2D.CircleCast(transform.position, CraftRange, Vector2.zero, 0f, mask);
+        _baseMask = LayerMask.GetMask(checkMask);
+    }
 
-        if (hit)
+    public void CircleCast(Vector3 position)
+    {
+        var hit = Physics2D.CircleCast(position, CraftRange, Vector2.zero, 0f, _baseMask);
+
+        if (hit) // bases nearby
         {
-                // TODO: Callback crafting thingy	        
-                if (!lastFrameOnBase && OnCampFireEnter != null)
-                {
-                    print("on enter");
-                    OnCampFireEnter();
-                    lastFrameOnBase = true;
-                }
+            if (!_lastFrameOnBase && OnEnter != null)
+            {
+                print("on enter");
+                OnEnter();
+                _lastFrameOnBase = true;
+            }
         }
         else
         {
-            // TODO: Stop crafting, Ui, touchcontrols, hud
-
-            if (lastFrameOnBase && OnCampFireExit != null)
+            if (_lastFrameOnBase && OnExit != null)
             {
-                OnCampFireExit();
-                lastFrameOnBase = false;
+                OnExit();
+                _lastFrameOnBase = false;
                 print("on exit");
             }
+        }
+
+        hit = Physics2D.CircleCast(position, CraftRange, Vector2.zero, 0f, LayerMask.GetMask("RuneStone"));
+        if (hit) // runeStoneNearby!
+        {
+            // !TODO: Huominen aloitetaan tosta!
+            hit.transform.gameObject.GetComponent<InfoStone>().Fibrate();
+            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Fibrate(0, 0);
+            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Fibrate(1, 0);
+            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Fibrate(2, 0);
+            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Fibrate(1, 1);
+            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Fibrate(0, 2);
+            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Fibrate(1, 2);
+            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Fibrate(2, 2);
+            // !TODO: Huominen aloitetaan tosta!
+        }
+        else
+        {
         }
     }
 }

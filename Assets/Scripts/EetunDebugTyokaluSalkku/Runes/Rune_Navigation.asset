@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f72788ca512f684b9cbd27a66ac4010, type: 3}
-  m_Name: Navigation
+  m_Name: Rune_Navigation
   m_EditorClassIdentifier: 
   Indices:
   - X: 0

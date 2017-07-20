@@ -34,12 +34,26 @@ struct v2f
 fixed4 _Color;  
 sampler2D _MainTex;
 
+/* Jos unity port särkee
+v2f OUT;
+    // OUT.vertex = UnityObjectToClipPos( IN.vertex );
+	OUT.vertex = mul(UNITY_MATRIX_MVP, IN.vertex);
+    OUT.texcoord = IN.texcoord;
+
+    OUT.color = IN.color * _Color;
+
+    #ifdef PIXELSNAP_ON
+    OUT.vertex = UnityPixelSnap( OUT.vertex );
+    #endif
+
+    return OUT;
+*/
 
 v2f vert( appdata_t IN )  
 {
-    v2f OUT;
+	v2f OUT;
     // OUT.vertex = UnityObjectToClipPos( IN.vertex );
-	OUT.vertex = UnityObjectToClipPos(IN.vertex);
+	OUT.vertex = mul(UNITY_MATRIX_MVP, IN.vertex);
     OUT.texcoord = IN.texcoord;
 
     OUT.color = IN.color * _Color;

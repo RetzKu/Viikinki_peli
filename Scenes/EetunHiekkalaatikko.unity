@@ -4038,6 +4038,10 @@ Prefab:
       propertyPath: terveisin
       value: 
       objectReference: {fileID: 548582412}
+    - target: {fileID: 1413272101325854, guid: e5d348d687a10e74b867e8f51b79f30c, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5d348d687a10e74b867e8f51b79f30c, type: 2}
   m_IsPrefabParent: 0

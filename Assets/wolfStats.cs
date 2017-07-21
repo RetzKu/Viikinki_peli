@@ -5,6 +5,8 @@ using UnityEngine;
 public class wolfStats : enemyStats {
 
     float startTime;
+    // flägi jolla katsotaan onko kuolemasusi jo spawnattu
+    private bool flag = false;
 
     void Update()
     {
@@ -27,10 +29,31 @@ public class wolfStats : enemyStats {
     // Katotaan onko susi elossa
     public void checkAlive() 
     {
-        if(hp <= 0)
+        if(hp <= 0 && flag == false)
         {
+            flag = true;
+            // ladataan kuolevan suden prefab
+            GameObject deadWolf = Resources.Load<GameObject>("ScmlAnims/wolf/entity_000");
+            // otetaan sille suden positio kartalla
+            deadWolf.transform.position = gameObject.transform.position;
+            // jos menee vasemmalle (kuollessa)
+            if(GetComponent<generalAi>().myDir == enemyDir.LD || GetComponent<generalAi>().myDir == enemyDir.LU || GetComponent<generalAi>().myDir == enemyDir.Left)
+            {
+                deadWolf.transform.localScale = new Vector3(3f, 3f, 1f);
+            }
+            // oikealle (kuollessa)
+            else
+            {
+                deadWolf.transform.localScale = new Vector3(-3f, 3f, 1f);
+            }
+            // Susi kuolee aina vaakatasossa (ei kulmassa)
+            deadWolf.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
+            Instantiate(deadWolf);
+            // Tapetaan susi paten metodin avulla
             GetComponent<generalAi>().killMePls();
             print(gameObject.name + "died.");
+            
+            
         }
     }
 

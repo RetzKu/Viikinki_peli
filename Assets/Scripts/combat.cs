@@ -154,7 +154,6 @@ public class combat : MonoBehaviour {
     public float countPlayerDamage()
     {
         float playerDamage = dmgBase;
-
         if (GetComponent<PlayerScript>().Inventory.EquipData.Tool != null)
         {
                 GameObject tempWeapon = GetComponent<PlayerScript>().Inventory.EquipData.Tool;

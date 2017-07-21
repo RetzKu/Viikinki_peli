@@ -249,7 +249,7 @@ public class WolfAI : generalAi
         Vector2 first = (main + perpendicular);
         Vector2 second = (main + (perpendicular * -1));
 
-        //Gizmos.DrawLine(body.position, body.position+main); // piirretään viiva visualisoimaan toimivuutta 
+        Gizmos.DrawLine(body.position, body.position+main); // piirretään viiva visualisoimaan toimivuutta 
         Gizmos.DrawLine(body.position, body.position + first);
         Gizmos.DrawLine(body.position, body.position + second);
         Gizmos.DrawLine(body.position, body.position + velocity * 30);

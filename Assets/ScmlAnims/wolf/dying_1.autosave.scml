@@ -298,7 +298,7 @@
                     <object_ref id="10" parent="6" timeline="6" key="1" z_index="10"/>
                 </key>
             </mainline>
-            <timeline id="0" name="head_1">
+            <timeline id="0" name="head">
                 <key id="0" spin="0">
                     <object folder="0" file="1" x="11" y="-7" angle="180.224688"/>
                 </key>

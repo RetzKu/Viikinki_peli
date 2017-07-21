@@ -19,7 +19,8 @@ internal class EnemyAnimator : MonoBehaviour {
 
     private List<Sprite> Heads;
     private List<Sprite> Chests;
-
+    private List<Sprite> UpperHands;
+    private List<Sprite> LowerHands;
 
     private void Awake()
     {
@@ -44,11 +45,18 @@ internal class EnemyAnimator : MonoBehaviour {
         SpriteController = new SpriteChanger(Torsos);
 
         /*Building New HandRoot Component*/
-        Hand = new HandRoot(Hands[0], SpriteFinderScript.Instance.RandomMeleeWeapon(),Hands);
+        Hand = new HandRoot(Hands[0], SpriteFinderScript.Instance.RandomMeleeWeapon(), Hands);
 
         Heads = SpriteFinderScript.Instance.RandomHead();
         Chests = SpriteFinderScript.Instance.RandomTorso();
+        UpperHands = SpriteFinderScript.Instance.RandomUpperArms();
+        LowerHands = SpriteFinderScript.Instance.RandomLowerArms();
 
+        UpdateRandomSprites();
+    }
+
+    private void UpdateRandomSprites()
+    {
         transform.Find("s_c_torso").Find("s_c_head").GetComponent<SpriteRenderer>().sprite = Heads[0];
         transform.Find("u_c_torso").Find("u_c_head").GetComponent<SpriteRenderer>().sprite = Heads[1];
         transform.Find("d_c_torso").Find("d_c_head").GetComponent<SpriteRenderer>().sprite = Heads[2];
@@ -57,6 +65,19 @@ internal class EnemyAnimator : MonoBehaviour {
         transform.Find("u_c_torso").GetComponent<SpriteRenderer>().sprite = Chests[1];
         transform.Find("d_c_torso").GetComponent<SpriteRenderer>().sprite = Chests[2];
 
+        transform.Find("s_c_torso").transform.Find("s_l_upper_arm").GetComponent<SpriteRenderer>().sprite = UpperHands[0];
+        transform.Find("s_c_torso").transform.Find("s_r_upper_arm").GetComponent<SpriteRenderer>().sprite = UpperHands[1];
+        transform.Find("u_c_torso").transform.Find("u_l_upper_arm").GetComponent<SpriteRenderer>().sprite = UpperHands[2];
+        transform.Find("u_c_torso").transform.Find("u_r_upper_arm").GetComponent<SpriteRenderer>().sprite = UpperHands[3];
+        transform.Find("d_c_torso").transform.Find("d_l_upper_arm").GetComponent<SpriteRenderer>().sprite = UpperHands[4];
+        transform.Find("d_c_torso").transform.Find("d_r_upper_arm").GetComponent<SpriteRenderer>().sprite = UpperHands[5];
+
+        transform.Find("s_c_torso").transform.Find("s_l_upper_arm").transform.Find("s_l_lower_arm").GetComponent<SpriteRenderer>().sprite = LowerHands[0];
+        transform.Find("s_c_torso").transform.Find("s_r_upper_arm").transform.Find("s_r_lower_arm").GetComponent<SpriteRenderer>().sprite = LowerHands[1];
+        transform.Find("u_c_torso").transform.Find("u_l_upper_arm").transform.Find("u_l_lower_arm").GetComponent<SpriteRenderer>().sprite = LowerHands[2];
+        transform.Find("u_c_torso").transform.Find("u_r_upper_arm").transform.Find("u_r_lower_arm").GetComponent<SpriteRenderer>().sprite = LowerHands[3];
+        transform.Find("d_c_torso").transform.Find("d_l_upper_arm").transform.Find("d_l_lower_arm").GetComponent<SpriteRenderer>().sprite = LowerHands[4];
+        transform.Find("d_c_torso").transform.Find("d_r_upper_arm").transform.Find("d_r_lower_arm").GetComponent<SpriteRenderer>().sprite = LowerHands[5];
     }
 
     private void Update()

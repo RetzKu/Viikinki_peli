@@ -293,6 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d56684b2e9956845aa64ec0c7c2e84d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CraftRange: 5
 --- !u!114 &114931641365587188
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -304,6 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 602a66cc43821a5428bd9d8eaf449add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Ownertype: 1
   runes:
   - {fileID: 11400000, guid: c3c86c75d27cc0346aed59334071e448, type: 2}
   - {fileID: 11400000, guid: 8cd7e8a1ab8e2bc41a396fea7b202396, type: 2}
@@ -312,3 +314,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8500bd4135acee541a6c29826f2e15da, type: 2}
   - {fileID: 11400000, guid: 2bc9ad2f6efa9f648b3ee0c40f867712, type: 2}
   - {fileID: 11400000, guid: 381077275c0ec7b4799f22ac2dbd357d, type: 2}
+  IsOwnerPlayer: 1

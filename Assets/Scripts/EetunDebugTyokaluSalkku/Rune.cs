@@ -9,8 +9,11 @@ public abstract class Rune : ScriptableObject
     {
         get { return Indices.Length; }
     }
+
     public AudioClip Sound;
     public Sprite sprite;
+    public Sprite HudImage;
+    public float Cd;
 
     public bool ValidateRune(Vec2[] runeIndices)
     {
@@ -28,4 +31,14 @@ public abstract class Rune : ScriptableObject
 
     public abstract void init(GameObject owner);
     public abstract void Fire();
+
+    public virtual void OnGui(RuneBarUiController ui, int i)
+    {
+        ui.OnCd(i, Cd);
+    }
+
+    public Sprite GetGuiImage()
+    {
+        return HudImage;
+    }
 }

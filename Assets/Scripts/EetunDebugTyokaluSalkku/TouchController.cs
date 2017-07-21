@@ -31,8 +31,6 @@ public class TouchController : MonoBehaviour
 
 
     // TODO: ^^^ CLEANUP ^^^
-
-
     public RuneHolder RuneHolder;
     public RuneHolder CraftingManagerHolder;
     public Color ButtonColor;

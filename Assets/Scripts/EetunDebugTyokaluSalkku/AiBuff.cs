@@ -28,3 +28,4 @@ public class AiDebuff : Buff
         // Debug.Log("Slow buff lähettää terveisensä! \nVihollinen "+ target.gameObject.name + " slowtatu");
     }
 }
+

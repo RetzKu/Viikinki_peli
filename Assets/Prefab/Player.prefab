@@ -867,7 +867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1871953104775388
 GameObject:
   m_ObjectHideFlags: 1
@@ -1195,7 +1195,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977754839611798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.2, y: 24.2, z: 0}
+  m_LocalPosition: {x: 28.904373, y: 25.972878, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 4701210339847834}
@@ -2894,9 +2894,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 602a66cc43821a5428bd9d8eaf449add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Ownertype: 0
   runes:
   - {fileID: 11400000, guid: 6d19112c5faec534d92ac23bf9a0afa0, type: 2}
   - {fileID: 11400000, guid: e16a8ceb4df570c4981a2e42bbb8567c, type: 2}
+  - {fileID: 11400000, guid: 2f67860261b084f4aa5efcb69db96216, type: 2}
+  IsOwnerPlayer: 1
 --- !u!114 &114595929073258388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2911,22 +2914,22 @@ MonoBehaviour:
   runeIndices:
   - X: 0
     Y: 0
-  - X: 0
+  - X: 1
     Y: 0
-  - X: 0
+  - X: 2
     Y: 0
+  - X: 2
+    Y: 1
+  - X: 1
+    Y: 1
   - X: 0
-    Y: 0
+    Y: 1
   - X: 0
-    Y: 0
-  - X: 0
-    Y: 0
-  - X: 0
-    Y: 0
-  - X: 0
-    Y: 0
-  - X: 0
-    Y: 0
+    Y: 2
+  - X: 1
+    Y: 2
+  - X: 2
+    Y: 2
   amountOfSpheres: 3
   offset: 1.44
   Radius: 0.57
@@ -2937,10 +2940,11 @@ MonoBehaviour:
   index: 0
   touchCollider: {fileID: 1941610706479234}
   Character: {fileID: 1977754839611798}
-  screenX: 133.5
-  RuneHolder: {fileID: 0}
+  screenX: 279.5
+  RuneHolder: {fileID: 114507850236751794}
   CraftingManagerHolder: {fileID: 0}
-  ControllerMode: 0
+  ButtonColor: {r: 0.42647058, g: 0.40986922, b: 0.37002593, a: 1}
+  ControllerMode: 1
 --- !u!114 &114596991943841444
 MonoBehaviour:
   m_ObjectHideFlags: 1

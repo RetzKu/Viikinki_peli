@@ -18,8 +18,9 @@ public class CraftingUiController : MonoBehaviour
     // Lapsena 9 Imagea
     private Image[] _hudImages = new Image[9];
     private Text[] _hudItemCounts = new Text[9];
-
     private GameObject[] _hudGameObjects = new GameObject[9];
+    private bool[] _buttonVibrating = new bool[9];
+
 
     // private Cost[] _cost = new Cost[9];
     // private bool _inventoryActive = true;
@@ -187,18 +188,22 @@ public class CraftingUiController : MonoBehaviour
         Numbers.gameObject.SetActive(false);
     }
 
-    public void Fibrate(int x, int y)
+    public void Vibrate(int x, int y)
     {
-        Vector3 startPosition = transform.position;
+        if (!_buttonVibrating[y * 3 + x])
         {
-            StartCoroutine(Fibrate(1f, 1f, _hudImages[y * 3 + x]));
+            Vector3 startPosition = transform.position;
+            {
+                StartCoroutine(Vibrate(1f, 0.25f, x, y));
+            }
         }
     }
 
-
-    IEnumerator Fibrate(float seconds, float fibrationRange, Image go)  // TODO: MIETI iteraatiot oikein 
+    IEnumerator Vibrate(float seconds, float fibrationRange, int x, int y)  // TODO: MIETI iteraatiot oikein 
     {
+        _buttonVibrating[y * 3 + x] = true;
         // transform.position = go.transform.position;
+        Image go = _hudImages[y * 3 + x];
 
         int iterations = 30;
         float waitTime = seconds / (float)iterations;
@@ -217,6 +222,8 @@ public class CraftingUiController : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
         }
         go.transform.position = startingPosition;
+
+        _buttonVibrating[y * 3 + x] = false;
     }
 
 }

@@ -22,13 +22,12 @@ public class BaseChecker : MonoBehaviour
 
     public void CircleCast(Vector3 position)
     {
-        var hit = Physics2D.CircleCast(position, CraftRange, Vector2.zero, 0f, _baseMask);
+        var hit = Physics2D.CircleCast(position, CraftRange, Vector2.zero, 0f, _baseMask); 
 
         if (hit) // bases nearby
         {
             if (!_lastFrameOnBase && OnEnter != null)
             {
-                print("on enter");
                 OnEnter();
                 _lastFrameOnBase = true;
             }
@@ -39,23 +38,21 @@ public class BaseChecker : MonoBehaviour
             {
                 OnExit();
                 _lastFrameOnBase = false;
-                print("on exit");
             }
         }
 
         hit = Physics2D.CircleCast(position, CraftRange, Vector2.zero, 0f, LayerMask.GetMask("RuneStone"));
         if (hit) // runeStoneNearby!
         {
-            // !TODO: Huominen aloitetaan tosta!
-            hit.transform.gameObject.GetComponent<InfoStone>().Fibrate();
-            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Fibrate(0, 0);
-            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Fibrate(1, 0);
-            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Fibrate(2, 0);
-            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Fibrate(1, 1);
-            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Fibrate(0, 2);
-            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Fibrate(1, 2);
-            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Fibrate(2, 2);
-            // !TODO: Huominen aloitetaan tosta!
+            // !TODO: tänään aloitetaan tosta!
+            hit.transform.gameObject.GetComponent<InfoStone>().Vibrate();
+            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Vibrate(0, 0);
+            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Vibrate(1, 0);
+            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Vibrate(2, 0);
+            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Vibrate(1, 1);
+            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Vibrate(0, 2);
+            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Vibrate(1, 2);
+            GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Vibrate(2, 2);
         }
         else
         {

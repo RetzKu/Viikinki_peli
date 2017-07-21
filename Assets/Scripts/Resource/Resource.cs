@@ -84,14 +84,14 @@ public abstract class Resource : MonoBehaviour
         }
         else
         {
-            Fibrate();
+            Vibrate();
         }
     }
 
     public abstract void OnDead();
     public abstract void Init(bool destroyedVersion);
 
-    public void Fibrate()
+    public void Vibrate()
     {
         Vector3 startPosition = transform.position;
         if (_fibrateEffect != null)
@@ -100,9 +100,10 @@ public abstract class Resource : MonoBehaviour
         }
         else
         {
-            _fibrateEffect = StartCoroutine(Fibrate(defaultFibrateTimer, TileWidth / 100f, startPosition));
+            _fibrateEffect = StartCoroutine(Vibrate(defaultFibrateTimer, TileWidth / 100f, startPosition));
         }
     }
+
 
     public virtual void DeActivate()
     {
@@ -112,7 +113,7 @@ public abstract class Resource : MonoBehaviour
 
     // yleiset efektit, joita voi käyttää
     #region Effects
-    protected IEnumerator Fibrate(float seconds, float fibrationRange, Vector3 startPosition)  // TODO: MIETI iteraatiot oikein 
+    protected IEnumerator Vibrate(float seconds, float fibrationRange, Vector3 startPosition)  // TODO: MIETI iteraatiot oikein 
     {
         transform.position = startPosition;
         int iterations = 30;

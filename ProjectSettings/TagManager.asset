@@ -25,6 +25,7 @@ TagManager:
   - LineController
   - CampFire
   - ResourceUiController
+  - RuneBarUi
   layers:
   - Default
   - TransparentFX

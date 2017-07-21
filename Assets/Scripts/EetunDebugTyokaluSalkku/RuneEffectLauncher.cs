@@ -126,4 +126,9 @@ public class RuneEffectLauncher : MonoBehaviour
             _afterEffects.Add(buffData.AfterEffect);
         }
     }
+
+    public void LaunchPlayerSingleTargetBuff(Buff buff)
+    {
+        buff.Apply(GameObject.FindWithTag("Player"));
+    }
 }

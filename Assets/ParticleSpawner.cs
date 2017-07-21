@@ -9,6 +9,7 @@ public class ParticleSpawner : MonoBehaviour {
     public GameObject Slow;
     public GameObject CastEffect;
     public static ParticleSpawner instance;
+
     void Start()
     {
         if(instance == null)
@@ -16,6 +17,7 @@ public class ParticleSpawner : MonoBehaviour {
             instance = this;
         }
     }
+
     public void SpawnLargeBlood(Vector2 from,Vector2 where)
     {
         var newBlood = Instantiate(Largeblood, new Vector2(0, 0), Quaternion.identity);

@@ -41,6 +41,7 @@ public class Movement : MonoBehaviour
     Vector2 knockDir = new Vector2(0f, 0f);
     Vector2 vel = new Vector2(0f, 0f);
     Vector2 acc = new Vector2(0f, 0f);
+    private int LastDirection;
     // 2 max drag
     // 0 min drag
 
@@ -201,6 +202,10 @@ public class Movement : MonoBehaviour
         {
             inAttack = true;
             GetComponent<AnimatorScript>().Sprites.EnableSprites((int)dir);
+
+            LastDirection = GetComponent<PlayerScript>().Direction;
+            GetComponent<PlayerScript>().Direction = (int)dir;
+
             GetComponent<AnimatorScript>()._Lock = true;
         }
     }
@@ -213,6 +218,7 @@ public class Movement : MonoBehaviour
             inAttack = false;
             attackTimer = 0f;
             GetComponent<AnimatorScript>()._Lock = false;
+            GetComponent<PlayerScript>().Direction = LastDirection;
         }
         else
         {

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 629e1517d153c074595eb344f3509beb
-timeCreated: 1500551229
+timeCreated: 1500633398
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -104,86 +104,86 @@ TextureImporter:
     21300194: d_c_head_enemy_17
     21300196: u_c_head_enemy_17
     21300198: s_c_head_enemy_17
-    21300200: VIKINGS_100
-    21300202: VIKINGS_101
-    21300204: VIKINGS_102
-    21300206: VIKINGS_103
-    21300208: VIKINGS_104
-    21300210: VIKINGS_105
+    21300200: d_r_upper_arm_enemy_1
+    21300202: d_l_upper_arm_enemy_1
+    21300204: u_r_upper_arm_enemy_1
+    21300206: u_l_upper_arm_enemy_1
+    21300208: s_r_upper_arm_enemy_1
+    21300210: s_l_upper_arm_enemy_1
     21300212: d_c_head_enemy_8
     21300214: u_c_head_enemy_8
     21300216: s_c_head_enemy_8
     21300218: d_c_head_enemy_18
     21300220: u_c_head_enemy_18
     21300222: s_c_head_enemy_18
-    21300224: VIKINGS_112
-    21300226: VIKINGS_113
-    21300228: VIKINGS_114
-    21300230: VIKINGS_115
-    21300232: VIKINGS_116
-    21300234: VIKINGS_117
-    21300236: VIKINGS_118
-    21300238: VIKINGS_119
-    21300240: VIKINGS_120
-    21300242: VIKINGS_121
-    21300244: VIKINGS_122
-    21300246: VIKINGS_123
+    21300224: d_r_lower_arm_enemy_1
+    21300226: d_l_lower_arm_enemy_1
+    21300228: u_r_lower_arm_enemy_1
+    21300230: u_l_lower_arm_enemy_1
+    21300232: s_r_lower_arm_enemy_1
+    21300234: s_l_lower_arm_enemy_1
+    21300236: d_r_upper_arm_enemy_2
+    21300238: d_l_upper_arm_enemy_2
+    21300240: u_r_upper_arm_enemy_2
+    21300242: u_l_upper_arm_enemy_2
+    21300244: s_r_upper_arm_enemy_2
+    21300246: s_l_upper_arm_enemy_2
     21300248: d_c_head_enemy_9
     21300250: u_c_head_enemy_9
     21300252: s_c_head_enemy_9
     21300254: d_c_head_enemy_19
     21300256: u_c_head_enemy_19
     21300258: s_c_head_enemy_19
-    21300260: VIKINGS_130
-    21300262: VIKINGS_131
-    21300264: VIKINGS_132
-    21300266: VIKINGS_133
-    21300268: VIKINGS_134
-    21300270: VIKINGS_135
+    21300260: d_r_lower_arm_enemy_2
+    21300262: d_l_lower_arm_enemy_2
+    21300264: u_r_lower_arm_enemy_2
+    21300266: u_l_lower_arm_enemy_2
+    21300268: s_r_lower_arm_enemy_2
+    21300270: s_l_lower_arm_enemy_2
     21300272: d_c_head_enemy_10
     21300274: u_c_head_enemy_10
     21300276: s_c_head_enemy_10
     21300278: d_c_head_enemy_20
     21300280: u_c_head_enemy_20
     21300282: s_c_head_enemy_20
-    21300284: VIKINGS_142
-    21300286: VIKINGS_143
-    21300288: VIKINGS_144
-    21300290: VIKINGS_145
-    21300292: VIKINGS_146
-    21300294: VIKINGS_147
-    21300296: VIKINGS_148
-    21300298: VIKINGS_149
-    21300300: VIKINGS_150
-    21300302: VIKINGS_151
-    21300304: VIKINGS_152
-    21300306: VIKINGS_153
+    21300284: d_r_upper_arm_enemy_3
+    21300286: d_l_upper_arm_enemy_3
+    21300288: u_r_upper_arm_enemy_3
+    21300290: u_l_upper_arm_enemy_3
+    21300292: s_r_upper_arm_enemy_3
+    21300294: s_l_upper_arm_enemy_3
+    21300296: d_r_lower_arm_enemy_3
+    21300298: d_l_lower_arm_enemy_3
+    21300300: u_r_lower_arm_enemy_3
+    21300302: u_l_lower_arm_enemy_3
+    21300304: s_r_lower_arm_enemy_3
+    21300306: s_l_lower_arm_enemy_3
     21300308: d_r_hand
     21300310: d_l_hand
     21300312: u_l_hand
     21300314: u_r_hand
-    21300316: s_r_arm
+    21300316: s_r_hand
     21300318: s_r_boot
     21300320: s_l_lower_leg
-    21300322: s_l_arm
-    21300324: VIKINGS_162
-    21300326: VIKINGS_163
-    21300328: VIKINGS_164
-    21300330: VIKINGS_165
-    21300332: VIKINGS_166
-    21300334: VIKINGS_167
-    21300336: VIKINGS_168
-    21300338: VIKINGS_169
-    21300340: VIKINGS_170
-    21300342: VIKINGS_171
-    21300344: VIKINGS_172
-    21300346: VIKINGS_173
-    21300348: VIKINGS_174
-    21300350: VIKINGS_175
-    21300352: VIKINGS_176
-    21300354: VIKINGS_177
-    21300356: VIKINGS_178
-    21300358: VIKINGS_179
+    21300322: s_l_hand
+    21300324: s_l_hand_enemy_1
+    21300326: s_r_hand_enemy_1
+    21300328: u_l_hand_enemy_1
+    21300330: u_r_hand_enemy_1
+    21300332: d_l_hand_enemy_1
+    21300334: d_r_hand_enemy_1
+    21300336: d_r_hand_enemy_2
+    21300338: d_l_hand_enemy_2
+    21300340: u_r_hand_enemy_2
+    21300342: u_l_hand_enemy_2
+    21300344: s_r_hand_enemy_2
+    21300346: s_l_hand_enemy_2
+    21300348: d_r_hand_enemy_3
+    21300350: d_l_hand_enemy_3
+    21300352: u_r_hand_enemy_3
+    21300354: u_l_hand_enemy_3
+    21300356: s_r_hand_enemy_3
+    21300358: s_l_hand_enemy_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -264,12 +264,12 @@ TextureImporter:
     overridden: 0
   - buildTarget: Android
     maxTextureSize: 2048
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
   - buildTarget: Tizen
     maxTextureSize: 2048
     textureFormat: -1
@@ -417,8 +417,8 @@ TextureImporter:
         y: 216
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -443,8 +443,8 @@ TextureImporter:
         y: 216
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -456,8 +456,8 @@ TextureImporter:
         y: 216
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -482,8 +482,8 @@ TextureImporter:
         y: 216
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -495,8 +495,8 @@ TextureImporter:
         y: 216
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -521,8 +521,8 @@ TextureImporter:
         y: 216
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -573,8 +573,8 @@ TextureImporter:
         y: 209
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7656784}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -586,8 +586,8 @@ TextureImporter:
         y: 209
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7656784}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -599,8 +599,8 @@ TextureImporter:
         y: 209
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7656784}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -612,8 +612,8 @@ TextureImporter:
         y: 209
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7656784}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -625,8 +625,8 @@ TextureImporter:
         y: 209
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7656784}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -638,8 +638,8 @@ TextureImporter:
         y: 209
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7656784}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -651,8 +651,8 @@ TextureImporter:
         y: 192
         width: 5
         height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8675499}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -664,8 +664,8 @@ TextureImporter:
         y: 195
         width: 12
         height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1419279}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -677,8 +677,8 @@ TextureImporter:
         y: 192
         width: 5
         height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8675499}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -690,8 +690,8 @@ TextureImporter:
         y: 192
         width: 5
         height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8675499}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -703,8 +703,8 @@ TextureImporter:
         y: 195
         width: 12
         height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1419279}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -716,8 +716,8 @@ TextureImporter:
         y: 192
         width: 5
         height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8675499}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -729,8 +729,8 @@ TextureImporter:
         y: 198
         width: 5
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.80808}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -742,8 +742,8 @@ TextureImporter:
         y: 195
         width: 8
         height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1419279}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -755,8 +755,8 @@ TextureImporter:
         y: 198
         width: 5
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.80808}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -807,8 +807,8 @@ TextureImporter:
         y: 191
         width: 5
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.80808}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -820,8 +820,8 @@ TextureImporter:
         y: 191
         width: 6
         height: 3
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6480802}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -1606,80 +1606,80 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_100
+      name: d_r_upper_arm_enemy_1
       rect:
         serializedVersion: 2
         x: 85
         y: 77
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_101
+      name: d_l_upper_arm_enemy_1
       rect:
         serializedVersion: 2
         x: 92
         y: 77
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_102
+      name: u_r_upper_arm_enemy_1
       rect:
         serializedVersion: 2
         x: 98
         y: 77
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_103
+      name: u_l_upper_arm_enemy_1
       rect:
         serializedVersion: 2
         x: 104
         y: 77
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_104
+      name: s_r_upper_arm_enemy_1
       rect:
         serializedVersion: 2
         x: 110
         y: 77
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_105
+      name: s_l_upper_arm_enemy_1
       rect:
         serializedVersion: 2
         x: 116
         y: 77
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -1762,158 +1762,158 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_112
+      name: d_r_lower_arm_enemy_1
       rect:
         serializedVersion: 2
         x: 85
         y: 70
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_113
+      name: d_l_lower_arm_enemy_1
       rect:
         serializedVersion: 2
         x: 92
         y: 70
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_114
+      name: u_r_lower_arm_enemy_1
       rect:
         serializedVersion: 2
         x: 98
         y: 70
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_115
+      name: u_l_lower_arm_enemy_1
       rect:
         serializedVersion: 2
         x: 104
         y: 70
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_116
+      name: s_r_lower_arm_enemy_1
       rect:
         serializedVersion: 2
         x: 110
         y: 70
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_117
+      name: s_l_lower_arm_enemy_1
       rect:
         serializedVersion: 2
         x: 116
         y: 70
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_118
+      name: d_r_upper_arm_enemy_2
       rect:
         serializedVersion: 2
         x: 85
         y: 58
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_119
+      name: d_l_upper_arm_enemy_2
       rect:
         serializedVersion: 2
         x: 92
         y: 58
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_120
+      name: u_r_upper_arm_enemy_2
       rect:
         serializedVersion: 2
         x: 98
         y: 58
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_121
+      name: u_l_upper_arm_enemy_2
       rect:
         serializedVersion: 2
         x: 104
         y: 58
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_122
+      name: s_r_upper_arm_enemy_2
       rect:
         serializedVersion: 2
         x: 110
         y: 58
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_123
+      name: s_l_upper_arm_enemy_2
       rect:
         serializedVersion: 2
         x: 116
         y: 58
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -1996,80 +1996,80 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_130
+      name: d_r_lower_arm_enemy_2
       rect:
         serializedVersion: 2
         x: 85
         y: 51
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_131
+      name: d_l_lower_arm_enemy_2
       rect:
         serializedVersion: 2
         x: 92
         y: 51
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_132
+      name: u_r_lower_arm_enemy_2
       rect:
         serializedVersion: 2
         x: 98
         y: 51
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_133
+      name: u_l_lower_arm_enemy_2
       rect:
         serializedVersion: 2
         x: 104
         y: 51
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_134
+      name: s_r_lower_arm_enemy_2
       rect:
         serializedVersion: 2
         x: 110
         y: 51
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_135
+      name: s_l_lower_arm_enemy_2
       rect:
         serializedVersion: 2
         x: 116
         y: 51
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -2152,158 +2152,158 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_142
+      name: d_r_upper_arm_enemy_3
       rect:
         serializedVersion: 2
         x: 85
         y: 39
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_143
+      name: d_l_upper_arm_enemy_3
       rect:
         serializedVersion: 2
         x: 92
         y: 39
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_144
+      name: u_r_upper_arm_enemy_3
       rect:
         serializedVersion: 2
         x: 98
         y: 39
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_145
+      name: u_l_upper_arm_enemy_3
       rect:
         serializedVersion: 2
         x: 104
         y: 39
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_146
+      name: s_r_upper_arm_enemy_3
       rect:
         serializedVersion: 2
         x: 110
         y: 39
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_147
+      name: s_l_upper_arm_enemy_3
       rect:
         serializedVersion: 2
         x: 116
         y: 39
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_148
+      name: d_r_lower_arm_enemy_3
       rect:
         serializedVersion: 2
         x: 85
         y: 32
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_149
+      name: d_l_lower_arm_enemy_3
       rect:
         serializedVersion: 2
         x: 92
         y: 32
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_150
+      name: u_r_lower_arm_enemy_3
       rect:
         serializedVersion: 2
         x: 98
         y: 32
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_151
+      name: u_l_lower_arm_enemy_3
       rect:
         serializedVersion: 2
         x: 104
         y: 32
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_152
+      name: s_r_lower_arm_enemy_3
       rect:
         serializedVersion: 2
         x: 110
         y: 32
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_153
+      name: s_l_lower_arm_enemy_3
       rect:
         serializedVersion: 2
         x: 116
         y: 32
         width: 4
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7586085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -2360,7 +2360,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: s_r_arm
+      name: s_r_hand
       rect:
         serializedVersion: 2
         x: 59
@@ -2380,8 +2380,8 @@ TextureImporter:
         y: 191
         width: 6
         height: 3
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6480802}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -2393,13 +2393,13 @@ TextureImporter:
         y: 191
         width: 5
         height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.80808}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: s_l_arm
+      name: s_l_hand
       rect:
         serializedVersion: 2
         x: 79
@@ -2412,7 +2412,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_162
+      name: s_l_hand_enemy_1
       rect:
         serializedVersion: 2
         x: 116
@@ -2425,7 +2425,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_163
+      name: s_r_hand_enemy_1
       rect:
         serializedVersion: 2
         x: 110
@@ -2438,7 +2438,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_164
+      name: u_l_hand_enemy_1
       rect:
         serializedVersion: 2
         x: 104
@@ -2451,7 +2451,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_165
+      name: u_r_hand_enemy_1
       rect:
         serializedVersion: 2
         x: 99
@@ -2464,7 +2464,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_166
+      name: d_l_hand_enemy_1
       rect:
         serializedVersion: 2
         x: 92
@@ -2477,7 +2477,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_167
+      name: d_r_hand_enemy_1
       rect:
         serializedVersion: 2
         x: 86
@@ -2490,7 +2490,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_168
+      name: d_r_hand_enemy_2
       rect:
         serializedVersion: 2
         x: 86
@@ -2503,7 +2503,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_169
+      name: d_l_hand_enemy_2
       rect:
         serializedVersion: 2
         x: 92
@@ -2516,7 +2516,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_170
+      name: u_r_hand_enemy_2
       rect:
         serializedVersion: 2
         x: 99
@@ -2529,7 +2529,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_171
+      name: u_l_hand_enemy_2
       rect:
         serializedVersion: 2
         x: 104
@@ -2542,7 +2542,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_172
+      name: s_r_hand_enemy_2
       rect:
         serializedVersion: 2
         x: 110
@@ -2555,7 +2555,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_173
+      name: s_l_hand_enemy_2
       rect:
         serializedVersion: 2
         x: 116
@@ -2568,7 +2568,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_174
+      name: d_r_hand_enemy_3
       rect:
         serializedVersion: 2
         x: 86
@@ -2581,7 +2581,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_175
+      name: d_l_hand_enemy_3
       rect:
         serializedVersion: 2
         x: 92
@@ -2594,7 +2594,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_176
+      name: u_r_hand_enemy_3
       rect:
         serializedVersion: 2
         x: 99
@@ -2607,7 +2607,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_177
+      name: u_l_hand_enemy_3
       rect:
         serializedVersion: 2
         x: 104
@@ -2620,7 +2620,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_178
+      name: s_r_hand_enemy_3
       rect:
         serializedVersion: 2
         x: 110
@@ -2633,7 +2633,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VIKINGS_179
+      name: s_l_hand_enemy_3
       rect:
         serializedVersion: 2
         x: 116

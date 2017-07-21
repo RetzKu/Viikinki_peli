@@ -56,7 +56,10 @@ public class PlayerScript : MonoBehaviour
     {
         tmpswing();
         Side();
-        Direction = transform.GetComponent<AnimatorScript>().PlayerDir();
+        if (GetComponent<AnimatorScript>()._Lock == false)
+        {
+            Direction = transform.GetComponent<AnimatorScript>().PlayerDir(); 
+        }
         RefreshHand();
         InventoryInput();
     }

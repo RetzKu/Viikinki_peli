@@ -6,7 +6,7 @@ public class AnimatorScript : MonoBehaviour
 {
     private Rigidbody2D Player;
     bool Lock = false;
-    public bool _Lock {set { Lock = value; } }
+    public bool _Lock {set { Lock = value; } get { return Lock; } }
     private List<Animator> Animators;
     private float SpeedEdge = 0.3f;
 
@@ -39,6 +39,7 @@ public class AnimatorScript : MonoBehaviour
         }
         Attack();
     }
+
     public int PlayerDir()
     {
         int tmp = Sprites.Index;

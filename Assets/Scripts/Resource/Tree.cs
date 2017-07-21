@@ -46,7 +46,6 @@ public class Tree : Resource
         }
         else
         {
-            print(transform.childCount);
             var shadow = transform.GetChild(3);
             var shadowRenderer = shadow.gameObject.GetComponent<SpriteRenderer>(); 
             shadowRenderer.sprite = _treeShadows[ResourceManager.TreeToShadow(type)];

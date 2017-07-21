@@ -8,7 +8,10 @@ public class notskaScript : MonoBehaviour
     {
         if (Collider.tag == "notPatePlayer" && GetComponent<CampFire>().type != ResourceType.campfire_noFire)
         {
-            GameObject.Find("Player").GetComponent<combat>().setPlayerOnFire();
+            GameObject tempPlayer;
+            tempPlayer = GameObject.Find("Player");
+            tempPlayer.GetComponent<combat>().setHitPosition(transform.position);
+            tempPlayer.GetComponent<combat>().setPlayerOnFire();
         }
     }
 }

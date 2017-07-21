@@ -22,6 +22,7 @@ public class PlayerScript : MonoBehaviour
     public inventory.Equipped EquippedTool { get { return Inventory.EquipData; } } //saa helposti equipatun tavaran tiedota, scriptien sisällöt etc.
     public int Arrows { get { return EquippedTool.ArrowCount; } }
 
+
     Vector3 startPoint;
     Vector3 endPoint;
 

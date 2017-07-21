@@ -4,6 +4,22 @@ using UnityEngine;
 
 public class Melee : weaponStats
 {
+    
+    private void FixedUpdate()
+    {
+        if(duration <= 0)
+        {
+            Destroy(gameObject);
+            GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.EquipData.EmptyHand();
+            Destroy(GameObject.Find("Player").GetComponent<PlayerScript>().weaponInHand);
+        }
+    }
+
+    public override void useDuration()
+    {
+        duration--;
+    }
+
     /*void OnTriggerEnter2D(Collider2D Trigger)
     {
         if (Trigger.gameObject.tag == "Enemy")
@@ -29,7 +45,7 @@ public class Melee : weaponStats
     {
          
         GameObject Weapon = transform.gameObject;
-
+        
         switch (Hand.transform.name)
         {
             case "s_l_hand":

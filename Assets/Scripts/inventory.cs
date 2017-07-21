@@ -20,6 +20,7 @@ public class inventory
     {
         if(EquipData.Tool == null) { EquipData.SetTool(Item); Item.SetActive(false); Changed = true; } // Onko equipissa tilaa, jos on niin laita sinne;
         else if(InventoryData.Count < InventorySize) { InventoryData.Add(Item); Item.SetActive(false); }
+        // Mika lisää tähän tsekki onko kyseessä armori
     }
 
     public void EquipItem(int Slot)

@@ -6,6 +6,21 @@ public class Ranged : weaponStats
 {
     private GameObject Weapon;
 
+    private void FixedUpdate()
+    {
+        if (duration <= 0)
+        {
+            Destroy(gameObject);
+            GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.EquipData.EmptyHand();
+            Destroy(GameObject.Find("Player").GetComponent<PlayerScript>().weaponInHand);
+        }
+    }
+
+    public override void useDuration()
+    {
+        duration--;
+    }
+
     public void Reposition(Transform Hand)
     {
         Weapon = transform.gameObject;

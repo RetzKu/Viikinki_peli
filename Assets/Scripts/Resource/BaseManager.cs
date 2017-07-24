@@ -3,26 +3,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class BaseManager : MonoBehaviour
 {
     public static BaseManager Instance = null;
+    public float CraftRange = 5f;
 
-    private GameObject _baseCheckerGo;
+    private GameObject _player;
     private BaseChecker _baseChecker;
-
     private List<GameObject> bases = new List<GameObject>(3);
+
+
+
+    private BaseChecker _InfoStoneChecker;
 
     void Awake()
     {
         Instance = this;
-        _baseCheckerGo = GameObject.FindWithTag("Player");
-        _baseChecker = _baseCheckerGo.GetComponent<BaseChecker>();
+        _player = GameObject.FindWithTag("Player");
 
-        if (_baseCheckerGo == null || _baseChecker == null)
+        // TODO: liian vaikea luoda
+        var go = new GameObject("Base Checker");
+        go.transform.parent = _player.transform.parent;
+        var checker = go.AddComponent<BaseChecker>();
+        checker.CraftRange = CraftRange;
+        _baseChecker = go.GetComponent<BaseChecker>();
+        _baseChecker.SetMask("Base"); // voisi olla parameter
+
+        if (_player == null || _baseChecker == null)
         {
             Debug.LogWarning("WARNING: BaseManager.cs basechecker null");
         }
+
+        var infoStoneGameObject = new GameObject("Info Stone Checker");
+        infoStoneGameObject.transform.parent = _player.transform.parent;
+        var infoStoneChecker = go.AddComponent<BaseChecker>();
+        infoStoneChecker.CraftRange = 5f;
+        _InfoStoneChecker = infoStoneChecker;
+    }
+
+    void Update()
+    {
+        _baseChecker.CircleCast(_player.transform.position);
+        _InfoStoneChecker.CircleCast(_player.transform.position);
     }
 
     // FastTravel menut jne tänne: vaatii chunkkien uudestaan inilisoinnin tilemapissa
@@ -30,23 +52,21 @@ public class BaseManager : MonoBehaviour
 
     public void RegisterOnBaseEnter(Action func)
     {
-        _baseChecker.OnCampFireEnter += func;
+        _baseChecker.OnEnter += func;
     }
-
     public void RegisterOnBaseExit(Action func)
     {
-        _baseChecker.OnCampFireExit += func;
+        _baseChecker.OnExit += func;
     }
-
     public void UnRegisterOnBaseEnter(Action func)
     {
-        _baseChecker.OnCampFireExit -= func;
+        _baseChecker.OnExit -= func;
     }
-
     public void UnRegisterOnBaseExit(Action func)
     {
-        _baseChecker.OnCampFireExit -= func;
+        _baseChecker.OnExit -= func;
     }
+
 
     public GameObject GetClosestBase()
     {
@@ -56,7 +76,7 @@ public class BaseManager : MonoBehaviour
             Debug.LogError("BaseManager.cs: no bases when requesting closest base");
             return null;
         }
-        return bases[0];
+        return bases[0]; // en toimi
     }
 
     public void AddBase(GameObject go)

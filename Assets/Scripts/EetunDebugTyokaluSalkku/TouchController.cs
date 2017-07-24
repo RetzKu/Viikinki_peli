@@ -31,10 +31,9 @@ public class TouchController : MonoBehaviour
 
 
     // TODO: ^^^ CLEANUP ^^^
-
-
     public RuneHolder RuneHolder;
     public RuneHolder CraftingManagerHolder;
+    public Color ButtonColor;
     private GameObject knob;
 
     private Vector3 lastPosition;
@@ -111,7 +110,7 @@ public class TouchController : MonoBehaviour
         {
             for (int x = 0; x < amountOfSpheres; x++)
             {
-                var go  = new GameObject();
+                var go = new GameObject();
                 go.layer = LayerMask.NameToLayer("TouchController");
                 go.transform.parent = transform;
                 var coll = go.AddComponent<CircleCollider2D>();
@@ -179,7 +178,7 @@ public class TouchController : MonoBehaviour
 
     void OnBaseEnter()
     {
-       ControllerMode = Mode.Crafting;
+        ControllerMode = Mode.Crafting;
     }
 
     void OnBaseExit()
@@ -259,8 +258,7 @@ public class TouchController : MonoBehaviour
         }
         else
         {
-            // sormi poesa
-
+            // sormi poesa näytöltä
             SendIndices();
             index = 0;
 
@@ -271,18 +269,20 @@ public class TouchController : MonoBehaviour
 
             SetLineRendererCount(0);
 
-            LineController.ResetPoints();
-
             if (Mode.Crafting == ControllerMode)
                 _craftingUiController.SetAllCounts();
-
+            else
+            {
+                _craftingUiController.HideNumbers();
+                _craftingUiController.SetAllButtonsImages(CraftingUiController.ButtonState.InCombat);
+            }
+            _craftingUiController.ResetAllColors();
+            LineController.ResetPoints();
             // TODO: linejen position fix
             // if (lastPosition != transform.position)
-                // LineController.TranslatePoints(lastPosition - transform.position);
-
+            // LineController.TranslatePoints(lastPosition - transform.position);
         }
         lastPosition = transform.position;
-
         // Reset LineRenderer
         //if (_timer < Time.time)
         //{
@@ -303,19 +303,23 @@ public class TouchController : MonoBehaviour
         {
             colliderGO.GetComponent<CircleCollider2D>().enabled = true;
         }
-
     }
 
     public void OnTouchDetected(int x, int y, Vector3 realTransform)
     {
         ResetColliders();
-
-        _craftingUiController.SetButtonImageInvertedY(CraftingUiController.ButtonState.Light, x, y);
+        if (ControllerMode == Mode.RuneCasting)
+        {
+            _craftingUiController.SetButtonColorInvertedY(ButtonColor, x, y);
+        }
+        else
+        {
+            _craftingUiController.SetButtonImageInvertedY(CraftingUiController.ButtonState.Light, x, y);
+        }
 
         if (_touching)
         {
             LineController.SetPoint(new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f));
-
             if (index < maxRuneIndices)
             {
                 runeIndices[index] = new Vec2(x, y);
@@ -323,5 +327,5 @@ public class TouchController : MonoBehaviour
             }
         }
         _timer = Time.time + lineResetTime;
-   }
+    }
 }

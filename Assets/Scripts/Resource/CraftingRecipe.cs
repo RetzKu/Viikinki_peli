@@ -15,8 +15,8 @@ public class CraftingRecipe : Rune
     {
         // Launcheriin, jokin cool effect, joka tulee kun craftaat + ääni
 
-
         // Gettaa order -> laita indices oikein
+
         Indices = new Vec2[Materials.Count];
         for (int i = 0; i < Materials.Count; i++)
         {

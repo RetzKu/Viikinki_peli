@@ -18,11 +18,26 @@ public class Stone : Resource
         ObjectPool.instance.PoolObject(this.gameObject);
     }
 
+    private Vector2 impact = Vector2.zero;
+    public void AddImpact(Vector2 force)
+    {
+        var dir = force.normalized;
+        impact += dir.normalized * force.magnitude / 1.0f;//mass
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(1))
         {
             Hit(25);
+            // AddImpact((Camera.main.ScreenToWorldPoint(Input.mousePosition) - GameObject.FindWithTag("Player").transform.position).normalized * 35f);
         }
+
+        // if (impact.magnitude > 0.2)
+        // {
+            transform.Translate(impact * Time.deltaTime);
+        // }
+        // impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
+
     }
 }

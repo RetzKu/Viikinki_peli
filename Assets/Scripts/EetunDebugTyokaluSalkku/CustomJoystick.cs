@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public enum ControllerType
@@ -78,7 +79,6 @@ public class CustomJoystick : MonoBehaviour
             return;
         }
 
-
         // Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
 
         // transform.Translate(lastPos - transform.position);
@@ -100,7 +100,7 @@ public class CustomJoystick : MonoBehaviour
         Rect ScreenView = new Rect(cameraPos.x + HitBox.x, cameraPos.y + HitBox.y, HitBox.width, HitBox.height);
 
         Base.transform.position = startPosition;
-
+        Base.transform.position = Vector3.zero;
 #if MOUSE
         if (Input.GetMouseButtonUp(0) )
 #else

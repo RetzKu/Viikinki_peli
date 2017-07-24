@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,14 +11,16 @@ public class CraftingUiController : MonoBehaviour
         Craft,
         Light,
         OutOf,
+        InCombat,
         Max,
     }
 
     // Lapsena 9 Imagea
     private Image[] _hudImages = new Image[9];
     private Text[] _hudItemCounts = new Text[9];
-
     private GameObject[] _hudGameObjects = new GameObject[9];
+    private bool[] _buttonVibrating = new bool[9];
+
 
     // private Cost[] _cost = new Cost[9];
     // private bool _inventoryActive = true;
@@ -34,6 +37,7 @@ public class CraftingUiController : MonoBehaviour
     public Sprite[] CraftSprites;
     public Sprite[] LightSprites;
     public Sprite[] OutOfSprites;
+    public Sprite CombatSprite;
     public Transform ResourceEndLocation;
 
     private Dictionary<ButtonState, Sprite[]> buttonStateSprites;
@@ -59,20 +63,28 @@ public class CraftingUiController : MonoBehaviour
         CraftingManager.Instance.OnResourceCountChanged += CheckResourceNumbers;
         // CraftingManager.Instance.SetResourcePickupEndLocation(Camera.main.ScreenToWorldPoint(ResourceEndLocation.position));
 
-        buttonStateSprites = new Dictionary<ButtonState, Sprite[]>(4);
+        buttonStateSprites = new Dictionary<ButtonState, Sprite[]>(5);
         buttonStateSprites[ButtonState.Default] = DefaultSprites;
         buttonStateSprites[ButtonState.Craft] = CraftSprites;
         buttonStateSprites[ButtonState.Light] = LightSprites;
         buttonStateSprites[ButtonState.OutOf] = OutOfSprites;
 
-        SetAllButtonsImages(ButtonState.Default);
-        current = ButtonState.Default;
-        SetAllActiveState(false);
+        Sprite[] arr = new Sprite[9];
+        for (int i = 0; i < 9; i++)
+        {
+            arr[i] = CombatSprite;
+        }
+        buttonStateSprites[ButtonState.InCombat] = arr;
+
+        current = ButtonState.InCombat;
+        SetAllActiveState(true);
 
         BaseManager.Instance.RegisterOnBaseEnter(OnBaseEnter);
         BaseManager.Instance.RegisterOnBaseExit(OnBaseExit);
 
-        SetAllCounts();
+        // SetAllCounts();
+
+        SetAllButtonsImages(ButtonState.InCombat);
     }
 
     void OnBaseEnter()
@@ -88,7 +100,7 @@ public class CraftingUiController : MonoBehaviour
     {
         SetAllButtonsImages(ButtonState.Default);
         current = ButtonState.Default;
-        SetAllActiveState(false);
+        SetAllButtonsImages(ButtonState.InCombat);
     }
 
     void SetAllActiveState(bool state)
@@ -116,6 +128,21 @@ public class CraftingUiController : MonoBehaviour
     {
         int yy = 2 - y;
         _hudImages[yy * 3 + x].sprite = buttonStateSprites[state][yy * 3 + x];
+    }
+
+    public void SetButtonColorInvertedY(Color color, int x, int y)
+    {
+        int yy = 2 - y;
+        _hudImages[yy * 3 + x].sprite = buttonStateSprites[ButtonState.InCombat][yy * 3 + x];
+        _hudImages[yy * 3 + x].color = color;
+    }
+
+    public void ResetAllColors()
+    {
+        foreach (var image in _hudImages)
+        {
+            image.color = Color.white;
+        }
     }
 
     public void SetAllCounts()
@@ -155,5 +182,50 @@ public class CraftingUiController : MonoBehaviour
             }
         }
     }
+
+    public void HideNumbers()
+    {
+        Numbers.gameObject.SetActive(false);
+    }
+
+    public void Vibrate(int x, int y)
+    {
+        if (!_buttonVibrating[y * 3 + x])
+        {
+            Vector3 startPosition = transform.position;
+            {
+                StartCoroutine(Vibrate(1f, 0.25f, x, y));
+            }
+        }
+    }
+
+    IEnumerator Vibrate(float seconds, float fibrationRange, int x, int y)  // TODO: MIETI iteraatiot oikein 
+    {
+        _buttonVibrating[y * 3 + x] = true;
+        // transform.position = go.transform.position;
+        Image go = _hudImages[y * 3 + x];
+
+        int iterations = 30;
+        float waitTime = seconds / (float)iterations;
+        Vector3 startingPosition = go.transform.position;
+
+        for (int i = 0; i < iterations; i++)
+        {
+            if (i % 2 == 0)
+            {
+                go.transform.Translate(Random.Range(-fibrationRange, fibrationRange), Random.Range(-fibrationRange, fibrationRange), 0f);
+            }
+            else
+            {
+                go.transform.Translate(Random.Range(-fibrationRange, fibrationRange), Random.Range(-fibrationRange, fibrationRange), 0f);
+            }
+            yield return new WaitForSeconds(waitTime);
+        }
+        go.transform.position = startingPosition;
+
+        _buttonVibrating[y * 3 + x] = false;
+    }
+
 }
+
 

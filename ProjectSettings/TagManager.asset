@@ -25,6 +25,7 @@ TagManager:
   - LineController
   - CampFire
   - ResourceUiController
+  - RuneBarUi
   layers:
   - Default
   - TransparentFX
@@ -51,7 +52,7 @@ TagManager:
   - Base
   - notPateEnemy
   - arrow
-  - 
+  - RuneStone
   - 
   - 
   - 

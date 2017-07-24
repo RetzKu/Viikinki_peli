@@ -31,10 +31,6 @@ public class FreezeRune : Rune
     public AoeEffectData EffectData;
     [Header("TODO: frameille parempi korvaus (aika)")]
 
-    // esim
-    // spublic Buff EffectAreaBuff;
-    // public float EffectAreaApplyTimer;
-
     [Header("if size == 0; mask = Enemy")]
     public string[] CollisionMaskValues;
 
@@ -69,34 +65,33 @@ public class FreezeRune : Rune
         // Laukaise cast efecti
         // tyyppi.cast(_owner);
     }
+
+    //public override void OnGui(RuneBarUiController ui)
+    //{
+    //}
 }
 
 
-[CreateAssetMenu(menuName = "Runes/BuffRune NOT IMPLEMENTED!")]
+[CreateAssetMenu(menuName = "Runes/BuffRune")]
 public class WeaponBuffRune : Rune
 {
-    // effect?
-    //private GameObject owner;
-    public float Range = 10f;
-    public float duration;
+    private GameObject _owner;
+    private RuneEffectLauncher _launcher;
 
-    // statsit:
-    // HP
-    // Attack
-    // Movement Speed 
-    // joku cool buff: Immortal jne...
-    // Debuffs:
-    // CC
-    // Statsit
+    public Buff buff;
 
     public override void init(GameObject owner)
     {
-        //this.owner = owner;     // Launcheriin visuaalinene efectio jos on sellainen 
+        _owner = owner;     // Launcheriin visuaalinene efectio jos on sellainen 
     }
 
     public override void Fire()
     {
-        // owner.applyBuff();
-        // laita timer joka lopettaa buffing keston
+        Debug.Log("start");
+        buff.Apply(_owner);   
     }
+
+    //public override void OnGui(RuneBarUiController ui)
+    //{
+    //}
 }

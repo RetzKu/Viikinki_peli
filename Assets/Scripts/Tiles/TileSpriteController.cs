@@ -331,7 +331,6 @@ public class TileSpriteController : MonoBehaviour
                 // lisää: reunat
                 // 4-bit directions
                 // North, west, east, south
-
 #if false
                 if (tempIndex < temporarySecondLayer.Length - 1)
                 {
@@ -412,7 +411,6 @@ public class TileSpriteController : MonoBehaviour
                     go.transform.position = new Vector3(x + offsetX, y + offsetY - 1);
                     borders.Add(go);
                 }
-
 #endif
             }
         }
@@ -432,94 +430,6 @@ public class TileSpriteController : MonoBehaviour
                 // fuck fuck
             }
         }
-
-
-    }
-
-    [Obsolete]
-    public void InitChunkSprites(int width, int height, TileMap tilemap, int startX, int startY)
-    {
-        List<Vec2> problemsCases = new List<Vec2>(32);
-        List<Vec2> BorderTiles = new List<Vec2>(512);
-
-        for (int y = startY; y < height; y++)
-        {
-            for (int x = startX; x < width; x++)
-            {
-                int count = 0;
-                string assetName = GetAssetName(x, y, tilemap.Tiles, out count);
-
-                if (count == 1 || count == 0)
-                {
-                    problemsCases.Add(new Vec2(x, y));
-                }
-                if (count < 4)
-                {
-                    BorderTiles.Add(new Vec2(x, y));
-                }
-
-                Sprite sprite;
-                if (_textures.TryGetValue(assetName, out sprite))
-                {
-                    tilemap.TileGameObjects[y, x].GetComponent<SpriteRenderer>().sprite = sprite;
-                }
-                else
-                {
-                    Debug.LogWarning("Texture: " + assetName + " Missing!");
-                }
-            }
-        }
-
-        foreach (var pos in problemsCases)
-        {
-            tilemap.Tiles[pos.Y, pos.X] = GetMostCommonNeighbour(tilemap.Tiles, pos.X, pos.Y);
-
-            //int count = 0;
-            //string assetName = GetAssetName(pos.X, pos.Y, tilemap.Tiles, out count);
-
-            //if (count == 1 || count == 0)
-            //{
-            //    problemsCases.Add(new Vec2(pos.X, pos.Y));
-            //}
-
-            //Sprite sprite;
-            //if (_textures.TryGetValue(assetName, out sprite))
-            //{
-            //    tilemap.TileGameObjects[pos.Y, pos.Y].GetComponent<SpriteRenderer>().sprite = sprite;
-            //}
-            //else
-            //{
-            //    Debug.LogWarning("Texture: " + assetName + " Missing!");
-            //}
-
-
-            //for(int i = 0; i < neighbours.Length; i++)
-            //{
-            //    int x = neighbours[i].X + pos.X;
-            //    int y = neighbours[i].Y + pos.Y;
-
-            //    int count = 0;
-            //    // string assetName = GetAssetName(x, y, tilemap.Tiles, out count);
-
-            //    //if (count == 1 || count == 0)
-            //    //{
-            //    //    problemsCases.Add(new Vec2(x, y));
-            //    //}
-
-            //    Sprite sprite;
-            //    if (_textures.TryGetValue(assetName, out sprite))
-            //    {
-            //        tilemap.TileGameObjects[y, x].GetComponent<SpriteRenderer>().sprite = sprite;
-            //    }
-            //    else
-            //    {
-            //        Debug.LogWarning("Texture: " + assetName + " Missing!");
-            //    }
-            //}
-        }
-        // probleemojen
-        // naapureiden uudestaan initointi
-        //DoubleLayerBorders(BorderTiles, tilemap.Tiles, tilemap.TileGameObjects, tilemap);
     }
 
     // TMP NEW CREATE!
@@ -567,41 +477,5 @@ public class TileSpriteController : MonoBehaviour
             }
         }
         return 0;
-    }
-
-    // tehdään iso oletus generaatiosta
-    // proper funktio tarvitaan? joissain rajatapauksissa
-    // vertaile edes kaikkia XD
-
-    TileType GetMostCommonNeighbour(TileType[,] tiles, int x, int y)
-    {
-        TileType value = TileType.Invalid;
-
-        TileType[] count = new TileType[4]    // NESW
-        {
-            TileType.Invalid, TileType.Invalid, TileType.Invalid, TileType.Invalid
-        };
-
-        for (int i = 0; i < 4; i++)
-        {
-            TileType neighbour = tiles[neighbours[i].Y + y, neighbours[i].X + x];
-            count[i] = neighbour;
-        }
-
-        for (int i = 0; i < 3; i++)
-        {
-            if (count[i] == count[i + 1])
-            {
-                value = count[i];
-                break;
-            }
-        }
-
-        if (value == TileType.Invalid)
-        {
-            Debug.LogWarning("missing " + value);
-        }
-
-        return value;
     }
 }

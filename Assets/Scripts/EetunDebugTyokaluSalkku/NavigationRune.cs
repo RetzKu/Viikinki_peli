@@ -24,4 +24,8 @@ public class NavigationRune : Rune
         Vector3 closestBase = BaseManager.Instance.GetClosestBase().transform.position;
         launcher.LaunchArrow(sprite, closestBase);
     }
+
+    //public override void OnGui(RuneBarUiController ui)
+    //{
+    //}
 }

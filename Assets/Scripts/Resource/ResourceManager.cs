@@ -10,8 +10,9 @@ public class ResourceManager : MonoBehaviour
     private string[] resourceTypeLookupTable = new string[(int)ResourceType.Max];
 
     private readonly int resourceTypeToTrunk = (int) (ResourceType.t_trunkEnd - ResourceType.t_trunkStart);
-
     public List<DropScript.Drops> CorpseDrops;
+
+    private static Sprite[] _runeSprites;
 
     void Awake()
     {
@@ -36,6 +37,8 @@ public class ResourceManager : MonoBehaviour
         Corpse.CorpseSprites = Resources.LoadAll<Sprite>("WorldObject/corpses");
 
         Tree._treeShadows = Resources.LoadAll<Sprite>("WorldObject/shadows");
+
+        _runeSprites = Resources.LoadAll<Sprite>("WorldObject/RunePillars/runepillars");
     }
 
     public string GetResourceTypeName(ResourceType type)
@@ -61,8 +64,6 @@ public class ResourceManager : MonoBehaviour
     {
         return CorpseDrops;
     }
-
-
 
     // valitan
     // shadow_+ num

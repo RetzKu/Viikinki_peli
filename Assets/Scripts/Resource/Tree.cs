@@ -113,8 +113,6 @@ public class Tree : Resource
         StubInit();
     }
 
-
-
     private void SetCollidersInChilds(bool state)
     {
         foreach (var renderer in GetComponentsInChildren<SpriteRenderer>())

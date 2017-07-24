@@ -489,7 +489,9 @@ public class Perlin : MonoBehaviour
 
                         go.transform.localScale *= Random.Range(0.90f, 1.10f);
 
-                        go.transform.position = spawnPosition;
+                        float z = ZlayerManager.GetZFromY(spawnPosition); // eessä olevat puut eteen ja takana taakse
+                        go.transform.position = new Vector3(spawnPosition.x, spawnPosition.y, z);
+                            
                         go.GetComponent<Resource>().Init(false);
 
                         chunk.AddObject(x, y, go);

@@ -427,9 +427,10 @@ public class TileSpriteController : MonoBehaviour
                 ObjectPool.instance.PoolObject(border);
                 borders.RemoveAt(i);
                 i--;
-                // fuck fuck
             }
         }
+
+                // fuck fuck
     }
 
     // TMP NEW CREATE!

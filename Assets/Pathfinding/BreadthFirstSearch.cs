@@ -75,8 +75,11 @@ public class BreadthFirstSearch
     public void uptadeTiles(int playerX, int playerY, TileMap tileMap)
     {
         inited = true;
-        map = tileMap; //EETU TRIGGER, mah ei tarvi korjata
+        map = tileMap; 
         moveTiles.Clear(); 
+
+        // tilemap saako updatta
+
         for (int y = 0; y < TileMap.TotalHeight; y++)
         {
             List<tiles> temp = new List<tiles>();

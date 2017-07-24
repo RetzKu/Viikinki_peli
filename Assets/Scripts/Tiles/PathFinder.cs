@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class PathFinder 
 {
     public enum Dir
@@ -13,7 +11,6 @@ public class PathFinder
         Right,
         Down,
         Left,
-
     }
 
     private static readonly int Width = TileMap.TotalWidth;

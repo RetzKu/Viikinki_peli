@@ -23,12 +23,12 @@ MonoBehaviour:
   HudImage: {fileID: 21300000, guid: d6bf80a471b016c4e97bb0be2a66eb2e, type: 3}
   Cd: 5
   EffectData:
-    BuffToApply: {fileID: 0}
+    BuffToApply: {fileID: 11400000, guid: dbc963e1dea3f1240aa0c1b94519393e, type: 2}
     ExpansionTime: 2
     TotalRotation: 360
     LeavesEffectArea: 0
     StartScale: 2
-    EndScale: 10
+    EndScale: 14
     Frames: 60
     AfterEffect: {fileID: 0}
     MovementDir: {x: 0, y: 0}

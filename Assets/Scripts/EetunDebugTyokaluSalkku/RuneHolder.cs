@@ -11,7 +11,7 @@ public class RuneHolder : MonoBehaviour
     }
 
     public OwnerType Ownertype;
-    public Rune[] runes;
+    public List<Rune> runes;
     public bool IsOwnerPlayer = true;
 
     private RuneBarUiController _runeBarUiController;
@@ -20,9 +20,17 @@ public class RuneHolder : MonoBehaviour
 
     void Start()
     {
-        foreach (var rune in runes)
+        for(int i = 0; i < runes.Count; i++)
         {
-            rune.init(this.gameObject);
+            if (runes[i] != null)
+            {
+                runes[i].init(this.gameObject);
+            }
+            else
+            {
+                runes.RemoveAt(i);
+                break;
+            }
         }
 
         // ReSharper disable once AssignmentInConditionalExpression
@@ -31,8 +39,8 @@ public class RuneHolder : MonoBehaviour
             Debug.LogError("RuneHolder.cs: Cannot Find RuneBarUiController");
         }
 
-        CanCast = new bool[runes.Length];
-        cds = new float[runes.Length];
+        CanCast = new bool[runes.Count];
+        cds = new float[runes.Count];
     }
 
     void Update()
@@ -86,8 +94,8 @@ public class RuneHolder : MonoBehaviour
 
     public Sprite[] GetHudImages()
     {
-        Sprite[] images = new Sprite[runes.Length];
-        for (int i = 0; i < runes.Length; i++)
+        Sprite[] images = new Sprite[runes.Count];
+        for (int i = 0; i < runes.Count; i++)
         {
             images[i] = runes[i].HudImage;
         }

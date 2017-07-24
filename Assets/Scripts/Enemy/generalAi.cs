@@ -55,6 +55,8 @@ public enum behavior
 }
 public abstract class generalAi : MonoBehaviour
 {
+    protected bool obc = false;
+
     protected float collideDist = 1f;
     protected collision CollState = collision.none;
     public float swingDist = 1f;
@@ -130,43 +132,35 @@ public abstract class generalAi : MonoBehaviour
     {
         PathFinder.Dir k = player.GetComponent<UpdatePathFind>().path.getTileDir(body.position);
 
-        //print(k);
         if (k == PathFinder.Dir.NoDir)
         {
             flags = 0;
             velocity *= 0;
-           // print("im STUCK");
-
         }
         else if (k == PathFinder.Dir.Right)
         {
             flags = (int)behavior.findPath;
-            //target = new Vector2(body.position.x + 1, body.position.y);
             target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x +1, body.position.y));
         }
         else if (k == PathFinder.Dir.Left)
         {
             flags = (int)behavior.findPath;
-            //target = new Vector2(body.position.x - 1, body.position.y);
             target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x -1, body.position.y));
         }
         else if (k == PathFinder.Dir.Up)
         {
             flags = (int)behavior.findPath;
-            //target = new Vector2(body.position.x, body.position.y + 1);
             target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x, body.position.y + 1));
         }
         else if (k == PathFinder.Dir.Down)
         {
             flags = (int)behavior.findPath;
-            //target = new Vector2(body.position.x, body.position.y - 1);
             target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x, body.position.y - 1));
         }
         else
         {
             flags = 0;
             velocity *= 0;
-            //print("im STUCK");
         }
     }
 
@@ -300,6 +294,29 @@ public abstract class generalAi : MonoBehaviour
             slowTimer = 0f;
             slow = false;
         }
+    }
+
+    float obsTime = 0.25f;
+    float obsTimer = 0f;
+
+    protected void getObstacle(Vector2 dist)
+    {
+        obsTimer += Time.deltaTime;
+        if(obsTimer > obsTime)
+        {
+            int mask = LayerMask.GetMask("ObjectLayer");
+            RaycastHit2D[] ob =  Physics2D.CircleCastAll(body.position, 1f, player.transform.position - (Vector3)body.position, dist.magnitude, mask);
+            if(ob.Length == 0)
+            {
+                obc = false;
+            }
+            else
+            {
+                obc = true;
+            }
+            obsTimer = 0f;
+        }
+
     }
     public abstract void resetValues();
     public abstract bool killMyself();

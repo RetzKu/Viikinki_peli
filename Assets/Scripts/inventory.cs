@@ -12,39 +12,80 @@ public class inventory
     public Equipped EquipData;
     public int InventorySize;
 
-    public inventory(int _InventorySize) { InventorySize = _InventorySize; InventoryData = new List<GameObject>(InventorySize); EquipData = new Equipped();}
+    public inventory(int _InventorySize) { InventorySize = _InventorySize; InventoryData = new List<GameObject>(InventorySize); EquipData = new Equipped(); }
 
     internal bool Changed = false;
+    internal bool ArmorEquipped = false;
 
     public void AddToInventory(GameObject Item)
     {
-        if(EquipData.Tool == null) { EquipData.SetTool(Item); Item.SetActive(false); Changed = true; } // Onko equipissa tilaa, jos on niin laita sinne;
-        else if(InventoryData.Count < InventorySize) { InventoryData.Add(Item); Item.SetActive(false); }
-        // Mika lisää tähän tsekki onko kyseessä armori
+        if (InventoryData.Count < InventorySize)
+        {
+            InventoryData.Add(Item);
+            if (Item.GetComponent<armorScript>() != null)
+            {
+                if (EquipData.Armor == null)
+                {
+                    EquipData.SetArmor(Item);
+                    ArmorEquipped = true;
+                }
+            }
+            else
+            {
+                if (EquipData.Tool == null)
+                {
+                    EquipData.SetTool(Item);
+                    Changed = true;
+                }
+            }
+            Item.SetActive(false);
+        }
     }
+
+    public void BreakArmor() { EquipData.BreakArmor(); }
+    public void BreakWeapon() { EquipData.BreakWeapon(); }
 
     public void EquipItem(int Slot)
-    { 
-        if (InventoryData.ElementAtOrDefault(Slot) != null)
+    {
+        GameObject Item = InventoryData[Slot];
+
+        if (EquipData.EquippedType(Item) == WeaponType.Armor)
         {
-            GameObject Item = InventoryData[Slot];
-            GameObject ReturnedItem = EquipData.SwapItem(Item);
-            if(ReturnedItem == null) { InventoryData.RemoveAt(Slot); }
-            else { InventoryData[Slot] = ReturnedItem; }
+            EquipData.SetArmor(Item);
+            ArmorEquipped = true;
+        }
+        else
+        {
+            EquipData.SetTool(Item);
             Changed = true;
         }
     }
 
-    public void DropItem()
+    public void DropItem(int slot)
     {
-        GameObject DroppedTool = EquipData.EmptyHand();
-        if (DroppedTool != null)
+        GameObject Item = InventoryData[slot];
+
+        if (EquipData.Armor != null)
         {
-            DroppedTool.transform.position = GameObject.Find("Player").transform.position;
-            DroppedTool.SetActive(true);
-            DroppedTool.tag = "Dropped";
-            Changed = true;
+            if (Item.name == EquipData.Armor.name)
+            {
+                EquipData.SetArmor(null);
+                ArmorEquipped = true;
+            } 
         }
+        if(EquipData.Tool != null)
+        {
+	        if (Item.name == EquipData.Tool.name)
+            {
+                EquipData.SetTool(null);
+                Changed = true;
+            } 
+        }
+        Item.SetActive(true);
+        Item.transform.position = GameObject.Find("Player").transform.position;
+        Item.tag = "Dropped";
+
+        InventoryData.RemoveAt(slot);
     }
 
     [System.Serializable]
@@ -57,10 +98,13 @@ public class inventory
         private GameObject _Tool;
         [SerializeField]
         private int _ArrowCount;
-        
+
 
         public GameObject Tool { get { return _Tool; } }
         public WeaponType Type { get { return EquippedType(); } }
+
+        public GameObject Armor { get { return _ChestPiece; } }
+
         public int ArrowCount { get { return _ArrowCount; } set { _ArrowCount = value; } }
 
         public Equipped() { _ChestPiece = null; _Tool = null; }
@@ -75,18 +119,31 @@ public class inventory
 
         public WeaponType EquippedType()
         {
-            if(Tool != null)
+            if (Tool != null)
             {
                 if (Tool.GetComponent<Ranged>() != null) { return WeaponType.rangedWeapon; }
                 else if (Tool.GetComponent<longMelee>() != null) { return WeaponType.longMeleeWeapon; }
                 else if (Tool.GetComponent<Melee>() != null) { return WeaponType.meleeWeapon; }
                 else { return WeaponType.noWeapon; }
-                
+
             }
             else { return WeaponType.noWeapon; }
         }
+        public WeaponType EquippedType(GameObject Item)
+        {
+            if (Item.GetComponent<Ranged>() != null) { return WeaponType.rangedWeapon; }
+            else if (Item.GetComponent<longMelee>() != null) { return WeaponType.longMeleeWeapon; }
+            else if (Item.GetComponent<Melee>() != null) { return WeaponType.meleeWeapon; }
+            else if (Item.GetComponent<armorScript>() != null) { return WeaponType.Armor; }
+            else { return WeaponType.noWeapon; }
+        }
+        public void SetArmor(GameObject Armor) { _ChestPiece = Armor; }
+
+        public void BreakArmor() { _ChestPiece = null; }
+        public void BreakWeapon() { _Tool = null; }
+
         public GameObject EmptyHand() { GameObject RemovedTool = _Tool; _Tool = null; return RemovedTool; }
         public void SetTool(GameObject Tool) { _Tool = Tool; }
-        public bool UsedArrow(){if (ArrowCount > 1){ArrowCount -= 1; return true; } else { return false; }}
+        public bool UsedArrow() { if (ArrowCount > 1) { ArrowCount -= 1; return true; } else { return false; } }
     }
 }

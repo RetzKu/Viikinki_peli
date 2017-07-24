@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponType { noWeapon, meleeWeapon, longMeleeWeapon, rangedWeapon }
+public enum WeaponType { noWeapon, meleeWeapon, longMeleeWeapon, rangedWeapon, Armor }
 
 public class PlayerScript : MonoBehaviour
 {
@@ -35,10 +35,13 @@ public class PlayerScript : MonoBehaviour
     private ItemManager Hand;
     public GameObject weaponInHand { get { return Hand.Copy; } } //jos haluaa collisioniin koskea tai tehdä collision tarkastuksia
 
+    private List<SpriteRenderer> Torsos;
+    public List<Sprite> DefaultTorsos;
     public int Direction;
 
     void Start()
     {
+        Torsos = new List<SpriteRenderer>(3);
         /*Get Inventory parents*/
         InventoryChild = gameObject.transform.Find("Inventory").gameObject;
         EquipChild = gameObject.transform.Find("Equip").gameObject;
@@ -51,6 +54,9 @@ public class PlayerScript : MonoBehaviour
         //pate on paras
         Hand = new ItemManager(SidewaysHand);
         //Damage = 30
+        Torsos.Add(transform.Find("d_c_torso").GetComponent<SpriteRenderer>());
+        Torsos.Add(transform.Find("s_c_torso").GetComponent<SpriteRenderer>());
+        Torsos.Add(transform.Find("u_c_torso").GetComponent<SpriteRenderer>());
     }
 
     void Update()
@@ -61,10 +67,43 @@ public class PlayerScript : MonoBehaviour
         {
             Direction = transform.GetComponent<AnimatorScript>().PlayerDir(); 
         }
+        if(Inventory.ArmorEquipped == true) { EquipArmor(); Inventory.ArmorEquipped = false; }
         RefreshHand();
         InventoryInput();
+        if(Input.GetKeyDown(KeyCode.Y) == true) { BreakArmor(); }
     }
-    
+
+    public void BreakArmor()
+    {
+        Inventory.BreakArmor();
+        for(int i = 0; i < 3; i++)
+        {
+            Torsos[i].sprite = DefaultTorsos[i];
+        }
+    }
+
+    public void BreakWeapon()
+    {
+        Inventory.BreakWeapon();
+        GetComponent<AnimatorScript>().ResetStates();
+        GetComponent<AnimatorScript>().Type = EquippedTool.Type;
+        transform.GetComponent<FxScript>().Default();
+        Hand.EmptyHand();
+    }
+
+    void EquipArmor()
+    {
+        if (Inventory.EquipData.Armor != null)
+        {
+            transform.Find("d_c_torso").GetComponent<SpriteRenderer>().sprite = Inventory.EquipData.Armor.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+            transform.Find("s_c_torso").GetComponent<SpriteRenderer>().sprite = Inventory.EquipData.Armor.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
+            transform.Find("u_c_torso").GetComponent<SpriteRenderer>().sprite = Inventory.EquipData.Armor.transform.GetChild(2).GetComponent<SpriteRenderer>().sprite; 
+        }
+        else
+        {
+            BreakArmor();
+        }
+    }
     void RefreshHand()
     {
         if (Inventory.Changed == true)
@@ -95,7 +134,6 @@ public class PlayerScript : MonoBehaviour
         else if (Direction == 1) { Hand.Handstate = 1; Hand.SetHand(DownwardsHand); }
         else if (Direction == 0 || Direction == 3) { Hand.Handstate = 0; Hand.SetHand(SidewaysHand); }
     }
-
     void tmpswing()
     {
         
@@ -113,14 +151,23 @@ public class PlayerScript : MonoBehaviour
         endPoint = Camera.main.ScreenToWorldPoint(mousePos); // Hiiren osoittama kohta
 
     }
-
     void InventoryInput()
     {
-        for(int i = 1; i <= InventorySize;i++)
+        
+        if(Input.GetKey("f") == true)
         {
-            if(Input.GetKeyDown(i.ToString()) == true) { Inventory.EquipItem(i-1); }
+            for (int i = 1; i <= InventorySize; i++)
+            {
+                if (Input.GetKeyDown(i.ToString()) == true) { Inventory.DropItem(i - 1); }
+            }
         }
-        if(Input.GetKeyDown("f") == true) { Inventory.DropItem(); }
+        else
+        {
+            for (int i = 1; i <= InventorySize; i++)
+            {
+                if (Input.GetKeyDown(i.ToString()) == true) { Inventory.EquipItem(i - 1); }
+            }
+        }
     }
 
     /*WHEN TIME, TRANSFER DEFAULT METHODS TO THIS CLASS*/

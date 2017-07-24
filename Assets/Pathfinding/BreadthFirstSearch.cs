@@ -45,7 +45,17 @@ public class BreadthFirstSearch
             return PathFinder.Dir.NoDir;                     // EETU TRIGGER
         }
     }
-
+    public PathFinder.Dir getTileDir(int[] j)
+    {
+        if (inited)
+        {
+            return panther.dirs[j[1], j[0]]; // palauttaa movement laskujen mukaan x y position
+        }
+        else
+        {
+            return PathFinder.Dir.NoDir;                     // EETU TRIGGER
+        }
+    }
 
 
     public int[] calculateIndex(Vector2 k)

@@ -335,7 +335,6 @@ public class EnemyMovement
         Vector2 average = new Vector2(0, 0);
         int count = 0;
 
-
         for (int i = 0; i < array.Length; i++)
         {
             Vector2 temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();

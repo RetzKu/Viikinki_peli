@@ -75,7 +75,7 @@ public class WolfAI : generalAi
             if (!agro)
             {
                 wander(HeardArray, ref flags, ref GiveStartTarget, ref counter, IdleRefreshRate);
-                rotation.rotToPl = false;
+                //rotation.rotToPl = false;
                 rotation.Lock = false;
             }
             else if (agro)
@@ -112,7 +112,8 @@ public class WolfAI : generalAi
         body.MovePosition(body.position + velocity);
     }
     void leapingPattern(Vector2 dist, Vector2 playerPos) //spe
-    {
+    {        
+        getObstacle(dist);
         if (dist.magnitude <= attackDist || inAttack || velocity.magnitude == 0)
         {
             if (!inAttack && attackCounter > attackUptade)
@@ -135,18 +136,7 @@ public class WolfAI : generalAi
                 {
                     GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapStart);
                     rotation.rotToPl = true;
-                    //Physics._maxSpeed = MaxSpeed * 4;
-                    //start leap
-                    //if (dist.magnitude > 1.2f)  // velocityn mukaan leap
-                    //{
-                    //    Vector2 plVec = player.GetComponent<Rigidbody2D>().velocity;
-                    //    playerPos += plVec * 0.5f; // muokkaa
-                        
-                    //    dist = body.position - playerPos;
-                    //}
-
-
-
+                    // ENNAKOIVA HYPPY?
                     dist.Normalize();
                     dist *= attackDist +1 ;//5
                     dist *= -1.0f;
@@ -215,7 +205,15 @@ public class WolfAI : generalAi
                     rotation.rotToPl = false;
                 }
                 attackCounter+= Time.deltaTime;
-                followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
+                //if (obc)
+                //{
+                //    findPath(ref flags, ref velocity, ref target, player, body);
+                //}
+                //else
+                //{
+                //    followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
+                //}
+                reversedFindPath(ref flags, ref velocity, ref target, player, body);
             }
         }
         else
@@ -225,7 +223,14 @@ public class WolfAI : generalAi
             if (dist.magnitude <= attackDist)
             {
                 rotation.rotToPl = false;
-                followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
+                if (obc)
+                {
+                    findPath(ref flags, ref velocity, ref target, player, body);
+                }
+                else
+                {
+                    followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
+                }
             }
             else
             {

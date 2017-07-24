@@ -23,7 +23,7 @@ public class DetectEnemies : MonoBehaviour
         {
             //print("BERZERG");
             // tähän check että ei ole minkään takana
-            aggroArray[i].transform.root.GetComponent<generalAi>().agro = true;
+            aggroArray[i].transform.root.GetComponent<generalAi>().agro = false;
         }
         var slowArray = Physics2D.OverlapCircleAll(body.position, slowDown, mask); // , mask);
         if(slowArray.Length > 0)

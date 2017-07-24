@@ -55,5 +55,9 @@ MonoBehaviour:
   Mob_Amount: 1
   Wolf: {fileID: 1975485080313304, guid: 31464838671e49b4585d82d7b87b4a3e, type: 2}
   Archer: {fileID: 1919206030925854, guid: aec341a3d2395384b9ad59b82b8232b3, type: 2}
-  MeleeDude: {fileID: 0}
+  MeleeDude: {fileID: 1977754839611798, guid: 66ccf3f92aecc84449b5c277bcd38483, type: 2}
   player: {fileID: 0}
+  spawnWolfs: 0
+  spawnMelee: 0
+  spawnArchers: 0
+  spawnBears: 0

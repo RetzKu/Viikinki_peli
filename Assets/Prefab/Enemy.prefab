@@ -1209,15 +1209,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2031ad80bc3df114696f3d0865c5394f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swingDist: 1
   inAttack: 0
   agro: 0
   attackDist: 0
-  MaxSpeed: 3
+  MaxSpeed: 30
   knockTime: 0.1
   IdleRefreshRate: 100
   IdleRadius: 60
   IdleBallDistance: 100
-  MaxSteeringForce: 0.001
+  MaxSteeringForce: 0.01
   ArriveRadius: 0.3
   desiredseparation: 0.7
   alingmentDistance: 1

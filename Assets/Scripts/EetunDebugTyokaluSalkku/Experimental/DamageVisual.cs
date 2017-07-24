@@ -18,9 +18,13 @@ public class DamageVisual : MonoBehaviour
     //// Update is called once per frame
     //void Update()
     //{
-
     //}
-
+    //public int power(int luku, int powerOf)
+    //{
+    //    if (powerOf == 1) return luku;
+    //    return power(luku  powerOf - 1);
+    //kk
+    
     public void TakeDamage()
     {
         Debug.Log("Post-processor effect launcher");

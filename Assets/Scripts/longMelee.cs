@@ -10,9 +10,7 @@ public class longMelee : weaponStats
     {
         if (duration <= 0)
         {
-            Destroy(gameObject);
-            GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.EquipData.EmptyHand();
-            Destroy(GameObject.Find("Player").GetComponent<PlayerScript>().weaponInHand);
+            GameObject.Find("Player").GetComponent<PlayerScript>().BreakWeapon();
         }
     }
 

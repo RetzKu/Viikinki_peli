@@ -25,6 +25,11 @@ public class MobsControl : MonoBehaviour
 
     public GameObject player;
 
+    public bool spawnWolfs;
+    public bool spawnMelee;
+    public bool spawnArchers;
+    public bool spawnBears;
+
     List<spawn> spawner = new List<spawn>();
     void Start()
     {
@@ -67,14 +72,25 @@ public class MobsControl : MonoBehaviour
                 }
                 while (k == PathFinder.Dir.NoDir);
 
+                if (spawnMelee)
+                {
+                    GameObject m;
+                    m = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
+                    m.GetComponent<generalAi>().InitStart(x, y,EnemyType.Archer, player);
+                    Boids.Add(m);
+                }
+                if (spawnWolfs)
+                {
+                    GameObject m;
+                    m = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
+                    m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Wolf, player);
+                    Boids.Add(m);
+                }
 
-                GameObject go;
 
                 //if (Boids.Count % 2 == 0)
                 //{
-                    go = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
 
-                    go.GetComponent<generalAi>().InitStart(x, y,EnemyType.Archer, player);
                 //}
                 //else
                 //{
@@ -82,7 +98,6 @@ public class MobsControl : MonoBehaviour
                 //    go.GetComponent<generalAi>().InitStart(x, y, EnemyType.Archer);
                 //}
                 //wolfBoids.Add(go);
-                Boids.Add(go);
 
                 spawner[0].amount--;
             }

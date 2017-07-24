@@ -348,11 +348,11 @@ public class WolfAI : generalAi
         //}
 
     }
-    public override void SlowRune(float time, float slowPercent, bool s = true)//todo
+    public override void SlowRune(float time, float slowPercent, bool reset = true)//todo
     {
-        this.slowPercent = slowPercent;
         if (!slow)
         {
+            this.slowPercent = slowPercent;
             ParticleSpawner.instance.SpawSlow(this.gameObject, time);
             if (inAttack)
             {
@@ -368,6 +368,13 @@ public class WolfAI : generalAi
             holderDist = attackDist;
             attackDist *= slowPercent;
             print(attackDist);
+        }
+        if (reset && slow)
+        {
+            slowTimer = 0;
+            slowTime = time;
+            GetComponentInChildren<buffParticle>().resetTime(time);
+
         }
     }
     protected override void SlowRuneTimer()

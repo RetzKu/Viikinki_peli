@@ -55,8 +55,11 @@ public enum behavior
 }
 public abstract class generalAi : MonoBehaviour
 {
+    protected bool obc = false;
+
     protected float collideDist = 1f;
     protected collision CollState = collision.none;
+    public float swingDist = 1f;
 
     [HideInInspector]
     public float spawnX { get; set; }
@@ -73,6 +76,8 @@ public abstract class generalAi : MonoBehaviour
     float knockDist = 3f;
     public float knockTime = 0.2f;
     float knockCounter = 0f;
+    float knockPercent = 1f;
+
     Vector2 knock = new Vector2(0, 0);
     protected bool GiveStartTarget = true;
     protected bool kys = false;
@@ -127,43 +132,35 @@ public abstract class generalAi : MonoBehaviour
     {
         PathFinder.Dir k = player.GetComponent<UpdatePathFind>().path.getTileDir(body.position);
 
-        //print(k);
         if (k == PathFinder.Dir.NoDir)
         {
             flags = 0;
             velocity *= 0;
-           // print("im STUCK");
-
         }
         else if (k == PathFinder.Dir.Right)
         {
             flags = (int)behavior.findPath;
-            //target = new Vector2(body.position.x + 1, body.position.y);
             target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x +1, body.position.y));
         }
         else if (k == PathFinder.Dir.Left)
         {
             flags = (int)behavior.findPath;
-            //target = new Vector2(body.position.x - 1, body.position.y);
             target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x -1, body.position.y));
         }
         else if (k == PathFinder.Dir.Up)
         {
             flags = (int)behavior.findPath;
-            //target = new Vector2(body.position.x, body.position.y + 1);
             target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x, body.position.y + 1));
         }
         else if (k == PathFinder.Dir.Down)
         {
             flags = (int)behavior.findPath;
-            //target = new Vector2(body.position.x, body.position.y - 1);
             target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x, body.position.y - 1));
         }
         else
         {
             flags = 0;
             velocity *= 0;
-            //print("im STUCK");
         }
     }
 
@@ -223,10 +220,11 @@ public abstract class generalAi : MonoBehaviour
     {
         return body.position;
     }
-    public virtual void KnockBack()
+    public virtual void KnockBack(float knockPercent = 1f)
     {
         if (!knocked)
         {
+            this.knockPercent = knockPercent;
             knocked = true;
             rotation.Lock = true; 
             resetValues();
@@ -242,9 +240,9 @@ public abstract class generalAi : MonoBehaviour
     {
         knockCounter += Time.deltaTime;
 
-        if(knockCounter < knockTime)
+        if(knockCounter < knockTime * knockPercent)
         {
-            float t = knockCounter / knockTime;
+            float t = knockCounter / knockTime * knockPercent;
             float k =  lerpate(MaxSpeed * 5, 0, t);
             //print(k);
             Physics._maxSpeed = k;
@@ -256,6 +254,7 @@ public abstract class generalAi : MonoBehaviour
             Physics._maxSpeed = MaxSpeed;
             knockCounter = 0;
             rotation.Lock = false;
+            knockPercent = 1f;
         }
     }
     float lerpate(float start, float end, float smooth)
@@ -271,17 +270,18 @@ public abstract class generalAi : MonoBehaviour
         
         if (!slow)
         {          
-            this.slowPercent = slowPercent;
+            this.slowPercent = slowPercent;           
             ParticleSpawner.instance.SpawSlow(this.gameObject, time);
             MaxSpeed *= slowPercent;
             Physics._maxSpeed = MaxSpeed;
             slowTime = time;
             slow = true;
         }
-        if (reset)
+        if (reset && slow) // ei testattu ominaisuus
         {
             slowTimer = 0;
             slowTime = time;
+            GetComponentInChildren<buffParticle>().resetTime(time);
         }
     }
     protected virtual void SlowRuneTimer()
@@ -294,6 +294,29 @@ public abstract class generalAi : MonoBehaviour
             slowTimer = 0f;
             slow = false;
         }
+    }
+
+    float obsTime = 0.25f;
+    float obsTimer = 0f;
+
+    protected void getObstacle(Vector2 dist)
+    {
+        obsTimer += Time.deltaTime;
+        if(obsTimer > obsTime)
+        {
+            int mask = LayerMask.GetMask("ObjectLayer");
+            RaycastHit2D[] ob =  Physics2D.CircleCastAll(body.position, 1f, player.transform.position - (Vector3)body.position, dist.magnitude, mask);
+            if(ob.Length == 0)
+            {
+                obc = false;
+            }
+            else
+            {
+                obc = true;
+            }
+            obsTimer = 0f;
+        }
+
     }
     public abstract void resetValues();
     public abstract bool killMyself();

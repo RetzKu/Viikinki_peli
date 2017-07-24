@@ -25,12 +25,12 @@ MonoBehaviour:
   EffectData:
     BuffToApply: {fileID: 0}
     ExpansionTime: 2
-    TotalRotation: 0
+    TotalRotation: 360
     LeavesEffectArea: 0
     StartScale: 2
     EndScale: 10
-    Frames: 40
-    AfterEffect: {fileID: 11400000, guid: 8cd7e8a1ab8e2bc41a396fea7b202396, type: 2}
+    Frames: 60
+    AfterEffect: {fileID: 0}
     MovementDir: {x: 0, y: 0}
     Speed: 0
   CollisionMaskValues:

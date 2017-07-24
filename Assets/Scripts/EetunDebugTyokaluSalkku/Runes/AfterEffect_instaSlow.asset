@@ -14,15 +14,17 @@ MonoBehaviour:
   Indices: []
   Sound: {fileID: 0}
   sprite: {fileID: 21300000, guid: 28dffb1a1e3099b44bf86546fac686c0, type: 3}
+  HudImage: {fileID: 0}
+  Cd: 0
   EffectData:
-    BuffToApply: {fileID: 11400000, guid: 487efebaf77f39e4796fd3f80a0f462f, type: 2}
+    BuffToApply: {fileID: 0}
     ExpansionTime: 0
     TotalRotation: 0
     LeavesEffectArea: 0
     StartScale: 10
     EndScale: 8
     Frames: 10
-    AfterEffect: {fileID: 0}
+    AfterEffect: {fileID: 11400000, guid: e16a8ceb4df570c4981a2e42bbb8567c, type: 2}
     MovementDir: {x: 0, y: 0}
     Speed: 0
   CollisionMaskValues: []

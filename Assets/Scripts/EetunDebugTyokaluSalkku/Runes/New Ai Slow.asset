@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: New Ai Slow
   m_EditorClassIdentifier: Assembly-CSharp::AiSlow
-  Duration: 0
-  Time: 0
-  SlowPercent: 0
+  Duration: 10
+  Time: 10
+  SlowPercent: 0.5

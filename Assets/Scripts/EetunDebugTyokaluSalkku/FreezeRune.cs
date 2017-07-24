@@ -31,10 +31,6 @@ public class FreezeRune : Rune
     public AoeEffectData EffectData;
     [Header("TODO: frameille parempi korvaus (aika)")]
 
-    // esim
-    // spublic Buff EffectAreaBuff;
-    // public float EffectAreaApplyTimer;
-
     [Header("if size == 0; mask = Enemy")]
     public string[] CollisionMaskValues;
 

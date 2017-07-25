@@ -24,11 +24,6 @@ public class EnemyFx : MonoBehaviour {
         GetWeaponSprite();
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Mouse0) == true) { Attack(); }
-    }
-
     private void CheckWeapon()
     {
         Weapon = transform.GetComponent<EnemyAnimator>().Weapon;

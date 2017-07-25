@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +20,6 @@ public class HealthBarUiController : MonoBehaviour
         {
             float endScale = EnemyMovement.map(current, 0f, 100f, 0f, 1f);
             StartCoroutine(LerpToScale(0.1f, endScale, HpOverlay));
-
         }
     }
 

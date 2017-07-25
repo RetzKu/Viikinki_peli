@@ -68,9 +68,16 @@ public class AnimatorScript : MonoBehaviour
         {
             if (MousePoint.x > 0)
             {
-                if(MousePoint.x > WrongWay.x && MousePoint.y < WrongWay.y)
+                if(MousePoint.x > WrongWay.x && MousePoint.y > WrongWay.y)
                 {
-
+                    triggered = true;
+                }
+            }
+            else
+            {
+                if(MousePoint.x < WrongWay.x && MousePoint.y > WrongWay.y)
+                {
+                    triggered = true;
                 }
             }
         }

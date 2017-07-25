@@ -73,10 +73,6 @@ public class Movement : MonoBehaviour
     {
         if (!knockBack)
         {
-            if (inAttack)
-            {
-                pateClock();
-            }
             lerpate();
             //print(max_spd);
             Vector2 SpeedLimiter = SpeedLimitChecker();
@@ -113,7 +109,6 @@ public class Movement : MonoBehaviour
         if (rb.velocity.y > max_spd) { added_spd.y -= ((rb.velocity.y / max_spd) - 1) * max_spd; }
         if (rb.velocity.x < -max_spd) { added_spd.x += ((rb.velocity.x / -max_spd) -1) *max_spd; }
         if (rb.velocity.y < -max_spd) { added_spd.y += ((rb.velocity.y / -max_spd) - 1) * max_spd; }
-        getRotation(added_spd);
         //vel = added_spd;
         return added_spd;
 
@@ -127,7 +122,6 @@ public class Movement : MonoBehaviour
             dir.Normalize();
             dir *= -10f;
             knockDir = /*rb.position +*/ dir; // korjaa maybebebe
-            GetComponent<AnimatorScript>()._Lock = true;
         }
     }
     void knockClock()
@@ -155,16 +149,17 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            GetComponent<AnimatorScript>()._Lock = false;
             knockBack = false;
             knockTimer = 0f;
             rb.drag = slowdown; // Tarkista 
         }
     }
+
     float lerp(float min,float max,float t)
     {
         return  min + ((max - min) * t);
     }
+
     void lerpate()
     {
         if (lerpUp)
@@ -190,67 +185,5 @@ public class Movement : MonoBehaviour
 
         max_spd = lerp(min_spd_pate, max_spd_pate,t);
 
-    }
-    public void UpPateDir(PlayerDir dir)
-    {
-        fx = dir;
-        if (dir == pd)
-        {
-            return;
-        }
-        else
-        {
-            inAttack = true;
-            GetComponent<AnimatorScript>().Sprites.EnableSprites((int)dir);
-
-            LastDirection = GetComponent<PlayerScript>().Direction;
-            GetComponent<PlayerScript>().Direction = (int)dir;
-
-            GetComponent<AnimatorScript>()._Lock = true;
-        }
-    }
-    void pateClock()
-    {
-        attackTimer += Time.deltaTime;
-        if (attackTimer > attackTime)
-        {
-            lerpUp = true;
-            inAttack = false;
-            attackTimer = 0f;
-            GetComponent<AnimatorScript>()._Lock = false;
-            GetComponent<PlayerScript>().Direction = LastDirection;
-        }
-        else
-        {
-            lerpUp = false;
-        }
-    }
-    void getRotation(Vector2 velocity)
-    {
-        PlayerDir temp = PlayerDir.def;
-        if (Mathf.Abs(velocity.x) >= Mathf.Abs(velocity.y))
-        {
-            if (velocity.x < 0)
-            {
-                temp = PlayerDir.left;
-            }
-            else
-            {
-                temp = PlayerDir.right;
-            }
-        }
-        else if (Mathf.Abs(velocity.y) >= Mathf.Abs(velocity.x))
-        {
-            if (velocity.y < 0)
-            {
-                temp = PlayerDir.down;
-            }
-            else
-            {
-                temp = PlayerDir.up;
-            }
-
-        }
-        pd = temp;
     }
 }

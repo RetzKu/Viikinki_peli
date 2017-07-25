@@ -63,10 +63,7 @@ public class PlayerScript : MonoBehaviour
     {
         tmpswing();
         Side();
-        if (GetComponent<AnimatorScript>()._Lock == false)
-        {
-            Direction = transform.GetComponent<AnimatorScript>().PlayerDir(); 
-        }
+        Direction = GetComponent<AnimatorScript>().PlayerDir();
         if(Inventory.ArmorEquipped == true) { EquipArmor(); Inventory.ArmorEquipped = false; }
         RefreshHand();
         InventoryInput();

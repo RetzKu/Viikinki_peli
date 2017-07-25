@@ -5,14 +5,17 @@ using UnityEngine;
 public class AnimatorScript : MonoBehaviour
 {
     private Rigidbody2D Player;
-    bool Lock = false;
-    public bool _Lock {set { Lock = value; } get { return Lock; } }
     private List<Animator> Animators;
     private float SpeedEdge = 0.3f;
 
     internal SpriteChanger Sprites;
 
     internal WeaponType Type;
+
+    private Vector3 MovementDir;
+
+    public GameObject Knob0;
+    public GameObject Knob1;
 
     void Start()
     {
@@ -28,22 +31,58 @@ public class AnimatorScript : MonoBehaviour
         Animators.Add(transform.Find("d_c_torso").GetComponent<Animator>());  //1 Index
         Animators.Add(transform.Find("u_c_torso").GetComponent<Animator>());  //2 Index
 
+        Knob0 = Instantiate(Knob0);
+        Knob1 = Instantiate(Knob1);
+
+        Destroy(Knob0.GetComponent<BoxCollider2D>());
+        Destroy(Knob1.GetComponent<BoxCollider2D>());
+
     }
 
     void Update()
     {
+        Sprites.DirectionCheck();
         CheckVelocity();
-        if (!Lock)
-        {
-            Sprites.DirectionCheck();
-        }
         Attack();
+        DirectionLock();
     }
 
     public int PlayerDir()
     {
         int tmp = Sprites.Index;
         return tmp;
+    }
+
+    void DirectionLock()
+    {
+        Vector3 NormalizedVelocity = new Vector3(Player.velocity.x, Player.velocity.y, 0).normalized;
+        Vector3 MousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition).normalized;
+        bool triggered = false;
+
+        Vector2 RightEdge = new Vector2(NormalizedVelocity.y * -1, NormalizedVelocity.x) * 0.7f;
+        Vector2 LeftEdge = new Vector2(NormalizedVelocity.y, NormalizedVelocity.x * -1) * 0.7f;
+
+        Vector2 WrongWay = new Vector2(NormalizedVelocity.x, NormalizedVelocity.y) * -1;
+
+        if(MousePoint.y < 0)
+        {
+            if (MousePoint.x > 0)
+            {
+                if(MousePoint.x > WrongWay.x && MousePoint.y < WrongWay.y)
+                {
+
+                }
+            }
+        }
+        else
+        {
+
+        }
+   
+        Knob0.transform.position = RightEdge + (Vector2)transform.position;
+        Knob1.transform.position = LeftEdge + (Vector2)transform.position;
+        //Debug.Log(RightEdge + "right side");
+        //Debug.Log(LeftEdge + "left side");
     }
 
     void CheckVelocity()

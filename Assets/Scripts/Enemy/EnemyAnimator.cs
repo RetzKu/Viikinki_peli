@@ -8,8 +8,8 @@ internal class EnemyAnimator : MonoBehaviour {
     private List<Transform> Hands;
 
     [SerializeField]
-    private GameObject Weapon;
-    private WeaponType Type;
+    public GameObject Weapon;
+    public WeaponType Type { get { return CheckWeaponType(); } }
 
     private List<GameObject> Torsos;
     private List<Animator> Animators;
@@ -39,8 +39,6 @@ internal class EnemyAnimator : MonoBehaviour {
         /*Finding Animators*/
         Animators = new List<Animator>(3);
         foreach (GameObject t in Torsos) { Animators.Add(t.GetComponent<Animator>()); }
-
-        Type = CheckWeaponType();
 
         SpriteController = new SpriteChanger(Torsos);
 
@@ -126,6 +124,7 @@ internal class EnemyAnimator : MonoBehaviour {
 
     public void Attack()
     {
+        GetComponent<EnemyFx>().Attack();
         foreach (Animator t in Animators) { t.SetTrigger(AttackType()); }
     }
 

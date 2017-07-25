@@ -76,7 +76,7 @@ public class PlayerScript : MonoBehaviour
     public void BreakArmor()
     {
         Inventory.BreakArmor();
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
             Torsos[i].sprite = DefaultTorsos[i];
         }

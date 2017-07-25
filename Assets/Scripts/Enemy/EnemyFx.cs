@@ -24,11 +24,6 @@ public class EnemyFx : MonoBehaviour {
         GetWeaponSprite();
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Mouse0) == true) { Attack(); }
-    }
-
     private void CheckWeapon()
     {
         Weapon = transform.GetComponent<EnemyAnimator>().Weapon;
@@ -83,8 +78,8 @@ public class EnemyFx : MonoBehaviour {
     {
         if(collision.GetComponent<s_c_torsoScript>() != null)
         {
-            
-            print("auts");
+            GameObject.Find("Player").GetComponent<combat>().setHitPosition(transform.position);
+            GameObject.Find("Player").GetComponent<combat>().takeDamage(Weapon.GetComponent<Melee>().damage);            
         }
     }
 

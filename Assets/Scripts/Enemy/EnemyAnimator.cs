@@ -124,6 +124,7 @@ internal class EnemyAnimator : MonoBehaviour {
 
     public void Attack()
     {
+        GetComponent<EnemyFx>().Attack();
         foreach (Animator t in Animators) { t.SetTrigger(AttackType()); }
     }
 

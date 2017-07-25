@@ -230,7 +230,7 @@ public class combat : MonoBehaviour {
         GetComponent<Movement>().KnockBack(lastEnemyHitPosition);
         Debug.Log("Player has " + hp + " hp left.");
         GetComponent<DamageVisual>().TakeDamage();
-        //ParticleSpawner.instance.SpawSmallBlood(lastEnemyHitPosition, transform.position);
+        ParticleSpawner.instance.SpawSmallBlood(lastEnemyHitPosition, transform.position);
     }
 
     void death()

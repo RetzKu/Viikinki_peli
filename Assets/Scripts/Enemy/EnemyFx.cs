@@ -83,8 +83,8 @@ public class EnemyFx : MonoBehaviour {
     {
         if(collision.GetComponent<s_c_torsoScript>() != null)
         {
-            
-            print("auts");
+            GameObject.Find("Player").GetComponent<combat>().setHitPosition(transform.position);
+            GameObject.Find("Player").GetComponent<combat>().takeDamage(Weapon.GetComponent<Melee>().damage);            
         }
     }
 

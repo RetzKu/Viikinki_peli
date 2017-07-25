@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
+    public Material NormalSpriteMaterial;
+    public Material OcculuderSpriteMaterial;
+
+
     [Header("Initoidaan Awakessa")]
     public static ResourceManager Instance = null;
     private string[] resourceTypeLookupTable = new string[(int)ResourceType.Max];
 
     private readonly int resourceTypeToTrunk = (int) (ResourceType.t_trunkEnd - ResourceType.t_trunkStart);
     public List<DropScript.Drops> CorpseDrops;
-
     private static Sprite[] _runeSprites;
 
     void Awake()
@@ -55,9 +58,15 @@ public class ResourceManager : MonoBehaviour
         return type + resourceTypeToTrunk;
     }
 
+
     public bool IsTrunkType(ResourceType type)
     {
         return (ResourceType.t_trunkStart < type && ResourceType.t_trunkEnd > type);
+    }
+
+    public static bool IsAliveTree(ResourceType type)
+    {
+        return (ResourceType.t_birch0 <= type && ResourceType.t_spruce1 >= type);
     }
 
     public List<DropScript.Drops> GetCorpseDrops()
@@ -108,5 +117,20 @@ public class ResourceManager : MonoBehaviour
     public static Sprite GetFallenTreeSprite()
     {
         return Tree._treeShadows[2];
+    }
+
+    public static Material GetNormalShader()
+    {
+        return Instance.NormalSpriteMaterial;
+    }
+
+    public static Material GetOcculuderShader()
+    {
+        return Instance.OcculuderSpriteMaterial;
+    }
+
+    public static bool IsBehindable(ResourceType type)
+    {
+        return ResourceType.t_trunkEnd >= type;
     }
 }

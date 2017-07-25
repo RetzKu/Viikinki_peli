@@ -26,6 +26,7 @@ TagManager:
   - CampFire
   - ResourceUiController
   - RuneBarUi
+  - Tilemap
   layers:
   - Default
   - TransparentFX

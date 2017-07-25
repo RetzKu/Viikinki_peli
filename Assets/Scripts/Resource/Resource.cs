@@ -62,6 +62,7 @@ public enum ResourceType
 // WARNING WARNING Enumi järjestyksen rikkominen / väliin lisäys särkee kaikein lisää aina maxin alle
 
 
+
 public abstract class Resource : MonoBehaviour
 {
     protected static readonly float TileWidth = 1f;
@@ -72,6 +73,7 @@ public abstract class Resource : MonoBehaviour
 
     protected bool dead = false;
     private Coroutine _fibrateEffect;
+
 
     public virtual void Hit(int damage)
     {
@@ -163,4 +165,15 @@ public abstract class Resource : MonoBehaviour
     {
         return ResourceManager.Instance.GetResourceTypeName(type);
     }
+
+    public void SetOcculuderShader()
+    {
+        GetComponent<SpriteRenderer>().material = ResourceManager.GetOcculuderShader();
+    }
+
+    public void SetNormalShader()
+    {
+        GetComponent<SpriteRenderer>().material = ResourceManager.GetNormalShader();
+    }
+
 }

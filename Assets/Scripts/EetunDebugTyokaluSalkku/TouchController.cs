@@ -48,17 +48,19 @@ public class TouchController : MonoBehaviour
 
     public Mode ControllerMode = Mode.Crafting;
     private CurvedLineRendererController LineController;
+    private bool _canSendIndices = false;
 
     void SendIndices()
     {
-        if (ControllerMode == Mode.RuneCasting)
+        if (ControllerMode == Mode.RuneCasting && _canSendIndices)
         {
-            RuneHolder.SendIndices(runeIndices, index);
+            RuneHolder.SendIndices(BoolArrayFromIndices(runeIndices));
         }
-        else if (ControllerMode == Mode.Crafting)
+        else if (ControllerMode == Mode.Crafting && _canSendIndices)
         {
-            CraftingManagerHolder.SendIndices(runeIndices, index);
+            CraftingManagerHolder.SendIndices(BoolArrayFromIndices(runeIndices));
         }
+        _canSendIndices = false;
     }
 
     void DrawToMouse(Vector2 mouse)
@@ -195,7 +197,7 @@ public class TouchController : MonoBehaviour
 
     void Update()
     {
-#if true
+#if UNITY_ANDROID
         Touch[] myTouches = Input.touches;
         for (int i = 0; i < Input.touchCount; i++)
         {
@@ -221,13 +223,13 @@ public class TouchController : MonoBehaviour
                     if (myTouches[i].phase == TouchPhase.Ended) // loppu
                     {
                         OnTouchEnded();
-                        // FingerId = -1000;
+                        FingerId = -1000;
                         // touchCollider.transform.position = myTouches[i].position;
                         // touchCollider.GetComponent<Collider2D>().enabled = false;
-// 
+                        // 
                         //  make vector of Attack Direction
                         // Vector2 touchDeltaVector = myTouches[i].deltaPosition;
-// 
+                        // 
                         // index = 0;
                         // ResetColliders();
                         // touchCollider.GetComponent<Collider2D>().enabled = false;
@@ -236,8 +238,9 @@ public class TouchController : MonoBehaviour
                 }
             }
         }
-#else
+#endif
 
+#if UNITY_EDITOR
         if (Input.GetMouseButton(0) /*|| Input.GetTouch(0).*/ )
         {
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -246,6 +249,8 @@ public class TouchController : MonoBehaviour
         else
         {
             OnTouchEnded();
+
+            // LineController.MovePoints(lastPosition - transform.position);
         }
         lastPosition = transform.position;
 #endif
@@ -253,6 +258,7 @@ public class TouchController : MonoBehaviour
 
     private void UpdateTouchController(Vector3 mousePos)
     {
+        _canSendIndices = true;
         mousePos.z = 2;
 
         touchCollider.GetComponent<Collider2D>().enabled = true;
@@ -287,6 +293,9 @@ public class TouchController : MonoBehaviour
         }
         _craftingUiController.ResetAllColors();
         LineController.ResetPoints();
+        LineController.HideLines();
+
+        _canSendIndices = false;
     }
 
     private GameObject GetFromArray(int x, int y)
@@ -324,5 +333,28 @@ public class TouchController : MonoBehaviour
             }
         }
         _timer = Time.time + lineResetTime;
+    }
+
+    public bool[] BoolArrayFromIndices(Vec2[] indices)
+    {
+        bool[] value = new bool[9];
+        for (int i = 0; i < index; i++)
+        {
+            int iii = GetBoolIndex(indices[i]);
+            value[iii] = true;
+        }
+        return value;
+    }
+
+    public static readonly int[,] IndexLookUpTable = new int[,] // x, y
+    {
+        { 0, 1, 2 },
+        { 3, 4, 5 },
+        { 6, 7, 8 },
+    };
+
+    public static int GetBoolIndex(Vec2 v)
+    {
+        return IndexLookUpTable[v.Y, v.X];
     }
 }

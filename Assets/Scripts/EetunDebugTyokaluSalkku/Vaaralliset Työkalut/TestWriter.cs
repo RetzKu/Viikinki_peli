@@ -76,7 +76,6 @@ public class TestWriter : MonoBehaviour
                 c++;
                 // Debug.Log((int)keyvaluePair.Value.GetComponent<Resource>().type);
             }
-
             // Debug.Log("save " + name + " " + c);
         }
 #endif

@@ -193,7 +193,7 @@ public class TileMap : MonoBehaviour
 
                 }
 
-                
+
                 SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position;
                 SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE - 3, this, 1, 1);
             }
@@ -457,6 +457,40 @@ public class TileMap : MonoBehaviour
         return _chunks[chunkY, chunkX].GetTile(offsetX, offsetY);
     }
 
+    public TileType GetTile(Vector2 vec)
+    {
+        int chunkX = 1;
+        int chunkY = 1;
+        GetChunkOffsetXY(ref chunkX, ref chunkY, vec.x, vec.y);
+
+        int offsetX = (int)vec.x % Chunk.CHUNK_SIZE;
+        int offsetY = (int)vec.y % Chunk.CHUNK_SIZE;
+        return _chunks[chunkY, chunkX].GetTile(offsetX, offsetY);
+    }
+
+    public GameObject GetGo(Vector2 vec)
+    {
+        int chunkX = 1;
+        int chunkY = 1;
+        GetChunkOffsetXY(ref chunkX, ref chunkY, vec.x, vec.y);
+
+        int offsetX = (int)vec.x % Chunk.CHUNK_SIZE;
+        int offsetY = (int)vec.y % Chunk.CHUNK_SIZE;
+        return _chunks[chunkY, chunkX].GetGameObject(offsetX, offsetY);
+    }
+
+    public GameObject GetTileOnTileGameObject(Vector2 vec)
+    {
+        int chunkX = 1;
+        int chunkY = 1;
+        GetChunkOffsetXY(ref chunkX, ref chunkY, vec.x, vec.y);
+
+        int offsetX = (int)vec.x % Chunk.CHUNK_SIZE;
+        int offsetY = (int)vec.y % Chunk.CHUNK_SIZE;
+        return _chunks[chunkY, chunkX].GetTileOnTileGameObject(offsetX, offsetY);
+    }
+
+
     public void SetTile(float x, float y, TileType type)
     {
         int chunkX = 1;
@@ -468,9 +502,6 @@ public class TileMap : MonoBehaviour
         _chunks[chunkY, chunkX].SetTile(offsetX, offsetY, type);
     }
 
-    // 40
-    // 2
-    // 0
     public GameObject GetGameObjectFast(int x, int y)
     {
         int ix = x / Chunk.CHUNK_SIZE;

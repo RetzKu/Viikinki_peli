@@ -27,7 +27,7 @@ public class CraftingUiController : MonoBehaviour
 
     public Transform Images;
     public Transform Numbers;
-
+    public Color ResetColor;
     public IngredientType[] IngredientTyperOrders;
 
     // 1 -> toiseens
@@ -141,9 +141,10 @@ public class CraftingUiController : MonoBehaviour
     {
         foreach (var image in _hudImages)
         {
-            image.color = Color.white;
+            image.color = ResetColor;
         }
     }
+
 
     public void SetAllCounts()
     {

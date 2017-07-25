@@ -44,13 +44,24 @@ public class CurvedLineRendererController : MonoBehaviour
         return new Vector3(-1, -1, -1);
     }
 
+    public void MovePoints(Vector3 delta)
+    {
+        if (_pointIndex > 0)
+        {
+            foreach (GameObject LinePoint in LinePoints)
+            {
+                LinePoint.transform.Translate(delta);
+            }
+        }
+    }
+
+    public void HideLines()
+    {
+        GetComponent<LineRenderer>().numPositions = 0;
+    }
+
     public int GetLinePointCount()
     {
         return _pointIndex + 1;
     }
-
-    // public void TranslatePoints(Vector3 vector)
-    // {
-// 
-    // }
 }

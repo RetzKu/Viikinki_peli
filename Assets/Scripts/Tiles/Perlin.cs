@@ -244,10 +244,10 @@ public class Perlin : MonoBehaviour
         return value;
     }
 
-    public int blueNoiseOctaves = 2;
+    public int   blueNoiseOctaves = 2;
     public float blueNoiseLacunarity = 0f;
     public float blueNoisePersistance = 0f;
-    public int ObjectRValue = 2;
+    public int   ObjectRValue = 2;
 
     public float[,] GenerateBlueNoise(int sizeX, int sizeY)
     {

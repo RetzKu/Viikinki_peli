@@ -19,13 +19,13 @@ public class Movement : MonoBehaviour
     PlayerDir pd = PlayerDir.def;
     PlayerDir fx = PlayerDir.def;
     private Rigidbody2D rb;
-        //private Vector2 movement;
-            public float slowdown = 10;
-            public float thrust = 15;
-            private float max_spd = 3;
-            private float min_spd_pate = 0.2f;
-            private float max_spd_pate = 3;
-            bool inAttack = false;
+    //private Vector2 movement;
+    public float slowdown = 10;
+    public float thrust = 15;
+    private float max_spd = 3;
+    private float min_spd_pate = 0.2f;
+    private float max_spd_pate = 3;
+    bool inAttack = false;
     bool knockBack = false;
     public bool Keyboard = true;
     public CustomJoystick Joystick;
@@ -54,13 +54,13 @@ public class Movement : MonoBehaviour
         //acc *= Time.deltaTime;
         vel += acc;
         //vel*=Time.deltaTime;
-        if(vel.magnitude > steerSPD)
+        if (vel.magnitude > steerSPD)
         {
             vel.Normalize();
             vel *= steerSPD;
             //print("limiting speed");
         }
-       
+
         rb.MovePosition(rb.position + vel);
         acc *= 0;
     }
@@ -81,23 +81,26 @@ public class Movement : MonoBehaviour
             //print(max_spd);
             Vector2 SpeedLimiter = SpeedLimitChecker();
             vel = rb.velocity += SpeedLimiter;
-            
+
         }
         else
         {
             knockClock();
         }
-
     }
 
     Vector2 Input_checker()
     {
         //Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical")).normalized; // ???
-        // Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized; // WASD liikkuminen koneell
+#if UNITY_EDITOR // miksi #elseif ei toimi
+        Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized; // WASD liikkuminen koneell
+#endif
+#if UNITY_ADNROID
         Vector2 movement = Joystick.GetInputVector(); // Kun buildataan phonelle
+#endif
 
-        if (movement.x == 0 && movement.y == 0) {rb.drag = slowdown;}
-        else {rb.drag = 2;}
+        if (movement.x == 0 && movement.y == 0) { rb.drag = slowdown; }
+        else { rb.drag = 2; }
 
         return movement;
     }
@@ -109,9 +112,9 @@ public class Movement : MonoBehaviour
         if (added_spd.x == 0) { rb.velocity = new Vector2(rb.velocity.x / 1.1f, rb.velocity.y); }
         if (added_spd.y == 0) { rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 1.1f); }
 
-        if (rb.velocity.x > max_spd) { added_spd.x -= ((rb.velocity.x / max_spd) - 1)* max_spd; }
+        if (rb.velocity.x > max_spd) { added_spd.x -= ((rb.velocity.x / max_spd) - 1) * max_spd; }
         if (rb.velocity.y > max_spd) { added_spd.y -= ((rb.velocity.y / max_spd) - 1) * max_spd; }
-        if (rb.velocity.x < -max_spd) { added_spd.x += ((rb.velocity.x / -max_spd) -1) *max_spd; }
+        if (rb.velocity.x < -max_spd) { added_spd.x += ((rb.velocity.x / -max_spd) - 1) * max_spd; }
         if (rb.velocity.y < -max_spd) { added_spd.y += ((rb.velocity.y / -max_spd) - 1) * max_spd; }
         getRotation(added_spd);
         //vel = added_spd;
@@ -133,7 +136,7 @@ public class Movement : MonoBehaviour
     void knockClock()
     {
         knockTimer += Time.deltaTime;
-        if(knockTimer < knockTime)
+        if (knockTimer < knockTime)
         {
             //Vector2 des = knockDir - rb.position;
             //des.Normalize();
@@ -161,9 +164,9 @@ public class Movement : MonoBehaviour
             rb.drag = slowdown; // Tarkista 
         }
     }
-    float lerp(float min,float max,float t)
+    float lerp(float min, float max, float t)
     {
-        return  min + ((max - min) * t);
+        return min + ((max - min) * t);
     }
     void lerpate()
     {
@@ -188,7 +191,7 @@ public class Movement : MonoBehaviour
         }
         float t = currentlerpate / lerpateTime;
 
-        max_spd = lerp(min_spd_pate, max_spd_pate,t);
+        max_spd = lerp(min_spd_pate, max_spd_pate, t);
 
     }
     public void UpPateDir(PlayerDir dir)

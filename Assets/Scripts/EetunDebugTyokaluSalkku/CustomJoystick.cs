@@ -67,7 +67,7 @@ public class CustomJoystick : MonoBehaviour
 
 
         Base = Instantiate(Resources.Load<GameObject>("Prefab/Ui/JoystickBase"));
-
+        Base.transform.position =  new Vector3(-100f, -100f);
     }
 
     // TODO: Cleanup

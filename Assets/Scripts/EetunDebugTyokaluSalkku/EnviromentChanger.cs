@@ -12,7 +12,8 @@ public class EnviromentChanger : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 	    if (Input.GetMouseButtonDown(0))
 	    {
 	        var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

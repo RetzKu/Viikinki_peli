@@ -29,6 +29,27 @@ public abstract class Rune : ScriptableObject
         return true;
     }
 
+    public bool ValidateRune(bool[] runeIndices)
+    {
+        bool[] indiceBools = new bool[9];
+        for (int i = 0; i < Indices.Length; i++)
+        {
+            indiceBools[TouchController.GetBoolIndex(Indices[i])] = true;
+        }
+
+        bool value = true;
+        for (int i = 0; i < Length; i++)
+        {
+            if (indiceBools[i] != runeIndices[i])
+            {
+                value = false;
+                break;
+            }
+        }
+        // Debug.Log("Rune validated!");
+        return value;
+    }
+
     public abstract void init(GameObject owner);
     public abstract void Fire();
 

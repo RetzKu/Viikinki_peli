@@ -573,6 +573,7 @@ GameObject:
   - component: {fileID: 70305166460511146}
   - component: {fileID: 114886004865924286}
   - component: {fileID: 114508786296571636}
+  - component: {fileID: 114751757998946096}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -1198,6 +1199,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Weapon: {fileID: 1192870776797376, guid: bd771d4617c99d149ad6c9dd912fcb49, type: 2}
   Movin: 0
+--- !u!114 &114751757998946096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1977754839611798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3d9d2015c7ace4dacb9ae9aa141490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultSprite: {fileID: 21300000, guid: f43c53a45dee3724793fb23c5164e286, type: 3}
+  DefaultOffset: {x: 0, y: 0.3, z: 0}
+  DefaultDistance: 0.5
+  DefaultDuration: 0.1
 --- !u!114 &114886004865924286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1209,6 +1225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2031ad80bc3df114696f3d0865c5394f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swingDist: 1
   inAttack: 0
   agro: 0
   attackDist: 0

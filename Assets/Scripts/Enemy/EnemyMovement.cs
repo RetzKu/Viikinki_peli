@@ -97,7 +97,7 @@ public class EnemyMovement
 
     }
 
-    public Vector2[] applyBehaviors(Collider2D[] GroupMobs, Collider2D[] CollisionMobs, Vector2 Rvelocity, Vector2 Rtarget, Vector2 position, int flags,collision collstate)
+    public Vector2[] applyBehaviors(Collider2D[] GroupMobs, Collider2D[] CollisionMobs,Collider2D[] environment, Vector2 Rvelocity, Vector2 Rtarget, Vector2 position, int flags,collision collstate)
     {
         float tempSpeed = MaxSpeed;
 
@@ -124,6 +124,10 @@ public class EnemyMovement
             Vector2 coh = cohesion(GroupMobs);
             coh *= cohF;
             applyForce(coh);
+        }
+        if ((flags & (int)behavior.CollideEnv) == (int)behavior.CollideEnv)
+        {
+            separate(environment,true);
         }
         if ((flags & (int)behavior.giveWanderingTargetSolo) == (int)behavior.giveWanderingTargetSolo)
         {
@@ -254,14 +258,13 @@ public class EnemyMovement
         desiredV = desiredV * MaxSpeed;
         Vector2 steer = new Vector2(0, 0);
         steer = desiredV - velocity;
-        if (steer.magnitude > MaxSpeed)
+        if (steer.magnitude > MaxSteeringForce)
         {
             steer.Normalize();
-            steer = steer * MaxSteeringForce;
+            steer = steer * MaxSteeringForce;// RIKKOO MAH KORJAA HOX HOX HOX
         }
         return steer;
     }
-
 
 
 
@@ -330,24 +333,36 @@ public class EnemyMovement
     }
 
 
-    Vector2 separate(Collider2D[] array)
+    Vector2 separate(Collider2D[] array, bool qq = false)
     {
         Vector2 average = new Vector2(0, 0);
         int count = 0;
-
-        for (int i = 0; i < array.Length; i++)
+        if(array != null)
         {
-            Vector2 temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();
-            float d = temp.magnitude;
-
-            if (d > 0)
+            if (qq)
             {
-                temp.Normalize();
-                temp = temp / d;
-                average = average + temp;
-                count++;
+                int k = 0;
+            }
+            for (int i = 0; i < array.Length; i++)
+            {
+                //Vector2 temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();
+                Vector2 temp = bodyPosition - (Vector2)array[i].transform.position;
+                float d = temp.magnitude;
+
+                if (d > 0)
+                {
+                    temp.Normalize();
+                    temp = temp / d;
+                    average = average + temp;
+                    count++;
+                }
+
             }
 
+        }
+        else
+        {
+            return new Vector2(0f, 0f);
         }
         if (count > 0)
         {

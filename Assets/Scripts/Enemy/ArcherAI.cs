@@ -72,7 +72,7 @@ public class ArcherAI : generalAi {
             knocktimer();
         }
 
-        powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags, CollState);
+        powers = Physics.applyBehaviors(HeardArray, CollisionArray,new Collider2D[0], velocity, target, body.position, flags, CollState);
         target = powers[1];
         velocity = powers[0];
 
@@ -213,7 +213,7 @@ public class ArcherAI : generalAi {
         {
             int[] ind = player.GetComponent<UpdatePathFind>().path.calculateIndex(body.position);
 
-            if (ind[0] < 0 || ind[0] > 59 || ind[1] < 0 || ind[1] > 59)
+            if (ind[0] < 0 || ind[0] > TileMap.TotalWidth || ind[1] < 0 || ind[1] > TileMap.TotalHeight)
             {
                 return true;
             }

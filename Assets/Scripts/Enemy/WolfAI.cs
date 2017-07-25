@@ -7,11 +7,11 @@ public class WolfAI : generalAi
 {
 
 
-    public float leapDist = 1.0f;
+    public float leapDist = 2.0f; // ignored for now
 
     private float attackCounter = 5f; // EETU TRIGGER
-    private float attackUptade = 5f;
-    float leapSpeed = 4;
+    private float attackUptade = 100f;
+    float leapSpeed = 3;
     bool bite = false;
 
     float currentTime = 0;
@@ -26,7 +26,7 @@ public class WolfAI : generalAi
 
     public override void InitStart(float x, float y, EnemyType type,GameObject player) // jokaselle
     {
-        attackDist = UnityEngine.Random.Range(leapDist-1f, leapDist+1f);
+        attackDist = leapDist;/* UnityEngine.Random.Range(leapDist-1f, leapDist+1f);*/
         //print(attackDist);
         myType = type;
         rotation.init(myType);
@@ -39,7 +39,7 @@ public class WolfAI : generalAi
         Physics._maxSpeed = MaxSpeed;
         this.player = player;
     }
-
+    Collider2D[] environment;
     public override void UpdatePosition() // jokaselle
     {
         //print(inAttack);
@@ -80,6 +80,7 @@ public class WolfAI : generalAi
             }
             else if (agro)
             {
+                getEnvironment(ref environment);
                 Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
 
                 Vector2 dist = body.position - playerPos;
@@ -98,7 +99,7 @@ public class WolfAI : generalAi
         {
             knocktimer();
         }
-        powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags, CollState);
+        powers = Physics.applyBehaviors(HeardArray, CollisionArray,environment, velocity, target, body.position, flags, CollState);
         target = powers[1];
         velocity = powers[0];
 
@@ -107,9 +108,9 @@ public class WolfAI : generalAi
             currentTime = animTime;
             Physics._maxSpeed = MaxSpeed * leapSpeed;            
         }
-        velocity *= Time.deltaTime;
+        //velocity *= Time.deltaTime;
         //print(velocity.magnitude);
-        body.MovePosition(body.position + velocity);
+        body.MovePosition(body.position + (velocity* Time.deltaTime));
     }
     void leapingPattern(Vector2 dist, Vector2 playerPos) //spe
     {        
@@ -125,6 +126,7 @@ public class WolfAI : generalAi
                     justBite = true;
                     inAttack = true;
                     Physics._maxSpeed = MaxSpeed * 0.3f;
+
                     rotation.playerPos = playerPos;
                     rotation.HardRotate( body.position, velocity);
                     GetComponent<WolfAnimatorScript>().SpriteDirection(myDir);
@@ -134,11 +136,13 @@ public class WolfAI : generalAi
                 }
                 else
                 {
+                    Physics._maxSteeringForce = MaxSteeringForce * 100f;
+
                     GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapStart);
                     rotation.rotToPl = true;
                     // ENNAKOIVA HYPPY?
-                    dist.Normalize();
-                    dist *= attackDist +1 ;//5
+                    //dist.Normalize();
+                    //dist *= attackDist +1 ;//5
                     dist *= -1.0f;
                     target = body.position + dist;
                     flags = (int)behavior.seek;
@@ -150,12 +154,13 @@ public class WolfAI : generalAi
             }
             else if (inAttack && !justBite)
             {
-                bool go = timer();
+                bool go = timer(); // korjaa
+                //bool go = true;
                 rotation.Lock = true;
                 //leaping
-                Vector2 t = target - body.position;
+               // Vector2 t = target - body.position;
                 flags = (int)behavior.seekAndArrive;
-                if (velocity.magnitude == 0 && go)
+                if ((target - body.position).magnitude < 0.5f && go)
                 {
                     GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd); // mee ohi
                     Physics._maxSpeed = MaxSpeed;
@@ -163,18 +168,20 @@ public class WolfAI : generalAi
                     attackCounter = 0;
                     bite = false;
                     rotation.Lock = false;
+                    Physics._maxSteeringForce = MaxSteeringForce;
                 }
-                else if (dist.magnitude < velocity.magnitude * leapAnim && !bite && go )// muokkaa purase
+                else if (dist.magnitude < 1/*velocity.magnitude * leapAnim*/ && !bite && go )// muokkaa purase
                 {
                     //GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
                     GetComponent<WolfAnimatorScript>().AnimationTrigger(action.Attack);
-                    target = body.position + (velocity * 4.5f);
+                    GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
+                    target = body.position + (velocity * 0.1f);
                     bite = true;
                 }
-                if( dist.magnitude < velocity.magnitude * leapAnim && go)
-                {
-                    GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
-                }
+                //if( dist.magnitude < velocity.magnitude /** leapAnim*/ && go)
+                //{
+                //    GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
+                //}
             }
             else if (justBite)
             {
@@ -211,9 +218,9 @@ public class WolfAI : generalAi
                 //}
                 //else
                 //{
-                //    followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
+                    followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
                 //}
-                reversedFindPath(ref flags, ref velocity, ref target, player, body);
+                //reversedFindPath(ref flags, ref velocity, ref target, player, body);
             }
         }
         else
@@ -257,7 +264,7 @@ public class WolfAI : generalAi
         Gizmos.DrawLine(body.position, body.position+main); // piirretään viiva visualisoimaan toimivuutta 
         Gizmos.DrawLine(body.position, body.position + first);
         Gizmos.DrawLine(body.position, body.position + second);
-        Gizmos.DrawLine(body.position, body.position + velocity * 30);
+        Gizmos.DrawLine(body.position, body.position + velocity);
         if (rotation.rotToPl)
         {
             Gizmos.color = Color.red;
@@ -305,7 +312,7 @@ public class WolfAI : generalAi
         {
             int[] ind = player.GetComponent<UpdatePathFind>().path.calculateIndex(body.position);
 
-            if (ind[0] < 0 || ind[0] > 59 || ind[1] < 0 || ind[1] > 59)
+            if (ind[0] < 0 || ind[0] > TileMap.TotalWidth || ind[1] < 0 || ind[1] > TileMap.TotalHeight)
             {
                 return true;
             }

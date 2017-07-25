@@ -680,6 +680,24 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114751462533805286, guid: 3360f61cc7c12e14d9e5929ad912cc16,
+        type: 2}
+      propertyPath: fireBuff
+      value: 
+      objectReference: {fileID: 1555529482691730, guid: f860d2bca251dbe4cb93c2e225fbfecc,
+        type: 2}
+    - target: {fileID: 114751462533805286, guid: 3360f61cc7c12e14d9e5929ad912cc16,
+        type: 2}
+      propertyPath: fireExp
+      value: 
+      objectReference: {fileID: 1523357301223836, guid: 789dafa39caf178438555f0038ca1e0f,
+        type: 2}
+    - target: {fileID: 114751462533805286, guid: 3360f61cc7c12e14d9e5929ad912cc16,
+        type: 2}
+      propertyPath: Slow
+      value: 
+      objectReference: {fileID: 1555529482691730, guid: f860d2bca251dbe4cb93c2e225fbfecc,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3360f61cc7c12e14d9e5929ad912cc16, type: 2}
   m_IsPrefabParent: 0
@@ -736,12 +754,12 @@ Prefab:
     - target: {fileID: 114082371090620650, guid: 2b5b440fa7b64344ea4718be6cea3e4e,
         type: 2}
       propertyPath: spawnMelee
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114082371090620650, guid: 2b5b440fa7b64344ea4718be6cea3e4e,
         type: 2}
       propertyPath: spawnWolfs
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b5b440fa7b64344ea4718be6cea3e4e, type: 2}

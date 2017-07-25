@@ -46,6 +46,7 @@ public enum behavior
     Inleap = 512,
     startLeap = 1024,
     Collide = 2048,
+    CollideEnv = 4096,
     wanderGroup = separate | alingment | cohesion,
     startWanderingSolo = wander | giveWanderingTargetSolo,
     changeSoloWanderDir = wander | changeSoloDIr,
@@ -124,10 +125,22 @@ public abstract class generalAi : MonoBehaviour
         dist.Normalize();
         dist *= attackDist;
         target = playerPos + dist;
-        flags = (int)behavior.seekAndArrive | (int)behavior.separate;
+        flags = (int)behavior.seekAndArrive | (int)behavior.separate | (int)behavior.CollideEnv;
         Physics._sepF = sepF * 2;
     }
+    float envTime = 0.1f;
+    float envTimer = 0f;
+    protected void getEnvironment(ref Collider2D[] environment)
+    {
+        envTimer += Time.deltaTime;
+        if(envTimer > envTime)
+        {
+            LayerMask mask = LayerMask.GetMask("ObjectLayer");
+            environment = Physics2D.OverlapCircleAll(body.position, 1f, mask);// muokkaa radiusta
+            envTimer = 0;
+        }
 
+    }
     public void findPath(ref int flags,ref Vector2 velocity,ref Vector2 target ,GameObject player,Rigidbody2D body)
     {
         PathFinder.Dir k = player.GetComponent<UpdatePathFind>().path.getTileDir(body.position);
@@ -384,7 +397,7 @@ public abstract class generalAi : MonoBehaviour
         if(obsTimer > obsTime)
         {
             int mask = LayerMask.GetMask("ObjectLayer");
-            RaycastHit2D[] ob =  Physics2D.CircleCastAll(body.position, 1f, player.transform.position - (Vector3)body.position, dist.magnitude, mask);
+            RaycastHit2D[] ob =  Physics2D.CircleCastAll(body.position, 0.5f, player.transform.position - (Vector3)body.position, dist.magnitude, mask);
             if(ob.Length == 0)
             {
                 obc = false;

@@ -95,21 +95,20 @@ public class CustomJoystick : MonoBehaviour
         if (touches.Length != 0)
             touching = true;
 #endif
-        Vector3 currentPotition = Camera.main.ScreenToWorldPoint(Input.mousePosition); // sormi
+        // Vector3 currentPotition = Camera.main.ScreenToWorldPoint(Input.mousePosition); // sormi
         Vector3 cameraPos = Camera.main.transform.position;
         Rect ScreenView = new Rect(cameraPos.x + HitBox.x, cameraPos.y + HitBox.y, HitBox.width, HitBox.height);
 
         Base.transform.position = startPosition;
-        Base.transform.position = Vector3.zero;
 #if MOUSE
         if (Input.GetMouseButtonUp(0) )
 #else
         for (int i = 0; i < touches.Length; i++)
         {
-            currentPotition = Camera.main.ScreenToWorldPoint(touches[i].position);
+            Vector3 currentPotition = Camera.main.ScreenToWorldPoint(touches[i].position);
 
 
-            if (fingerId == touches[i].fingerId && touches[i].phase == TouchPhase.Ended)
+            if (fingerId == touches[i].fingerId && touches[i].phase == TouchPhase.Ended) // irrouttautuminen h
 #endif
             {
                 FirstTouchSuccess = false;
@@ -117,55 +116,61 @@ public class CustomJoystick : MonoBehaviour
                 endposition = Vector2.zero;
                 transform.position = Vector3.zero;
                 fingerId = NO_FINGER;
+                Base.transform.position = Vector3.zero;
+
             }
 
 #if MOUSE
             if (Input.GetMouseButtonDown(0))    // eka 
 #else
-            if (fingerId == NO_FINGER && touches[i].phase == TouchPhase.Began)
-#endif
+            if (touches[i].position.x < Screen.width / 2f)
             {
+                if (fingerId == NO_FINGER && touches[i].phase == TouchPhase.Began)
+#endif
+                {
 #if !MOUSE
-                fingerId = touches[i].fingerId;
+                    fingerId = touches[i].fingerId;
 #endif
 
 #if MOUSE
                 if (touching && !touchingLastFrame && ScreenView.Contains(currentPotition))
 #else
-                if (touching && !touchingLastFrame && ScreenView.Contains(currentPotition))
+                    if (touching && !touchingLastFrame && ScreenView.Contains(currentPotition))
 #endif
-                {
-                    startPosition = currentPotition;
-                    transform.position = startPosition;
-                    touching = true;
-                    FirstTouchSuccess = true;
-                    position = Player.transform.position;
+                    {
+                        startPosition = currentPotition;
+                        transform.position = startPosition;
+                        touching = true;
+                        FirstTouchSuccess = true;
+                        position = Player.transform.position;
+                    }
+                    else
+                    {
+                        FirstTouchSuccess = false;
+                        fingerId = NO_FINGER;
+                    }
                 }
                 else
                 {
-                    FirstTouchSuccess = false;
-                }
-            }
-            else
-            {
-                if (touching && FirstTouchSuccess)    // toka
-                {
-                    if (touching && touchingLastFrame)
+                    if (touching && FirstTouchSuccess)    // toka
                     {
-                        endposition = currentPotition;
-                        transform.position = endposition;
-                    }
+                        if (touching && touchingLastFrame)
+                        {
+                            endposition = currentPotition;
+                            transform.position = endposition;
+                        }
 
-                    Vector2 touchVector = GetTouchVector();
-                    if (touchVector.magnitude > maxLength && touchingLastFrame)
-                    {
-                        endposition = startPosition + (touchVector.normalized * maxLength);
-                        transform.position = endposition;
+                        Vector2 touchVector = GetTouchVector();
+                        if (touchVector.magnitude > maxLength && touchingLastFrame)
+                        {
+                            endposition = startPosition + (touchVector.normalized * maxLength);
+                            transform.position = endposition;
+                        }
                     }
-                }
-                else
-                {
-                    touching = false;
+                    else
+                    {
+                        touching = false;
+                    }
                 }
             }
 #if !MOUSE

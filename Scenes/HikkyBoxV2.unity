@@ -3181,6 +3181,11 @@ Prefab:
       propertyPath: spawnMelee
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114082371090620650, guid: 2b5b440fa7b64344ea4718be6cea3e4e,
+        type: 2}
+      propertyPath: spawnWolfs
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b5b440fa7b64344ea4718be6cea3e4e, type: 2}
   m_IsPrefabParent: 0
@@ -4543,6 +4548,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1830157689502956, guid: 243c70e89a75e7f43895e031aebe4ac0,
         type: 2}
+    - target: {fileID: 114286256747533024, guid: b5405cc59ec405e42ac26438ef1b066d,
+        type: 2}
+      propertyPath: Duration
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
   m_IsPrefabParent: 0

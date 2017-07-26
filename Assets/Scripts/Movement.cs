@@ -132,11 +132,6 @@ public class Movement : MonoBehaviour
         if (added_spd.x == 0) { rb.velocity = new Vector2(rb.velocity.x / 1.1f, rb.velocity.y); }
         if (added_spd.y == 0) { rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 1.1f); }
 
-        if(Slowed)
-        {
-            print("slowed");
-        }
-
         if (rb.velocity.x > ModifiedMaxSpd) { added_spd.x -= ((rb.velocity.x / ModifiedMaxSpd) - 1) * ModifiedMaxSpd; }
         if (rb.velocity.y > ModifiedMaxSpd) { added_spd.y -= ((rb.velocity.y / ModifiedMaxSpd) - 1) * ModifiedMaxSpd; }
         if (rb.velocity.x < -ModifiedMaxSpd) { added_spd.x += ((rb.velocity.x / -ModifiedMaxSpd) - 1) * ModifiedMaxSpd; }
@@ -213,10 +208,10 @@ public class Movement : MonoBehaviour
                 }
             }
         }
+
         float t = currentlerpate / lerpateTime;
-
-        //max_spd = lerp(min_spd_pate, max_spd_pate, t);
-
+        //ModifiedMaxSpd = lerp(min_spd_pate, max_spd_pate, t);
+        
     }
     public void pateClock()
     {

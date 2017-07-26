@@ -26,13 +26,10 @@ public class DetectEnemies : MonoBehaviour
             aggroArray[i].transform.root.GetComponent<generalAi>().agro = true;
         }
         var slowArray = Physics2D.OverlapCircleAll(body.position, slowDown, mask); // , mask);
-        if(slowArray.Length > 0)
+        if (slowArray.Length > 0)
         {
-            GetComponent<Movement>().lerpUp = false;
-        }
-        else
-        {
-            GetComponent<Movement>().lerpUp = true;
+            GetComponent<Movement>().Started = true;
+            GetComponent<Movement>().Slowed = true;
         }
     }
     public Vector2 getPosition()

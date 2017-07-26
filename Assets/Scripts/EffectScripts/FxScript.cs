@@ -106,6 +106,7 @@ public class FxScript : MonoBehaviour {
         if (trig.gameObject.tag == "Enemy")
         {
             lastHittedEnemy = trig.gameObject;
+
             if(GetComponent<PlayerScript>().weaponInHand != null)
             {
                 GetComponentInChildren<weaponStats>().onRange = true;
@@ -138,7 +139,9 @@ public class FxScript : MonoBehaviour {
     {
         if (trig.gameObject.tag == "Enemy")
         {
-            lastHittedEnemy = trig.gameObject;
+
+            lastHittedEnemy = trig.gameObject; 
+
             if (GetComponent<PlayerScript>().weaponInHand != null)
             {
                 GetComponentInChildren<weaponStats>().onRange = true;

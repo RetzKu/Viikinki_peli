@@ -4967,8 +4967,6 @@ MonoBehaviour:
   runes:
   - {fileID: 11400000, guid: 6d19112c5faec534d92ac23bf9a0afa0, type: 2}
   - {fileID: 11400000, guid: e16a8ceb4df570c4981a2e42bbb8567c, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
   IsOwnerPlayer: 1
 --- !u!114 &936331384
 MonoBehaviour:
@@ -5658,8 +5656,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37dc794a2619d824bbe9c64c81c049ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
-  _offset: {x: 0, y: 0, z: 0}
 --- !u!1 &1270689091
 GameObject:
   m_ObjectHideFlags: 0
@@ -6894,8 +6890,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e1d3afbdf75a84ea4813618555efff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tileMap: {fileID: 0}
-  _running: 0
 --- !u!114 &1838485410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8133,13 +8127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6343a15e1e7dc514da4489dcc0241786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitboxes:
-  - x: 19.11
-    y: 13.47
-    width: 10
-    height: 10
-  Transforms:
-  - {fileID: 1988806560}
 --- !u!4 &2109962678
 Transform:
   m_ObjectHideFlags: 0

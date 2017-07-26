@@ -58,13 +58,12 @@ v2f vert( appdata_t IN )
 
     OUT.color = IN.color * _Color;
 
-    #ifdef PIXELSNAP_ON
-    OUT.vertex = UnityPixelSnap( OUT.vertex );
-    #endif
+    // #ifdef PIXELSNAP_ON
+    // OUT.vertex = UnityPixelSnap( OUT.vertex );
+    // #endif
 
     return OUT;
 }
-
 ENDCG
 
 

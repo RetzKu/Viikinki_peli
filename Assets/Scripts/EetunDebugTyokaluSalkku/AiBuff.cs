@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Runes/Buff/Aibuff/Slow")]
 public class AiSlow : Buff

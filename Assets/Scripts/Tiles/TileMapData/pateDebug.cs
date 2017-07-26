@@ -15,7 +15,7 @@ public class pateDebug : MonoBehaviour {
     void Update () {
         if (Input.GetKeyDown("o"))
         {
-            ParticleSpawner.instance.SpawnExplosion(Camera.main.ScreenToWorldPoint(Input.mousePosition),Random.Range(1f,2f));
+            ParticleSpawner.instance.SpawnFireExplosion(Camera.main.ScreenToWorldPoint(Input.mousePosition),Random.Range(1f,2f));
             ParticleSpawner.instance.CastSpell(this.gameObject);
         }
     }

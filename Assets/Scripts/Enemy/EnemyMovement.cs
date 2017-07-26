@@ -37,7 +37,7 @@ public class EnemyMovement
     float cohF;
 
 
-
+    float environmentCollisionForce = 0.04f;
 
 
     Vector2 velocity = new Vector2(); //An object’s PVector velocity will remain constant if it is in a state of equilibrium.
@@ -97,7 +97,7 @@ public class EnemyMovement
 
     }
 
-    public Vector2[] applyBehaviors(Collider2D[] GroupMobs, Collider2D[] CollisionMobs, Vector2 Rvelocity, Vector2 Rtarget, Vector2 position, int flags,collision collstate)
+    public Vector2[] applyBehaviors(Collider2D[] GroupMobs, Collider2D[] CollisionMobs,Collider2D[] environment, Vector2 Rvelocity, Vector2 Rtarget, Vector2 position, int flags,collision collstate)
     {
         float tempSpeed = MaxSpeed;
 
@@ -124,6 +124,12 @@ public class EnemyMovement
             Vector2 coh = cohesion(GroupMobs);
             coh *= cohF;
             applyForce(coh);
+        }
+        if ((flags & (int)behavior.CollideEnv) == (int)behavior.CollideEnv)
+        {
+            Vector2 envsep = separate(environment);
+            envsep *= environmentCollisionForce;
+            applyForce(envsep);
         }
         if ((flags & (int)behavior.giveWanderingTargetSolo) == (int)behavior.giveWanderingTargetSolo)
         {
@@ -254,14 +260,13 @@ public class EnemyMovement
         desiredV = desiredV * MaxSpeed;
         Vector2 steer = new Vector2(0, 0);
         steer = desiredV - velocity;
-        if (steer.magnitude > MaxSpeed)
+        if (steer.magnitude > MaxSteeringForce)
         {
             steer.Normalize();
-            steer = steer * MaxSteeringForce;
+            steer = steer * MaxSteeringForce;// RIKKOO MAH KORJAA HOX HOX HOX
         }
         return steer;
     }
-
 
 
 
@@ -277,9 +282,12 @@ public class EnemyMovement
         Vector2 average = new Vector2(0, 0);
         for (int i = 0; i < array.Length; i++)
         {
-            Vector2 temp = new Vector2(0f, 0f);
-            temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();
-            average = average + array[i].GetComponent<generalAi>().velocity;
+            if(array[i] != null)
+            {
+                Vector2 temp = new Vector2(0f, 0f);
+                temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();
+                average = average + array[i].GetComponent<generalAi>().velocity;
+            }
         }
 
 
@@ -312,10 +320,13 @@ public class EnemyMovement
 
         for (int i = 0; i < array.Length; i++)
         {
-            Vector2 temp = new Vector2(0f, 0f);
-            temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();
+            if (array[i] != null)
+            {
+                Vector2 temp = new Vector2(0f, 0f);
+                temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();
 
-            average = average + array[i].GetComponent<generalAi>().getPosition();
+                average = average + array[i].GetComponent<generalAi>().getPosition();
+            }
         }
 
         if (array.Length > 1)
@@ -330,25 +341,35 @@ public class EnemyMovement
     }
 
 
-    Vector2 separate(Collider2D[] array)
+    Vector2 separate(Collider2D[] array) // qq debug
     {
         Vector2 average = new Vector2(0, 0);
         int count = 0;
-
-
-        for (int i = 0; i < array.Length; i++)
+        if(array != null)
         {
-            Vector2 temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();
-            float d = temp.magnitude;
-
-            if (d > 0)
+            for (int i = 0; i < array.Length; i++)
             {
-                temp.Normalize();
-                temp = temp / d;
-                average = average + temp;
-                count++;
+                if (array[i] != null)
+                {
+                        //Vector2 temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();
+                    Vector2 temp = bodyPosition - (Vector2)array[i].transform.position;
+                    float d = temp.magnitude;
+
+                    if (d > 0)
+                    {
+                        temp.Normalize();
+                        temp = temp / d;
+                        average = average + temp;
+                        count++;
+                    }
+                }
+
             }
 
+        }
+        else
+        {
+            return new Vector2(0f, 0f);
         }
         if (count > 0)
         {

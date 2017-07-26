@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpdatePathFind : MonoBehaviour {
+public class UpdatePathFind : MonoBehaviour
+{
 
     private Rigidbody2D body;
 
 
     public BreadthFirstSearch path;
-    //debugGiz Giz;
+    debugGiz Giz;
 
     bool uptade = true;
 
@@ -19,36 +20,40 @@ public class UpdatePathFind : MonoBehaviour {
     public TileMap terveisin;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         path = new BreadthFirstSearch();
         path.map = terveisin;
         body = GetComponent<Rigidbody2D>();
-        //Giz = GetComponent<debugGiz>();
-        //Giz.init(path);
+        Giz = GetComponent<debugGiz>();
+        Giz.init(path);
     }
 
-    void Update() {
+    void Update()
+    {
         if (uptade)
         {
-            path.uptadeTiles(midPoint, terveisin); //get tile map
-            uptade = false;
+            if (terveisin.CanUpdatePathFind())
+            {
+                path.uptadeTiles(midPoint, terveisin); //get tile map
+                uptade = false;
+            }
             //Giz.init(path);
         }
 
         int[] m = path.calculateIndex(body.position);
-        
 
-        if(LasPos[0] != m[0] || LasPos[1] != m[1])
+
+        if (LasPos[0] != m[0] || LasPos[1] != m[1])
         {
-            path.uptadeTiles(m[0],m[1], terveisin);
+            path.uptadeTiles(m[0], m[1], terveisin);
             LasPos = m;
         }
 
 
     }
 
-    //void OnDrawGizmos() // käytä pathfind debuggaukseen
+    //void OnDrawGizmos() // käytä pathfind debuggaukseens
     //{
     //    Giz.OnDrawGizmosPate();
     //}

@@ -9,7 +9,7 @@ public class MeleeAi : generalAi {
     float attRefresh = 2f;
     float attCount = 0f;
     bool attack = true;
-
+    
     public override void InitStart(float x, float y, EnemyType type,GameObject player)
     {
         attackDist = UnityEngine.Random.Range(swingDist - 0.2f, swingDist + 0.2f);
@@ -24,15 +24,19 @@ public class MeleeAi : generalAi {
         Physics._maxSpeed = MaxSpeed;
         this.player = player;
     }
+    //Collider2D[] environment = new Collider2D[0];
+    Collider2D[] HeardArray = new Collider2D[0];
+    Collider2D[] CollisionArray = new Collider2D[0];
     public override void UpdatePosition()
     {
         rotation.UpdateRotation(velocity, body.position);
+        //print(velocity.magnitude);
         transform.GetComponent<EnemyAnimator>().ChangeDirection(myDir);
         LayerMask mask = new LayerMask();
         mask = LayerMask.GetMask("Enemy");
-
-        var HeardArray = Physics2D.OverlapCircleAll(body.position, alingmentDistance, mask); // , mask);
-        var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
+        getFriends(ref HeardArray, ref CollisionArray, alingmentDistance, desiredseparation, mask);
+        //var HeardArray = Physics2D.OverlapCircleAll(body.position, alingmentDistance, mask); // , mask);
+        //var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
         Vector2[] powers = new Vector2[2];
 
         if (slow)
@@ -43,6 +47,7 @@ public class MeleeAi : generalAi {
         {
             if (!agro)
             {
+                //flags = (int)behavior.wanderGroup;
                 wander(HeardArray, ref flags, ref GiveStartTarget, ref counter, IdleRefreshRate);
                 rotation.rotToPl = false;
                 rotation.Lock = false;
@@ -61,17 +66,19 @@ public class MeleeAi : generalAi {
             knocktimer();
         }
        // print((behavior)flags);
-        powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags, CollState);
+        powers = Physics.applyBehaviors(HeardArray, CollisionArray, new Collider2D[0], velocity, target, body.position, flags, CollState);
         target = powers[1];
         velocity = powers[0];
 
-        velocity *= Time.deltaTime;
+        //velocity *= Time.deltaTime;
+        //Vector2 r = velocity * Time.deltaTime;
+        //print(velocity.magnitude);
         //if (knocked)
         //{
         //    print(velocity.magnitude);
         //}
 
-        body.MovePosition(body.position + velocity);
+        body.MovePosition(body.position + velocity * Time.deltaTime);
     }
 
     void meleePattern(Vector2 dist, Vector2 playerPos)
@@ -175,7 +182,7 @@ public class MeleeAi : generalAi {
         {
             int[] ind = player.GetComponent<UpdatePathFind>().path.calculateIndex(body.position);
 
-            if (ind[0] < 0 || ind[0] > 59 || ind[1] < 0 || ind[1] > 59)
+            if (ind[0] < 0 || ind[0] > TileMap.TotalWidth || ind[1] < 0 || ind[1] > TileMap.TotalHeight)
             {
                 return true;
             }

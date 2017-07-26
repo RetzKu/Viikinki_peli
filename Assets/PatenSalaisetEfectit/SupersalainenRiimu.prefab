@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadetime: 3
-  ex: {fileID: 198488753435618582, guid: f4d4536d2f2cf9844980dbb930fca604, type: 2}
+  ex: {fileID: 198118672052008674, guid: 66e2dbbb5643c11468d2f9b0ee315c90, type: 2}
 --- !u!212 &212854692381218516
 SpriteRenderer:
   m_ObjectHideFlags: 1

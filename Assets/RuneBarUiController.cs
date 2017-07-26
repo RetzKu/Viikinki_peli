@@ -55,6 +55,7 @@ public class RuneBarUiController : MonoBehaviour
 
         float increment = 0.02f / duration;
         float t = 0f;
+
         while (t < 1.0f)
         {
             image.color = Color.Lerp(original, Color.white, t);

@@ -5,6 +5,9 @@ public class Tree : Resource
 {
     public static Sprite[] _treeShadows;
 
+
+
+
     public override void Init(bool destroyed)
     {
         SetCollidersInChilds(false);

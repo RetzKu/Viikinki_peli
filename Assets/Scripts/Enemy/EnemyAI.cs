@@ -180,7 +180,7 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
-        powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags,CollState);
+        //powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags,CollState);
         target = powers[1];
         velocity = powers[0];
         body.MovePosition(body.position + velocity);

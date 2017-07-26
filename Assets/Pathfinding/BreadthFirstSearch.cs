@@ -7,8 +7,7 @@ public class BreadthFirstSearch
     bool inited = false;
 
     int goalX, goalY;
-    public List<List<tiles>>  moveTiles = new List<List<tiles>>();
-
+    public List<List<tiles>> moveTiles = new List<List<tiles>>();
     public PathFinder panther = new PathFinder();
 
     public TileMap map;
@@ -37,8 +36,19 @@ public class BreadthFirstSearch
     {
         if (inited)
         {
-            int[] j = calculateIndex(k);              
-            return panther.dirs[j[1],j[0]]; // palauttaa movement laskujen mukaan x y position
+            int[] j = calculateIndex(k);
+            return panther.dirs[j[1], j[0]]; // palauttaa movement laskujen mukaan x y position
+        }
+        else
+        {
+            return PathFinder.Dir.NoDir;                     // EETU TRIGGER
+        }
+    }
+    public PathFinder.Dir getTileDir(int[] j)
+    {
+        if (inited)
+        {
+            return panther.dirs[j[1], j[0]]; // palauttaa movement laskujen mukaan x y position
         }
         else
         {
@@ -47,13 +57,12 @@ public class BreadthFirstSearch
     }
 
 
-
     public int[] calculateIndex(Vector2 k)
     {
-       Vector3 j = map.GetGameObjectFast(0, 0).transform.position;
-       Vector2 i = j;
-       k += new Vector2(0.5f, 0.5f);
-       Vector2 temp = k - i;
+        Vector3 j = map.GetGameObjectFast(0, 0).transform.position;
+        Vector2 i = j;
+        k += new Vector2(0.5f, 0.5f);
+        Vector2 temp = k - i;
 
         int[] h = new int[2];
         h[0] = (int)temp.x;
@@ -62,21 +71,42 @@ public class BreadthFirstSearch
 
         return h;
     }
-    public void uptadeTiles(Vector2 position,TileMap tileMap)
+    public void uptadeTiles(Vector2 position, TileMap tileMap)
     {
         uptadeTiles((int)position.x, (int)position.y, tileMap);
     }
     public Vector2 getTileTrans(Vector2 k)
     {
         int[] h = calculateIndex(k);
-        
+
         return map.GetGameObjectFast(h[0], h[1]).transform.position;
     }
+
+    public void Init(TileMap tileMap)
+    {
+        for (int y = 0; y < TileMap.TotalHeight; y++)
+        {
+            List<tiles> temp = new List<tiles>(TileMap.TotalHeight);
+            for (int x = 0; x < TileMap.TotalWidth; x++)
+            {
+                temp.Add(new tiles() { x = x, y = y, tileState = tileMap.GetTileAndObjectCollision(x, y) ? states.wall : states.unVisited });   /*GET WALL INFO*/
+            }
+            moveTiles.Add(temp);
+        }
+    }
+
     public void uptadeTiles(int playerX, int playerY, TileMap tileMap)
     {
+        if (!inited)
+        {
+            Init(tileMap);
+        }
         inited = true;
-        map = tileMap; //EETU TRIGGER, mah ei tarvi korjata
+        map = tileMap;
+
+#if false
         moveTiles.Clear(); 
+
         for (int y = 0; y < TileMap.TotalHeight; y++)
         {
             List<tiles> temp = new List<tiles>();
@@ -85,18 +115,24 @@ public class BreadthFirstSearch
                 if (x == playerX && y == playerY)
                         temp.Add(new tiles() { x = x, y = y, tileState = states.goal});
                 else
-#if true
                     temp.Add(new tiles() { x = x, y = y, tileState = tileMap.GetTileAndObjectCollision(x, y) ? states.wall : states.unVisited});   /*GET WALL INFO*/
-#else
-                    temp.Add(new tiles() { x = x, y = y, tileState = TileMap.Collides(tileMap.GetTileFast(x, y)) ? states.wall : states.unVisited});   /*GET WALL INFO*/
-#endif
-
             }
             moveTiles.Add(temp);
         } 
+#else
+        for (int y = 0; y < TileMap.TotalHeight; y++)
+        {
+            for (int x = 0; x < TileMap.TotalWidth; x++)
+            {
+                moveTiles[y][x] = new tiles() { x = x, y = y, tileState = tileMap.GetTileAndObjectCollision(x, y) ? states.wall : states.unVisited };
+            }
+        }
+        moveTiles[playerY][playerX] = new tiles() { x = playerX, y = playerY, tileState = states.goal };
+#endif
+
         goalX = playerX;
         goalY = playerY;
-        panther.Search(moveTiles,goalX,goalY);
+        panther.Search(moveTiles, goalX, goalY);
         //for(int y = 0; y < moveTiles.Count; y++)
         //{
         //    for (int x = 0; x < moveTiles.Count; x++)

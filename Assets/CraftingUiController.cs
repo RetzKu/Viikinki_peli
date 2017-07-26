@@ -27,7 +27,7 @@ public class CraftingUiController : MonoBehaviour
 
     public Transform Images;
     public Transform Numbers;
-
+    public Color ResetColor;
     public IngredientType[] IngredientTyperOrders;
 
     // 1 -> toiseens
@@ -85,6 +85,30 @@ public class CraftingUiController : MonoBehaviour
         // SetAllCounts();
 
         SetAllButtonsImages(ButtonState.InCombat);
+
+        Vector2[] pos = new Vector2[9];
+        for (int i = 0; i < pos.Length; i++)
+        {
+            Vector3 center = _hudImages[i].transform.position;
+            pos[i] = Camera.main.ScreenToWorldPoint(center);
+            // center.x += _hudImages[i].rectTransform.rect.width;
+            // center.y += _hudImages[i].rectTransform.rect.height;
+        }
+
+        var touchControllerGo = GameObject.FindWithTag("TouchController");
+        TouchController touchController = touchControllerGo.GetComponent<TouchController>();
+        touchController.SetTouchContollerCenters(pos);
+    }
+
+    public Vector2[] GetPos()
+    {
+        Vector2[] pos = new Vector2[9];
+        for (int i = 0; i < pos.Length; i++)
+        {
+            Vector3 center = _hudImages[i].transform.position;
+            pos[i] = Camera.main.ScreenToWorldPoint(center);
+        }
+        return pos;
     }
 
     void OnBaseEnter()
@@ -141,9 +165,10 @@ public class CraftingUiController : MonoBehaviour
     {
         foreach (var image in _hudImages)
         {
-            image.color = Color.white;
+            image.color = ResetColor;
         }
     }
+
 
     public void SetAllCounts()
     {

@@ -248,7 +248,6 @@ public class TouchController : MonoBehaviour
         if (Input.GetMouseButton(0) /*|| Input.GetTouch(0).*/ )
         {
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            print(Screen.width / 2f);
             UpdateTouchController(mousePos);
         }
         else

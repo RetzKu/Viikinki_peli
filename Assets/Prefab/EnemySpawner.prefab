@@ -61,3 +61,4 @@ MonoBehaviour:
   spawnMelee: 0
   spawnArchers: 0
   spawnBears: 0
+  naturalSpawn: 1

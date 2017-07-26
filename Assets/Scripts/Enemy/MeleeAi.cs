@@ -24,6 +24,9 @@ public class MeleeAi : generalAi {
         Physics._maxSpeed = MaxSpeed;
         this.player = player;
     }
+    //Collider2D[] environment = new Collider2D[0];
+    Collider2D[] HeardArray = new Collider2D[0];
+    Collider2D[] CollisionArray = new Collider2D[0];
     public override void UpdatePosition()
     {
         rotation.UpdateRotation(velocity, body.position);
@@ -31,9 +34,9 @@ public class MeleeAi : generalAi {
         transform.GetComponent<EnemyAnimator>().ChangeDirection(myDir);
         LayerMask mask = new LayerMask();
         mask = LayerMask.GetMask("Enemy");
-
-        var HeardArray = Physics2D.OverlapCircleAll(body.position, alingmentDistance, mask); // , mask);
-        var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
+        getFriends(ref HeardArray, ref CollisionArray, alingmentDistance, desiredseparation, mask);
+        //var HeardArray = Physics2D.OverlapCircleAll(body.position, alingmentDistance, mask); // , mask);
+        //var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
         Vector2[] powers = new Vector2[2];
 
         if (slow)

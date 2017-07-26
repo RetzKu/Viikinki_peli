@@ -10,20 +10,20 @@ public class WolfAI : generalAi
     public float leapDist = 2.0f; // ignored for now
 
     private float attackCounter = 5f; // EETU TRIGGER
-    private float attackUptade = 100f;
+    private float attackUptade = 5f;
     float leapSpeed = 3;
     bool bite = false;
 
     float currentTime = 0;
     float animTime = 0.7f;
-    float leapAnim = 8f;
+    //float leapAnim = 8f;
     float biteRange = 2f; // just bite
     float biteTime = 1f; // kuinka kauan vain purasu kestää
     float biteTimer = 0f; 
     bool justBite = false;
     float holderDist = 0;
     //generalAi AI = new generalAi();
-
+    LayerMask mask;
     public override void InitStart(float x, float y, EnemyType type,GameObject player) // jokaselle
     {
         attackDist = leapDist;/* UnityEngine.Random.Range(leapDist-1f, leapDist+1f);*/
@@ -38,8 +38,12 @@ public class WolfAI : generalAi
         Physics.InitRules(sepF, aliF, cohF, desiredseparation, alingmentDistance, IdleRadius, IdleBallDistance, ArriveRadius, MaxSteeringForce, MaxSpeed);
         Physics._maxSpeed = MaxSpeed;
         this.player = player;
+        mask = LayerMask.GetMask("Enemy");
+
     }
-    Collider2D[] environment;
+    Collider2D[] environment = new Collider2D[0];
+    Collider2D[] HeardArray = new Collider2D[0];
+    Collider2D[] CollisionArray = new Collider2D[0];
     public override void UpdatePosition() // jokaselle
     {
         //print(inAttack);
@@ -48,12 +52,9 @@ public class WolfAI : generalAi
             rotation.UpdateRotation(velocity, body.position);
             GetComponent<WolfAnimatorScript>().SpriteDirection(myDir);
         }
-        LayerMask mask = new LayerMask();
-
-        mask = LayerMask.GetMask("Enemy");
-
-        var HeardArray = Physics2D.OverlapCircleAll(body.position, alingmentDistance, mask); // , mask);
-        var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
+        getFriends(ref HeardArray,ref CollisionArray, alingmentDistance,desiredseparation, mask);
+        //var HeardArray = Physics2D.OverlapCircleAll(body.position, alingmentDistance, mask); // , mask);
+        //var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
         Vector2[] powers = new Vector2[2];
 
         if (agro && HeardArray.Length > 1)   // agro jokainen vihu lähellä
@@ -117,7 +118,7 @@ public class WolfAI : generalAi
         getObstacle(dist);
         if (dist.magnitude <= attackDist || inAttack || velocity.magnitude == 0)
         {
-            if (!inAttack && attackCounter > attackUptade)
+            if (!inAttack && attackCounter > attackUptade && !obc)
             {
 
                 if (dist.magnitude < biteRange)
@@ -212,14 +213,18 @@ public class WolfAI : generalAi
                     rotation.rotToPl = false;
                 }
                 attackCounter+= Time.deltaTime;
-                //if (obc)
-                //{
-                //    findPath(ref flags, ref velocity, ref target, player, body);
-                //}
-                //else
-                //{
+                if (!inAttack && attackCounter > attackUptade)
+                {
+                    findPath(ref flags, ref velocity, ref target, player, body);
+                }
+                else
+                {
                     followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
-                //}
+                    if (environment != null && environment.Length != 0)
+                    {
+                        flags = flags | (int)behavior.CollideEnv;
+                    }
+                }
                 //reversedFindPath(ref flags, ref velocity, ref target, player, body);
             }
         }

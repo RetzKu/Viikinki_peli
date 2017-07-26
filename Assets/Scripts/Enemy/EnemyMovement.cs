@@ -37,7 +37,7 @@ public class EnemyMovement
     float cohF;
 
 
-
+    float environmentCollisionForce = 0.04f;
 
 
     Vector2 velocity = new Vector2(); //An object’s PVector velocity will remain constant if it is in a state of equilibrium.
@@ -127,7 +127,9 @@ public class EnemyMovement
         }
         if ((flags & (int)behavior.CollideEnv) == (int)behavior.CollideEnv)
         {
-            separate(environment,true);
+            Vector2 envsep = separate(environment);
+            envsep *= environmentCollisionForce;
+            applyForce(envsep);
         }
         if ((flags & (int)behavior.giveWanderingTargetSolo) == (int)behavior.giveWanderingTargetSolo)
         {
@@ -280,9 +282,12 @@ public class EnemyMovement
         Vector2 average = new Vector2(0, 0);
         for (int i = 0; i < array.Length; i++)
         {
-            Vector2 temp = new Vector2(0f, 0f);
-            temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();
-            average = average + array[i].GetComponent<generalAi>().velocity;
+            if(array[i] != null)
+            {
+                Vector2 temp = new Vector2(0f, 0f);
+                temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();
+                average = average + array[i].GetComponent<generalAi>().velocity;
+            }
         }
 
 
@@ -315,10 +320,13 @@ public class EnemyMovement
 
         for (int i = 0; i < array.Length; i++)
         {
-            Vector2 temp = new Vector2(0f, 0f);
-            temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();
+            if (array[i] != null)
+            {
+                Vector2 temp = new Vector2(0f, 0f);
+                temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();
 
-            average = average + array[i].GetComponent<generalAi>().getPosition();
+                average = average + array[i].GetComponent<generalAi>().getPosition();
+            }
         }
 
         if (array.Length > 1)
@@ -333,28 +341,27 @@ public class EnemyMovement
     }
 
 
-    Vector2 separate(Collider2D[] array, bool qq = false)
+    Vector2 separate(Collider2D[] array) // qq debug
     {
         Vector2 average = new Vector2(0, 0);
         int count = 0;
         if(array != null)
         {
-            if (qq)
-            {
-                int k = 0;
-            }
             for (int i = 0; i < array.Length; i++)
             {
-                //Vector2 temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();
-                Vector2 temp = bodyPosition - (Vector2)array[i].transform.position;
-                float d = temp.magnitude;
-
-                if (d > 0)
+                if (array[i] != null)
                 {
-                    temp.Normalize();
-                    temp = temp / d;
-                    average = average + temp;
-                    count++;
+                        //Vector2 temp = bodyPosition - array[i].transform.GetComponent<generalAi>().getPosition();
+                    Vector2 temp = bodyPosition - (Vector2)array[i].transform.position;
+                    float d = temp.magnitude;
+
+                    if (d > 0)
+                    {
+                        temp.Normalize();
+                        temp = temp / d;
+                        average = average + temp;
+                        count++;
+                    }
                 }
 
             }

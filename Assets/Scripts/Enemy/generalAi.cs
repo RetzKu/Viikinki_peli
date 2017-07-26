@@ -125,7 +125,7 @@ public abstract class generalAi : MonoBehaviour
         dist.Normalize();
         dist *= attackDist;
         target = playerPos + dist;
-        flags = (int)behavior.seekAndArrive | (int)behavior.separate | (int)behavior.CollideEnv;
+        flags = (int)behavior.seekAndArrive | (int)behavior.separate /*| (int)behavior.CollideEnv*/;
         Physics._sepF = sepF * 2;
     }
     float envTime = 0.1f;
@@ -140,6 +140,18 @@ public abstract class generalAi : MonoBehaviour
             envTimer = 0;
         }
 
+    }
+    float t = 0f;
+    float tr = 0.1f;
+    protected void getFriends(ref Collider2D[] friends, ref Collider2D[] coll, float alir,float desr,LayerMask mask)
+    {
+        t += Time.deltaTime;
+        if(t > tr)
+        {
+            friends = Physics2D.OverlapCircleAll(body.position, alir, mask);
+            coll = Physics2D.OverlapCircleAll(body.position, desr, mask);
+            t = 0f;
+        }
     }
     public void findPath(ref int flags,ref Vector2 velocity,ref Vector2 target ,GameObject player,Rigidbody2D body)
     {

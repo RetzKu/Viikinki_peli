@@ -39,6 +39,7 @@ public class TouchController : MonoBehaviour
     private Vector3 lastPosition;
 
     private CraftingUiController _craftingUiController;
+    private combat _player;
 
     public enum Mode
     {
@@ -95,7 +96,7 @@ public class TouchController : MonoBehaviour
     }
 
     // Use this for initialization
-    private float sceenXHack; 
+    private float sceenXHack;
     void Start()
     {
         sceenXHack = Screen.width / 10f;
@@ -178,6 +179,7 @@ public class TouchController : MonoBehaviour
 
         _craftingUiController = GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>();
 
+        _player = GameObject.FindWithTag("Player").GetComponent<combat>();
 
         lastPosition = transform.position;
     }
@@ -199,6 +201,9 @@ public class TouchController : MonoBehaviour
 
     private int FingerId = -1000;
     private bool _init = true;
+    private Vector2 startPosition = new Vector2(0f, 0f);
+
+    public static Vector2 AttackDir = new Vector2(0f, 0f);
 
     void Update()
     {
@@ -209,49 +214,36 @@ public class TouchController : MonoBehaviour
             _init = true;
         }
 
-
-        Touch[] myTouches = Input.touches;
+        Touch[] touches = Input.touches;
         for (int i = 0; i < Input.touchCount; i++)
         {
-            if (myTouches[i].position.x > Screen.width / 2f + sceenXHack * 2f)
+            if (touches[i].position.x > Screen.width / 2f + sceenXHack * 2f)
             {
-                // trackaa oikeaa sormea
                 if (FingerId == -1000)
                 {
-                    FingerId = myTouches[i].fingerId;
+                    FingerId = touches[i].fingerId;
+                    startPosition = touches[i].position;
                 }
+            }
 
+            if (touches[i].fingerId == FingerId) // oikea sormi liikkellä 
+            {
+                var mousePos = Camera.main.ScreenToWorldPoint(touches[i].position);
+                UpdateTouchController(mousePos);
 
-                if (myTouches[i].fingerId == FingerId) // oikea sormi liikkellä 
+                if (touches[i].phase == TouchPhase.Ended)
                 {
-                    var mousePos = Camera.main.ScreenToWorldPoint(myTouches[i].position);
-                    UpdateTouchController(mousePos);
+                    OnTouchEnded();
+                    FingerId = -1000;
 
-                    // mousePos.z = 2;
-                    // touchCollider.GetComponent<Collider2D>().enabled = true;
-                    // touchCollider.transform.position = mousePos;
-                    // _touching = true;
-
-                    if (myTouches[i].phase == TouchPhase.Ended) // loppu
-                    {
-                        OnTouchEnded();
-                        FingerId = -1000;
-                        // touchCollider.transform.position = myTouches[i].position;
-                        // touchCollider.GetComponent<Collider2D>().enabled = false;
-                        // 
-                        //  make vector of Attack Direction
-                        // Vector2 touchDeltaVector = myTouches[i].deltaPosition;
-                        // 
-                        // index = 0;
-                        // ResetColliders();
-                        // touchCollider.GetComponent<Collider2D>().enabled = false;
-                        // _touching = false;
-                    }
+                    var delta = touches[i].position - startPosition;
+                    AttackDir = delta;
+                    _player.attackBoolean(delta);
+                    _player.GetComponent<AnimatorScript>().Attack();
                 }
             }
         }
 #endif
-
 #if UNITY_EDITOR
         if (Input.GetMouseButton(0) /*|| Input.GetTouch(0).*/ )
         {
@@ -309,7 +301,6 @@ public class TouchController : MonoBehaviour
         LineController.HideLines();
 
         _canSendIndices = false;
-
     }
 
     private GameObject GetFromArray(int x, int y)
@@ -377,7 +368,7 @@ public class TouchController : MonoBehaviour
     public void SetTouchContollerCenters(Vector2[] positions)
     {
         // käännetään y ylösalaisin
-        for(int y = 0, i = 0; y < 3; y++)
+        for (int y = 0, i = 0; y < 3; y++)
         {
             int yy = 2 - y;
             for (int x = 0; x < 3; x++, i++)

@@ -67,10 +67,13 @@ public class CustomJoystick : MonoBehaviour
 
 
         Base = Instantiate(Resources.Load<GameObject>("Prefab/Ui/JoystickBase"));
-        Base.transform.position =  new Vector3(-100f, -100f);
+        Base.transform.position = new Vector3(-100f, -100f);
+
+
+        TouchData d = new TouchData(HitBox, OnEnter, OnHold, OnExit);
+        TouchManager.instance.RegisterTouchCallbacks(d);
     }
 
-    // TODO: Cleanup
     void Update()
     {
         if (controlScheme == ControllerType.Mouse)
@@ -78,38 +81,42 @@ public class CustomJoystick : MonoBehaviour
             MouseUpdate();
             return;
         }
-
-        // Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
-
-        // transform.Translate(lastPos - transform.position);
+        // Callback
         Vector3 movVec = Player.transform.position - position;
         startPosition = startPosition + (Vector2)movVec;
         endposition = endposition + (Vector2)movVec;
 
         position = Player.transform.position;
-#if MOUSE
-        touching = Input.GetMouseButton(0);
-#else
+        Base.transform.position = startPosition;
+        return;
+        // Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
+
+        // transform.Translate(lastPos - transform.position);
+        movVec = Player.transform.position - position;
+        startPosition = startPosition + (Vector2)movVec;
+        endposition = endposition + (Vector2)movVec;
+
+        position = Player.transform.position;
+
         Touch[] touches = Input.touches;
 
         if (touches.Length != 0)
+        {
             touching = true;
-#endif
+        }
+
         // Vector3 currentPotition = Camera.main.ScreenToWorldPoint(Input.mousePosition); // sormi
         Vector3 cameraPos = Camera.main.transform.position;
         Rect ScreenView = new Rect(cameraPos.x + HitBox.x, cameraPos.y + HitBox.y, HitBox.width, HitBox.height);
 
         Base.transform.position = startPosition;
-#if MOUSE
-        if (Input.GetMouseButtonUp(0) )
-#else
+
+
         for (int i = 0; i < touches.Length; i++)
         {
             Vector3 currentPotition = Camera.main.ScreenToWorldPoint(touches[i].position);
 
-
             if (fingerId == touches[i].fingerId && touches[i].phase == TouchPhase.Ended) // irrouttautuminen h
-#endif
             {
                 FirstTouchSuccess = false;
                 startPosition = Vector2.zero;
@@ -117,27 +124,20 @@ public class CustomJoystick : MonoBehaviour
                 transform.position = Vector3.zero;
                 fingerId = NO_FINGER;
                 Base.transform.position = Vector3.zero;
-
+                break;
             }
 
-#if MOUSE
-            if (Input.GetMouseButtonDown(0))    // eka 
-#else
+
             if (touches[i].position.x < Screen.width / 2f)
             {
-                if (fingerId == NO_FINGER && touches[i].phase == TouchPhase.Began)
-#endif
-                {
-#if !MOUSE
-                    fingerId = touches[i].fingerId;
-#endif
 
-#if MOUSE
-                if (touching && !touchingLastFrame && ScreenView.Contains(currentPotition))
-#else
+
+
+                if (fingerId == NO_FINGER && touches[i].phase == TouchPhase.Began)
+                {
                     if (touching && !touchingLastFrame && ScreenView.Contains(currentPotition))
-#endif
                     {
+                        fingerId = touches[i].fingerId;
                         startPosition = currentPotition;
                         transform.position = startPosition;
                         touching = true;
@@ -152,7 +152,7 @@ public class CustomJoystick : MonoBehaviour
                 }
                 else
                 {
-                    if (touching && FirstTouchSuccess)    // toka
+                    if (touching && FirstTouchSuccess)    // 2 frame
                     {
                         if (touching && touchingLastFrame)
                         {
@@ -169,17 +169,61 @@ public class CustomJoystick : MonoBehaviour
                     }
                     else
                     {
+                        FirstTouchSuccess = false;
                         touching = false;
+                        fingerId = NO_FINGER;
                     }
                 }
             }
-#if !MOUSE
         }
-#endif
+
         touchingLastFrame = touching;
+    }
 
+    void OnEnter(Vector3 worldPosition)
+    {
+        startPosition = worldPosition;
+        transform.position = startPosition;
+        touching = true;
+        FirstTouchSuccess = true;
+        position = Player.transform.position;
+        FirstTouchSuccess = false;
+    }
 
+    public static void SpawnDebugParticle(Vector3 worldPosition)
+    {
+        GameObject go = new GameObject("debug");
+        go.transform.position = worldPosition;
+        ParticleSpawner.instance.CastSpell(go);
+    }
 
+    void OnHold(Vector3 worldPosition)
+    {
+        if (touching)
+        {
+            endposition = worldPosition;
+            transform.position = endposition;
+        }
+        Vector2 touchVector = GetTouchVector();
+
+        // SpawnDebugParticle(startPosition);
+        // SpawnDebugParticle(endposition);
+
+        if (touchVector.magnitude > maxLength )
+        {
+            endposition = startPosition + (touchVector.normalized * maxLength);
+            transform.position = endposition;
+        }
+    }
+
+    void OnExit()
+    {
+        FirstTouchSuccess = false;
+        startPosition = Vector2.zero;
+        endposition = Vector2.zero;
+        transform.position = Vector3.zero;
+        fingerId = NO_FINGER;
+        Base.transform.position = Vector3.zero;
     }
 
 

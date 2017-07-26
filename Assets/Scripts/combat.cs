@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class combat : MonoBehaviour {
+public class combat : MonoBehaviour
+{
 
     [Header("Player base stats")]
 
@@ -23,17 +24,17 @@ public class combat : MonoBehaviour {
     private bool damageDone = false;
 
     private Vector2 lastEnemyHitPosition = new Vector2(0f, 0f);
-    
+
     private enum Directions { Left, Down, Up, Right }
     private Directions Direction;
 
     private string dirObjectName;
-	private Sprite Fx;
+    private Sprite Fx;
 
-	void Update ()
+    void Update()
     {
         // Tarkistetaan onko pelaaja elossa
-        if(hp <= 0)
+        if (hp <= 0)
         {
             death();
         }
@@ -88,8 +89,8 @@ public class combat : MonoBehaviour {
         string tmpName = "";
         int tmpDir = GetComponent<AnimatorScript>().PlayerDir();
 
-        if(tmpDir == 0 || tmpDir == 3) // Liikutaan sivulle
-        { 
+        if (tmpDir == 0 || tmpDir == 3) // Liikutaan sivulle
+        {
             tmpName = "s_c_torso";
             transform.Find(tmpName).GetComponent<Collider2D>().enabled = true;
             transform.Find("u_c_torso").GetComponent<Collider2D>().enabled = false;
@@ -130,7 +131,7 @@ public class combat : MonoBehaviour {
     // Onko lyönti cooldownilla
     private bool isAttackLegal()
     {
-        if(Time.time > attackSpeedTime)
+        if (Time.time > attackSpeedTime)
         {
             damageDone = false;
             atmAttackTime = Time.time; // lyödään juuri tähän aikaan
@@ -153,8 +154,8 @@ public class combat : MonoBehaviour {
         float playerDamage = dmgBase;
         if (GetComponent<PlayerScript>().Inventory.EquipData.Tool != null)
         {
-                GameObject tempWeapon = GetComponent<PlayerScript>().Inventory.EquipData.Tool;
-                playerDamage += tempWeapon.GetComponent<weaponStats>().damage;
+            GameObject tempWeapon = GetComponent<PlayerScript>().Inventory.EquipData.Tool;
+            playerDamage += tempWeapon.GetComponent<weaponStats>().damage;
         }
 
         return playerDamage;
@@ -167,38 +168,31 @@ public class combat : MonoBehaviour {
     }
 
     // Metodi jolla tarkistetaan onko painettu lyöty ja lyönti pois CD
-    public bool attackBoolean()
+    public void attackBoolean(Vector2 direction)
     {
         // Tähän voisi tehdä pari riviä koodia joka tarkistaa onko kyseessä android vai pc inputit ja sen mukaan ohjaisi
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (isAttackLegal()) // PC
         {
-            if (isAttackLegal()) // PC
+            // VÄÄRÄSSÄ PAIKASSA ATM MUTTA TOIMII =D
+            if (GetComponent<PlayerScript>().EquippedTool.Type == WeaponType.rangedWeapon)
             {
-                
-                // VÄÄRÄSSÄ PAIKASSA ATM MUTTA TOIMII =D
-                if (GetComponent<PlayerScript>().EquippedTool.Type == WeaponType.rangedWeapon)
+                // Ammu nuoli, vähentää pelaajan inventorystä nuolen
+                if (GetComponent<PlayerScript>().EquippedTool.UsedArrow() == true)
                 {
-                    // Ammu nuoli, vähentää pelaajan inventorystä nuolen
-                    if(GetComponent<PlayerScript>().EquippedTool.UsedArrow() == true)
-                    {
-                        Vector2 tempo = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                        Vector2 tempo2 = new Vector2((tempo.x - transform.position.x), (tempo.y - transform.position.y));
-                        tempo2.Normalize();
-                        GameObject.Find("projectileManager").GetComponent<ProjectileManager>().spawnProjectile(transform.position, new Vector2(transform.position.x + tempo2.x * 6, transform.position.y + tempo2.y * 6));
-                        GetComponentInChildren<weaponStats>().useDuration();
-                        // Tähän voisi laittaa efektin vaihtumaan bowi efektiin
-                    }
-                    else
-                    {
-                        // Tähän voisi laittaa efektin vaihtumaan lyönti efektiin
-                    }
-                }
-                // // // // // // // // //
+                    // Vector2 tempo = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    Vector2 tempo2 = new Vector2((direction.x - transform.position.x), (direction.y - transform.position.y));
+                    tempo2.Normalize();
 
-                return true;
+                    GameObject.Find("projectileManager").GetComponent<ProjectileManager>().spawnProjectile(transform.position, new Vector2(transform.position.x + tempo2.x * 6, transform.position.y + tempo2.y * 6));
+                    GetComponentInChildren<weaponStats>().useDuration();
+                    // Tähän voisi laittaa efektin vaihtumaan bowi efektiin
+                }
+                else
+                {
+                    // Tähän voisi laittaa efektin vaihtumaan lyönti efektiin
+                }
             }
         }
-        return false;
     }
 
     public float hit()
@@ -226,7 +220,7 @@ public class combat : MonoBehaviour {
         GetComponent<Movement>().KnockBack(lastEnemyHitPosition);
         Debug.Log("Player has " + hp + " hp left.");
         GetComponent<DamageVisual>().TakeDamage();
-        //ParticleSpawner.instance.SpawSmallBlood(lastEnemyHitPosition, transform.position);
+        ParticleSpawner.instance.SpawSmallBlood(lastEnemyHitPosition, transform.position);
     }
 
     void death()

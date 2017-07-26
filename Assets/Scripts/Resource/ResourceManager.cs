@@ -20,6 +20,13 @@ public class ResourceManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+
+        // Inisoi rakkaat ruumit
+        Corpse.CorpseSprites = Resources.LoadAll<Sprite>("WorldObject/corpses");
+
+        Tree._treeShadows = Resources.LoadAll<Sprite>("WorldObject/shadows");
+
+        _runeSprites = Resources.LoadAll<Sprite>("WorldObject/RunePillars/runepillars");
     }
 
     void Start()
@@ -36,12 +43,6 @@ public class ResourceManager : MonoBehaviour
             resourceTypeLookupTable[i] = str.Substring(0, str.Length - 6); // _ t r u n k == 6
         }
 
-        // Inisoi rakkaat ruumit
-        Corpse.CorpseSprites = Resources.LoadAll<Sprite>("WorldObject/corpses");
-
-        Tree._treeShadows = Resources.LoadAll<Sprite>("WorldObject/shadows");
-
-        _runeSprites = Resources.LoadAll<Sprite>("WorldObject/RunePillars/runepillars");
     }
 
     public string GetResourceTypeName(ResourceType type)

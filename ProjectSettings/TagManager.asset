@@ -27,6 +27,7 @@ TagManager:
   - ResourceUiController
   - RuneBarUi
   - Tilemap
+  - TouchController
   layers:
   - Default
   - TransparentFX

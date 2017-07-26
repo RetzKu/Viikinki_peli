@@ -121,14 +121,10 @@ public class combat : MonoBehaviour {
 
     //void OnTriggerEnter2D(Collider2D Trigger)
     //{
-         
-
     //}
 
     //void OnTriggerStay2D(Collider2D Trigger)
     //{
-
-
     //}
 
     // Onko lyönti cooldownilla

@@ -8,8 +8,6 @@ public class TouchController : MonoBehaviour
     public int amountOfSpheres = 3;
     public float offset = 10f;
     public float Radius = 5f;
-    public float bulletSpeed = 4f;
-
     public float LineStartWidth = 0.5f;
     public float MaxWidht = 2f;
 
@@ -27,7 +25,9 @@ public class TouchController : MonoBehaviour
     public GameObject Character;
 
 
-    public float screenX = 600f;
+    public float offsetX;
+    public float offsetY;
+
 
 
     // TODO: ^^^ CLEANUP ^^^
@@ -89,15 +89,17 @@ public class TouchController : MonoBehaviour
         {
             for (int x = 0; x < amountOfSpheres; x++)
             {
-                Gizmos.DrawWireSphere(new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 0), Radius);
+                Gizmos.DrawWireSphere(new Vector3(transform.position.x + x * offsetX, transform.position.y + y * offsetY, 0), Radius);
             }
         }
     }
 
     // Use this for initialization
+    private float sceenXHack; 
     void Start()
     {
-        screenX = Screen.width / 2f;
+        sceenXHack = Screen.width / 10f;
+        // screenX = Screen.width / 2f;
         lineRenderer = GetComponent<LineRenderer>();
         positions = new Vector3[10];
         lineRenderer.SetPositions(positions);
@@ -116,13 +118,15 @@ public class TouchController : MonoBehaviour
                 go.layer = LayerMask.NameToLayer("TouchController");
                 go.transform.parent = transform;
                 var coll = go.AddComponent<CircleCollider2D>();
-                coll.transform.position = new Vector3(x * offset + transform.position.x, y * offset + transform.position.y, 0);
+                coll.transform.position = new Vector3(x * offsetX + transform.position.x, y * offsetY + transform.position.y, 0);
                 coll.radius = Radius;
                 _colliders[ii] = go;
                 coll.isTrigger = true;
 
-                // go.layer = SortingLayer.GetLayerValueFromName("TouchController");
+                // var sr = go.AddComponent<SpriteRenderer>();
+                // sr.sprite = Resources.Load<Sprite>("Circle");
 
+                // go.layer = SortingLayer.GetLayerValueFromName("TouchController");
                 // TouchScreenPoint newPoint = new TouchScreenPoint(x, y);
 
                 go.AddComponent(typeof(TouchScreenPoint));
@@ -194,14 +198,22 @@ public class TouchController : MonoBehaviour
     }
 
     private int FingerId = -1000;
+    private bool _init = true;
 
     void Update()
     {
 #if UNITY_ANDROID
+        if (_init == false)
+        {
+            SetTouchContollerCenters(_craftingUiController.GetPos());
+            _init = true;
+        }
+
+
         Touch[] myTouches = Input.touches;
         for (int i = 0; i < Input.touchCount; i++)
         {
-            if (myTouches[i].position.x > screenX)
+            if (myTouches[i].position.x > Screen.width / 2f + sceenXHack * 2f)
             {
                 // trackaa oikeaa sormea
                 if (FingerId == -1000)
@@ -244,6 +256,7 @@ public class TouchController : MonoBehaviour
         if (Input.GetMouseButton(0) /*|| Input.GetTouch(0).*/ )
         {
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            print(Screen.width / 2f);
             UpdateTouchController(mousePos);
         }
         else
@@ -296,6 +309,7 @@ public class TouchController : MonoBehaviour
         LineController.HideLines();
 
         _canSendIndices = false;
+
     }
 
     private GameObject GetFromArray(int x, int y)
@@ -325,7 +339,9 @@ public class TouchController : MonoBehaviour
 
         if (_touching)
         {
-            LineController.SetPoint(new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f));
+            Vector3 point = realTransform - transform.position;
+
+            LineController.SetPoint(new Vector3(transform.position.x + point.x, transform.position.y + point.y, 4f));
             if (index < maxRuneIndices)
             {
                 runeIndices[index] = new Vec2(x, y);
@@ -356,5 +372,18 @@ public class TouchController : MonoBehaviour
     public static int GetBoolIndex(Vec2 v)
     {
         return IndexLookUpTable[v.Y, v.X];
+    }
+
+    public void SetTouchContollerCenters(Vector2[] positions)
+    {
+        // käännetään y ylösalaisin
+        for(int y = 0, i = 0; y < 3; y++)
+        {
+            int yy = 2 - y;
+            for (int x = 0; x < 3; x++, i++)
+            {
+                _colliders[yy * 3 + x].transform.position = positions[i];
+            }
+        }
     }
 }

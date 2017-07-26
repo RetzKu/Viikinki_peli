@@ -92,10 +92,8 @@ public class Movement : MonoBehaviour
     Vector2 Input_checker()
     {
         //Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical")).normalized; // ???
-#if UNITY_EDITOR // miksi #elseif ei toimi
-        Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized; // WASD liikkuminen koneell
-#endif
-#if UNITY_ADNROID
+        // Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized; // WASD liikkuminen koneell
+#if UNITY_ANDROID
         Vector2 movement = Joystick.GetInputVector(); // Kun buildataan phonelle
 #endif
 

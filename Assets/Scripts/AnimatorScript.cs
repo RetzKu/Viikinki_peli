@@ -44,7 +44,10 @@ public class AnimatorScript : MonoBehaviour
         Sprites.DirectionCheck();
         CheckVelocity();
         Attack();
-        DirectionLock();
+        if (Input.GetKeyDown(KeyCode.Mouse0) == true)
+        {
+            DirectionLock();
+        }
     }
 
     public int PlayerDir()
@@ -55,41 +58,20 @@ public class AnimatorScript : MonoBehaviour
 
     void DirectionLock()
     {
-        Vector3 NormalizedVelocity = new Vector3(Player.velocity.x, Player.velocity.y, 0).normalized;
-        Vector3 MousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition).normalized;
-        bool triggered = false;
+        Vector3 Destination = new Vector3(Player.velocity.x, Player.velocity.y, 0) + transform.position;
+        Destination = transform.position + (Destination - transform.position).normalized * 0.7f;
+        Vector3 WrongWay = transform.position - (Destination - transform.position).normalized * 0.7f;
+        Vector3 MousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        MousePoint.Normalize();
+        MousePoint = MousePoint + transform.position;
 
-        Vector2 RightEdge = new Vector2(NormalizedVelocity.y * -1, NormalizedVelocity.x) * 0.7f;
-        Vector2 LeftEdge = new Vector2(NormalizedVelocity.y, NormalizedVelocity.x * -1) * 0.7f;
-
-        Vector2 WrongWay = new Vector2(NormalizedVelocity.x, NormalizedVelocity.y) * -1;
-
-        if(MousePoint.y < 0)
+        if(Vector3.Distance(MousePoint,WrongWay) < Vector3.Distance(MousePoint,Destination))
         {
-            if (MousePoint.x > 0)
-            {
-                if(MousePoint.x > WrongWay.x && MousePoint.y > WrongWay.y)
-                {
-                    triggered = true;
-                }
-            }
-            else
-            {
-                if(MousePoint.x < WrongWay.x && MousePoint.y > WrongWay.y)
-                {
-                    triggered = true;
-                }
-            }
+            print("Hidasdutus");
+            GetComponent<Movement>().Slowed = true;
+            GetComponent<Movement>().Started = true;
         }
-        else
-        {
 
-        }
-   
-        Knob0.transform.position = RightEdge + (Vector2)transform.position;
-        Knob1.transform.position = LeftEdge + (Vector2)transform.position;
-        //Debug.Log(RightEdge + "right side");
-        //Debug.Log(LeftEdge + "left side");
     }
 
     void CheckVelocity()

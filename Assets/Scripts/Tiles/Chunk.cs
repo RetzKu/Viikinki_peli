@@ -64,7 +64,7 @@ public class Chunk      // sub array
         return worldObjects.TryGetValue(new Vec2(x, y), out value);
     }
 
-    public GameObject GetTileGameObject(int x, int y)
+    public GameObject GetTileOnTileGameObject(int x, int y)
     {
         GameObject value;
         if (worldObjects.TryGetValue(new Vec2(x, y), out value))
@@ -94,7 +94,6 @@ public class Chunk      // sub array
         View<TileType> temp = a.TilemapTilesView;
         a.TilemapTilesView = b.TilemapTilesView;
         b.TilemapTilesView = temp;
-
 
         //View<GameObject> tmp = a.GameObjectView;
         //a.GameObjectView = b.GameObjectView;

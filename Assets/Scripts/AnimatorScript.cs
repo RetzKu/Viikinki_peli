@@ -6,7 +6,7 @@ public class AnimatorScript : MonoBehaviour
 {
     private Rigidbody2D Player;
     bool Lock = false;
-    public bool _Lock {set { Lock = value; } get { return Lock; } }
+    public bool _Lock { set { Lock = value; } get { return Lock; } }
     private List<Animator> Animators;
     private float SpeedEdge = 0.3f;
 
@@ -37,7 +37,7 @@ public class AnimatorScript : MonoBehaviour
         {
             Sprites.DirectionCheck();
         }
-        Attack();
+        // Attack();
     }
 
     public int PlayerDir()
@@ -51,7 +51,7 @@ public class AnimatorScript : MonoBehaviour
         if (Player.velocity.x < -SpeedEdge || Player.velocity.y < -SpeedEdge || Player.velocity.x > SpeedEdge || Player.velocity.y > SpeedEdge)
         {
             foreach (Animator t in Animators) { t.SetBool(WalkType(), true); }
-            foreach(Animator t in Animators) { t.SetBool("Walking", true); }
+            foreach (Animator t in Animators) { t.SetBool("Walking", true); }
         }
         else
         {
@@ -60,13 +60,10 @@ public class AnimatorScript : MonoBehaviour
         }
     }
 
-    void Attack()
+    public void Attack()
     {
-        if (GetComponent<combat>().attackBoolean() == true)
-        {
-            foreach (Animator t in Animators) { t.SetTrigger(AttackType()); }
-            GetComponent<FxScript>().instantiateFx();
-        }
+        foreach (Animator t in Animators) { t.SetTrigger(AttackType()); }
+        GetComponent<FxScript>().instantiateFx();
     }
 
     public void ResetStates()
@@ -79,7 +76,7 @@ public class AnimatorScript : MonoBehaviour
 
     public string AttackType()
     {
-        switch(Type)
+        switch (Type)
         {
             case WeaponType.meleeWeapon: { return "MeleeAttack"; }
             case WeaponType.longMeleeWeapon: { return "LongMeleeAttack"; }

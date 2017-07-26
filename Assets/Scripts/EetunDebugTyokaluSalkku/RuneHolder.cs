@@ -92,6 +92,47 @@ public class RuneHolder : MonoBehaviour
         }
     }
 
+    public void SendIndices(bool[] positions)
+    {
+        int indiceCount = 0;
+        for (int i = 0; i < positions.Length; i++)
+        {
+            print(i + ": " + positions[i]);
+            if (positions[i])
+                indiceCount++;
+        }
+
+        int ii = 0;
+        foreach (var rune in runes)
+        {
+            if (rune.Length == indiceCount && rune.ValidateRune(positions))
+            {
+                if (Ownertype != OwnerType.Enemy)
+                {
+                    if (CanCast[ii])
+                    {
+                        rune.Fire();
+                        CanCast[ii] = false;
+                        cds[ii] = rune.Cd;
+
+                        if (OwnerType.Player == Ownertype)
+                        {
+                            rune.OnGui(_runeBarUiController, ii);
+                            ParticleSpawner.instance.CastSpell(gameObject);
+                        }
+                    }
+                }
+                else
+                {
+                    rune.Fire();
+                }
+                break;
+            }
+            ii++;
+        }
+    }
+
+
     public Sprite[] GetHudImages()
     {
         Sprite[] images = new Sprite[runes.Count];

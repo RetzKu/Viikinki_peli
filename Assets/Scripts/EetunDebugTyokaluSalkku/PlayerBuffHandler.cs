@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class PlayerBuffHandler : MonoBehaviour
@@ -10,6 +8,10 @@ public class PlayerBuffHandler : MonoBehaviour
         StartCoroutine(StartBuff(buff, target));
     }
 
+    public void HealPlayer(GameObject target, float totatHealAmount, int numberOfTicks, float duration)
+    {
+        StartCoroutine(Flask(target, totatHealAmount, numberOfTicks, duration));
+    }
 
     IEnumerator StartBuff(PlayerBuff buff, GameObject target)
     {
@@ -43,14 +45,25 @@ public class PlayerBuffHandler : MonoBehaviour
         Destroy(this);
     }
 
-    IEnumerator Flask(GameObject target, PlayerBuff buff)
+    IEnumerator Flask(GameObject target, float totalHealAmount, int numberOfTicks, float duration)
     {
         var stats = target.GetComponent<combat>();
+        float healAmount = totalHealAmount / numberOfTicks;
+        float tickRate = duration / numberOfTicks;
 
-        while (true)
+        for(int i = 0; i < numberOfTicks; i++)
         {
-            stats.hp += 1f;
-            yield return null;
+            stats.hp += healAmount;
+            if (stats.hp > 100f) // TODO: PElaajan health voi vaihtua
+            {
+                stats.hp = 100f;
+            }
+
+            print("healed for " + healAmount);
+            ParticleSpawner.instance.CastSpell(this.gameObject);
+            yield return new WaitForSeconds(tickRate);
         }
+
+        Destroy(this);
     }
 }

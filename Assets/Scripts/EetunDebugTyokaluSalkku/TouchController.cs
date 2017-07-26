@@ -8,8 +8,6 @@ public class TouchController : MonoBehaviour
     public int amountOfSpheres = 3;
     public float offset = 10f;
     public float Radius = 5f;
-    public float bulletSpeed = 4f;
-
     public float LineStartWidth = 0.5f;
     public float MaxWidht = 2f;
 
@@ -27,7 +25,9 @@ public class TouchController : MonoBehaviour
     public GameObject Character;
 
 
-    public float screenX = 600f;
+    public float offsetX;
+    public float offsetY;
+
 
 
     // TODO: ^^^ CLEANUP ^^^
@@ -39,6 +39,7 @@ public class TouchController : MonoBehaviour
     private Vector3 lastPosition;
 
     private CraftingUiController _craftingUiController;
+    private combat _player;
 
     public enum Mode
     {
@@ -48,17 +49,19 @@ public class TouchController : MonoBehaviour
 
     public Mode ControllerMode = Mode.Crafting;
     private CurvedLineRendererController LineController;
+    private bool _canSendIndices = false;
 
     void SendIndices()
     {
-        if (ControllerMode == Mode.RuneCasting)
+        if (ControllerMode == Mode.RuneCasting && _canSendIndices)
         {
-            RuneHolder.SendIndices(runeIndices, index);
+            RuneHolder.SendIndices(BoolArrayFromIndices(runeIndices));
         }
-        else if (ControllerMode == Mode.Crafting)
+        else if (ControllerMode == Mode.Crafting && _canSendIndices)
         {
-            CraftingManagerHolder.SendIndices(runeIndices, index);
+            CraftingManagerHolder.SendIndices(BoolArrayFromIndices(runeIndices));
         }
+        _canSendIndices = false;
     }
 
     void DrawToMouse(Vector2 mouse)
@@ -87,15 +90,17 @@ public class TouchController : MonoBehaviour
         {
             for (int x = 0; x < amountOfSpheres; x++)
             {
-                Gizmos.DrawWireSphere(new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 0), Radius);
+                Gizmos.DrawWireSphere(new Vector3(transform.position.x + x * offsetX, transform.position.y + y * offsetY, 0), Radius);
             }
         }
     }
 
     // Use this for initialization
+    private float sceenXHack;
     void Start()
     {
-        screenX = Screen.width / 2f;
+        sceenXHack = Screen.width / 10f;
+        // screenX = Screen.width / 2f;
         lineRenderer = GetComponent<LineRenderer>();
         positions = new Vector3[10];
         lineRenderer.SetPositions(positions);
@@ -114,13 +119,15 @@ public class TouchController : MonoBehaviour
                 go.layer = LayerMask.NameToLayer("TouchController");
                 go.transform.parent = transform;
                 var coll = go.AddComponent<CircleCollider2D>();
-                coll.transform.position = new Vector3(x * offset + transform.position.x, y * offset + transform.position.y, 0);
+                coll.transform.position = new Vector3(x * offsetX + transform.position.x, y * offsetY + transform.position.y, 0);
                 coll.radius = Radius;
                 _colliders[ii] = go;
                 coll.isTrigger = true;
 
-                // go.layer = SortingLayer.GetLayerValueFromName("TouchController");
+                // var sr = go.AddComponent<SpriteRenderer>();
+                // sr.sprite = Resources.Load<Sprite>("Circle");
 
+                // go.layer = SortingLayer.GetLayerValueFromName("TouchController");
                 // TouchScreenPoint newPoint = new TouchScreenPoint(x, y);
 
                 go.AddComponent(typeof(TouchScreenPoint));
@@ -172,6 +179,7 @@ public class TouchController : MonoBehaviour
 
         _craftingUiController = GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>();
 
+        _player = GameObject.FindWithTag("Player").GetComponent<combat>();
 
         lastPosition = transform.position;
     }
@@ -191,105 +199,108 @@ public class TouchController : MonoBehaviour
         lineRenderer.numPositions = i;
     }
 
-    // private int FingerId = -1000;
+    private int FingerId = -1000;
+    private bool _init = true;
+    private Vector2 startPosition = new Vector2(0f, 0f);
+
+    public static Vector2 AttackDir = new Vector2(0f, 0f);
 
     void Update()
     {
-#if false               // Mobile
-        Touch[] myTouches = Input.touches;
+#if UNITY_ANDROID
+        if (_init == false)
+        {
+            SetTouchContollerCenters(_craftingUiController.GetPos());
+            _init = true;
+        }
+
+        Touch[] touches = Input.touches;
         for (int i = 0; i < Input.touchCount; i++)
         {
-            if (myTouches[i].position.x > screenX)
+            if (touches[i].position.x > Screen.width / 2f + sceenXHack * 2f)
             {
                 if (FingerId == -1000)
                 {
-                    FingerId = myTouches[i].fingerId;
+                    FingerId = touches[i].fingerId;
+                    startPosition = touches[i].position;
                 }
+            }
 
-                if (myTouches[i].fingerId == FingerId) // oikea sormi liikkellä 
+            if (touches[i].fingerId == FingerId) // oikea sormi liikkellä 
+            {
+                var mousePos = Camera.main.ScreenToWorldPoint(touches[i].position);
+                UpdateTouchController(mousePos);
+
+                if (touches[i].phase == TouchPhase.Ended)
                 {
-                    var mousePos = Camera.main.ScreenToWorldPoint(myTouches[i].position);
-                    mousePos.z = 2;
-                    touchCollider.GetComponent<Collider2D>().enabled = true;
-                    touchCollider.transform.position = mousePos;
-                    _touching = true;
+                    OnTouchEnded();
+                    FingerId = -1000;
 
-                    if (myTouches[i].phase == TouchPhase.Ended) // loppu
-                    {
-                        FingerId = -1000;
-                        touchCollider.transform.position = myTouches[i].position;
-                        touchCollider.GetComponent<Collider2D>().enabled = false;
-
-                        // make vector of Attack Direction
-                        Vector2 touchDeltaVector = myTouches[i].deltaPosition;
-
-                        var bulletGo = Instantiate(new GameObject());
-                        bulletGo.transform.position = Character.transform.position;
-                        var bullet = bulletGo.AddComponent<Bullet>();
-                        bullet.velocity = touchDeltaVector.normalized;
-                        bullet.Speed = bulletSpeed;
-
-                        var renderer = bulletGo.AddComponent<SpriteRenderer>();
-                        renderer.sprite = BulletSprite;
-                        renderer.sortingLayerName = "Player";
-
-                        index = 0;
-                        ResetColliders();
-                        touchCollider.GetComponent<Collider2D>().enabled = false;
-                        _touching = false;
-                    }
+                    var delta = touches[i].position - startPosition;
+                    AttackDir = delta;
+                    _player.attackBoolean(delta);
+                    _player.GetComponent<AnimatorScript>().Attack();
                 }
             }
         }
 #endif
-
+#if UNITY_EDITOR
         if (Input.GetMouseButton(0) /*|| Input.GetTouch(0).*/ )
         {
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = 2;
-
-            touchCollider.GetComponent<Collider2D>().enabled = true;
-            touchCollider.transform.position = mousePos;
-
-            _touching = true;
-            DrawToMouse((mousePos));
-
-            LineController.transform.position = transform.position;
+            print(Screen.width / 2f);
+            UpdateTouchController(mousePos);
         }
         else
         {
-            // sormi poesa näytöltä
-            SendIndices();
-            index = 0;
+            OnTouchEnded();
 
-            touchCollider.GetComponent<Collider2D>().enabled = false;
-            _touching = false;
-            _timer -= 200;
-            ResetColliders();
-
-            SetLineRendererCount(0);
-
-            if (Mode.Crafting == ControllerMode)
-                _craftingUiController.SetAllCounts();
-            else
-            {
-                _craftingUiController.HideNumbers();
-                _craftingUiController.SetAllButtonsImages(CraftingUiController.ButtonState.InCombat);
-            }
-            _craftingUiController.ResetAllColors();
-            LineController.ResetPoints();
-            // TODO: linejen position fix
-            // if (lastPosition != transform.position)
-            // LineController.TranslatePoints(lastPosition - transform.position);
+            // LineController.MovePoints(lastPosition - transform.position);
         }
         lastPosition = transform.position;
-        // Reset LineRenderer
-        //if (_timer < Time.time)
-        //{
-        //    index = 0;
-        //    ResetColliders();
-        //    LineController.ResetPoints();
-        //}
+#endif
+    }
+
+    private void UpdateTouchController(Vector3 mousePos)
+    {
+        _canSendIndices = true;
+        mousePos.z = 2;
+
+        touchCollider.GetComponent<Collider2D>().enabled = true;
+        touchCollider.transform.position = mousePos;
+
+        _touching = true;
+        DrawToMouse((mousePos));
+
+        LineController.transform.position = transform.position;
+    }
+
+    private void OnTouchEnded()
+    {
+        SendIndices();
+        index = 0;
+
+        touchCollider.GetComponent<Collider2D>().enabled = false;
+        _touching = false;
+        _timer -= 200;
+        ResetColliders();
+
+        SetLineRendererCount(0);
+
+        if (Mode.Crafting == ControllerMode)
+        {
+            _craftingUiController.SetAllCounts();
+        }
+        else
+        {
+            _craftingUiController.HideNumbers();
+            _craftingUiController.SetAllButtonsImages(CraftingUiController.ButtonState.InCombat);
+        }
+        _craftingUiController.ResetAllColors();
+        LineController.ResetPoints();
+        LineController.HideLines();
+
+        _canSendIndices = false;
     }
 
     private GameObject GetFromArray(int x, int y)
@@ -319,7 +330,9 @@ public class TouchController : MonoBehaviour
 
         if (_touching)
         {
-            LineController.SetPoint(new Vector3(transform.position.x + x * offset, transform.position.y + y * offset, 4f));
+            Vector3 point = realTransform - transform.position;
+
+            LineController.SetPoint(new Vector3(transform.position.x + point.x, transform.position.y + point.y, 4f));
             if (index < maxRuneIndices)
             {
                 runeIndices[index] = new Vec2(x, y);
@@ -327,5 +340,41 @@ public class TouchController : MonoBehaviour
             }
         }
         _timer = Time.time + lineResetTime;
+    }
+
+    public bool[] BoolArrayFromIndices(Vec2[] indices)
+    {
+        bool[] value = new bool[9];
+        for (int i = 0; i < index; i++)
+        {
+            int iii = GetBoolIndex(indices[i]);
+            value[iii] = true;
+        }
+        return value;
+    }
+
+    public static readonly int[,] IndexLookUpTable = new int[,] // x, y
+    {
+        { 0, 1, 2 },
+        { 3, 4, 5 },
+        { 6, 7, 8 },
+    };
+
+    public static int GetBoolIndex(Vec2 v)
+    {
+        return IndexLookUpTable[v.Y, v.X];
+    }
+
+    public void SetTouchContollerCenters(Vector2[] positions)
+    {
+        // käännetään y ylösalaisin
+        for (int y = 0, i = 0; y < 3; y++)
+        {
+            int yy = 2 - y;
+            for (int x = 0; x < 3; x++, i++)
+            {
+                _colliders[yy * 3 + x].transform.position = positions[i];
+            }
+        }
     }
 }

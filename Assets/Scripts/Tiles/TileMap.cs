@@ -34,7 +34,6 @@ public class TileMap : MonoBehaviour
     public Color tint;
     private Color last;
 
-
     void Start()
     {
         SpriteController = FindObjectOfType<TileSpriteController>();
@@ -160,6 +159,8 @@ public class TileMap : MonoBehaviour
 
         if (chunkOffsetX != player.ChunkOffsets.X || chunkOffsetY != player.ChunkOffsets.Y)
         {
+            _chunkGenerationInProcess = true;
+            StartCoroutine(SetChunkTimer(5));
             //Debug.LogFormat("player chunk changed to({0}:{1})", chunkOffsetX, chunkOffsetY);
 
             int chunkDtX = chunkOffsetX - player.ChunkOffsets.X;
@@ -176,7 +177,7 @@ public class TileMap : MonoBehaviour
             {
                 StartCoroutine(ThreeFrameUpdateRight(chunkOffsetX, chunkOffsetY));
             }
-            if (chunkDtY < 0)
+            if (chunkDtY < 0) // alas
             {
                 swapRow(2, 1);
                 swapRow(1, 0);
@@ -192,6 +193,8 @@ public class TileMap : MonoBehaviour
 
                 }
 
+
+                SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position;
                 SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE - 3, this, 1, 1);
             }
             else if (chunkDtY > 0)  // ylös
@@ -209,7 +212,10 @@ public class TileMap : MonoBehaviour
                     _chunks[2, i + 1].MoveChunk(0, 3);
                 }
 
-                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE * 3 - 3, this, 1, Chunk.CHUNK_SIZE * 2 - 3);
+                // koska ylös mennessä 0, 0 nousee
+                SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position; //  + new Vector3(0f, 17f);
+                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 2, Chunk.CHUNK_SIZE * 3 - 2, this, 1, Chunk.CHUNK_SIZE * 2 - 2);
+                // SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE * 3 - 3, this, 1, Chunk.CHUNK_SIZE * 2 - 3);
             }
             SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position;
 
@@ -221,17 +227,20 @@ public class TileMap : MonoBehaviour
         // _chunks[1, 1].offsetY = chunkOffsetY;
     }
 
+    IEnumerator SetChunkTimer(int frames)
+    {
+        for (int i = 0; i < frames; i++)
+            yield return null;
+
+        _chunkGenerationInProcess = false;
+    }
 
 
 
     IEnumerator ThreeFrameUpdateRight(int chunkOffsetX, int chunkOffsetY)
     {
         swapColumn(1, 0);
-        // SwapColumnsViews(2, 1);
         swapColumn(2, 1);
-        // SwapColumnsViews(1, 0);
-        // ResetTileViews();
-        // SwapRight();
 
         for (int i = -1; i < 2; i++)    // -1
         {
@@ -242,7 +251,7 @@ public class TileMap : MonoBehaviour
             yield return null;
         }
 
-        // TODO: WARNING HETKINEN
+        SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position; //  + new Vector3(0f, 17f);
         SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE * 3 - 3, this, Chunk.CHUNK_SIZE * 2 - 3, 1);
     }
 
@@ -261,6 +270,7 @@ public class TileMap : MonoBehaviour
             yield return null;
         }
 
+        SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position; //  + new Vector3(0f, 17f);
         SpriteController.SetTileSprites(Chunk.CHUNK_SIZE - 3, Chunk.CHUNK_SIZE * 3 - 3, this, 1, 1);
     }
 
@@ -353,7 +363,6 @@ public class TileMap : MonoBehaviour
 
 
     Dictionary<Vec2, bool> SavedChunks = new Dictionary<Vec2, bool>(25);
-
     void GenerateChunk(int offsetX, int offsetY, int perlinOffsetX, int perlinOffsetY)
     {
         // tallenna entinen
@@ -389,50 +398,6 @@ public class TileMap : MonoBehaviour
     void Update()
     {
         Tint();
-        //if (CrossPlatformInputManager.GetButtonDown("Jump"))
-        //{
-        //    Destroy(this.gameObject);            
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.F1))
-        //{
-        //    RandomizeAllTiles();
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.F2))
-        //{
-        //    ResetColor();
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.N))
-        //{
-        //    var go = ObjectPool.instance.GetObjectForType("SpawnableTree", true);
-        //    go.transform.position = new Vector3(18, 25);
-        //    _chunks[1, 1].AddObject(1, 8, go);
-
-        //}
-        //if (Input.GetKeyDown(KeyCode.U))
-        //{
-        //    var go = ObjectPool.instance.GetObjectForType("SpawnableTree", true);
-        //    go.transform.position = new Vector3(18, 20);
-        //    _chunks[1, 1].AddObject(1, 3, go);
-
-        //}
-        //if (Input.GetKeyDown(KeyCode.J))
-        //{
-        //    _chunks[1, 1].OnChunkChangedCleanup();
-        //
-
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //for (int i = 0; i < 3; i++)
-            //{
-            //    SpriteController.InitChunkSprites()
-            //}
-            // SpriteController.InitChunkSprites(TotalWidth - 2, TotalHeight - 2, this, 1, 1);
-            SpriteController.SetTileSprites(TotalWidth - 2, TotalHeight - 2, this, 1, 1);
-        }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -442,7 +407,6 @@ public class TileMap : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             _chunks[1, 1].Load();
-            
         }
     }
 
@@ -451,6 +415,8 @@ public class TileMap : MonoBehaviour
     {
         new Vec2(1, 1), new Vec2(1, 0),
     };
+
+    private bool _chunkGenerationInProcess = false;
 
     void SwapLeft()
     {
@@ -476,7 +442,6 @@ public class TileMap : MonoBehaviour
         }
     }
 
-
     // NOTE(Eetu):
     // jos funktioiden matematiikka on liian raskasta niin on vielä mahdollista optimoida se muutamalla kikalla
     // raskas toiminnallisuuss liittyen tiilien looppaamiseen kannattaa sijoittaa chunkkeihin suoraan
@@ -492,6 +457,40 @@ public class TileMap : MonoBehaviour
         return _chunks[chunkY, chunkX].GetTile(offsetX, offsetY);
     }
 
+    public TileType GetTile(Vector2 vec)
+    {
+        int chunkX = 1;
+        int chunkY = 1;
+        GetChunkOffsetXY(ref chunkX, ref chunkY, vec.x, vec.y);
+
+        int offsetX = (int)vec.x % Chunk.CHUNK_SIZE;
+        int offsetY = (int)vec.y % Chunk.CHUNK_SIZE;
+        return _chunks[chunkY, chunkX].GetTile(offsetX, offsetY);
+    }
+
+    public GameObject GetGo(Vector2 vec)
+    {
+        int chunkX = 1;
+        int chunkY = 1;
+        GetChunkOffsetXY(ref chunkX, ref chunkY, vec.x, vec.y);
+
+        int offsetX = (int)vec.x % Chunk.CHUNK_SIZE;
+        int offsetY = (int)vec.y % Chunk.CHUNK_SIZE;
+        return _chunks[chunkY, chunkX].GetGameObject(offsetX, offsetY);
+    }
+
+    public GameObject GetTileOnTileGameObject(Vector2 vec)
+    {
+        int chunkX = 1;
+        int chunkY = 1;
+        GetChunkOffsetXY(ref chunkX, ref chunkY, vec.x, vec.y);
+
+        int offsetX = (int)vec.x % Chunk.CHUNK_SIZE;
+        int offsetY = (int)vec.y % Chunk.CHUNK_SIZE;
+        return _chunks[chunkY, chunkX].GetTileOnTileGameObject(offsetX, offsetY);
+    }
+
+
     public void SetTile(float x, float y, TileType type)
     {
         int chunkX = 1;
@@ -503,9 +502,6 @@ public class TileMap : MonoBehaviour
         _chunks[chunkY, chunkX].SetTile(offsetX, offsetY, type);
     }
 
-    // 40
-    // 2
-    // 0
     public GameObject GetGameObjectFast(int x, int y)
     {
         int ix = x / Chunk.CHUNK_SIZE;
@@ -556,5 +552,10 @@ public class TileMap : MonoBehaviour
         {
             --y;
         }
+    }
+
+    public bool CanUpdatePathFind()
+    {
+        return !_chunkGenerationInProcess;
     }
 }

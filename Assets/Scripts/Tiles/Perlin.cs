@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -245,10 +244,10 @@ public class Perlin : MonoBehaviour
         return value;
     }
 
-    public int blueNoiseOctaves = 2;
+    public int   blueNoiseOctaves = 2;
     public float blueNoiseLacunarity = 0f;
     public float blueNoisePersistance = 0f;
-    public int ObjectRValue = 2;
+    public int   ObjectRValue = 2;
 
     public float[,] GenerateBlueNoise(int sizeX, int sizeY)
     {
@@ -489,7 +488,9 @@ public class Perlin : MonoBehaviour
 
                         go.transform.localScale *= Random.Range(0.90f, 1.10f);
 
-                        go.transform.position = spawnPosition;
+                        float z = ZlayerManager.GetZFromY(spawnPosition); // eessä olevat puut eteen ja takana taakse
+                        go.transform.position = new Vector3(spawnPosition.x, spawnPosition.y, z);
+                            
                         go.GetComponent<Resource>().Init(false);
 
                         chunk.AddObject(x, y, go);

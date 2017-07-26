@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MobsControl : MonoBehaviour
 {
+    public static MobsControl instance;
+
 
     private class spawn
     {
@@ -12,7 +14,7 @@ public class MobsControl : MonoBehaviour
 
     }
 
-    // JOONAN BOOL MUUTTUJA, PATE NÄPIT IRTI, THX
+    // JOONAN BOOL MUUTTUJA, PATE NÄPIT IRTI, THX // fuq u mayn
     [Header("Enemies deal dmg")]
     public bool enemiesDealDamage = true;
 
@@ -29,30 +31,36 @@ public class MobsControl : MonoBehaviour
     public bool spawnMelee;
     public bool spawnArchers;
     public bool spawnBears;
-
+    public bool naturalSpawn;
     List<spawn> spawner = new List<spawn>();
     void Start()
     {
 
         Boids = new List<GameObject>(Mob_Amount); // mah fix
-
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("y"))
+        if(!naturalSpawn)
         {
-            var pl = player.GetComponent<Rigidbody2D>().position;
-            SpawnBoids(pl.x, pl.y, 4f, Mob_Amount);          
-        }
-        if (Input.GetKeyDown("m"))
-        {
-            DeleteAllCurrentMobs();
-        }
-        if (Input.GetKeyDown("k"))
-        {
-            slow = true;
+            if (Input.GetKeyDown("y"))
+            {
+                var pl = player.GetComponent<Rigidbody2D>().position;
+                SpawnBoids(pl.x, pl.y, 4f, Mob_Amount);          
+            }
+            if (Input.GetKeyDown("m"))
+            {
+                DeleteAllCurrentMobs();
+            }
+            if (Input.GetKeyDown("k"))
+            {
+                slow = true;
+            }
         }
 
 
@@ -71,32 +79,43 @@ public class MobsControl : MonoBehaviour
                     k = player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(x, y));
                 }
                 while (k == PathFinder.Dir.NoDir);
-
-                if (spawnMelee)
+                if (!naturalSpawn)
                 {
-                    GameObject m;
-                    m = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
-                    m.GetComponent<generalAi>().InitStart(x, y,EnemyType.Archer, player);
-                    Boids.Add(m);
+                    if (spawnMelee)
+                    {
+                        GameObject m;
+                        m = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
+                        m.GetComponent<generalAi>().InitStart(x, y,EnemyType.Archer, player);
+                        Boids.Add(m);
+                    }
+                    if (spawnWolfs)
+                    {
+                        GameObject m;
+                        m = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
+                        m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Wolf, player);
+                        Boids.Add(m);
+                    }
+
                 }
-                if (spawnWolfs)
+                else
                 {
-                    GameObject m;
-                    m = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
-                    m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Wolf, player);
-                    Boids.Add(m);
+                    if (Boids.Count % 2 == 0)
+                    {
+                        GameObject m;
+                        m = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
+                        m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Archer, player);
+                        Boids.Add(m);
+                    }
+                    else
+                    {
+                        GameObject m;
+                        m = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
+                        m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Wolf, player);
+                        Boids.Add(m);
+                    }
+
                 }
 
-
-                //if (Boids.Count % 2 == 0)
-                //{
-
-                //}
-                //else
-                //{
-                //    go = Instantiate(Archer, new Vector2(x, y), Quaternion.identity);
-                //    go.GetComponent<generalAi>().InitStart(x, y, EnemyType.Archer);
-                //}
                 //wolfBoids.Add(go);
 
                 spawner[0].amount--;

@@ -46,6 +46,7 @@ public enum behavior
     Inleap = 512,
     startLeap = 1024,
     Collide = 2048,
+    CollideEnv = 4096,
     wanderGroup = separate | alingment | cohesion,
     startWanderingSolo = wander | giveWanderingTargetSolo,
     changeSoloWanderDir = wander | changeSoloDIr,
@@ -124,14 +125,39 @@ public abstract class generalAi : MonoBehaviour
         dist.Normalize();
         dist *= attackDist;
         target = playerPos + dist;
-        flags = (int)behavior.seekAndArrive | (int)behavior.separate;
+        flags = (int)behavior.seekAndArrive | (int)behavior.separate /*| (int)behavior.CollideEnv*/;
         Physics._sepF = sepF * 2;
     }
+    float envTime = 0.1f;
+    float envTimer = 0f;
+    protected void getEnvironment(ref Collider2D[] environment)
+    {
+        envTimer += Time.deltaTime;
+        if(envTimer > envTime)
+        {
+            LayerMask mask = LayerMask.GetMask("ObjectLayer");
+            environment = Physics2D.OverlapCircleAll(body.position, 1f, mask);// muokkaa radiusta
+            envTimer = 0;
+        }
 
+    }
+    float t = 0f;
+    float tr = 0.1f;
+    protected void getFriends(ref Collider2D[] friends, ref Collider2D[] coll, float alir,float desr,LayerMask mask)
+    {
+        t += Time.deltaTime;
+        if(t > tr)
+        {
+            friends = Physics2D.OverlapCircleAll(body.position, alir, mask);
+            coll = Physics2D.OverlapCircleAll(body.position, desr, mask);
+            t = 0f;
+        }
+    }
     public void findPath(ref int flags,ref Vector2 velocity,ref Vector2 target ,GameObject player,Rigidbody2D body)
     {
         PathFinder.Dir k = player.GetComponent<UpdatePathFind>().path.getTileDir(body.position);
-
+        rotation.rotToPl = true;
+        rotation.playerPos = player.transform.position;
         if (k == PathFinder.Dir.NoDir)
         {
             flags = 0;
@@ -156,6 +182,84 @@ public abstract class generalAi : MonoBehaviour
         {
             flags = (int)behavior.findPath;
             target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x, body.position.y - 1));
+        }
+        else
+        {
+            flags = 0;
+            velocity *= 0;
+        }
+    }
+
+    public void reversedFindPath(ref int flags, ref Vector2 velocity, ref Vector2 target, GameObject player, Rigidbody2D body) // älä käytä, riks pox
+    {
+        int[] ind = player.GetComponent<UpdatePathFind>().path.calculateIndex(body.position);
+        PathFinder.Dir k = player.GetComponent<UpdatePathFind>().path.getTileDir(body.position);
+        rotation.rotToPl = true;
+        rotation.playerPos = player.transform.position;
+        if (k == PathFinder.Dir.NoDir)
+        {
+            flags = 0;
+            velocity *= 0;
+        }
+        else if (k == PathFinder.Dir.Right)
+        {
+            flags = (int)behavior.findPath;
+            ind[0]--;
+            PathFinder.Dir temp = player.GetComponent<UpdatePathFind>().path.getTileDir(ind);
+            if (temp != PathFinder.Dir.NoDir || temp != PathFinder.Dir.NoWayOut)
+            {
+                target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x - 1, body.position.y));               
+            }
+            else
+            {
+                flags = 0;
+                velocity *= 0;
+            }
+        }
+        else if (k == PathFinder.Dir.Left)
+        {
+            flags = (int)behavior.findPath;
+            ind[0]++;
+            PathFinder.Dir temp = player.GetComponent<UpdatePathFind>().path.getTileDir(ind);
+            if (temp != PathFinder.Dir.NoDir || temp != PathFinder.Dir.NoWayOut)
+            {
+                target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x + 1, body.position.y));
+            }
+            else
+            {
+                flags = 0;
+                velocity *= 0;
+            }
+        }
+        else if (k == PathFinder.Dir.Up)
+        {
+            flags = (int)behavior.findPath;
+            ind[1]++;
+            PathFinder.Dir temp = player.GetComponent<UpdatePathFind>().path.getTileDir(ind);
+            if (temp != PathFinder.Dir.NoDir || temp != PathFinder.Dir.NoWayOut)
+            {
+                target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x, body.position.y-1));
+            }
+            else
+            {
+                flags = 0;
+                velocity *= 0;
+            }
+        }
+        else if (k == PathFinder.Dir.Down)
+        {
+            flags = (int)behavior.findPath;
+            ind[1]--;
+            PathFinder.Dir temp = player.GetComponent<UpdatePathFind>().path.getTileDir(ind);
+            if (temp != PathFinder.Dir.NoDir || temp != PathFinder.Dir.NoWayOut)
+            {
+                target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x , body.position.y+1));
+            }
+            else
+            {
+                flags = 0;
+                velocity *= 0;
+            }
         }
         else
         {
@@ -194,7 +298,7 @@ public abstract class generalAi : MonoBehaviour
     public void RayCollide(ref collision CollState,ref Vector2 velocity,float collideDist, Rigidbody2D body)
     {
         CollState = collision.none;
-        LayerMask mask = LayerMask.GetMask("Collide");
+        LayerMask mask = LayerMask.GetMask("ObjectLayer");
         Vector2 main = velocity;
         main.Normalize();
         main *= collideDist; // EETU TRIGGER
@@ -214,7 +318,7 @@ public abstract class generalAi : MonoBehaviour
         {
             CollState = collision.Left;
         }
-
+        print(CollState);
     }
     public Vector2 getPosition() // tulee jokaselle
     {
@@ -305,7 +409,7 @@ public abstract class generalAi : MonoBehaviour
         if(obsTimer > obsTime)
         {
             int mask = LayerMask.GetMask("ObjectLayer");
-            RaycastHit2D[] ob =  Physics2D.CircleCastAll(body.position, 1f, player.transform.position - (Vector3)body.position, dist.magnitude, mask);
+            RaycastHit2D[] ob =  Physics2D.CircleCastAll(body.position, 0.5f, player.transform.position - (Vector3)body.position, dist.magnitude, mask);
             if(ob.Length == 0)
             {
                 obc = false;

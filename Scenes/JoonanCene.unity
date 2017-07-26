@@ -4421,7 +4421,7 @@ Prefab:
     - target: {fileID: 224611100231060242, guid: 37de142f75c66004d88909a69474a49f,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.9999542
+      value: -138
       objectReference: {fileID: 0}
     - target: {fileID: 224611100231060242, guid: 37de142f75c66004d88909a69474a49f,
         type: 2}
@@ -4462,6 +4462,10 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1954085615274792, guid: 37de142f75c66004d88909a69474a49f, type: 2}
+      propertyPath: m_Name
+      value: CardPlaceholder
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 37de142f75c66004d88909a69474a49f, type: 2}

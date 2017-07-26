@@ -167,7 +167,7 @@ public class TileMap : MonoBehaviour
 
             player.ChunkOffsets.X = chunkOffsetX;
             player.ChunkOffsets.Y = chunkOffsetY;
-
+            
             if (chunkDtX < 0) // vasen
             {
                 StartCoroutine(ThreeFrameUpdateLeft(chunkOffsetX, chunkOffsetY));

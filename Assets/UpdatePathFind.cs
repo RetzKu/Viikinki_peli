@@ -9,7 +9,7 @@ public class UpdatePathFind : MonoBehaviour
 
 
     public BreadthFirstSearch path;
-    //debugGiz Giz;
+    debugGiz Giz;
 
     bool uptade = true;
 
@@ -25,8 +25,8 @@ public class UpdatePathFind : MonoBehaviour
         path = new BreadthFirstSearch();
         path.map = terveisin;
         body = GetComponent<Rigidbody2D>();
-        //Giz = GetComponent<debugGiz>();
-        //Giz.init(path);
+        Giz = GetComponent<debugGiz>();
+        Giz.init(path);
     }
 
     void Update()
@@ -53,7 +53,7 @@ public class UpdatePathFind : MonoBehaviour
 
     }
 
-    //void OnDrawGizmos() // käytä pathfind debuggaukseen
+    //void OnDrawGizmos() // käytä pathfind debuggaukseens
     //{
     //    Giz.OnDrawGizmosPate();
     //}

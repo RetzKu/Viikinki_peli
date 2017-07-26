@@ -168,7 +168,7 @@ public class TileMap : MonoBehaviour
 
             player.ChunkOffsets.X = chunkOffsetX;
             player.ChunkOffsets.Y = chunkOffsetY;
-
+            
             if (chunkDtX < 0) // vasen
             {
                 StartCoroutine(ThreeFrameUpdateLeft(chunkOffsetX, chunkOffsetY));
@@ -366,13 +366,14 @@ public class TileMap : MonoBehaviour
     void GenerateChunk(int offsetX, int offsetY, int perlinOffsetX, int perlinOffsetY)
     {
         // tallenna entinen
+        MobsControl.instance.SpawnBoids(perlinOffsetX * ChunkSize + ChunkSize / 2, perlinOffsetY * ChunkSize + ChunkSize / 2, ChunkSize / 3, Random.Range(2, 6));//pate spawn
+
         var chunk = _chunks[offsetY, offsetX]; // missä kohdalla _chunkeissa
 
         SavedChunks[new Vec2(chunk.offsetX, chunk.offsetY)] = true;
         chunk.Save();
 
         chunk.OnChunkChangedCleanup();
-
         bool exist = false;
         if (SavedChunks.TryGetValue(new Vec2(perlinOffsetX, perlinOffsetY), out exist))
         {
@@ -386,6 +387,7 @@ public class TileMap : MonoBehaviour
         }
         chunk.offsetX = perlinOffsetX;
         chunk.offsetY = perlinOffsetY;
+
     }
 
 

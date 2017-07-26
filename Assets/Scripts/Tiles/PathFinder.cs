@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class PathFinder 
@@ -42,32 +43,30 @@ public class PathFinder
         return Vector2.zero;
     }
 
-
-
     static readonly Vec2[] Neighbours = new Vec2[]
     {
         new Vec2(1, 0), new Vec2(0, -1),
         new Vec2(-1, 0), new Vec2(0, 1)
     };
 
-    List<Vec2> GetNeighbours(Vec2 location)
+    void GetNeighbours(Vec2 location, List<Vec2> values, out int count)
     {
-        List<Vec2> value = new List<Vec2>(4);
+        // List<Vec2> value = new List<Vec2>(4);
+        count = 0;
         foreach (Vec2 offset in Neighbours)
         {
             Vec2 next = new Vec2(location.X + offset.X, location.Y + offset.Y);
             if (InBounds(next) && realMap[next.Y][next.X].tileState != BreadthFirstSearch.states.wall)     // passable jne......
             {
-                value.Add(next);
+                values[count] = next;
+                count++;
             }
         }
 
         if ((location.X + location.Y) % 2 == 0)
         {
-            value.Reverse();
+            values.Reverse();
         }
-
-        return value;
     }
 
     bool InBounds(Vec2 location)
@@ -86,24 +85,29 @@ public class PathFinder
         this.GoalX = goalX;
         this.GoalY = goalY;
         realMap = moveTiles;
-        Queue<Vec2> frontier = new Queue<Vec2>();
+        Queue<Vec2> frontier = new Queue<Vec2>(100);
 
         Vec2 start = new Vec2(GoalX, GoalY);
         frontier.Enqueue(start);
 
-        Dictionary<Vec2, Vec2> cameFrom = new Dictionary<Vec2, Vec2>();
+        Dictionary<Vec2, Vec2> cameFrom = new Dictionary<Vec2, Vec2>(289);
         cameFrom[start] = start;
 
+
         dirs = new Dir[Height, Width];
+
+        List<Vec2> neighbours = new List<Vec2>(4) {new Vec2(0, 0), new Vec2(0, 0), new Vec2(0, 0), new Vec2(0, 0)};
+        
 
         while (frontier.Count > 0)
         {
             var current = frontier.Dequeue();
-            var n = GetNeighbours(current);
+            int count = 0;
+            GetNeighbours(current, neighbours, out count);
 
-            for (int i = 0; i < n.Count; i++)
+            for (int i = 0; i < count; i++)
             {
-                var next = n[i];
+                var next = neighbours[i];
                 if (!cameFrom.ContainsKey(next)) // LOL
                 {
                     frontier.Enqueue(next);
@@ -121,6 +125,7 @@ public class PathFinder
         {
             for (int x = 1; x < Width - 1; x++)
             {
+
                 if (realMap[y][x].tileState != BreadthFirstSearch.states.wall && dirs[y, x] != Dir.NoWayOut)
                 {
                     Vec2 vec = new Vec2(x, y);

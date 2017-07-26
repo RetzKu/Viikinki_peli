@@ -7,26 +7,26 @@ public class WolfAI : generalAi
 {
 
 
-    public float leapDist = 1.0f;
+    public float leapDist = 2.0f; // ignored for now
 
     private float attackCounter = 5f; // EETU TRIGGER
     private float attackUptade = 5f;
-    float leapSpeed = 4;
+    float leapSpeed = 3;
     bool bite = false;
 
     float currentTime = 0;
     float animTime = 0.7f;
-    float leapAnim = 8f;
+    //float leapAnim = 8f;
     float biteRange = 2f; // just bite
     float biteTime = 1f; // kuinka kauan vain purasu kestää
     float biteTimer = 0f; 
     bool justBite = false;
     float holderDist = 0;
     //generalAi AI = new generalAi();
-
+    LayerMask mask;
     public override void InitStart(float x, float y, EnemyType type,GameObject player) // jokaselle
     {
-        attackDist = UnityEngine.Random.Range(leapDist-1f, leapDist+1f);
+        attackDist = leapDist;/* UnityEngine.Random.Range(leapDist-1f, leapDist+1f);*/
         //print(attackDist);
         myType = type;
         rotation.init(myType);
@@ -38,8 +38,12 @@ public class WolfAI : generalAi
         Physics.InitRules(sepF, aliF, cohF, desiredseparation, alingmentDistance, IdleRadius, IdleBallDistance, ArriveRadius, MaxSteeringForce, MaxSpeed);
         Physics._maxSpeed = MaxSpeed;
         this.player = player;
-    }
+        mask = LayerMask.GetMask("Enemy");
 
+    }
+    Collider2D[] environment = new Collider2D[0];
+    Collider2D[] HeardArray = new Collider2D[0];
+    Collider2D[] CollisionArray = new Collider2D[0];
     public override void UpdatePosition() // jokaselle
     {
         //print(inAttack);
@@ -48,12 +52,9 @@ public class WolfAI : generalAi
             rotation.UpdateRotation(velocity, body.position);
             GetComponent<WolfAnimatorScript>().SpriteDirection(myDir);
         }
-        LayerMask mask = new LayerMask();
-
-        mask = LayerMask.GetMask("Enemy");
-
-        var HeardArray = Physics2D.OverlapCircleAll(body.position, alingmentDistance, mask); // , mask);
-        var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
+        getFriends(ref HeardArray,ref CollisionArray, alingmentDistance,desiredseparation, mask);
+        //var HeardArray = Physics2D.OverlapCircleAll(body.position, alingmentDistance, mask); // , mask);
+        //var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
         Vector2[] powers = new Vector2[2];
 
         if (agro && HeardArray.Length > 1)   // agro jokainen vihu lähellä
@@ -75,11 +76,12 @@ public class WolfAI : generalAi
             if (!agro)
             {
                 wander(HeardArray, ref flags, ref GiveStartTarget, ref counter, IdleRefreshRate);
-                rotation.rotToPl = false;
+                //rotation.rotToPl = false;
                 rotation.Lock = false;
             }
             else if (agro)
             {
+                getEnvironment(ref environment);
                 Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
 
                 Vector2 dist = body.position - playerPos;
@@ -98,7 +100,7 @@ public class WolfAI : generalAi
         {
             knocktimer();
         }
-        powers = Physics.applyBehaviors(HeardArray, CollisionArray, velocity, target, body.position, flags, CollState);
+        powers = Physics.applyBehaviors(HeardArray, CollisionArray,environment, velocity, target, body.position, flags, CollState);
         target = powers[1];
         velocity = powers[0];
 
@@ -107,15 +109,16 @@ public class WolfAI : generalAi
             currentTime = animTime;
             Physics._maxSpeed = MaxSpeed * leapSpeed;            
         }
-        velocity *= Time.deltaTime;
+        //velocity *= Time.deltaTime;
         //print(velocity.magnitude);
-        body.MovePosition(body.position + velocity);
+        body.MovePosition(body.position + (velocity* Time.deltaTime));
     }
     void leapingPattern(Vector2 dist, Vector2 playerPos) //spe
-    {
+    {        
+        getObstacle(dist);
         if (dist.magnitude <= attackDist || inAttack || velocity.magnitude == 0)
         {
-            if (!inAttack && attackCounter > attackUptade)
+            if (!inAttack && attackCounter > attackUptade && !obc)
             {
 
                 if (dist.magnitude < biteRange)
@@ -124,6 +127,7 @@ public class WolfAI : generalAi
                     justBite = true;
                     inAttack = true;
                     Physics._maxSpeed = MaxSpeed * 0.3f;
+
                     rotation.playerPos = playerPos;
                     rotation.HardRotate( body.position, velocity);
                     GetComponent<WolfAnimatorScript>().SpriteDirection(myDir);
@@ -133,22 +137,13 @@ public class WolfAI : generalAi
                 }
                 else
                 {
+                    Physics._maxSteeringForce = MaxSteeringForce * 100f;
+
                     GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapStart);
                     rotation.rotToPl = true;
-                    //Physics._maxSpeed = MaxSpeed * 4;
-                    //start leap
-                    //if (dist.magnitude > 1.2f)  // velocityn mukaan leap
-                    //{
-                    //    Vector2 plVec = player.GetComponent<Rigidbody2D>().velocity;
-                    //    playerPos += plVec * 0.5f; // muokkaa
-                        
-                    //    dist = body.position - playerPos;
-                    //}
-
-
-
-                    dist.Normalize();
-                    dist *= attackDist +1 ;//5
+                    // ENNAKOIVA HYPPY?
+                    //dist.Normalize();
+                    //dist *= attackDist +1 ;//5
                     dist *= -1.0f;
                     target = body.position + dist;
                     flags = (int)behavior.seek;
@@ -160,12 +155,13 @@ public class WolfAI : generalAi
             }
             else if (inAttack && !justBite)
             {
-                bool go = timer();
+                bool go = timer(); // korjaa
+                //bool go = true;
                 rotation.Lock = true;
                 //leaping
-                Vector2 t = target - body.position;
+               // Vector2 t = target - body.position;
                 flags = (int)behavior.seekAndArrive;
-                if (velocity.magnitude == 0 && go)
+                if ((target - body.position).magnitude < 0.5f && go)
                 {
                     GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd); // mee ohi
                     Physics._maxSpeed = MaxSpeed;
@@ -173,18 +169,20 @@ public class WolfAI : generalAi
                     attackCounter = 0;
                     bite = false;
                     rotation.Lock = false;
+                    Physics._maxSteeringForce = MaxSteeringForce;
                 }
-                else if (dist.magnitude < velocity.magnitude * leapAnim && !bite && go )// muokkaa purase
+                else if (dist.magnitude < 1/*velocity.magnitude * leapAnim*/ && !bite && go )// muokkaa purase
                 {
                     //GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
                     GetComponent<WolfAnimatorScript>().AnimationTrigger(action.Attack);
-                    target = body.position + (velocity * 4.5f);
+                    GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
+                    target = body.position + (velocity * 0.1f);
                     bite = true;
                 }
-                if( dist.magnitude < velocity.magnitude * leapAnim && go)
-                {
-                    GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
-                }
+                //if( dist.magnitude < velocity.magnitude /** leapAnim*/ && go)
+                //{
+                //    GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
+                //}
             }
             else if (justBite)
             {
@@ -215,7 +213,19 @@ public class WolfAI : generalAi
                     rotation.rotToPl = false;
                 }
                 attackCounter+= Time.deltaTime;
-                followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
+                if (!inAttack && attackCounter > attackUptade)
+                {
+                    findPath(ref flags, ref velocity, ref target, player, body);
+                }
+                else
+                {
+                    followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
+                    if (environment != null && environment.Length != 0)
+                    {
+                        flags = flags | (int)behavior.CollideEnv;
+                    }
+                }
+                //reversedFindPath(ref flags, ref velocity, ref target, player, body);
             }
         }
         else
@@ -225,7 +235,14 @@ public class WolfAI : generalAi
             if (dist.magnitude <= attackDist)
             {
                 rotation.rotToPl = false;
-                followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
+                if (obc)
+                {
+                    findPath(ref flags, ref velocity, ref target, player, body);
+                }
+                else
+                {
+                    followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
+                }
             }
             else
             {
@@ -252,7 +269,7 @@ public class WolfAI : generalAi
         Gizmos.DrawLine(body.position, body.position+main); // piirretään viiva visualisoimaan toimivuutta 
         Gizmos.DrawLine(body.position, body.position + first);
         Gizmos.DrawLine(body.position, body.position + second);
-        Gizmos.DrawLine(body.position, body.position + velocity * 30);
+        Gizmos.DrawLine(body.position, body.position + velocity);
         if (rotation.rotToPl)
         {
             Gizmos.color = Color.red;
@@ -300,7 +317,7 @@ public class WolfAI : generalAi
         {
             int[] ind = player.GetComponent<UpdatePathFind>().path.calculateIndex(body.position);
 
-            if (ind[0] < 0 || ind[0] > 59 || ind[1] < 0 || ind[1] > 59)
+            if (ind[0] < 0 || ind[0] > TileMap.TotalWidth || ind[1] < 0 || ind[1] > TileMap.TotalHeight)
             {
                 return true;
             }

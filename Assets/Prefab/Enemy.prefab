@@ -1234,11 +1234,11 @@ MonoBehaviour:
   IdleRefreshRate: 100
   IdleRadius: 60
   IdleBallDistance: 100
-  MaxSteeringForce: 0.001
+  MaxSteeringForce: 0.5
   ArriveRadius: 0.3
   desiredseparation: 0.7
   alingmentDistance: 1
-  sepF: 0.1
+  sepF: 0.05
   aliF: 0.2
   cohF: 0.1
   velocity: {x: 0, y: 0}

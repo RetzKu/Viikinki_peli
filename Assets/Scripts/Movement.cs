@@ -91,6 +91,25 @@ public class Movement : MonoBehaviour
         }
     }
 
+    public void UpPateDir(PlayerDir dir)
+    {
+        fx = dir;
+        if (dir == pd)
+        {
+            return;
+        }
+        else
+        {
+            inAttack = true;
+            GetComponent<AnimatorScript>().Sprites.EnableSprites((int)dir);
+
+            LastDirection = GetComponent<PlayerScript>().Direction;
+            GetComponent<PlayerScript>().Direction = (int)dir;
+
+            GetComponent<AnimatorScript>()._Lock = true;
+        }
+    }
+
     void FixedUpdate()
     {
         if (!knockBack)
@@ -191,27 +210,27 @@ public class Movement : MonoBehaviour
 
     void lerpate()
     {
-        if (lerpUp)
-        {
-            currentlerpate += Time.deltaTime;
-            if (currentlerpate > lerpateTime)
-            {
-                currentlerpate = lerpateTime;
-            }
-        }
-        else
-        {
-            {
-                currentlerpate -= Time.deltaTime;
-                if (currentlerpate < 0)
-                {
-                    currentlerpate = 0;
-                    max_spd = min_spd_pate;
-                }
-            }
-        }
+        //if (lerpUp)
+        //{
+        //    currentlerpate += Time.deltaTime;
+        //    if (currentlerpate > lerpateTime)
+        //    {
+        //        currentlerpate = lerpateTime;
+        //    }
+        //}
+        //else
+        //{
+        //    {
+        //        currentlerpate -= Time.deltaTime;
+        //        if (currentlerpate < 0)
+        //        {
+        //            currentlerpate = 0;
+        //            max_spd = min_spd_pate;
+        //        }
+        //    }
+        //}
 
-        float t = currentlerpate / lerpateTime;
+        //float t = currentlerpate / lerpateTime;
         //ModifiedMaxSpd = lerp(min_spd_pate, max_spd_pate, t);
         
     }

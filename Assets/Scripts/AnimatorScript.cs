@@ -45,10 +45,10 @@ public class AnimatorScript : MonoBehaviour
     {
         Sprites.DirectionCheck();
         CheckVelocity();
-        Attack();
         if (Input.GetKeyDown(KeyCode.Mouse0) == true)
         {
-            DirectionLock();
+            Attack();
+
         }
     }
 
@@ -92,6 +92,7 @@ public class AnimatorScript : MonoBehaviour
 
     public void Attack()
     {
+        DirectionLock();
         foreach (Animator t in Animators) { t.SetTrigger(AttackType()); }
         GetComponent<FxScript>().instantiateFx();
     }

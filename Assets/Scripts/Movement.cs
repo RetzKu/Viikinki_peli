@@ -42,6 +42,12 @@ public class Movement : MonoBehaviour
     Vector2 vel = new Vector2(0f, 0f);
     Vector2 acc = new Vector2(0f, 0f);
     private int LastDirection;
+
+    public float Duration;
+    public bool Started = false;
+    private float startTime;
+    public bool Slowed = false;
+    public float ModifiedMaxSpd;
     // 2 max drag
     // 0 min drag
 
@@ -67,6 +73,22 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        ModifiedMaxSpd = max_spd;
+    }
+
+    public void AttackSlow()
+    {
+        if(Started)
+        {
+            startTime = Time.time;
+            Started = false;
+        }
+        float t = (Time.time - startTime) / Duration;
+        ModifiedMaxSpd = Mathf.SmoothStep(0.1f, max_spd, t);
+        if(ModifiedMaxSpd == 3)
+        {
+            Slowed = false;
+        }
     }
 
     void FixedUpdate()
@@ -78,14 +100,16 @@ public class Movement : MonoBehaviour
                 pateClock();
             }
             lerpate();
-            //print(max_spd);
             Vector2 SpeedLimiter = SpeedLimitChecker();
             vel = rb.velocity += SpeedLimiter;
-
         }
         else
         {
             knockClock();
+        }
+        if(Slowed)
+        {
+            AttackSlow();
         }
     }
 
@@ -111,11 +135,10 @@ public class Movement : MonoBehaviour
         if (added_spd.x == 0) { rb.velocity = new Vector2(rb.velocity.x / 1.1f, rb.velocity.y); }
         if (added_spd.y == 0) { rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 1.1f); }
 
-        if (rb.velocity.x > max_spd) { added_spd.x -= ((rb.velocity.x / max_spd) - 1) * max_spd; }
-        if (rb.velocity.y > max_spd) { added_spd.y -= ((rb.velocity.y / max_spd) - 1) * max_spd; }
-        if (rb.velocity.x < -max_spd) { added_spd.x += ((rb.velocity.x / -max_spd) - 1) * max_spd; }
-        if (rb.velocity.y < -max_spd) { added_spd.y += ((rb.velocity.y / -max_spd) - 1) * max_spd; }
-        getRotation(added_spd);
+        if (rb.velocity.x > ModifiedMaxSpd) { added_spd.x -= ((rb.velocity.x / ModifiedMaxSpd) - 1) * ModifiedMaxSpd; }
+        if (rb.velocity.y > ModifiedMaxSpd) { added_spd.y -= ((rb.velocity.y / ModifiedMaxSpd) - 1) * ModifiedMaxSpd; }
+        if (rb.velocity.x < -ModifiedMaxSpd) { added_spd.x += ((rb.velocity.x / -ModifiedMaxSpd) - 1) * ModifiedMaxSpd; }
+        if (rb.velocity.y < -ModifiedMaxSpd) { added_spd.y += ((rb.velocity.y / -ModifiedMaxSpd) - 1) * ModifiedMaxSpd; }
         //vel = added_spd;
         return added_spd;
 
@@ -129,7 +152,6 @@ public class Movement : MonoBehaviour
             dir.Normalize();
             dir *= -10f;
             knockDir = /*rb.position +*/ dir; // korjaa maybebebe
-            GetComponent<AnimatorScript>()._Lock = true;
         }
     }
     void knockClock()
@@ -157,7 +179,6 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            GetComponent<AnimatorScript>()._Lock = false;
             knockBack = false;
             knockTimer = 0f;
             rb.drag = slowdown; // Tarkista 
@@ -167,6 +188,7 @@ public class Movement : MonoBehaviour
     {
         return min + ((max - min) * t);
     }
+
     void lerpate()
     {
         if (lerpUp)
@@ -188,30 +210,12 @@ public class Movement : MonoBehaviour
                 }
             }
         }
+
         float t = currentlerpate / lerpateTime;
-
-        max_spd = lerp(min_spd_pate, max_spd_pate, t);
-
+        //ModifiedMaxSpd = lerp(min_spd_pate, max_spd_pate, t);
+        
     }
-    public void UpPateDir(PlayerDir dir)
-    {
-        fx = dir;
-        if (dir == pd)
-        {
-            return;
-        }
-        else
-        {
-            inAttack = true;
-            GetComponent<AnimatorScript>().Sprites.EnableSprites((int)dir);
-
-            LastDirection = GetComponent<PlayerScript>().Direction;
-            GetComponent<PlayerScript>().Direction = (int)dir;
-
-            GetComponent<AnimatorScript>()._Lock = true;
-        }
-    }
-    void pateClock()
+    public void pateClock()
     {
         attackTimer += Time.deltaTime;
         if (attackTimer > attackTime)
@@ -219,40 +223,10 @@ public class Movement : MonoBehaviour
             lerpUp = true;
             inAttack = false;
             attackTimer = 0f;
-            GetComponent<AnimatorScript>()._Lock = false;
-            GetComponent<PlayerScript>().Direction = LastDirection;
         }
         else
         {
             lerpUp = false;
         }
-    }
-    void getRotation(Vector2 velocity)
-    {
-        PlayerDir temp = PlayerDir.def;
-        if (Mathf.Abs(velocity.x) >= Mathf.Abs(velocity.y))
-        {
-            if (velocity.x < 0)
-            {
-                temp = PlayerDir.left;
-            }
-            else
-            {
-                temp = PlayerDir.right;
-            }
-        }
-        else if (Mathf.Abs(velocity.y) >= Mathf.Abs(velocity.x))
-        {
-            if (velocity.y < 0)
-            {
-                temp = PlayerDir.down;
-            }
-            else
-            {
-                temp = PlayerDir.up;
-            }
-
-        }
-        pd = temp;
     }
 }

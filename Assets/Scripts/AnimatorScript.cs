@@ -14,6 +14,11 @@ public class AnimatorScript : MonoBehaviour
 
     internal WeaponType Type;
 
+    private Vector3 MovementDir;
+
+    public GameObject Knob0;
+    public GameObject Knob1;
+
     void Start()
     {
         /*Get RigidBody for velocity check*/
@@ -28,22 +33,47 @@ public class AnimatorScript : MonoBehaviour
         Animators.Add(transform.Find("d_c_torso").GetComponent<Animator>());  //1 Index
         Animators.Add(transform.Find("u_c_torso").GetComponent<Animator>());  //2 Index
 
+        Knob0 = Instantiate(Knob0);
+        Knob1 = Instantiate(Knob1);
+
+        Destroy(Knob0.GetComponent<BoxCollider2D>());
+        Destroy(Knob1.GetComponent<BoxCollider2D>());
+
     }
 
     void Update()
     {
+        Sprites.DirectionCheck();
         CheckVelocity();
-        if (!Lock)
+        Attack();
+        if (Input.GetKeyDown(KeyCode.Mouse0) == true)
         {
-            Sprites.DirectionCheck();
+            DirectionLock();
         }
-        // Attack();
     }
 
     public int PlayerDir()
     {
         int tmp = Sprites.Index;
         return tmp;
+    }
+
+    void DirectionLock()
+    {
+        Vector3 Destination = new Vector3(Player.velocity.x, Player.velocity.y, 0) + transform.position;
+        Destination = transform.position + (Destination - transform.position).normalized * 0.7f;
+        Vector3 WrongWay = transform.position - (Destination - transform.position).normalized * 0.7f;
+        Vector3 MousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        MousePoint.Normalize();
+        MousePoint = MousePoint + transform.position;
+
+        if(Vector3.Distance(MousePoint,WrongWay) < Vector3.Distance(MousePoint,Destination))
+        {
+            print("Hidasdutus");
+            GetComponent<Movement>().Slowed = true;
+            GetComponent<Movement>().Started = true;
+        }
+
     }
 
     void CheckVelocity()

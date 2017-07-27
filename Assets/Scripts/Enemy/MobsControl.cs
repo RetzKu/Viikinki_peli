@@ -72,53 +72,59 @@ public class MobsControl : MonoBehaviour
                 float x;
                 float y;
                 PathFinder.Dir k;
+                int tries = 0;
                 do
                 {
                     x = Random.Range(spawner[0].x - spawner[0].rad, spawner[0].x + spawner[0].rad);
                     y = Random.Range(spawner[0].y - spawner[0].rad, spawner[0].y + spawner[0].rad);
                     k = player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(x, y));
+                    tries++;
                 }
-                while (k == PathFinder.Dir.NoDir);
-                if (!naturalSpawn)
+                while (k == PathFinder.Dir.NoDir && tries<5 );
+                if(tries <= 5)
                 {
-                    if (spawnMelee)
+                    if (!naturalSpawn)
                     {
-                        GameObject m;
-                        m = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
-                        m.GetComponent<generalAi>().InitStart(x, y,EnemyType.Archer, player);
-                        Boids.Add(m);
-                    }
-                    if (spawnWolfs)
-                    {
-                        GameObject m;
-                        m = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
-                        m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Wolf, player);
-                        Boids.Add(m);
-                    }
+                        if (spawnMelee)
+                        {
+                            GameObject m;
+                            m = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
+                            m.GetComponent<generalAi>().InitStart(x, y,EnemyType.Archer, player);
+                            Boids.Add(m);
+                        }
+                        if (spawnWolfs)
+                        {
+                            GameObject m;
+                            m = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
+                            m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Wolf, player);
+                            Boids.Add(m);
+                        }
 
-                }
-                else
-                {
-                    if (Boids.Count % 2 == 0)
-                    {
-                        GameObject m;
-                        m = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
-                        m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Archer, player);
-                        Boids.Add(m);
                     }
                     else
                     {
-                        GameObject m;
-                        m = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
-                        m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Wolf, player);
-                        Boids.Add(m);
+                        if (Boids.Count % 2 == 0)
+                        {
+                            GameObject m;
+                            m = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
+                            m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Archer, player);
+                            Boids.Add(m);
+                        }
+                        else
+                        {
+                            GameObject m;
+                            m = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
+                            m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Wolf, player);
+                            Boids.Add(m);
+                        }
+
                     }
 
+                    //wolfBoids.Add(go);
+
                 }
-
-                //wolfBoids.Add(go);
-
                 spawner[0].amount--;
+
             }
             else
             {

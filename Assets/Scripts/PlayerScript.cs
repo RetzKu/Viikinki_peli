@@ -63,10 +63,7 @@ public class PlayerScript : MonoBehaviour
     {
         tmpswing();
         Side();
-        if (GetComponent<AnimatorScript>()._Lock == false)
-        {
-            Direction = transform.GetComponent<AnimatorScript>().PlayerDir(); 
-        }
+        Direction = GetComponent<AnimatorScript>().PlayerDir();
         if(Inventory.ArmorEquipped == true) { EquipArmor(); Inventory.ArmorEquipped = false; }
         RefreshHand();
         InventoryInput();
@@ -238,10 +235,11 @@ public class PlayerScript : MonoBehaviour
             {
                 if (Hand.childCount > 0)
                 {
+                   
                     Hand.GetChild(0).SetParent(_Hand);
                     Hand = _Hand;
                     GameObject Copy = Hand.transform.GetChild(0).gameObject;
-
+                    Copy.GetComponent<SpriteRenderer>().enabled = true;
                     switch (Hand.transform.name)
                     {
                         case "s_l_hand":

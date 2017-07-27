@@ -1179,7 +1179,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977754839611798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.904373, y: 25.972878, z: 0}
+  m_LocalPosition: {x: 25.2, y: 24.2, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 4701210339847834}
@@ -2616,7 +2616,14 @@ MonoBehaviour:
   SidewaysHand: {fileID: 4334774280397600}
   UpwardsHand: {fileID: 4440870551386460}
   DownwardsHand: {fileID: 4936626758937170}
+<<<<<<< HEAD
   DefaultTorsos: []
+=======
+  DefaultTorsos:
+  - {fileID: 21300054, guid: 629e1517d153c074595eb344f3509beb, type: 3}
+  - {fileID: 21300066, guid: 629e1517d153c074595eb344f3509beb, type: 3}
+  - {fileID: 21300060, guid: 629e1517d153c074595eb344f3509beb, type: 3}
+>>>>>>> fc3d11fc62a0de3fab4e418316551a8ede380cb2
   Direction: 0
 --- !u!114 &114135886502828906
 MonoBehaviour:
@@ -2790,6 +2797,10 @@ MonoBehaviour:
   Keyboard: 1
   Joystick: {fileID: 114043215955215906}
   lerpUp: 1
+  Duration: 1
+  Started: 0
+  Slowed: 0
+  ModifiedMaxSpd: 0
 --- !u!114 &114335856655356606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2926,6 +2937,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346d15d1fa97b8d4f98a2b1aa2c13c7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Knob0: {fileID: 1017973806840300, guid: a138be7d1acea3b408a0a2570e8a51b1, type: 2}
+  Knob1: {fileID: 1830157689502956, guid: 243c70e89a75e7f43895e031aebe4ac0, type: 2}
 --- !u!114 &114613662104883584
 MonoBehaviour:
   m_ObjectHideFlags: 1

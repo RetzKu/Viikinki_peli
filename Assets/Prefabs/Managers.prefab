@@ -312,9 +312,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3392ccd266d224f469c4823886e7ec18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NormalSpriteMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  OcculuderSpriteMaterial: {fileID: 2100000, guid: 4b7452374a729074e88ee8b63a371caf,
-    type: 2}
+  NormalSpriteMaterial: {fileID: 0}
+  OcculuderSpriteMaterial: {fileID: 0}
   CorpseDrops:
   - Item: {fileID: 1093993870452012, guid: 4fed55b4841709f429a0550704b75d0d, type: 2}
     DropChance: 10
@@ -428,10 +427,10 @@ MonoBehaviour:
   Largeblood: {fileID: 1593606135807078, guid: 86256631849893542978f06a8931337b, type: 2}
   SmallBlood: {fileID: 1944270308619096, guid: 541b230e1b65dff4093af9ead1021112, type: 2}
   Slow: {fileID: 1555529482691730, guid: f860d2bca251dbe4cb93c2e225fbfecc, type: 2}
-  fireBuff: {fileID: 1555529482691730, guid: f860d2bca251dbe4cb93c2e225fbfecc, type: 2}
+  fireBuff: {fileID: 0}
   CastEffect: {fileID: 1283451824446608, guid: 39027584d7a334c4d86c927b021382b4, type: 2}
   Explosion: {fileID: 1523357301223836, guid: 789dafa39caf178438555f0038ca1e0f, type: 2}
-  fireExp: {fileID: 1523357301223836, guid: 789dafa39caf178438555f0038ca1e0f, type: 2}
+  fireExp: {fileID: 0}
 --- !u!114 &114561745592519198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -443,6 +442,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 251bb790b1995c54b9345e3a1e1fcfb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+=======
+--- !u!114 &114676718114899972
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1503326067527500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9418c05cae37f464d93db17dca2da32e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemiesDealDamage: 1
+  Mob_Amount: 1
+  Wolf: {fileID: 1975485080313304, guid: 31464838671e49b4585d82d7b87b4a3e, type: 2}
+  Archer: {fileID: 1919206030925854, guid: aec341a3d2395384b9ad59b82b8232b3, type: 2}
+  MeleeDude: {fileID: 1977754839611798, guid: 66ccf3f92aecc84449b5c277bcd38483, type: 2}
+  player: {fileID: 0}
+  spawnWolfs: 0
+  spawnMelee: 0
+  spawnArchers: 0
+  spawnBears: 0
+  naturalSpawn: 0
+>>>>>>> fc3d11fc62a0de3fab4e418316551a8ede380cb2
 --- !u!114 &114794321535803728
 MonoBehaviour:
   m_ObjectHideFlags: 1

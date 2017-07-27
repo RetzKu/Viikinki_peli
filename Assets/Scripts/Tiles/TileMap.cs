@@ -168,14 +168,41 @@ public class TileMap : MonoBehaviour
 
             player.ChunkOffsets.X = chunkOffsetX;
             player.ChunkOffsets.Y = chunkOffsetY;
-            
+
             if (chunkDtX < 0) // vasen
             {
-                StartCoroutine(ThreeFrameUpdateLeft(chunkOffsetX, chunkOffsetY));
+                // StartCoroutine(ThreeFrameUpdateLeft(chunkOffsetX, chunkOffsetY));
+                swapColumn(2, 1);
+                swapColumn(1, 0);
+
+                for (int i = -1; i < 2; i++)    // -1
+                {
+                    _chunks[i + 1, 0].DisableChunkCollision();
+
+                    GenerateChunk(0, i + 1, chunkOffsetX - 1, chunkOffsetY + i);
+                    _chunks[i + 1, 0].MoveChunk(-3, 0); // moves gos
+                }
+
+                SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position; //  + new Vector3(0f, 17f);
+                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE - 3, Chunk.CHUNK_SIZE * 3 - 3, this, 1, 1);
+
             }
             else if (chunkDtX > 0)      // oikealle
             {
-                StartCoroutine(ThreeFrameUpdateRight(chunkOffsetX, chunkOffsetY));
+                // StartCoroutine(ThreeFrameUpdateRight(chunkOffsetX, chunkOffsetY));
+                swapColumn(1, 0);
+                swapColumn(2, 1);
+
+                for (int i = -1; i < 2; i++)    // -1
+                {
+                    _chunks[i + 1, 2].DisableChunkCollision();
+
+                    GenerateChunk(2, i + 1, chunkOffsetX + 1, chunkOffsetY + i);
+                    _chunks[i + 1, 2].MoveChunk(3, 0);
+                }
+
+                SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position; //  + new Vector3(0f, 17f);
+                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE * 3 - 3, this, Chunk.CHUNK_SIZE * 2 - 3, 1);
             }
             if (chunkDtY < 0) // alas
             {

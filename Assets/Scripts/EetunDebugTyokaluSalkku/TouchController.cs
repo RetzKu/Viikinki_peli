@@ -99,6 +99,7 @@ public class TouchController : MonoBehaviour
     private float sceenXHack;
     void Start()
     {
+        Screen.orientation = ScreenOrientation.LandscapeLeft; // TODO: remove
         sceenXHack = Screen.width / 10f;
         // screenX = Screen.width / 2f;
         lineRenderer = GetComponent<LineRenderer>();
@@ -208,7 +209,7 @@ public class TouchController : MonoBehaviour
     void Update()
     {
 #if UNITY_ANDROID
-        if (_init == false)
+        if (_init == false) // todo: miksi bugittaa androidilla
         {
             SetTouchContollerCenters(_craftingUiController.GetPos());
             _init = true;
@@ -250,9 +251,14 @@ public class TouchController : MonoBehaviour
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             UpdateTouchController(mousePos);
         }
-        else
+        else if (_canSendIndices)
         {
             OnTouchEnded();
+
+            var delta = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _player.transform.position;
+            AttackDir = delta;
+            _player.attackBoolean(delta);
+            _player.GetComponent<AnimatorScript>().Attack();
 
             // LineController.MovePoints(lastPosition - transform.position);
         }

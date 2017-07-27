@@ -14,10 +14,13 @@ public class AnimatorScript : MonoBehaviour
 
     internal WeaponType Type;
 
-    private Vector3 MovementDir;
+    private List<GameObject> TorsoList;
 
     public GameObject Knob0;
     public GameObject Knob1;
+    public GameObject Knob3;
+    public GameObject Knob4;
+
 
     void Start()
     {
@@ -25,7 +28,12 @@ public class AnimatorScript : MonoBehaviour
         Player = GetComponent<Rigidbody2D>();
 
         /*Make SpriteChanger*/
-        Sprites = new SpriteChanger(transform, Player);
+        TorsoList = new List<GameObject>(3);
+        TorsoList.Add(transform.Find("s_c_torso").gameObject);
+        TorsoList.Add(transform.Find("d_c_torso").gameObject);
+        TorsoList.Add(transform.Find("u_c_torso").gameObject);
+
+        Sprites = new SpriteChanger(transform, Player,TorsoList);
 
         /*Get Animators*/
         Animators = new List<Animator>(3);
@@ -35,9 +43,13 @@ public class AnimatorScript : MonoBehaviour
 
         Knob0 = Instantiate(Knob0);
         Knob1 = Instantiate(Knob1);
+        Knob3 = Instantiate(Knob0);
+        Knob4 = Instantiate(Knob1);
 
         Destroy(Knob0.GetComponent<BoxCollider2D>());
         Destroy(Knob1.GetComponent<BoxCollider2D>());
+        Destroy(Knob3.GetComponent<BoxCollider2D>());
+        Destroy(Knob4.GetComponent<BoxCollider2D>());
 
     }
 
@@ -45,6 +57,7 @@ public class AnimatorScript : MonoBehaviour
     {
         Sprites.DirectionCheck();
         CheckVelocity();
+        LookAt(((Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized) + transform.position);
         if (Input.GetKeyDown(KeyCode.Mouse0) == true)
         {
             Attack();
@@ -54,7 +67,7 @@ public class AnimatorScript : MonoBehaviour
 
     public int PlayerDir()
     {
-        int tmp = Sprites.Index;
+        int tmp = (int)Sprites.Direction;
         return tmp;
     }
 
@@ -78,6 +91,21 @@ public class AnimatorScript : MonoBehaviour
 
     public void LookAt(Vector3 MouseDir)
     {
+        Vector3 Up = new Vector3(transform.position.x,transform.position.y);
+        Vector3 Down = new Vector3(transform.position.x, transform.position.y);
+        Vector3 Right = new Vector3(transform.position.x, transform.position.y);
+        Vector3 Left = new Vector3(transform.position.x, transform.position.y);
+
+        Up.y += Vector3.Distance(transform.position, MouseDir);
+        Down.y -= Vector3.Distance(transform.position, MouseDir);
+        Right.x += Vector3.Distance(transform.position, MouseDir);
+        Left.x -= Vector3.Distance(transform.position, MouseDir);
+
+        float TmpDis = Vector3.Distance(Up, transform.position);
+        if(Vector3.Distance(Down,transform.position) < TmpDis) { }
+        if (Vector3.Distance(Left, transform.position) < TmpDis) { }
+        if (Vector3.Distance(Right, transform.position) < TmpDis) { }
+        if (TmpDis == Vector3.Distance(Up, transform.position)) { }
 
     }
 
@@ -135,17 +163,19 @@ public class AnimatorScript : MonoBehaviour
     public class SpriteChanger
     {
 
-        enum Directions { Left, Right, Down, Up }
+        public enum Directions { Left, Down, Up, Right }
 
         Transform PlayerTransform;
         List<SpriteRenderer[]> Sprites;
         Transform Torso;
         Rigidbody2D PlayerRb;
 
-        int LastSpriteNum;
-        public int Index;
+        private List<GameObject> Torsos;
 
-        public SpriteChanger(Transform Player, Rigidbody2D Rb)
+        Directions LastDir;
+        public Directions Direction;
+
+        public SpriteChanger(Transform Player, Rigidbody2D Rb, List<GameObject> TorsoList)
         {
             PlayerTransform = Player; PlayerRb = Rb;
             Sprites = new List<SpriteRenderer[]>(3);
@@ -153,6 +183,8 @@ public class AnimatorScript : MonoBehaviour
             Sprites.Add(PlayerTransform.Find("d_c_torso").GetComponentsInChildren<SpriteRenderer>());
             Sprites.Add(PlayerTransform.Find("u_c_torso").GetComponentsInChildren<SpriteRenderer>());
             Torso = PlayerTransform.Find("s_c_torso");
+            LastDir = Directions.Right;
+            Torsos = TorsoList;
         }
 
         public void DirectionCheck()
@@ -161,80 +193,81 @@ public class AnimatorScript : MonoBehaviour
             {
                 if (PlayerRb.velocity.x < PlayerRb.velocity.y) // 1,1
                 {
-                    Index = 2; // ylös
+                    Direction = Directions.Up; // ylös
                 }
                 else if (PlayerRb.velocity.x < PlayerRb.velocity.y * -1) //1,-1
                 {
                     //spritesdown
-                    Index = 1; // alas
+                    Direction = Directions.Down; // alas
                 }
                 else
                 {
-                    Index = 3; // oikea
+                    Direction = Directions.Right; // oikea
                 }
             }
             else if (PlayerRb.velocity.x < 0) // X negative
             {
                 if (PlayerRb.velocity.x > PlayerRb.velocity.y * -1) // -1,1
                 {
-                    Index = 2; // ylös
+                    Direction = Directions.Up; // ylös
                 }
                 else if (PlayerRb.velocity.x > PlayerRb.velocity.y) //-1,-1
                 {
-                    Index = 1; // alas
+                    Direction = Directions.Down; // alas
                 }
                 else
                 {
-                    Index = 0; // vasen
+                    Direction = Directions.Left; // vasen
                 }
             }
             else if (PlayerRb.velocity.y != 0) // X negative
             {
                 if (PlayerRb.velocity.y > 0) // -1,1
                 {
-                    Index = 2; // ylös
+                    Direction = Directions.Up; // ylös
                 }
                 else if (PlayerRb.velocity.y < 0) //-1,-1
                 {
-                    Index = 1; // alas
+                    Direction = Directions.Down; // alas
                 }
             }
-            EnableSprites(Index);
+            EnableSprites(Direction);
         }
 
-        public void EnableSprites(int SpriteNum)
+        public void EnableSprites(Directions SpriteDir)
         {
             bool changed = false;
-            if (SpriteNum != LastSpriteNum)
+
+            if (SpriteDir != LastDir)
             {
-                if (SpriteNum == 0)
+                if (SpriteDir == Directions.Right)
                 {
-                    Torso.GetComponent<Transform>().localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+                    Torsos[0].GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 }
                 else
                 {
-                    Torso.GetComponent<Transform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    Torsos[0].GetComponent<Transform>().localScale = new Vector3(-1.0f, 1.0f, 1.0f);
                 }
                 for (int i = 0; i < 3; i++)
                 {
-                    if (SpriteNum == i || SpriteNum == 3 && changed == false)
+                    if ((int)SpriteDir == i || SpriteDir == Directions.Right && changed == false)
                     {
                         changed = true;
-                        foreach (SpriteRenderer t in Sprites[i])
+                        foreach (SpriteRenderer t in Torsos[i].GetComponentsInChildren<SpriteRenderer>())
                         {
                             t.enabled = true;
                         }
                     }
                     else
                     {
-                        foreach (SpriteRenderer t in Sprites[i])
+                        foreach (SpriteRenderer t in Torsos[i].GetComponentsInChildren<SpriteRenderer>())
                         {
                             t.enabled = false;
                         }
                     }
                 }
             }
-            LastSpriteNum = SpriteNum;
+            LastDir = SpriteDir;
         }
     }
 }

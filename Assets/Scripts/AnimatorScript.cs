@@ -5,7 +5,7 @@ using UnityEngine;
 public class AnimatorScript : MonoBehaviour
 {
     private Rigidbody2D Player;
-    bool Lock = false;
+    public bool Lock = false;
     public bool _Lock { set { Lock = value; } get { return Lock; } }
     private List<Animator> Animators;
     private float SpeedEdge = 0.3f;
@@ -21,6 +21,8 @@ public class AnimatorScript : MonoBehaviour
     public GameObject Knob3;
     public GameObject Knob4;
 
+    private float StartTime;
+    private float Duration = 0.5f;
 
     void Start()
     {
@@ -33,7 +35,7 @@ public class AnimatorScript : MonoBehaviour
         TorsoList.Add(transform.Find("d_c_torso").gameObject);
         TorsoList.Add(transform.Find("u_c_torso").gameObject);
 
-        Sprites = new SpriteChanger(transform, Player,TorsoList);
+        Sprites = new SpriteChanger(transform, Player, TorsoList);
 
         /*Get Animators*/
         Animators = new List<Animator>(3);
@@ -50,19 +52,22 @@ public class AnimatorScript : MonoBehaviour
         Destroy(Knob1.GetComponent<BoxCollider2D>());
         Destroy(Knob3.GetComponent<BoxCollider2D>());
         Destroy(Knob4.GetComponent<BoxCollider2D>());
+        
 
     }
 
     void Update()
     {
-        Sprites.DirectionCheck();
-        CheckVelocity();
-        LookAt(((Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized) + transform.position);
-        if (Input.GetKeyDown(KeyCode.Mouse0) == true)
+        if (!Lock)
         {
-            Attack();
-
+            Sprites.DirectionCheck();
         }
+        if((Time.time-StartTime) / Duration > 1)
+        {
+            Lock = false;
+        }
+        CheckVelocity();
+        
     }
 
     public int PlayerDir()
@@ -80,34 +85,30 @@ public class AnimatorScript : MonoBehaviour
         MousePoint.Normalize();
         MousePoint = MousePoint + transform.position;
 
-        if(Vector3.Distance(MousePoint,WrongWay) < Vector3.Distance(MousePoint,Destination))
+        if (Vector3.Distance(MousePoint, WrongWay) < Vector3.Distance(MousePoint, Destination))
         {
-            print("Hidasdutus");
             GetComponent<Movement>().Slowed = true;
             GetComponent<Movement>().Started = true;
         }
 
     }
 
-    public void LookAt(Vector3 MouseDir)
+    public void LookAt()
     {
-        Vector3 Up = new Vector3(transform.position.x,transform.position.y);
-        Vector3 Down = new Vector3(transform.position.x, transform.position.y);
-        Vector3 Right = new Vector3(transform.position.x, transform.position.y);
-        Vector3 Left = new Vector3(transform.position.x, transform.position.y);
+        Vector3 MouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 Up = new Vector3(transform.position.x, transform.position.y + 0.5f);
+        Vector3 Down = new Vector3(transform.position.x, transform.position.y - 0.5f);
+        Vector3 Right = new Vector3(transform.position.x + 0.5f, transform.position.y);
+        Vector3 Left = new Vector3(transform.position.x - 0.5f, transform.position.y);
 
-        Up.y += Vector3.Distance(transform.position, MouseDir);
-        Down.y -= Vector3.Distance(transform.position, MouseDir);
-        Right.x += Vector3.Distance(transform.position, MouseDir);
-        Left.x -= Vector3.Distance(transform.position, MouseDir);
+        float TmpDis = Vector3.Distance(Up, MouseDir);
+        if (Vector3.Distance(Down, MouseDir) < TmpDis) { TmpDis = Vector3.Distance(Down, MouseDir); Sprites.EnableSprites(SpriteChanger.Directions.Down); Lock = true; }
+        if (Vector3.Distance(Left, MouseDir) < TmpDis) { TmpDis = Vector3.Distance(Left, MouseDir); Sprites.EnableSprites(SpriteChanger.Directions.Left); Lock = true; }
+        if (Vector3.Distance(Right, MouseDir) < TmpDis) { TmpDis = Vector3.Distance(Right, MouseDir); Sprites.EnableSprites(SpriteChanger.Directions.Right); Lock = true; }
+        if (Vector3.Distance(Up, MouseDir) == TmpDis) { TmpDis = Vector3.Distance(Up, MouseDir); Sprites.EnableSprites(SpriteChanger.Directions.Up); Lock = true; }
 
-        float TmpDis = Vector3.Distance(Up, transform.position);
-        if(Vector3.Distance(Down,transform.position) < TmpDis) { }
-        if (Vector3.Distance(Left, transform.position) < TmpDis) { }
-        if (Vector3.Distance(Right, transform.position) < TmpDis) { }
-        if (TmpDis == Vector3.Distance(Up, transform.position)) { }
-
-    }
+}
+    
 
     void CheckVelocity()
     {
@@ -125,6 +126,7 @@ public class AnimatorScript : MonoBehaviour
 
     public void Attack()
     {
+        StartTime = Time.time;
         DirectionLock();
         foreach (Animator t in Animators) { t.SetTrigger(AttackType()); }
         GetComponent<FxScript>().instantiateFx();
@@ -237,7 +239,7 @@ public class AnimatorScript : MonoBehaviour
         public void EnableSprites(Directions SpriteDir)
         {
             bool changed = false;
-
+            Direction = SpriteDir;
             if (SpriteDir != LastDir)
             {
                 if (SpriteDir == Directions.Right)

@@ -28,7 +28,7 @@ public class DetectEnemies : MonoBehaviour
             {
                 //print("BERZERG");
                 // tähän check että ei ole minkään takana
-                aggroArray[i].transform.root.GetComponent<generalAi>().agro = true;
+                aggroArray[i].transform.root.GetComponent<generalAi>().agro = false;
             }
         yield return new WaitForSeconds(0.5f);
         }

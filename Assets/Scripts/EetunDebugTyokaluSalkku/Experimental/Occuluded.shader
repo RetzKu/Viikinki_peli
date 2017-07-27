@@ -2,6 +2,8 @@
 
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Sprites/Occluded"  
 {
     Properties
@@ -53,7 +55,7 @@ v2f vert( appdata_t IN )
 {
 	v2f OUT;
     // OUT.vertex = UnityObjectToClipPos( IN.vertex );
-	OUT.vertex = mul(UNITY_MATRIX_MVP, IN.vertex);
+	OUT.vertex = UnityObjectToClipPos(IN.vertex);
     OUT.texcoord = IN.texcoord;
 
     OUT.color = IN.color * _Color;

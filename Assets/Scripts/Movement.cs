@@ -114,11 +114,6 @@ public class Movement : MonoBehaviour
     {
         if (!knockBack)
         {
-            if (inAttack)
-            {
-                pateClock();
-            }
-            lerpate();
             Vector2 SpeedLimiter = SpeedLimitChecker();
             vel = rb.velocity += SpeedLimiter;
         }
@@ -208,8 +203,8 @@ public class Movement : MonoBehaviour
         return min + ((max - min) * t);
     }
 
-    void lerpate()
-    {
+    //void lerpate()
+    //{
         //if (lerpUp)
         //{
         //    currentlerpate += Time.deltaTime;
@@ -233,19 +228,19 @@ public class Movement : MonoBehaviour
         //float t = currentlerpate / lerpateTime;
         //ModifiedMaxSpd = lerp(min_spd_pate, max_spd_pate, t);
         
-    }
-    public void pateClock()
-    {
-        attackTimer += Time.deltaTime;
-        if (attackTimer > attackTime)
-        {
-            lerpUp = true;
-            inAttack = false;
-            attackTimer = 0f;
-        }
-        else
-        {
-            lerpUp = false;
-        }
-    }
+    //}
+    //public void pateClock()
+    //{
+    //    attackTimer += Time.deltaTime;
+    //    if (attackTimer > attackTime)
+    //    {
+    //        lerpUp = true;
+    //        inAttack = false;
+    //        attackTimer = 0f;
+    //    }
+    //    else
+    //    {
+    //        lerpUp = false;
+    //    }
+    //}
 }

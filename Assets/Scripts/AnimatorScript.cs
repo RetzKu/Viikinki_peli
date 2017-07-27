@@ -76,6 +76,11 @@ public class AnimatorScript : MonoBehaviour
 
     }
 
+    public void LookAt(Vector3 MouseDir)
+    {
+
+    }
+
     void CheckVelocity()
     {
         if (Player.velocity.x < -SpeedEdge || Player.velocity.y < -SpeedEdge || Player.velocity.x > SpeedEdge || Player.velocity.y > SpeedEdge)

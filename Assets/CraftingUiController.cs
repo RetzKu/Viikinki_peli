@@ -98,7 +98,7 @@ public class CraftingUiController : MonoBehaviour
         var touchControllerGo = GameObject.FindWithTag("TouchController");
         TouchController touchController = touchControllerGo.GetComponent<TouchController>();
         touchController.SetTouchContollerCenters(pos);
-    }
+   } 
 
     public Vector2[] GetPos()
     {

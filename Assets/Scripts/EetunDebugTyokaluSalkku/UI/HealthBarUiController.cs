@@ -12,6 +12,7 @@ public class HealthBarUiController : MonoBehaviour
 
 	void Start ()
     {
+        
 	}
 
 	void Update ()

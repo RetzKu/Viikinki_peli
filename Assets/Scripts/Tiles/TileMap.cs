@@ -361,7 +361,6 @@ public class TileMap : MonoBehaviour
         //Chunk.SwapViews(_chunks[offsetY, offsetX], _chunks[newOffsetY, newOffsetX]);
     }
 
-
     Dictionary<Vec2, bool> SavedChunks = new Dictionary<Vec2, bool>(25);
     void GenerateChunk(int offsetX, int offsetY, int perlinOffsetX, int perlinOffsetY)
     {

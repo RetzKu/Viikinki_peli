@@ -38,7 +38,7 @@ public abstract class Rune : ScriptableObject
         }
 
         bool value = true;
-        for (int i = 0; i < Length; i++)
+        for (int i = 0; i < runeIndices.Length; i++)
         {
             if (indiceBools[i] != runeIndices[i])
             {

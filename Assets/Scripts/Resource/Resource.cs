@@ -57,6 +57,20 @@ public enum ResourceType
     rune_y,
     rune_p,
 
+
+
+    Runestone_Spear,
+    Runestone_Hammer,
+    Runestone_Torch,
+    Runestone_Sword,
+    Runestone_Shield,
+    Runestone_Pickaxe,
+    Runestone_Packback,
+    Runestone_Caltrops,
+    Runestone_Bow,
+    Runestone_Axe,
+    Runestone_Arrow,
+    Runestone_Armor,
     Max,
 }
 // WARNING WARNING Enumi järjestyksen rikkominen / väliin lisäys särkee kaikein lisää aina maxin alle

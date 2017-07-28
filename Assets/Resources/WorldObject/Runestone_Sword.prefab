@@ -52,7 +52,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4943830373799008}
   - component: {fileID: 212737219524566482}
-  m_Layer: 0
+  - component: {fileID: 58353547082130192}
+  - component: {fileID: 114581253821968536}
+  m_Layer: 25
   m_Name: Runestone_Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +110,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1609119758463580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.924475, y: 21.797451, z: 0}
+  m_LocalPosition: {x: 29.278797, y: 25.72237, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4690072403777368}
@@ -130,6 +132,38 @@ Transform:
   m_Father: {fileID: 4943830373799008}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &58353547082130192
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1609119758463580}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: -0.72}
+  serializedVersion: 2
+  m_Radius: 0.86293983
+--- !u!114 &114581253821968536
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1609119758463580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26deb9662b6deaa4499bcc9f67896eda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 100
+  defaultFibrateTimer: 0.015
+  deathTimer: 4
+  type: 0
+  RuneToTeach: {fileID: 0}
+  PlayerInRange: 0
+  Default: {r: 0, g: 0, b: 0, a: 0}
 --- !u!212 &212065226168945396
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -162,7 +196,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300008, guid: cda9de21021053a47b1a065b142ed522, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!212 &212398214876963286

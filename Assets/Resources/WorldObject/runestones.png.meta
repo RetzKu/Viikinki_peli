@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: cda9de21021053a47b1a065b142ed522
-timeCreated: 1501160471
+timeCreated: 1501231841
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -230,7 +230,7 @@ TextureImporter:
       name: runestones_83
       rect:
         serializedVersion: 2
-        x: 311
+        x: 310
         y: 357
         width: 16
         height: 30
@@ -373,8 +373,8 @@ TextureImporter:
       name: Rune_Bow_Blue
       rect:
         serializedVersion: 2
-        x: 285
-        y: 436
+        x: 284
+        y: 435
         width: 14
         height: 25
       alignment: 0

@@ -2616,14 +2616,7 @@ MonoBehaviour:
   SidewaysHand: {fileID: 4334774280397600}
   UpwardsHand: {fileID: 4440870551386460}
   DownwardsHand: {fileID: 4936626758937170}
-<<<<<<< HEAD
   DefaultTorsos: []
-=======
-  DefaultTorsos:
-  - {fileID: 21300054, guid: 629e1517d153c074595eb344f3509beb, type: 3}
-  - {fileID: 21300066, guid: 629e1517d153c074595eb344f3509beb, type: 3}
-  - {fileID: 21300060, guid: 629e1517d153c074595eb344f3509beb, type: 3}
->>>>>>> fc3d11fc62a0de3fab4e418316551a8ede380cb2
   Direction: 0
 --- !u!114 &114135886502828906
 MonoBehaviour:

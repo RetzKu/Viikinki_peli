@@ -9,14 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc53a20bdbca5234eb4afb6f8da23b13, type: 3}
-  m_Name: buff_player_oxbuff
+  m_Name: buff_oxBuff
   m_EditorClassIdentifier: 
-  Duration: 5
-  DamageBoost: 1000
-  MovementSpeedBoost: 8.6
-  ArmorBoost: 1.11
+  Duration: 10
+  DamageBoost: 10
+  MovementSpeedBoost: 8.61
+  ArmorBoost: 0
   RangedDamageBoost: 0
   HudIndicator: {fileID: 21300000, guid: 3c0e1a2869cfd7a419daff7c956e14cd, type: 3}
-  CanCutTrees: 1
-  CuttingRadius: 2
+  CanCutTrees: 0
+  CuttingRadius: 0
   EnlargePlayerSize: {x: 6, y: 6, z: 1}

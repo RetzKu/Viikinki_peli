@@ -8,6 +8,8 @@ public class PlayerBuff : Buff
     public float ArmorBoost;
     public float RangedDamageBoost;
     public Sprite HudIndicator;
+    public bool CanCutTrees;
+    public float CuttingRadius;
 
 
     public Vector3 EnlargePlayerSize;

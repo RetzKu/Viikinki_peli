@@ -4950,9 +4950,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ownertype: 0
   runes:
-  - {fileID: 11400000, guid: 41f55baef62436c468c41082d0ac439b, type: 2}
+  - {fileID: 11400000, guid: 91fb5823455859b49800803396222102, type: 2}
   - {fileID: 11400000, guid: 6b2b94678b9625444a5fb76c126e4f2f, type: 2}
-  - {fileID: 11400000, guid: 57e5a0d1352c41e419be4ec8fca6ddf9, type: 2}
+  - {fileID: 11400000, guid: 354da4f74d5bf6c42a748031a9163aff, type: 2}
   IsOwnerPlayer: 1
 --- !u!114 &936331384
 MonoBehaviour:
@@ -5412,12 +5412,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RuneRefs:
   - {fileID: 11400000, guid: 6b2b94678b9625444a5fb76c126e4f2f, type: 2}
-  - {fileID: 11400000, guid: 41f55baef62436c468c41082d0ac439b, type: 2}
-  - {fileID: 11400000, guid: c4b323be7e5dc9b4c93b3c3ffc77b7ad, type: 2}
   - {fileID: 11400000, guid: cbdd5e3228cb9f448888c77a003bc652, type: 2}
-  - {fileID: 11400000, guid: 57e5a0d1352c41e419be4ec8fca6ddf9, type: 2}
+  - {fileID: 11400000, guid: 41f55baef62436c468c41082d0ac439b, type: 2}
+  - {fileID: 11400000, guid: 41f55baef62436c468c41082d0ac439b, type: 2}
+  - {fileID: 11400000, guid: 91fb5823455859b49800803396222102, type: 2}
   RuneBuffs:
   - {fileID: 11400000, guid: 29b6e2bf970c41441bbfb92c929fcf1c, type: 2}
+  - {fileID: 11400000, guid: fb3323d780652034cb919ecb88028f8e, type: 2}
   - {fileID: 11400000, guid: fb3323d780652034cb919ecb88028f8e, type: 2}
 --- !u!1001 &1175157682
 Prefab:

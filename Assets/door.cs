@@ -7,9 +7,9 @@ public class door : MonoBehaviour {
 
     bool created = false;
     string seed;
-    int height = 250; // mah random
-    int widht = 250; // mah random
-    int fillpercent = 50;
+    int height = 50; // mah random
+    int widht = 50; // mah random
+    int fillpercent = 45;
 
     List<Room> finalRooms = new List<Room>();
 

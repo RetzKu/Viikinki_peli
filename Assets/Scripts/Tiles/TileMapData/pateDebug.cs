@@ -6,7 +6,7 @@ public class pateDebug : MonoBehaviour {
 
     // Use this for initialization
     Rigidbody2D body;
-    //public GameObject door;
+    public GameObject door;
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
@@ -16,11 +16,11 @@ public class pateDebug : MonoBehaviour {
     void Update () {
         if (Input.GetKeyDown("o"))
         {
-            GetComponent<ScreenShake>().Shake();
-            print("shake dat booty");
+           // GetComponent<ScreenShake>().Shake();
+            //print("shake dat booty");
             //ParticleSpawner.instance.SpawnFireExplosion(Camera.main.ScreenToWorldPoint(Input.mousePosition),Random.Range(1f,2f));
             //ParticleSpawner.instance.CastSpell(this.gameObject);
-            //door.GetComponent<door>().Activate();
+            door.GetComponent<door>().Activate();
         }
     }
 }

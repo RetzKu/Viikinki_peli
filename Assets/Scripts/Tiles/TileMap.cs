@@ -86,8 +86,21 @@ public class TileMap : MonoBehaviour
         running = true;
 
         last = tint;
+
+        SpriteController.gameObject.SetActive(false);
     }
 
+    public void DisableTileMap()
+    {
+        gameObject.SetActive(false);
+        SpriteController.gameObject.SetActive(false);
+    }
+
+    public void EnableTileMap()
+    {
+        gameObject.SetActive(true);
+        // SpriteController.gameObject.SetActive(true);
+    }
 
     public void Tint()
     {

@@ -179,7 +179,5 @@ public class BreadthFirstSearch
         //        tile.tileState = states.up;
         //    }
         //}
-
-
     }
 }

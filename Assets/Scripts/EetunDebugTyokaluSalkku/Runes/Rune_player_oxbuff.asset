@@ -9,17 +9,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: rune_player_flask 1
+  m_Name: Rune_player_oxbuff
   m_EditorClassIdentifier: Assembly-CSharp::WeaponBuffRune
   Indices:
-  - X: 2
+  - X: 0
     Y: 0
-  - X: 2
+  - X: 0
     Y: 1
-  - X: 2
-    Y: 2
+  - X: 1
+    Y: 1
   Sound: {fileID: 0}
   sprite: {fileID: 0}
   HudImage: {fileID: 21300000, guid: 3c0e1a2869cfd7a419daff7c956e14cd, type: 3}
-  Cd: 3
-  buff: {fileID: 0}
+  Cd: 10
+  buff: {fileID: 11400000, guid: c283c2fae1f89a44d8dc5444f8d60e5d, type: 2}

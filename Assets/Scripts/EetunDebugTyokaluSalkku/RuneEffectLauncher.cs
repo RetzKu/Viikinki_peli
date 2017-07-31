@@ -103,15 +103,18 @@ public class RuneEffectLauncher : MonoBehaviour
             go.transform.Translate(buffData.MovementDir * buffData.Speed * Time.deltaTime);
             go.transform.Rotate(new Vector3(0, 0, buffData.TotalRotation / iterationForEffect));
 
-            if (iterationForEffect % 3 == 0) // mikä on hyvä applytys aika
+            if (iterationForEffect % 3 == 0 || iterationForEffect <= 1) // mikä on hyvä applytys aika
             {
                 float radius = go.transform.localScale.x / 2f;
                 _aoeEffectRadius = radius; // debug
                 _aoeStartPoint = go.transform.position;
                 var colliders = Physics2D.CircleCastAll(go.transform.position, radius, new Vector2(0, 0), 0, mask);
-                foreach (var collider in colliders)
+                if (colliders != null)
                 {
-                    buffData.BuffToApply.Apply(collider.transform.gameObject);
+                    foreach (var collider in colliders)
+                    {
+                        buffData.BuffToApply.Apply(collider.transform.gameObject);
+                    }
                 }
             }
             yield return null;

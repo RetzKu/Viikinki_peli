@@ -89,6 +89,7 @@ public class CustomJoystick : MonoBehaviour
         position = Player.transform.position;
         Base.transform.position = startPosition;
         return;
+
         // Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
 
         // transform.Translate(lastPos - transform.position);
@@ -298,10 +299,6 @@ public class CustomJoystick : MonoBehaviour
 
         touchingLastFrame = touching;
     }
-
-
-
-
 
     void UpdateVisuals()
     {

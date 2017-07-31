@@ -90,15 +90,15 @@ public class MapGenerator : MonoBehaviour
     GameObject[,] TileObjects;
     private static MapGenerator instance;
 
+    void Awake()
+    {
+        instance = this;
+    }
 
     public static MapGenerator Instance
     {
         get
         {
-            if (instance == null)
-            {
-                instance = new MapGenerator();
-            }
             return instance;
         }
     }
@@ -160,7 +160,7 @@ public class MapGenerator : MonoBehaviour
             {
                 GameObject tileObject = new GameObject("(" + y + "," + x + ")");
                 tileObject.transform.parent = parent.transform;
-                tileObject.transform.position = new Vector3(x, y, 0);
+                tileObject.transform.position = new Vector3(x + 100, y + 100, 0);
 
                 SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
                 if (MapGenerator.Instance.map[x, y] == TileType.CaveFloor)
@@ -499,6 +499,14 @@ public class MapGenerator : MonoBehaviour
     {
         List<Coord> tiles = new List<Coord>();
         TileType[,] mapFlags = new TileType[widht, height];
+        for (int x = 0; x < widht; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                mapFlags[x, y] = TileType.CaveFloor;
+            }
+
+        }
         TileType tileType = map[startX, startY];
 
         Queue<Coord> queue = new Queue<Coord>();

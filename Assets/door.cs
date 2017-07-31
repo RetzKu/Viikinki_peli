@@ -7,9 +7,9 @@ public class door : MonoBehaviour {
 
     bool created = false;
     string seed;
-    int height = 50; // mah random
-    int widht = 50; // mah random
-    int fillpercent = 40;
+    int height = 250; // mah random
+    int widht = 250; // mah random
+    int fillpercent = 50;
 
     List<Room> finalRooms = new List<Room>();
 
@@ -36,33 +36,33 @@ public class door : MonoBehaviour {
         // mene pois luolasta
     }
     // Update is called once per frame
-    void OnDrawGizmos()
-    {
-        if (created)
-        {
-            for(int y = 0;y < height; y++)
-            {
-                for (int x = 0; x < widht; x++)
-                {
-                    Gizmos.color = Color.black;
-                    if ( MapGenerator.Instance.map[x,y] == TileType.CaveFloor)
-                    {
-                        Gizmos.DrawCube(new Vector2(x * 100, y * 100),new Vector3(1,1,1));
-                    }
-                    else if (MapGenerator.Instance.map[x, y] == TileType.CaveWall)
-                    {
-                        Gizmos.DrawSphere(new Vector2(x * 100, y * 100), 1);
-                    }
-                    else
-                    {
-                        Gizmos.color = Color.yellow;
-                        Gizmos.DrawSphere(new Vector2(x * 100, y * 100), 1);
-                    }
-                }
-            }
+    //void OnDrawGizmos()
+    //{
+    //    if (created)
+    //    {
+    //        for(int y = 0;y < height; y++)
+    //        {
+    //            for (int x = 0; x < widht; x++)
+    //            {
+    //                Gizmos.color = Color.black;
+    //                if ( MapGenerator.Instance.map[x,y] == TileType.CaveFloor)
+    //                {
+    //                    //Gizmos.DrawCube(new Vector2(x + 100, y + 100),new Vector3(1,1,1));
+    //                }
+    //                else if (MapGenerator.Instance.map[x, y] == TileType.CaveWall)
+    //                {
+    //                    Gizmos.DrawSphere(new Vector2(x + 100, y + 100), 1);
+    //                }
+    //                else
+    //                {
+    //                    Gizmos.color = Color.yellow;
+    //                    Gizmos.DrawSphere(new Vector2(x + 100, y + 100), 10);
+    //                }
+    //            }
+    //        }
 
-        }
-    }
+    //    }
+    //}
     public void Activate () {
         //destroy world
 
@@ -80,23 +80,27 @@ public class door : MonoBehaviour {
             if (MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY-1] == TileType.CaveWall)
             {
                 MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY - 1] = TileType.CaveDoor;
+                print("door created");
             }
             else if (MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY +1] == TileType.CaveWall)
             {
                 MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY + 1] = TileType.CaveDoor;
+                print("door created");
             }
             else if (MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX-1, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY] == TileType.CaveWall)
             {
                 MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX - 1, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY] = TileType.CaveDoor;
+                print("door created");
             }
             else
             {
                 MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX + 1, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY] = TileType.CaveDoor;
+                print("door created");
             }
 
         }
 
-        //MapGenerator.Instance.showRooms();
+        MapGenerator.Instance.showRooms();
 
         //smooth
         //spawn

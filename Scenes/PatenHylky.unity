@@ -664,8 +664,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21174c74f2d10a24c8406971f0f6e6a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GrassSprite: {fileID: 0}
-  SuperSprite: {fileID: 0}
+  GrassSprite: {fileID: 21300000, guid: 5da900f9aedc67d4895628a91ac751a9, type: 3}
+  SuperSprite: {fileID: 21300006, guid: 7e79beade1fa2554581c694e6da74a50, type: 3}
   StartSprite: {fileID: 0}
   seed: 
   randomFillPercent: 45
@@ -790,6 +790,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1014882575}
+--- !u!1 &1211022295 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1821540224787276, guid: b5405cc59ec405e42ac26438ef1b066d,
+    type: 2}
+  m_PrefabInternal: {fileID: 763703216}
 --- !u!114 &1472106373 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
@@ -914,6 +919,18 @@ GameObject:
   m_PrefabParentObject: {fileID: 1977754839611798, guid: b5405cc59ec405e42ac26438ef1b066d,
     type: 2}
   m_PrefabInternal: {fileID: 763703216}
+--- !u!114 &1815068459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1815068458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eb7841052bf02442926b671277524b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 1211022295}
 --- !u!1 &1889939612
 GameObject:
   m_ObjectHideFlags: 0

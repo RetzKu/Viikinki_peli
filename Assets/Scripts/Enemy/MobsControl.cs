@@ -159,6 +159,7 @@ public class MobsControl : MonoBehaviour
             slow = false;
         }
     }
+
     public void SpawnBoids(float x, float y, float radius, int amount)
     {
         spawn k = new spawn();
@@ -178,5 +179,4 @@ public class MobsControl : MonoBehaviour
         Boids.Clear();
         spawner.Clear(); 
     }
-
 }

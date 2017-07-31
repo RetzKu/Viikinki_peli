@@ -159,6 +159,7 @@ public class MobsControl : MonoBehaviour
             slow = false;
         }
     }
+
     public void SpawnBoids(float x, float y, float radius, int amount)
     {
         spawn k = new spawn();
@@ -169,14 +170,15 @@ public class MobsControl : MonoBehaviour
         spawner.Add(k);
     }
 
-    public void DeleteAllCurrentMobs() // korjaa
+    public int DeleteAllCurrentMobs() // korjaa
     {
+        int l = Boids.Count;
         foreach (GameObject kakka in Boids)
         {
             Destroy(kakka);
         }
         Boids.Clear();
-        spawner.Clear(); 
+        spawner.Clear();
+        return l;
     }
-
 }

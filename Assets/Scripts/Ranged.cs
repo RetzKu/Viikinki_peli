@@ -26,7 +26,7 @@ public class Ranged : weaponStats
         Weapon = transform.gameObject;
 
         if (Hand.name == "u_l_hand") { Weapon.transform.localRotation = Quaternion.Euler(0, 0, -260); Weapon.GetComponent<SpriteRenderer>().sortingOrder = 0; }
-        if (Hand.name == "d_r_hand") { Weapon.transform.localRotation = Quaternion.Euler(0, 0, -105); }
+        if (Hand.name == "d_r_hand") { Weapon.transform.localRotation = Quaternion.Euler(0, 0, -90); }
         if (Hand.name == "s_l_hand") { Weapon.transform.localRotation = Quaternion.Euler(0, 0, -67); Weapon.GetComponent<SpriteRenderer>().sortingOrder = 1; }
         
 

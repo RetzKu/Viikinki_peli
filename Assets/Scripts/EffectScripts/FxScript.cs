@@ -87,10 +87,11 @@ public class FxScript : MonoBehaviour {
 
 #if UNITY_EDITOR
         MouseDir = (MousePoint - transform.position - EffectOffSet).normalized * MaxDistance; //mikä on hiiren suunta
-        rotatePate(MouseDir);
+        //rotatePate(MouseDir);
+        GetComponent<AnimatorScript>().LookAt();
 #elif UNITY_ANDROID
         MouseDir = TouchController.AttackDir.normalized * MaxDistance;
-        rotatePate(MouseDir);
+        GetComponent<AnimatorScript>().LookAt(MouseDir);
 #endif
 
         Copy.transform.position = Base + MouseDir; 
@@ -109,41 +110,12 @@ public class FxScript : MonoBehaviour {
         Copy.transform.Rotate(0, 0, n * -1);
     }
 
-   void rotatePate(Vector2 MouseDir)
-   {
-        PlayerDir temp = PlayerDir.def;
-        if (Mathf.Abs( MouseDir.x) >= Mathf.Abs(MouseDir.y))
-        {
-            if (MouseDir.x < 0)
-            {
-                temp = PlayerDir.left;
-            }
-            else
-            {
-                temp = PlayerDir.right;
-            }
-        }
-        else if (Mathf.Abs(MouseDir.y) >= Mathf.Abs(MouseDir.x))
-        {
-            if (MouseDir.y < 0)
-            {
-                temp = PlayerDir.down;
-            }
-            else
-            {
-                temp = PlayerDir.up;
-            }
-
-        }
-
-        GetComponent<Movement>().UpPateDir(temp);
-    }
-   
     void OnTriggerEnter2D(Collider2D trig)
     {
         if (trig.gameObject.tag == "Enemy")
         {
             lastHittedEnemy = trig.gameObject;
+
             if(GetComponent<PlayerScript>().weaponInHand != null)
             {
                 GetComponentInChildren<weaponStats>().onRange = true;
@@ -176,7 +148,7 @@ public class FxScript : MonoBehaviour {
     {
         if (trig.gameObject.tag == "Enemy")
         {
-            lastHittedEnemy = trig.gameObject;
+            lastHittedEnemy = trig.gameObject; 
             if (GetComponent<PlayerScript>().weaponInHand != null)
             {
                 GetComponentInChildren<weaponStats>().onRange = true;

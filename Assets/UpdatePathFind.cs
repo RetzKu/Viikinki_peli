@@ -39,7 +39,7 @@ public class UpdatePathFind : MonoBehaviour
                 path.uptadeTiles(midPoint, terveisin); //get tile map // 
                 uptade = false;
             }
-            Giz.init(path);
+            // Giz.init(path);
         }
 
         int[] m = path.calculateIndex(body.position);
@@ -56,6 +56,6 @@ public class UpdatePathFind : MonoBehaviour
 
     void OnDrawGizmos() // käytä pathfind debuggaukseens
     {
-        Giz.OnDrawGizmosPate();
+        // Giz.OnDrawGizmosPate();
     }
 }

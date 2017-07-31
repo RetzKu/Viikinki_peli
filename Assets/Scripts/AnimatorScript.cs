@@ -93,9 +93,9 @@ public class AnimatorScript : MonoBehaviour
 
     }
 
-    public void LookAt()
+    public void LookAt(Vector3 mousePoint)
     {
-        Vector3 MouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 MouseDir = Camera.main.ScreenToWorldPoint(mousePoint);
         Vector3 Up = new Vector3(transform.position.x, transform.position.y + 0.5f);
         Vector3 Down = new Vector3(transform.position.x, transform.position.y - 0.5f);
         Vector3 Right = new Vector3(transform.position.x + 0.5f, transform.position.y);

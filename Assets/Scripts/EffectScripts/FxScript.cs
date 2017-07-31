@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FxScript : MonoBehaviour {
+public class FxScript : MonoBehaviour
+{
 
     public Sprite BareHandSprite;
     private GameObject Fx;
@@ -21,13 +22,13 @@ public class FxScript : MonoBehaviour {
     public bool handEffectOnrange = false;
     public GameObject lastHittedEnemy;
 
-	void Start ()
+    void Start()
     {
         Fx = new GameObject("Fx");
         Fx.AddComponent<SpriteRenderer>().sprite = BareHandSprite;
         Fx.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0);
         Fx.transform.localScale = SpriteScale;
-	}
+    }
 
     public void Default()
     {
@@ -36,16 +37,16 @@ public class FxScript : MonoBehaviour {
 
     public void FxUpdate(Sprite NewFx)
     {
-        if(NewFx != null && NewFx.name != Fx.GetComponent<SpriteRenderer>().name)
+        if (NewFx != null && NewFx.name != Fx.GetComponent<SpriteRenderer>().name)
         {
             Fx.GetComponent<SpriteRenderer>().sprite = NewFx;
-        } 
+        }
     }
 
     public void instantiateFx()
     {
         CopyFx = Instantiate(Fx);
-        
+
         Destroy(CopyFx, LifeTime);
         CopyFx.AddComponent<FxFade>().Duration = LifeTime;
         CopyFx.AddComponent<BoxCollider2D>().isTrigger = true;
@@ -64,7 +65,6 @@ public class FxScript : MonoBehaviour {
 
     void ObjectPosition(GameObject Copy)
     {
-        MousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition); // hiiren sijainti
         Base = transform.position + EffectOffSet; //Missä on pelaajan base jonka ympärillä efekti rotatee
         if (GetComponent<PlayerScript>().weaponInHand != null)
         {
@@ -85,17 +85,23 @@ public class FxScript : MonoBehaviour {
             EffectOffSet = new Vector3(0f, 0.3f, 0f);
         }
 
-#if UNITY_EDITOR
-        MouseDir = (MousePoint - transform.position - EffectOffSet).normalized * MaxDistance; //mikä on hiiren suunta
-        GetComponent<AnimatorScript>().LookAt(MouseDir);
-        // rotatePate(MouseDir);
+        // MousePoint = TouchController.AttackDir;
+        // GetComponent<AnimatorScript>().LookAt(MouseDir);
 
+#if UNITY_EDITOR
+        MousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        MouseDir   = (MousePoint - transform.position - EffectOffSet).normalized * MaxDistance; //mikä on hiiren suunta
+        GetComponent<AnimatorScript>().LookAt(MousePoint);
+        // rotatePate(MouseDir);
 #elif UNITY_ANDROID
-        MouseDir = TouchController.AttackDir.normalized * MaxDistance;
-        GetComponent<AnimatorScript>().LookAt(MouseDir);
-        rotatePate(MouseDir);
+        MousePoint = Camera.main.ScreenToWorldPoint((TouchController.AttackDir * 5)+ (Vector2)transform.position);
+        MouseDir = ((Vector2)MousePoint - (Vector2)transform.position - (Vector2)EffectOffSet).normalized * MaxDistance;
+        GetComponent<AnimatorScript>().LookAt(MousePoint);
+
+        // MouseDir = ((Vector2)MousePoint - TouchController.AttackDir).normalized * MaxDistance;
+        // rotatePate(MouseDir);
 #endif
-        Copy.transform.position = Base + MouseDir; 
+        Copy.transform.position = Base + MouseDir;
         GetAngleDegress(Copy);
     }
     //void OnDrawGizmos()
@@ -117,7 +123,7 @@ public class FxScript : MonoBehaviour {
         {
             lastHittedEnemy = trig.gameObject;
 
-            if(GetComponent<PlayerScript>().weaponInHand != null)
+            if (GetComponent<PlayerScript>().weaponInHand != null)
             {
                 GetComponentInChildren<weaponStats>().onRange = true;
             }
@@ -128,18 +134,18 @@ public class FxScript : MonoBehaviour {
         }
         else if (trig.gameObject.layer == LayerMask.NameToLayer("ObjectLayer"))
         {
-            if( GetComponent<combat>().IsAttacking())
+            if (GetComponent<combat>().IsAttacking())
             {
                 var resourceGo = trig.gameObject.GetComponent<Resource>();
                 // puuPrefabit toimivat hieman eri tavalla kuin muut resurrsit / sama pitää tällä tavalla niin tulevaisuudessa jos tulee eksoottinen prefab
                 if (resourceGo == null)
                 {
                     trig.gameObject.transform.parent.GetComponent<Resource>()
-                        .Hit((int) GetComponent<combat>().countPlayerDamage());
+                        .Hit((int)GetComponent<combat>().countPlayerDamage());
                 }
                 else
                 {
-                    resourceGo.Hit((int) GetComponent<combat>().countPlayerDamage());
+                    resourceGo.Hit((int)GetComponent<combat>().countPlayerDamage());
                 }
             }
         }
@@ -149,7 +155,7 @@ public class FxScript : MonoBehaviour {
     {
         if (trig.gameObject.tag == "Enemy")
         {
-            lastHittedEnemy = trig.gameObject; 
+            lastHittedEnemy = trig.gameObject;
             if (GetComponent<PlayerScript>().weaponInHand != null)
             {
                 GetComponentInChildren<weaponStats>().onRange = true;

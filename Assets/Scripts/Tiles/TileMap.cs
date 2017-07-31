@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileMap : MonoBehaviour
+public class TileMap : MonoBehaviour, ITileMap
 {
     public Sprite GrassSprite; // Note(Eetu): Spritet kannattaa varmaan eroitella toiseen scriptiin (ehkä?)
 
@@ -16,8 +16,10 @@ public class TileMap : MonoBehaviour
     public TileType[,] Tiles = new TileType[TotalHeight, TotalWidth]; // todo: w h laskeminen koosta
     public GameObject[,] TileGameObjects = new GameObject[TotalHeight, TotalWidth];
 
-    public int Width = TotalWidth;
-    public int Heigth = TotalHeight;
+    public int Width { get; set; }  
+    public int Height { get; set; }  
+
+
 
     [Header("kayta")]
     public bool tilemapPrototypeLayout = false;
@@ -36,6 +38,9 @@ public class TileMap : MonoBehaviour
 
     void Start()
     {
+        Width = TotalWidth;
+        Height = TotalHeight;
+
         SpriteController = FindObjectOfType<TileSpriteController>();
 
         _perlinGenerator = GetComponent<Perlin>();
@@ -81,19 +86,19 @@ public class TileMap : MonoBehaviour
             TileGameObjects[x, TotalWidth - 1].GetComponent<SpriteRenderer>().sprite = GrassSprite;
         }
 
-        SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position;
+        SpriteController.transform.position = GetTileGameObject(0, 0).transform.position;
         SpriteController.SetTileSprites(TotalWidth - 2, TotalHeight - 2, this, 1, 1);
         running = true;
 
         last = tint;
 
-        SpriteController.gameObject.SetActive(false);
+        // SpriteController.gameObject.SetActive(false);
     }
 
     public void DisableTileMap()
     {
         gameObject.SetActive(false);
-        SpriteController.gameObject.SetActive(false);
+        // SpriteController.gameObject.SetActive(false);
     }
 
     public void EnableTileMap()
@@ -119,7 +124,7 @@ public class TileMap : MonoBehaviour
         return (type <= TileType.CollisionTiles);
     }
 
-    public bool GetTileAndObjectCollision(int x, int y)
+    public bool GetTileCollision(int x, int y)
     {
         int ix = x / Chunk.CHUNK_SIZE;
         int iy = y / Chunk.CHUNK_SIZE;
@@ -196,7 +201,7 @@ public class TileMap : MonoBehaviour
                     _chunks[i + 1, 0].MoveChunk(-3, 0); // moves gos
                 }
 
-                SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position; //  + new Vector3(0f, 17f);
+                SpriteController.transform.position = GetTileGameObject(0, 0).transform.position; //  + new Vector3(0f, 17f);
                 SpriteController.SetTileSprites(Chunk.CHUNK_SIZE - 3, Chunk.CHUNK_SIZE * 3 - 3, this, 1, 1);
 
             }
@@ -214,7 +219,7 @@ public class TileMap : MonoBehaviour
                     _chunks[i + 1, 2].MoveChunk(3, 0);
                 }
 
-                SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position; //  + new Vector3(0f, 17f);
+                SpriteController.transform.position = GetTileGameObject(0, 0).transform.position; //  + new Vector3(0f, 17f);
                 SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE * 3 - 3, this, Chunk.CHUNK_SIZE * 2 - 3, 1);
             }
             if (chunkDtY < 0) // alas
@@ -234,7 +239,7 @@ public class TileMap : MonoBehaviour
                 }
 
 
-                SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position;
+                SpriteController.transform.position = GetTileGameObject(0, 0).transform.position;
                 SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE - 3, this, 1, 1);
             }
             else if (chunkDtY > 0)  // ylös
@@ -253,11 +258,11 @@ public class TileMap : MonoBehaviour
                 }
 
                 // koska ylös mennessä 0, 0 nousee
-                SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position; //  + new Vector3(0f, 17f);
+                SpriteController.transform.position = GetTileGameObject(0, 0).transform.position; //  + new Vector3(0f, 17f);
                 SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 2, Chunk.CHUNK_SIZE * 3 - 2, this, 1, Chunk.CHUNK_SIZE * 2 - 2);
                 // SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE * 3 - 3, this, 1, Chunk.CHUNK_SIZE * 2 - 3);
             }
-            SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position;
+            SpriteController.transform.position = GetTileGameObject(0, 0).transform.position;
 
 
             //SpriteController.SetTileSprites(59, 59, this, 1, 1);
@@ -291,7 +296,7 @@ public class TileMap : MonoBehaviour
             yield return null;
         }
 
-        SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position; //  + new Vector3(0f, 17f);
+        SpriteController.transform.position = GetTileGameObject(0, 0).transform.position; //  + new Vector3(0f, 17f);
         SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE * 3 - 3, this, Chunk.CHUNK_SIZE * 2 - 3, 1);
     }
 
@@ -310,7 +315,7 @@ public class TileMap : MonoBehaviour
             yield return null;
         }
 
-        SpriteController.transform.position = GetGameObjectFast(0, 0).transform.position; //  + new Vector3(0f, 17f);
+        SpriteController.transform.position = GetTileGameObject(0, 0).transform.position; //  + new Vector3(0f, 17f);
         SpriteController.SetTileSprites(Chunk.CHUNK_SIZE - 3, Chunk.CHUNK_SIZE * 3 - 3, this, 1, 1);
     }
 
@@ -487,6 +492,7 @@ public class TileMap : MonoBehaviour
     // jos funktioiden matematiikka on liian raskasta niin on vielä mahdollista optimoida se muutamalla kikalla
     // raskas toiminnallisuuss liittyen tiilien looppaamiseen kannattaa sijoittaa chunkkeihin suoraan
     // tarkoitettu lähinnä tiilien vaihtoon / yksittäisiin tiili operaatioihin
+
     public TileType GetTile(float x, float y)                   // TODO: FIX THESE
     {
         int chunkX = 1;
@@ -543,7 +549,7 @@ public class TileMap : MonoBehaviour
         _chunks[chunkY, chunkX].SetTile(offsetX, offsetY, type);
     }
 
-    public GameObject GetGameObjectFast(int x, int y)
+    public GameObject GetTileGameObject(int x, int y)
     {
         int ix = x / Chunk.CHUNK_SIZE;
         int iy = y / Chunk.CHUNK_SIZE;
@@ -552,10 +558,15 @@ public class TileMap : MonoBehaviour
 
     public TileType GetTileFast(Vector2 position)
     {
-        return GetTileFast((int)position.x, (int)position.y);
+        return GetTile((int)position.x, (int)position.y);
     }
 
-    public TileType GetTileFast(int x, int y)
+    //public GameObject GetTileGameObject(int x, int y)
+    //{
+    //    throw new System.NotImplementedException();
+    //}
+
+    public TileType GetTile(int x, int y)
     {
         int ix = x / Chunk.CHUNK_SIZE;
         int iy = y / Chunk.CHUNK_SIZE;

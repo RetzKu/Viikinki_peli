@@ -15,7 +15,7 @@ public class debugGiz : MonoBehaviour {
     public void OnDrawGizmosPate()
     {
         
-        Vector2 mapstart = copy.map.GetGameObjectFast(0, 0).transform.position;
+        Vector2 mapstart = copy.map.GetTileGameObject(0, 0).transform.position;
         if (inited)
         {
             Gizmos.color = Color.blue;

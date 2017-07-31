@@ -10,7 +10,7 @@ public class BreadthFirstSearch
     public List<List<tiles>> moveTiles = new List<List<tiles>>();
     public PathFinder panther = new PathFinder();
 
-    public TileMap map;
+    public ITileMap map;
 
     public class tiles
     {
@@ -59,7 +59,7 @@ public class BreadthFirstSearch
 
     public int[] calculateIndex(Vector2 k)
     {
-        Vector3 j = map.GetGameObjectFast(0, 0).transform.position;
+        Vector3 j = map.GetTileGameObject(0, 0).transform.position;
         Vector2 i = j;
         k += new Vector2(0.5f, 0.5f);
         Vector2 temp = k - i;
@@ -79,23 +79,23 @@ public class BreadthFirstSearch
     {
         int[] h = calculateIndex(k);
 
-        return map.GetGameObjectFast(h[0], h[1]).transform.position;
+        return map.GetTileGameObject(h[0], h[1]).transform.position;
     }
 
-    public void Init(TileMap tileMap)
+    public void Init(ITileMap tileMap)
     {
-        for (int y = 0; y < TileMap.TotalHeight; y++)
+        for (int y = 0; y < tileMap.Height; y++)
         {
-            List<tiles> temp = new List<tiles>(TileMap.TotalHeight);
+            List<tiles> temp = new List<tiles>(tileMap.Height);
             for (int x = 0; x < TileMap.TotalWidth; x++)
             {
-                temp.Add(new tiles() { x = x, y = y, tileState = tileMap.GetTileAndObjectCollision(x, y) ? states.wall : states.unVisited });   /*GET WALL INFO*/
+                temp.Add(new tiles() { x = x, y = y, tileState = tileMap.GetTileCollision(x, y) ? states.wall : states.unVisited });   /*GET WALL INFO*/
             }
             moveTiles.Add(temp);
         }
     }
 
-    public void uptadeTiles(int playerX, int playerY, TileMap tileMap)
+    public void uptadeTiles(int playerX, int playerY, ITileMap tileMap)
     {
         if (!inited)
         {
@@ -124,7 +124,7 @@ public class BreadthFirstSearch
         {
             for (int x = 0; x < TileMap.TotalWidth; x++)
             {
-                moveTiles[y][x] = new tiles() { x = x, y = y, tileState = tileMap.GetTileAndObjectCollision(x, y) ? states.wall : states.unVisited };
+                moveTiles[y][x] = new tiles() { x = x, y = y, tileState = tileMap.GetTileCollision(x, y) ? states.wall : states.unVisited };
             }
         }
         moveTiles[playerY][playerX] = new tiles() { x = playerX, y = playerY, tileState = states.goal };

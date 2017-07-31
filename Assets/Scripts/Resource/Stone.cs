@@ -35,9 +35,8 @@ public class Stone : Resource
 
         // if (impact.magnitude > 0.2)
         // {
-            transform.Translate(impact * Time.deltaTime);
         // }
         // impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
-
+        transform.Translate(impact * Time.deltaTime);
     }
 }

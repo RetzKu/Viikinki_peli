@@ -2,23 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GodOfTheWorld : MonoBehaviour {
+public class GodOfTheWorld : MonoBehaviour
+{
 
     // Use this for initialization
+    // public GameObject 
+
     public GameObject tilemap;
     int worldMobs = 0;
-	void Start () {
 		
-	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
     void CreateEverything()
     {
 
     }
+
     void DestroyWorld()
     {
         worldMobs = MobsControl.instance.DeleteAllCurrentMobs();
@@ -28,7 +26,7 @@ public class GodOfTheWorld : MonoBehaviour {
         {
             for (int x = 0; x < TileMap.TotalHeight; x++)
             {
-                Destroy(tilemap.GetComponent<TileMap>().GetGameObjectFast(x,y));
+                Destroy(tilemap.GetComponent<TileMap>().GetTileGameObject(x,y));
             }
         }
 
@@ -37,6 +35,7 @@ public class GodOfTheWorld : MonoBehaviour {
         // olen.donezo();
 
     }
+
     void DestroyCave()
     {
         worldMobs = MobsControl.instance.DeleteAllCurrentMobs();
@@ -46,7 +45,7 @@ public class GodOfTheWorld : MonoBehaviour {
         {
             for (int x = 0; x < TileMap.TotalHeight; x++)
             {
-                Destroy(tilemap.GetComponent<TileMap>().GetGameObjectFast(x, y));
+                Destroy(tilemap.GetComponent<TileMap>().GetTileGameObject(x, y));
             }
         }
 

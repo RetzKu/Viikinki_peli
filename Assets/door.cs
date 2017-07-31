@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class door : MonoBehaviour {
+public class door : MonoBehaviour
+{
 
     bool created = false;
     string seed;
@@ -16,20 +17,36 @@ public class door : MonoBehaviour {
     public Sprite GrassSprite;
     public Sprite SuperSprite;
     public Sprite StartSprite;
-                        //public GameObject[,] TileGameObjects = new GameObject[TotalHeight, TotalWidth];
+    //public GameObject[,] TileGameObjects = new GameObject[TotalHeight, TotalWidth];
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        var tilemap = FindObjectOfType<TileMap>();
+
+        // if (other.gameObject.GetComponent<ChunkMover>().UnderGround)
+        // {
+        //     // maan päälle
+        //     tilemap.EnableTileMap();
+        // }
+        // else
+        // {
+        //     tilemap.DisableTileMap();
+        //     Activate();
+        // }
+    }
 
     //private GameObject Spawner;
     void Start()
     {
         //Spawner = GameObject.FindGameObjectWithTag("Spawner");
-                        //GameObject tileObject = new GameObject("(" + y + "," + x + ")");
-                        //tileObject.transform.parent = parent.transform;
-                        //tileObject.transform.position = new Vector3(x + chunkOffsetX, y + chunkOffsetY, 0);
-                        //tileObject.layer = ;
+        //GameObject tileObject = new GameObject("(" + y + "," + x + ")");
+        //tileObject.transform.parent = parent.transform;
+        //tileObject.transform.position = new Vector3(x + chunkOffsetX, y + chunkOffsetY, 0);
+        //tileObject.layer = ;
 
-                        //SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
-                        //spriteRenderer.sortingLayerName = "TileMap";
-                        //spriteRenderer.sprite = SuperSprite;
+        //SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
+        //spriteRenderer.sortingLayerName = "ITileMap";
+        //spriteRenderer.sprite = SuperSprite;
     }
     public void DeActivate()
     {
@@ -63,7 +80,8 @@ public class door : MonoBehaviour {
 
     //    }
     //}
-    public void Activate () {
+    public void Activate()
+    {
         //destroy world
 
         //create cave
@@ -71,23 +89,23 @@ public class door : MonoBehaviour {
         {
             createNewCave();
         }
-        finalRooms =  MapGenerator.Instance.GenerateMap(widht, height, seed, fillpercent);
+        finalRooms = MapGenerator.Instance.GenerateMap(widht, height, seed, fillpercent);
         if (!created)                                                                                   // create door
         {
             int temp = finalRooms[finalRooms.Count - 1].edgeTiles.Count;
             int rand = UnityEngine.Random.Range(0, temp);
 
-            if (MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY-1] == TileType.CaveWall)
+            if (MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY - 1] == TileType.CaveWall)
             {
                 MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY - 1] = TileType.CaveDoor;
                 print("door created");
             }
-            else if (MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY +1] == TileType.CaveWall)
+            else if (MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY + 1] == TileType.CaveWall)
             {
                 MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY + 1] = TileType.CaveDoor;
                 print("door created");
             }
-            else if (MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX-1, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY] == TileType.CaveWall)
+            else if (MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX - 1, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY] == TileType.CaveWall)
             {
                 MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX - 1, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY] = TileType.CaveDoor;
                 print("door created");
@@ -107,7 +125,7 @@ public class door : MonoBehaviour {
 
 
 
-       
+
 
 
 

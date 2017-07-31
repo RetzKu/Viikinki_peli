@@ -161,7 +161,7 @@ public class Perlin : MonoBehaviour
     public void GenerateTileMap(TileMap tileMap)
     {
         int width = tileMap.Width;
-        int height = tileMap.Heigth;
+        int height = tileMap.Height;
         float[,] elevation = new float[width, height];
         float[,] moisture = new float[width, height];
 
@@ -170,7 +170,7 @@ public class Perlin : MonoBehaviour
 
         for (int y = 0; y < tileMap.Width; y++)
         {
-            for (int x = 0; x < tileMap.Heigth; x++)
+            for (int x = 0; x < tileMap.Height; x++)
             {
                 tileMap.GetTileGameObject(y, x).GetComponent<Renderer>().material.color =
                     BiomeToColor(GetBiome(elevation[y, x], moisture[y, x]));
@@ -560,7 +560,7 @@ public class Perlin : MonoBehaviour
 
                 // go.GetComponent<Renderer>().material.color = BiomeToColor(type);
 
-                if (TileMap.Collides(type)) // disable atm TileMap.cs
+                if (TileMap.Collides(type)) // disable atm ITileMap.cs
                 {
                     Collider2D body = go.GetComponent<Collider2D>();
                     body.enabled = true;
@@ -615,7 +615,7 @@ public class Perlin : MonoBehaviour
                 TileType type = GetBiome(elevation[chunkY, chunkX], moisture[chunkY, chunkX]);
                 go.GetComponent<Renderer>().material.color = BiomeToColor(GetBiome(elevation[chunkY, chunkX], moisture[chunkY, chunkX]));
 
-                if (TileMap.Collides(type)) // disable atm TileMap.cs
+                if (TileMap.Collides(type)) // disable atm ITileMap.cs
                 {
                     Collider2D body = go.GetComponent<Collider2D>();
                     body.enabled = true;
@@ -627,7 +627,7 @@ public class Perlin : MonoBehaviour
         OffsetY = 0;
     }
 
-    //public void GenerateTileMap(TileMap tileMap)
+    //public void GenerateTileMap(ITileMap tileMap)
     //{
     //    int width = tileMap.Width;
     //    int height = tileMap.Height;

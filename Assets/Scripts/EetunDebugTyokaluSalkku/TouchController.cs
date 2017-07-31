@@ -205,6 +205,7 @@ public class TouchController : MonoBehaviour
     private bool _init = true;
     private Vector2 startPosition = new Vector2(0f, 0f);
 
+    public static Vector2 endPosition = new Vector2(0f, 0f);
     public static Vector2 AttackDir = new Vector2(0f, 0f);
 
     void Update()
@@ -238,10 +239,13 @@ public class TouchController : MonoBehaviour
                     OnTouchEnded();
                     FingerId = -1000;
 
-                    var delta = touches[i].position - startPosition;
-                    AttackDir = delta;
+                    var delta   = touches[i].position - startPosition;
+                    endPosition = touches[i].position;
+                    AttackDir   = delta;
+
                     _player.attackBoolean(delta);
                     _player.GetComponent<AnimatorScript>().Attack();
+
                 }
             }
         }

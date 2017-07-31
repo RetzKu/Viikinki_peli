@@ -98,25 +98,6 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public void UpPateDir(PlayerDir dir)
-    {
-        fx = dir;
-        if (dir == pd)
-        {
-            return;
-        }
-        else
-        {
-            inAttack = true;
-            GetComponent<AnimatorScript>().Sprites.EnableSprites((int)dir);
-
-            LastDirection = GetComponent<PlayerScript>().Direction;
-            GetComponent<PlayerScript>().Direction = (int)dir;
-
-            GetComponent<AnimatorScript>()._Lock = true;
-        }
-    }
-
     void FixedUpdate()
     {
         if (!knockBack)

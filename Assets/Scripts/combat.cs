@@ -33,6 +33,15 @@ public class combat : MonoBehaviour
 
     void Update()
     {
+
+        // Joonan testikoodia raycastille, joiden olisi tarkoitus tulla korteille
+        //Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z));
+        //Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
+        //Vector3 fwd = Camera.main.transform.TransformDirection(Vector3.forward);
+
+        //if (Physics.Raycast(transform.position, fwd, Mathf.Infinity))
+        //    print("There is something in front of the object!");
+
         // Tarkistetaan onko pelaaja elossa
         if (hp <= 0)
         {

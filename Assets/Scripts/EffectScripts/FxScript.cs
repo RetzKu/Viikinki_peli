@@ -87,7 +87,9 @@ public class FxScript : MonoBehaviour {
 
 #if UNITY_EDITOR
         MouseDir = (MousePoint - transform.position - EffectOffSet).normalized * MaxDistance; //mikä on hiiren suunta
+
         rotatePate(MouseDir);
+
 #elif UNITY_ANDROID
         MouseDir = TouchController.AttackDir.normalized * MaxDistance;
         rotatePate(MouseDir);
@@ -106,37 +108,6 @@ public class FxScript : MonoBehaviour {
         //var n = 0 - (Mathf.Atan2(Base.y - Base.y + MouseDir.y,Base.x - Base.x + MouseDir.x)) * 180 / Mathf.PI; //origin - target
         //print(n);
         Copy.transform.Rotate(0, 0, n * -1);
-    }
-
-
-    void rotatePate(Vector2 MouseDir)
-    {
-        PlayerDir temp = PlayerDir.def;
-        if (Mathf.Abs(MouseDir.x) >= Mathf.Abs(MouseDir.y))
-        {
-            if (MouseDir.x < 0)
-            {
-                temp = PlayerDir.left;
-            }
-            else
-            {
-                temp = PlayerDir.right;
-            }
-        }
-        else if (Mathf.Abs(MouseDir.y) >= Mathf.Abs(MouseDir.x))
-        {
-            if (MouseDir.y < 0)
-            {
-                temp = PlayerDir.down;
-            }
-            else
-            {
-                temp = PlayerDir.up;
-            }
-
-        }
-
-        GetComponent<Movement>().UpPateDir(temp);
     }
 
     void OnTriggerEnter2D(Collider2D trig)

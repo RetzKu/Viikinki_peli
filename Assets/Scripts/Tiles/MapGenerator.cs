@@ -15,7 +15,7 @@ public class Room : IComparable<Room>
     public Room()
     { }
 
-    public Room(List<MapGenerator.Coord> roomTiles, int[,] map)
+    public Room(List<MapGenerator.Coord> roomTiles, TileType[,] map)
     {
         tiles = roomTiles;
         roomsize = tiles.Count;
@@ -30,7 +30,7 @@ public class Room : IComparable<Room>
                 {
                     if (x == tile.tileX || y == tile.tileY)
                     {
-                        if (map[x, y] == 1)
+                        if (map[x, y] == TileType.CaveWall)
                         {
                             edgeTiles.Add(tile);
                         }
@@ -80,18 +80,25 @@ public class Room : IComparable<Room>
 
 
 
-public class MapGenerator
+public class MapGenerator : MonoBehaviour
 {
+
+    public Sprite GrassSprite;
+    public Sprite SuperSprite;
+    public Sprite StartSprite;
+
+    GameObject[,] TileObjects;
     private static MapGenerator instance;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     public static MapGenerator Instance
     {
         get
         {
-            if (instance == null)
-            {
-                instance = new MapGenerator();
-            }
             return instance;
         }
     }
@@ -107,7 +114,7 @@ public class MapGenerator
     [Range(0, 100)]
     public int randomFillPercent;
 
-    public int[,] map; // 0 empty tile, 1 wall tile
+    public TileType[,] map; // 0 empty tile, 1 wall tile
     
 
     public List<Room> GenerateMap(int widht, int height, string seed, int fillPercent)
@@ -117,7 +124,7 @@ public class MapGenerator
         this.seed = seed;
         this.randomFillPercent = fillPercent;
 
-        map = new int[widht, height];
+        map = new TileType[widht, height];
         RandomFillMap();
 
         for (int i = 0; i < smoothTimes; i++)
@@ -129,7 +136,50 @@ public class MapGenerator
 
         return surviving;
     }
+    public TileType Gettiletype(int x,int y)
+    {
+        return map[x, y];
+    }
 
+    public GameObject GettileGameobject(int x,int y) //TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    {
+        return TileObjects[x,y];
+    }
+
+    public bool GetCollision(int x,int y)
+    {
+        return map[x, y] == TileType.CaveWall;
+    }
+    public void showRooms()
+    {
+        TileObjects = new GameObject[widht, height];
+        GameObject parent = new GameObject("CAVES!");
+        for (int x = 0; x < widht; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                GameObject tileObject = new GameObject("(" + y + "," + x + ")");
+                tileObject.transform.parent = parent.transform;
+                tileObject.transform.position = new Vector3(x + 100, y + 100, 0);
+
+                SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
+                if (MapGenerator.Instance.map[x, y] == TileType.CaveFloor)
+                {
+                    spriteRenderer.sprite = GrassSprite;
+                }
+                else if (MapGenerator.Instance.map[x, y] == TileType.CaveWall)
+                {
+                    spriteRenderer.sprite = SuperSprite;
+                }
+                else
+                {
+                    //print("drawing star point");
+                    spriteRenderer.sprite = StartSprite;
+                }
+                TileObjects[x, y] = tileObject;
+            }
+        }
+    }
     void RandomFillMap()
     {
         //if (useRandomSeed)
@@ -146,11 +196,11 @@ public class MapGenerator
             {
                 if (x == 0 || x == widht - 1 || y == 0 || y == height - 1)
                 {
-                    map[x, y] = 1;
+                    map[x, y] = TileType.CaveWall;
                 }
                 else
                 {
-                    map[x, y] = (pseudoRandom.Next(0, 100) < randomFillPercent) ? 1 : 0;
+                    map[x, y] = (pseudoRandom.Next(0, 100) < randomFillPercent) ? TileType.CaveWall : TileType.CaveFloor;
                 }
             }
         }
@@ -158,7 +208,7 @@ public class MapGenerator
 
     List<Room> ProcessMap()
     {
-        List<List<Coord>> wallregions = GetRegions(1);
+        List<List<Coord>> wallregions = GetRegions(TileType.CaveWall);
 
         int wallThresholdSize = 50; // any wall region which is less than 50 tiles will be removed
 
@@ -168,12 +218,12 @@ public class MapGenerator
             {
                 foreach (Coord tile in wallregion)
                 {
-                    map[tile.tileX, tile.tileY] = 0;
+                    map[tile.tileX, tile.tileY] = TileType.CaveFloor;
                 }
             }
         }
 
-        List<List<Coord>> roomregions = GetRegions(0);
+        List<List<Coord>> roomregions = GetRegions(TileType.CaveFloor);
 
         int roomThresholdSize = 50; // any wall region which is less than 50 tiles will be removed
 
@@ -185,7 +235,7 @@ public class MapGenerator
             {
                 foreach (Coord tile in roomregion)
                 {
-                    map[tile.tileX, tile.tileY] = 1;
+                    map[tile.tileX, tile.tileY] = TileType.CaveWall;
                 }
             }
             else
@@ -309,7 +359,7 @@ public class MapGenerator
                     int realY = c.tileY + y;
                     if (IsInMapRange(realX, realY))
                     {
-                        map[realX, realY] = 0;
+                        map[realX, realY] = TileType.CaveFloor;
                     }
                 }
             }
@@ -392,22 +442,31 @@ public class MapGenerator
     {
         return new Vector3(-widht / 2 + .5f + tile.tileX, 2, -height / 2 + .5f + tile.tileY);
     }
-    List<List<Coord>> GetRegions(int tiletype)
+    List<List<Coord>> GetRegions(TileType tiletype)
     {
         List<List<Coord>> regions = new List<List<Coord>>();
-        int[,] mapFlags = new int[widht, height];
+        TileType[,] mapFlags = new TileType[widht, height];
+
         for (int x = 0; x < widht; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                if (mapFlags[x, y] == 0 && map[x, y] == tiletype)
+                mapFlags[x,y] = TileType.CaveFloor;
+            }
+            
+        }
+        for (int x = 0; x < widht; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (mapFlags[x, y] == TileType.CaveFloor && map[x, y] == tiletype)
                 {
                     List<Coord> newRegion = GetRegionTiles(x, y);
                     regions.Add(newRegion);
 
                     foreach (Coord tile in newRegion)
                     {
-                        mapFlags[tile.tileX, tile.tileY] = 1;
+                        mapFlags[tile.tileX, tile.tileY] = TileType.CaveWall;
                     }
                 }
             }
@@ -426,11 +485,11 @@ public class MapGenerator
 
                 if (neighbourWallTiles > walls)
                 {
-                    map[x, y] = 1;
+                    map[x, y] = TileType.CaveWall;
                 }
                 else if (neighbourWallTiles < walls)
                 {
-                    map[x, y] = 0;
+                    map[x, y] = TileType.CaveFloor;
                 }
             }
         }
@@ -439,13 +498,21 @@ public class MapGenerator
     List<Coord> GetRegionTiles(int startX, int startY)
     {
         List<Coord> tiles = new List<Coord>();
-        int[,] mapFlags = new int[widht, height];
-        int tileType = map[startX, startY];
+        TileType[,] mapFlags = new TileType[widht, height];
+        for (int x = 0; x < widht; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                mapFlags[x, y] = TileType.CaveFloor;
+            }
+
+        }
+        TileType tileType = map[startX, startY];
 
         Queue<Coord> queue = new Queue<Coord>();
         queue.Enqueue(new Coord(startX, startY));
 
-        mapFlags[startX, startY] = 1;
+        mapFlags[startX, startY] = TileType.CaveWall;
         while (queue.Count > 0)
         {
             Coord tile = queue.Dequeue();
@@ -457,9 +524,9 @@ public class MapGenerator
                 {
                     if (IsInMapRange(x, y) && (y == tile.tileY || x == tile.tileX))
                     {
-                        if (mapFlags[x, y] == 0 && map[x, y] == tileType)
+                        if (mapFlags[x, y] == TileType.CaveFloor && map[x, y] == tileType)
                         {
-                            mapFlags[x, y] = 1;
+                            mapFlags[x, y] = TileType.CaveWall;
                             queue.Enqueue(new Coord(x, y));
                         }
                     }
@@ -487,7 +554,8 @@ public class MapGenerator
                 {
                     if (neighbourX != gridX || neighbourY != gridY)
                     {
-                        wallCount += map[neighbourX, neighbourY];
+                        if(map[neighbourX, neighbourY] == TileType.CaveWall) { wallCount++; }
+                        //wallCount += map[neighbourX, neighbourY];
                     }
                 }
                 else

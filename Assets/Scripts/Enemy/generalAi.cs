@@ -337,8 +337,10 @@ public abstract class generalAi : MonoBehaviour
             knock *= knockDist;
             flags = (int)behavior.seek;
             Physics._maxSpeed = MaxSpeed * 5;
+            Physics._maxSteeringForce = MaxSteeringForce * 100;
+
         }
-        
+
     }
     protected void knocktimer()
     {
@@ -359,6 +361,7 @@ public abstract class generalAi : MonoBehaviour
             knockCounter = 0;
             rotation.Lock = false;
             knockPercent = 1f;
+            Physics._maxSteeringForce = MaxSteeringForce;
         }
     }
     float lerpate(float start, float end, float smooth)

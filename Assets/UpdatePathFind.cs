@@ -18,6 +18,7 @@ public class UpdatePathFind : MonoBehaviour
     bool pressed = false;
     Vector2 midPoint = new Vector2(10f, 10f);
     public TileMap terveisin;
+    public bool inCave;
 
     // Use this for initialization
     void Start()
@@ -35,10 +36,10 @@ public class UpdatePathFind : MonoBehaviour
         {
             if (terveisin.CanUpdatePathFind())
             {
-                path.uptadeTiles(midPoint, terveisin); //get tile map
+                path.uptadeTiles(midPoint, terveisin); //get tile map // 
                 uptade = false;
             }
-            //Giz.init(path);
+            Giz.init(path);
         }
 
         int[] m = path.calculateIndex(body.position);
@@ -53,8 +54,8 @@ public class UpdatePathFind : MonoBehaviour
 
     }
 
-    //void OnDrawGizmos() // käytä pathfind debuggaukseens
-    //{
-    //    Giz.OnDrawGizmosPate();
-    //}
+    void OnDrawGizmos() // käytä pathfind debuggaukseens
+    {
+        Giz.OnDrawGizmosPate();
+    }
 }

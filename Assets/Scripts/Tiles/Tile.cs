@@ -9,13 +9,15 @@ public enum TileType
     DeepWater,
     Water,
     Mountain,
+    CaveWall, // haluan ensimmäiseksi, pls eetut
 
     CollisionTiles,
 
 
 
+    CaveFloor,
+    CaveDoor,
     Beach,
-
     //Scorhed,
     //Bare,
     //Tundra,

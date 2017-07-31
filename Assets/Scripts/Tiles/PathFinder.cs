@@ -93,11 +93,8 @@ public class PathFinder
         Dictionary<Vec2, Vec2> cameFrom = new Dictionary<Vec2, Vec2>(289);
         cameFrom[start] = start;
 
-
         dirs = new Dir[Height, Width];
-
         List<Vec2> neighbours = new List<Vec2>(4) {new Vec2(0, 0), new Vec2(0, 0), new Vec2(0, 0), new Vec2(0, 0)};
-        
 
         while (frontier.Count > 0)
         {

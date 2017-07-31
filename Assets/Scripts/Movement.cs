@@ -22,9 +22,9 @@ public class Movement : MonoBehaviour
     //private Vector2 movement;
     public float slowdown = 10;
     public float thrust = 15;
-    private float max_spd = 3;
-    private float min_spd_pate = 0.2f;
-    private float max_spd_pate = 3;
+    public float max_spd = 3;
+    public float min_spd_pate = 0.2f;
+    public float max_spd_pate = 3;
     bool inAttack = false;
     bool knockBack = false;
     public bool Keyboard = true;
@@ -50,6 +50,13 @@ public class Movement : MonoBehaviour
     public float ModifiedMaxSpd;
     // 2 max drag
     // 0 min drag
+
+    public void SetMaxSpeed(float speed)
+    {
+        max_spd        = speed;
+        max_spd_pate   = speed;
+        ModifiedMaxSpd = speed;
+    }
 
     void applyForce(Vector2 force)
     {
@@ -111,9 +118,9 @@ public class Movement : MonoBehaviour
     Vector2 Input_checker()
     {
         //Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical")).normalized; // ???
-#if UNITY_EDITOR
+#if UNITY_EDITOR 
         Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized; // WASD liikkuminen koneell
-#elif UNITY_ANDROID
+#else
         Vector2 movement = Joystick.GetInputVector(); // Kun buildataan phonelle
 #endif
 

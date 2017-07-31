@@ -55,8 +55,12 @@ public class Chunk      // sub array
     public View<TileType> TilemapTilesView;
     public View<GameObject> GameObjectView;
 
+    private GameObject _parent;
+
 
     private Dictionary<Vec2, GameObject> worldObjects = new Dictionary<Vec2, GameObject>(10);
+
+
 
     public bool TileCollides(int x, int y)
     {
@@ -76,6 +80,7 @@ public class Chunk      // sub array
 
     public void AddObject(int x, int y, GameObject go)
     {
+        go.transform.parent = _parent.transform;
         worldObjects.Add(new Vec2(x, y), go);
     }
 
@@ -84,6 +89,7 @@ public class Chunk      // sub array
         foreach (var keypairvalue in worldObjects)
         {
             keypairvalue.Value.transform.localScale = new Vector3(1f, 1f, 1f);
+            keypairvalue.Value.transform.parent = null;
             ObjectPool.instance.PoolObject(keypairvalue.Value);
         }
         worldObjects.Clear();
@@ -144,6 +150,9 @@ public class Chunk      // sub array
                 collider.enabled = false;
             }
         }
+
+        _parent = new GameObject("Chunk " + offsetX + ", " + offsetY);
+        _parent.transform.parent = tilemap;
     }
 
     private TileType[,] GetArray()
@@ -198,6 +207,8 @@ public class Chunk      // sub array
             }
 
             go.transform.position = new Vector3(v.X + offsetX * CHUNK_SIZE, v.Y + offsetY * CHUNK_SIZE);
+            go.transform.parent = _parent.transform;
+
             worldObjects[keyvaluepair.Key] = go;
         }
     }

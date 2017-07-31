@@ -31,7 +31,8 @@ public class DeckScript : MonoBehaviour
     // Flageja invin hallintaan
     private bool openChanger = false;
     private bool openChanger2 = true;
-    private bool cardChanged = false;
+    private bool addCard = false;
+    private bool removeCard = false;
 
     // Array jossa kulkee kortti peliobjektit
     private GameObject[] cards;
@@ -116,8 +117,16 @@ public class DeckScript : MonoBehaviour
                 GameObject tempObj = new GameObject("CardChild");
                 tempObj.transform.position = cards[x].transform.position;
                 Sprite cardImage = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<SpriteRenderer>().sprite;
-                Rect cardImageRect = cardImage.rect;
 
+                GameObject tempObj2 = new GameObject("coverColor");
+                tempObj2.transform.position = cards[x].transform.position;
+                tempObj2.AddComponent<RectTransform>().pivot = new Vector2(1f, 0.5f);
+                tempObj2.AddComponent<Image>().sprite = Resources.Load<Sprite>("whitecard");
+                //tempObj2.transform.localScale = new Vector3(1f, 1f, 1f); // < EI TOIMI KORJAA NEXTINÄ
+                tempObj2.transform.parent = cards[x].transform;
+
+
+                Rect cardImageRect = cardImage.rect;
                 var image = tempObj.AddComponent<Image>();
                 image.sprite = cardImage;
                 image.rectTransform.sizeDelta = cardImageRect.size;
@@ -135,16 +144,15 @@ public class DeckScript : MonoBehaviour
             minPositionY = positionMinY(cardCount);
             t = 0;
 
-            cardChanged = true;
+            addCard = true;
         }
 
-        /*
-        // Jos inventoryn koko kasvaa
+        // Jos inventoryn koko laskee
         if (cardCount > updatedCardCount)
         {
             // Tallennetaan "vanhojen" korttien propertiesit
             saveCardProperties();
-
+            /*
             // Tuhoaa kaikki olemassa olevat kortit
             for (int x = 0; x < cardCount; x++)
             {
@@ -172,8 +180,10 @@ public class DeckScript : MonoBehaviour
                 tempObj.transform.SetParent(cards[x].transform);
                 tempObj.transform.localScale = new Vector3(2.85714285714286f, 2f, 1f);
             }
+            */
 
             // Ladataan uudet positiot ja anglet uudelle kortti määrälle
+            
             cardCount = updatedCardCount;
             maxAngles = rotationMax(cardCount);
             maxPositionX = positionMaxX(cardCount);
@@ -181,18 +191,17 @@ public class DeckScript : MonoBehaviour
             minAngles = rotationMin(cardCount);
             minPositionX = positionMinX(cardCount);
             minPositionY = positionMinY(cardCount);
+            
             t = 0;
 
-            cardChanged = true;
+            removeCard = true;
         }
-
-    */
 
         // Kasvata lerpin t
         t += Time.deltaTime * Speed;
 
         // Aukaisee inventoryn
-        if (open == true && cardChanged == false)
+        if (open == true && addCard == false && removeCard == false)
         {
             // Juoksee kerran kun open true
             if (openChanger == true)
@@ -210,8 +219,8 @@ public class DeckScript : MonoBehaviour
             }
         }
 
-        // Aukaisee inventoryn ja kortti on vaihtunut
-        if (open == true && cardChanged == true)
+        // Aukaisee inventoryn ja kortti lisääntynyt
+        if (open == true && addCard == true && removeCard == false)
         {
             // Juoksee kerran kun open true
             if (openChanger == true)
@@ -231,12 +240,12 @@ public class DeckScript : MonoBehaviour
             transform.FindChild("Card" + (cardCount - 1)).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(minAngles[(cardCount - 1)], maxAngles[(cardCount - 1)], t), 0.5f);
             if (t >= 1)
             {
-                cardChanged = false;
+                addCard = false;
             }
         }
 
         // Sulkee inventoryn
-        if (open == false && cardChanged == false)
+        if (open == false && addCard == false && removeCard == false)
         {
             // Juoksee kerran kun open false
             if (openChanger2 == true)
@@ -255,8 +264,8 @@ public class DeckScript : MonoBehaviour
             }
         }
 
-        // Kun invi kiinni ja kortti vaihtunut
-        if (open == false && cardChanged == true)
+        // Kun invi kiinni ja kortti lisääntynyt
+        if (open == false && addCard == true && removeCard == false)
         {
             // Juoksee kerran kun open false
             if (openChanger2 == true)
@@ -276,9 +285,37 @@ public class DeckScript : MonoBehaviour
             transform.FindChild("Card" + (cardCount - 1)).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(maxAngles[(cardCount - 1)], minAngles[(cardCount - 1)], t), 0.5f);
             if (t >= 1)
             {
-                cardChanged = false;
+                addCard = false;
             }
         }
+
+        // Kun invi kiinni ja kortti vähentynyt
+        if (open == false && addCard == false && removeCard == true)
+        {
+            // Juoksee kerran kun open false
+            if (openChanger2 == true)
+            {
+                t = 0;
+                openChanger2 = false;
+                openChanger = true;
+            }
+            // Juoksee joka kerta
+            // 
+            for (int x = 0; x < updatedCardCount; x++)
+            {
+                transform.FindChild("Card" + x).localPosition = Vector3.Lerp(positions[x], new Vector3(minPositionX[x], minPositionY[x], 0f), t);
+                transform.FindChild("Card" + x).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(rotations[x].z, minAngles[x], t), 0.5f);
+            }
+            
+            transform.FindChild("Card" + (updatedCardCount)).localPosition = Vector3.Lerp(positions[updatedCardCount], new Vector3(maxPositionX[(updatedCardCount)], maxPositionY[(updatedCardCount)], 0f), t);
+            transform.FindChild("Card" + (updatedCardCount)).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(rotations[updatedCardCount].z, maxAngles[(updatedCardCount)], t), 0.5f);
+            
+            if (t >= 1)
+            {
+                removeCard = false;
+            }
+        }
+
     }
 
     // Default arvoja rotationille

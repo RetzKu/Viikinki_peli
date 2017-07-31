@@ -4821,6 +4821,11 @@ Prefab:
       propertyPath: spawnMelee
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114676718114899972, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: naturalSpawn
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 317101aad9860994d946e75d103c65d0, type: 2}
   m_IsPrefabParent: 0

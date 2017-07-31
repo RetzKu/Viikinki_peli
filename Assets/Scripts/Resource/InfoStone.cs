@@ -9,7 +9,13 @@ public class InfoStone : Resource
     public bool PlayerInRange = false;
 
     public Color Default;
+    private float Distance;
 
+    public bool RecipeLearned = false;
+    private bool FadeDone = false;
+
+    private float StartTime;
+    public float Duration;
 
     public override void OnDead()
     {
@@ -20,9 +26,17 @@ public class InfoStone : Resource
     {
     }
 
+   
+
     private void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.E) == true)
+        {
+            CraftingManager.Instance.GetComponent<RuneHolder>();
+            //RuneToTeach.Fire();
+            //LearnStone();
+            //RuneToTeach.ValidateRune()
+        }
     }
 
     public void AlphaEffect()
@@ -30,28 +44,69 @@ public class InfoStone : Resource
         if (PlayerInRange == false)
         {
             PlayerInRange = true;
-            StartCoroutine(EffectBrightness(GameObject.Find("Player"))); 
+            StartCoroutine(EffectBrightness(GameObject.Find("Player")));
         }
 
     }
 
     IEnumerator EffectBrightness(GameObject Player)
     {
-        
+
         while (PlayerInRange == true)
         {
-            
-            float Distance = Vector2.Distance(Player.transform.position, transform.position);
-            float t = EnemyMovement.map(Distance, 1.5f, 3f, 1,0);
 
-            transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, t);
+            Distance = Vector2.Distance(Player.transform.position, transform.position);
+            float t = EnemyMovement.map(Distance, 3, 4, 0.7f, 0);
 
-            if(Vector2.Distance(Player.transform.position,transform.position) > 4)
+            if (FadeDone == true)
+            {
+                transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, t);
+                transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, t);
+            }
+            else
+            {
+                transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, t);
+            }
+
+            if (Vector2.Distance(Player.transform.position, transform.position) > 5)
             {
                 PlayerInRange = false;
-                transform.GetChild(0).GetComponent<SpriteRenderer>().color = Default;
-
             }
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    public void LearnStone()
+    {
+        float tmp = Vector3.Distance(GameObject.Find("Player").transform.position, transform.position);
+        //rune holderiin uusi rune
+        if (Vector3.Distance(GameObject.Find("Player").transform.position, transform.position) < 3)
+        {
+            if (RecipeLearned == false)
+            {
+                StartTime = Time.time;
+                StartCoroutine(RecipeLearnedFade(StartTime));
+                RecipeLearned = true;
+                GameObject.Find("Player").GetComponent<RuneHolder>().AddRune(RuneToTeach);
+            }
+
+        }
+    }
+
+    IEnumerator RecipeLearnedFade(float StartTime)
+    {
+        while (FadeDone == false)
+        {
+            float t = (Time.time - StartTime) / Duration;
+            transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, Mathf.SmoothStep(0.1f, 1, t));
+            transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, Mathf.SmoothStep(0.1f, 1, t));
+
+            if (t >= 1)
+            {
+                transform.GetChild(2).GetComponent<SpriteRenderer>().enabled = false;
+                FadeDone = true;
+            }
+
             yield return new WaitForSeconds(0.1f);
         }
     }

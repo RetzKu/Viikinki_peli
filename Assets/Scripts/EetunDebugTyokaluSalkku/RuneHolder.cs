@@ -18,6 +18,12 @@ public class RuneHolder : MonoBehaviour
     private bool[] CanCast;
     private float[] cds;
 
+    public void AddRune(Rune rune)
+    {
+        rune.init(this.gameObject);
+        runes.Add(rune);
+    }
+
     void Start()
     {
         for(int i = 0; i < runes.Count; i++)

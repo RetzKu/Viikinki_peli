@@ -73,7 +73,7 @@ public class BreadthFirstSearch
     }
     public void uptadeTiles(Vector2 position, TileMap tileMap)
     {
-        uptadeTiles((int)position.x, (int)position.y, tileMap);
+        uptadeTiles((int)position.x, (int)position.y, tileMap); // 
     }
     public Vector2 getTileTrans(Vector2 k)
     {
@@ -179,7 +179,5 @@ public class BreadthFirstSearch
         //        tile.tileState = states.up;
         //    }
         //}
-
-
     }
 }

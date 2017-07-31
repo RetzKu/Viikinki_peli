@@ -45,6 +45,7 @@ public class TouchController : MonoBehaviour
     {
         Crafting,
         RuneCasting
+
     }
 
     public Mode ControllerMode = Mode.Crafting;
@@ -208,7 +209,7 @@ public class TouchController : MonoBehaviour
 
     void Update()
     {
-#if UNITY_ANDROID
+#if !UNITY_EDITOR
         if (_init == false) // todo: miksi bugittaa androidilla
         {
             SetTouchContollerCenters(_craftingUiController.GetPos());
@@ -244,8 +245,7 @@ public class TouchController : MonoBehaviour
                 }
             }
         }
-#endif
-#if UNITY_EDITOR
+#else
         if (Input.GetMouseButton(0) /*|| Input.GetTouch(0).*/ )
         {
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

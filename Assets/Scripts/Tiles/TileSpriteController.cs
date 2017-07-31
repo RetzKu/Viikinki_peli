@@ -7,9 +7,7 @@ using Random = UnityEngine.Random;
 
 public class TileSpriteController : MonoBehaviour
 {
-    // wheels badman käyttää stringejä 
     private Dictionary<string, Sprite> _textures;
-    GameObject[] temporarySecondLayer = new GameObject[450];    // LOL
 
     public SpriteControllerSettings Settings;
 
@@ -20,6 +18,8 @@ public class TileSpriteController : MonoBehaviour
 
     private string[] EnumNames = new string[(int)TileType.Max];
     private string[] numbers = new string[StringEndNumberCount];
+
+    private GameObject _borders;
 
 
     public enum CurrentPool
@@ -40,32 +40,28 @@ public class TileSpriteController : MonoBehaviour
         return currentPool++.ToString();
     }
 
-
     // TODO: ONKO T}YNN};s
-    private List<GameObject> borders = new List<GameObject>(500);
-    private List<GameObject> borders1 = new List<GameObject>(250);
-    private List<GameObject> borders2 = new List<GameObject>(250);
-
-
-
+    private List<GameObject> borders = new List<GameObject>(0);
 
     private Dictionary<TileType, Sprite[]> _textures2 = new Dictionary<TileType, Sprite[]>(10);
 
     void Awake()
     {
+        _borders = new GameObject("Borders");
+        _borders.transform.parent = this.transform;
         // lataa kaikki johonkin vaikka dicciiin aluks
         // nopeampiakin ratkaisuja olisi
         _textures = new Dictionary<string, Sprite>(16);
         //Sprite[] sprites = Resources.LoadAll<Sprite>("Tiles/");
 
-        for (int i = 0; i < temporarySecondLayer.Length; i++)
-        {
-            temporarySecondLayer[i] = new GameObject();
-            // go.SetActive(false);
-            var renderer = temporarySecondLayer[i].AddComponent<SpriteRenderer>();
-            temporarySecondLayer[i].transform.parent = gameObject.transform;
-            renderer.sortingLayerName = "TileMapBorder";
-        }
+        //for (int i = 0; i < temporarySecondLayer.Length; i++)
+        //{
+        //    temporarySecondLayer[i] = new GameObject();
+        //    // go.SetActive(false);
+        //    var renderer = temporarySecondLayer[i].AddComponent<SpriteRenderer>();
+        //    temporarySecondLayer[i].transform.parent = gameObject.transform;
+        //    renderer.sortingLayerName = "TileMapBorder";
+        //}
 
         foreach (var tile in Settings.SpriteData)
         {
@@ -250,7 +246,6 @@ public class TileSpriteController : MonoBehaviour
         return value;
     }
 
-
     string GetAssetName(int x, int y, TileType[,] tiles, out int count)
     {
         count = 0;
@@ -385,6 +380,7 @@ public class TileSpriteController : MonoBehaviour
                     var go = ObjectPool.instance.GetObjectForType(currentPool, true);
                     go.GetComponent<SpriteRenderer>().sprite = _textures[border + "N0"];
                     go.transform.position = new Vector3(x + offsetX, y + offsetY + 1);
+                    go.transform.parent = _borders.transform;
                     borders.Add(go);
                 }
 
@@ -393,6 +389,7 @@ public class TileSpriteController : MonoBehaviour
                     var go = ObjectPool.instance.GetObjectForType(currentPool, true);
                     go.GetComponent<SpriteRenderer>().sprite = _textures[border + "W0"];
                     go.transform.position = new Vector3(x + offsetX - 1, y + offsetY);
+                    go.transform.parent = _borders.transform;
                     borders.Add(go);
                 }
 
@@ -401,6 +398,7 @@ public class TileSpriteController : MonoBehaviour
                     var go = ObjectPool.instance.GetObjectForType(currentPool, true);
                     go.GetComponent<SpriteRenderer>().sprite = _textures[border + "E0"];
                     go.transform.position = new Vector3(x + offsetX + 1, y + offsetY);
+                    go.transform.parent = _borders.transform;
                     borders.Add(go);
                 }
 
@@ -409,6 +407,7 @@ public class TileSpriteController : MonoBehaviour
                     var go = ObjectPool.instance.GetObjectForType(currentPool, true);
                     go.GetComponent<SpriteRenderer>().sprite = _textures[border + "S0"];
                     go.transform.position = new Vector3(x + offsetX, y + offsetY - 1);
+                    go.transform.parent = _borders.transform;
                     borders.Add(go);
                 }
 #endif
@@ -424,12 +423,13 @@ public class TileSpriteController : MonoBehaviour
                 offsetY > border.transform.position.y ||
                 offsetY + TileMap.TotalHeight < border.transform.position.y)
             {
+                // border.transform.parent = null;
+                border.transform.parent = null;
                 ObjectPool.instance.PoolObject(border);
                 borders.RemoveAt(i);
                 i--;
             }
         }
-
                 // fuck fuck
     }
 

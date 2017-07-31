@@ -13,6 +13,8 @@ public class PlayerBuffHandler : MonoBehaviour
         StartCoroutine(Flask(target, totatHealAmount, numberOfTicks, duration));
     }
 
+    private const int _checkRate = 20;
+
     IEnumerator StartBuff(PlayerBuff buff, GameObject target)
     {
         Vector3 startScale = target.transform.localScale;
@@ -30,9 +32,38 @@ public class PlayerBuffHandler : MonoBehaviour
         stats.rangedBaseDmg += buff.RangedDamageBoost;
 
         var movement = target.GetComponent<Movement>();
+
+        float startSpeed = movement.max_spd;
+        movement.SetMaxSpeed(buff.MovementSpeedBoost);
         // movement.
 
-        yield return new WaitForSeconds(buff.Duration);
+        if (buff.CanCutTrees)
+        {
+            float increment = buff.Duration / _checkRate;
+            LayerMask mask = LayerMask.GetMask("ObjectLayer");
+            for (int i = 0; i < _checkRate; i++)
+            {
+                var colliders =  Physics2D.CircleCastAll(target.transform.position, buff.CuttingRadius, Vector2.zero, 0f, mask);
+                if (colliders != null)
+                {
+                    foreach (var collider in colliders)
+                    {
+                        if (collider.transform.CompareTag("puu"))
+                        {
+                            collider.transform.parent.gameObject.GetComponent<Resource>().Hit(100);
+                                // .Vibrate();
+                        }
+                    }
+                }
+                yield return new WaitForSeconds(increment);
+            }
+        }
+        else
+        {
+            yield return new WaitForSeconds(buff.Duration);
+        }
+
+        movement.SetMaxSpeed(startSpeed);
 
         stats.dmgBase -= buff.DamageBoost;
         stats.armor -= buff.ArmorBoost;

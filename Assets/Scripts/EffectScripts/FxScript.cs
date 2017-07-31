@@ -87,13 +87,14 @@ public class FxScript : MonoBehaviour {
 
 #if UNITY_EDITOR
         MouseDir = (MousePoint - transform.position - EffectOffSet).normalized * MaxDistance; //mikä on hiiren suunta
-        //rotatePate(MouseDir);
-        GetComponent<AnimatorScript>().LookAt();
+        GetComponent<AnimatorScript>().LookAt(MouseDir);
+        // rotatePate(MouseDir);
+
 #elif UNITY_ANDROID
         MouseDir = TouchController.AttackDir.normalized * MaxDistance;
         GetComponent<AnimatorScript>().LookAt(MouseDir);
+        rotatePate(MouseDir);
 #endif
-
         Copy.transform.position = Base + MouseDir; 
         GetAngleDegress(Copy);
     }

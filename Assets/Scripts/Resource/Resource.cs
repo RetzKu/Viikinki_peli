@@ -53,7 +53,7 @@ public enum ResourceType
     hemp_tree_0,
     hemp_tree_1,
 
-    rune_z,
+    rune_z, 
     rune_y,
     rune_p,
 

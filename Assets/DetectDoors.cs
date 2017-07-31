@@ -6,29 +6,34 @@ public class DetectDoors : MonoBehaviour {
     private Rigidbody2D body;
     float doorDistance = 1f;
     bool onTop = false;
-
+    LayerMask mask;
     // Use this for initialization
     void Start () {
         body = GetComponent<Rigidbody2D>();
+        mask = LayerMask.GetMask("Door");
+        StartCoroutine(UpdateDoor());
     }
 
     // Update is called once per frame
-    void Update () {
-        LayerMask mask = LayerMask.GetMask("Door");
-        var array = Physics2D.OverlapCircleAll(body.position, doorDistance, mask); // , mask);
-        if(array.Length > 0)
+    IEnumerator UpdateDoor () {
+        for (;;)
         {
-            //print("DETECTING DOOR");
-            if (!onTop)
+            var array = Physics2D.OverlapCircleAll(body.position, doorDistance, mask); // , mask);
+            if(array.Length > 0)
             {
-                array[0].transform.GetComponent<door>().Activate();
-                onTop = true;
+                //print("DETECTING DOOR");
+                if (!onTop)
+                {
+                    array[0].transform.GetComponent<door>().Activate();
+                    onTop = true;
+                }
             }
-        }
-        else
-        {
-            //print("NOT DETECTING DOOR");
-            onTop = false;
+            else
+            {
+                //print("NOT DETECTING DOOR");
+                onTop = false;
+            }
+            yield return new WaitForSeconds(0.3f);
         }
     }
 }

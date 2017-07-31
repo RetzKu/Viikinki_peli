@@ -1,28 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using UnityEngine;
-
-[System.Serializable]
-public struct AoeEffectData
-{
-    // Buff BuffToApply
-    public Buff BuffToApply;
-    public float ExpansionTime;
-    public float TotalRotation;
-    public bool LeavesEffectArea;
-    public float StartScale;
-    public float EndScale;
-    public int Frames;
-    public Rune AfterEffect;
-// Donezo
-    public Vector2 MovementDir;
-    public float Speed;
-}
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Runes/Aoe rune")]
 public class FreezeRune : Rune
 {
+    // public AoeEffectData2 test;
+
     private GameObject _owner;
     private RuneEffectLauncher _launcher;
     private LayerMask _collisionMask;
@@ -57,9 +39,18 @@ public class FreezeRune : Rune
     public override void Fire()
     {
         // launcheri tekee likaisen työn maailman kanssa visuaalinen collision
-        _launcher.FireAoeEffect(sprite, EffectData, _collisionMask);
-        Vector2 pos = _owner.transform.position;
 
+        // AiDebuff aiBuff = CreateInstance<AiDebuff>(); // debug
+        // aiBuff.Duration = 5f;
+        // aiBuff.SlowPercent = 0.5f;
+        // aiBuff.Time = 5f;
+
+        // EffectData.BuffToApply = aiBuff;
+        // test.BuffToApply = aiBuff;
+
+        _launcher.FireAoeEffect(sprite, EffectData, _collisionMask);
+
+        Vector2 pos = _owner.transform.position;
         Debug.Log("FreezeRune lähettää terveisensä!");
 
         // Laukaise cast efecti
@@ -72,26 +63,3 @@ public class FreezeRune : Rune
 }
 
 
-[CreateAssetMenu(menuName = "Runes/BuffRune")]
-public class WeaponBuffRune : Rune
-{
-    private GameObject _owner;
-    private RuneEffectLauncher _launcher;
-
-    public Buff buff;
-
-    public override void init(GameObject owner)
-    {
-        _owner = owner;     // Launcheriin visuaalinene efectio jos on sellainen 
-    }
-
-    public override void Fire()
-    {
-        Debug.Log("start");
-        buff.Apply(_owner);   
-    }
-
-    //public override void OnGui(RuneBarUiController ui)
-    //{
-    //}
-}

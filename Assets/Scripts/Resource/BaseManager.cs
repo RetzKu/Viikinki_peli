@@ -12,8 +12,6 @@ public class BaseManager : MonoBehaviour
     private BaseChecker _baseChecker;
     private List<GameObject> bases = new List<GameObject>(3);
 
-
-
     private BaseChecker _InfoStoneChecker;
 
     void Awake()
@@ -27,6 +25,7 @@ public class BaseManager : MonoBehaviour
         var checker = go.AddComponent<BaseChecker>();
         checker.CraftRange = CraftRange;
         _baseChecker = go.GetComponent<BaseChecker>();
+
         _baseChecker.SetMask("Base"); // voisi olla parameter
 
         if (_player == null || _baseChecker == null)
@@ -36,9 +35,10 @@ public class BaseManager : MonoBehaviour
 
         var infoStoneGameObject = new GameObject("Info Stone Checker");
         infoStoneGameObject.transform.parent = _player.transform.parent;
-        var infoStoneChecker = go.AddComponent<BaseChecker>();
-        infoStoneChecker.CraftRange = 5f;
-        _InfoStoneChecker = infoStoneChecker;
+
+        // var infoStoneChecker = go.AddComponent<BaseChecker>();
+        checker.CraftRange = 5f;
+        _InfoStoneChecker = checker;
     }
 
     void Update()

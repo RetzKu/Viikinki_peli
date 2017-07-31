@@ -56,6 +56,7 @@ public class Vec2
     }
 }
 
+
 public interface ITestPlayer
 {
    Vec2 ChunkOffsets { get; set; }
@@ -68,7 +69,7 @@ public class ChunkMover : MonoBehaviour, ITestPlayer
     public Vec2 ChunkOffsets { get; set; }
     private int _viewRange = 8;
 
-      
+    private bool _tilemapActive = true;
 
     void OnDrawGizmos()
     {
@@ -82,8 +83,26 @@ public class ChunkMover : MonoBehaviour, ITestPlayer
         ChunkOffsets = TileMap.GetChunkOffset (transform.position.x, transform.position.y);
     }
 
+
     void Update ()
     {
-        tilemap.UpdateTilemap(this, _viewRange);
+        if (_tilemapActive)
+        {
+            tilemap.UpdateTilemap(this, _viewRange);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if (_tilemapActive)
+            {
+                tilemap.DisableTileMap();
+            }
+            else
+            {
+                tilemap.EnableTileMap();
+            }
+            _tilemapActive = !_tilemapActive;
+        }
     }
 }
+

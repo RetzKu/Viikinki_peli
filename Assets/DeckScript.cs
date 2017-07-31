@@ -17,6 +17,9 @@ public class DeckScript : MonoBehaviour
     private float[] maxAngles;
     private float[] maxPositionX;
     private float[] maxPositionY;
+    private float[] maxAngles2;
+    private float[] maxPositionX2;
+    private float[] maxPositionY2;
     private float[] minAngles;
     private float[] minPositionX;
     private float[] minPositionY;
@@ -34,6 +37,9 @@ public class DeckScript : MonoBehaviour
     private bool addCard = false;
     private bool removeCard = false;
 
+    private int brokenWeaponInt;
+    private Sprite[] cardArray;
+
     // Array jossa kulkee kortti peliobjektit
     private GameObject[] cards;
 
@@ -46,6 +52,7 @@ public class DeckScript : MonoBehaviour
 
     // Määritetään juttuja jotta päästään eroon nullreference erroreista
     void Start () {
+        cardArray = Resources.LoadAll<Sprite>("iteminventory");
         cardCount = inventorySize();
         updatedCardCount = cardCount;
 
@@ -113,7 +120,8 @@ public class DeckScript : MonoBehaviour
                 cards[x].transform.parent = gameObject.transform;
                 cards[x].transform.localScale = new Vector3(0.7f, 1f, 1f);
                 cards[x].transform.SetSiblingIndex(x);
-                cards[x].AddComponent<Image>().sprite = GameObject.Find("CardPlaceholder").GetComponent<Image>().sprite;
+                //cards[x].AddComponent<Image>().sprite = GameObject.Find("CardPlaceholder").GetComponent<Image>().sprite;
+                cards[x].AddComponent<Image>().sprite = cardArray[3];
                 GameObject tempObj = new GameObject("CardChild");
                 tempObj.transform.position = cards[x].transform.position;
                 Sprite cardImage = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<SpriteRenderer>().sprite;
@@ -122,8 +130,15 @@ public class DeckScript : MonoBehaviour
                 tempObj2.transform.position = cards[x].transform.position;
                 tempObj2.AddComponent<RectTransform>().pivot = new Vector2(1f, 0.5f);
                 tempObj2.AddComponent<Image>().sprite = Resources.Load<Sprite>("whitecard");
-                //tempObj2.transform.localScale = new Vector3(1f, 1f, 1f); // < EI TOIMI KORJAA NEXTINÄ
-                tempObj2.transform.parent = cards[x].transform;
+                tempObj2.transform.SetParent(cards[x].transform);
+                //tempObj2.transform.parent = cards[x].transform;
+                tempObj2.transform.localScale = new Vector3(1f, 1f, 1f); // < EI TOIMI KORJAA NEXTINÄ
+                tempObj2.GetComponent<Image>().color = new Color(0.13334f, 0.0902f, 0.02745f, 0.6902f);
+                tempObj2.GetComponent<RectTransform>().localPosition = new Vector3(50f, 0f, 0f);
+
+                int duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<weaponStats>().duration;
+                tempObj2.GetComponent<RectTransform>().localScale = new Vector3((float)duration*0.1f*0.1f, 1f, 1f);
+
 
 
                 Rect cardImageRect = cardImage.rect;
@@ -191,7 +206,10 @@ public class DeckScript : MonoBehaviour
             minAngles = rotationMin(cardCount);
             minPositionX = positionMinX(cardCount);
             minPositionY = positionMinY(cardCount);
-            
+            maxAngles2 = rotationMax(cardCount + 1);
+            maxPositionX2 = positionMaxX(cardCount + 1);
+            maxPositionY2 = positionMaxY(cardCount + 1);
+
             t = 0;
 
             removeCard = true;
@@ -306,25 +324,52 @@ public class DeckScript : MonoBehaviour
                 transform.FindChild("Card" + x).localPosition = Vector3.Lerp(positions[x], new Vector3(minPositionX[x], minPositionY[x], 0f), t);
                 transform.FindChild("Card" + x).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(rotations[x].z, minAngles[x], t), 0.5f);
             }
-            
-            transform.FindChild("Card" + (updatedCardCount)).localPosition = Vector3.Lerp(positions[updatedCardCount], new Vector3(maxPositionX[(updatedCardCount)], maxPositionY[(updatedCardCount)], 0f), t);
-            transform.FindChild("Card" + (updatedCardCount)).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(rotations[updatedCardCount].z, maxAngles[(updatedCardCount)], t), 0.5f);
-            
+
+            transform.FindChild("Card" + (brokenWeaponInt)).GetComponent<Image>().sprite = cardArray[1];
+            transform.FindChild("Card" + (brokenWeaponInt)).localPosition = Vector3.Lerp(positions[brokenWeaponInt], new Vector3(maxPositionX2[(brokenWeaponInt)], maxPositionY2[(brokenWeaponInt)], 0f), t);
+            transform.FindChild("Card" + (brokenWeaponInt)).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(rotations[brokenWeaponInt].z, maxAngles2[(brokenWeaponInt)], t), 0.5f);
+            Color cardColor = transform.FindChild("Card" + (brokenWeaponInt)).GetComponent<Image>().color;
+            transform.FindChild("Card" + (brokenWeaponInt)).GetComponent<Image>().color = new Color(cardColor.r, cardColor.g, cardColor.b, Mathf.Lerp(1f, 0f, t));
+            Color cardColor2 = transform.FindChild("Card" + (brokenWeaponInt)).GetChild(0).GetComponent<Image>().color;
+            transform.FindChild("Card" + (brokenWeaponInt)).GetChild(0).GetComponent<Image>().color = new Color(cardColor2.r, cardColor2.g, cardColor2.b, Mathf.Lerp(1f, 0f, t));
+            Color cardColor3 = transform.FindChild("Card" + (brokenWeaponInt)).GetChild(1).GetComponent<Image>().color;
+            transform.FindChild("Card" + (brokenWeaponInt)).GetChild(1).GetComponent<Image>().color = new Color(cardColor3.r, cardColor3.g, cardColor3.b, Mathf.Lerp(1f, 0f, t));
+
+
             if (t >= 1)
             {
                 removeCard = false;
+                Destroy(transform.FindChild("Card" + (brokenWeaponInt)).gameObject);
+                updatedCardCount = cardCount + 1;
+                /* JATKa TÄSTä
+                string tempName = gameObject.transform.GetChild(GameObject.Find("Deck1").transform.childCount - 2).name;
+                char[] tempChar = tempName.Substring(tempName.Length - 1, 1).ToCharArray();
+                int numberFlag = 0;
+                for(int x = 0; x < tempChar[0]; x++)
+                {
+                    if (transform.childCount - 2)
+                    {
+                        transform.GetChild(x).name = "Card" + numberFlag;
+                        numberFlag++;
+                    }
+                }*/
             }
         }
-
     }
 
     // Default arvoja rotationille
     private float[] rotationMax (int cards)
     {
+        if (cards == 0) cards = 1;
         float[] max = new float [cards];
 
         switch (cards)
         {
+            case 0:
+                {
+                    max[0] = 0f;
+                    return new float[] { max[0] };
+                }
             case 1:
                 {
                     max[0] = 0f;
@@ -373,10 +418,16 @@ public class DeckScript : MonoBehaviour
     // Default arvoja korttien x positiolle
     private float[] positionMaxX(int cards)
     {
+        if (cards == 0) cards = 1;
         float[] max = new float[cards];
 
         switch (cards)
         {
+            case 0:
+                {
+                    max[0] = 0f;
+                    return new float[] { max[0] };
+                }
             case 1:
                 {
                     max[0] = 0f;
@@ -425,10 +476,16 @@ public class DeckScript : MonoBehaviour
     // Default arvoja korttien Y positiolle
     private float[] positionMaxY(int cards)
     {
+        if (cards == 0) cards = 1;
         float[] max = new float[cards];
 
         switch (cards)
         {
+            case 0:
+                {
+                    max[0] = 50f;
+                    return new float[] { max[0] };
+                }
             case 1:
                 {
                     max[0] = 50f;
@@ -483,6 +540,7 @@ public class DeckScript : MonoBehaviour
     // Default arvoja rotationille
     private float[] rotationMin(int cards)
     {
+        if (cards == 0) cards = 1;
         float[] max = new float[cards];
 
         switch (cards)
@@ -535,6 +593,7 @@ public class DeckScript : MonoBehaviour
     // Default arvoja korttien x positiolle
     private float[] positionMinX(int cards)
     {
+        if (cards == 0) cards = 1;
         float[] max = new float[cards];
 
         switch (cards)
@@ -587,6 +646,7 @@ public class DeckScript : MonoBehaviour
     // Default arvoja korttien Y positiolle
     private float[] positionMinY(int cards)
     {
+        if (cards == 0) cards = 1;
         float[] max = new float[cards];
 
         switch (cards)
@@ -648,5 +708,10 @@ public class DeckScript : MonoBehaviour
             positions[x] = new Vector3(transform.FindChild("Card" + x).localPosition.x, transform.FindChild("Card" + x).localPosition.y, 0f);
             rotations[x] = new Quaternion(transform.FindChild("Card" + x).localRotation.x, transform.FindChild("Card" + x).localRotation.y, transform.FindChild("Card" + x).localRotation.z, transform.FindChild("Card" + x).localRotation.w);
         }
+    }
+
+    public void lastBrokenWeapon(int weaponInt)
+    {
+        brokenWeaponInt = weaponInt;
     }
 }

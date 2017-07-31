@@ -43,7 +43,19 @@ public class inventory
     }
 
     public void BreakArmor() { EquipData.BreakArmor(); }
-    public void BreakWeapon() { EquipData.BreakWeapon(); }
+    public void BreakWeapon()
+    {
+    GameObject tempObject = EquipData.BreakWeapon();    
+        foreach (GameObject t in InventoryData)
+        {
+            if(t.name == tempObject.name)
+            {
+                GameObject.Find("Deck1").GetComponent<DeckScript>().lastBrokenWeapon(InventoryData.FindIndex(a => a.name == t.name));
+                InventoryData.RemoveAt(InventoryData.FindIndex(a => a.name == t.name));
+                break;
+            }
+        }
+    }
 
     public void EquipItem(int Slot)
     {
@@ -140,7 +152,7 @@ public class inventory
         public void SetArmor(GameObject Armor) { _ChestPiece = Armor; }
 
         public void BreakArmor() { _ChestPiece = null; }
-        public void BreakWeapon() { _Tool = null; }
+        public GameObject BreakWeapon() { GameObject RemovedTool = _Tool; _Tool = null; return RemovedTool; }
 
         public GameObject EmptyHand() { GameObject RemovedTool = _Tool; _Tool = null; return RemovedTool; }
         public void SetTool(GameObject Tool) { _Tool = Tool; }

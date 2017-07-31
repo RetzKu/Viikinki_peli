@@ -10,7 +10,7 @@ public class Melee : weaponStats
         if(duration <= 0)
         {
             GameObject.Find("Player").GetComponent<PlayerScript>().BreakWeapon();
-
+            Destroy(gameObject);
         }
     }
 

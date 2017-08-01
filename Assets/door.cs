@@ -60,6 +60,7 @@ public class door : MonoBehaviour
     //    //spriteRenderer.sortingLayerName = "TileMap";
     //    //spriteRenderer.sprite = SuperSprite;
     //}
+
     public void DeActivate()
     {
         // mene pois luolasta

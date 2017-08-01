@@ -501,9 +501,9 @@ public class Perlin : MonoBehaviour
                 }
             }
         }
-        else
-        {
-        }
+        // else
+        // {
+        // }
 
     }
 

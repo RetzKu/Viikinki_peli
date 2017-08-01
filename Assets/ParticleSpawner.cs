@@ -11,7 +11,7 @@ public class ParticleSpawner : MonoBehaviour {
     public GameObject CastEffect;
     public GameObject Explosion;
     public GameObject fireExp;
-
+    public GameObject rockExp;
     public static ParticleSpawner instance;
 
     void Start()
@@ -55,6 +55,11 @@ public class ParticleSpawner : MonoBehaviour {
     public void SpawnFireExplosion(Vector2 position, float time = 3f)
     {
         var ss = Instantiate(fireExp);
+        ss.GetComponent<SecretExplosion>().init(position, time);
+    }
+    public void SpawnRockExplosion(Vector2 position, float time = 3f)
+    {
+        var ss = Instantiate(rockExp);
         ss.GetComponent<SecretExplosion>().init(position, time);
     }
 }

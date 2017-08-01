@@ -1225,11 +1225,13 @@ GameObject:
   - component: {fileID: 114210843949519274}
   - component: {fileID: 114264761283226734}
   - component: {fileID: 114023827949223096}
-
   - component: {fileID: 58421809874053922}
   - component: {fileID: 114102464536211990}
   - component: {fileID: 58287890094487306}
   - component: {fileID: 114743761843763340}
+  - component: {fileID: 114335856655356606}
+  - component: {fileID: 114647863370753822}
+  - component: {fileID: 114822880315434542}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -3022,6 +3024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terveisin: {fileID: 0}
+  inCave: 0
 --- !u!114 &114037649305198458
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3133,9 +3136,7 @@ MonoBehaviour:
   UpwardsHand: {fileID: 4440870551386460}
   DownwardsHand: {fileID: 4936626758937170}
   DefaultTorsos: []
-
   Direction: 2
-
 --- !u!114 &114135886502828906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3305,10 +3306,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowdown: 10
   thrust: 15
+  max_spd: 3
+  min_spd_pate: 0.2
+  max_spd_pate: 3
   Keyboard: 1
   Joystick: {fileID: 114043215955215906}
   lerpUp: 1
-
   Duration: 1
   Started: 0
   Slowed: 0
@@ -3328,7 +3331,7 @@ MonoBehaviour:
   y: 0
 --- !u!114 &114335856655356606
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977754839611798}
@@ -3337,7 +3340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859abfb1546e9a74d969c99f50f3ff08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
+  door: {fileID: 0}
 --- !u!114 &114371828299425804
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3429,7 +3432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ownertype: 0
   runes:
-  - {fileID: 11400000, guid: 6d19112c5faec534d92ac23bf9a0afa0, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: e16a8ceb4df570c4981a2e42bbb8567c, type: 2}
   IsOwnerPlayer: 1
 --- !u!114 &114528099119221096
@@ -3553,7 +3556,7 @@ MonoBehaviour:
   y: 2
 --- !u!114 &114647863370753822
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977754839611798}
@@ -3598,6 +3601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DebugViewRange: 16
+  UnderGround: 0
 --- !u!114 &114813127432793708
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3613,7 +3617,7 @@ MonoBehaviour:
   y: 1
 --- !u!114 &114822880315434542
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977754839611798}
@@ -3622,6 +3626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859abfb1546e9a74d969c99f50f3ff08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 0}
 --- !u!114 &114851106342051558
 MonoBehaviour:
   m_ObjectHideFlags: 1

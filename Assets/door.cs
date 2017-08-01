@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class door : MonoBehaviour {
+public class door : MonoBehaviour
+{
 
     bool created = false;
     string seed;
@@ -13,18 +14,52 @@ public class door : MonoBehaviour {
 
     List<Room> finalRooms = new List<Room>();
 
+    private TileMap _tilemap;
+
     void Start()
     {
-        //Spawner = GameObject.FindGameObjectWithTag("Spawner");
-                        //GameObject tileObject = new GameObject("(" + y + "," + x + ")");
-                        //tileObject.transform.parent = parent.transform;
-                        //tileObject.transform.position = new Vector3(x + chunkOffsetX, y + chunkOffsetY, 0);
-                        //tileObject.layer = ;
-
-                        //SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
-                        //spriteRenderer.sortingLayerName = "TileMap";
-                        //spriteRenderer.sprite = SuperSprite;
+        _tilemap = GameObject.FindWithTag("Tilemap").GetComponent<TileMap>();
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        ChunkMover mover = other.gameObject.transform.parent.GetComponent<ChunkMover>();
+        if (mover.UnderGround)
+        {
+            // maan päälle
+            _tilemap.EnableTileMap();
+
+            mover.UnderGround = false;
+        }
+        else
+        {
+            _tilemap.DisableTileMap();
+            Activate();
+            mover.UnderGround = true;
+
+            MapGenerator dungeon = MapGenerator.Instance;
+            var go = GameObject.FindWithTag("SpriteController");
+            TileSpriteController tileSpriteController = go.GetComponent<TileSpriteController>();
+            tileSpriteController.ResetAllTiles();
+            tileSpriteController.SetTileSprites(dungeon.Width - 1, dungeon.Height - 1, dungeon, 1, 1);
+
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.GetComponent<UpdatePathFind>().path.map = dungeon;
+        }
+    }
+
+    //void Start()
+    //{
+    //    //Spawner = GameObject.FindGameObjectWithTag("Spawner");
+    //    //GameObject tileObject = new GameObject("(" + y + "," + x + ")");
+    //    //tileObject.transform.parent = parent.transform;
+    //    //tileObject.transform.position = new Vector3(x + chunkOffsetX, y + chunkOffsetY, 0);
+    //    //tileObject.layer = ;
+
+    //    //SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
+    //    //spriteRenderer.sortingLayerName = "TileMap";
+    //    //spriteRenderer.sprite = SuperSprite;
+    //}
     public void DeActivate()
     {
         // mene pois luolasta
@@ -65,18 +100,18 @@ public class door : MonoBehaviour {
 
             return;
         }
-        for(int i = 0;i < rooms; i++)
+        for (int i = 0; i < rooms; i++)
         {
-            if(i == 0)
+            if (i == 0)
             {
                 // generate boss mayn
                 //spawn boss mayn
             }
             float mobAmount = finalRooms[i].roomsize / 10;
-            if(mobAmount > 1)
+            if (mobAmount > 1)
             {
                 Vector2 k = new Vector2(finalRooms[i].tiles[6].tileX, finalRooms[i].tiles[6].tileY);
-                MobsControl.instance.SpawnBoids(k.x, k.y,2,(int)mobAmount);
+                MobsControl.instance.SpawnBoids(k.x, k.y, 2, (int)mobAmount);
             }
         }
     }
@@ -84,8 +119,9 @@ public class door : MonoBehaviour {
     {
 
     }
-    
-    public void Activate () {
+
+    public void Activate()
+    {
         //destroy world
 
         //create cave
@@ -93,7 +129,7 @@ public class door : MonoBehaviour {
         {
             createNewCave();
         }
-        finalRooms =  MapGenerator.Instance.GenerateMap(widht, height, seed, fillpercent);
+        finalRooms = MapGenerator.Instance.GenerateMap(widht, height, seed, fillpercent);
         if (!created)                                                                                   // create door
         {
             int temp = finalRooms[finalRooms.Count - 1].edgeTiles.Count;
@@ -113,7 +149,7 @@ public class door : MonoBehaviour {
 
 
 
-       
+
 
 
 

@@ -18,7 +18,7 @@ public class GodOfTheWorld : MonoBehaviour {
 	//}
     void CreateEverything()
     {
-        MobsControl.instance.SpawnBoids(player.transform.position.x, player.transform.position.y,)
+        //MobsControl.instance.SpawnBoids(player.transform.position.x, player.transform.position.y, )
     }
     void DestroyWorld()
     {

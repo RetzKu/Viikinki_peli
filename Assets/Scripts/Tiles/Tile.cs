@@ -9,6 +9,7 @@ public enum TileType
     DeepWater,
     Water,
     Mountain,
+
     CaveWall, // haluan ensimmäiseksi, pls eetut
 
     CollisionTiles,

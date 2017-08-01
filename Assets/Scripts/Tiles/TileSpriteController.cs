@@ -202,44 +202,44 @@ public class TileSpriteController : MonoBehaviour
         // 4-bit directions
         // North, west, east, south
         value = 0;
-        if (IsUpperTile(type, Tilemap.GetTileFast(x, y + 1)))  // Tähän reunan insert
+        if (IsUpperTile(type, Tilemap.GetTile(x, y + 1)))  // Tähän reunan insert
         {
             value += 1;
         }
-        if (IsUpperTile(type, Tilemap.GetTileFast(x + 1, y)))
+        if (IsUpperTile(type, Tilemap.GetTile(x + 1, y)))
         {
             value += 4;
         }
-        if (IsUpperTile(type, Tilemap.GetTileFast(x, y - 1)))
+        if (IsUpperTile(type, Tilemap.GetTile(x, y - 1)))
         {
             value += 8;
         }
-        if (IsUpperTile(type, Tilemap.GetTileFast(x - 1, y)))
+        if (IsUpperTile(type, Tilemap.GetTile(x - 1, y)))
         {
             value += 2;
         }
         return assetName;
     }
 
-    int GetAssetNameBitmaskNoStr(int x, int y, TileMap Tilemap, TileType type)
+    int GetAssetNameBitmaskNoStr(int x, int y, ITileMap Tilemap, TileType type)
     {
         // found = IsImplemented(type) ? true : false;
         // 4-bit directions
         // North, west, east, south
         int value = 0;
-        if (IsUpperTile(type, Tilemap.GetTileFast(x, y + 1)))  // Tähän reunan insert
+        if (IsUpperTile(type, Tilemap.GetTile(x, y + 1)))  // Tähän reunan insert
         {
             value += 1;
         }
-        if (IsUpperTile(type, Tilemap.GetTileFast(x + 1, y)))
+        if (IsUpperTile(type, Tilemap.GetTile(x + 1, y)))
         {
             value += 4;
         }
-        if (IsUpperTile(type, Tilemap.GetTileFast(x, y - 1)))
+        if (IsUpperTile(type, Tilemap.GetTile(x, y - 1)))
         {
             value += 8;
         }
-        if (IsUpperTile(type, Tilemap.GetTileFast(x - 1, y)))
+        if (IsUpperTile(type, Tilemap.GetTile(x - 1, y)))
         {
             value += 2;
         }
@@ -299,7 +299,21 @@ public class TileSpriteController : MonoBehaviour
         return TileCount[(int)type];
     }
 
-    public void SetTileSprites(int width, int height, TileMap tilemap, int startX, int startY)
+
+    public void ResetAllTiles()
+    {
+        for(int i = 0; i < borders.Count; i++)
+        {
+            var border = borders[i];
+            {
+                border.transform.parent = null;
+                ObjectPool.instance.PoolObject(border);
+            }
+        }
+        borders.Clear();
+    }
+
+    public void SetTileSprites(int width, int height, ITileMap tilemap, int startX, int startY)
     {
         // int tempIndex = 0;
         float offsetX = transform.position.x;
@@ -312,11 +326,11 @@ public class TileSpriteController : MonoBehaviour
         {
             for (int x = startX; x < width; x++)
             {
-                TileType type = tilemap.GetTileFast(x, y);
+                TileType type = tilemap.GetTile(x, y);
                 int value = GetAssetNameBitmaskNoStr(x, y, tilemap, type);
 
                 if (IsImplemented(type))
-                    tilemap.GetGameObjectFast(x, y).GetComponent<SpriteRenderer>().sprite = _textures2[type][(Random.Range(0, GetAssetCount(type)))];
+                    tilemap.GetTileGameObject(x, y).GetComponent<SpriteRenderer>().sprite = _textures2[type][(Random.Range(0, GetAssetCount(type)))];
 
                 if (value == 15)    // ei voi tulla enää reunoja
                 {
@@ -479,4 +493,5 @@ public class TileSpriteController : MonoBehaviour
         }
         return 0;
     }
+
 }

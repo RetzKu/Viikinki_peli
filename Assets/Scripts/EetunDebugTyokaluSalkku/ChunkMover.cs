@@ -71,6 +71,8 @@ public class ChunkMover : MonoBehaviour, ITestPlayer
 
     private bool _tilemapActive = true;
 
+    public bool UnderGround = false;
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -83,10 +85,9 @@ public class ChunkMover : MonoBehaviour, ITestPlayer
         ChunkOffsets = TileMap.GetChunkOffset (transform.position.x, transform.position.y);
     }
 
-
     void Update ()
     {
-        if (_tilemapActive)
+        if (_tilemapActive && !UnderGround)
         {
             tilemap.UpdateTilemap(this, _viewRange);
         }
@@ -104,5 +105,6 @@ public class ChunkMover : MonoBehaviour, ITestPlayer
             _tilemapActive = !_tilemapActive;
         }
     }
+
 }
 

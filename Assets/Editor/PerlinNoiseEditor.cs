@@ -25,7 +25,7 @@ public class PerlinNoiseEditor : Editor
         {
             myPerlin.InitalizeRenderTarget();
         }
-        else if (GUILayout.Button("Generate TileMap") && myTileMap != null)
+        else if (GUILayout.Button("Generate ITileMap") && myTileMap != null)
         {
             myPerlin.GenerateTileMap(myTileMap);
         }

@@ -78,14 +78,24 @@ public class Room : IComparable<Room>
 }
 
 
-
-
-public class MapGenerator : MonoBehaviour
+public interface ITileMap
 {
+    int Height { get; set; }
+    int Width  { get; set; }
+    GameObject GetTileGameObject(int x, int y);
+    TileType GetTile(int x, int y);
+    bool GetTileCollision(int x, int y);
+}
 
+
+public class MapGenerator : MonoBehaviour, ITileMap
+{
     public Sprite GrassSprite;
     public Sprite SuperSprite;
     public Sprite StartSprite;
+
+    private Vector3 StartPosition;
+    private GameObject _cavesParent;
 
     GameObject[,] TileObjects;
     private static MapGenerator instance;
@@ -93,6 +103,11 @@ public class MapGenerator : MonoBehaviour
     void Awake()
     {
         instance = this;
+    }
+
+    void Start()
+    {
+        _cavesParent = new GameObject("Caves");
     }
 
     public static MapGenerator Instance
@@ -103,9 +118,9 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    int widht;
-    int height;
-    public 
+    public int Width { get; set; }
+    public int Height { get; set; }
+
     string seed;
     int smoothTimes = 4;
     int walls = 4;
@@ -119,8 +134,8 @@ public class MapGenerator : MonoBehaviour
 
     public List<Room> GenerateMap(int widht, int height, string seed, int fillPercent)
     {
-        this.widht = widht;
-        this.height = height;
+        this.Width = widht;
+        this.Height = height;
         this.seed = seed;
         this.randomFillPercent = fillPercent;
 
@@ -136,33 +151,36 @@ public class MapGenerator : MonoBehaviour
 
         return surviving;
     }
-    public TileType Gettiletype(int x,int y)
+    public TileType GetTile(int x,int y)
     {
         return map[x, y];
     }
 
-    public GameObject GettileGameobject(int x,int y) //TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public GameObject GetTileGameObject(int x, int y) //TODO: !!
     {
         return TileObjects[x,y];
     }
 
-    public bool GetCollision(int x,int y)
+    public bool GetTileCollision(int x,int y)
     {
         return map[x, y] == TileType.CaveWall;
     }
     public void showRooms()
     {
-        TileObjects = new GameObject[widht, height];
-        GameObject parent = new GameObject("CAVES!");
-        for (int x = 0; x < widht; x++)
+        TileObjects = new GameObject[Width, Height];
+        
+        // GameObject parent = new GameObject("CAVES!");
+
+        for (int x = 0; x < Width; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < Height; y++)
             {
                 GameObject tileObject = new GameObject("(" + y + "," + x + ")");
-                tileObject.transform.parent = parent.transform;
-                tileObject.transform.position = new Vector3(x + 100, y + 100, 0);
+                tileObject.transform.parent = _cavesParent.transform;
+                tileObject.transform.position = new Vector3(x + StartPosition.x, y + StartPosition.y, 0);
 
                 SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
+                spriteRenderer.sortingLayerName = "TileMap";
                 if (MapGenerator.Instance.map[x, y] == TileType.CaveFloor)
                 {
                     spriteRenderer.sprite = GrassSprite;
@@ -180,6 +198,8 @@ public class MapGenerator : MonoBehaviour
             }
         }
     }
+
+
     void RandomFillMap()
     {
         //if (useRandomSeed)
@@ -190,11 +210,11 @@ public class MapGenerator : MonoBehaviour
         //    seed = Time.time.ToString();
         //}
         System.Random pseudoRandom = new System.Random(seed.GetHashCode());
-        for (int x = 0; x < widht; x++)
+        for (int x = 0; x < Width; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < Height; y++)
             {
-                if (x == 0 || x == widht - 1 || y == 0 || y == height - 1)
+                if (x == 0 || x == Width - 1 || y == 0 || y == Height - 1)
                 {
                     map[x, y] = TileType.CaveWall;
                 }
@@ -440,24 +460,24 @@ public class MapGenerator : MonoBehaviour
 
     Vector3 CoordToWOrldPoint(Coord tile)
     {
-        return new Vector3(-widht / 2 + .5f + tile.tileX, 2, -height / 2 + .5f + tile.tileY);
+        return new Vector3(-Width / 2 + .5f + tile.tileX, 2, -Height / 2 + .5f + tile.tileY);
     }
     List<List<Coord>> GetRegions(TileType tiletype)
     {
         List<List<Coord>> regions = new List<List<Coord>>();
-        TileType[,] mapFlags = new TileType[widht, height];
+        TileType[,] mapFlags = new TileType[Width, Height];
 
-        for (int x = 0; x < widht; x++)
+        for (int x = 0; x < Width; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < Height; y++)
             {
                 mapFlags[x,y] = TileType.CaveFloor;
             }
             
         }
-        for (int x = 0; x < widht; x++)
+        for (int x = 0; x < Width; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < Height; y++)
             {
                 if (mapFlags[x, y] == TileType.CaveFloor && map[x, y] == tiletype)
                 {
@@ -477,9 +497,9 @@ public class MapGenerator : MonoBehaviour
 
     void SmoothMap()
     {
-        for (int x = 0; x < widht; x++)
+        for (int x = 0; x < Width; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < Height; y++)
             {
                 int neighbourWallTiles = getSurroundingWallCount(x, y);
 
@@ -498,10 +518,10 @@ public class MapGenerator : MonoBehaviour
     List<Coord> GetRegionTiles(int startX, int startY)
     {
         List<Coord> tiles = new List<Coord>();
-        TileType[,] mapFlags = new TileType[widht, height];
-        for (int x = 0; x < widht; x++)
+        TileType[,] mapFlags = new TileType[Width, Height];
+        for (int x = 0; x < Width; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < Height; y++)
             {
                 mapFlags[x, y] = TileType.CaveFloor;
             }
@@ -540,7 +560,7 @@ public class MapGenerator : MonoBehaviour
 
     bool IsInMapRange(int x, int y)
     {
-        return x >= 0 && x < widht && y >= 0 && y < height;
+        return x >= 0 && x < Width && y >= 0 && y < Height;
     }
 
     int getSurroundingWallCount(int gridX, int gridY)
@@ -586,12 +606,12 @@ public class MapGenerator : MonoBehaviour
     //{
     //    if (map != null)
     //    {
-    //        for (int x = 0; x < widht; x++)
+    //        for (int x = 0; x < Width; x++)
     //        {
-    //            for (int y = 0; y < height; y++)
+    //            for (int y = 0; y < Height; y++)
     //            {
     //                Gizmos.color = (map[x, y] == 1) ? Color.black : Color.white;
-    //                Vector3 pos = new Vector3(-widht / 2 + x + .5f, 0, -height / 2 + y + .5f);
+    //                Vector3 pos = new Vector3(-Width / 2 + x + .5f, 0, -Height / 2 + y + .5f);
     //                Gizmos.DrawCube(pos, Vector3.one);
     //            }
     //        }

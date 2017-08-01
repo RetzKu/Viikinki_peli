@@ -127,7 +127,7 @@ public class Chunk      // sub array
         chunkOffsetX *= CHUNK_SIZE;
         chunkOffsetY *= CHUNK_SIZE;
 
-        GameObject parent = new GameObject("CHUNKERS!");
+        GameObject parent = new GameObject("Chunk(" + offsetX + "," + offsetY + ")");
         parent.transform.parent = tilemap;
 
         for (int y = 0; y < CHUNK_SIZE; y++)
@@ -244,7 +244,7 @@ public class Chunk      // sub array
         }
     }
 
-    // näitä kutsuu todenkäköisesti vain TileMap class jonka kautta kaikki kommunikaatio
+    // näitä kutsuu todenkäköisesti vain ITileMap class jonka kautta kaikki kommunikaatio
     // chunkeille tehdään! 
     public TileType GetTile(int x, int y)
     {

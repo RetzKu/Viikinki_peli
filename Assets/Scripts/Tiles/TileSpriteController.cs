@@ -48,7 +48,7 @@ public class TileSpriteController : MonoBehaviour
     void Awake()
     {
         _borders = new GameObject("Borders");
-        _borders.transform.parent = this.transform;
+        // _borders.transform.parent = this.transform;
         // lataa kaikki johonkin vaikka dicciiin aluks
         // nopeampiakin ratkaisuja olisi
         _textures = new Dictionary<string, Sprite>(16);

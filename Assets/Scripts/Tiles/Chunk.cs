@@ -175,6 +175,10 @@ public class Chunk      // sub array
             for (int j = 0; j < CHUNK_SIZE; j++)
             {
                 TilemapTilesView[i, j] = types[i, j];
+                if (TileMap.Collides(types[i, j]))
+                {
+                    GetGameObject(j, i).GetComponent<Collider2D>().enabled = true;
+                }
             }
         }
     }
@@ -187,8 +191,9 @@ public class Chunk      // sub array
     public void Load()
     {
         Dictionary<Vec2, ResourceType> types = new Dictionary<Vec2, ResourceType>();
-        SetTypes(TestWriter.Load(GetPath(), out types));
+        SetTypes(TestWriter.Load(GetPath(), out types)); // lataa tiilet
 
+        // lataa tiilien resurssit
         foreach (var keyvaluepair in types)
         {
             Vec2 v = keyvaluepair.Key;
@@ -210,6 +215,8 @@ public class Chunk      // sub array
             go.transform.parent = _parent.transform;
 
             worldObjects[keyvaluepair.Key] = go;
+
+          
         }
     }
 

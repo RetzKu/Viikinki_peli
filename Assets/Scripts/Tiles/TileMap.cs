@@ -210,7 +210,7 @@ public class TileMap : MonoBehaviour, ITileMap
                 }
 
                 SpriteController.transform.position = GetTileGameObject(0, 0).transform.position; //  + new Vector3(0f, 17f);
-                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE - 3, Chunk.CHUNK_SIZE * 3 - 3, this, 1, 1);
+                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3- 3, Chunk.CHUNK_SIZE * 3 - 3, this, 1, 1);
 
             }
             else if (chunkDtX > 0)      // oikealle
@@ -246,9 +246,8 @@ public class TileMap : MonoBehaviour, ITileMap
 
                 }
 
-
                 SpriteController.transform.position = GetTileGameObject(0, 0).transform.position;
-                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE - 3, this, 1, 1);
+                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE - 1, this, 1, 1);  
             }
             else if (chunkDtY > 0)  // ylös
             {
@@ -267,7 +266,7 @@ public class TileMap : MonoBehaviour, ITileMap
 
                 // koska ylös mennessä 0, 0 nousee
                 SpriteController.transform.position = GetTileGameObject(0, 0).transform.position; //  + new Vector3(0f, 17f);
-                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 2, Chunk.CHUNK_SIZE * 3 - 2, this, 1, Chunk.CHUNK_SIZE * 2 - 2);
+                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 2, Chunk.CHUNK_SIZE * 3 - 2, this, 1, Chunk.CHUNK_SIZE * 2 - 4);
                 // SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE * 3 - 3, this, 1, Chunk.CHUNK_SIZE * 2 - 3);
             }
             SpriteController.transform.position = GetTileGameObject(0, 0).transform.position;
@@ -414,6 +413,7 @@ public class TileMap : MonoBehaviour, ITileMap
         //Chunk.SwapViews(_chunks[offsetY, offsetX], _chunks[newOffsetY, newOffsetX]);
     }
 
+    // Generoi tai lataa chunkin
     Dictionary<Vec2, bool> SavedChunks = new Dictionary<Vec2, bool>(25);
     void GenerateChunk(int offsetX, int offsetY, int perlinOffsetX, int perlinOffsetY)
     {

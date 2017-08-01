@@ -29,18 +29,18 @@ public abstract class Rune : ScriptableObject
         return true;
     }
 
-    public bool ValidateRune(bool[] runeIndices)
+    public bool ValidateRune(bool[] runeIndices, int[] touches)
     {
-        bool[] indiceBools = new bool[9];
+        int[] indiceCounts = new int[9];
         for (int i = 0; i < Indices.Length; i++)
         {
-            indiceBools[TouchController.GetBoolIndex(Indices[i])] = true;
+            indiceCounts[TouchController.GetBoolIndex(Indices[i])]++;
         }
 
         bool value = true;
-        for (int i = 0; i < runeIndices.Length; i++)
+        for (int i = 0; i < touches.Length; i++)
         {
-            if (indiceBools[i] != runeIndices[i])
+            if (indiceCounts[i] != touches[i])
             {
                 value = false;
                 break;

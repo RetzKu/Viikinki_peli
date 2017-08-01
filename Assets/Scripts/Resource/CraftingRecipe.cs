@@ -22,6 +22,7 @@ public class CraftingRecipe : Rune
         {
             Vec2 vec = CraftingManager.Instance.GetCraftingIndexes(Materials[i].Type);
             Indices[i] = vec;
+            // TODO: Tästä ^^ int[]
         }
     }
 

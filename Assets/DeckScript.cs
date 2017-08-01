@@ -23,6 +23,9 @@ public class DeckScript : MonoBehaviour
     private float[] minAngles;
     private float[] minPositionX;
     private float[] minPositionY;
+    private float[] minAngles2;
+    private float[] minPositionX2;
+    private float[] minPositionY2;
     // Arrayt joihin voidaan tallentaa positiot ja rotatiot
     private Vector3[] positions;
     private Quaternion[] rotations;
@@ -73,7 +76,7 @@ public class DeckScript : MonoBehaviour
         {
             positions = new Vector3[1];
             rotations = new Quaternion[1];
-            cards = new GameObject[1];
+            //cards = new GameObject[1];
         }
 
         if (cardCount != 0)
@@ -120,7 +123,6 @@ public class DeckScript : MonoBehaviour
                 cards[x].transform.parent = gameObject.transform;
                 cards[x].transform.localScale = new Vector3(0.7f, 1f, 1f);
                 cards[x].transform.SetSiblingIndex(x);
-                //cards[x].AddComponent<Image>().sprite = GameObject.Find("CardPlaceholder").GetComponent<Image>().sprite;
                 cards[x].AddComponent<Image>().sprite = cardArray[3];
                 GameObject tempObj = new GameObject("CardChild");
                 tempObj.transform.position = cards[x].transform.position;
@@ -131,15 +133,15 @@ public class DeckScript : MonoBehaviour
                 tempObj2.AddComponent<RectTransform>().pivot = new Vector2(1f, 0.5f);
                 tempObj2.AddComponent<Image>().sprite = Resources.Load<Sprite>("whitecard");
                 tempObj2.transform.SetParent(cards[x].transform);
-                //tempObj2.transform.parent = cards[x].transform;
-                tempObj2.transform.localScale = new Vector3(1f, 1f, 1f); // < EI TOIMI KORJAA NEXTINÄ
+                tempObj2.transform.localScale = new Vector3(1f, 1f, 1f);
                 tempObj2.GetComponent<Image>().color = new Color(0.13334f, 0.0902f, 0.02745f, 0.6902f);
                 tempObj2.GetComponent<RectTransform>().localPosition = new Vector3(50f, 0f, 0f);
 
+                /*
+                // Duration testiä
                 int duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<weaponStats>().duration;
-                tempObj2.GetComponent<RectTransform>().localScale = new Vector3((float)duration*0.1f*0.1f, 1f, 1f);
-
-
+                tempObj2.GetComponent<RectTransform>().localScale = new Vector3((float)duration * 0.1f * 0.1f, 1f, 1f);
+                */
 
                 Rect cardImageRect = cardImage.rect;
                 var image = tempObj.AddComponent<Image>();
@@ -167,38 +169,8 @@ public class DeckScript : MonoBehaviour
         {
             // Tallennetaan "vanhojen" korttien propertiesit
             saveCardProperties();
-            /*
-            // Tuhoaa kaikki olemassa olevat kortit
-            for (int x = 0; x < cardCount; x++)
-            {
-                Destroy(GameObject.Find("Card" + x).gameObject);
-            }
-
-            cards = new GameObject[updatedCardCount];
-
-            // Tekee oikean määrän kortteja (lisätty/vähennetty määrä)
-            for (int x = 0; x < updatedCardCount; x++)
-            {
-                cards[x] = new GameObject("Card" + x);
-                cards[x].transform.parent = gameObject.transform;
-                cards[x].transform.localScale = new Vector3(0.7f, 1f, 1f);
-                cards[x].transform.SetSiblingIndex(x);
-                cards[x].AddComponent<Image>().sprite = GameObject.Find("CardPlaceholder").GetComponent<Image>().sprite;
-                GameObject tempObj = new GameObject("CardChild");
-                tempObj.transform.position = cards[x].transform.position;
-                Sprite cardImage = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<SpriteRenderer>().sprite;
-                Rect cardImageRect = cardImage.rect;
-
-                var image = tempObj.AddComponent<Image>();
-                image.sprite = cardImage;
-                image.rectTransform.sizeDelta = cardImageRect.size;
-                tempObj.transform.SetParent(cards[x].transform);
-                tempObj.transform.localScale = new Vector3(2.85714285714286f, 2f, 1f);
-            }
-            */
 
             // Ladataan uudet positiot ja anglet uudelle kortti määrälle
-            
             cardCount = updatedCardCount;
             maxAngles = rotationMax(cardCount);
             maxPositionX = positionMaxX(cardCount);
@@ -209,9 +181,10 @@ public class DeckScript : MonoBehaviour
             maxAngles2 = rotationMax(cardCount + 1);
             maxPositionX2 = positionMaxX(cardCount + 1);
             maxPositionY2 = positionMaxY(cardCount + 1);
-
+            minAngles2 = rotationMin(cardCount + 1);
+            minPositionX2 = positionMinX(cardCount + 1);
+            minPositionY2 = positionMinY(cardCount + 1);
             t = 0;
-
             removeCard = true;
         }
 
@@ -259,6 +232,63 @@ public class DeckScript : MonoBehaviour
             if (t >= 1)
             {
                 addCard = false;
+            }
+        }
+
+        // Invi auki ja kortti lähtee
+        if (open == true && addCard == false && removeCard == true)
+        {
+            // Juoksee kerran kun open true
+            if (openChanger == true)
+            {
+                t = 0;
+                openChanger = false;
+                openChanger2 = true;
+
+            }
+            // Juoksee joka kerta
+
+            // Counter pitää X arvon oikeana huomioiden poistuvan aseen arvot
+            int counter = 0;
+
+            for (int x = 0; x < updatedCardCount + 1; x++)
+            {
+                if (x != brokenWeaponInt)
+                {
+                    if (positions[x] != null)
+                    {
+                        transform.FindChild("Card" + x).localPosition = Vector3.Lerp(positions[x], new Vector3(maxPositionX[counter], maxPositionY[counter], 0f), t);
+                        transform.FindChild("Card" + x).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(rotations[x].z, maxAngles[counter], t), 0.5f);
+                    }
+                }
+                else
+                {
+                    counter--;
+                }
+                counter++;
+            }
+
+            transform.FindChild("Card" + (brokenWeaponInt)).GetComponent<Image>().sprite = cardArray[1];
+            transform.FindChild("Card" + (brokenWeaponInt)).localPosition = Vector3.Lerp(positions[brokenWeaponInt], new Vector3(maxPositionX2[(brokenWeaponInt)], maxPositionY2[(brokenWeaponInt)] + 50f, 0f), t);
+            transform.FindChild("Card" + (brokenWeaponInt)).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(rotations[brokenWeaponInt].z, maxAngles2[(brokenWeaponInt)], t), 0.5f);
+            Color cardColor = transform.FindChild("Card" + (brokenWeaponInt)).GetComponent<Image>().color;
+            transform.FindChild("Card" + (brokenWeaponInt)).GetComponent<Image>().color = new Color(cardColor.r, cardColor.g, cardColor.b, Mathf.Lerp(1f, 0f, t));
+            Color cardColor2 = transform.FindChild("Card" + (brokenWeaponInt)).GetChild(0).GetComponent<Image>().color;
+            transform.FindChild("Card" + (brokenWeaponInt)).GetChild(0).GetComponent<Image>().color = new Color(cardColor2.r, cardColor2.g, cardColor2.b, Mathf.Lerp(1f, 0f, t));
+            Color cardColor3 = transform.FindChild("Card" + (brokenWeaponInt)).GetChild(1).GetComponent<Image>().color;
+            transform.FindChild("Card" + (brokenWeaponInt)).GetChild(1).GetComponent<Image>().color = new Color(cardColor3.r, cardColor3.g, cardColor3.b, Mathf.Lerp(1f, 0f, t));
+
+
+            if (t >= 1)
+            {
+                removeCard = false;
+                DestroyImmediate(transform.FindChild("Card" + (brokenWeaponInt)).gameObject);
+
+                int tempInt = transform.childCount - 1;
+                for (int x = 0; x < tempInt; x++)
+                {
+                    transform.GetChild(x).name = "Card" + x;
+                }
             }
         }
 
@@ -318,11 +348,25 @@ public class DeckScript : MonoBehaviour
                 openChanger = true;
             }
             // Juoksee joka kerta
-            // 
-            for (int x = 0; x < updatedCardCount; x++)
+             
+            // Counter pitää X arvon oikeana huomioiden poistuvan aseen arvot
+            int counter = 0;
+
+            for (int x = 0; x < updatedCardCount + 1; x++)
             {
-                transform.FindChild("Card" + x).localPosition = Vector3.Lerp(positions[x], new Vector3(minPositionX[x], minPositionY[x], 0f), t);
-                transform.FindChild("Card" + x).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(rotations[x].z, minAngles[x], t), 0.5f);
+                if (x != brokenWeaponInt)
+                {
+                    if (positions[x] != null)
+                    {
+                        transform.FindChild("Card" + x).localPosition = Vector3.Lerp(positions[x], new Vector3(minPositionX[counter], minPositionY[counter], 0f), t);
+                        transform.FindChild("Card" + x).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(rotations[x].z, minAngles[counter], t), 0.5f);
+                    }
+                }
+                else
+                {
+                    counter--;
+                }
+                counter++;
             }
 
             transform.FindChild("Card" + (brokenWeaponInt)).GetComponent<Image>().sprite = cardArray[1];
@@ -339,20 +383,23 @@ public class DeckScript : MonoBehaviour
             if (t >= 1)
             {
                 removeCard = false;
-                Destroy(transform.FindChild("Card" + (brokenWeaponInt)).gameObject);
-                updatedCardCount = cardCount + 1;
-                /* JATKa TÄSTä
-                string tempName = gameObject.transform.GetChild(GameObject.Find("Deck1").transform.childCount - 2).name;
-                char[] tempChar = tempName.Substring(tempName.Length - 1, 1).ToCharArray();
-                int numberFlag = 0;
-                for(int x = 0; x < tempChar[0]; x++)
+                DestroyImmediate(transform.FindChild("Card" + (brokenWeaponInt)).gameObject);
+
+                int tempInt = transform.childCount - 1;
+                for(int x = 0; x < tempInt; x++)
                 {
-                    if (transform.childCount - 2)
-                    {
-                        transform.GetChild(x).name = "Card" + numberFlag;
-                        numberFlag++;
-                    }
-                }*/
+                    transform.GetChild(x).name = "Card" + x;
+                }
+            }
+        }
+
+        for (int x = 0; x < cardCount; x++)
+        {
+            if(cards[x] != null)
+            {
+                 // Toimisi kun mika kertoisi vain kaavan..... .. ... .. .. . .
+                int duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<weaponStats>().duration;
+                cards[x].transform.GetChild(0).GetComponent<RectTransform>().localScale = new Vector3(1f - 0.1f * duration, 1f, 1f);
             }
         }
     }
@@ -366,49 +413,35 @@ public class DeckScript : MonoBehaviour
         switch (cards)
         {
             case 0:
-                {
-                    max[0] = 0f;
-                    return new float[] { max[0] };
-                }
+                {   max[0] = 0f;
+                    return new float[] { max[0] };  }
             case 1:
-                {
-                    max[0] = 0f;
-                    return new float[] { max[0] };
-                }
+                {   max[0] = 0f;
+                    return new float[] { max[0] };  }
             case 2:
-                {
-                    max[0] = 0.09f;
+                {   max[0] = 0.09f;
                     max[1] = -0.09f;
-                    return new float[] { max[0], max[1] };
-                }
+                    return new float[] { max[0], max[1] };  }
             case 3:
-                {
-                    max[0] = 0.12f;
+                {   max[0] = 0.12f;
                     max[1] = 0f;
                     max[2] = -0.12f;
-                    return new float[] { max[0], max[1], max[2] };
-                }
+                    return new float[] { max[0], max[1], max[2] };  }
             case 4:
-                {
-                    max[0] = 0.2f;
+                {   max[0] = 0.2f;
                     max[1] = 0.06f;
                     max[2] = -0.06f;
                     max[3] = -0.2f;
-                    return new float[] { max[0], max[1], max[2], max[3] };
-                }
+                    return new float[] { max[0], max[1], max[2], max[3] };  }
             case 5:
-                {
-                    max[0] = 0.24f;
+                {   max[0] = 0.24f;
                     max[1] = 0.14f;
                     max[2] = 0f;
                     max[3] = -0.14f;
                     max[4] = -0.24f;
-                    return new float[] { max[0], max[1], max[2], max[3], max[4] };
-                }
+                    return new float[] { max[0], max[1], max[2], max[3], max[4] };  }
             default:
-                {
-                    break;
-                }
+                {   break;  }
         }
         Debug.LogError("Error on rotationMax method");
         max[0] = 0.0f;
@@ -424,49 +457,35 @@ public class DeckScript : MonoBehaviour
         switch (cards)
         {
             case 0:
-                {
-                    max[0] = 0f;
-                    return new float[] { max[0] };
-                }
+                {   max[0] = 0f;
+                    return new float[] { max[0] };  }
             case 1:
-                {
-                    max[0] = 0f;
-                    return new float[] { max[0] };
-                }
+                {   max[0] = 0f;
+                    return new float[] { max[0] };  }
             case 2:
-                {
-                    max[0] = -45f;
+                {   max[0] = -45f;
                     max[1] = 45f;
-                    return new float[] { max[0], max[1] };
-                }
+                    return new float[] { max[0], max[1] };  }
             case 3:
-                {
-                    max[0] = -65f;
+                {   max[0] = -65f;
                     max[1] = 0f;
                     max[2] = 65f;
-                    return new float[] { max[0], max[1], max[2] };
-                }
+                    return new float[] { max[0], max[1], max[2] };  }
             case 4:
-                {
-                    max[0] = -97.5f;
+                {   max[0] = -97.5f;
                     max[1] = -32.5f;
                     max[2] = 32.5f;
                     max[3] = 97.5f;
-                    return new float[] { max[0], max[1], max[2], max[3] };
-                }
+                    return new float[] { max[0], max[1], max[2], max[3] };  }
             case 5:
-                {
-                    max[0] = -100f;
+                {   max[0] = -100f;
                     max[1] = -50f;
                     max[2] = 0f;
                     max[3] = 50f;
                     max[4] = 100f;
-                    return new float[] { max[0], max[1], max[2], max[3], max[4] };
-                }
+                    return new float[] { max[0], max[1], max[2], max[3], max[4] };  }
             default:
-                {
-                    break;
-                }
+                {   break;  }
         }
         Debug.LogError("Error on positionMaxX method");
         max[0] = 0.0f;
@@ -482,49 +501,35 @@ public class DeckScript : MonoBehaviour
         switch (cards)
         {
             case 0:
-                {
-                    max[0] = 50f;
-                    return new float[] { max[0] };
-                }
+                {   max[0] = 50f;
+                    return new float[] { max[0] };  }
             case 1:
-                {
-                    max[0] = 50f;
-                    return new float[] { max[0] };
-                }
+                {   max[0] = 50f;
+                    return new float[] { max[0] };  }
             case 2:
-                {
-                    max[0] = 40f;
+                {   max[0] = 40f;
                     max[1] = 40f;
-                    return new float[] { max[0], max[1] };
-                }
+                    return new float[] { max[0], max[1] };  }
             case 3:
-                {
-                    max[0] = 35f;
+                {   max[0] = 35f;
                     max[1] = 50f;
                     max[2] = 35f;
-                    return new float[] { max[0], max[1], max[2] };
-                }
+                    return new float[] { max[0], max[1], max[2] };  }
             case 4:
-                {
-                    max[0] = 15f;
+                {   max[0] = 15f;
                     max[1] = 50f;
                     max[2] = 50f;
                     max[3] = 15f;
-                    return new float[] { max[0], max[1], max[2], max[3] };
-                }
+                    return new float[] { max[0], max[1], max[2], max[3] };  }
             case 5:
-                {
-                    max[0] = 0f;
+                {   max[0] = 0f;
                     max[1] = 40f;
                     max[2] = 50f;
                     max[3] = 40f;
                     max[4] = 0f;
-                    return new float[] { max[0], max[1], max[2], max[3], max[4] };
-                }
+                    return new float[] { max[0], max[1], max[2], max[3], max[4] };  }
             default:
-                {
-                    break;
-                }
+                {   break;  }
         }
         Debug.LogError("Error on positionMaxY method");
         max[0] = 0.0f;
@@ -546,44 +551,32 @@ public class DeckScript : MonoBehaviour
         switch (cards)
         {
             case 1:
-                {
-                    max[0] = 0f;
-                    return new float[] { max[0] };
-                }
+                {   max[0] = 0f;
+                    return new float[] { max[0] };  }
             case 2:
-                {
-                    max[0] = 0.07f;
+                {   max[0] = 0.07f;
                     max[1] = -0.07f;
-                    return new float[] { max[0], max[1] };
-                }
+                    return new float[] { max[0], max[1] };  }
             case 3:
-                {
-                    max[0] = 0.12f;
+                {   max[0] = 0.12f;
                     max[1] = 0f;
                     max[2] = -0.12f;
-                    return new float[] { max[0], max[1], max[2] };
-                }
+                    return new float[] { max[0], max[1], max[2] };  }
             case 4:
-                {
-                    max[0] = 0.06f;
+                {   max[0] = 0.06f;
                     max[1] = 0.06f;
                     max[2] = -0.06f;
                     max[3] = -0.06f;
-                    return new float[] { max[0], max[1], max[2], max[3] };
-                }
+                    return new float[] { max[0], max[1], max[2], max[3] };  }
             case 5:
-                {
-                    max[0] = 0.08f;
+                {   max[0] = 0.08f;
                     max[1] = 0.06f;
                     max[2] = 0f;
                     max[3] = -0.06f;
                     max[4] = -0.08f;
-                    return new float[] { max[0], max[1], max[2], max[3], max[4] };
-                }
+                    return new float[] { max[0], max[1], max[2], max[3], max[4] };  }
             default:
-                {
-                    break;
-                }
+                {   break;  }
         }
         Debug.LogError("Error on rotationMin method");
         max[0] = 0.0f;
@@ -599,44 +592,32 @@ public class DeckScript : MonoBehaviour
         switch (cards)
         {
             case 1:
-                {
-                    max[0] = 0f;
-                    return new float[] { max[0] };
-                }
+                {   max[0] = 0f;
+                    return new float[] { max[0] };  }
             case 2:
-                {
-                    max[0] = -35f;
+                {   max[0] = -35f;
                     max[1] = 35f;
-                    return new float[] { max[0], max[1] };
-                }
+                    return new float[] { max[0], max[1] };  }
             case 3:
-                {
-                    max[0] = -40f;
+                {   max[0] = -40f;
                     max[1] = 0f;
                     max[2] = 40f;
-                    return new float[] { max[0], max[1], max[2] };
-                }
+                    return new float[] { max[0], max[1], max[2] };  }
             case 4:
-                {
-                    max[0] = -50f;
+                {   max[0] = -50f;
                     max[1] = -20f;
                     max[2] = 20f;
                     max[3] = 50f;
-                    return new float[] { max[0], max[1], max[2], max[3] };
-                }
+                    return new float[] { max[0], max[1], max[2], max[3] };  }
             case 5:
-                {
-                    max[0] = -54f;
+                {   max[0] = -54f;
                     max[1] = -30f;
                     max[2] = 0f;
                     max[3] = 30f;
                     max[4] = 54f;
-                    return new float[] { max[0], max[1], max[2], max[3], max[4] };
-                }
+                    return new float[] { max[0], max[1], max[2], max[3], max[4] };  }
             default:
-                {
-                    break;
-                }
+                {   break;  }
         }
         Debug.LogError("Error on positionMinX method");
         max[0] = 0.0f;
@@ -652,44 +633,32 @@ public class DeckScript : MonoBehaviour
         switch (cards)
         {
             case 1:
-                {
-                    max[0] = -50f;
-                    return new float[] { max[0] };
-                }
+                {   max[0] = -50f;
+                    return new float[] { max[0] };  }
             case 2:
-                {
-                    max[0] = -55f;
+                {   max[0] = -55f;
                     max[1] = -55f;
-                    return new float[] { max[0], max[1] };
-                }
+                    return new float[] { max[0], max[1] };  }
             case 3:
-                {
-                    max[0] = -60f;
+                {   max[0] = -60f;
                     max[1] = -50f;
                     max[2] = -60f;
-                    return new float[] { max[0], max[1], max[2] };
-                }
+                    return new float[] { max[0], max[1], max[2] };  }
             case 4:
-                {
-                    max[0] = -80f;
+                {   max[0] = -80f;
                     max[1] = -50f;
                     max[2] = -50f;
                     max[3] = -80f;
-                    return new float[] { max[0], max[1], max[2], max[3] };
-                }
+                    return new float[] { max[0], max[1], max[2], max[3] };  }
             case 5:
-                {
-                    max[0] = -80f;
+                {   max[0] = -80f;
                     max[1] = -62f;
                     max[2] = -50f;
                     max[3] = -62f;
                     max[4] = -80f;
-                    return new float[] { max[0], max[1], max[2], max[3], max[4] };
-                }
+                    return new float[] { max[0], max[1], max[2], max[3], max[4] };  }
             default:
-                {
-                    break;
-                }
+                {   break;  }
         }
         Debug.LogError("Error on positionMinY method");
         max[0] = 0.0f;

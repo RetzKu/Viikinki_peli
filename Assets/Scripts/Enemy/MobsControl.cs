@@ -81,7 +81,7 @@ public class MobsControl : MonoBehaviour
                     tries++;
                 }
                 while (k == PathFinder.Dir.NoDir && tries<5 );
-                if(tries <= 5)
+                if(tries <= 5 && x > 0 && y > 0)
                 {
                     if (!naturalSpawn)
                     {

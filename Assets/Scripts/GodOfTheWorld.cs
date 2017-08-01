@@ -6,31 +6,25 @@ public class GodOfTheWorld : MonoBehaviour {
 
     // Use this for initialization
     public GameObject tilemap;
+    public GameObject player;
     int worldMobs = 0;
-	void Start () {
+	//void Start () {
 		
-	}
+	//}
 	
-	// Update is called once per frame
-	void Update () {
+	//// Update is called once per frame
+	//void Update () {
 		
-	}
+	//}
     void CreateEverything()
     {
-
+        MobsControl.instance.SpawnBoids(player.transform.position.x, player.transform.position.y,)
     }
     void DestroyWorld()
     {
         worldMobs = MobsControl.instance.DeleteAllCurrentMobs();
 
 
-        for(int y = 0; y < TileMap.TotalHeight; y++)
-        {
-            for (int x = 0; x < TileMap.TotalHeight; x++)
-            {
-                Destroy(tilemap.GetComponent<TileMap>().GetGameObjectFast(x,y));
-            }
-        }
 
         // tilemap.tuhoa();
         // luola.ala();
@@ -42,13 +36,7 @@ public class GodOfTheWorld : MonoBehaviour {
         worldMobs = MobsControl.instance.DeleteAllCurrentMobs();
 
 
-        for (int y = 0; y < TileMap.TotalHeight; y++)
-        {
-            for (int x = 0; x < TileMap.TotalHeight; x++)
-            {
-                Destroy(tilemap.GetComponent<TileMap>().GetGameObjectFast(x, y));
-            }
-        }
+  
 
         // tilemap.tuhoa();
         // luola.ala();

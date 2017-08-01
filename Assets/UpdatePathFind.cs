@@ -18,7 +18,7 @@ public class UpdatePathFind : MonoBehaviour
     bool pressed = false;
     Vector2 midPoint = new Vector2(10f, 10f);
     public TileMap terveisin;
-    public bool inCave;
+
 
     // Use this for initialization
     void Start()

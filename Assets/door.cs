@@ -13,12 +13,6 @@ public class door : MonoBehaviour {
 
     List<Room> finalRooms = new List<Room>();
 
-    public Sprite GrassSprite;
-    public Sprite SuperSprite;
-    public Sprite StartSprite;
-                        //public GameObject[,] TileGameObjects = new GameObject[TotalHeight, TotalWidth];
-
-    //private GameObject Spawner;
     void Start()
     {
         //Spawner = GameObject.FindGameObjectWithTag("Spawner");
@@ -105,26 +99,10 @@ public class door : MonoBehaviour {
             int temp = finalRooms[finalRooms.Count - 1].edgeTiles.Count;
             int rand = UnityEngine.Random.Range(0, temp);
 
-            if (MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY-1] == TileType.CaveWall)
-            {
-                MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY - 1] = TileType.CaveDoor;
-                print("door created");
-            }
-            else if (MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY +1] == TileType.CaveWall)
-            {
-                MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY + 1] = TileType.CaveDoor;
-                print("door created");
-            }
-            else if (MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX-1, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY] == TileType.CaveWall)
-            {
-                MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX - 1, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY] = TileType.CaveDoor;
-                print("door created");
-            }
-            else
-            {
-                MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX + 1, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY] = TileType.CaveDoor;
-                print("door created");
-            }
+            MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY - 1] = TileType.CaveDoor;
+            created = true;
+            print("door created");
+
 
         }
 
@@ -191,6 +169,5 @@ public class door : MonoBehaviour {
     void createNewCave()
     {
         seed = DateTime.Now.Ticks.ToString();
-        created = true;
     }
 }

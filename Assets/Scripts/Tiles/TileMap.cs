@@ -210,7 +210,7 @@ public class TileMap : MonoBehaviour, ITileMap
                 }
 
                 SpriteController.transform.position = GetTileGameObject(0, 0).transform.position; //  + new Vector3(0f, 17f);
-                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE - 3, Chunk.CHUNK_SIZE * 3 - 3, this, 1, 1);
+                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE - 2, Chunk.CHUNK_SIZE * 3 - 2, this, 1, 1);
 
             }
             else if (chunkDtX > 0)      // oikealle
@@ -228,7 +228,7 @@ public class TileMap : MonoBehaviour, ITileMap
                 }
 
                 SpriteController.transform.position = GetTileGameObject(0, 0).transform.position; //  + new Vector3(0f, 17f);
-                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE * 3 - 3, this, Chunk.CHUNK_SIZE * 2 - 3, 1);
+                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 2, Chunk.CHUNK_SIZE * 3 - 2, this, Chunk.CHUNK_SIZE * 2 - 2, 1);
             }
             if (chunkDtY < 0) // alas
             {
@@ -248,7 +248,7 @@ public class TileMap : MonoBehaviour, ITileMap
 
 
                 SpriteController.transform.position = GetTileGameObject(0, 0).transform.position;
-                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE - 3, this, 1, 1);
+                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 2, Chunk.CHUNK_SIZE - 2, this, 1, 1);
             }
             else if (chunkDtY > 0)  // ylös
             {

@@ -299,6 +299,20 @@ public class TileSpriteController : MonoBehaviour
         return TileCount[(int)type];
     }
 
+
+    public void ResetAllTiles()
+    {
+        for(int i = 0; i < borders.Count; i++)
+        {
+            var border = borders[i];
+            {
+                border.transform.parent = null;
+                ObjectPool.instance.PoolObject(border);
+            }
+        }
+        borders.Clear();
+    }
+
     public void SetTileSprites(int width, int height, ITileMap tilemap, int startX, int startY)
     {
         // int tempIndex = 0;
@@ -479,4 +493,5 @@ public class TileSpriteController : MonoBehaviour
         }
         return 0;
     }
+
 }

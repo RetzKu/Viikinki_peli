@@ -21,6 +21,7 @@ public class BreadthFirstSearch
 
         }
     }
+
     public enum states
     {
         goal,

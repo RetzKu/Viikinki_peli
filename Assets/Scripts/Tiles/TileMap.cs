@@ -95,6 +95,12 @@ public class TileMap : MonoBehaviour, ITileMap
         // SpriteController.gameObject.SetActive(false);
     }
 
+    public void ResetBorders()
+    {
+        SpriteController.transform.position = GetTileGameObject(0, 0).transform.position;
+        SpriteController.SetTileSprites(TotalWidth - 1, TotalHeight - 1, this, 1, 1);
+    }
+
     public void DisableTileMap()
     {
         gameObject.SetActive(false);
@@ -104,6 +110,8 @@ public class TileMap : MonoBehaviour, ITileMap
     public void EnableTileMap()
     {
         gameObject.SetActive(true);
+        SpriteController.ResetAllTiles();
+        ResetBorders();
         // SpriteController.gameObject.SetActive(true);
     }
 
@@ -610,4 +618,6 @@ public class TileMap : MonoBehaviour, ITileMap
     {
         return !_chunkGenerationInProcess;
     }
+
+
 }

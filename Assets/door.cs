@@ -17,27 +17,42 @@ public class door : MonoBehaviour
     public Sprite GrassSprite;
     public Sprite SuperSprite;
     public Sprite StartSprite;
+
+    private TileMap _tilemap;
     //public GameObject[,] TileGameObjects = new GameObject[TotalHeight, TotalWidth];
 
+    // ovet collidaa vain pelaajan kanssa
     void OnTriggerEnter2D(Collider2D other)
     {
-        var tilemap = FindObjectOfType<TileMap>();
+        ChunkMover mover = other.gameObject.transform.parent.GetComponent<ChunkMover>();
+        if (mover.UnderGround)
+        {
+            // maan päälle
+            _tilemap.EnableTileMap();
 
-        // if (other.gameObject.GetComponent<ChunkMover>().UnderGround)
-        // {
-        //     // maan päälle
-        //     tilemap.EnableTileMap();
-        // }
-        // else
-        // {
-        //     tilemap.DisableTileMap();
-        //     Activate();
-        // }
+            mover.UnderGround = false;
+        }
+        else
+        {
+            _tilemap.DisableTileMap();
+            Activate();
+            mover.UnderGround = true;
+
+            MapGenerator dungeon = MapGenerator.Instance;
+            var go = GameObject.FindWithTag("SpriteController");
+            TileSpriteController tileSpriteController =  go.GetComponent<TileSpriteController>();
+            tileSpriteController.ResetAllTiles();
+            tileSpriteController.SetTileSprites(dungeon.Width - 1, dungeon.Height - 1, dungeon, 1, 1);
+
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.GetComponent<UpdatePathFind>().path.map = dungeon;
+        }
     }
 
     //private GameObject Spawner;
     void Start()
     {
+        _tilemap = FindObjectOfType<TileMap>();
         //Spawner = GameObject.FindGameObjectWithTag("Spawner");
         //GameObject tileObject = new GameObject("(" + y + "," + x + ")");
         //tileObject.transform.parent = parent.transform;

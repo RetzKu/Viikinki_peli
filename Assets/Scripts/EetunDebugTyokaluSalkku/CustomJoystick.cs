@@ -72,6 +72,10 @@ public class CustomJoystick : MonoBehaviour
 
         TouchData d = new TouchData(HitBox, OnEnter, OnHold, OnExit);
         TouchManager.instance.RegisterTouchCallbacks(d);
+
+#if UNITY_EDITOR
+        Base.SetActive(false);
+#endif
     }
 
     void Update()

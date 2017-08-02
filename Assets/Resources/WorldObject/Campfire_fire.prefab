@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114375846595963956}
   - component: {fileID: 60371318650527042}
   m_Layer: 22
-  m_Name: notska
+  m_Name: Campfire_fire
   m_TagString: CampFire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

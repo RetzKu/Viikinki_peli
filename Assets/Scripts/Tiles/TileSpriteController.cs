@@ -316,8 +316,8 @@ public class TileSpriteController : MonoBehaviour
     public void SetTileSprites(int width, int height, ITileMap tilemap, int startX, int startY)
     {
         // int tempIndex = 0;
-        float offsetX = transform.position.x;
-        float offsetY = transform.position.y;
+        float offsetX = tilemap.GetTileGameObject(0, 0).transform.position.x;
+        float offsetY = tilemap.GetTileGameObject(0, 0).transform.position.y;
 
         // sstring currentPool = GetCurrentPool();
         string currentPool = "Border";

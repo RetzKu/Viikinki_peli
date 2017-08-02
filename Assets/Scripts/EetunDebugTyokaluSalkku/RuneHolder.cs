@@ -98,7 +98,7 @@ public class RuneHolder : MonoBehaviour
         for (int i = 0; i < touchCounts.Length; i++)
         {
             if (touchCounts[i] != 0)
-                indiceCount++;
+                indiceCount += touchCounts[i];
         }
 
 

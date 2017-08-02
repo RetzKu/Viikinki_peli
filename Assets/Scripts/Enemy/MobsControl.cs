@@ -77,11 +77,12 @@ public class MobsControl : MonoBehaviour
                 {
                     x = Random.Range(spawner[0].x - spawner[0].rad, spawner[0].x + spawner[0].rad);
                     y = Random.Range(spawner[0].y - spawner[0].rad, spawner[0].y + spawner[0].rad);
+
                     k = player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(x, y));
-                    tries++;
+
                 }
-                while (k == PathFinder.Dir.NoDir && tries<5 );
-                if(tries <= 5 && x > 0 && y > 0)
+                while (k == PathFinder.Dir.NoDir && tries<5);
+                if(tries <= 5 && x > 0 && y > 0 && k != PathFinder.Dir.error)
                 {
                     if (!naturalSpawn)
                     {

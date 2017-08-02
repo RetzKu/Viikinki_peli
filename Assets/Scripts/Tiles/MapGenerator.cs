@@ -165,7 +165,7 @@ public class MapGenerator : MonoBehaviour, ITileMap
     {
         return map[x, y] == TileType.CaveWall;
     }
-    public void showRooms()
+    public void showRooms(Vector2 offset)
     {
         TileObjects = new GameObject[Width, Height];
         
@@ -177,7 +177,7 @@ public class MapGenerator : MonoBehaviour, ITileMap
             {
                 GameObject tileObject = new GameObject("(" + y + "," + x + ")");
                 tileObject.transform.parent = _cavesParent.transform;
-                tileObject.transform.position = new Vector3(x + StartPosition.x, y + StartPosition.y, 0);
+                tileObject.transform.position = new Vector3(x + offset.x, y + offset.y, 0);
 
                 SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
                 spriteRenderer.sortingLayerName = "TileMap";

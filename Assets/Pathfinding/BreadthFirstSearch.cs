@@ -38,6 +38,10 @@ public class BreadthFirstSearch
         if (inited)
         {
             int[] j = calculateIndex(k);
+            if (j[0] > TileMap.TotalWidth || j[1] > TileMap.TotalHeight || j[0] < 0 || j[1] < 0)
+            {
+                return PathFinder.Dir.error;
+            }
             return panther.dirs[j[1], j[0]]; // palauttaa movement laskujen mukaan x y position
         }
         else

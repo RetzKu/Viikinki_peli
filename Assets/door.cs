@@ -44,7 +44,7 @@ public class door : MonoBehaviour
             tileSpriteController.SetTileSprites(dungeon.Width - 1, dungeon.Height - 1, dungeon, 1, 1);
 
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            player.GetComponent<UpdatePathFind>().path.map = dungeon;
+            player.GetComponent<UpdatePathFind>().tilemap = dungeon;
         }
     }
 

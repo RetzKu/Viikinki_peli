@@ -17,29 +17,39 @@ public class UpdatePathFind : MonoBehaviour
 
     bool pressed = false;
     Vector2 midPoint = new Vector2(10f, 10f);
-    public TileMap terveisin;
+    public ITileMap tilemap;// vaihra
 
 
     // Use this for initialization
     void Start()
     {
         path = new BreadthFirstSearch();
-        path.map = terveisin;
+        path.map = tilemap;
         body = GetComponent<Rigidbody2D>();
         Giz = GetComponent<debugGiz>();
         Giz.init(path);
+
+        var go = GameObject.FindGameObjectWithTag("Tilemap");
+        if (go)
+        {
+            tilemap = go.GetComponent<TileMap>();
+        }
+        else
+        {
+            Debug.LogError("Tilemap missing");
+        }
     }
 
     void Update()
     {
         if (uptade)
         {
-            if (terveisin.CanUpdatePathFind())
+            if (tilemap.CanUpdatePathFind())
             {
-                path.uptadeTiles(midPoint, terveisin); //get tile map // 
+                path.uptadeTiles(midPoint, tilemap); //get tile map // 
                 uptade = false;
             }
-            // Giz.init(path);
+            Giz.init(path);
         }
 
         int[] m = path.calculateIndex(body.position);
@@ -47,7 +57,7 @@ public class UpdatePathFind : MonoBehaviour
 
         if (LasPos[0] != m[0] || LasPos[1] != m[1])
         {
-            path.uptadeTiles(m[0], m[1], terveisin);
+            path.uptadeTiles(m[0], m[1], tilemap);
             LasPos = m;
         }
 
@@ -56,6 +66,6 @@ public class UpdatePathFind : MonoBehaviour
 
     void OnDrawGizmos() // käytä pathfind debuggaukseens
     {
-        // Giz.OnDrawGizmosPate();
+        Giz.OnDrawGizmosPate();
     }
 }

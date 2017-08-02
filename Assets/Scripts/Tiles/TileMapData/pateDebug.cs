@@ -14,7 +14,7 @@ public class pateDebug : MonoBehaviour
 
     void Start()
     {
-        tilemap = FindObjectOfType<TileMap>();
+        //tilemap = FindObjectOfType<TileMap>();
     }
 
     void Update()

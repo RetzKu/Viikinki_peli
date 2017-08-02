@@ -85,6 +85,7 @@ public interface ITileMap
     GameObject GetTileGameObject(int x, int y);
     TileType GetTile(int x, int y);
     bool GetTileCollision(int x, int y);
+    bool CanUpdatePathFind();
 }
 
 
@@ -130,7 +131,12 @@ public class MapGenerator : MonoBehaviour, ITileMap
     public int randomFillPercent;
 
     public TileType[,] map; // 0 empty tile, 1 wall tile
-    
+
+    public bool CanUpdatePathFind()
+    {
+        return true;
+    }
+
 
     public List<Room> GenerateMap(int widht, int height, string seed, int fillPercent)
     {
@@ -188,6 +194,8 @@ public class MapGenerator : MonoBehaviour, ITileMap
                 else if (MapGenerator.Instance.map[x, y] == TileType.CaveWall)
                 {
                     spriteRenderer.sprite = SuperSprite;
+                    tileObject.AddComponent<BoxCollider2D>();
+                    tileObject.layer = 19;
                 }
                 else
                 {

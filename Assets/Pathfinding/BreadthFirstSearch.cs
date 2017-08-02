@@ -76,7 +76,7 @@ public class BreadthFirstSearch
 
         return h;
     }
-    public void uptadeTiles(Vector2 position, TileMap tileMap)
+    public void uptadeTiles(Vector2 position, ITileMap tileMap)
     {
         uptadeTiles((int)position.x, (int)position.y, tileMap); // 
     }
@@ -125,9 +125,9 @@ public class BreadthFirstSearch
             moveTiles.Add(temp);
         } 
 #else
-        for (int y = 0; y < TileMap.TotalHeight; y++)
+        for (int y = 0; y < tileMap.Height; y++)
         {
-            for (int x = 0; x < TileMap.TotalWidth; x++)
+            for (int x = 0; x < tileMap.Width; x++)
             {
                 moveTiles[y][x] = new tiles() { x = x, y = y, tileState = tileMap.GetTileCollision(x, y) ? states.wall : states.unVisited };
             }

@@ -28,8 +28,11 @@ public class door : MonoBehaviour
         {
             // maan päälle
             _tilemap.EnableTileMap();
-
             mover.UnderGround = false;
+            MapGenerator.Instance.DestroyCave();
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.GetComponent<UpdatePathFind>().tilemap = GameObject.FindGameObjectWithTag("Tilemap").GetComponent<TileMap>();
+            player.GetComponent<UpdatePathFind>().path.map = GameObject.FindGameObjectWithTag("Tilemap").GetComponent<TileMap>();
         }
         else
         {
@@ -120,7 +123,7 @@ public class door : MonoBehaviour
     {
 
     }
-
+    Vector2 offset = new Vector2(0, 0);
     public void Activate()
     {
         //destroy world
@@ -131,7 +134,6 @@ public class door : MonoBehaviour
             createNewCave();
         }
         finalRooms = MapGenerator.Instance.GenerateMap(widht, height, seed, fillpercent);
-        Vector2 offset = new Vector2(0, 0);
         if (!created)                                                                                   // create door
         {
             int temp = finalRooms[finalRooms.Count - 1].edgeTiles.Count;
@@ -151,8 +153,11 @@ public class door : MonoBehaviour
         //smooth
         //spawn
 
+        // for(;;asdas123123123)
+        //    playbackInput();
+        //    updtea();
 
-
+        //draw():;
 
 
 

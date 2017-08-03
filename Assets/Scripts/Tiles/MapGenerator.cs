@@ -171,6 +171,18 @@ public class MapGenerator : MonoBehaviour, ITileMap
     {
         return map[x, y] == TileType.CaveWall;
     }
+    public void DestroyCave()
+    {
+        for(int y = 0;y < TileObjects.GetLength(0); y++)
+        {
+            for (int x = 0; x < TileObjects.GetLength(1); x++)
+            {
+                Destroy(TileObjects[y, x]);
+            }
+        }
+        TileObjects = new GameObject[Width,Height];
+
+    }
     public void showRooms(Vector2 offset)
     {
         TileObjects = new GameObject[Width, Height];

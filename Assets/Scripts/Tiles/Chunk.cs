@@ -60,8 +60,6 @@ public class Chunk      // sub array
 
     private Dictionary<Vec2, GameObject> worldObjects = new Dictionary<Vec2, GameObject>(10);
 
-
-
     public bool TileCollides(int x, int y)
     {
         GameObject value;
@@ -88,9 +86,21 @@ public class Chunk      // sub array
     {
         foreach (var keypairvalue in worldObjects)
         {
-            keypairvalue.Value.transform.localScale = new Vector3(1f, 1f, 1f);
+            ResourceType type = keypairvalue.Value.GetComponent<Resource>().type;
+            if (ResourceManager.IsAliveTree(type))
+            {
+                keypairvalue.Value.transform.localScale = new Vector3(1f, 1f, 1f);
+            }
             keypairvalue.Value.transform.parent = null;
-            ObjectPool.instance.PoolObject(keypairvalue.Value);
+
+            if (ResourceManager.Instance.IsTrunkType(type))
+            {
+                ObjectPool.instance.PoolObject(keypairvalue.Value);
+            }
+            else
+            {
+                ObjectPool.instance.DestroyObjectAndReplace(keypairvalue.Value);
+            }
         }
         worldObjects.Clear();
     }
@@ -175,6 +185,10 @@ public class Chunk      // sub array
             for (int j = 0; j < CHUNK_SIZE; j++)
             {
                 TilemapTilesView[i, j] = types[i, j];
+                if (TileMap.Collides(types[i, j]))
+                {
+                    GetGameObject(j, i).GetComponent<Collider2D>().enabled = true;
+                }
             }
         }
     }
@@ -187,8 +201,9 @@ public class Chunk      // sub array
     public void Load()
     {
         Dictionary<Vec2, ResourceType> types = new Dictionary<Vec2, ResourceType>();
-        SetTypes(TestWriter.Load(GetPath(), out types));
+        SetTypes(TestWriter.Load(GetPath(), out types)); // lataa tiilet
 
+        // lataa tiilien resurssit
         foreach (var keyvaluepair in types)
         {
             Vec2 v = keyvaluepair.Key;
@@ -210,6 +225,8 @@ public class Chunk      // sub array
             go.transform.parent = _parent.transform;
 
             worldObjects[keyvaluepair.Key] = go;
+
+          
         }
     }
 
@@ -240,6 +257,21 @@ public class Chunk      // sub array
             {
                 var go = GameObjectView[yy, xx];
                 go.transform.position = new Vector3(go.transform.position.x + dtOffsetX, go.transform.position.y + dtOffsetY);
+            }
+        }
+    }
+
+    public void SetChunkPosition(int x, int y)
+    {
+        int OffsetX = CHUNK_SIZE * x;
+        int OffsetY = CHUNK_SIZE * y;
+
+        for (int yy = 0; yy < CHUNK_SIZE; yy++)
+        {
+            for (int xx = 0; xx < CHUNK_SIZE; xx++)
+            {
+                var go = GameObjectView[yy, xx];
+                go.transform.position = new Vector3(go.transform.position.x + OffsetX, go.transform.position.y + OffsetY);
             }
         }
     }

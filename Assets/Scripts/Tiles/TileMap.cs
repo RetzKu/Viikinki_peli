@@ -16,10 +16,8 @@ public class TileMap : MonoBehaviour, ITileMap
     public TileType[,] Tiles = new TileType[TotalHeight, TotalWidth]; // todo: w h laskeminen koosta
     public GameObject[,] TileGameObjects = new GameObject[TotalHeight, TotalWidth];
 
-    public int Width { get; set; }  
-    public int Height { get; set; }  
-
-
+    public int Width { get; set; }
+    public int Height { get; set; }
 
     [Header("kayta")]
     public bool tilemapPrototypeLayout = false;
@@ -77,6 +75,8 @@ public class TileMap : MonoBehaviour, ITileMap
                 GenerateChunk(x, y); // ei vällii?      // vanhaa koodia? 
             }
         }
+        _perlinGenerator.PlaceBase(_chunks[1, 1]); // base vasta kun on generoitu tiilet
+
 
         for (int x = 0; x < TotalWidth; x++)
         {
@@ -210,7 +210,7 @@ public class TileMap : MonoBehaviour, ITileMap
                 }
 
                 SpriteController.transform.position = GetTileGameObject(0, 0).transform.position; //  + new Vector3(0f, 17f);
-                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE - 2, Chunk.CHUNK_SIZE * 3 - 2, this, 1, 1);
+                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE + 2, Chunk.CHUNK_SIZE * 3 - 3, this, 1, 1);
 
             }
             else if (chunkDtX > 0)      // oikealle
@@ -228,7 +228,7 @@ public class TileMap : MonoBehaviour, ITileMap
                 }
 
                 SpriteController.transform.position = GetTileGameObject(0, 0).transform.position; //  + new Vector3(0f, 17f);
-                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 2, Chunk.CHUNK_SIZE * 3 - 2, this, Chunk.CHUNK_SIZE * 2 - 2, 1);
+                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE * 3 - 3, this, Chunk.CHUNK_SIZE * 2 - 3, 1);
             }
             if (chunkDtY < 0) // alas
             {
@@ -246,9 +246,8 @@ public class TileMap : MonoBehaviour, ITileMap
 
                 }
 
-
                 SpriteController.transform.position = GetTileGameObject(0, 0).transform.position;
-                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 2, Chunk.CHUNK_SIZE - 2, this, 1, 1);
+                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 2, Chunk.CHUNK_SIZE - 1, this, 1, 1);
             }
             else if (chunkDtY > 0)  // ylös
             {
@@ -267,7 +266,7 @@ public class TileMap : MonoBehaviour, ITileMap
 
                 // koska ylös mennessä 0, 0 nousee
                 SpriteController.transform.position = GetTileGameObject(0, 0).transform.position; //  + new Vector3(0f, 17f);
-                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 2, Chunk.CHUNK_SIZE * 3 - 2, this, 1, Chunk.CHUNK_SIZE * 2 - 2);
+                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 2, Chunk.CHUNK_SIZE * 3 - 2, this, 1, Chunk.CHUNK_SIZE * 2 - 4);
                 // SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 3, Chunk.CHUNK_SIZE * 3 - 3, this, 1, Chunk.CHUNK_SIZE * 2 - 3);
             }
             SpriteController.transform.position = GetTileGameObject(0, 0).transform.position;
@@ -414,6 +413,7 @@ public class TileMap : MonoBehaviour, ITileMap
         //Chunk.SwapViews(_chunks[offsetY, offsetX], _chunks[newOffsetY, newOffsetX]);
     }
 
+    // Generoi tai lataa chunkin
     Dictionary<Vec2, bool> SavedChunks = new Dictionary<Vec2, bool>(25);
     void GenerateChunk(int offsetX, int offsetY, int perlinOffsetX, int perlinOffsetY)
     {
@@ -449,19 +449,44 @@ public class TileMap : MonoBehaviour, ITileMap
         _perlinGenerator.GenerateChunk(_chunks[offsetY, offsetX], offsetX, offsetY);
     }
 
+
+    
+
+
     void Update()
     {
         Tint();
 
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    _chunks[1, 1].Save();
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    _chunks[1, 1].Load();
+        //}
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            _chunks[1, 1].Save();
+            RecenterTilemap(new Vector2(100, 100));
+        }
+    }
+
+    public void RecenterTilemap(Vector2 leftCorner)
+    {
+        // move chunks
+        leftCorner /= ChunkSize;
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+               GenerateChunk(i, j, (int)leftCorner.x, (int)leftCorner.y);
+               _chunks[i, j].SetChunkPosition((int)leftCorner.x, (int)leftCorner.y);
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            _chunks[1, 1].Load();
-        }
+        SpriteController.SetTileSprites(Width - 1, Height - 1, this, 1, 1);
     }
 
     public enum Dir { Rigth, Left }
@@ -621,3 +646,4 @@ public class TileMap : MonoBehaviour, ITileMap
 
 
 }
+

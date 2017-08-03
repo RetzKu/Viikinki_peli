@@ -91,6 +91,8 @@ public class Perlin : MonoBehaviour
     void Awake()
     {
         trees = new GameObject("trees");
+
+        InitSettings();
     }
 
     void Start()
@@ -99,17 +101,10 @@ public class Perlin : MonoBehaviour
         {
             Debug.LogError("Please set the renderTarget (Quad)");
         }
-
         _renderer = RenderTarget.GetComponent<Renderer>();
         InitalizeRenderTarget();
 
-        InitSettings();
-
         // sampler = new PoissonDiscSampler(samplerWidth, samplerHeigth, samplerRadius);
-    }
-
-    void Update()
-    {
     }
 
     void InitSettings()
@@ -501,10 +496,6 @@ public class Perlin : MonoBehaviour
                 }
             }
         }
-        // else
-        // {
-        // }
-
     }
 
     // spawn ratet:
@@ -514,7 +505,6 @@ public class Perlin : MonoBehaviour
     //   - lisää ? 
     //  - 40
     //   - lisää ?
-
 
     bool[,] GenerateObjectsPosition(float[,] objectNoise) // suurempi kuin R
     {
@@ -592,6 +582,8 @@ public class Perlin : MonoBehaviour
         OffsetY = 0;
     }
 
+
+
     public GameObject TreeTrefab;
     public void GenerateChunk(TileType[,] tiles, GameObject[,] gameObjects, int offsetX, int offsetY, int startX, int startY) // chunkin offsetit 0,0:sta
     {
@@ -625,6 +617,50 @@ public class Perlin : MonoBehaviour
         }
         OffsetX = 0;
         OffsetY = 0;
+    }
+
+
+    private const int _neigboursLength = 8;
+    private Vec2[] neighbours = new Vec2[_neigboursLength]
+    {
+        new Vec2(-1, 1), new Vec2(0, 1), new Vec2(1, 1), 
+        new Vec2(1, 0), new Vec2(-1, 0), 
+        new Vec2(-1, -1), new Vec2(0, -1), new Vec2(-1, -1), 
+    };
+
+    public void PlaceBase(Chunk chunk)
+    {
+        bool success = false;
+        int baseX = 0, baseY = 0;
+        for (int y = 1; y < Chunk.CHUNK_SIZE - 1; y += 2)
+        {
+            for (int x = 1; x < Chunk.CHUNK_SIZE - 1; x += 2)
+            {
+                int neighbourCount = 0;
+                for (int i = 0; i < neighbours.Length; i++)
+                {
+                    var n = neighbours[i];
+                    if (chunk.GetTile(n.Y, n.X) == TileType.GrassLand)
+                    {
+                        neighbourCount++;
+                    }
+                }
+                if (neighbourCount == _neigboursLength)
+                {
+                    success = true;
+                    baseY   = y;
+                    baseX   = x;
+                    break;
+                }
+            }
+        }
+
+        // add base
+        if (success)
+        {
+            print("Base location " + baseX + " " + baseY);
+            chunk.AddObject(baseX, baseY, ObjectPool.instance.GetObjectForType("Campfire_fire", false));
+        }
     }
 
     //public void GenerateTileMap(ITileMap tileMap)

@@ -4,6 +4,8 @@ public class TouchController : MonoBehaviour
 {
     private static readonly int maxRuneIndices = 9;
     public Vec2[] runeIndices = new Vec2[maxRuneIndices];
+    private int[] _touchCounts = new int[9];
+    private int _currentCount = 0;
 
     public int amountOfSpheres = 3;
     public float offset = 10f;
@@ -56,11 +58,11 @@ public class TouchController : MonoBehaviour
     {
         if (ControllerMode == Mode.RuneCasting && _canSendIndices)
         {
-            RuneHolder.SendIndices(BoolArrayFromIndices(runeIndices));
+            RuneHolder.SendIndices(BoolArrayFromIndices(runeIndices), _touchCounts);
         }
         else if (ControllerMode == Mode.Crafting && _canSendIndices)
         {
-            CraftingManagerHolder.SendIndices(BoolArrayFromIndices(runeIndices));
+            CraftingManagerHolder.SendIndices(BoolArrayFromIndices(runeIndices), _touchCounts);
         }
         _canSendIndices = false;
     }
@@ -309,6 +311,11 @@ public class TouchController : MonoBehaviour
         LineController.ResetPoints();
         LineController.HideLines();
 
+        for (int i = 0; i < _touchCounts.Length; i++)
+        {
+            _touchCounts[i] = 0;
+        }
+
         _canSendIndices = false;
     }
 
@@ -323,6 +330,11 @@ public class TouchController : MonoBehaviour
         {
             colliderGO.GetComponent<CircleCollider2D>().enabled = true;
         }
+    }
+
+    public void AddTouchCount(int x, int y)
+    {
+        _touchCounts[y * 3 + x]++;
     }
 
     public void OnTouchDetected(int x, int y, Vector3 realTransform)
@@ -345,6 +357,7 @@ public class TouchController : MonoBehaviour
             if (index < maxRuneIndices)
             {
                 runeIndices[index] = new Vec2(x, y);
+                AddTouchCount(x, y);
                 index++;
             }
         }

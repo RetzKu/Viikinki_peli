@@ -48,7 +48,7 @@ public class TileSpriteController : MonoBehaviour
     void Awake()
     {
         _borders = new GameObject("Borders");
-        _borders.transform.parent = this.transform;
+        // _borders.transform.parent = this.transform;
         // lataa kaikki johonkin vaikka dicciiin aluks
         // nopeampiakin ratkaisuja olisi
         _textures = new Dictionary<string, Sprite>(16);
@@ -315,7 +315,7 @@ public class TileSpriteController : MonoBehaviour
 
     public void SetTileSprites(int width, int height, ITileMap tilemap, int startX, int startY)
     {
-        // int tempIndex = 0; toimii paremmin tai pahemmin
+        // int tempIndex = 0;
         float offsetX = tilemap.GetTileGameObject(0, 0).transform.position.x;
         float offsetY = tilemap.GetTileGameObject(0, 0).transform.position.y;
 

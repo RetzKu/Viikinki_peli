@@ -55,7 +55,7 @@ public class RuneHolder : MonoBehaviour
         }
     }
 
-    public void SendIndices(Vec2[] positions, int realSize)
+    public void SendIndices(Vec2[] positions, int realSize ) 
     {
         for (int i = 0; i < realSize; i++)
         {
@@ -65,7 +65,7 @@ public class RuneHolder : MonoBehaviour
         int ii = 0;
         foreach (var rune in runes)
         {
-            if (rune.Length == realSize && rune.ValidateRune(positions))
+            if (rune.Length == realSize && rune.ValidateRune(positions ))
             {
                 if (Ownertype != OwnerType.Enemy)
                 {
@@ -92,20 +92,27 @@ public class RuneHolder : MonoBehaviour
         }
     }
 
-    public void SendIndices(bool[] positions)
+    public void SendIndices(bool[] positions, int[] touchCounts)
     {
         int indiceCount = 0;
-        for (int i = 0; i < positions.Length; i++)
+        for (int i = 0; i < touchCounts.Length; i++)
         {
-            print(i + ": " + positions[i]);
-            if (positions[i])
-                indiceCount++;
+            if (touchCounts[i] != 0)
+                indiceCount += touchCounts[i];
         }
+
+
+        //for (int i = 0; i < positions.Length; i++)
+        //{
+        //    print(i + ": " + positions[i]);
+        //    if (positions[i])
+        //        indiceCount++;
+        //}
 
         int ii = 0;
         foreach (var rune in runes)
         {
-            if (rune.Length == indiceCount && rune.ValidateRune(positions))
+            if (rune.Length == indiceCount && rune.ValidateRune(positions, touchCounts))
             {
                 if (Ownertype != OwnerType.Enemy)
                 {

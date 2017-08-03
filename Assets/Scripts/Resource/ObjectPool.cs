@@ -10,13 +10,11 @@ public class ObjectPool : MonoBehaviour
     public GameObject[] objectPrefabs;
     public List<GameObject>[] pooledObjects;
 
-    /// The amount of objects of each type to buffer.
-
+    // The amount of objects of each type to buffer.
     public int[] amountToBuffer;
     public int defaultBufferAmount = 3;
 
-    /// The container object that we will keep unused pooled objects so we dont clog up the editor with objects.
-
+    // The container object that we will keep unused pooled objects so we dont clog up the editor with objects.
     protected GameObject containerObject;
    
     void Awake ()
@@ -95,7 +93,7 @@ public class ObjectPool : MonoBehaviour
     /// Pools the object specified.  Will not be pooled if there is no prefab of that type.
     /// Object to be pooled.
 
-    public void PoolObject ( GameObject obj )
+    public void PoolObject( GameObject obj )
     {
         for ( int i = 0; i < objectPrefabs.Length; i++)
         {
@@ -104,6 +102,23 @@ public class ObjectPool : MonoBehaviour
                 obj.SetActive(false);
                 obj.transform.parent = containerObject.transform;
                 pooledObjects[i].Add(obj);
+                return;
+            }
+        }
+    }
+
+    public void DestroyObjectAndReplace(GameObject obj)
+    {
+        for ( int i = 0; i < objectPrefabs.Length; i++)
+        {
+            if(objectPrefabs[i].name == obj.name)
+            {
+                // obj.SetActive(false);
+                // obj.transform.parent = containerObject.transform;
+                Destroy(obj);
+
+                pooledObjects[i].Add(Instantiate(objectPrefabs[i]));
+                pooledObjects[i][pooledObjects[i].Count - 1].SetActive(false);
                 return;
             }
         }

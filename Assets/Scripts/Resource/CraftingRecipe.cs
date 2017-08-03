@@ -11,6 +11,9 @@ public class CraftingRecipe : Rune
     [Header("No need to Use Indices by hand")]
     public List<Cost> Materials;
 
+    //[HideInInspector]
+    //public List<int> Counts;
+
     public override void init(GameObject owner)
     {
         // Launcheriin, jokin cool effect, joka tulee kun craftaat + ääni
@@ -22,6 +25,10 @@ public class CraftingRecipe : Rune
         {
             Vec2 vec = CraftingManager.Instance.GetCraftingIndexes(Materials[i].Type);
             Indices[i] = vec;
+
+
+            // Counts[]++;
+            // TODO: Tästä ^^ int[]
         }
     }
 

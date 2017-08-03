@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04dc6761d973d26478f4b5b7179a0081, type: 3}
   m_Name: GrassLand
   m_EditorClassIdentifier: 
-  Type: 7
+  Type: 10
   SpawnableObjects:
   - ObjectPrefab: {fileID: 1384798036243720, guid: 1d6b060ef40a3664da1b12583f13f561,
       type: 2}

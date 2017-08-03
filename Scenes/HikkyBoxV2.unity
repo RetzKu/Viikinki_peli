@@ -2980,6 +2980,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: TestTiles.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4772326767965640, guid: 9ba8cfce009a3764ba416b37c8f039af, type: 2}
       propertyPath: m_LocalPosition.x
       value: -1.1

@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using UnityEngine;
 
-public class PathFinder 
+public class PathFinder
 {
     public enum Dir
     {
@@ -45,8 +47,12 @@ public class PathFinder
 
     static readonly Vec2[] Neighbours = new Vec2[]
     {
-        new Vec2(1, 0), new Vec2(0, -1),
-        new Vec2(-1, 0), new Vec2(0, 1)
+
+        // new Vec2(1, 0), new Vec2(0, -1),
+        // new Vec2(-1, 0), new Vec2(0, 1)
+
+        new Vec2(1, 0), new Vec2(-1, 0),
+        new Vec2(0, 1), new Vec2(0, -1)
     };
 
     void GetNeighbours(Vec2 location, List<Vec2> values, out int count)
@@ -79,7 +85,6 @@ public class PathFinder
         return (x >= 0 && y >= 0 && x < Width && y < Height);
     }
 
-
     public void Search(List<List<BreadthFirstSearch.tiles>> moveTiles, int goalX, int goalY)
     {
         this.GoalX = goalX;
@@ -90,11 +95,13 @@ public class PathFinder
         Vec2 start = new Vec2(GoalX, GoalY);
         frontier.Enqueue(start);
 
-        Dictionary<Vec2, Vec2> cameFrom = new Dictionary<Vec2, Vec2>(289);
+        Dictionary<Vec2, Vec2> cameFrom = new Dictionary<Vec2, Vec2>(289); // 17 * 17
         cameFrom[start] = start;
 
         dirs = new Dir[Height, Width];
-        List<Vec2> neighbours = new List<Vec2>(4) {new Vec2(0, 0), new Vec2(0, 0), new Vec2(0, 0), new Vec2(0, 0)};
+        List<Vec2> neighbours = new List<Vec2>(4) { new Vec2(0, 0), new Vec2(0, 0), new Vec2(0, 0), new Vec2(0, 0) };
+
+        VisualizeMoveTiles();
 
         while (frontier.Count > 0)
         {
@@ -116,13 +123,52 @@ public class PathFinder
         GeneratePaths(cameFrom);
     }
 
+    private void VisualizeMoveTiles()
+    {
+        string content = "";
+
+        for (int i = 0; i < realMap.Count; i++)
+        {
+            for (int j = 0; j < realMap[0].Count; j++)
+            {
+                content += StateToChar(realMap[i][j].tileState);
+            }
+            content += "\r\n";
+        }
+
+        File.WriteAllText("debug.txt", content);
+    }
+
+    private char StateToChar(BreadthFirstSearch.states state)
+    {
+        switch (state)
+        {
+            case BreadthFirstSearch.states.goal:
+                return 'G';
+            case BreadthFirstSearch.states.unVisited:
+                return 'U';
+            case BreadthFirstSearch.states.wall:
+                return 'X';
+            case BreadthFirstSearch.states.up:
+                return 'u';
+            case BreadthFirstSearch.states.down:
+                return 'd';
+            case BreadthFirstSearch.states.right:
+                return 'r';
+            case BreadthFirstSearch.states.left:
+                return 'l';
+            default:
+                return '9';
+        }
+    }
+
     private void GeneratePaths(Dictionary<Vec2, Vec2> cameFrom)
     {
+
         for (int y = 1; y < Height - 1; y++)
         {
             for (int x = 1; x < Width - 1; x++)
             {
-
                 if (realMap[y][x].tileState != BreadthFirstSearch.states.wall && dirs[y, x] != Dir.NoWayOut)
                 {
                     Vec2 vec = new Vec2(x, y);

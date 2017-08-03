@@ -25,7 +25,7 @@ public class debugGiz : MonoBehaviour {
                 {
                     float tx = x + mapstart.x;
                     float ty = y + mapstart.y;
-                    switch (copy.panther.dirs[y,x])
+                    switch (copy.moveTiles[y][x].tileState)
                     {
                         //case PathFinder.Dir.Down:
                         //    Gizmos.DrawLine(new Vector2(tx, ty + plus), new Vector2(tx, ty - plus));
@@ -44,8 +44,14 @@ public class debugGiz : MonoBehaviour {
                         //    Gizmos.DrawLine(new Vector2(tx+ plus, ty ), new Vector2(tx - plus, ty));
                         //    Gizmos.DrawLine(new Vector2(tx + plus, ty - (plus / 2)), new Vector2(tx + plus, ty + (plus / 2)));
                         //    break;
-                        case PathFinder.Dir.NoDir:
+                        case BreadthFirstSearch.states.wall:
+                            Gizmos.color = Color.blue;
                             //Gizmos.DrawLine(new Vector2(x + plus, y), new Vector2(x - plus, y));
+                            Gizmos.DrawSphere(new Vector2(tx, ty), 0.5f);
+                            break;
+                        case BreadthFirstSearch.states.unVisited:
+                            //Gizmos.DrawLine(new Vector2(x + plus, y), new Vector2(x - plus, y));
+                            Gizmos.color = Color.yellow;
                             Gizmos.DrawSphere(new Vector2(tx, ty), 0.5f);
                             break;
                         default:

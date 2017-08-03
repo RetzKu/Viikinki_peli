@@ -38,6 +38,10 @@ public class BreadthFirstSearch
         if (inited)
         {
             int[] j = calculateIndex(k);
+            if (j[0] > TileMap.TotalWidth || j[1] > TileMap.TotalHeight || j[0] < 0 || j[1] < 0)
+            {
+                return PathFinder.Dir.error;
+            }
             return panther.dirs[j[1], j[0]]; // palauttaa movement laskujen mukaan x y position
         }
         else
@@ -72,7 +76,7 @@ public class BreadthFirstSearch
 
         return h;
     }
-    public void uptadeTiles(Vector2 position, TileMap tileMap)
+    public void uptadeTiles(Vector2 position, ITileMap tileMap)
     {
         uptadeTiles((int)position.x, (int)position.y, tileMap); // 
     }
@@ -121,9 +125,9 @@ public class BreadthFirstSearch
             moveTiles.Add(temp);
         } 
 #else
-        for (int y = 0; y < TileMap.TotalHeight; y++)
+        for (int y = 0; y < tileMap.Height; y++)
         {
-            for (int x = 0; x < TileMap.TotalWidth; x++)
+            for (int x = 0; x < tileMap.Width; x++)
             {
                 moveTiles[y][x] = new tiles() { x = x, y = y, tileState = tileMap.GetTileCollision(x, y) ? states.wall : states.unVisited };
             }

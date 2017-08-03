@@ -10,8 +10,8 @@ public class door : MonoBehaviour
     string seed;
     int height = 50; // mah random
     int widht = 50; // mah random
-    int fillpercent = 45;
-
+    int fillpercent = 50;
+    public GameObject GodOfTheWorld;
     List<Room> finalRooms = new List<Room>();
 
     private TileMap _tilemap;
@@ -44,7 +44,7 @@ public class door : MonoBehaviour
             tileSpriteController.SetTileSprites(dungeon.Width - 1, dungeon.Height - 1, dungeon, 1, 1);
 
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            player.GetComponent<UpdatePathFind>().path.map = dungeon;
+            player.GetComponent<UpdatePathFind>().tilemap = dungeon;
         }
     }
 
@@ -131,19 +131,22 @@ public class door : MonoBehaviour
             createNewCave();
         }
         finalRooms = MapGenerator.Instance.GenerateMap(widht, height, seed, fillpercent);
+        Vector2 offset = new Vector2(0, 0);
         if (!created)                                                                                   // create door
         {
             int temp = finalRooms[finalRooms.Count - 1].edgeTiles.Count;
             int rand = UnityEngine.Random.Range(0, temp);
 
             MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY - 1] = TileType.CaveDoor;
+            offset = new Vector2((float)finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX,(float) finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY - 1);
             created = true;
             print("door created");
 
 
         }
+        Vector2 mapPosition = (Vector2)transform.position - offset;
 
-        MapGenerator.Instance.showRooms();
+        MapGenerator.Instance.showRooms(mapPosition);
 
         //smooth
         //spawn

@@ -12,6 +12,7 @@ public class PathFinder
         Right,
         Down,
         Left,
+        error
     }
 
     private static readonly int Width = TileMap.TotalWidth;

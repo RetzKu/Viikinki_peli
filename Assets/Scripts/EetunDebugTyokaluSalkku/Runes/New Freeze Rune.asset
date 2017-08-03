@@ -17,7 +17,7 @@ MonoBehaviour:
   HudImage: {fileID: 0}
   Cd: 0
   EffectData:
-    BuffToApply: {fileID: 0}
+    BuffToApply: {fileID: 11400000, guid: d36227bd1db615f42b160e47fd68e8b6, type: 2}
     ExpansionTime: 0
     TotalRotation: 0
     LeavesEffectArea: 0

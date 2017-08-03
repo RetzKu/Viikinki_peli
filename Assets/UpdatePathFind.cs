@@ -18,6 +18,7 @@ public class UpdatePathFind : MonoBehaviour
     bool pressed = false;
     Vector2 midPoint = new Vector2(10f, 10f);
     public ITileMap tilemap;// vaihra
+    private bool _running;
 
 
     // Use this for initialization
@@ -38,6 +39,8 @@ public class UpdatePathFind : MonoBehaviour
         {
             Debug.LogError("Tilemap missing");
         }
+
+        _running = true;
     }
 
     void Update()
@@ -66,6 +69,7 @@ public class UpdatePathFind : MonoBehaviour
 
     void OnDrawGizmos() // käytä pathfind debuggaukseens
     {
-        Giz.OnDrawGizmosPate();
+        if (_running)
+            Giz.OnDrawGizmosPate();
     }
 }

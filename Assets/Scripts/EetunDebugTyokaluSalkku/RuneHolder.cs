@@ -139,7 +139,6 @@ public class RuneHolder : MonoBehaviour
         }
     }
 
-
     public Sprite[] GetHudImages()
     {
         Sprite[] images = new Sprite[runes.Count];

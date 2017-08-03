@@ -96,7 +96,7 @@ public class TileMap : MonoBehaviour, ITileMap
     }
 
     public void ResetBorders()
-    {
+    {Input.mousePosition;
         SpriteController.transform.position = GetTileGameObject(0, 0).transform.position;
         SpriteController.SetTileSprites(TotalWidth - 1, TotalHeight - 1, this, 1, 1);
     }
@@ -448,10 +448,6 @@ public class TileMap : MonoBehaviour, ITileMap
     {
         _perlinGenerator.GenerateChunk(_chunks[offsetY, offsetX], offsetX, offsetY);
     }
-
-
-    
-
 
     void Update()
     {

@@ -101,26 +101,26 @@ public class door : MonoBehaviour
     //}
     public void spawnCaveMobs()
     {
-        //int rooms = finalRooms.Count - 1;
-        //if (rooms == 0)
-        //{
+        int rooms = finalRooms.Count - 1;
+        if (rooms == 0)
+        {
 
-        //    return;
-        //}
-        //for (int i = 0; i < rooms; i++)
-        //{
-        //    if (i == 0)
-        //    {
-        //        // generate boss mayn
-        //        //spawn boss mayn
-        //    }
-        //    float mobAmount = finalRooms[i].roomsize / 10;
-        //    if (mobAmount > 1)
-        //    {
-        //        Vector2 k = new Vector2(finalRooms[i].tiles[6].tileX, finalRooms[i].tiles[6].tileY);
-        //        MobsControl.instance.SpawnBoids(k.x + offset.x, k.y + offset.y, 0, (int)mobAmount);
-        //    }
-        //}
+            return;
+        }
+        for (int i = 0; i < rooms; i++)
+        {
+            if (i == 0)
+            {
+                // generate boss mayn
+                //spawn boss mayn
+            }
+            float mobAmount = finalRooms[i].roomsize / 10;
+            if (mobAmount > 1)
+            {
+                Vector2 k = new Vector2(finalRooms[i].tiles[6].tileX, finalRooms[i].tiles[6].tileY);
+                MobsControl.instance.SpawnBoids(k.x + offset.x, k.y + offset.y, 0, (int)mobAmount);
+            }
+        }
 
 
     }

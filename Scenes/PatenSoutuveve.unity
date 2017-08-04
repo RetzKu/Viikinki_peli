@@ -3950,12 +3950,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ba8cfce009a3764ba416b37c8f039af, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &548582412 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-    type: 2}
-  m_PrefabInternal: {fileID: 535620828}
-  m_Script: {fileID: 11500000, guid: bbe7d1aef62cba44e98493997c79bf35, type: 3}
 --- !u!1001 &554868586
 Prefab:
   m_ObjectHideFlags: 0
@@ -4790,7 +4784,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b89cc67f5a1e31942802ff0453d461f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terveisin: {fileID: 548582412}
 --- !u!114 &936331382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6448,6 +6441,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114067160158167116, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: objectPrefabs.Array.size
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 114067160158167116, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: amountToBuffer.Array.size
+      value: 21
+      objectReference: {fileID: 0}
     - target: {fileID: 4214500096432208, guid: 317101aad9860994d946e75d103c65d0, type: 2}
       propertyPath: m_LocalPosition.x
       value: 25.199982
@@ -6488,7 +6491,7 @@ Prefab:
     - target: {fileID: 114676718114899972, guid: 317101aad9860994d946e75d103c65d0,
         type: 2}
       propertyPath: naturalSpawn
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114380621323257422, guid: 317101aad9860994d946e75d103c65d0,
         type: 2}
@@ -6516,6 +6519,17 @@ Prefab:
     - target: {fileID: 114676718114899972, guid: 317101aad9860994d946e75d103c65d0,
         type: 2}
       propertyPath: spawnWolfs
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114067160158167116, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: objectPrefabs.Array.data[20]
+      value: 
+      objectReference: {fileID: 1394555125282836, guid: 46a6d3f233ea10f4c98f9609ac59dae8,
+        type: 2}
+    - target: {fileID: 114067160158167116, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: amountToBuffer.Array.data[20]
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -7628,7 +7642,7 @@ Prefab:
     - target: {fileID: 224441577834934154, guid: aa7beb610ae45184ca0c009d3990cb02,
         type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aa7beb610ae45184ca0c009d3990cb02, type: 2}

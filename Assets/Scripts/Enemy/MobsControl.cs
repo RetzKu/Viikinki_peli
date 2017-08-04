@@ -79,7 +79,7 @@ public class MobsControl : MonoBehaviour
                     y = Random.Range(spawner[0].y - spawner[0].rad, spawner[0].y + spawner[0].rad);
 
                     k = player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(x, y));
-
+                    tries++;
                 }
                 while (k == PathFinder.Dir.NoDir && tries<5);
                 if(tries <= 5 && x > 0 && y > 0 && k != PathFinder.Dir.error)
@@ -102,7 +102,7 @@ public class MobsControl : MonoBehaviour
                         }
 
                     }
-                    else
+                    else if(tries < 5)
                     {
                         if (Boids.Count % 2 == 0)
                         {
@@ -120,7 +120,7 @@ public class MobsControl : MonoBehaviour
                         }
 
                     }
-
+                    
                     //wolfBoids.Add(go);
 
                 }

@@ -17,6 +17,7 @@ public class Perlin : MonoBehaviour
     private int samplerWidth = Chunk.CHUNK_SIZE;
     private int samplerHeigth = Chunk.CHUNK_SIZE;
     // private int samplerRadius = 2;
+    public float MaxObjectOffset = 0.3f;
 
     #region Fields
     public enum NoiseMode
@@ -454,8 +455,6 @@ public class Perlin : MonoBehaviour
     public void SpawnObject(Vector3 spawnPosition, Transform parent, TileType type, Chunk chunk, int x, int y)
     {
         // choose object to spawn
-        // TODO: jokaiselle biomelle omat spawnsettingits
-        // type = TileType.GrassLand;
 
         if (!IsImplementedSetting(type))
         {
@@ -559,19 +558,18 @@ public class Perlin : MonoBehaviour
             }
         }
 
-        // float[,] blueNoise = GenerateBlueNoise(20, 20);
-        // bool[,] trees = PlaceTrees(blueNoise, 20, 20, types); // kutsu suoraan tuolla niin ei tarvita uutta arrayta
 
         bool[,] trees = GenerateObjectsPosition(moisture);
 
         float startZ = (float)offsetY;
         for (int y = 0; y < Chunk.CHUNK_SIZE; y++)
         {
-            for (int x = 0; x < Chunk.CHUNK_SIZE; x++)    // offsetY
+            for (int x = 0; x < Chunk.CHUNK_SIZE; x++)    
             {
                 if (trees[y, x])
                 {
-                    Vector3 spawnPosition = new Vector3(offsetX * Chunk.CHUNK_SIZE + x + Random.Range(-0.4f, 0.4f), offsetY * Chunk.CHUNK_SIZE + y + Random.Range(-0.4f, 0.4f), startZ);
+                    // Vector3 spawnPosition = new Vector3(offsetX * Chunk.CHUNK_SIZE + x + Random.Range(-0.4f, 0.4f), offsetY * Chunk.CHUNK_SIZE + y + Random.Range(-0.4f, 0.4f), startZ);
+                    Vector3 spawnPosition = new Vector3(offsetX * Chunk.CHUNK_SIZE + x + Random.Range(-MaxObjectOffset, MaxObjectOffset), offsetY * Chunk.CHUNK_SIZE + y + Random.Range(-MaxObjectOffset, MaxObjectOffset), startZ);
                     startZ += 0.001f; // Z tween/interpolation funktio
                     SpawnObject(spawnPosition, this.trees.transform, types[y, x], chunk, x, y);
                 }
@@ -581,8 +579,6 @@ public class Perlin : MonoBehaviour
         OffsetX = 0;
         OffsetY = 0;
     }
-
-
 
     public GameObject TreeTrefab;
     public void GenerateChunk(TileType[,] tiles, GameObject[,] gameObjects, int offsetX, int offsetY, int startX, int startY) // chunkin offsetit 0,0:sta

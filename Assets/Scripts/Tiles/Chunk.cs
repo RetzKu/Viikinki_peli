@@ -79,7 +79,8 @@ public class Chunk      // sub array
     public void AddObject(int x, int y, GameObject go)
     {
         go.transform.parent = _parent.transform;
-        worldObjects.Add(new Vec2(x, y), go);
+
+        worldObjects[new Vec2(x, y)] = go;
     }
 
     public void OnChunkChangedCleanup()
@@ -87,23 +88,30 @@ public class Chunk      // sub array
         foreach (var keypairvalue in worldObjects)
         {
             ResourceType type = keypairvalue.Value.GetComponent<Resource>().type;
+
+            keypairvalue.Value.transform.parent = null;
+
             if (ResourceManager.IsAliveTree(type))
             {
                 keypairvalue.Value.transform.localScale = new Vector3(1f, 1f, 1f);
-            }
-            keypairvalue.Value.transform.parent = null;
-
-            if (ResourceManager.Instance.IsTrunkType(type))
-            {
                 ObjectPool.instance.PoolObject(keypairvalue.Value);
             }
             else
             {
-                ObjectPool.instance.DestroyObjectAndReplace(keypairvalue.Value);
+                if (ResourceManager.Instance.IsTrunkType(type))
+                {
+                    ObjectPool.instance.PoolObject(keypairvalue.Value);
+                }
+                else
+                {
+                    ObjectPool.instance.DestroyObjectAndReplace(keypairvalue.Value);
+                }
             }
+
         }
         worldObjects.Clear();
     }
+
 
     public static void SwapViews(Chunk a, Chunk b)
     {
@@ -226,7 +234,7 @@ public class Chunk      // sub array
 
             worldObjects[keyvaluepair.Key] = go;
 
-          
+
         }
     }
 

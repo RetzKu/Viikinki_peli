@@ -31,7 +31,7 @@ public class CardMoverEraser : MonoBehaviour, IPointerClickHandler, IPointerEnte
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        // print(Vector2.Distance((Vector2)transform.position, _startPosition) );
+        print(Vector2.Distance((Vector2)transform.position, _startPosition) );
         if (Vector2.Distance((Vector2)transform.position, _startPosition) >= DropDistance)
         {
             // poista, jostain inventorysta

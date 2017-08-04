@@ -2980,6 +2980,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: TestTiles.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4772326767965640, guid: 9ba8cfce009a3764ba416b37c8f039af, type: 2}
       propertyPath: m_LocalPosition.x
       value: -1.1
@@ -4332,6 +4337,15 @@ Prefab:
       propertyPath: terveisin
       value: 
       objectReference: {fileID: 548582412}
-    m_RemovedComponents: []
+    - target: {fileID: 114335856655356606, guid: b5405cc59ec405e42ac26438ef1b066d,
+        type: 2}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 1500619622908896, guid: 48784c733145937429b392a440fa8575,
+        type: 2}
+    m_RemovedComponents:
+    - {fileID: 114822880315434542, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
+    - {fileID: 114743761843763340, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
+    - {fileID: 114647863370753822, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
   m_IsPrefabParent: 0

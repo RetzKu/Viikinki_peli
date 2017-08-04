@@ -65,7 +65,7 @@ public class combat : MonoBehaviour
                     {
                         // Tehään viholliseen damagea
                         GetComponent<FxScript>().lastHittedEnemy.GetComponent<enemyStats>().takeDamage(countPlayerDamage());
-                        GetComponentInChildren<weaponStats>().useDuration();
+                        transform.GetComponent<PlayerScript>().LoseDurability();
                         Debug.Log("Dmg given to: " + GetComponent<FxScript>().lastHittedEnemy.name + " " + countPlayerDamage() + ". HP left: " + GetComponent<FxScript>().lastHittedEnemy.GetComponent<enemyStats>().hp);
                         damageDone = true;
                     }
@@ -193,7 +193,7 @@ public class combat : MonoBehaviour
                     tempo2.Normalize();
 
                     GameObject.Find("projectileManager").GetComponent<ProjectileManager>().spawnProjectile(transform.position, new Vector2(transform.position.x + tempo2.x * 6, transform.position.y + tempo2.y * 6));
-                    GetComponentInChildren<weaponStats>().useDuration();
+                    transform.GetComponent<PlayerScript>().LoseDurability();
                     // Tähän voisi laittaa efektin vaihtumaan bowi efektiin
                 }
                 else

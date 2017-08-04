@@ -16,11 +16,6 @@ public class AnimatorScript : MonoBehaviour
 
     private List<GameObject> TorsoList;
 
-    public GameObject Knob0;
-    public GameObject Knob1;
-    public GameObject Knob3;
-    public GameObject Knob4;
-
     private float StartTime;
     private float Duration = 0.5f;
 
@@ -42,17 +37,6 @@ public class AnimatorScript : MonoBehaviour
         Animators.Add(transform.Find("s_c_torso").GetComponent<Animator>());  //0 Index
         Animators.Add(transform.Find("d_c_torso").GetComponent<Animator>());  //1 Index
         Animators.Add(transform.Find("u_c_torso").GetComponent<Animator>());  //2 Index
-
-        Knob0 = Instantiate(Knob0);
-        Knob1 = Instantiate(Knob1);
-        Knob3 = Instantiate(Knob0);
-        Knob4 = Instantiate(Knob1);
-
-        Destroy(Knob0.GetComponent<BoxCollider2D>());
-        Destroy(Knob1.GetComponent<BoxCollider2D>());
-        Destroy(Knob3.GetComponent<BoxCollider2D>());
-        Destroy(Knob4.GetComponent<BoxCollider2D>());
-        
 
     }
 

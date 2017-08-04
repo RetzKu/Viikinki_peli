@@ -29,9 +29,12 @@ public class CardMoverEraser : MonoBehaviour, IPointerClickHandler, IPointerEnte
         // hover stuff
     }
 
+    // korttien transformit on lokattu =(
     public void OnPointerUp(PointerEventData eventData)
     {
         print(Vector2.Distance((Vector2)transform.position, _startPosition) );
+        float dis = Vector2.Distance(transform.position, _startPosition);
+
         if (Vector2.Distance((Vector2)transform.position, _startPosition) >= DropDistance)
         {
             // poista, jostain inventorysta

@@ -9,7 +9,7 @@ public class UpdatePathFind : MonoBehaviour
 
 
     public BreadthFirstSearch path;
-    debugGiz Giz;
+    //debugGiz Giz;
 
     bool uptade = true;
 
@@ -26,8 +26,8 @@ public class UpdatePathFind : MonoBehaviour
         path = new BreadthFirstSearch();
         path.map = tilemap;
         body = GetComponent<Rigidbody2D>();
-        Giz = GetComponent<debugGiz>();
-        Giz.init(path);
+       // Giz = GetComponent<debugGiz>();
+      //  Giz.init(path);
 
         var go = GameObject.FindGameObjectWithTag("Tilemap");
         if (go)
@@ -49,7 +49,7 @@ public class UpdatePathFind : MonoBehaviour
                 path.uptadeTiles(midPoint, tilemap); //get tile map // 
                 uptade = false;
             }
-            Giz.init(path);
+       //     Giz.init(path);
         }
 
         int[] m = path.calculateIndex(body.position);
@@ -66,6 +66,6 @@ public class UpdatePathFind : MonoBehaviour
 
     void OnDrawGizmos() // käytä pathfind debuggaukseens
     {
-        Giz.OnDrawGizmosPate();
+    //    Giz.OnDrawGizmosPate();
     }
 }

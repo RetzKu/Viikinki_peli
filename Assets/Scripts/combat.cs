@@ -22,6 +22,7 @@ public class combat : MonoBehaviour
     public float atmAttackTime = 0.0f;
     // Flagi jolla tarkistetaan onko lyönnillä JO tehty damagea
     private bool damageDone = false;
+    private bool CampfireDamageFlag = false;
 
     private Vector2 lastEnemyHitPosition = new Vector2(0f, 0f);
 
@@ -172,8 +173,9 @@ public class combat : MonoBehaviour
 
     public void setPlayerOnFire()
     {
-        ParticleSpawner.instance.SpawSlow(GameObject.Find("Player"), 2.5f);
-        takeDamage(10f);
+        ParticleSpawner.instance.SpawFireEffect(GameObject.Find("Player"), 2.5f);
+        CampfireDamageFlag = true;
+        takeDamage(1f);
     }
 
     // Metodi jolla tarkistetaan onko painettu lyöty ja lyönti pois CD
@@ -229,7 +231,15 @@ public class combat : MonoBehaviour
         GetComponent<Movement>().KnockBack(lastEnemyHitPosition);
         Debug.Log("Player has " + hp + " hp left.");
         GetComponent<DamageVisual>().TakeDamage();
-        ParticleSpawner.instance.SpawSmallBlood(lastEnemyHitPosition, transform.position);
+        if (CampfireDamageFlag)
+        {
+            //GetComponent<ScreenShake>().Shake(); // Ison veren kanssa
+            CampfireDamageFlag = false;
+        }
+        else
+        {
+            ParticleSpawner.instance.SpawSmallBlood(lastEnemyHitPosition, transform.position);
+        }
         GameObject.Find("HpBase").GetComponent<HealthBar>().RefreshHP((int)hp);
     }
 

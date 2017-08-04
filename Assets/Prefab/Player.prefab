@@ -1226,12 +1226,10 @@ GameObject:
   - component: {fileID: 114264761283226734}
   - component: {fileID: 114023827949223096}
   - component: {fileID: 58421809874053922}
-  - component: {fileID: 114102464536211990}
-  - component: {fileID: 58287890094487306}
-  - component: {fileID: 114743761843763340}
   - component: {fileID: 114335856655356606}
   - component: {fileID: 114647863370753822}
-  - component: {fileID: 114822880315434542}
+  - component: {fileID: 114527698779494314}
+  - component: {fileID: 114716112762998226}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -2460,20 +2458,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.57
---- !u!58 &58287890094487306
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1977754839611798}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -0.075}
-  serializedVersion: 2
-  m_Radius: 0.05
 --- !u!58 &58359055287938942
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -3023,8 +3007,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b89cc67f5a1e31942802ff0453d461f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terveisin: {fileID: 0}
-  inCave: 0
 --- !u!114 &114037649305198458
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3089,17 +3071,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 0
   y: 2
---- !u!114 &114102464536211990
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1977754839611798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c499b1efb0997e42b0cfb500150534b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114106720866073798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3124,8 +3095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventorySize: 5
   Inventory:
-    InventoryData:
-    - {fileID: 0}
+    InventoryData: []
     EquipData:
       _ChestPiece: {fileID: 0}
       _Tool: {fileID: 0}
@@ -3331,7 +3301,7 @@ MonoBehaviour:
   y: 0
 --- !u!114 &114335856655356606
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977754839611798}
@@ -3435,6 +3405,18 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 11400000, guid: e16a8ceb4df570c4981a2e42bbb8567c, type: 2}
   IsOwnerPlayer: 1
+--- !u!114 &114527698779494314
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1977754839611798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eb7841052bf02442926b671277524b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 1821540224787276}
 --- !u!114 &114528099119221096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3518,10 +3500,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Lock: 0
-  Knob0: {fileID: 0}
-  Knob1: {fileID: 0}
-  Knob3: {fileID: 0}
-  Knob4: {fileID: 0}
 --- !u!114 &114613662104883584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3533,7 +3511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c036588fb7ae84b98c28ed62031ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
+  hp: 10
   dmgBase: 5
   rangedBaseDmg: 0
   movementSpeed: 100
@@ -3556,7 +3534,7 @@ MonoBehaviour:
   y: 2
 --- !u!114 &114647863370753822
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977754839611798}
@@ -3578,7 +3556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 1
   y: 0
---- !u!114 &114743761843763340
+--- !u!114 &114716112762998226
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3586,9 +3564,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1977754839611798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c499b1efb0997e42b0cfb500150534b, type: 3}
+  m_Script: {fileID: 11500000, guid: cf12ffb5967ed9d489b4c18798bc8326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 6
+  open: 0
 --- !u!114 &114769070197153522
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3615,18 +3595,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 1
   y: 1
---- !u!114 &114822880315434542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1977754839611798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 859abfb1546e9a74d969c99f50f3ff08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  door: {fileID: 0}
 --- !u!114 &114851106342051558
 MonoBehaviour:
   m_ObjectHideFlags: 1

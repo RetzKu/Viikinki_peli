@@ -8,6 +8,7 @@ public class HealthBar : MonoBehaviour {
     public float Speed;
     static float t = 0.0f;
     private GameObject[] HealthArray = new GameObject[10];
+    private bool BloodFlag = false;
 
 	// Use this for initialization
 	void Start ()
@@ -22,6 +23,7 @@ public class HealthBar : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate()
     {
+        /*
         t += Time.deltaTime * Speed;
 
         for(int x = 0; x < 10; x++)
@@ -29,9 +31,10 @@ public class HealthBar : MonoBehaviour {
             if (transform.Find("Blood" + x) != null)
             {
                 GameObject tempObj = transform.Find("Blood" + x).gameObject;
-                tempObj.transform.position = new Vector3(tempObj.transform.position.x, Mathf.Lerp(tempObj.transform.position.y, tempObj.transform.position.y - 50f, t));
+                tempObj.GetComponent<Image>().color = new Color(1f, 1f, 1f, Mathf.Lerp(1f, 0f, t));
             }
         }
+        */
     }
 
     public void RefreshHP(int CurrentHP)
@@ -53,10 +56,13 @@ public class HealthBar : MonoBehaviour {
                     Sprite[] tempSprites = Resources.LoadAll<Sprite>("hpbar");
                     BloodDrop.AddComponent<Image>().sprite = tempSprites[14];
                     BloodDrop.transform.SetParent(HealthArray[x].transform.parent.transform);
-                    BloodDrop.transform.position = new Vector3(HealthArray[x].transform.position.x, HealthArray[x].transform.position.y -10f, 1f);
+                    BloodDrop.transform.position = new Vector3(HealthArray[x].transform.position.x, HealthArray[x].transform.position.y - 20f, 1f);
                     BloodDrop.transform.localScale = new Vector3(0.2f, 0.2f, 1f);
+                    
+                    //BloodDrop.GetComponent<Rigidbody2D>().AddForce();
+                    BloodDrop.AddComponent<BloodDrop>();
                     //BloodDrop.GetComponent<RectTransform>().local
-                    Destroy(BloodDrop, 2f);
+                    //Destroy(BloodDrop, 3.5f);
                 }
             }
         }

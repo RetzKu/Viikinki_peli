@@ -35,8 +35,11 @@ public class CraftingManager : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.grey;
-        Gizmos.DrawSphere(InventoryPosition.position, 10f);
+        if (InventoryPosition)
+        {
+            Gizmos.color = Color.grey;
+            Gizmos.DrawSphere(InventoryPosition.position, 10f);
+        }
     }
 
     void Awake()
@@ -144,7 +147,7 @@ public class CraftingManager : MonoBehaviour
             {
                 go.transform.position = Vector3.Lerp(start, Camera.main.ScreenToWorldPoint(InventoryPosition.position), i / (float)iters);
                 go.transform.Rotate(0f, 0f, rotation);
-                yield return null; 
+                yield return null;
             }
         }
 

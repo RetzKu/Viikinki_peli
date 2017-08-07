@@ -35,8 +35,8 @@ public class CraftingManager : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.grey;
-        Gizmos.DrawSphere(InventoryPosition.position, 10f);
+        //Gizmos.color = Color.grey;
+       // Gizmos.DrawSphere(InventoryPosition.position, 10f);
     }
 
     void Awake()

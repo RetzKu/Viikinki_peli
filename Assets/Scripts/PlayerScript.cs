@@ -70,6 +70,13 @@ public class PlayerScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Y) == true) { BreakArmor(); }
     }
 
+    public void LoseDurability()
+    {
+        //Inventory.EquipData.Tool.GetComponent<weaponStats>().useDuration();
+        Inventory.InventoryData.Find(a => a.name == EquippedTool.Tool.name).GetComponent<weaponStats>().useDuration();
+        weaponInHand.GetComponent<weaponStats>().useDuration();
+    }
+
     public void BreakArmor()
     {
         Inventory.BreakArmor();

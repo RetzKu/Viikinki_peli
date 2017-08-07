@@ -137,12 +137,6 @@ public class DeckScript : MonoBehaviour
                 tempObj2.GetComponent<Image>().color = new Color(0.13334f, 0.0902f, 0.02745f, 0.6902f);
                 tempObj2.GetComponent<RectTransform>().localPosition = new Vector3(50f, 0f, 0f);
 
-                /*
-                // Duration testiä
-                int duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<weaponStats>().duration;
-                tempObj2.GetComponent<RectTransform>().localScale = new Vector3((float)duration * 0.1f * 0.1f, 1f, 1f);
-                */
-
                 Rect cardImageRect = cardImage.rect;
                 var image = tempObj.AddComponent<Image>();
                 image.sprite = cardImage;
@@ -378,7 +372,6 @@ public class DeckScript : MonoBehaviour
             transform.FindChild("Card" + (brokenWeaponInt)).GetChild(0).GetComponent<Image>().color = new Color(cardColor2.r, cardColor2.g, cardColor2.b, Mathf.Lerp(1f, 0f, t));
             Color cardColor3 = transform.FindChild("Card" + (brokenWeaponInt)).GetChild(1).GetComponent<Image>().color;
             transform.FindChild("Card" + (brokenWeaponInt)).GetChild(1).GetComponent<Image>().color = new Color(cardColor3.r, cardColor3.g, cardColor3.b, Mathf.Lerp(1f, 0f, t));
-
 
             if (t >= 1)
             {

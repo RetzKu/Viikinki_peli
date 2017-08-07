@@ -22,6 +22,7 @@ public class combat : MonoBehaviour
     public float atmAttackTime = 0.0f;
     // Flagi jolla tarkistetaan onko lyönnillä JO tehty damagea
     private bool damageDone = false;
+    private bool CampfireDamageFlag = false;
 
     private Vector2 lastEnemyHitPosition = new Vector2(0f, 0f);
 
@@ -65,7 +66,7 @@ public class combat : MonoBehaviour
                     {
                         // Tehään viholliseen damagea
                         GetComponent<FxScript>().lastHittedEnemy.GetComponent<enemyStats>().takeDamage(countPlayerDamage());
-                        GetComponentInChildren<weaponStats>().useDuration();
+                        transform.GetComponent<PlayerScript>().LoseDurability();
                         Debug.Log("Dmg given to: " + GetComponent<FxScript>().lastHittedEnemy.name + " " + countPlayerDamage() + ". HP left: " + GetComponent<FxScript>().lastHittedEnemy.GetComponent<enemyStats>().hp);
                         damageDone = true;
                     }
@@ -172,8 +173,9 @@ public class combat : MonoBehaviour
 
     public void setPlayerOnFire()
     {
-        ParticleSpawner.instance.SpawSlow(GameObject.Find("Player"), 2.5f);
-        takeDamage(10f);
+        ParticleSpawner.instance.SpawFireEffect(GameObject.Find("Player"), 2.5f);
+        CampfireDamageFlag = true;
+        takeDamage(1f);
     }
 
     // Metodi jolla tarkistetaan onko painettu lyöty ja lyönti pois CD
@@ -193,7 +195,7 @@ public class combat : MonoBehaviour
                     tempo2.Normalize();
 
                     GameObject.Find("projectileManager").GetComponent<ProjectileManager>().spawnProjectile(transform.position, new Vector2(transform.position.x + tempo2.x * 6, transform.position.y + tempo2.y * 6));
-                    GetComponentInChildren<weaponStats>().useDuration();
+                    transform.GetComponent<PlayerScript>().LoseDurability();
                     // Tähän voisi laittaa efektin vaihtumaan bowi efektiin
                 }
                 else
@@ -229,7 +231,15 @@ public class combat : MonoBehaviour
         GetComponent<Movement>().KnockBack(lastEnemyHitPosition);
         Debug.Log("Player has " + hp + " hp left.");
         GetComponent<DamageVisual>().TakeDamage();
-        ParticleSpawner.instance.SpawSmallBlood(lastEnemyHitPosition, transform.position);
+        if (CampfireDamageFlag)
+        {
+            //GetComponent<ScreenShake>().Shake(); // Ison veren kanssa
+            CampfireDamageFlag = false;
+        }
+        else
+        {
+            ParticleSpawner.instance.SpawSmallBlood(lastEnemyHitPosition, transform.position);
+        }
         GameObject.Find("HpBase").GetComponent<HealthBar>().RefreshHP((int)hp);
     }
 

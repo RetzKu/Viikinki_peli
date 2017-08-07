@@ -13,7 +13,7 @@ public class ParticleSpawner : MonoBehaviour {
     public GameObject fireExp;
     public GameObject rockExp;
     public static ParticleSpawner instance;
-
+    public List<GameObject> bloods = new List<GameObject>();
     void Start()
     {
         if(instance == null)
@@ -26,11 +26,13 @@ public class ParticleSpawner : MonoBehaviour {
     {
         var newBlood = Instantiate(Largeblood, new Vector2(0, 0), Quaternion.identity);
         newBlood.GetComponent<destroyMe>().initParticle(from, where);
+        bloods.Add(newBlood);
     }
     public void SpawSmallBlood(Vector2 from, Vector2 where)
     {
         var newBlood = Instantiate(SmallBlood, new Vector2(0, 0), Quaternion.identity);
         newBlood.GetComponent<destroyMe>().initParticle(from, where);
+        bloods.Add(newBlood);
     }
     public void SpawSlow(GameObject father,float time)
     {
@@ -61,5 +63,13 @@ public class ParticleSpawner : MonoBehaviour {
     {
         var ss = Instantiate(rockExp);
         ss.GetComponent<SecretExplosion>().init(position, time);
+    }
+    public void destroybloods()
+    {
+        foreach(GameObject b in bloods)
+        {
+            Destroy(b);
+            bloods.Remove(b);
+        }
     }
 }

@@ -471,8 +471,9 @@ PlayerSettings:
   XboxOneAllowedProductIds: []
   XboxOnePersistentLocalStorageSize: 0
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
-  cloudProjectId: 
-  projectName: 
-  organizationId: 
+  cloudServicesEnabled:
+    UNet: 1
+  cloudProjectId: d581a244-4dd7-4b39-b368-de3e01704b96
+  projectName: com.tannekko.pitilaittaa
+  organizationId: pendergast
   cloudEnabled: 0

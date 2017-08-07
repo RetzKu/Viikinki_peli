@@ -5,7 +5,6 @@ using System;
 
 public class door : MonoBehaviour
 {
-
     bool created = false;
     string seed;
     int height = 50; // mah random

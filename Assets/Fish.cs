@@ -1,0 +1,59 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
+public class Fish : MonoBehaviour
+{
+    private Rigidbody2D _body;
+    private Vector2 _startPosition;
+    private readonly float startOffsetY = -0.6f;
+
+    public void Start()
+    {
+        Init();
+    }
+
+    public void Init()
+    {
+        _body = GetComponent<Rigidbody2D>();
+        _startPosition = transform.position; 
+        _startPosition.y += startOffsetY;
+
+        GetComponent<SpriteRenderer>().sprite = Corpse.CorpseSprites[Random.Range(0, Corpse.CorpseSprites.Length - 1)];
+        transform.localScale = new Vector3(2f, 2f, 2f);
+    }
+
+    public void Launch(Vector2 force)
+    {
+        // _body.AddForce(force, ForceMode2D.Impulse);
+        // var laucher = gameObject.AddComponent<ObjectFaller>();
+        // laucher.StartFreeFall(3f);
+
+        _body.AddForce(new Vector2(Random.Range(-3f, 3f), 8f), ForceMode2D.Impulse);
+    }
+
+    void Update()
+    {
+        transform.right = _body.velocity.normalized;
+
+        if (transform.position.y <= _startPosition.y)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // drop
+        // if (other.gameObject.layer)
+        // {
+        // }
+        //if (other.gameObject.layer)
+        //{
+        //}
+    }
+}

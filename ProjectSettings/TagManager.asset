@@ -84,11 +84,11 @@ TagManager:
   - name: ObjectLeftOvers
     uniqueID: 2481744113
     locked: 0
-  - name: ObjectLayer
-    uniqueID: 1593682653
-    locked: 0
   - name: ObjectShadow
     uniqueID: 3272270773
+    locked: 0
+  - name: ObjectLayer
+    uniqueID: 1593682653
     locked: 0
   - name: Player
     uniqueID: 3664509369

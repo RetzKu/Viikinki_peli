@@ -240,10 +240,10 @@ public class Perlin : MonoBehaviour
         return value;
     }
 
-    public int   blueNoiseOctaves = 2;
+    public int blueNoiseOctaves = 2;
     public float blueNoiseLacunarity = 0f;
     public float blueNoisePersistance = 0f;
-    public int   ObjectRValue = 2;
+    public int ObjectRValue = 2;
 
     public float[,] GenerateBlueNoise(int sizeX, int sizeY)
     {
@@ -476,7 +476,7 @@ public class Perlin : MonoBehaviour
                     float spawnRate = setting.SpawnableObjects[i].SpawnRate;
 
                     GameObject prefab = setting.SpawnableObjects[i].ObjectPrefab;
-                    if (totalCount + (spawnRate) >= roll)
+                    if (totalCount + spawnRate >= roll)
                     {
                         var go = ObjectPool.instance.GetObjectForType(prefab.name, false); // ??????????????????
 
@@ -484,7 +484,7 @@ public class Perlin : MonoBehaviour
 
                         float z = ZlayerManager.GetZFromY(spawnPosition); // eessä olevat puut eteen ja takana taakse
                         go.transform.position = new Vector3(spawnPosition.x, spawnPosition.y, z);
-                            
+
                         go.GetComponent<Resource>().Init(false);
 
                         chunk.AddObject(x, y, go);
@@ -513,11 +513,7 @@ public class Perlin : MonoBehaviour
 
         foreach (Vector2 sample in samples) // 20, 20 alueelta pisteitä muuta indekseiksi
         {
-            // float a = objectNoise[(int)sample.y, (int)sample.x];
-            // if (a > 0.45f)
-            {
-                result[(int)sample.x, (int)sample.y] = true;   // myohemmin generaatio voisi suoraan olla tähän
-            }
+            result[(int)sample.x, (int)sample.y] = true;   // myohemmin generaatio voisi suoraan olla tähän
         }
         return result;
     }
@@ -542,11 +538,10 @@ public class Perlin : MonoBehaviour
             for (int x = 0; x < chunkSize; x++)
             {
                 GameObject go = chunk.GetGameObject(x, y);
-                // TileType type = GetBiome(elevation[y, x], moisture[y, x]);
                 TileType type = GetBiomeWSettings(elevation[y, x], moisture[y, x]);
-
                 types[y, x] = type;
 
+                // TileType type = GetBiome(elevation[y, x], moisture[y, x]);
                 // go.GetComponent<Renderer>().material.color = BiomeToColor(type);
 
                 if (TileMap.Collides(type)) // disable atm ITileMap.cs
@@ -561,16 +556,13 @@ public class Perlin : MonoBehaviour
 
         bool[,] trees = GenerateObjectsPosition(moisture);
 
-        float startZ = (float)offsetY;
         for (int y = 0; y < Chunk.CHUNK_SIZE; y++)
         {
-            for (int x = 0; x < Chunk.CHUNK_SIZE; x++)    
+            for (int x = 0; x < Chunk.CHUNK_SIZE; x++)
             {
                 if (trees[y, x])
                 {
-                    // Vector3 spawnPosition = new Vector3(offsetX * Chunk.CHUNK_SIZE + x + Random.Range(-0.4f, 0.4f), offsetY * Chunk.CHUNK_SIZE + y + Random.Range(-0.4f, 0.4f), startZ);
-                    Vector3 spawnPosition = new Vector3(offsetX * Chunk.CHUNK_SIZE + x + Random.Range(-MaxObjectOffset, MaxObjectOffset), offsetY * Chunk.CHUNK_SIZE + y + Random.Range(-MaxObjectOffset, MaxObjectOffset), startZ);
-                    startZ += 0.001f; // Z tween/interpolation funktio
+                    Vector3 spawnPosition = new Vector3(offsetX * Chunk.CHUNK_SIZE + x + Random.Range(-MaxObjectOffset, MaxObjectOffset), offsetY * Chunk.CHUNK_SIZE + y + Random.Range(-MaxObjectOffset, MaxObjectOffset));
                     SpawnObject(spawnPosition, this.trees.transform, types[y, x], chunk, x, y);
                 }
             }
@@ -619,9 +611,9 @@ public class Perlin : MonoBehaviour
     private const int _neigboursLength = 8;
     private Vec2[] neighbours = new Vec2[_neigboursLength]
     {
-        new Vec2(-1, 1), new Vec2(0, 1), new Vec2(1, 1), 
-        new Vec2(1, 0), new Vec2(-1, 0), 
-        new Vec2(-1, -1), new Vec2(0, -1), new Vec2(-1, -1), 
+        new Vec2(-1, 1), new Vec2(0, 1), new Vec2(1, 1),
+        new Vec2(1, 0), new Vec2(-1, 0),
+        new Vec2(-1, -1), new Vec2(0, -1), new Vec2(-1, -1),
     };
 
     public void PlaceBase(Chunk chunk)
@@ -644,8 +636,8 @@ public class Perlin : MonoBehaviour
                 if (neighbourCount == _neigboursLength)
                 {
                     success = true;
-                    baseY   = y;
-                    baseX   = x;
+                    baseY = y;
+                    baseX = x;
                     break;
                 }
             }

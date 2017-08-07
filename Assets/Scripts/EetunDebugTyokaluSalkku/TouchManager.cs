@@ -1,4 +1,5 @@
-﻿using System;
+﻿//#define DEBUG_TOUCH_POINT
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,12 +25,14 @@ public class TouchData
 
 public class TouchManager : MonoBehaviour
 {
-    private List<GameObject> _gameObjects = new List<GameObject>(10);
-    private Sprite _sprite;
     private List<TouchData> _touchCallback = new List<TouchData>();
 
+#if DEBUG_TOUCH_POINT
+    private Sprite _sprite;
+    private List<GameObject> _gameObjects = new List<GameObject>(10);
     private GameObject borders;
     private GameObject borders2;
+#endif
 
     public static TouchManager instance;
 
@@ -43,6 +46,7 @@ public class TouchManager : MonoBehaviour
         _touchCallback.Add(data);
     }
 
+#if DEBUG_TOUCH_POINT
     GameObject CreateCursorDebugSprite()
     {
         GameObject go = new GameObject("debug touch point");
@@ -52,13 +56,12 @@ public class TouchManager : MonoBehaviour
         // go.SetActive(false));
         return go;
     }
+#endif
 
-    void OnDrawGizmos()
-    {
-    }
 
     void Start()
     {
+#if DEBUG_TOUCH_POINT
         _sprite = Resources.Load<Sprite>("Circle");
 
         borders = new GameObject("debug");
@@ -73,6 +76,7 @@ public class TouchManager : MonoBehaviour
         {
             _gameObjects.Add(CreateCursorDebugSprite());
         }
+#endif
 
 
     }
@@ -95,15 +99,23 @@ public class TouchManager : MonoBehaviour
 
         for (int i = 0; i < touches.Length; i++)
         {
+#if DEBUG_TOUCH_POINT
             if (i > _gameObjects.Count - 1)
             {
                 break;
             }
+#endif
             var touch = touches[i];
+
+#if DEBUG_TOUCH_POINT
             var go = _gameObjects[i];
+#endif
+
             if (touch.phase == TouchPhase.Began)
             {
+#if DEBUG_TOUCH_POINT
                 go.SetActive(true);
+#endif
             }
             else if (touch.phase == TouchPhase.Ended)
             {
@@ -111,7 +123,9 @@ public class TouchManager : MonoBehaviour
             }
 
             Vector3 position = Camera.main.ScreenToWorldPoint(touch.position);
+#if DEBUG_TOUCH_POINT
             go.transform.position = position;
+#endif
 
             for (int j = 0; j < _touchCallback.Count; j++)
             {

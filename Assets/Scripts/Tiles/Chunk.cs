@@ -98,20 +98,20 @@ public class Chunk      // sub array
             }
             else
             {
-                if (ResourceManager.Instance.IsTrunkType(type))
-                {
-                    ObjectPool.instance.PoolObject(keypairvalue.Value);
-                }
-                else
-                {
-                    ObjectPool.instance.DestroyObjectAndReplace(keypairvalue.Value);
-                }
-            }
+                ObjectPool.instance.DestroyObjectAndReplace(keypairvalue.Value);
 
+                //if (ResourceManager.Instance.IsTrunkType(type))
+                //{
+                //    ObjectPool.instance.PoolObject(keypairvalue.Value);
+                //}
+                //else
+                //{
+                //    ObjectPool.instance.DestroyObjectAndReplace(keypairvalue.Value);
+                //}
+            }
         }
         worldObjects.Clear();
     }
-
 
     public static void SwapViews(Chunk a, Chunk b)
     {
@@ -233,8 +233,6 @@ public class Chunk      // sub array
             go.transform.parent = _parent.transform;
 
             worldObjects[keyvaluepair.Key] = go;
-
-
         }
     }
 

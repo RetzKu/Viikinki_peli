@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CardMoverEraser : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
-    IPointerUpHandler, IPointerDownHandler, IDragHandler
+public class CardMoverEraser : MonoBehaviour,
+    IPointerClickHandler, IPointerEnterHandler, 
+    IPointerUpHandler, IPointerDownHandler, 
+    IDragHandler
 {
     private Vector2 _startPosition;
     private Vector2 _endPosition;
@@ -54,6 +56,7 @@ public class CardMoverEraser : MonoBehaviour, IPointerClickHandler, IPointerEnte
         {
             transform.position = Vector2.Lerp(_startPosition, _endPosition, _t);
             _t -= Time.deltaTime * ReturnSpeed;
+
             if (_t < 0.0f)
             {
                 _returnBack = false;
@@ -68,6 +71,8 @@ public class CardMoverEraser : MonoBehaviour, IPointerClickHandler, IPointerEnte
 
     public void OnDrag(PointerEventData eventData)
     {
+        // tohon bool
+
         transform.position = eventData.position;
         _returnBack = false;
         _t = 1.0f;

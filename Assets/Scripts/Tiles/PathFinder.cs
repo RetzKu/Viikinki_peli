@@ -27,7 +27,7 @@ public class PathFinder
     public int GoalY;
     public Texture2D GoalTexture2D;
 
-    Vector3 GetDir(Dir dir)
+    public static Vector3 GetDir(Dir dir)
     {
         const float len = 0.35f;
         switch (dir)
@@ -102,7 +102,7 @@ public class PathFinder
         dirs = new Dir[Height, Width];
         List<Vec2> neighbours = new List<Vec2>(4) { new Vec2(0, 0), new Vec2(0, 0), new Vec2(0, 0), new Vec2(0, 0) };
 
-        VisualizeMoveTiles();
+        // VisualizeMoveTiles();
 
         while (frontier.Count > 0)
         {
@@ -123,6 +123,12 @@ public class PathFinder
 
         GeneratePaths(cameFrom);
     }
+
+    void VisualizeCameFrom()
+    {
+
+    }
+
 
     private void VisualizeMoveTiles()
     {
@@ -170,7 +176,7 @@ public class PathFinder
         {
             for (int x = 1; x < Width - 1; x++)
             {
-                if (realMap[y][x].tileState != BreadthFirstSearch.states.wall && dirs[y, x] != Dir.NoWayOut)
+                if (realMap[y][x].tileState != BreadthFirstSearch.states.wall) // && dirs[y, x] != Dir.NoWayOut)
                 {
                     Vec2 vec = new Vec2(x, y);
                     Vec2 value;

@@ -38,7 +38,7 @@ public class BreadthFirstSearch
         if (inited)
         {
             int[] j = calculateIndex(k);
-            if (j[0] > TileMap.TotalWidth || j[1] > TileMap.TotalHeight || j[0] < 0 || j[1] < 0)
+            if (j[0] > TileMap.TotalWidth - 1 || j[1] > TileMap.TotalHeight - 1 || j[0] < 0 || j[1] < 0)
             {
                 return PathFinder.Dir.error;
             }

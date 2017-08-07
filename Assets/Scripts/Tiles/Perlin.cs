@@ -17,6 +17,7 @@ public class Perlin : MonoBehaviour
     private int samplerWidth = Chunk.CHUNK_SIZE;
     private int samplerHeigth = Chunk.CHUNK_SIZE;
     // private int samplerRadius = 2;
+    public float MaxObjectOffset = 0.3f;
 
     #region Fields
     public enum NoiseMode
@@ -239,10 +240,10 @@ public class Perlin : MonoBehaviour
         return value;
     }
 
-    public int   blueNoiseOctaves = 2;
+    public int blueNoiseOctaves = 2;
     public float blueNoiseLacunarity = 0f;
     public float blueNoisePersistance = 0f;
-    public int   ObjectRValue = 2;
+    public int ObjectRValue = 2;
 
     public float[,] GenerateBlueNoise(int sizeX, int sizeY)
     {
@@ -454,8 +455,6 @@ public class Perlin : MonoBehaviour
     public void SpawnObject(Vector3 spawnPosition, Transform parent, TileType type, Chunk chunk, int x, int y)
     {
         // choose object to spawn
-        // TODO: jokaiselle biomelle omat spawnsettingits
-        // type = TileType.GrassLand;
 
         if (!IsImplementedSetting(type))
         {
@@ -477,7 +476,7 @@ public class Perlin : MonoBehaviour
                     float spawnRate = setting.SpawnableObjects[i].SpawnRate;
 
                     GameObject prefab = setting.SpawnableObjects[i].ObjectPrefab;
-                    if (totalCount + (spawnRate) >= roll)
+                    if (totalCount + spawnRate >= roll)
                     {
                         var go = ObjectPool.instance.GetObjectForType(prefab.name, false); // ??????????????????
 
@@ -485,7 +484,7 @@ public class Perlin : MonoBehaviour
 
                         float z = ZlayerManager.GetZFromY(spawnPosition); // eessä olevat puut eteen ja takana taakse
                         go.transform.position = new Vector3(spawnPosition.x, spawnPosition.y, z);
-                            
+
                         go.GetComponent<Resource>().Init(false);
 
                         chunk.AddObject(x, y, go);
@@ -514,11 +513,7 @@ public class Perlin : MonoBehaviour
 
         foreach (Vector2 sample in samples) // 20, 20 alueelta pisteitä muuta indekseiksi
         {
-            // float a = objectNoise[(int)sample.y, (int)sample.x];
-            // if (a > 0.45f)
-            {
-                result[(int)sample.x, (int)sample.y] = true;   // myohemmin generaatio voisi suoraan olla tähän
-            }
+            result[(int)sample.x, (int)sample.y] = true;   // myohemmin generaatio voisi suoraan olla tähän
         }
         return result;
     }
@@ -543,11 +538,10 @@ public class Perlin : MonoBehaviour
             for (int x = 0; x < chunkSize; x++)
             {
                 GameObject go = chunk.GetGameObject(x, y);
-                // TileType type = GetBiome(elevation[y, x], moisture[y, x]);
                 TileType type = GetBiomeWSettings(elevation[y, x], moisture[y, x]);
-
                 types[y, x] = type;
 
+                // TileType type = GetBiome(elevation[y, x], moisture[y, x]);
                 // go.GetComponent<Renderer>().material.color = BiomeToColor(type);
 
                 if (TileMap.Collides(type)) // disable atm ITileMap.cs
@@ -559,20 +553,16 @@ public class Perlin : MonoBehaviour
             }
         }
 
-        // float[,] blueNoise = GenerateBlueNoise(20, 20);
-        // bool[,] trees = PlaceTrees(blueNoise, 20, 20, types); // kutsu suoraan tuolla niin ei tarvita uutta arrayta
 
         bool[,] trees = GenerateObjectsPosition(moisture);
 
-        float startZ = (float)offsetY;
         for (int y = 0; y < Chunk.CHUNK_SIZE; y++)
         {
-            for (int x = 0; x < Chunk.CHUNK_SIZE; x++)    // offsetY
+            for (int x = 0; x < Chunk.CHUNK_SIZE; x++)
             {
                 if (trees[y, x])
                 {
-                    Vector3 spawnPosition = new Vector3(offsetX * Chunk.CHUNK_SIZE + x + Random.Range(-0.4f, 0.4f), offsetY * Chunk.CHUNK_SIZE + y + Random.Range(-0.4f, 0.4f), startZ);
-                    startZ += 0.001f; // Z tween/interpolation funktio
+                    Vector3 spawnPosition = new Vector3(offsetX * Chunk.CHUNK_SIZE + x + Random.Range(-MaxObjectOffset, MaxObjectOffset), offsetY * Chunk.CHUNK_SIZE + y + Random.Range(-MaxObjectOffset, MaxObjectOffset));
                     SpawnObject(spawnPosition, this.trees.transform, types[y, x], chunk, x, y);
                 }
             }
@@ -581,8 +571,6 @@ public class Perlin : MonoBehaviour
         OffsetX = 0;
         OffsetY = 0;
     }
-
-
 
     public GameObject TreeTrefab;
     public void GenerateChunk(TileType[,] tiles, GameObject[,] gameObjects, int offsetX, int offsetY, int startX, int startY) // chunkin offsetit 0,0:sta
@@ -623,9 +611,9 @@ public class Perlin : MonoBehaviour
     private const int _neigboursLength = 8;
     private Vec2[] neighbours = new Vec2[_neigboursLength]
     {
-        new Vec2(-1, 1), new Vec2(0, 1), new Vec2(1, 1), 
-        new Vec2(1, 0), new Vec2(-1, 0), 
-        new Vec2(-1, -1), new Vec2(0, -1), new Vec2(-1, -1), 
+        new Vec2(-1, 1), new Vec2(0, 1), new Vec2(1, 1),
+        new Vec2(1, 0), new Vec2(-1, 0),
+        new Vec2(-1, -1), new Vec2(0, -1), new Vec2(-1, -1),
     };
 
     public void PlaceBase(Chunk chunk)
@@ -648,8 +636,8 @@ public class Perlin : MonoBehaviour
                 if (neighbourCount == _neigboursLength)
                 {
                     success = true;
-                    baseY   = y;
-                    baseX   = x;
+                    baseY = y;
+                    baseX = x;
                     break;
                 }
             }

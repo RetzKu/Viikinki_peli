@@ -12,22 +12,31 @@ public class CraftingManager : MonoBehaviour
     public delegate void OnCraftingResourceChanged();
     public event OnCraftingResourceChanged OnResourceCountChanged;
 
-    // resuja actually 8 kpl atm
     private Dictionary<IngredientType, int> CraftingInventory = new Dictionary<IngredientType, int>((int)IngredientType.Max);
+
     // public Dictionary<IngredientType, Sprite> sprite = new Dictionary<IngredientType, Sprite>();
+    // resuja actually 8 kpl atm
 
     public float DragTimerEffect = 3.5f;
     public float MaxRotation = 3.5f;
     public float MinRotation = 1.5f;
+    public RectTransform InventoryPosition;
 
     // GUI 
     // Ota viestit vastaan rune castaukselta
     // Lataa spritet awakessa niin saadaan ne GUILLE
     private Vector3 _resourcePickupEndPosition = new Vector3(0f, 0f, 0f);
 
+
     public void SetResourcePickupEndLocation(Vector3 position)
     {
         _resourcePickupEndPosition = position;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.grey;
+        Gizmos.DrawSphere(InventoryPosition.position, 10f);
     }
 
     void Awake()
@@ -123,22 +132,25 @@ public class CraftingManager : MonoBehaviour
     // TODO: laske aika oikein
     private IEnumerator DragToInventoryEffect(GameObject go)
     {
-        int iters = 60;
-        Vector3 start = go.transform.position;
-
-        float dir = Random.Range(0, 2) == 0 ? -1 : 1;
-        float rotation = dir * Random.Range(MinRotation, MaxRotation);
-
-        for (int i = 0; i < iters; i++)
+        if (InventoryPosition)
         {
-            go.transform.position = Vector3.Lerp(start, transform.position, i / (float)iters);
-            go.transform.Rotate(0f, 0f, rotation);
-            yield return null; // frame
+            int iters = 50;
+            Vector3 start = go.transform.position;
+
+            float dir = Random.Range(0, 2) == 0 ? -1 : 1;
+            float rotation = dir * Random.Range(MinRotation, MaxRotation);
+
+            for (int i = 0; i < iters; i++)
+            {
+                go.transform.position = Vector3.Lerp(start, Camera.main.ScreenToWorldPoint(InventoryPosition.position), i / (float)iters);
+                go.transform.Rotate(0f, 0f, rotation);
+                yield return null; 
+            }
         }
 
         var ingredient = go.GetComponent<Ingredient>();
         AddToInventory(ingredient.Type);
-        
+
         Destroy(go); // Lopussa himmennystä
     }
 

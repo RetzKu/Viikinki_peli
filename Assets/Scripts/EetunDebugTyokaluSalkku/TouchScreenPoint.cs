@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TouchScreenPoint : MonoBehaviour
 {
@@ -23,23 +21,5 @@ public class TouchScreenPoint : MonoBehaviour
                 GetComponent<CircleCollider2D>().enabled = false;
             }
         }
-    }
-
-    //void OnTriggerStay2D(Collider2D other)
-    //{
-    //    if (other.CompareTag("TouchPoint"))
-    //    {
-    //        if (_touchController != null)
-    //        {
-    //            _touchController.OnTouchDetected(x, y);
-    //            GetComponent<CircleCollider2D>().enabled = false;
-    //            Debug.LogFormat("{0} {1}", x, y);
-
-    //        }
-    //    }
-    //}
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Reflection.Emit;
 using UnityEngine;
 
  
 public class ObjectPool : MonoBehaviour
 {
-   
     public static ObjectPool instance;
     public GameObject[] objectPrefabs;
     public List<GameObject>[] pooledObjects;
@@ -79,9 +79,10 @@ public class ObjectPool : MonoBehaviour
                     return pooledObject;
                    
                 } else if(!onlyPooled) {
-                    return Instantiate(objectPrefabs[i]) as GameObject;
+                    GameObject go = Instantiate(objectPrefabs[i]) as GameObject;
+                    go.name = objectPrefabs[i].name;
+                    return go;
                 }
-
                 break;
             }
         }
@@ -118,7 +119,9 @@ public class ObjectPool : MonoBehaviour
                 Destroy(obj);
 
                 pooledObjects[i].Add(Instantiate(objectPrefabs[i]));
+                pooledObjects[i][pooledObjects[i].Count - 1].gameObject.name = objectPrefabs[i].gameObject.name;
                 pooledObjects[i][pooledObjects[i].Count - 1].SetActive(false);
+                pooledObjects[i][pooledObjects[i].Count - 1].transform.parent = containerObject.transform;
                 return;
             }
         }

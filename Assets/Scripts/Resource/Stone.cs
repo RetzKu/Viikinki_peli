@@ -27,16 +27,16 @@ public class Stone : Resource
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            Hit(25);
+        // if (Input.GetMouseButtonDown(1))
+        // {
+            // Hit(25);
             // AddImpact((Camera.main.ScreenToWorldPoint(Input.mousePosition) - GameObject.FindWithTag("Player").transform.position).normalized * 35f);
-        }
+        // }
 
         // if (impact.magnitude > 0.2)
         // {
         // }
         // impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
-        transform.Translate(impact * Time.deltaTime);
+        // transform.Translate(impact * Time.deltaTime);
     }
 }

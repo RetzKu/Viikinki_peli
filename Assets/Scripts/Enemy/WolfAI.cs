@@ -39,7 +39,7 @@ public class WolfAI : generalAi
         Physics._maxSpeed = MaxSpeed;
         this.player = player;
         mask = LayerMask.GetMask("Enemy");
-
+        inCave =  player.GetComponent<ChunkMover>().UnderGround;
     }
     Collider2D[] environment = new Collider2D[0];
     Collider2D[] HeardArray = new Collider2D[0];
@@ -75,12 +75,26 @@ public class WolfAI : generalAi
         {
             if (!agro)
             {
-                wander(HeardArray, ref flags, ref GiveStartTarget, ref counter, IdleRefreshRate);
-                //rotation.rotToPl = false;
-                rotation.Lock = false;
+                if (!inCave)
+                {
+                    wander(HeardArray, ref flags, ref GiveStartTarget, ref counter, IdleRefreshRate);
+                    RayCollide(ref CollState, ref velocity, collideDist, body);
+                    flags = flags | (int)behavior.Collide;
+                    rotation.Lock = false;
+                }
+                else
+                {
+                    Physics._maxSpeed = MaxSpeed * 0.2f;
+                    findPath(ref flags, ref velocity, ref target, player, body);
+                }
             }
             else if (agro)
             {
+                if (inCave)
+                {
+                    Physics._maxSpeed = MaxSpeed;
+
+                }
                 getEnvironment(ref environment);
                 Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
 

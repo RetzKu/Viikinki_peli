@@ -7,7 +7,7 @@ public class WolfAnimatorScript : MonoBehaviour
 
     private Animator WolfAnimator;
     private Transform WolfTransform;
-
+    public float scale;
     bool flip = false;
     int Rotation = 0;
     void Awake()
@@ -70,8 +70,8 @@ public class WolfAnimatorScript : MonoBehaviour
 
 
         }
-        if (flip == true) { transform.localScale = new Vector3(-1, 1, 1); }
-        else { transform.localScale = new Vector3(1, 1, 1); }
+        if (flip == true) { transform.localScale = new Vector3(-scale, scale, 1); }
+        else { transform.localScale = new Vector3(scale, scale, 1); }
 
         transform.localEulerAngles = new Vector3(0, 0, Rotation);
     }

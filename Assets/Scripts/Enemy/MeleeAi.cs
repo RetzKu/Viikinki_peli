@@ -12,7 +12,7 @@ public class MeleeAi : generalAi {
     
     public override void InitStart(float x, float y, EnemyType type,GameObject player)
     {
-        attackDist = UnityEngine.Random.Range(swingDist - 0.2f, swingDist + 0.2f);
+        attackDist = swingDist;
         myType = type;
         rotation.init(myType);
         body = GetComponent<Rigidbody2D>();
@@ -23,6 +23,8 @@ public class MeleeAi : generalAi {
         Physics.InitRules(sepF, aliF, cohF, desiredseparation, alingmentDistance, IdleRadius, IdleBallDistance, ArriveRadius, MaxSteeringForce, MaxSpeed);
         Physics._maxSpeed = MaxSpeed;
         this.player = player;
+        inCave = player.GetComponent<ChunkMover>().UnderGround;
+
     }
     //Collider2D[] environment = new Collider2D[0];
     Collider2D[] HeardArray = new Collider2D[0];
@@ -47,13 +49,28 @@ public class MeleeAi : generalAi {
         {
             if (!agro)
             {
-                //flags = (int)behavior.wanderGroup;
-                wander(HeardArray, ref flags, ref GiveStartTarget, ref counter, IdleRefreshRate);
-                rotation.rotToPl = false;
-                rotation.Lock = false;
+                if (!inCave)
+                {
+                    //flags = (int)behavior.wanderGroup;
+                    wander(HeardArray, ref flags, ref GiveStartTarget, ref counter, IdleRefreshRate);
+                    RayCollide(ref CollState, ref velocity, collideDist, body);
+                    flags = flags | (int)behavior.Collide;
+                    rotation.rotToPl = false;
+                    rotation.Lock = false;
+                }
+                else
+                {
+                    Physics._maxSpeed = MaxSpeed * 0.2f;
+                    findPath(ref flags, ref velocity, ref target, player, body);
+
+                }
             }
             else if (agro)
             {
+                if (inCave)
+                {
+                    Physics._maxSpeed = MaxSpeed;
+                }
                 Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
 
                 Vector2 dist = body.position - playerPos;

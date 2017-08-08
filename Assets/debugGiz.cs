@@ -64,6 +64,7 @@ public class debugGiz : MonoBehaviour
         Vector2 mapstart = copy.map.GetTileGameObject(0, 0).transform.position;
         if (inited)
         {
+
             Gizmos.color = Color.blue;
             for (int y = 0; y < copy.moveTiles.Count; y++)
             {

@@ -23,6 +23,8 @@ public class MobsControl : MonoBehaviour
     public GameObject Wolf;
     public GameObject Archer;
     public GameObject MeleeDude;
+    public GameObject BigMan;
+    public GameObject BigWolf;
     List<GameObject> Boids;
 
     public GameObject player;
@@ -102,7 +104,7 @@ public class MobsControl : MonoBehaviour
                         }
 
                     }
-                    else
+                    else if(tries < 5)
                     {
                         if (Boids.Count % 2 == 0)
                         {
@@ -120,7 +122,7 @@ public class MobsControl : MonoBehaviour
                         }
 
                     }
-
+                    ///////////////////////////////////////////////////////////////////////////////////////////////
                     //wolfBoids.Add(go);
 
                 }
@@ -181,5 +183,19 @@ public class MobsControl : MonoBehaviour
         Boids.Clear();
         spawner.Clear();
         return l;
+    }
+    public void spawnBigMan(float x, float y)
+    {
+        GameObject m;
+        m = Instantiate(BigMan, new Vector2(x, y), Quaternion.identity);
+        m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Archer, player);
+        Boids.Add(m);
+    }
+    public void spawnBigWolf(float x, float y)
+    {
+        GameObject m;
+        m = Instantiate(BigWolf, new Vector2(x, y), Quaternion.identity);
+        m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Wolf, player);
+        Boids.Add(m);
     }
 }

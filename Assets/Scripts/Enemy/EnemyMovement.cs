@@ -164,7 +164,7 @@ public class EnemyMovement
             }
             else
             {
-                acceleration = CollideSteer(collstate, acceleration); // EETU TRIGGER
+                acceleration = CollideSteer(collstate, acceleration,true); // EETU TRIGGER
             }
         }
 

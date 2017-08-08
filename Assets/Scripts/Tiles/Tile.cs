@@ -10,7 +10,7 @@ public enum TileType
     Water,
     Mountain,
 
-    CaveWall, // haluan ensimmäiseksi, pls eetut
+    CaveWall,
 
     CollisionTiles,
 

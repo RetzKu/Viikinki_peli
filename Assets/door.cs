@@ -57,6 +57,8 @@ public class door : MonoBehaviour
 
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             player.GetComponent<UpdatePathFind>().tilemap = dungeon;
+            player.GetComponent<UpdatePathFind>().path.uptadeTiles(player.transform.position,dungeon);
+
             if (!spawnedMobs)
             {
                 spawnCaveMobs();
@@ -92,8 +94,10 @@ public class door : MonoBehaviour
                 switch (boss)
                 {
                     case BossTypes.BigMan:
+                        MobsControl.instance.spawnBigMan(k.x + zero.x, k.y + zero.y);
                         break;
                     case BossTypes.BigWolf:
+                        MobsControl.instance.spawnBigWolf(k.x + zero.x, k.y + zero.y);
                         break;
                     default:
                         print("error loading boss");
@@ -163,8 +167,12 @@ public class door : MonoBehaviour
 
     //    }
     //}
+    List<Vector2> spawnpos = new List<Vector2>();
+    bool spawneddd = false;
+
     public void spawnCaveMobs()
     {
+        spawneddd = true;
         int rooms = finalRooms.Count - 1;
         if (rooms == 0)
         {
@@ -183,23 +191,25 @@ public class door : MonoBehaviour
                /// te = k;
                 Vector2 zero = (Vector2)MapGenerator.Instance.GetTileGameObject(0, 0).transform.position;
                 int rndBoss = UnityEngine.Random.Range(0, 1);
+                spawnpos.Add(new Vector2(k.x + zero.x, k.y + zero.y));
+
                 switch (rndBoss)
                 {
                     case 0:
                         MobsControl.instance.spawnBigWolf(k.x + zero.x, k.y + zero.y);
                         boss = BossTypes.BigWolf;
-                        print("boss created");
+                        print("boss created wolf");
                         break;
                     case 1:
                         MobsControl.instance.spawnBigMan(k.x + zero.x, k.y + zero.y);
                         boss = BossTypes.BigMan;
-                        print("boss created");
+                        print("boss created man");
                         break;
                 }
 
             }
             float _mobAmount = finalRooms[i].roomsize / 10;
-            int mobAmount = (int)_mobAmount;
+            int mobAmount = UnityEngine.Random.Range(5,8);
             mobs += mobAmount;
             if (mobAmount > 1) 
             {
@@ -212,22 +222,23 @@ public class door : MonoBehaviour
                     Vector2 k = new Vector2(finalRooms[i].tiles[(int)rndx].tileX, finalRooms[i].tiles[(int)rndy].tileY);
                     //te = k;
                     Vector2 zero = (Vector2)MapGenerator.Instance.GetTileGameObject(0, 0).transform.position;
+                    spawnpos.Add(new Vector2(k.x + zero.x, k.y + zero.y));
                     MobsControl.instance.SpawnBoids(k.x + zero.x, k.y + zero.y, 0, 1);
                 }
             }
         }
 
-
     }
     //bool spawned = false;
     //Vector2 te = new Vector2(0,0);
-    //void OnDrawGizmos()
-    //{
-    //    if (spawned)
-    //    {
-    //        Gizmos.DrawSphere((Vector2)MapGenerator.Instance.GetTileGameObject(0,0).transform.position + te, 1.5f);
-    //    }
-    //}
+    void OnDrawGizmos()
+    {
+
+            foreach(Vector2 vec in spawnpos)
+            {
+                Gizmos.DrawSphere(vec,1);
+            }
+    }
     void Update()
     {
         if (Input.GetKeyDown("v"))

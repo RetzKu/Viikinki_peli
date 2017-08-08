@@ -13,26 +13,30 @@ public class ParticleSpawner : MonoBehaviour {
     public GameObject fireExp;
     public GameObject rockExp;
     public static ParticleSpawner instance;
-    public List<GameObject> bloods = new List<GameObject>();
+    //public List<GameObject> bloods = new List<GameObject>();
+
+    private Transform _parent;
     void Start()
     {
         if(instance == null)
         {
             instance = this;
         }
-    }
 
+        _parent = new GameObject("luola_tuho").GetComponent<Transform>();
+    }
     public void SpawnLargeBlood(Vector2 from,Vector2 where)
     {
         var newBlood = Instantiate(Largeblood, new Vector2(0, 0), Quaternion.identity);
         newBlood.GetComponent<destroyMe>().initParticle(from, where);
-        bloods.Add(newBlood);
+        newBlood.transform.parent = _parent;
+        //bloods.Add(newBlood);
     }
     public void SpawSmallBlood(Vector2 from, Vector2 where)
     {
         var newBlood = Instantiate(SmallBlood, new Vector2(0, 0), Quaternion.identity);
         newBlood.GetComponent<destroyMe>().initParticle(from, where);
-        bloods.Add(newBlood);
+        newBlood.transform.parent = _parent;
     }
     public void SpawSlow(GameObject father,float time)
     {
@@ -66,10 +70,7 @@ public class ParticleSpawner : MonoBehaviour {
     }
     public void destroybloods()
     {
-        foreach(GameObject b in bloods)
-        {
-            Destroy(b);
-            bloods.Remove(b);
-        }
+        Destroy(_parent.gameObject);
+        _parent = new GameObject("luola_tuho").GetComponent<Transform>();
     }
 }

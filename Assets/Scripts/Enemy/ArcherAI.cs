@@ -26,7 +26,9 @@ public class ArcherAI : generalAi {
         proManager = GameObject.FindGameObjectWithTag("projectileManager");
 
     }
-
+    Collider2D[] environment = new Collider2D[0];
+    Collider2D[] HeardArray = new Collider2D[0];
+    Collider2D[] CollisionArray = new Collider2D[0];
     public override void UpdatePosition()
     {
         rotation.UpdateRotation(velocity, body.position);
@@ -35,9 +37,10 @@ public class ArcherAI : generalAi {
         LayerMask mask = new LayerMask();
         mask = LayerMask.GetMask("Enemy");
 
-        var HeardArray = Physics2D.OverlapCircleAll(body.position, alingmentDistance, mask); // , mask);
-        var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
+        getFriends(ref HeardArray, ref CollisionArray, alingmentDistance, desiredseparation, mask);
+
         Vector2[] powers = new Vector2[2];
+
 
         if (agro)   // agro jokainen vihu lähellä
         {
@@ -54,13 +57,32 @@ public class ArcherAI : generalAi {
         {
             if (!agro)
             {
-                wander(HeardArray,ref flags,ref GiveStartTarget,ref counter,IdleRefreshRate);
-                rotation.rotToPl = false;
-                rotation.Lock = false;
+                if (!inCave)
+                {
+                    //flags = (int)behavior.wanderGroup;
+                    wander(HeardArray, ref flags, ref GiveStartTarget, ref counter, IdleRefreshRate);
+                    RayCollide(ref CollState, ref velocity, collideDist, body);
+                    flags = flags | (int)behavior.Collide;
+                    rotation.rotToPl = false;
+                    rotation.Lock = false;
+                }
+                else
+                {
+
+                    Physics._maxSpeed = MaxSpeed * 0.2f;
+                    findPath(ref flags, ref velocity, ref target, player, body);
+
+                }
             }
             else if (agro)
             {
-                Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
+                if (inCave)
+                {
+                    Physics._maxSpeed = MaxSpeed;
+                }
+                getEnvironment(ref environment);
+
+                Vector2 playerPos = player.transform.position;
 
                 Vector2 dist = body.position - playerPos;
            
@@ -72,14 +94,13 @@ public class ArcherAI : generalAi {
             knocktimer();
         }
 
-        powers = Physics.applyBehaviors(HeardArray, CollisionArray,new Collider2D[0], velocity, target, body.position, flags, CollState);
+        powers = Physics.applyBehaviors(HeardArray, CollisionArray, environment, velocity, target, body.position, flags, CollState);
         target = powers[1];
         velocity = powers[0];
 
 
-        velocity *= Time.deltaTime;
         //print(velocity.magnitude);
-        body.MovePosition(body.position + velocity);
+        body.MovePosition(body.position + velocity * Time.deltaTime);
 
     }
     void archerPattern(Vector2 dist, Vector2 playerPos) // spe
@@ -91,7 +112,7 @@ public class ArcherAI : generalAi {
             {
                 rotation.rotToPl = true;
                 rotation.playerPos = playerPos;
-                Physics._desiredseparation = 0.7f;
+                Physics._desiredseparation =desiredseparation * 0.8f;
                 Physics._maxSpeed = MaxSpeed * 1.5f;
                 findPath(ref flags,ref velocity,ref target,player,body);
             }
@@ -106,9 +127,13 @@ public class ArcherAI : generalAi {
                 {
                     rotation.rotToPl = false;
                 }
-                Physics._desiredseparation = 1.0f;
+                Physics._desiredseparation = desiredseparation;
                 Physics._maxSpeed =MaxSpeed* 0.8f;
                 followPlayer(ref dist, playerPos,attackDist,ref target,ref flags,Physics,sepF);
+                if (environment != null && environment.Length != 0)
+                {
+                    flags = flags | (int)behavior.CollideEnv;
+                }
             }
         }
         else
@@ -117,8 +142,8 @@ public class ArcherAI : generalAi {
             attackCounter = 0;
             clock(playerPos,dist);
         }
-        Physics._sepF = sepF * 1.5f;
-        Physics._maxSteeringForce = MaxSteeringForce * 0.1f; //EETU TRIGGER
+        //Physics._sepF = sepF * 1.5f;
+        //Physics._maxSteeringForce = MaxSteeringForce * 0.1f; //EETU TRIGGER
     }
     void clock(Vector2 playerPos,Vector2 dist)
     {
@@ -164,7 +189,7 @@ public class ArcherAI : generalAi {
         //Gizmos.DrawLine(body.position, body.position+main); // piirretään viiva visualisoimaan toimivuutta 
         Gizmos.DrawLine(body.position, body.position + first);
         Gizmos.DrawLine(body.position, body.position + second);
-        Gizmos.DrawLine(body.position, body.position + velocity * 30);
+        Gizmos.DrawLine(body.position, body.position + velocity);
         if (rotation.rotToPl)
         {
             Gizmos.color = Color.red;

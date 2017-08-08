@@ -128,7 +128,7 @@ public abstract class generalAi : MonoBehaviour
         dist *= attackDist;
         target = playerPos + dist;
         flags = (int)behavior.seekAndArrive | (int)behavior.separate /*| (int)behavior.CollideEnv*/;
-        Physics._sepF = sepF * 2;
+        //Physics._sepF = sepF * 2;
     }
     float envTime = 0.1f;
     float envTimer = 0f;

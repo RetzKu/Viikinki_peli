@@ -12,7 +12,7 @@ public class MeleeAi : generalAi {
     
     public override void InitStart(float x, float y, EnemyType type,GameObject player)
     {
-        attackDist = UnityEngine.Random.Range(swingDist - 0.2f, swingDist + 0.2f);
+        attackDist = swingDist;
         myType = type;
         rotation.init(myType);
         body = GetComponent<Rigidbody2D>();

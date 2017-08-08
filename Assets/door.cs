@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+enum BossTypes
+{
+    unInit,
+    BigMan,
+    BigWolf
+}
+
 public class door : MonoBehaviour
 {
 
@@ -15,7 +22,7 @@ public class door : MonoBehaviour
     List<Room> finalRooms = new List<Room>();
     float mobs = 0;
     private TileMap _tilemap;
-
+    BossTypes boss = BossTypes.unInit;
     void Start()
     {
         _tilemap = GameObject.FindWithTag("Tilemap").GetComponent<TileMap>();
@@ -77,19 +84,35 @@ public class door : MonoBehaviour
         {
             if (i == 0)
             {
+                float rndx = UnityEngine.Random.Range(0f, (float)finalRooms[i].roomsize);
+                float rndy = UnityEngine.Random.Range(0f, (float)finalRooms[i].roomsize);
+                Vector2 k = new Vector2(finalRooms[i].tiles[(int)rndx].tileX, finalRooms[i].tiles[(int)rndy].tileY);
+                /// te = k;
+                Vector2 zero = (Vector2)MapGenerator.Instance.GetTileGameObject(0, 0).transform.position;
+
+                switch (boss)
+                {
+                    case BossTypes.BigMan:
+                        break;
+                    case BossTypes.BigWolf:
+                        break;
+                    default:
+                        print("error loading boss");
+                        break;
+                }
                 // generate boss mayn
                 //spawn boss mayn
             }
             if (mobs > 0)
             {
-                spawned = true;
+                //spawned = true;
                 for (int j = 0; j < mobs; j++)
                 {
                     float rndx = UnityEngine.Random.Range(0f, (float)finalRooms[i].roomsize);
                     float rndy = UnityEngine.Random.Range(0f, (float)finalRooms[i].roomsize);
 
                     Vector2 k = new Vector2(finalRooms[i].tiles[(int)rndx].tileX, finalRooms[i].tiles[(int)rndy].tileY);
-                    te = k;
+                    //te = k;
                     Vector2 zero = (Vector2)MapGenerator.Instance.GetTileGameObject(0, 0).transform.position;
                     MobsControl.instance.SpawnBoids(k.x + zero.x, k.y + zero.y, 0, 1);
                 }
@@ -157,24 +180,38 @@ public class door : MonoBehaviour
                 //spawn boss mayn
                 float rndx = UnityEngine.Random.Range(0f, (float)finalRooms[i].roomsize);
                 float rndy = UnityEngine.Random.Range(0f, (float)finalRooms[i].roomsize);
-                    Vector2 k = new Vector2(finalRooms[i].tiles[(int)rndx].tileX, finalRooms[i].tiles[(int)rndy].tileY);
-                    te = k;
-                    Vector2 zero = (Vector2)MapGenerator.Instance.GetTileGameObject(0, 0).transform.position;
-                    MobsControl.instance.spawnBigWolf(k.x + zero.x, k.y + zero.y);
+                Vector2 k = new Vector2(finalRooms[i].tiles[(int)rndx].tileX, finalRooms[i].tiles[(int)rndy].tileY);
+               /// te = k;
+                Vector2 zero = (Vector2)MapGenerator.Instance.GetTileGameObject(0, 0).transform.position;
+                int rndBoss = UnityEngine.Random.Range(0, 1);
+                switch (rndBoss)
+                {
+                    case 0:
+                        MobsControl.instance.spawnBigWolf(k.x + zero.x, k.y + zero.y);
+                        boss = BossTypes.BigWolf;
+                        print("boss created");
+                        break;
+                    case 1:
+                        MobsControl.instance.spawnBigMan(k.x + zero.x, k.y + zero.y);
+                        boss = BossTypes.BigMan;
+                        print("boss created");
+                        break;
+                }
+
             }
             float _mobAmount = finalRooms[i].roomsize / 10;
             int mobAmount = (int)_mobAmount;
             mobs += mobAmount;
             if (mobAmount > 1) 
             {
-                spawned = true;
+                //spawned = true;
                 for(int j = 0;j < mobAmount; j++)
                 {
                     float rndx = UnityEngine.Random.Range(0f,(float) finalRooms[i].roomsize);
                     float rndy = UnityEngine.Random.Range(0f, (float)finalRooms[i].roomsize);
 
                     Vector2 k = new Vector2(finalRooms[i].tiles[(int)rndx].tileX, finalRooms[i].tiles[(int)rndy].tileY);
-                    te = k;
+                    //te = k;
                     Vector2 zero = (Vector2)MapGenerator.Instance.GetTileGameObject(0, 0).transform.position;
                     MobsControl.instance.SpawnBoids(k.x + zero.x, k.y + zero.y, 0, 1);
                 }
@@ -183,15 +220,15 @@ public class door : MonoBehaviour
 
 
     }
-    bool spawned = false;
-    Vector2 te = new Vector2(0,0);
-    void OnDrawGizmos()
-    {
-        if (spawned)
-        {
-            Gizmos.DrawSphere((Vector2)MapGenerator.Instance.GetTileGameObject(0,0).transform.position + te, 1.5f);
-        }
-    }
+    //bool spawned = false;
+    //Vector2 te = new Vector2(0,0);
+    //void OnDrawGizmos()
+    //{
+    //    if (spawned)
+    //    {
+    //        Gizmos.DrawSphere((Vector2)MapGenerator.Instance.GetTileGameObject(0,0).transform.position + te, 1.5f);
+    //    }
+    //}
     void Update()
     {
         if (Input.GetKeyDown("v"))

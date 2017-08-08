@@ -228,6 +228,7 @@ public class combat : MonoBehaviour
     {
         // Lisää tähän tsekkaus
         hp = hp - (rawTakenDamage / armor);
+        //Mikä damage tulee vastaan.
         GetComponent<Movement>().KnockBack(lastEnemyHitPosition);
         Debug.Log("Player has " + hp + " hp left.");
         GetComponent<DamageVisual>().TakeDamage();

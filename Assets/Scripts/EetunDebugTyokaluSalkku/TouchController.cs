@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class TouchController : MonoBehaviour
 {
@@ -54,6 +55,8 @@ public class TouchController : MonoBehaviour
     private CurvedLineRendererController LineController;
     private bool _canSendIndices = false;
 
+    //private delegate Action SendIndicesCallback;
+
     void SendIndices()
     {
         if (ControllerMode == Mode.RuneCasting && _canSendIndices)
@@ -64,6 +67,8 @@ public class TouchController : MonoBehaviour
         {
             CraftingManagerHolder.SendIndices(BoolArrayFromIndices(runeIndices), _touchCounts);
         }
+        
+        // 
         _canSendIndices = false;
     }
 

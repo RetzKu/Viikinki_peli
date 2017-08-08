@@ -1,0 +1,818 @@
+fileFormatVersion: 2
+guid: cda9de21021053a47b1a065b142ed522
+timeCreated: 1501231841
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Runestone_Bow
+    21300002: Runestone_Axe
+    21300004: Runestone_Pickaxe
+    21300006: Runestone_Spear
+    21300008: runestones_83
+    21300010: Runestone_Arrow
+    21300012: Runestone_Armor
+    21300014: Runestone_Hammer
+    21300016: Runestone_Shield
+    21300018: Rune_Backpack_Blue
+    21300020: Runestone_Torch
+    21300022: Runestone_Sword
+    21300024: Runestone_Packback
+    21300026: Runestone_Caltrops
+    21300028: Runestone_Empty
+    21300030: Rune_Bow_Blue
+    21300032: Rune_Axe_Blue
+    21300034: Rune_Pickaxe_Blue
+    21300036: Rune_Spear_Blue
+    21300038: Rune_Armor_Blue
+    21300040: Rune_Hammer_Blue
+    21300042: Rune_Shield_Blue
+    21300044: Rune_Bow_Blue_Recipe
+    21300046: Rune_Axe_Blue_Recipe
+    21300048: Rune_Pickaxe_Blue_Recipe
+    21300050: Rune_Spear_Blue_Recipe
+    21300052: Rune_Arrow_Blue_Recipe
+    21300054: Rune_Armor_Blue_Recipe
+    21300056: Rune_Hammer_Blue_Recipe
+    21300058: Rune_Shield_Blue_Recipe
+    21300060: Rune_Torch_Blue
+    21300062: Rune_Caltrops_Blue
+    21300064: Rune_Caltrops_Blue_Recipe
+    21300066: Rune_Packback_Blue_Recipe
+    21300068: Rune_Sword_Blue_Recipe
+    21300070: Rune_Torch_Blue_Recipe
+    21300072: Rune_Bow_Red_Recipe
+    21300074: Rune_Axe_Red_Recipe
+    21300076: Rune_Pickaxe_Red_Recipe
+    21300078: Rune_Spear_Red_Recipe
+    21300080: Rune_Arrow_Red_Recipe
+    21300082: Rune_Armor_Red_Recipe
+    21300084: Rune_Hammer_Red_Recipe
+    21300086: Rune_Shield_Red_Recipe
+    21300088: Rune_Caltrops_Red_Recipe
+    21300090: Rune_Packback_Red_Recipe
+    21300092: Rune_Sword_Red_Recipe
+    21300094: Rune_Torch_Red_Recipe
+    21300096: Rune_Arrow_Blue
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 32
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: tvOS
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+  - buildTarget: Tizen
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Samsung TV
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Runestone_Bow
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 384
+        width: 62
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Runestone_Axe
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 384
+        width: 62
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Runestone_Pickaxe
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 384
+        width: 62
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Runestone_Spear
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 384
+        width: 62
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: runestones_83
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 357
+        width: 16
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Runestone_Arrow
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 273
+        width: 62
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Runestone_Armor
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 273
+        width: 62
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Runestone_Hammer
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 273
+        width: 62
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Runestone_Shield
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 273
+        width: 62
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Backpack_Blue
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 357
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Runestone_Torch
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 162
+        width: 62
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Runestone_Sword
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 162
+        width: 62
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Runestone_Packback
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 162
+        width: 62
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Runestone_Caltrops
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 162
+        width: 62
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Runestone_Empty
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 51
+        width: 62
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Bow_Blue
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 435
+        width: 14
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Axe_Blue
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 435
+        width: 13
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Pickaxe_Blue
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 438
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Spear_Blue
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 432
+        width: 10
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Armor_Blue
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 432
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Hammer_Blue
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 435
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Shield_Blue
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 434
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Bow_Blue_Recipe
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 404
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Axe_Blue_Recipe
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 404
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Pickaxe_Blue_Recipe
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 404
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Spear_Blue_Recipe
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 404
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Arrow_Blue_Recipe
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 403
+        width: 4
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Armor_Blue_Recipe
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 403
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Hammer_Blue_Recipe
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 403
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Shield_Blue_Recipe
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 403
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Torch_Blue
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 358
+        width: 10
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Caltrops_Blue
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 361
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Caltrops_Blue_Recipe
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 328
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Packback_Blue_Recipe
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 328
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Sword_Blue_Recipe
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 328
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Torch_Blue_Recipe
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 328
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Bow_Red_Recipe
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 279
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Axe_Red_Recipe
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 279
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Pickaxe_Red_Recipe
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 279
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Spear_Red_Recipe
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 279
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Arrow_Red_Recipe
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 279
+        width: 4
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Armor_Red_Recipe
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 279
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Hammer_Red_Recipe
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 279
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Shield_Red_Recipe
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 279
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Caltrops_Red_Recipe
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 240
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Packback_Red_Recipe
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 240
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Sword_Red_Recipe
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 240
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Torch_Red_Recipe
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 240
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rune_Arrow_Blue
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 436
+        width: 4
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

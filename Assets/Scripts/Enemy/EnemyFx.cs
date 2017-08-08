@@ -11,6 +11,7 @@ public class EnemyFx : MonoBehaviour {
 
     private GameObject BaseFx;
     private GameObject Fx;
+    private GameObject TmpFx;
 
     private GameObject Weapon;
     private WeaponType Type;
@@ -54,7 +55,7 @@ public class EnemyFx : MonoBehaviour {
 
     public void Attack()
     {
-        GameObject TmpFx = Instantiate(Fx);
+        TmpFx = Instantiate(Fx);
         TmpFx.AddComponent<FxFade>().Duration = DefaultDuration;
         TmpFx.layer = LayerMask.NameToLayer("EnemyFx");
         TmpFx.AddComponent<BoxCollider2D>();//.isTrigger = true;
@@ -77,31 +78,21 @@ public class EnemyFx : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!DamageDone)
+        if (collision.GetComponent<s_c_torsoScript>() != null)
         {
-            if (collision.GetComponent<s_c_torsoScript>() != null)
-            {
-                DamageDone = true;
-                GameObject.Find("Player").GetComponent<combat>().setHitPosition(transform.position);
-                GameObject.Find("Player").GetComponent<combat>().takeDamage(Weapon.GetComponent<Melee>().damage);
-            }
+            Destroy(TmpFx.GetComponent<BoxCollider2D>());
+            GameObject.Find("Player").GetComponent<combat>().setHitPosition(transform.position);
+            GameObject.Find("Player").GetComponent<combat>().takeDamage(Weapon.GetComponent<Melee>().damage);
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!DamageDone)
+        if (collision.GetComponent<s_c_torsoScript>() != null)
         {
-            if (collision.GetComponent<s_c_torsoScript>() != null)
-            {
-                DamageDone = true;
-                GameObject.Find("Player").GetComponent<combat>().setHitPosition(transform.position);
-                GameObject.Find("Player").GetComponent<combat>().takeDamage(Weapon.GetComponent<Melee>().damage);
-            }
+            Destroy(TmpFx.GetComponent<BoxCollider2D>());
+            GameObject.Find("Player").GetComponent<combat>().setHitPosition(transform.position);
+            GameObject.Find("Player").GetComponent<combat>().takeDamage(Weapon.GetComponent<Melee>().damage);
         }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        DamageDone = false;
     }
 
     private Sprite GetWeaponSprite()

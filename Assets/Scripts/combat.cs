@@ -229,7 +229,7 @@ public class combat : MonoBehaviour
         // Lisää tähän tsekkaus
         hp = hp - (rawTakenDamage / armor);
         //Mikä damage tulee vastaan.
-        StartCoroutine(transform.GetComponent<PlayerScript>().HpCanvas.TakeDamage(3));
+        StartCoroutine(transform.GetComponent<PlayerScript>().HpCanvas.TakeDamage((int)rawTakenDamage));
         
         GetComponent<Movement>().KnockBack(lastEnemyHitPosition);
         Debug.Log("Player has " + hp + " hp left.");
@@ -249,6 +249,6 @@ public class combat : MonoBehaviour
     void death()
     {
         // Kuoleman jälkeiset asiat tänne
-        Debug.LogError("Kuolit");
+        
     }
 }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 public enum WeaponType { noWeapon, meleeWeapon, longMeleeWeapon, rangedWeapon, Armor }
 
@@ -182,24 +183,29 @@ public class PlayerScript : MonoBehaviour
     {
         private Transform HpCanvas;
         private GameObject Sword;
-        private float Length;
 
-        private bool ArmorImage { set { HpCanvas.Find("Armor").GetComponent<Image>().enabled = value; } get { return ArmorImage; } }
+        private Image ArmorImage;
 
         public CanvasController()
         {
             HpCanvas = GameObject.Find("Canvas 2").transform.GetChild(1);
             Sword = HpCanvas.GetChild(2).GetChild(0).gameObject;
+            ArmorImage = HpCanvas.GetChild(1).GetComponent<Image>();
         }
 
         public void ToggleArmorImage(bool Toggle)
         {
-            ArmorImage = Toggle;
+            ArmorImage.enabled = Toggle;
         }
 
         public IEnumerator TakeDamage(int Damage)
         {
             Sword.SetActive(true);
+            if(ArmorImage.enabled != true)
+            {
+
+            }
+            Sword.transform.Find("Sword0_2").GetChild(0).GetComponent<TextMeshProUGUI>().text = Damage.ToString();
             Sword.GetComponent<Animator>().Play("DamageToArmor");
             yield return new WaitForSeconds(0.4f);
             Sword.SetActive(false);

@@ -391,7 +391,7 @@ public class TileSpriteController : MonoBehaviour
 
                 if ((value & (1 << 1 - 1)) == 0)            // TODO: TEXTURES2 TÄNNE
                 {
-                    var go = ObjectPool.instance.GetObjectForType(currentPool, true);
+                    var go = ObjectPool.instance.GetObjectForType(currentPool, false);
                     go.GetComponent<SpriteRenderer>().sprite = _textures[border + "N0"];
                     go.transform.position = new Vector3(x + offsetX, y + offsetY + 1);
                     go.transform.parent = _borders.transform;
@@ -400,7 +400,7 @@ public class TileSpriteController : MonoBehaviour
 
                 if ((value & (1 << 2 - 1)) == 0)
                 {
-                    var go = ObjectPool.instance.GetObjectForType(currentPool, true);
+                    var go = ObjectPool.instance.GetObjectForType(currentPool, false);
                     go.GetComponent<SpriteRenderer>().sprite = _textures[border + "W0"];
                     go.transform.position = new Vector3(x + offsetX - 1, y + offsetY);
                     go.transform.parent = _borders.transform;
@@ -409,7 +409,7 @@ public class TileSpriteController : MonoBehaviour
 
                 if ((value & (1 << 3 - 1)) == 0)
                 {
-                    var go = ObjectPool.instance.GetObjectForType(currentPool, true);
+                    var go = ObjectPool.instance.GetObjectForType(currentPool, false);
                     go.GetComponent<SpriteRenderer>().sprite = _textures[border + "E0"];
                     go.transform.position = new Vector3(x + offsetX + 1, y + offsetY);
                     go.transform.parent = _borders.transform;
@@ -418,7 +418,7 @@ public class TileSpriteController : MonoBehaviour
 
                 if ((value & (1 << 4 - 1)) == 0)
                 {
-                    var go = ObjectPool.instance.GetObjectForType(currentPool, true);
+                    var go = ObjectPool.instance.GetObjectForType(currentPool, false);
                     go.GetComponent<SpriteRenderer>().sprite = _textures[border + "S0"];
                     go.transform.position = new Vector3(x + offsetX, y + offsetY - 1);
                     go.transform.parent = _borders.transform;

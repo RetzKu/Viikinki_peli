@@ -4191,6 +4191,21 @@ Prefab:
       propertyPath: SpriteController
       value: 
       objectReference: {fileID: 1310822892}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: a
+      value: 0.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: b
+      value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: c
+      value: 0.86
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ba8cfce009a3764ba416b37c8f039af, type: 2}
   m_IsPrefabParent: 0
@@ -8366,6 +8381,26 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332516033373980, guid: aa7beb610ae45184ca0c009d3990cb02,
+        type: 2}
+      propertyPath: ResetColor.a
+      value: 0.159
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332516033373980, guid: aa7beb610ae45184ca0c009d3990cb02,
+        type: 2}
+      propertyPath: ResetColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332516033373980, guid: aa7beb610ae45184ca0c009d3990cb02,
+        type: 2}
+      propertyPath: ResetColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332516033373980, guid: aa7beb610ae45184ca0c009d3990cb02,
+        type: 2}
+      propertyPath: ResetColor.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aa7beb610ae45184ca0c009d3990cb02, type: 2}

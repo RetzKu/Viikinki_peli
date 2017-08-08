@@ -13,6 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 1
   SpawnableObjects:
-  - ObjectPrefab: {fileID: 1031800583617284, guid: ce35163152400a141a41ea7652a32222,
-      type: 2}
+  - ObjectPrefab: {fileID: 0}
     SpawnRate: 0

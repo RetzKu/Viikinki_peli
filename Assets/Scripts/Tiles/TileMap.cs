@@ -34,11 +34,12 @@ public class TileMap : MonoBehaviour, ITileMap
     public Color tint;
     private Color last;
 
+    private GameObject _player;
+
     void Start()
     {
         Width = TotalWidth;
         Height = TotalHeight;
-
         SpriteController = FindObjectOfType<TileSpriteController>();
 
         _perlinGenerator = GetComponent<Perlin>();
@@ -46,6 +47,24 @@ public class TileMap : MonoBehaviour, ITileMap
 
         Chunk.TileGameObjects = TileGameObjects;
         Chunk.Tiles = Tiles;
+
+        //  
+        _player = GameObject.FindGameObjectWithTag("Player");
+        //int offX = Random.Range(0, 1500);
+        //int offY = Random.Range(0, 1500);
+
+        int offX = 0;
+        int offY = 0;
+        _perlinGenerator.RandomIsland(offX, offY);
+
+        offX += 4;
+        offY += 4;
+
+        _player.transform.position = new Vector3(offX * ChunkSize + ChunkSize + ChunkSize / 2, offY * ChunkSize + ChunkSize + ChunkSize / 2);
+
+        var mover = _player.GetComponent<ChunkMover>();
+        mover.ChunkOffsets = new Vec2(offX + 1, offY + 1);
+
 
         for (int y = 0; y < 3; y++)
         {
@@ -55,24 +74,25 @@ public class TileMap : MonoBehaviour, ITileMap
 
                 int viewIndexX = x * Chunk.CHUNK_SIZE;
                 int viewIndexY = y * Chunk.CHUNK_SIZE;
-
-                _chunks[y, x].Init(x, y, this.transform, Tiles, TileGameObjects, viewIndexX, viewIndexY);
+                _chunks[y, x].Init(x + offX, y + offY, this.transform, Tiles, TileGameObjects, viewIndexX, viewIndexY);
+                // _chunks[y, x].MoveChunk(x + offX, y + offY);
             }
         }
 
         int initHeight = 3;
         int initWidth = 3;
-        if (tilemapPrototypeLayout)
-        {
-            initHeight = 3;
-            initWidth = 3;
-        }
+        //if (tilemapPrototypeLayout)
+        //{
+        //    initHeight = 3;
+        //    initWidth = 3;
+        //}
 
         for (int y = 0; y < initHeight; y++)
         {
             for (int x = 0; x < initWidth; x++)
             {
-                GenerateChunk(x, y); // ei vällii?      // vanhaa koodia? 
+                // GenerateChunk(x, y); // ei vällii?      // vanhaa koodia? 
+                GenerateChunk(x, y, offX + x, offY + y);
             }
         }
         _perlinGenerator.PlaceBase(_chunks[1, 1]); // base vasta kun on generoitu tiilet
@@ -248,7 +268,7 @@ public class TileMap : MonoBehaviour, ITileMap
                 }
 
                 SpriteController.transform.position = GetTileGameObject(0, 0).transform.position;
-                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 2, Chunk.CHUNK_SIZE - 1, this, 1, 1);
+                SpriteController.SetTileSprites(Chunk.CHUNK_SIZE * 3 - 2, Chunk.CHUNK_SIZE + 1, this, 1, 1);
             }
             else if (chunkDtY > 0)  // ylös
             {
@@ -421,7 +441,6 @@ public class TileMap : MonoBehaviour, ITileMap
 
         var chunk = _chunks[offsetY, offsetX]; // missä kohdalla _chunkeissa
 
-        SavedChunks[new Vec2(chunk.offsetX, chunk.offsetY)] = true;
         chunk.Save();
 
         chunk.OnChunkChangedCleanup();
@@ -436,9 +455,10 @@ public class TileMap : MonoBehaviour, ITileMap
         {
             _perlinGenerator.GenerateChunk(_chunks[offsetY, offsetX], perlinOffsetX, perlinOffsetY);
         }
+
+        SavedChunks[new Vec2(chunk.offsetX, chunk.offsetY)] = true;
         chunk.offsetX = perlinOffsetX;
         chunk.offsetY = perlinOffsetY;
-
     }
 
 
@@ -465,6 +485,11 @@ public class TileMap : MonoBehaviour, ITileMap
         if (Input.GetKeyDown(KeyCode.Q))
         {
             RecenterTilemap(new Vector2(100, 100));
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            SpriteController.SetTileSprites( 3 * ChunkSize - 1, 3 * ChunkSize - 1, this, 2, 2 );
         }
     }
 

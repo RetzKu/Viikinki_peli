@@ -38,7 +38,11 @@ public class Fish : MonoBehaviour
 
     void Update()
     {
-        transform.right = _body.velocity.normalized;
+        var fishDirection = _body.velocity.normalized;
+        transform.right = fishDirection;
+
+        // monnit oikein päin!
+        transform.localScale = fishDirection.x >= 0f ? new Vector3(2f, -2f, 2f) : new Vector3(2f, 2f, 2f);
 
         if (transform.position.y <= _startPosition.y)
         {

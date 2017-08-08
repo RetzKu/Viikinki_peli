@@ -7,7 +7,7 @@ public class BloodDrop : MonoBehaviour {
 
     private float t = 0;
     [SerializeField]
-    private float Speed = 2f;
+    private float Speed = 0.5f;
 
     void Start()
     {

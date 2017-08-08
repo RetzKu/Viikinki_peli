@@ -58,10 +58,7 @@ public class HealthBar : MonoBehaviour {
                     BloodDrop.transform.SetParent(HealthArray[x].transform.parent.transform);
                     BloodDrop.transform.position = new Vector3(HealthArray[x].transform.position.x, HealthArray[x].transform.position.y - 20f, 1f);
                     BloodDrop.transform.localScale = new Vector3(0.2f, 0.2f, 1f);
-                    
-                    //BloodDrop.GetComponent<Rigidbody2D>().AddForce();
                     BloodDrop.AddComponent<BloodDrop>();
-                    //BloodDrop.GetComponent<RectTransform>().local
                     //Destroy(BloodDrop, 3.5f);
                 }
             }

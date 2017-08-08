@@ -38,9 +38,9 @@ public class debugGiz : MonoBehaviour
                 for (int y = 1; y < 50; y++)
                 {
                     // print(i + " " + y);
-                    Vector3 arrow = PathFinder.GetDir(Updater.path.getTileDir(new int[] { y, i }));
+                    //Vector3 arrow = PathFinder.GetDir(Updater.path.getTileDir(new int[] { y, i }));
                     // PathFinder.GetDir(dirs[i, y]); 
-                    Gizmos.DrawLine(new Vector3(mapstart.x + y, mapstart.y + i, 4f), new Vector3(mapstart.x + y, mapstart.y + i, 4f) + arrow);
+                   // Gizmos.DrawLine(new Vector3(mapstart.x + y, mapstart.y + i, 4f), new Vector3(mapstart.x + y, mapstart.y + i, 4f) + arrow);
                 }
             }
         }

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-internal class EnemyAnimator : MonoBehaviour {
+internal class EnemyArcherAnimator : MonoBehaviour
+{
 
     private HandRoot Hand;
     private List<Transform> Hands;
@@ -38,9 +39,6 @@ internal class EnemyAnimator : MonoBehaviour {
         Torsos.Add(transform.GetChild(1).gameObject);
         Torsos.Add(transform.GetChild(2).gameObject);
 
-        /*Finding enemy Heads*/
-        Heads = new List<Sprite>(3);
-
         /*Finding Animators*/
         Animators = new List<Animator>(3);
         foreach (GameObject t in Torsos) { Animators.Add(t.GetComponent<Animator>()); }
@@ -48,16 +46,7 @@ internal class EnemyAnimator : MonoBehaviour {
         SpriteController = new SpriteChanger(Torsos);
 
         /*Building New HandRoot Component*/
-
-        if(GetComponent<archerStats>() == null)
-        {
-            Hand = new HandRoot(Hands[0], SpriteFinderScript.Instance.RandomMeleeWeapon(), Hands);
-        }
-        else
-        {
-            Hand = new HandRoot(Hands[0], Bow, Hands);
-        }
-
+        Hand = new HandRoot(Hands[0], Bow, Hands);
 
         Heads = SpriteFinderScript.Instance.RandomHead();
         Chests = SpriteFinderScript.Instance.RandomTorso();
@@ -99,12 +88,12 @@ internal class EnemyAnimator : MonoBehaviour {
 
     public void ChangeDirection(enemyDir Dir)
     {
-        switch(Dir)
+        switch (Dir)
         {
-            case enemyDir.StillDown: { Hand.SwapHand(enemyDir.Down); SpriteController.EnableSprites(enemyDir.Down); Movin = false;    break; }
-            case enemyDir.StillL: { Hand.SwapHand(enemyDir.Left); SpriteController.EnableSprites(enemyDir.Left); Movin = false;    break; }
-            case enemyDir.StillR: { Hand.SwapHand(enemyDir.Right); SpriteController.EnableSprites(enemyDir.Right); Movin = false;    break; }
-            case enemyDir.StillUp: { Hand.SwapHand(enemyDir.Up); SpriteController.EnableSprites(enemyDir.Up); Movin = false;    break; }
+            case enemyDir.StillDown: { Hand.SwapHand(enemyDir.Down); SpriteController.EnableSprites(enemyDir.Down); Movin = false; break; }
+            case enemyDir.StillL: { Hand.SwapHand(enemyDir.Left); SpriteController.EnableSprites(enemyDir.Left); Movin = false; break; }
+            case enemyDir.StillR: { Hand.SwapHand(enemyDir.Right); SpriteController.EnableSprites(enemyDir.Right); Movin = false; break; }
+            case enemyDir.StillUp: { Hand.SwapHand(enemyDir.Up); SpriteController.EnableSprites(enemyDir.Up); Movin = false; break; }
             default: { Hand.SwapHand(Dir); SpriteController.EnableSprites(Dir); Movin = true; break; }
         }
     }
@@ -222,7 +211,8 @@ internal class EnemyAnimator : MonoBehaviour {
         private GameObject _Weapon;
         private List<Transform> Hands;
 
-        public HandRoot(Transform Hand, GameObject Weapon, List<Transform> HandsList) {
+        public HandRoot(Transform Hand, GameObject Weapon, List<Transform> HandsList)
+        {
             _Hand = Hand;
             _Weapon = Instantiate(Weapon);
             DestroyObject(_Weapon.GetComponent<Collider2D>());
@@ -233,10 +223,10 @@ internal class EnemyAnimator : MonoBehaviour {
         {
             switch (Direction)
             {
-                case enemyDir.Left:   { _Hand = Hands[0];  break; }
-                case enemyDir.Down:   { _Hand = Hands[1]; break; }
-                case enemyDir.Up:     { _Hand = Hands[2]; break; }
-                case enemyDir.Right:  { _Hand = Hands[0]; break; }
+                case enemyDir.Left: { _Hand = Hands[0]; break; }
+                case enemyDir.Down: { _Hand = Hands[1]; break; }
+                case enemyDir.Up: { _Hand = Hands[2]; break; }
+                case enemyDir.Right: { _Hand = Hands[0]; break; }
             }
 
             _Weapon.transform.SetParent(_Hand.transform); //antaa uuden parent transformin
@@ -246,7 +236,7 @@ internal class EnemyAnimator : MonoBehaviour {
 
         private void WeaponSettings()
         {
-            if(_Weapon.GetComponent<Melee>() != null) { _Weapon.GetComponent<Melee>().Reposition(_Hand); }
+            if (_Weapon.GetComponent<Melee>() != null) { _Weapon.GetComponent<Melee>().Reposition(_Hand); }
             else if (_Weapon.GetComponent<longMelee>() != null) { _Weapon.GetComponent<longMelee>().Reposition(_Hand); }
             else if (_Weapon.GetComponent<Ranged>() != null) { _Weapon.GetComponent<Ranged>().Reposition(_Hand); }
         }

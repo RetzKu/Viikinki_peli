@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum WeaponType { noWeapon, meleeWeapon, longMeleeWeapon, rangedWeapon, Armor }
 
@@ -38,9 +39,11 @@ public class PlayerScript : MonoBehaviour
     private List<SpriteRenderer> Torsos;
     public List<Sprite> DefaultTorsos;
     public int Direction;
+    public CanvasController HpCanvas;
 
     void Start()
     {
+        HpCanvas = new CanvasController();
         Torsos = new List<SpriteRenderer>(3);
         /*Get Inventory parents*/
         InventoryChild = gameObject.transform.Find("Inventory").gameObject;
@@ -67,7 +70,7 @@ public class PlayerScript : MonoBehaviour
         if(Inventory.ArmorEquipped == true) { EquipArmor(); Inventory.ArmorEquipped = false; }
         RefreshHand();
         InventoryInput();
-        if(Input.GetKeyDown(KeyCode.Y) == true) { BreakArmor(); }
+        if(Inventory.EquipData.Armor != null) { HpCanvas.ToggleArmorImage(true); } else { HpCanvas.ToggleArmorImage(false); }
     }
 
     public void LoseDurability()
@@ -172,6 +175,20 @@ public class PlayerScript : MonoBehaviour
                 if (Input.GetKeyDown(i.ToString()) == true) { Inventory.EquipItem(i - 1); }
             }
         }
+    }
+
+    public class CanvasController
+    {
+        private Transform Canvas2;
+        private bool ArmorImage { set { Canvas2.Find("Armor").GetComponent<Image>().enabled = value; } get { return ArmorImage; } }
+
+        public CanvasController() { Canvas2 = GameObject.Find("Canvas 2").transform.GetChild(1); }
+
+        public void ToggleArmorImage(bool Toggle)
+        {
+            ArmorImage = Toggle;
+        }
+
     }
 
     /*WHEN TIME, TRANSFER DEFAULT METHODS TO THIS CLASS*/

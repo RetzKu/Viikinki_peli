@@ -179,7 +179,7 @@ public class combat : MonoBehaviour
     }
 
     // Metodi jolla tarkistetaan onko painettu lyöty ja lyönti pois CD
-    public void attackBoolean(Vector2 direction)
+    public void attackBoolean(Vector2 direction, Vector2 attackpos)
     {
         // Tähän voisi tehdä pari riviä koodia joka tarkistaa onko kyseessä android vai pc inputit ja sen mukaan ohjaisi
         if (isAttackLegal()) // PC
@@ -194,7 +194,7 @@ public class combat : MonoBehaviour
                     Vector2 tempo2 = new Vector2((direction.x - transform.position.x), (direction.y - transform.position.y));
                     tempo2.Normalize();
 
-                    GameObject.Find("projectileManager").GetComponent<ProjectileManager>().spawnProjectile(transform.position, new Vector2(transform.position.x + tempo2.x * 6, transform.position.y + tempo2.y * 6));
+                    GameObject.Find("projectileManager").GetComponent<ProjectileManager>().spawnProjectile(transform.position, (Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position).normalized * 6 + transform.position /*new Vector2(transform.position.x + tempo2.x * 6, transform.position.y + tempo2.y * 6)*/);
                     transform.GetComponent<PlayerScript>().LoseDurability();
                     // Tähän voisi laittaa efektin vaihtumaan bowi efektiin
                 }
@@ -228,6 +228,7 @@ public class combat : MonoBehaviour
     {
         // Lisää tähän tsekkaus
         hp = hp - (rawTakenDamage / armor);
+        //Mikä damage tulee vastaan.
         GetComponent<Movement>().KnockBack(lastEnemyHitPosition);
         Debug.Log("Player has " + hp + " hp left.");
         GetComponent<DamageVisual>().TakeDamage();

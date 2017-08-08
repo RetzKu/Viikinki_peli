@@ -9,135 +9,135 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1609119758463580}
+  m_RootGameObject: {fileID: 1311341994458962}
   m_IsPrefabParent: 1
---- !u!1 &1155854741087302
+--- !u!1 &1311341994458962
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4690072403777368}
-  - component: {fileID: 212065226168945396}
-  m_Layer: 0
-  m_Name: runestones_83
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1262941977646884
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4990828564113026}
-  - component: {fileID: 212889864483981778}
-  m_Layer: 0
-  m_Name: Rune_Sword_Blue_Recipe
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1609119758463580
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4943830373799008}
-  - component: {fileID: 212737219524566482}
-  - component: {fileID: 58353547082130192}
-  - component: {fileID: 114581253821968536}
+  - component: {fileID: 4993284182948008}
+  - component: {fileID: 212911097040251056}
+  - component: {fileID: 58725778908015584}
+  - component: {fileID: 114559446324300410}
   m_Layer: 25
-  m_Name: Runestone_Sword
+  m_Name: Runestone_Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1997420554176172
+--- !u!1 &1484452589153240
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4075841592376274}
-  - component: {fileID: 212398214876963286}
+  - component: {fileID: 4011690964138284}
+  - component: {fileID: 212404814435824246}
   m_Layer: 0
-  m_Name: Rune_Sword_Red_Recipe
+  m_Name: Rune_Arrow_Blue_Recipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4075841592376274
+--- !u!1 &1549515095521760
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4763074598798668}
+  - component: {fileID: 212495570482717736}
+  m_Layer: 0
+  m_Name: Rune_Arrow_Blue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1964179311282376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4517914530543620}
+  - component: {fileID: 212533707875018164}
+  m_Layer: 0
+  m_Name: Rune_Arrow_Red_Recipe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4011690964138284
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1997420554176172}
+  m_GameObject: {fileID: 1484452589153240}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.06251, y: -0.453095, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4943830373799008}
-  m_RootOrder: 2
+  m_Father: {fileID: 4993284182948008}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4690072403777368
+--- !u!4 &4517914530543620
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1155854741087302}
+  m_GameObject: {fileID: 1964179311282376}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.156258, y: 0.546881, z: 0}
+  m_LocalPosition: {x: 0.06251, y: -0.453095, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4943830373799008}
-  m_RootOrder: 0
+  m_Father: {fileID: 4993284182948008}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4943830373799008
+--- !u!4 &4763074598798668
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1609119758463580}
+  m_GameObject: {fileID: 1549515095521760}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0625, y: 0.5782, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4993284182948008}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4993284182948008
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1311341994458962}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.278797, y: 25.72237, z: 0}
+  m_LocalPosition: {x: 37.040688, y: 29.388308, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4690072403777368}
-  - {fileID: 4990828564113026}
-  - {fileID: 4075841592376274}
+  - {fileID: 4763074598798668}
+  - {fileID: 4011690964138284}
+  - {fileID: 4517914530543620}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4990828564113026
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1262941977646884}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.06251, y: -0.453095, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4943830373799008}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &58353547082130192
+--- !u!58 &58725778908015584
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1609119758463580}
+  m_GameObject: {fileID: 1311341994458962}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -146,12 +146,12 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.72}
   serializedVersion: 2
   m_Radius: 0.86293983
---- !u!114 &114581253821968536
+--- !u!114 &114559446324300410
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1609119758463580}
+  m_GameObject: {fileID: 1311341994458962}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26deb9662b6deaa4499bcc9f67896eda, type: 3}
@@ -160,16 +160,18 @@ MonoBehaviour:
   Hp: 100
   defaultFibrateTimer: 0.015
   deathTimer: 4
-  type: 0
+  type: 48
   RuneToTeach: {fileID: 0}
   PlayerInRange: 0
   Default: {r: 0, g: 0, b: 0, a: 0}
---- !u!212 &212065226168945396
+  RecipeLearned: 0
+  Duration: 2
+--- !u!212 &212404814435824246
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1155854741087302}
+  m_GameObject: {fileID: 1484452589153240}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -194,17 +196,17 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300008, guid: cda9de21021053a47b1a065b142ed522, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300052, guid: cda9de21021053a47b1a065b142ed522, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
---- !u!212 &212398214876963286
+--- !u!212 &212495570482717736
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1997420554176172}
+  m_GameObject: {fileID: 1549515095521760}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -229,17 +231,17 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300092, guid: cda9de21021053a47b1a065b142ed522, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300096, guid: cda9de21021053a47b1a065b142ed522, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
---- !u!212 &212737219524566482
+--- !u!212 &212533707875018164
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1609119758463580}
+  m_GameObject: {fileID: 1964179311282376}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -264,17 +266,17 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300022, guid: cda9de21021053a47b1a065b142ed522, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_SortingOrder: 3
+  m_Sprite: {fileID: 21300080, guid: cda9de21021053a47b1a065b142ed522, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
---- !u!212 &212889864483981778
+--- !u!212 &212911097040251056
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1262941977646884}
+  m_GameObject: {fileID: 1311341994458962}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -300,7 +302,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300068, guid: cda9de21021053a47b1a065b142ed522, type: 3}
+  m_Sprite: {fileID: 21300010, guid: cda9de21021053a47b1a065b142ed522, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

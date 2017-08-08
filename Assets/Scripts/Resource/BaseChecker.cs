@@ -43,11 +43,14 @@ public class BaseChecker : MonoBehaviour
 
         hit = Physics2D.CircleCast(position, CraftRange, Vector2.zero, 0f, LayerMask.GetMask("RuneStone"));
         // Tee array
-        var RunestoneCast = Physics2D.CircleCast(position, 5, Vector2.zero, 0f, LayerMask.GetMask("RuneStone"));
+        var RunestoneCast = Physics2D.CircleCastAll(position, 5, Vector2.zero, 0f, LayerMask.GetMask("RuneStone"));
 
-        if (RunestoneCast)
+        if (RunestoneCast.Length != 0)
         {
-            RunestoneCast.transform.GetComponent<InfoStone>().AlphaEffect();
+            foreach(RaycastHit2D t in RunestoneCast)
+            {
+                t.transform.GetComponent<InfoStone>().AlphaEffect();
+            }
         }
 
         if (hit) // runeStoneNearby!

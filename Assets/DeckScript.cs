@@ -398,8 +398,17 @@ public class DeckScript : MonoBehaviour
         {
             if(cards[x] != null)
             {
+                int duration;
                  // Toimisi kun mika kertoisi vain kaavan..... .. ... .. .. . .
-                int duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<weaponStats>().duration;
+                try
+                {
+                    duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<weaponStats>().duration;
+                }
+                catch
+                {
+                    duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<armorScript>().duration;
+                }
+                
                 cards[x].transform.GetChild(0).GetComponent<RectTransform>().localScale = new Vector3(1f - 0.1f * duration, 1f, 1f);
             }
         }

@@ -58,7 +58,7 @@ public abstract class generalAi : MonoBehaviour
 {
     protected bool obc = false;
 
-    protected float collideDist = 1f;
+    protected float collideDist = 2f;
     protected collision CollState = collision.none;
     public float swingDist = 1f;
 
@@ -119,6 +119,8 @@ public abstract class generalAi : MonoBehaviour
     protected float slowPercent;
     //protected float holderSpeed;
     protected bool slow = false;
+    protected bool inCave = false;
+
     public void followPlayer(ref Vector2 dist, Vector2 playerPos, float attackDist,ref Vector2 target,ref int flags,EnemyMovement Physics,float sepF)
     {
         //print(attackDist);
@@ -126,7 +128,7 @@ public abstract class generalAi : MonoBehaviour
         dist *= attackDist;
         target = playerPos + dist;
         flags = (int)behavior.seekAndArrive | (int)behavior.separate /*| (int)behavior.CollideEnv*/;
-        Physics._sepF = sepF * 2;
+        //Physics._sepF = sepF * 2;
     }
     float envTime = 0.1f;
     float envTimer = 0f;
@@ -156,12 +158,35 @@ public abstract class generalAi : MonoBehaviour
     public void findPath(ref int flags,ref Vector2 velocity,ref Vector2 target ,GameObject player,Rigidbody2D body)
     {
         PathFinder.Dir k = player.GetComponent<UpdatePathFind>().path.getTileDir(body.position);
-        rotation.rotToPl = true;
+        rotation.rotToPl = false;
         rotation.playerPos = player.transform.position;
         if (k == PathFinder.Dir.NoDir)
         {
-            flags = 0;
-            velocity *= 0;
+            if (player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2 (body.position.x-1, body.position.y)) != PathFinder.Dir.NoDir)
+            {
+                flags = (int)behavior.findPath;
+                target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x - 1, body.position.y));
+            }
+            else if (player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(body.position.x+1, body.position.y)) != PathFinder.Dir.NoDir)
+            {
+                flags = (int)behavior.findPath;
+                target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x + 1, body.position.y));
+            }
+            else if (player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(body.position.x, body.position.y-1)) != PathFinder.Dir.NoDir)
+            {
+                flags = (int)behavior.findPath;
+                target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x , body.position.y-1));
+            }
+            else if (player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(body.position.x, body.position.y+1)) != PathFinder.Dir.NoDir)
+            {
+                flags = (int)behavior.findPath;
+                target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x, body.position.y + 1));
+            }
+            else
+            {
+                flags = 0;
+                velocity *= 0;
+            }
         }
         else if (k == PathFinder.Dir.Right)
         {
@@ -294,6 +319,7 @@ public abstract class generalAi : MonoBehaviour
                 counter++;
             }
         }
+
     }
     public void RayCollide(ref collision CollState,ref Vector2 velocity,float collideDist, Rigidbody2D body)
     {

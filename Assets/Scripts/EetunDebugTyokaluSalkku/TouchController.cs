@@ -250,7 +250,7 @@ public class TouchController : MonoBehaviour
                     endPosition = touches[i].position;
                     AttackDir   = delta;
 
-                    _player.attackBoolean(delta);
+                    _player.attackBoolean(delta,endPosition);
                     _player.GetComponent<AnimatorScript>().Attack();
 
                 }
@@ -268,7 +268,7 @@ public class TouchController : MonoBehaviour
 
             var delta = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _player.transform.position;
             AttackDir = delta;
-            _player.attackBoolean(delta);
+            _player.attackBoolean(delta,Camera.main.ScreenToWorldPoint(Input.mousePosition));
             _player.GetComponent<AnimatorScript>().Attack();
 
             // LineController.MovePoints(lastPosition - transform.position);

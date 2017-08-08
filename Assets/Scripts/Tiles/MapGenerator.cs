@@ -137,9 +137,10 @@ public class MapGenerator : MonoBehaviour, ITileMap
         return true;
     }
 
-
+    bool inited = false ;//debug
     public List<Room> GenerateMap(int widht, int height, string seed, int fillPercent)
     {
+        inited = true;
         this.Width = widht;
         this.Height = height;
         this.seed = seed;
@@ -166,10 +167,30 @@ public class MapGenerator : MonoBehaviour, ITileMap
     {
         return TileObjects[x,y];
     }
-
+    void OnDrawGizmos()
+    {
+        if (inited)
+        {
+            Gizmos.DrawSphere(GetTileGameObject(0, 0).transform.position, 1);
+            Gizmos.DrawSphere(GetTileGameObject(Width - 1,Height -1).transform.position, 1);
+            Gizmos.DrawSphere(GetTileGameObject(Width - 1, Height - 1).transform.position, 1);
+        }
+    }
     public bool GetTileCollision(int x,int y)
     {
         return map[x, y] == TileType.CaveWall;
+    }
+    public void DestroyCave()
+    {
+        for(int y = 0;y < TileObjects.GetLength(0); y++)
+        {
+            for (int x = 0; x < TileObjects.GetLength(1); x++)
+            {
+                Destroy(TileObjects[y, x]);
+            }
+        }
+        TileObjects = new GameObject[Width,Height];
+
     }
     public void showRooms(Vector2 offset)
     {
@@ -608,7 +629,7 @@ public class MapGenerator : MonoBehaviour, ITileMap
     }
 
     
-
+    
 
     //private void OnDrawGizmos()
     //{

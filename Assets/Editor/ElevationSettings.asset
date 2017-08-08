@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: ElevationSettings
   m_EditorClassIdentifier: 
   Elevations:
-  - StartElevation: 0.2
+  - StartElevation: 0.16
     Tiles:
     - StartMoisture: 1
       Type: 1

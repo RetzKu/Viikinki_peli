@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public enum WeaponType { noWeapon, meleeWeapon, longMeleeWeapon, rangedWeapon, Armor }
 
@@ -39,7 +40,7 @@ public class PlayerScript : MonoBehaviour
     private List<SpriteRenderer> Torsos;
     public List<Sprite> DefaultTorsos;
     public int Direction;
-    public CanvasController HpCanvas;
+    internal CanvasController HpCanvas;
 
     void Start()
     {
@@ -179,17 +180,32 @@ public class PlayerScript : MonoBehaviour
 
     public class CanvasController
     {
-        private Transform Canvas2;
-        private bool ArmorImage { set { Canvas2.Find("Armor").GetComponent<Image>().enabled = value; } get { return ArmorImage; } }
+        private Transform HpCanvas;
+        private GameObject Sword;
+        private float Length;
 
-        public CanvasController() { Canvas2 = GameObject.Find("Canvas 2").transform.GetChild(1); }
+        private bool ArmorImage { set { HpCanvas.Find("Armor").GetComponent<Image>().enabled = value; } get { return ArmorImage; } }
+
+        public CanvasController()
+        {
+            HpCanvas = GameObject.Find("Canvas 2").transform.GetChild(1);
+            Sword = HpCanvas.GetChild(2).GetChild(0).gameObject;
+        }
 
         public void ToggleArmorImage(bool Toggle)
         {
             ArmorImage = Toggle;
         }
 
+        public IEnumerator TakeDamage(int Damage)
+        {
+            Sword.SetActive(true);
+            Sword.GetComponent<Animator>().Play("DamageToArmor");
+            yield return new WaitForSeconds(0.4f);
+            Sword.SetActive(false);
+        }
     }
+
 
     /*WHEN TIME, TRANSFER DEFAULT METHODS TO THIS CLASS*/
     public class ItemManager

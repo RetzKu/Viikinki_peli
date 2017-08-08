@@ -14,6 +14,7 @@ public class EnemyFx : MonoBehaviour {
 
     private GameObject Weapon;
     private WeaponType Type;
+    private bool DamageDone;
 
     private void Awake()
     {
@@ -56,7 +57,7 @@ public class EnemyFx : MonoBehaviour {
         GameObject TmpFx = Instantiate(Fx);
         TmpFx.AddComponent<FxFade>().Duration = DefaultDuration;
         TmpFx.layer = LayerMask.NameToLayer("EnemyFx");
-        TmpFx.AddComponent<BoxCollider2D>().isTrigger = true;
+        TmpFx.AddComponent<BoxCollider2D>();//.isTrigger = true;
         TmpFx.transform.SetParent(transform);
         Destroy(TmpFx, DefaultDuration);
         Vector3 EffectOffSet = GetOffset();
@@ -76,11 +77,31 @@ public class EnemyFx : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<s_c_torsoScript>() != null)
+        if (!DamageDone)
         {
-            GameObject.Find("Player").GetComponent<combat>().setHitPosition(transform.position);
-            GameObject.Find("Player").GetComponent<combat>().takeDamage(Weapon.GetComponent<Melee>().damage);            
+            if (collision.GetComponent<s_c_torsoScript>() != null)
+            {
+                DamageDone = true;
+                GameObject.Find("Player").GetComponent<combat>().setHitPosition(transform.position);
+                GameObject.Find("Player").GetComponent<combat>().takeDamage(Weapon.GetComponent<Melee>().damage);
+            }
         }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (!DamageDone)
+        {
+            if (collision.GetComponent<s_c_torsoScript>() != null)
+            {
+                DamageDone = true;
+                GameObject.Find("Player").GetComponent<combat>().setHitPosition(transform.position);
+                GameObject.Find("Player").GetComponent<combat>().takeDamage(Weapon.GetComponent<Melee>().damage);
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        DamageDone = false;
     }
 
     private Sprite GetWeaponSprite()

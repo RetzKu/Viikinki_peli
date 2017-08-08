@@ -67,7 +67,6 @@ public class PlayerScript : MonoBehaviour
         if(Inventory.ArmorEquipped == true) { EquipArmor(); Inventory.ArmorEquipped = false; }
         RefreshHand();
         InventoryInput();
-        if(Input.GetKeyDown(KeyCode.Y) == true) { BreakArmor(); }
     }
 
     public void LoseDurability()

@@ -40,6 +40,8 @@ public class DeckScript : MonoBehaviour
     private bool addCard = false;
     private bool removeCard = false;
 
+    private bool dragFlag = false;
+
     private int brokenWeaponInt;
     private Sprite[] cardArray;
 
@@ -116,7 +118,7 @@ public class DeckScript : MonoBehaviour
 
             cards = new GameObject[updatedCardCount];
 
-            // Tekee oikean määrän kortteja (lisätty/vähennetty määrä)
+            // Tekee oikean määrän kortteja (lisätty määrä)
             for (int x = 0; x < updatedCardCount; x++)
             {
                 cards[x] = new GameObject("Card" + x);
@@ -124,6 +126,10 @@ public class DeckScript : MonoBehaviour
                 cards[x].transform.localScale = new Vector3(0.7f, 1f, 1f);
                 cards[x].transform.SetSiblingIndex(x);
                 cards[x].AddComponent<Image>().sprite = cardArray[3];
+
+                cards[x].AddComponent<CardMoverEraser>().DropDistance = 200f;
+                cards[x].GetComponent<CardMoverEraser>().ReturnSpeed = 1.5f;
+
                 GameObject tempObj = new GameObject("CardChild");
                 tempObj.transform.position = cards[x].transform.position;
                 Sprite cardImage = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<SpriteRenderer>().sprite;
@@ -186,7 +192,7 @@ public class DeckScript : MonoBehaviour
         t += Time.deltaTime * Speed;
 
         // Aukaisee inventoryn
-        if (open == true && addCard == false && removeCard == false)
+        if (open == true && addCard == false && removeCard == false && dragFlag == false)
         {
             // Juoksee kerran kun open true
             if (openChanger == true)
@@ -194,6 +200,7 @@ public class DeckScript : MonoBehaviour
                 t = 0;
                 openChanger = false;
                 openChanger2 = true;
+                GetComponentInChildren<CardMoverEraser>().ApplyOpenPosition();
                 //transform.FindChild("Base").localRotation = new Quaternion(0f, 0f, 0f, 0f);
             }
             // Juoksee joka kerta
@@ -213,7 +220,7 @@ public class DeckScript : MonoBehaviour
                 t = 0;
                 openChanger = false;
                 openChanger2 = true;
-
+                GetComponentInChildren<CardMoverEraser>().ApplyOpenPosition();
             }
             // Juoksee joka kerta
             for (int x = 0; x < cardCount - 1; x++)
@@ -238,6 +245,7 @@ public class DeckScript : MonoBehaviour
                 t = 0;
                 openChanger = false;
                 openChanger2 = true;
+                GetComponentInChildren<CardMoverEraser>().ApplyOpenPosition();
 
             }
             // Juoksee joka kerta
@@ -684,5 +692,21 @@ public class DeckScript : MonoBehaviour
     public void lastBrokenWeapon(int weaponInt)
     {
         brokenWeaponInt = weaponInt;
+    }
+
+    public void dragTrue()
+    {
+        dragFlag = true;
+    }
+
+    public void dragFalse()
+    {
+        dragFlag = false;
+    }
+
+    public Vector3 OpenInvPositions(int Count)
+    {
+        Vector3 tempVector3 = new Vector3(maxPositionX[Count], maxPositionY[Count], 0f);
+        return tempVector3;
     }
 }

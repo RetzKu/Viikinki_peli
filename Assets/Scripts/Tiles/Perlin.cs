@@ -305,6 +305,45 @@ public class Perlin : MonoBehaviour
         return 6;
     }
 
+    public Texture2D GenMiniMap(int w, int h)
+    {
+        Width  = w;
+        Heigth = h;
+        Texture2D tex = GeneraTextureMap((e, m) => BiomeToColor(GetBiomeWSettings(e, m)));
+        Heigth = Width = 250; // fuck 
+        return tex;
+    }
+
+    // TODO: REMOVE
+    public Texture2D GeneraTextureMap(ColoringScheme coloring)
+    {
+        Texture2D texture = new Texture2D(Width, Heigth);
+        texture.filterMode = FilterMode.Point;
+        texture.wrapMode = TextureWrapMode.Clamp;
+
+        float[,] elevation = new float[Width, Heigth];
+
+        float[,] moisture = new float[Width, Heigth];
+        GenerateNoiseMap(elevation, Width, Heigth);
+
+        float tmp = OffsetX;
+        OffsetX += 100f;
+        GenerateNoiseMap(moisture, Width, Heigth);
+        OffsetX = tmp;
+
+        for (int y = 0; y < Width; y++)
+        {
+            for (int x = 0; x < Heigth; x++)
+            {
+                float e = elevation[y, x];
+                float m = moisture[y, x];
+                texture.SetPixel(x, y, coloring(e, m));
+            }
+        }
+        texture.Apply();
+        return texture;
+    }
+
     public void DrawNoiseMap(ColoringScheme coloring, Renderer renderer)
     {
         Texture2D texture = new Texture2D(Width, Heigth);
@@ -483,7 +522,7 @@ public class Perlin : MonoBehaviour
 #if true
                 noiseMap[y, x] = noiseHeigth;
 
-                noiseMap[y, x] = noiseMap[y, x] + a - b * Mathf.Pow(Distance(OffsetX + x * 0.01f , OffsetY + y * 0.01f), c);
+                noiseMap[y, x] = noiseMap[y, x] + a - b * Mathf.Pow(Distance(OffsetX + x * 0.01f, OffsetY + y * 0.01f), c);
                 // e = e + a - b * d ^ c
 #else
 #endif
@@ -609,7 +648,7 @@ public class Perlin : MonoBehaviour
                 // TileType type = GetBiome(elevation[y, x], moisture[y, x]);
                 // go.GetComponent<Renderer>().material.color = BiomeToColor(type);
 
-                if (TileMap.Collides(type)) // disable atm ITileMap.cs
+                if (TileMap.Collides(type)) // disable atm IileMap.cs
                 {
                     Collider2D body = go.GetComponent<Collider2D>();
                     body.enabled = true;

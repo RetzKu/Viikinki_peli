@@ -4208,7 +4208,7 @@ Prefab:
     - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
         type: 2}
       propertyPath: c
-      value: 1.78
+      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
         type: 2}
@@ -4254,6 +4254,11 @@ Prefab:
         type: 2}
       propertyPath: Mountain.b
       value: 0.33088237
+      objectReference: {fileID: 0}
+    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: QuickLaunch
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ba8cfce009a3764ba416b37c8f039af, type: 2}
@@ -6949,6 +6954,22 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1 &1686745555 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1468715861072664, guid: 9ba8cfce009a3764ba416b37c8f039af,
+    type: 2}
+  m_PrefabInternal: {fileID: 535620828}
+--- !u!114 &1686745559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1686745555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e34f4d9a863581e4f9b19c2205576fdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1723313079
 GameObject:
   m_ObjectHideFlags: 0

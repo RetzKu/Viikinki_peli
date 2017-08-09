@@ -26,16 +26,34 @@ public class InfoStone : Resource
     {
     }
 
-   
+    void Start()
+    {
+        RuneToTeach.init(this.gameObject);
+    }
+
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) == true)
         {
-            CraftingManager.Instance.GetComponent<RuneHolder>();
-            //RuneToTeach.Fire();
-            //LearnStone();
-            //RuneToTeach.ValidateRune()
+        }
+    }
+
+    public void TryToTeachRune(bool[] positions, int[] touchCounts)
+    {
+        var craftingrecipeHolder = CraftingManager.Instance.GetComponent<RuneHolder>();
+        if (RuneToTeach != null && !RecipeLearned)
+        {
+            if (RuneToTeach.ValidateRune(positions, touchCounts))
+            {
+                craftingrecipeHolder.AddRune(RuneToTeach);
+                print("teached " + RuneToTeach.name);
+                RecipeLearned = true;
+            }
+        }
+        else
+        {
+            Debug.LogWarning(gameObject.name + " does not contain rune or already learned");
         }
     }
 
@@ -110,4 +128,5 @@ public class InfoStone : Resource
             yield return new WaitForSeconds(0.1f);
         }
     }
+
 }

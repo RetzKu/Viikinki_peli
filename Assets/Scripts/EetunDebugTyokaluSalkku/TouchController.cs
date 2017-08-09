@@ -48,24 +48,27 @@ public class TouchController : MonoBehaviour
     {
         Crafting,
         RuneCasting
-
     }
 
     public Mode ControllerMode = Mode.Crafting;
     private CurvedLineRendererController LineController;
     private bool _canSendIndices = false;
-
     //private delegate Action SendIndicesCallback;
+
+    // public Delegate RunePillarsCallBack;
+    // public event OnCraftingResourceChanged OnResourceCountChanged;
 
     void SendIndices()
     {
         if (ControllerMode == Mode.RuneCasting && _canSendIndices)
         {
             RuneHolder.SendIndices(BoolArrayFromIndices(runeIndices), _touchCounts);
+            _player.GetComponent<BaseChecker>().SendIndices(BoolArrayFromIndices(runeIndices), _touchCounts);
         }
         else if (ControllerMode == Mode.Crafting && _canSendIndices)
         {
             CraftingManagerHolder.SendIndices(BoolArrayFromIndices(runeIndices), _touchCounts);
+
         }
         
         // 

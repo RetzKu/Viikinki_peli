@@ -344,7 +344,7 @@ public abstract class generalAi : MonoBehaviour
         {
             CollState = collision.Left;
         }
-        print(CollState);
+        // print(CollState);
     }
     public Vector2 getPosition() // tulee jokaselle
     {

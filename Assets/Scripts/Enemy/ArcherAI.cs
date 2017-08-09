@@ -7,7 +7,7 @@ public class ArcherAI : generalAi {
     private float attackCounter = 0f;
     private float attackUptade = 2f;
     float chargeCounter = 0f;
-    float shootTime = 1f;
+    public float shootTime = 1f;
     GameObject proManager;
 
     public override void InitStart(float x, float y, EnemyType type,GameObject player)

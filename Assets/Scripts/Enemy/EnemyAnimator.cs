@@ -118,6 +118,10 @@ internal class EnemyAnimator : MonoBehaviour {
             else if (Weapon.GetComponent<Melee>() != null) { return WeaponType.meleeWeapon; }
             else { return WeaponType.noWeapon; }
         }
+        else if(Bow != null)
+        {
+            return WeaponType.rangedWeapon;
+        }
         else { return WeaponType.noWeapon; }
     }
 

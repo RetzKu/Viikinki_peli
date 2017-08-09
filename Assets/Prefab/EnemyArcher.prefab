@@ -573,7 +573,6 @@ GameObject:
   - component: {fileID: 114751757998946096}
   - component: {fileID: 114316052009345806}
   - component: {fileID: 114158304993457522}
-  - component: {fileID: 114120302418394698}
   - component: {fileID: 114462557661782716}
   m_Layer: 8
   m_Name: EnemyArcher
@@ -1100,7 +1099,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0.06}
   m_Size: {x: 0.1, y: 0.33}
@@ -1173,20 +1172,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114120302418394698
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1977754839611798}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67cf798e837364e4883a7f60d268ff3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Weapon: {fileID: 0}
-  Movin: 0
-  Bow: {fileID: 1386470419308244, guid: 1bed30da8ec31904a893159a7589637c, type: 2}
 --- !u!114 &114158304993457522
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1221,7 +1206,7 @@ MonoBehaviour:
   IdleRefreshRate: 100
   IdleRadius: 60
   IdleBallDistance: 100
-  MaxSteeringForce: 0.001
+  MaxSteeringForce: 0.1
   ArriveRadius: 0.3
   desiredseparation: 0.7
   alingmentDistance: 1

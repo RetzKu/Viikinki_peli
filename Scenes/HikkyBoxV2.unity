@@ -4534,6 +4534,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114507850236751794, guid: b5405cc59ec405e42ac26438ef1b066d,
+        type: 2}
+      propertyPath: runes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4173307104970268, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
       propertyPath: m_LocalPosition.x
       value: 25.2
@@ -4566,6 +4571,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 114507850236751794, guid: b5405cc59ec405e42ac26438ef1b066d,
+        type: 2}
+      propertyPath: runes.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: e16a8ceb4df570c4981a2e42bbb8567c,
+        type: 2}
+    - target: {fileID: 114507850236751794, guid: b5405cc59ec405e42ac26438ef1b066d,
+        type: 2}
+      propertyPath: runes.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6b2b94678b9625444a5fb76c126e4f2f,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
   m_IsPrefabParent: 0

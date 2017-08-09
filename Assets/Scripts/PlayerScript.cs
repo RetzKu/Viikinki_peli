@@ -268,6 +268,7 @@ public class PlayerScript : MonoBehaviour
                 Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                 Copy.GetComponent<SpriteRenderer>().sortingOrder = 1;
             }
+            if (Copy.GetComponent<Melee>() != null) { Copy.GetComponent<Melee>().Reposition(Hand); }
             if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
             if (Copy.GetComponent<longMelee>() != null) { Copy.GetComponent<longMelee>().Reposition(Hand); }
         }
@@ -300,6 +301,7 @@ public class PlayerScript : MonoBehaviour
                             Copy.transform.localRotation = rotation;
                             Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                             Copy.GetComponent<SpriteRenderer>().sortingOrder = 20;
+                            if (Copy.GetComponent<Melee>() != null) { Copy.GetComponent<Melee>().Reposition(Hand); }
                             if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
                             if (Copy.GetComponent<longMelee>() != null) { Copy.GetComponent<longMelee>().Reposition(Hand); }
                                 break;
@@ -312,6 +314,7 @@ public class PlayerScript : MonoBehaviour
                             Copy.transform.localRotation = rotation;
                             Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                             Copy.GetComponent<SpriteRenderer>().sortingOrder = 8;
+                            if (Copy.GetComponent<Melee>() != null) { Copy.GetComponent<Melee>().Reposition(Hand); }
                             if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
                             if (Copy.GetComponent<longMelee>() != null) { Copy.GetComponent<longMelee>().Reposition(Hand); }
                             break;
@@ -324,6 +327,7 @@ public class PlayerScript : MonoBehaviour
                             Copy.transform.localRotation = rotation;
                             Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                             Copy.GetComponent<SpriteRenderer>().sortingOrder = 16;
+                            if (Copy.GetComponent<Melee>() != null) { Copy.GetComponent<Melee>().Reposition(Hand); }
                             if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
                             if (Copy.GetComponent<longMelee>() != null) { Copy.GetComponent<longMelee>().Reposition(Hand); }
                             break;

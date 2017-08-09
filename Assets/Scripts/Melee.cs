@@ -43,7 +43,8 @@ public class Melee : weaponStats
     {
          
         GameObject Weapon = transform.gameObject;
-        
+        if (Weapon.transform.localScale.x < 0) { Vector3 Scale = Weapon.transform.localScale; Scale.x *= -1; Weapon.transform.localScale = Scale; }
+
         switch (Hand.transform.name)
         {
             case "s_l_hand":
@@ -69,6 +70,7 @@ public class Melee : weaponStats
                     Weapon.transform.position = Hand.position;
                     Weapon.transform.localRotation = rotation;
                     Weapon.GetComponent<SpriteRenderer>().sortingOrder = 16;
+                    Vector3 Scale = Weapon.transform.localScale; Scale.x *= -1; Weapon.transform.localScale = Scale; 
                     break;
                 }
         }

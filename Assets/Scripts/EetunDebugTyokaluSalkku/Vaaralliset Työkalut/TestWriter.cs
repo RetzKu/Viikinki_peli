@@ -40,9 +40,19 @@ public class TestWriter : MonoBehaviour
         //}
     }
 
+    public static string GetChunkPath(string chunkName)
+    {
+        return Application.persistentDataPath + "/" + chunkName + ".sav";
+    }
+
+    public static bool ChunkExists(string name)
+    {
+        return File.Exists(GetChunkPath(name));
+    }
+
     public static void Save(TileType[,] chunk, Dictionary<Vec2, GameObject> tileObjects, string name)
     {
-        string path = Application.persistentDataPath + "/" + name + ".sav";
+        string path = GetChunkPath(name);
 #if false
 
         if (File.Exists(path))
@@ -67,13 +77,13 @@ public class TestWriter : MonoBehaviour
 
             writer.Write(tileObjects.Count);
 
-            int c = 0;
+            // int c = 0;
             foreach (var keyvaluePair in tileObjects)
             {
                 writer.Write(keyvaluePair.Key.X);
                 writer.Write(keyvaluePair.Key.Y);
                 writer.Write((int)keyvaluePair.Value.GetComponent<Resource>().type);
-                c++;
+                // c++;
                 // Debug.Log((int)keyvaluePair.Value.GetComponent<Resource>().type);
             }
             // Debug.Log("save " + name + " " + c);

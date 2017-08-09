@@ -201,7 +201,19 @@ public class Chunk      // sub array
         }
     }
 
-    public string GetPath()
+    public bool SaveExists()
+    {
+        return TestWriter.ChunkExists(ChunkSaveName());
+    }
+
+    // tiedosto koneella 
+    public string GetChunkSaveFileName()
+    {
+        return TestWriter.GetChunkPath(ChunkSaveName());
+    }
+
+    // osa tiedoston nimeä
+    private string ChunkSaveName()
     {
         return "chunkdata" + offsetX.ToString() + "_" + offsetY.ToString();
     }
@@ -209,7 +221,7 @@ public class Chunk      // sub array
     public void Load()
     {
         Dictionary<Vec2, ResourceType> types = new Dictionary<Vec2, ResourceType>();
-        SetTypes(TestWriter.Load(GetPath(), out types)); // lataa tiilet
+        SetTypes(TestWriter.Load(ChunkSaveName(), out types)); // lataa tiilet
 
         // lataa tiilien resurssit
         foreach (var keyvaluepair in types)
@@ -238,7 +250,7 @@ public class Chunk      // sub array
 
     public void Save()
     {
-        TestWriter.Save(GetArray(), worldObjects, GetPath());
+        TestWriter.Save(GetArray(), worldObjects, ChunkSaveName());
     }
 
     public void DisableChunkCollision()

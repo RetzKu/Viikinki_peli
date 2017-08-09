@@ -10,16 +10,17 @@ public class CardMoverEraser : MonoBehaviour,
 {
     private Vector2 _startPosition;
     private Vector2 _endPosition;
-    public float DropDistance = 350f;
-    public float ReturnSpeed = 1f;
+    public float DropDistance = 170f;
+    public float ReturnSpeed = 1.5f;
     private float _t = 1.0f;
     private bool _returnBack;
     private bool _newCardFlag = false;
+    private bool _dragClick = false; // click false, drag true
     CardMoverEraser[] kortit;
 
     void Start()
     {
-        //_startPosition = transform.position;
+        _startPosition = transform.position;
         kortit = FindObjectsOfType(typeof(CardMoverEraser)) as CardMoverEraser[];
         foreach (CardMoverEraser kortti in kortit)
         {
@@ -29,8 +30,12 @@ public class CardMoverEraser : MonoBehaviour,
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        // Selected
-        print("click");
+        _dragClick = false;
+        // Katsoo gameobjectin nimestä viimeisen numeron
+        string tempString = gameObject.name.Substring(gameObject.name.Length - 1, 1);
+        int tempInt = int.Parse(tempString);
+        // Kertoo inventorylle että laittaa käteen oikean esineen
+        GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.EquipItem(tempInt);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -41,26 +46,33 @@ public class CardMoverEraser : MonoBehaviour,
     // korttien transformit on lokattu =( // fixered
     public void OnPointerUp(PointerEventData eventData)
     {
-        print(Vector2.Distance((Vector2)transform.position, _startPosition) );
+        //print(Vector2.Distance((Vector2)transform.position, _startPosition) );
         float dis = Vector2.Distance(transform.position, _startPosition);
 
-        if (Vector2.Distance((Vector2)transform.position, _startPosition) >= DropDistance)
+        //if (Vector2.Distance((Vector2)transform.position, _startPosition) >= DropDistance)
+        if(transform.position.y >= DropDistance)
         {
+            // Poistaa kortin deckistä
+            // Katsoo gameobjectin nimestä viimeisen numeron
             GetComponentInParent<DeckScript>().dragFalse();
-            // poista, jostain inventorysta
-            //Destroy(gameObject);
-
             string tempString = gameObject.name.Substring(gameObject.name.Length - 1, 1);
             int tempInt = int.Parse(tempString);
+            // Kertoo inventorylle että pudottaa oikean esineen
             GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.DropItem(tempInt);
-
+            // Kertoo deckscriptille että hävittää deckistä oikean kortin
+            GameObject.Find("Deck1").GetComponent<DeckScript>().lastBrokenWeapon(tempInt);
         }
-        else 
+        else
         {
-            // kotiin
+            // Palauttaa kortin deckiin
             _endPosition = eventData.position;
-            _returnBack = true;
-            GetComponentInParent<DeckScript>().dragFalse();
+            
+            if (_dragClick == true)
+            {
+                LoadOpenPosition();
+                _returnBack = true;
+            }
+            //GetComponentInParent<DeckScript>().dragFalse();
         }
     }
 
@@ -70,7 +82,7 @@ public class CardMoverEraser : MonoBehaviour,
     {
         if (_newCardFlag)
         {
-            _startPosition = transform.localPosition;
+            _startPosition = transform.position;
             _newCardFlag = false;
         }
 
@@ -83,18 +95,18 @@ public class CardMoverEraser : MonoBehaviour,
             {
                 _returnBack = false;
                 _t = 1f;
+                GetComponentInParent<DeckScript>().dragFalse();
             }
         }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        // tohon bool
+        _dragClick = true;
         GetComponentInParent<DeckScript>().dragTrue();
         transform.position = eventData.position;
         _returnBack = false;
@@ -112,7 +124,7 @@ public class CardMoverEraser : MonoBehaviour,
         string tempString = gameObject.name.Substring(gameObject.name.Length - 1, 1);
         int tempInt = int.Parse(tempString);
         tempVec = GetComponentInParent<DeckScript>().OpenInvPositions(tempInt);
-       // _startPosition = tempVec;
+        _startPosition = tempVec + gameObject.transform.position;
     }
 
     public void ApplyOpenPosition()

@@ -73,6 +73,8 @@ public class PlayerScript : MonoBehaviour
         RefreshHand();
         InventoryInput();
         if(Inventory.EquipData.Armor != null) { HpCanvas.ToggleArmorImage(true); } else { HpCanvas.ToggleArmorImage(false); }
+
+        if(Input.GetKey(KeyCode.U) == true) { GameObject.Find("Bear").GetComponent<Animator>().SetBool("Movinyg",true); }
     }
 
     public void LoseDurability()

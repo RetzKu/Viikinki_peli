@@ -22,7 +22,7 @@ public class BaseChecker : MonoBehaviour
 
     public void CircleCast(Vector3 position)
     {
-        var hit = Physics2D.CircleCast(position, CraftRange, Vector2.zero, 0f, _baseMask); 
+        var hit = Physics2D.CircleCast(position, CraftRange, Vector2.zero, 0f, _baseMask);
 
         if (hit) // bases nearby
         {
@@ -44,12 +44,14 @@ public class BaseChecker : MonoBehaviour
         hit = Physics2D.CircleCast(position, CraftRange, Vector2.zero, 0f, LayerMask.GetMask("RuneStone"));
         // Tee array
         var RunestoneCast = Physics2D.CircleCastAll(position, 5, Vector2.zero, 0f, LayerMask.GetMask("RuneStone"));
-
-        if (RunestoneCast[0])
+        if (RunestoneCast != null)
         {
-            foreach(RaycastHit2D t in RunestoneCast)
+            if (RunestoneCast.Length > 0)
             {
-                t.transform.GetComponent<InfoStone>().AlphaEffect();
+                foreach (RaycastHit2D t in RunestoneCast)
+                {
+                    t.transform.GetComponent<InfoStone>().AlphaEffect();
+                }
             }
         }
 

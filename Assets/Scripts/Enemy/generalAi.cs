@@ -137,7 +137,7 @@ public abstract class generalAi : MonoBehaviour
         envTimer += Time.deltaTime;
         if(envTimer > envTime)
         {
-            LayerMask mask = LayerMask.GetMask("ObjectLayer");
+            LayerMask mask = LayerMask.GetMask("ObjectLayer","Tile");
             environment = Physics2D.OverlapCircleAll(body.position, 1f, mask);// muokkaa radiusta
             envTimer = 0;
         }
@@ -324,7 +324,7 @@ public abstract class generalAi : MonoBehaviour
     public void RayCollide(ref collision CollState,ref Vector2 velocity,float collideDist, Rigidbody2D body)
     {
         CollState = collision.none;
-        LayerMask mask = LayerMask.GetMask("ObjectLayer");
+        LayerMask mask = LayerMask.GetMask("ObjectLayer","Tile");
         Vector2 main = velocity;
         main.Normalize();
         main *= collideDist; // EETU TRIGGER
@@ -437,7 +437,7 @@ public abstract class generalAi : MonoBehaviour
         obsTimer += Time.deltaTime;
         if(obsTimer > obsTime)
         {
-            int mask = LayerMask.GetMask("ObjectLayer");
+            int mask = LayerMask.GetMask("ObjectLayer","Tile");
             RaycastHit2D[] ob =  Physics2D.CircleCastAll(body.position, 0.5f, player.transform.position - (Vector3)body.position, dist.magnitude, mask);
             if(ob.Length == 0)
             {

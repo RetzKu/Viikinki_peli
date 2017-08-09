@@ -40,6 +40,8 @@ public class door : MonoBehaviour
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             player.GetComponent<UpdatePathFind>().tilemap = GameObject.FindGameObjectWithTag("Tilemap").GetComponent<TileMap>();
             player.GetComponent<UpdatePathFind>().path.map = GameObject.FindGameObjectWithTag("Tilemap").GetComponent<TileMap>();
+            int[] m = player.GetComponent<UpdatePathFind>().path.calculateIndex(player.transform.position);
+            player.GetComponent<UpdatePathFind>().path.uptadeTiles(m[0], m[1], GameObject.FindGameObjectWithTag("Tilemap").GetComponent<TileMap>());
             ParticleSpawner.instance.destroybloods();
         }
         else
@@ -57,7 +59,14 @@ public class door : MonoBehaviour
 
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             player.GetComponent<UpdatePathFind>().tilemap = dungeon;
-            player.GetComponent<UpdatePathFind>().path.uptadeTiles(player.transform.position,dungeon);
+
+            int[] m = player.GetComponent<UpdatePathFind>().path.calculateIndex(player.transform.position);
+
+
+            player.GetComponent<UpdatePathFind>().path.uptadeTiles(m[0], m[1], dungeon);
+
+           
+            //player.GetComponent<UpdatePathFind>().path.uptadeTiles(player.transform.position,dungeon);
 
             if (!spawnedMobs)
             {
@@ -185,8 +194,13 @@ public class door : MonoBehaviour
             {
                 // generate boss mayn
                 //spawn boss mayn
-                float rndx = UnityEngine.Random.Range(0f, (float)finalRooms[i].roomsize);
-                float rndy = UnityEngine.Random.Range(0f, (float)finalRooms[i].roomsize);
+                float rndx;
+                float rndy;
+                do
+                {
+                    rndx = UnityEngine.Random.Range(0f, (float)finalRooms[i].roomsize - 1);
+                    rndy = UnityEngine.Random.Range(0f, (float)finalRooms[i].roomsize - 1);
+                } while (MapGenerator.Instance.GetTileCollision(finalRooms[i].tiles[(int)rndx].tileX, finalRooms[i].tiles[(int)rndy].tileY));
                 Vector2 k = new Vector2(finalRooms[i].tiles[(int)rndx].tileX, finalRooms[i].tiles[(int)rndy].tileY);
                /// te = k;
                 Vector2 zero = (Vector2)MapGenerator.Instance.GetTileGameObject(0, 0).transform.position;
@@ -210,14 +224,20 @@ public class door : MonoBehaviour
             }
             float _mobAmount = finalRooms[i].roomsize / 10;
             int mobAmount = UnityEngine.Random.Range(5,8);
+            print(mobAmount);
             mobs += mobAmount;
             if (mobAmount > 1) 
             {
                 //spawned = true;
                 for(int j = 0;j < mobAmount; j++)
                 {
-                    float rndx = UnityEngine.Random.Range(0f,(float) finalRooms[i].roomsize);
-                    float rndy = UnityEngine.Random.Range(0f, (float)finalRooms[i].roomsize);
+                    float rndx;
+                    float rndy;
+                    do
+                    {
+                        rndx = UnityEngine.Random.Range(0f, (float)finalRooms[i].roomsize - 1);
+                        rndy = UnityEngine.Random.Range(0f, (float)finalRooms[i].roomsize - 1);
+                    } while (MapGenerator.Instance.GetTileCollision(finalRooms[i].tiles[(int)rndx].tileX, finalRooms[i].tiles[(int)rndy].tileY));
 
                     Vector2 k = new Vector2(finalRooms[i].tiles[(int)rndx].tileX, finalRooms[i].tiles[(int)rndy].tileY);
                     //te = k;
@@ -234,10 +254,21 @@ public class door : MonoBehaviour
     void OnDrawGizmos()
     {
 
+        //Vector2 zero = (Vector2)MapGenerator.Instance.GetTileGameObject(0, 0).transform.position;
+
+        //foreach (Room r in finalRooms)
+        //    {
+        //        foreach(MapGenerator.Coord t in r.tiles)
+        //        {
+        //            Gizmos.color = Color.yellow;
+        //            Gizmos.DrawSphere(new Vector2(t.tileX + zero.x,t.tileY + zero.y), 1);
+        //        }
+        //    }
             foreach(Vector2 vec in spawnpos)
             {
-                Gizmos.DrawSphere(vec,1);
-            } 
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(new Vector3(vec.x,vec.y,-1),1);
+            }
     }
     void Update()
     {

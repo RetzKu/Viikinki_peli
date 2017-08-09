@@ -20,7 +20,7 @@ public class PathFinder
     private  int Width = TileMap.TotalWidth;
     private int Height = TileMap.TotalHeight;
     List<List<BreadthFirstSearch.tiles>> realMap;
-    public Dir[,] dirs = new Dir[Height, Width];
+    public Dir[,] dirs = new Dir[TileMap.TotalWidth, TileMap.TotalHeight];
     public bool run = false;
 
     public int GoalX;

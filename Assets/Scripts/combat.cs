@@ -13,7 +13,7 @@ public class combat : MonoBehaviour
     public float rangedBaseDmg = 0.0f;
     public float movementSpeed = 100.0f;
     public float attackSpeed = 1.0f;
-    public float armor = 1.0f;
+    public float armor = 1;
     public float DefaultAttackLength = 0.2f;
 
     // Attack cd muuttuja, muuta attackSpeed muuttujaa jos haluat muokata attackspeediä
@@ -175,7 +175,7 @@ public class combat : MonoBehaviour
     {
         ParticleSpawner.instance.SpawFireEffect(GameObject.Find("Player"), 2.5f);
         CampfireDamageFlag = true;
-        takeDamage(1f);
+        takeDamage(1);
     }
 
     // Metodi jolla tarkistetaan onko painettu lyöty ja lyönti pois CD
@@ -226,10 +226,13 @@ public class combat : MonoBehaviour
     // Metodi jolla pelaaja ottaa damagea
     public void takeDamage(float rawTakenDamage)
     {
+        int FilteredDamage = (int)(rawTakenDamage - armor);
+        if(FilteredDamage < 0) { FilteredDamage = 0; }
         // Lisää tähän tsekkaus
-        hp = hp - (rawTakenDamage / armor);
+        hp -= FilteredDamage;
         //Mikä damage tulee vastaan.
-        StartCoroutine(transform.GetComponent<PlayerScript>().HpCanvas.TakeDamage((int)rawTakenDamage));
+        StartCoroutine(transform.GetComponent<PlayerScript>().HpCanvas.TakeDamage(FilteredDamage));
+        if (transform.GetComponent<PlayerScript>().Inventory.EquipData.Armor != null) { transform.GetComponent<PlayerScript>().LoseArmorDurability(1); }
         
         GetComponent<Movement>().KnockBack(lastEnemyHitPosition);
         Debug.Log("Player has " + hp + " hp left.");

@@ -42,7 +42,9 @@ public class inventory
         }
     }
 
-    public void BreakArmor() { EquipData.BreakArmor(); }
+    public void BreakArmor() {int i = InventoryData.FindIndex(a => a.name == EquipData.BreakArmor().name);
+        InventoryData.RemoveAt(i);
+    }
     public void BreakWeapon()
     {
     GameObject tempObject = EquipData.BreakWeapon();    
@@ -149,9 +151,9 @@ public class inventory
             else if (Item.GetComponent<armorScript>() != null) { return WeaponType.Armor; }
             else { return WeaponType.noWeapon; }
         }
-        public void SetArmor(GameObject Armor) { _ChestPiece = Armor; }
+        public void SetArmor(GameObject Armor) { Armor.GetComponent<armorScript>().addArmorStats(); _ChestPiece = Armor; }
 
-        public void BreakArmor() { _ChestPiece = null; }
+        public GameObject BreakArmor() { GameObject RemovedArmor = _ChestPiece; _ChestPiece = null; return RemovedArmor; }
         public GameObject BreakWeapon() { GameObject RemovedTool = _Tool; _Tool = null; return RemovedTool; }
 
         public GameObject EmptyHand() { GameObject RemovedTool = _Tool; _Tool = null; return RemovedTool; }

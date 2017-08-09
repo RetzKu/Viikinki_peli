@@ -3028,6 +3028,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 18
       objectReference: {fileID: 0}
+    - target: {fileID: 1500619622908896, guid: 48784c733145937429b392a440fa8575, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 48784c733145937429b392a440fa8575, type: 2}
   m_IsPrefabParent: 0
@@ -4191,6 +4195,71 @@ Prefab:
       propertyPath: SpriteController
       value: 
       objectReference: {fileID: 1310822892}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: a
+      value: 0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: b
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: c
+      value: 1.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: Forest.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: Forest.g
+      value: 0.52205884
+      objectReference: {fileID: 0}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: Forest.b
+      value: 0.1709396
+      objectReference: {fileID: 0}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: Jungle.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: Jungle.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: Jungle.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: Mountain.r
+      value: 0.33088237
+      objectReference: {fileID: 0}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: Mountain.g
+      value: 0.33088237
+      objectReference: {fileID: 0}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: Mountain.b
+      value: 0.33088237
+      objectReference: {fileID: 0}
+    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: QuickLaunch
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ba8cfce009a3764ba416b37c8f039af, type: 2}
   m_IsPrefabParent: 0
@@ -6885,6 +6954,22 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1 &1686745555 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1468715861072664, guid: 9ba8cfce009a3764ba416b37c8f039af,
+    type: 2}
+  m_PrefabInternal: {fileID: 535620828}
+--- !u!114 &1686745559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1686745555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e34f4d9a863581e4f9b19c2205576fdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1723313079
 GameObject:
   m_ObjectHideFlags: 0
@@ -8366,6 +8451,26 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332516033373980, guid: aa7beb610ae45184ca0c009d3990cb02,
+        type: 2}
+      propertyPath: ResetColor.a
+      value: 0.159
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332516033373980, guid: aa7beb610ae45184ca0c009d3990cb02,
+        type: 2}
+      propertyPath: ResetColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332516033373980, guid: aa7beb610ae45184ca0c009d3990cb02,
+        type: 2}
+      propertyPath: ResetColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332516033373980, guid: aa7beb610ae45184ca0c009d3990cb02,
+        type: 2}
+      propertyPath: ResetColor.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aa7beb610ae45184ca0c009d3990cb02, type: 2}

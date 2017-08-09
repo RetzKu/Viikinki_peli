@@ -11,6 +11,12 @@ public class PerlinNoiseEditor : Editor
         Perlin  myPerlin  = (Perlin) target;
         TileMap myTileMap = (TileMap) myPerlin.GetComponent<TileMap>();
 
+        if (GUILayout.Button("Generate island"))
+        {
+            myPerlin.RandomIsland(Random.Range(0, 1500), Random.Range(0, 1500));
+            myPerlin.InitalizeRenderTarget();
+        }
+
         if (DrawDefaultInspector())
         {
             // arvoja muutettu

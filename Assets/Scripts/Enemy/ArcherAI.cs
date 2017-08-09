@@ -7,7 +7,7 @@ public class ArcherAI : generalAi {
     private float attackCounter = 0f;
     private float attackUptade = 2f;
     float chargeCounter = 0f;
-    float shootTime = 1f;
+    public float shootTime = 1f;
     GameObject proManager;
 
     public override void InitStart(float x, float y, EnemyType type,GameObject player)
@@ -32,6 +32,7 @@ public class ArcherAI : generalAi {
     public override void UpdatePosition()
     {
         rotation.UpdateRotation(velocity, body.position);
+        transform.GetComponent<EnemyAnimator>().ChangeDirection(myDir);
 
 
         LayerMask mask = new LayerMask();
@@ -145,6 +146,7 @@ public class ArcherAI : generalAi {
         //Physics._sepF = sepF * 1.5f;
         //Physics._maxSteeringForce = MaxSteeringForce * 0.1f; //EETU TRIGGER
     }
+    bool call = false;
     void clock(Vector2 playerPos,Vector2 dist)
     {
         chargeCounter += Time.deltaTime;
@@ -164,10 +166,17 @@ public class ArcherAI : generalAi {
             chargeCounter = 0;
             inAttack = false;
             rotation.Lock = false;
+            call = false;
             Physics._maxSpeed = MaxSpeed;
         }
         else
         {
+            if (!call)
+            {
+                print("shooot");
+                GetComponent<EnemyAnimator>().Attack();
+                call = true;    
+            }
             rotation.playerPos = playerPos;
             rotation.HardRotate(body.position, velocity);
             Physics._maxSpeed = MaxSpeed * 0.1f;

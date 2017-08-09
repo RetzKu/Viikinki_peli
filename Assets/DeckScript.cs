@@ -397,8 +397,7 @@ public class DeckScript : MonoBehaviour
         {
             if(cards[x] != null)
             {
-                int duration;
-                 // Toimisi kun mika kertoisi vain kaavan..... .. ... .. .. . .
+                float duration;
                 try
                 {
                     duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<weaponStats>().duration;

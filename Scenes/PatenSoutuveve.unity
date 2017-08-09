@@ -2934,11 +2934,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4373966958268876, guid: 48784c733145937429b392a440fa8575, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 26.71
+      value: 65.6
       objectReference: {fileID: 0}
     - target: {fileID: 4373966958268876, guid: 48784c733145937429b392a440fa8575, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 25.724
+      value: 40.1
       objectReference: {fileID: 0}
     - target: {fileID: 4373966958268876, guid: 48784c733145937429b392a440fa8575, type: 2}
       propertyPath: m_LocalPosition.z
@@ -4835,10 +4835,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Lock: 0
-  Knob0: {fileID: 1714856249146214, guid: 6d526cf892c1eab4795bff5aa59f6d1f, type: 2}
-  Knob1: {fileID: 1442913211837032, guid: 008965e054cf0a94c84b820e12ee658a, type: 2}
-  Knob3: {fileID: 0}
-  Knob4: {fileID: 0}
 --- !u!114 &936331385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4991,6 +4987,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c499b1efb0997e42b0cfb500150534b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DrawTileDirs: 1
+  Updater: {fileID: 936331381}
 --- !u!1 &937540138
 GameObject:
   m_ObjectHideFlags: 0
@@ -5692,6 +5690,10 @@ MonoBehaviour:
   deathTimer: 4
   type: 35
   RuneToTeach: {fileID: 0}
+  PlayerInRange: 0
+  Default: {r: 0, g: 0, b: 0, a: 0}
+  RecipeLearned: 0
+  Duration: 0
 --- !u!212 &1410270147
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6559,7 +6561,7 @@ Prefab:
         type: 2}
       propertyPath: MeleeDude
       value: 
-      objectReference: {fileID: 1977754839611798, guid: 66ccf3f92aecc84449b5c277bcd38483,
+      objectReference: {fileID: 1919206030925854, guid: aec341a3d2395384b9ad59b82b8232b3,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 317101aad9860994d946e75d103c65d0, type: 2}

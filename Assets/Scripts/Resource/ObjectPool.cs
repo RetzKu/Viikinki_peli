@@ -72,9 +72,9 @@ public class ObjectPool : MonoBehaviour
                 if(pooledObjects[i].Count > 0)
                 {
                     GameObject pooledObject = pooledObjects[i][0];
-                    pooledObjects[i].RemoveAt(0);
                     pooledObject.transform.parent = null;
                     pooledObject.SetActive(true);
+                    pooledObjects[i].RemoveAt(0);
                    
                     return pooledObject;
                    

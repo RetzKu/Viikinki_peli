@@ -4473,7 +4473,7 @@ Prefab:
         type: 2}
       propertyPath: MeleeDude
       value: 
-      objectReference: {fileID: 1977754839611798, guid: 66ccf3f92aecc84449b5c277bcd38483,
+      objectReference: {fileID: 1977754839611798, guid: e4a6185be38541c49988afc717cbf7d4,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 317101aad9860994d946e75d103c65d0, type: 2}

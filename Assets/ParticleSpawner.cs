@@ -45,7 +45,7 @@ public class ParticleSpawner : MonoBehaviour {
     }
     public void SpawFireEffect(GameObject father, float time)
     {
-        var ss = Instantiate(fireBuff);
+        var ss = Instantiate(fireBuff/*, new Vector2(0, 0), Quaternion.Euler(-90,0,0)*/);
         ss.GetComponent<buffParticle>().init(father, time);
     }
     public void CastSpell(GameObject father)

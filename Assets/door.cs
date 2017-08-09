@@ -237,7 +237,7 @@ public class door : MonoBehaviour
             foreach(Vector2 vec in spawnpos)
             {
                 Gizmos.DrawSphere(vec,1);
-            }
+            } 
     }
     void Update()
     {

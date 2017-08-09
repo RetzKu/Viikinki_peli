@@ -17,8 +17,8 @@ public class PathFinder
         error
     }
 
-    private static readonly int Width = TileMap.TotalWidth;
-    private static readonly int Height = TileMap.TotalHeight;
+    private  int Width = TileMap.TotalWidth;
+    private int Height = TileMap.TotalHeight;
     List<List<BreadthFirstSearch.tiles>> realMap;
     public Dir[,] dirs = new Dir[Height, Width];
     public bool run = false;
@@ -86,8 +86,11 @@ public class PathFinder
         return (x >= 0 && y >= 0 && x < Width && y < Height);
     }
 
-    public void Search(List<List<BreadthFirstSearch.tiles>> moveTiles, int goalX, int goalY)
+    public void Search(List<List<BreadthFirstSearch.tiles>> moveTiles, int goalX, int goalY,ITileMap tilemap)
     {
+        Height = tilemap.Height;
+        Width = tilemap.Width;
+
         this.GoalX = goalX;
         this.GoalY = goalY;
         realMap = moveTiles;

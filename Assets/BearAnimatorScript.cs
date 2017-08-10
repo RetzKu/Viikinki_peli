@@ -43,7 +43,7 @@ public class BearAnimatorScript : MonoBehaviour
                 }
             case action.Roar:
                 {
-
+                    GetComponent<Animator>().SetTrigger("Roar");
                     break;
                 }
             case action.Dead:

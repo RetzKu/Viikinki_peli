@@ -123,6 +123,11 @@ public abstract class generalAi : MonoBehaviour
     protected bool slow = false;
     protected bool inCave = false;
 
+    void Update()
+    {
+        UpdatePosition();
+    }
+
     public void followPlayer(ref Vector2 dist, Vector2 playerPos, float attackDist,ref Vector2 target,ref int flags,EnemyMovement Physics,float sepF)
     {
         //print(attackDist);
@@ -139,7 +144,7 @@ public abstract class generalAi : MonoBehaviour
         envTimer += Time.deltaTime;
         if(envTimer > envTime)
         {
-            LayerMask mask = LayerMask.GetMask("ObjectLayer");
+            LayerMask mask = LayerMask.GetMask("ObjectLayer","Tile");
             environment = Physics2D.OverlapCircleAll(body.position, 1f, mask);// muokkaa radiusta
             envTimer = 0;
         }
@@ -157,7 +162,7 @@ public abstract class generalAi : MonoBehaviour
             t = 0f;
         }
     }
-    public void findPath(ref int flags,ref Vector2 velocity,ref Vector2 target ,GameObject player,Rigidbody2D body)
+    public bool findPath(ref int flags,ref Vector2 velocity,ref Vector2 target ,GameObject player,Rigidbody2D body)
     {
         PathFinder.Dir k = player.GetComponent<UpdatePathFind>().path.getTileDir(body.position);
         rotation.rotToPl = false;
@@ -186,8 +191,7 @@ public abstract class generalAi : MonoBehaviour
             }
             else
             {
-                flags = 0;
-                velocity *= 0;
+                return false;
             }
         }
         else if (k == PathFinder.Dir.Right)
@@ -212,9 +216,9 @@ public abstract class generalAi : MonoBehaviour
         }
         else
         {
-            flags = 0;
-            velocity *= 0;
+            return false;
         }
+        return true;
     }
 
     public void reversedFindPath(ref int flags, ref Vector2 velocity, ref Vector2 target, GameObject player, Rigidbody2D body) // älä käytä, riks pox
@@ -326,7 +330,7 @@ public abstract class generalAi : MonoBehaviour
     public void RayCollide(ref collision CollState,ref Vector2 velocity,float collideDist, Rigidbody2D body)
     {
         CollState = collision.none;
-        LayerMask mask = LayerMask.GetMask("ObjectLayer");
+        LayerMask mask = LayerMask.GetMask("ObjectLayer","Tile");
         Vector2 main = velocity;
         main.Normalize();
         main *= collideDist; // EETU TRIGGER
@@ -439,7 +443,7 @@ public abstract class generalAi : MonoBehaviour
         obsTimer += Time.deltaTime;
         if(obsTimer > obsTime)
         {
-            int mask = LayerMask.GetMask("ObjectLayer");
+            int mask = LayerMask.GetMask("ObjectLayer","Tile");
             RaycastHit2D[] ob =  Physics2D.CircleCastAll(body.position, 0.5f, player.transform.position - (Vector3)body.position, dist.magnitude, mask);
             if(ob.Length == 0)
             {

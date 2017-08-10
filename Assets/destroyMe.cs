@@ -44,8 +44,7 @@ public class destroyMe : MonoBehaviour {
                 visited = true;
             }
             
-        }
-        
+        }        
     }
 
 

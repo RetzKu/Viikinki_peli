@@ -465,7 +465,7 @@ public class TileMap : MonoBehaviour, ITileMap
     void GenerateChunk(int offsetX, int offsetY, int perlinOffsetX, int perlinOffsetY)
     {
         // tallenna entinen
-        MobsControl.instance.SpawnBoids(perlinOffsetX * ChunkSize + ChunkSize / 2, perlinOffsetY * ChunkSize + ChunkSize / 2, ChunkSize / 3, Random.Range(2, 6));//pate spawn
+        //MobsControl.instance.SpawnBoids(perlinOffsetX * ChunkSize + ChunkSize / 2, perlinOffsetY * ChunkSize + ChunkSize / 2, ChunkSize / 3, Random.Range(2, 6));//pate spawn
 
         var chunk = _chunks[offsetY, offsetX]; // missä kohdalla _chunkeissa
 

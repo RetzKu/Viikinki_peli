@@ -10,7 +10,9 @@ public enum TileType
     Water,
     Mountain,
 
-    CaveWall, 
+
+    CaveWall,
+
 
     CollisionTiles,
 

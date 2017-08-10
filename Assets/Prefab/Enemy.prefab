@@ -1238,7 +1238,7 @@ MonoBehaviour:
   ArriveRadius: 0.3
   desiredseparation: 0.7
   alingmentDistance: 1
-  sepF: 0.05
+  sepF: 0.1
   aliF: 0.2
   cohF: 0.1
   velocity: {x: 0, y: 0}

@@ -111,6 +111,10 @@ public class MeleeAi : generalAi {
         //attackCounter += Time.deltaTime;
         clock();// sets attack
         //if (attackCounter <= attackUptade &&!inAttack)
+        if(attack && find && dist.magnitude < 0.5f)
+        {
+            find = false;
+        }
         if (attack && dist.magnitude <= attackDist * 1.1f && !find)
         {
             //anim
@@ -142,7 +146,11 @@ public class MeleeAi : generalAi {
             {
                 //followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
 
-                findPath(ref flags, ref velocity, ref target, player, body);
+                bool success = findPath(ref flags, ref velocity, ref target, player, body);
+                if (!success)
+                {
+                    followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
+                }
             }
             //}
 

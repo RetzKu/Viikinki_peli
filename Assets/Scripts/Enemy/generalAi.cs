@@ -121,6 +121,11 @@ public abstract class generalAi : MonoBehaviour
     protected bool slow = false;
     protected bool inCave = false;
 
+    void Update()
+    {
+        UpdatePosition();
+    }
+
     public void followPlayer(ref Vector2 dist, Vector2 playerPos, float attackDist,ref Vector2 target,ref int flags,EnemyMovement Physics,float sepF)
     {
         //print(attackDist);
@@ -155,7 +160,7 @@ public abstract class generalAi : MonoBehaviour
             t = 0f;
         }
     }
-    public void findPath(ref int flags,ref Vector2 velocity,ref Vector2 target ,GameObject player,Rigidbody2D body)
+    public bool findPath(ref int flags,ref Vector2 velocity,ref Vector2 target ,GameObject player,Rigidbody2D body)
     {
         PathFinder.Dir k = player.GetComponent<UpdatePathFind>().path.getTileDir(body.position);
         rotation.rotToPl = false;
@@ -184,8 +189,7 @@ public abstract class generalAi : MonoBehaviour
             }
             else
             {
-                flags = 0;
-                velocity *= 0;
+                return false;
             }
         }
         else if (k == PathFinder.Dir.Right)
@@ -210,9 +214,9 @@ public abstract class generalAi : MonoBehaviour
         }
         else
         {
-            flags = 0;
-            velocity *= 0;
+            return false;
         }
+        return true;
     }
 
     public void reversedFindPath(ref int flags, ref Vector2 velocity, ref Vector2 target, GameObject player, Rigidbody2D body) // älä käytä, riks pox
@@ -344,7 +348,7 @@ public abstract class generalAi : MonoBehaviour
         {
             CollState = collision.Left;
         }
-        print(CollState);
+        //print(CollState);
     }
     public Vector2 getPosition() // tulee jokaselle
     {

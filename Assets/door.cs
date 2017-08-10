@@ -19,7 +19,7 @@ public class door : MonoBehaviour
     int fillpercent = 50;
     public GameObject GodOfTheWorld;
     List<Room> finalRooms = new List<Room>();
-    float mobs = 0;
+    public float mobs = 0;
     private TileMap _tilemap;
     BossTypes boss = BossTypes.unInit;
     void Start()
@@ -43,6 +43,8 @@ public class door : MonoBehaviour
             int[] m = player.GetComponent<UpdatePathFind>().path.calculateIndex(player.transform.position);
             player.GetComponent<UpdatePathFind>().path.uptadeTiles(m[0], m[1], GameObject.FindGameObjectWithTag("Tilemap").GetComponent<TileMap>());
             ParticleSpawner.instance.destroybloods();
+            MobsControl.instance.cave = false;
+
         }
         else
         {
@@ -65,7 +67,9 @@ public class door : MonoBehaviour
 
             player.GetComponent<UpdatePathFind>().path.uptadeTiles(m[0], m[1], dungeon);
 
-           
+            MobsControl.instance._door = this.gameObject;
+            MobsControl.instance.cave = true;
+
             //player.GetComponent<UpdatePathFind>().path.uptadeTiles(player.transform.position,dungeon);
 
             if (!spawnedMobs)
@@ -81,6 +85,7 @@ public class door : MonoBehaviour
 
         }
     }
+
     void spawnCreadedMobs()
     {
 

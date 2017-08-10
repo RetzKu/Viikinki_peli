@@ -229,14 +229,29 @@ public class WolfAI : generalAi
                 attackCounter+= Time.deltaTime;
                 if (!inAttack && attackCounter > attackUptade)
                 {
-                    findPath(ref flags, ref velocity, ref target, player, body);
+                    bool success = findPath(ref flags, ref velocity, ref target, player, body);
+                    if (!success)
+                    {
+                        followPlayer(ref dist, playerPos, 0, ref target, ref flags, Physics, sepF);
+                    }
                 }
                 else
                 {
-                    followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
-                    if (environment != null && environment.Length != 0)
+                    if (!obc)
                     {
-                        flags = flags | (int)behavior.CollideEnv;
+                        followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
+                        if (environment != null && environment.Length != 0)
+                        {
+                            flags = flags | (int)behavior.CollideEnv;
+                        }
+                    }
+                    else
+                    {
+                        bool success = findPath(ref flags, ref velocity, ref target, player, body);
+                        if (!success)
+                        {
+                            followPlayer(ref dist, playerPos, 0, ref target, ref flags, Physics, sepF);
+                        }
                     }
                 }
                 //reversedFindPath(ref flags, ref velocity, ref target, player, body);

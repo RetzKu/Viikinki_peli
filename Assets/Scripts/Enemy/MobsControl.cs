@@ -38,7 +38,7 @@ public class MobsControl : MonoBehaviour
 
     [HideInInspector]
     public GameObject _door { set { door = value; } }
-    GameObject door = new GameObject();
+    GameObject door;
     public bool cave = false;
     void Start()
     {
@@ -159,7 +159,10 @@ public class MobsControl : MonoBehaviour
             {
                 Destroy(Boids[ind]);
                 Boids.Remove(Boids[ind]);
-                door.GetComponent<door>().mobs -= 1;               
+                if (cave)
+                {
+                    door.GetComponent<door>().mobs -= 1;               
+                }
             }
             else
             {

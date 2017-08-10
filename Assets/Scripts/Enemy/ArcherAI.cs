@@ -12,7 +12,7 @@ public class ArcherAI : generalAi {
 
     public override void InitStart(float x, float y, EnemyType type,GameObject player)
     {
-        attackDist = UnityEngine.Random.Range(4f, 6f);
+        attackDist = UnityEngine.Random.Range(3f, 4f);
         myType = type;
         rotation.init(myType);
         body = GetComponent<Rigidbody2D>();
@@ -106,6 +106,7 @@ public class ArcherAI : generalAi {
     }
     void archerPattern(Vector2 dist, Vector2 playerPos) // spe
     {
+        getObstacle(dist);
         attackCounter += Time.deltaTime;
         if(attackCounter < attackUptade &&  !inAttack)
         {
@@ -130,10 +131,21 @@ public class ArcherAI : generalAi {
                 }
                 Physics._desiredseparation = desiredseparation;
                 Physics._maxSpeed =MaxSpeed* 0.8f;
-                followPlayer(ref dist, playerPos,attackDist,ref target,ref flags,Physics,sepF);
-                if (environment != null && environment.Length != 0)
+                if (!obc)
                 {
-                    flags = flags | (int)behavior.CollideEnv;
+                    followPlayer(ref dist, playerPos,attackDist,ref target,ref flags,Physics,sepF);
+                    if (environment != null && environment.Length != 0)
+                    {
+                        flags = flags | (int)behavior.CollideEnv;
+                    }
+                }
+                else
+                {
+                    bool success = findPath(ref flags, ref velocity, ref target, player, body);
+                    if (!success)
+                    {
+                        followPlayer(ref dist, playerPos, 0, ref target, ref flags, Physics, sepF);
+                    }
                 }
             }
         }

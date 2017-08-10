@@ -1214,6 +1214,7 @@ MonoBehaviour:
   aliF: 0.2
   cohF: 0.1
   velocity: {x: 0, y: 0}
+  shootTime: 0.3
 --- !u!114 &114462557661782716
 MonoBehaviour:
   m_ObjectHideFlags: 1

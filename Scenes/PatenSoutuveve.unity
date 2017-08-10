@@ -2934,13 +2934,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4373966958268876, guid: 48784c733145937429b392a440fa8575, type: 2}
       propertyPath: m_LocalPosition.x
-
-      value: 50
+      value: 65.6
       objectReference: {fileID: 0}
     - target: {fileID: 4373966958268876, guid: 48784c733145937429b392a440fa8575, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 40
-
+      value: 40.1
       objectReference: {fileID: 0}
     - target: {fileID: 4373966958268876, guid: 48784c733145937429b392a440fa8575, type: 2}
       propertyPath: m_LocalPosition.z
@@ -6563,7 +6561,13 @@ Prefab:
         type: 2}
       propertyPath: MeleeDude
       value: 
-      objectReference: {fileID: 1919206030925854, guid: aec341a3d2395384b9ad59b82b8232b3,
+      objectReference: {fileID: 1977754839611798, guid: e4a6185be38541c49988afc717cbf7d4,
+        type: 2}
+    - target: {fileID: 114676718114899972, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: Archer
+      value: 
+      objectReference: {fileID: 1977754839611798, guid: e4a6185be38541c49988afc717cbf7d4,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 317101aad9860994d946e75d103c65d0, type: 2}

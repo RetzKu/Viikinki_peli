@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5809d43aadc2ec64dbd7ef1ee376c9ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swingDist: 1
   inAttack: 0
   agro: 0
   attackDist: 4.815528
@@ -97,7 +98,7 @@ MonoBehaviour:
   IdleRefreshRate: 100
   IdleRadius: 60
   IdleBallDistance: 100
-  MaxSteeringForce: 0.001
+  MaxSteeringForce: 0.1
   ArriveRadius: 0.3
   desiredseparation: 0.7
   alingmentDistance: 1

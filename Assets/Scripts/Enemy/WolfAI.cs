@@ -251,7 +251,11 @@ public class WolfAI : generalAi
                 rotation.rotToPl = false;
                 if (obc)
                 {
-                    findPath(ref flags, ref velocity, ref target, player, body);
+                    bool success =  findPath(ref flags, ref velocity, ref target, player, body);
+                    if(!success)
+                    {
+                        followPlayer(ref dist, playerPos, 0, ref target, ref flags, Physics, sepF);
+                    }
                 }
                 else
                 {
@@ -262,7 +266,11 @@ public class WolfAI : generalAi
             {
                 rotation.playerPos = playerPos;
                 rotation.rotToPl = true;
-                findPath(ref flags, ref velocity, ref target, player, body);
+                bool success = findPath(ref flags, ref velocity, ref target, player, body);
+                if (!success)
+                {
+                    followPlayer(ref dist, playerPos, 0, ref target, ref flags, Physics, sepF);
+                }
             }
             //attackCounter = attackUptade;
         }

@@ -66,6 +66,6 @@ public class UpdatePathFind : MonoBehaviour
 
     //void OnDrawGizmos() // käytä pathfind debuggaukseens
     //{
-    //    Giz.OnDrawGizmosPate();
+    //    Gizmos.DrawSphere(body.position, 0.1f);
     //}
 }

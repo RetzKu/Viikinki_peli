@@ -337,6 +337,7 @@ GameObject:
   - component: {fileID: 114296487332856214}
   - component: {fileID: 114950410156743508}
   - component: {fileID: 61301480390770990}
+  - component: {fileID: 114449907913420302}
   m_Layer: 8
   m_Name: Bear
   m_TagString: Enemy
@@ -1175,7 +1176,7 @@ MonoBehaviour:
   inAttack: 0
   agro: 0
   attackDist: 0
-  MaxSpeed: 0.04
+  MaxSpeed: 3
   knockTime: 0.2
   IdleRefreshRate: 100
   IdleRadius: 60
@@ -1204,6 +1205,17 @@ MonoBehaviour:
   Sprites:
   - {fileID: 21300000, guid: d613489e11afe7e4ca88aaddbc69ce11, type: 3}
   - {fileID: 21300000, guid: 582917827fd3b66449a2d343026ac64b, type: 3}
+--- !u!114 &114449907913420302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1670808006553996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c7b3b2669070940ad93f01c6e7709a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114645184092337382
 MonoBehaviour:
   m_ObjectHideFlags: 1

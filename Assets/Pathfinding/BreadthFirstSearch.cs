@@ -137,7 +137,7 @@ public class BreadthFirstSearch
 
         goalX = playerX;
         goalY = playerY;
-        panther.Search(moveTiles, goalX, goalY);
+        panther.Search(moveTiles, goalX, goalY,tileMap);
         //for(int y = 0; y < moveTiles.Count; y++)
         //{
         //    for (int x = 0; x < moveTiles.Count; x++)

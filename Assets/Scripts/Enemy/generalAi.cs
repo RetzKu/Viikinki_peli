@@ -29,6 +29,7 @@ public enum action
     LeapStart,
     LeapEnd,
     Moving,
+    Roar,
     Idle
 }
 [Flags]

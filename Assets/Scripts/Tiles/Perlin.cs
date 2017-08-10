@@ -305,6 +305,45 @@ public class Perlin : MonoBehaviour
         return 6;
     }
 
+    public Texture2D GenMiniMap(int w, int h)
+    {
+        Width  = w;
+        Heigth = h;
+        Texture2D tex = GeneraTextureMap((e, m) => BiomeToColor(GetBiomeWSettings(e, m)));
+        Heigth = Width = 250; // fuck 
+        return tex;
+    }
+
+    // TODO: REMOVE
+    public Texture2D GeneraTextureMap(ColoringScheme coloring)
+    {
+        Texture2D texture = new Texture2D(Width, Heigth);
+        texture.filterMode = FilterMode.Point;
+        texture.wrapMode = TextureWrapMode.Clamp;
+
+        float[,] elevation = new float[Width, Heigth];
+
+        float[,] moisture = new float[Width, Heigth];
+        GenerateNoiseMap(elevation, Width, Heigth);
+
+        float tmp = OffsetX;
+        OffsetX += 100f;
+        GenerateNoiseMap(moisture, Width, Heigth);
+        OffsetX = tmp;
+
+        for (int y = 0; y < Width; y++)
+        {
+            for (int x = 0; x < Heigth; x++)
+            {
+                float e = elevation[y, x];
+                float m = moisture[y, x];
+                texture.SetPixel(x, y, coloring(e, m));
+            }
+        }
+        texture.Apply();
+        return texture;
+    }
+
     public void DrawNoiseMap(ColoringScheme coloring, Renderer renderer)
     {
         Texture2D texture = new Texture2D(Width, Heigth);
@@ -371,8 +410,62 @@ public class Perlin : MonoBehaviour
         renderer.material.mainTexture = texture;
     }
 
+    public float a = 0.05f;
+    public float b = 1.0f;
+    public float c = 1.5f;
+    public float CenterX = 1.5f;
+    public float CenterY = 1.5f;
+    private float _cx;
+    private float _cy;
+
+    private float Distance(float nx, float ny)
+    {
+        return 2 * Mathf.Max(Mathf.Abs(_cx - nx), Mathf.Abs(_cy - ny));
+    }
+
+
+    public void RandomIsland(int offsetX, int offsetY)
+    {
+        float offX = .17f * (float)offsetX; // Random.Range(1f, 1500f);
+        float offY = .17f * (float)offsetY; // Random.Range(1f, 1500f);
+        // OffsetX = .17f * (float)offsetX;
+        // OffsetY = .17f * (float)offsetY;
+
+        _cx = offX;
+        _cy = offY;
+        CenterX = offX + 1.5f;
+        CenterY = offY + 1.5f;
+
+        OffsetX = _cx;
+        OffsetY = _cy;
+        // move players
+    }
+
+    // abc
+    // 37              26                         85
+    /*
+     e = e + a - b*d^c, where d is the distance from the center (scaled to 0-1).
+     Another option would be e = (e + a) * (1 - b*d^c).
+     The constant a pushes everything up, b pushes the edges down, and c controls how quick the drop off is.
+     a = pushes everything up
+     b = pushes edges down 
+     c = controls drop off
+     */
+
+
+    private bool _first = true;
     private void GenerateNoiseMap(float[,] noiseMap, int width, int height, float seed = 0f, int octaves = 0, float persistance = 0f, float lacuranity = 0f)
     {
+        if (_first)
+        {
+            _first = false;
+            _cx = OffsetY;
+            _cy = OffsetY;
+        }
+        _cx = CenterX;
+        _cy = CenterY;
+
+
         if (octaves == 0)
         {
             octaves = this.Octaves;
@@ -390,6 +483,9 @@ public class Perlin : MonoBehaviour
         float minNoiseHeight = float.MaxValue;
 
         float xOff = seed;
+
+
+
         for (int y = 0; y < width; y++)
         {
             float yOff = seed;
@@ -423,8 +519,14 @@ public class Perlin : MonoBehaviour
                 {
                     minNoiseHeight = noiseHeigth;
                 }
+#if true
                 noiseMap[y, x] = noiseHeigth;
-#else       
+
+                noiseMap[y, x] = noiseMap[y, x] + a - b * Mathf.Pow(Distance(OffsetX + x * 0.01f, OffsetY + y * 0.01f), c);
+                // e = e + a - b * d ^ c
+#else
+#endif
+#else
                 float e = 1 * Mathf.PerlinNoise(nx * Frequency, ny * Frequency) +
                           0.5f * Mathf.PerlinNoise(2 * nx, 2 * ny)
                           + 0.25f * Mathf.PerlinNoise(4 * nx, 4 * ny);
@@ -450,6 +552,8 @@ public class Perlin : MonoBehaviour
             }
         }
     }
+
+
 
     public TilemapObjectSpawnSettings SpawnSettings;
     public void SpawnObject(Vector3 spawnPosition, Transform parent, TileType type, Chunk chunk, int x, int y)
@@ -544,7 +648,7 @@ public class Perlin : MonoBehaviour
                 // TileType type = GetBiome(elevation[y, x], moisture[y, x]);
                 // go.GetComponent<Renderer>().material.color = BiomeToColor(type);
 
-                if (TileMap.Collides(type)) // disable atm ITileMap.cs
+                if (TileMap.Collides(type)) // disable atm IileMap.cs
                 {
                     Collider2D body = go.GetComponent<Collider2D>();
                     body.enabled = true;

@@ -40,6 +40,8 @@ public class DeckScript : MonoBehaviour
     private bool addCard = false;
     private bool removeCard = false;
 
+    private bool dragFlag = false;
+
     private int brokenWeaponInt;
     private Sprite[] cardArray;
 
@@ -116,7 +118,7 @@ public class DeckScript : MonoBehaviour
 
             cards = new GameObject[updatedCardCount];
 
-            // Tekee oikean määrän kortteja (lisätty/vähennetty määrä)
+            // Tekee oikean määrän kortteja (lisätty määrä)
             for (int x = 0; x < updatedCardCount; x++)
             {
                 cards[x] = new GameObject("Card" + x);
@@ -124,6 +126,10 @@ public class DeckScript : MonoBehaviour
                 cards[x].transform.localScale = new Vector3(0.7f, 1f, 1f);
                 cards[x].transform.SetSiblingIndex(x);
                 cards[x].AddComponent<Image>().sprite = cardArray[3];
+
+                cards[x].AddComponent<CardMoverEraser>();
+                cards[x].GetComponent<CardMoverEraser>();
+
                 GameObject tempObj = new GameObject("CardChild");
                 tempObj.transform.position = cards[x].transform.position;
                 Sprite cardImage = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<SpriteRenderer>().sprite;
@@ -164,6 +170,7 @@ public class DeckScript : MonoBehaviour
             // Tallennetaan "vanhojen" korttien propertiesit
             saveCardProperties();
 
+            // Testiä --> GetComponentInChildren<CardMoverEraser>().ApplyOpenPosition();
             // Ladataan uudet positiot ja anglet uudelle kortti määrälle
             cardCount = updatedCardCount;
             maxAngles = rotationMax(cardCount);
@@ -186,7 +193,7 @@ public class DeckScript : MonoBehaviour
         t += Time.deltaTime * Speed;
 
         // Aukaisee inventoryn
-        if (open == true && addCard == false && removeCard == false)
+        if (open == true && addCard == false && removeCard == false && dragFlag == false)
         {
             // Juoksee kerran kun open true
             if (openChanger == true)
@@ -194,6 +201,7 @@ public class DeckScript : MonoBehaviour
                 t = 0;
                 openChanger = false;
                 openChanger2 = true;
+               // GetComponentInChildren<CardMoverEraser>().ApplyOpenPosition();
                 //transform.FindChild("Base").localRotation = new Quaternion(0f, 0f, 0f, 0f);
             }
             // Juoksee joka kerta
@@ -213,7 +221,7 @@ public class DeckScript : MonoBehaviour
                 t = 0;
                 openChanger = false;
                 openChanger2 = true;
-
+                //GetComponentInChildren<CardMoverEraser>().ApplyOpenPosition();
             }
             // Juoksee joka kerta
             for (int x = 0; x < cardCount - 1; x++)
@@ -271,7 +279,6 @@ public class DeckScript : MonoBehaviour
             transform.FindChild("Card" + (brokenWeaponInt)).GetChild(0).GetComponent<Image>().color = new Color(cardColor2.r, cardColor2.g, cardColor2.b, Mathf.Lerp(1f, 0f, t));
             Color cardColor3 = transform.FindChild("Card" + (brokenWeaponInt)).GetChild(1).GetComponent<Image>().color;
             transform.FindChild("Card" + (brokenWeaponInt)).GetChild(1).GetComponent<Image>().color = new Color(cardColor3.r, cardColor3.g, cardColor3.b, Mathf.Lerp(1f, 0f, t));
-
 
             if (t >= 1)
             {
@@ -390,8 +397,16 @@ public class DeckScript : MonoBehaviour
         {
             if(cards[x] != null)
             {
-                 // Toimisi kun mika kertoisi vain kaavan..... .. ... .. .. . .
-                int duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<weaponStats>().duration;
+                float duration;
+                try
+                {
+                    duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<weaponStats>().duration;
+                }
+                catch
+                {
+                    duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<armorScript>().duration;
+                }
+                
                 cards[x].transform.GetChild(0).GetComponent<RectTransform>().localScale = new Vector3(1f - 0.1f * duration, 1f, 1f);
             }
         }
@@ -658,7 +673,7 @@ public class DeckScript : MonoBehaviour
         return new float[] { max[0] };
     }
 
-    public void saveCardProperties()
+    private void saveCardProperties()
     {
         // Päivitetään arrayt oikean kokoisiksi
         positions = new Vector3[cardCount];
@@ -675,5 +690,21 @@ public class DeckScript : MonoBehaviour
     public void lastBrokenWeapon(int weaponInt)
     {
         brokenWeaponInt = weaponInt;
+    }
+
+    public void dragTrue()
+    {
+        dragFlag = true;
+    }
+
+    public void dragFalse()
+    {
+        dragFlag = false;
+    }
+
+    public Vector3 OpenInvPositions(int Count)
+    {
+        Vector3 tempVector3 = new Vector3(maxPositionX[Count], maxPositionY[Count], 0f);
+        return tempVector3;
     }
 }

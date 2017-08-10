@@ -22,6 +22,8 @@ internal class EnemyAnimator : MonoBehaviour {
     private List<Sprite> UpperHands;
     private List<Sprite> LowerHands;
 
+    public GameObject Bow;
+
     private void Awake()
     {
         /*Finding enemy hands*/
@@ -36,6 +38,9 @@ internal class EnemyAnimator : MonoBehaviour {
         Torsos.Add(transform.GetChild(1).gameObject);
         Torsos.Add(transform.GetChild(2).gameObject);
 
+        /*Finding enemy Heads*/
+        Heads = new List<Sprite>(3);
+
         /*Finding Animators*/
         Animators = new List<Animator>(3);
         foreach (GameObject t in Torsos) { Animators.Add(t.GetComponent<Animator>()); }
@@ -43,7 +48,16 @@ internal class EnemyAnimator : MonoBehaviour {
         SpriteController = new SpriteChanger(Torsos);
 
         /*Building New HandRoot Component*/
-        Hand = new HandRoot(Hands[0], SpriteFinderScript.Instance.RandomMeleeWeapon(), Hands);
+
+        if(GetComponent<archerStats>() == null)
+        {
+            Hand = new HandRoot(Hands[0], SpriteFinderScript.Instance.RandomMeleeWeapon(), Hands);
+        }
+        else
+        {
+            Hand = new HandRoot(Hands[0], Bow, Hands);
+        }
+
 
         Heads = SpriteFinderScript.Instance.RandomHead();
         Chests = SpriteFinderScript.Instance.RandomTorso();
@@ -104,6 +118,10 @@ internal class EnemyAnimator : MonoBehaviour {
             else if (Weapon.GetComponent<Melee>() != null) { return WeaponType.meleeWeapon; }
             else { return WeaponType.noWeapon; }
         }
+        else if(Bow != null)
+        {
+            return WeaponType.rangedWeapon;
+        }
         else { return WeaponType.noWeapon; }
     }
 
@@ -124,7 +142,10 @@ internal class EnemyAnimator : MonoBehaviour {
 
     public void Attack()
     {
-        GetComponent<EnemyFx>().Attack();
+        if (Bow == null)
+        {
+            GetComponent<EnemyFx>().Attack(); 
+        }
         foreach (Animator t in Animators) { t.SetTrigger(AttackType()); }
     }
 

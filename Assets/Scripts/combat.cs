@@ -13,7 +13,7 @@ public class combat : MonoBehaviour
     public float rangedBaseDmg = 0.0f;
     public float movementSpeed = 100.0f;
     public float attackSpeed = 1.0f;
-    public float armor = 1.0f;
+    public float armor = 1;
     public float DefaultAttackLength = 0.2f;
 
     // Attack cd muuttuja, muuta attackSpeed muuttujaa jos haluat muokata attackspeediä
@@ -175,11 +175,11 @@ public class combat : MonoBehaviour
     {
         ParticleSpawner.instance.SpawFireEffect(GameObject.Find("Player"), 2.5f);
         CampfireDamageFlag = true;
-        takeDamage(1f);
+        takeDamage(1);
     }
 
     // Metodi jolla tarkistetaan onko painettu lyöty ja lyönti pois CD
-    public void attackBoolean(Vector2 direction)
+    public void attackBoolean(Vector2 direction, Vector2 attackpos)
     {
         // Tähän voisi tehdä pari riviä koodia joka tarkistaa onko kyseessä android vai pc inputit ja sen mukaan ohjaisi
         if (isAttackLegal()) // PC
@@ -194,7 +194,7 @@ public class combat : MonoBehaviour
                     Vector2 tempo2 = new Vector2((direction.x - transform.position.x), (direction.y - transform.position.y));
                     tempo2.Normalize();
 
-                    GameObject.Find("projectileManager").GetComponent<ProjectileManager>().spawnProjectile(transform.position, new Vector2(transform.position.x + tempo2.x * 6, transform.position.y + tempo2.y * 6));
+                    GameObject.Find("projectileManager").GetComponent<ProjectileManager>().spawnProjectile(transform.position, (Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position).normalized * 6 + transform.position /*new Vector2(transform.position.x + tempo2.x * 6, transform.position.y + tempo2.y * 6)*/);
                     transform.GetComponent<PlayerScript>().LoseDurability();
                     // Tähän voisi laittaa efektin vaihtumaan bowi efektiin
                 }
@@ -226,8 +226,14 @@ public class combat : MonoBehaviour
     // Metodi jolla pelaaja ottaa damagea
     public void takeDamage(float rawTakenDamage)
     {
+        int FilteredDamage = (int)(rawTakenDamage - armor);
+        if(FilteredDamage < 0) { FilteredDamage = 0; }
         // Lisää tähän tsekkaus
-        hp = hp - (rawTakenDamage / armor);
+        hp -= FilteredDamage;
+        //Mikä damage tulee vastaan.
+        StartCoroutine(transform.GetComponent<PlayerScript>().HpCanvas.TakeDamage(FilteredDamage));
+        if (transform.GetComponent<PlayerScript>().Inventory.EquipData.Armor != null) { transform.GetComponent<PlayerScript>().LoseArmorDurability(1); }
+        
         GetComponent<Movement>().KnockBack(lastEnemyHitPosition);
         Debug.Log("Player has " + hp + " hp left.");
         GetComponent<DamageVisual>().TakeDamage();
@@ -246,6 +252,6 @@ public class combat : MonoBehaviour
     void death()
     {
         // Kuoleman jälkeiset asiat tänne
-        Debug.LogError("Kuolit");
+        
     }
 }

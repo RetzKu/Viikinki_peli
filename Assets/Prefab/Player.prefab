@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 95596494444626358}
   - component: {fileID: 114168565267878290}
   - component: {fileID: 70989200074635580}
-  m_Layer: 10
+  m_Layer: 28
   m_Name: d_c_torso
   m_TagString: notPatePlayer
   m_Icon: {fileID: 0}
@@ -465,7 +465,7 @@ GameObject:
   - component: {fileID: 95196998322497356}
   - component: {fileID: 114983095315675218}
   - component: {fileID: 70103911513326906}
-  m_Layer: 10
+  m_Layer: 28
   m_Name: s_c_torso
   m_TagString: notPatePlayer
   m_Icon: {fileID: 0}
@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 95888391498598372}
   - component: {fileID: 114106720866073798}
   - component: {fileID: 70218858162413130}
-  m_Layer: 10
+  m_Layer: 28
   m_Name: u_c_torso
   m_TagString: notPatePlayer
   m_Icon: {fileID: 0}
@@ -1241,6 +1241,7 @@ GameObject:
   - component: {fileID: 114335856655356606}
   - component: {fileID: 58421809874053922}
   - component: {fileID: 114102464536211990}
+  - component: {fileID: 114988319565465690}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -2351,7 +2352,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!58 &58006729692043916
@@ -3129,7 +3130,10 @@ MonoBehaviour:
   SidewaysHand: {fileID: 4334774280397600}
   UpwardsHand: {fileID: 4440870551386460}
   DownwardsHand: {fileID: 4936626758937170}
-  DefaultTorsos: []
+  DefaultTorsos:
+  - {fileID: 21300054, guid: 629e1517d153c074595eb344f3509beb, type: 3}
+  - {fileID: 21300066, guid: 629e1517d153c074595eb344f3509beb, type: 3}
+  - {fileID: 21300060, guid: 629e1517d153c074595eb344f3509beb, type: 3}
   Direction: 2
 --- !u!114 &114135886502828906
 MonoBehaviour:
@@ -3615,6 +3619,17 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1320921916812334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4cc7c6ff647c242bec7c60d3743139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114988319565465690
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1977754839611798}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b4cc7c6ff647c242bec7c60d3743139, type: 3}

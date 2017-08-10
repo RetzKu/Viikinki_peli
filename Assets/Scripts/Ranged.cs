@@ -10,9 +10,7 @@ public class Ranged : weaponStats
     {
         if (duration <= 0)
         {
-            Destroy(gameObject);
-            GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.EquipData.EmptyHand();
-            Destroy(GameObject.Find("Player").GetComponent<PlayerScript>().weaponInHand);
+            GameObject.Find("Player").GetComponent<PlayerScript>().BreakWeapon();
         }
     }
 
@@ -29,7 +27,7 @@ public class Ranged : weaponStats
         if (Hand.name == "d_r_hand") { Weapon.transform.localRotation = Quaternion.Euler(0, 0, -90); }
         if (Hand.name == "s_l_hand") { Weapon.transform.localRotation = Quaternion.Euler(0, 0, -67); Weapon.GetComponent<SpriteRenderer>().sortingOrder = 1; }
         
-
         if (Weapon.transform.localScale.x < 0){ Vector3 Scale = Weapon.transform.localScale; Scale.x *= -1; Weapon.transform.localScale = Scale;}
+
     }
 }

@@ -82,7 +82,7 @@ public class ChunkMover : MonoBehaviour, ITestPlayer
     void Start()
     {
         tilemap = FindObjectOfType<TileMap>();
-        ChunkOffsets = TileMap.GetChunkOffset (transform.position.x, transform.position.y);
+        // ChunkOffsets = TileMap.GetChunkOffset (transform.position.x, transform.position.y);
     }
 
     void Update ()

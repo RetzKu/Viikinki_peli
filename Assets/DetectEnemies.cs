@@ -7,7 +7,7 @@ public class DetectEnemies : MonoBehaviour
 
     private Rigidbody2D body;
     public float aggroDist = 5.0f;
-    public float slowDown = 0.2f;
+    public float slowDown = 0.05f;
     LayerMask mask = new LayerMask();
     // Use this for initialization
     void Start()

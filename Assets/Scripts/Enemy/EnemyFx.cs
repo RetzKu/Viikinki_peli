@@ -11,9 +11,11 @@ public class EnemyFx : MonoBehaviour {
 
     private GameObject BaseFx;
     private GameObject Fx;
+    private GameObject TmpFx;
 
     private GameObject Weapon;
     private WeaponType Type;
+    private bool DamageDone;
 
     private void Awake()
     {
@@ -53,10 +55,10 @@ public class EnemyFx : MonoBehaviour {
 
     public void Attack()
     {
-        GameObject TmpFx = Instantiate(Fx);
+        TmpFx = Instantiate(Fx);
         TmpFx.AddComponent<FxFade>().Duration = DefaultDuration;
         TmpFx.layer = LayerMask.NameToLayer("EnemyFx");
-        TmpFx.AddComponent<BoxCollider2D>().isTrigger = true;
+        TmpFx.AddComponent<BoxCollider2D>();//.isTrigger = true;
         TmpFx.transform.SetParent(transform);
         Destroy(TmpFx, DefaultDuration);
         Vector3 EffectOffSet = GetOffset();
@@ -76,10 +78,20 @@ public class EnemyFx : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<s_c_torsoScript>() != null)
+        if (collision.GetComponent<s_c_torsoScript>() != null)
         {
+            Destroy(TmpFx.GetComponent<BoxCollider2D>());
             GameObject.Find("Player").GetComponent<combat>().setHitPosition(transform.position);
-            GameObject.Find("Player").GetComponent<combat>().takeDamage(Weapon.GetComponent<Melee>().damage);            
+            GameObject.Find("Player").GetComponent<combat>().takeDamage(Weapon.GetComponent<Melee>().damage);
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.GetComponent<s_c_torsoScript>() != null)
+        {
+            Destroy(TmpFx.GetComponent<BoxCollider2D>());
+            GameObject.Find("Player").GetComponent<combat>().setHitPosition(transform.position);
+            GameObject.Find("Player").GetComponent<combat>().takeDamage(Weapon.GetComponent<Melee>().damage);
         }
     }
 

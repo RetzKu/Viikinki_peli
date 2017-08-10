@@ -76,7 +76,7 @@ public class BearAnimatorScript : MonoBehaviour
     {
         while(enabled)
         {
-            transform.localEulerAngles = new Vector3(0,0,Mathf.SmoothStep(OldRotation,Rotation,))
+            transform.localEulerAngles = new Vector3(0, 0, Mathf.SmoothStep(OldRotation, Rotation, 1));
             yield return new WaitForSeconds(0.1f);
         }
     }

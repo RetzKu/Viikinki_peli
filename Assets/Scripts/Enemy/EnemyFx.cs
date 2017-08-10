@@ -103,7 +103,7 @@ public class EnemyFx : MonoBehaviour {
         {
             case WeaponType.meleeWeapon: { TmpFx = Weapon.GetComponent<Melee>().weaponEffect; break; }
             case WeaponType.longMeleeWeapon: { TmpFx = Weapon.GetComponent<longMelee>().weaponEffect; break; }
-            case WeaponType.rangedWeapon: { TmpFx = Weapon.GetComponent<Ranged>().weaponEffect; break; }
+            //case WeaponType.rangedWeapon: { TmpFx = Weapon.GetComponent<Ranged>().weaponEffect; break; }
             case WeaponType.noWeapon: { TmpFx = DefaultSprite; break; }
             default: { TmpFx = DefaultSprite; break; }
         }

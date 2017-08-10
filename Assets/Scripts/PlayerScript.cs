@@ -43,8 +43,11 @@ public class PlayerScript : MonoBehaviour
     public int Direction;
     internal CanvasController HpCanvas;
 
+    public static GameObject Player;
+
     void Start()
     {
+        Player = gameObject;
         HpCanvas = new CanvasController();
         Torsos = new List<SpriteRenderer>(3);
         /*Get Inventory parents*/
@@ -76,7 +79,13 @@ public class PlayerScript : MonoBehaviour
 
         if(Input.GetKey(KeyCode.U) == true) { GameObject.Find("Bear").GetComponent<Animator>().SetBool("Movinyg",true); }
     }
-
+    public float GetAngle(Vector2 pointA, Vector2 pointB)
+    {
+        var target = pointB - pointA;
+        var angle = Vector2.Angle(pointA, pointB);
+        var orientation = Mathf.Sign(pointA.x * target.y - pointA.y * target.x);
+        return (360 - orientation * angle) % 360;
+    }
     public void LoseDurability()
     {
         //Inventory.EquipData.Tool.GetComponent<weaponStats>().useDuration();

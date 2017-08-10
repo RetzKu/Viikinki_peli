@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WolfAI : generalAi
+public class BearAi : generalAi
 {
 
 
@@ -19,12 +19,12 @@ public class WolfAI : generalAi
     //float leapAnim = 8f;
     float biteRange = 2f; // just bite
     float biteTime = 1f; // kuinka kauan vain purasu kestää
-    float biteTimer = 0f; 
+    float biteTimer = 0f;
     bool justBite = false;
     float holderDist = 0;
     //generalAi AI = new generalAi();
     LayerMask mask;
-    public override void InitStart(float x, float y, EnemyType type,GameObject player) // jokaselle
+    public override void InitStart(float x, float y, EnemyType type, GameObject player) // jokaselle
     {
         attackDist = leapDist;/* UnityEngine.Random.Range(leapDist-1f, leapDist+1f);*/
         //print(attackDist);
@@ -39,7 +39,7 @@ public class WolfAI : generalAi
         Physics._maxSpeed = MaxSpeed;
         this.player = player;
         mask = LayerMask.GetMask("Enemy");
-        inCave =  player.GetComponent<ChunkMover>().UnderGround;
+        inCave = player.GetComponent<ChunkMover>().UnderGround;
     }
     Collider2D[] environment = new Collider2D[0];
     Collider2D[] HeardArray = new Collider2D[0];
@@ -50,9 +50,9 @@ public class WolfAI : generalAi
         if (!justBite)
         {
             rotation.UpdateRotation(velocity, body.position);
-            GetComponent<WolfAnimatorScript>().SpriteDirection(myDir);
+            GetComponent<BearAnimatorScript>().SpriteDirection(myDir);
         }
-        getFriends(ref HeardArray,ref CollisionArray, alingmentDistance,desiredseparation, mask);
+        getFriends(ref HeardArray, ref CollisionArray, alingmentDistance, desiredseparation, mask);
         //var HeardArray = Physics2D.OverlapCircleAll(body.position, alingmentDistance, mask); // , mask);
         //var CollisionArray = Physics2D.OverlapCircleAll(body.position, desiredseparation, mask);
         Vector2[] powers = new Vector2[2];
@@ -114,21 +114,21 @@ public class WolfAI : generalAi
         {
             knocktimer();
         }
-        powers = Physics.applyBehaviors(HeardArray, CollisionArray,environment, velocity, target, body.position, flags, CollState);
+        powers = Physics.applyBehaviors(HeardArray, CollisionArray, environment, velocity, target, body.position, flags, CollState);
         target = powers[1];
         velocity = powers[0];
 
         if (currentTime > animTime) //??
         {
             currentTime = animTime;
-            Physics._maxSpeed = MaxSpeed * leapSpeed;            
+            Physics._maxSpeed = MaxSpeed * leapSpeed;
         }
         //velocity *= Time.deltaTime;
         //print(velocity.magnitude);
-        body.MovePosition(body.position + (velocity* Time.deltaTime));
+        body.MovePosition(body.position + (velocity * Time.deltaTime));
     }
     void leapingPattern(Vector2 dist, Vector2 playerPos) //spe
-    {        
+    {
         getObstacle(dist);
         if (dist.magnitude <= attackDist || inAttack || velocity.magnitude == 0)
         {
@@ -143,17 +143,17 @@ public class WolfAI : generalAi
                     Physics._maxSpeed = MaxSpeed * 0.3f;
 
                     rotation.playerPos = playerPos;
-                    rotation.HardRotate( body.position, velocity);
-                    GetComponent<WolfAnimatorScript>().SpriteDirection(myDir);
-                    GetComponent<WolfAnimatorScript>().AnimationTrigger(action.Attack);
-                    GetComponent<WolfAnimatorScript>().AnimationState(action.Idle);
+                    rotation.HardRotate(body.position, velocity);
+                    GetComponent<BearAnimatorScript>().SpriteDirection(myDir);
+                    GetComponent<BearAnimatorScript>().AnimationTrigger(action.Attack);
+                    GetComponent<BearAnimatorScript>().AnimationState(action.Idle);
 
                 }
                 else
                 {
                     Physics._maxSteeringForce = MaxSteeringForce * 100f;
 
-                    GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapStart);
+                    GetComponent<BearAnimatorScript>().AnimationTrigger(action.LeapStart);
                     rotation.rotToPl = true;
                     // ENNAKOIVA HYPPY?
                     //dist.Normalize();
@@ -173,11 +173,11 @@ public class WolfAI : generalAi
                 //bool go = true;
                 rotation.Lock = true;
                 //leaping
-               // Vector2 t = target - body.position;
+                // Vector2 t = target - body.position;
                 flags = (int)behavior.seekAndArrive;
                 if ((target - body.position).magnitude < 0.5f && go)
                 {
-                    GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd); // mee ohi
+                    GetComponent<BearAnimatorScript>().AnimationTrigger(action.LeapEnd); // mee ohi
                     Physics._maxSpeed = MaxSpeed;
                     inAttack = false;
                     attackCounter = 0;
@@ -185,11 +185,11 @@ public class WolfAI : generalAi
                     rotation.Lock = false;
                     Physics._maxSteeringForce = MaxSteeringForce;
                 }
-                else if (dist.magnitude < 1/*velocity.magnitude * leapAnim*/ && !bite && go )// muokkaa purase
+                else if (dist.magnitude < 1/*velocity.magnitude * leapAnim*/ && !bite && go)// muokkaa purase
                 {
                     //GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
-                    GetComponent<WolfAnimatorScript>().AnimationTrigger(action.Attack);
-                    GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
+                    GetComponent<BearAnimatorScript>().AnimationTrigger(action.Attack);
+                    GetComponent<BearAnimatorScript>().AnimationTrigger(action.LeapEnd);
                     target = body.position + (velocity * 0.1f);
                     bite = true;
                 }
@@ -201,7 +201,7 @@ public class WolfAI : generalAi
             else if (justBite)
             {
                 biteTimer += Time.deltaTime;
-                if(biteTimer >= biteTime)
+                if (biteTimer >= biteTime)
                 {
                     inAttack = false;
                     justBite = false;
@@ -210,7 +210,7 @@ public class WolfAI : generalAi
                     biteTimer = 0f;
                     attackCounter = 0;
                     rotation.Lock = false;
-                    GetComponent<WolfAnimatorScript>().AnimationState(action.Moving);
+                    GetComponent<BearAnimatorScript>().AnimationState(action.Moving);
                 }
 
             }
@@ -226,7 +226,7 @@ public class WolfAI : generalAi
                 {
                     rotation.rotToPl = false;
                 }
-                attackCounter+= Time.deltaTime;
+                attackCounter += Time.deltaTime;
                 if (!inAttack && attackCounter > attackUptade)
                 {
                     findPath(ref flags, ref velocity, ref target, player, body);
@@ -318,9 +318,9 @@ public class WolfAI : generalAi
             case enemyDir.RU:
                 Gizmos.DrawLine(body.position, body.position + new Vector2(1, 1));
                 break;
-            //case enemyDir.Still:
-            //    Gizmos.DrawSphere(body.position, 0.3f);
-            //    break;
+                //case enemyDir.Still:
+                //    Gizmos.DrawSphere(body.position, 0.3f);
+                //    break;
 
 
         }
@@ -339,7 +339,6 @@ public class WolfAI : generalAi
         }
         else
         {
-            
             return true;
         }
     }
@@ -372,7 +371,7 @@ public class WolfAI : generalAi
         attackCounter = 0f;
         if (inAttack)
         {
-            GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
+            GetComponent<BearAnimatorScript>().AnimationTrigger(action.LeapEnd);
         }
         //else
         //{
@@ -388,7 +387,7 @@ public class WolfAI : generalAi
             ParticleSpawner.instance.SpawSlow(this.gameObject, time);
             if (inAttack)
             {
-                GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
+                GetComponent<BearAnimatorScript>().AnimationTrigger(action.LeapEnd);
                 inAttack = false;
                 attackCounter = 0;
                 rotation.Lock = false;

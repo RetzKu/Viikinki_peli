@@ -30,6 +30,7 @@ public enum action
     LeapEnd,
     Moving,
     Roar,
+    Dead,
     Idle
 }
 [Flags]

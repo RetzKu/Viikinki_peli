@@ -11,7 +11,6 @@ public class BaseManager : MonoBehaviour
     private GameObject _player;
     private BaseChecker _baseChecker;
     private List<GameObject> bases = new List<GameObject>(3);
-
     private BaseChecker _InfoStoneChecker;
 
     void Awake()
@@ -19,14 +18,16 @@ public class BaseManager : MonoBehaviour
         Instance = this;
         _player = GameObject.FindWithTag("Player");
 
-        // TODO: liian vaikea luoda
+        // TODO: liian vaikea luoda 
         var go = new GameObject("Base Checker");
         go.transform.parent = _player.transform.parent;
         var checker = go.AddComponent<BaseChecker>();
         checker.CraftRange = CraftRange;
         _baseChecker = go.GetComponent<BaseChecker>();
-
         _baseChecker.SetMask("Base"); // voisi olla parameter
+
+
+
 
         if (_player == null || _baseChecker == null)
         {

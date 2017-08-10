@@ -75,8 +75,6 @@ public enum ResourceType
 }
 // WARNING WARNING Enumi järjestyksen rikkominen / väliin lisäys särkee kaikein lisää aina maxin alle
 
-
-
 public abstract class Resource : MonoBehaviour
 {
     protected static readonly float TileWidth = 1f;
@@ -189,5 +187,4 @@ public abstract class Resource : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().material = ResourceManager.GetNormalShader();
     }
-
 }

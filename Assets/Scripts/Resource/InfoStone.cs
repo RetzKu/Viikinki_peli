@@ -1,11 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InfoStone : Resource
 {
     public Rune RuneToTeach;
-
     public bool PlayerInRange = false;
 
     public Color Default;
@@ -31,10 +29,9 @@ public class InfoStone : Resource
         RuneToTeach.init(this.gameObject);
     }
 
-
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) == true)
+        if (Input.GetKeyDown(KeyCode.E))
         {
         }
     }
@@ -46,9 +43,10 @@ public class InfoStone : Resource
         {
             if (RuneToTeach.ValidateRune(positions, touchCounts))
             {
+                LearnStone();
                 craftingrecipeHolder.AddRune(RuneToTeach);
-                print("teached " + RuneToTeach.name);
-                RecipeLearned = true;
+                // print("teached " + RuneToTeach.name);
+                // RecipeLearned = true;
             }
         }
         else
@@ -105,7 +103,7 @@ public class InfoStone : Resource
                 StartTime = Time.time;
                 StartCoroutine(RecipeLearnedFade(StartTime));
                 RecipeLearned = true;
-                GameObject.Find("Player").GetComponent<RuneHolder>().AddRune(RuneToTeach);
+                // GameObject.Find("Player").GetComponent<RuneHolder>().AddRune(RuneToTeach);
             }
 
         }
@@ -128,5 +126,4 @@ public class InfoStone : Resource
             yield return new WaitForSeconds(0.1f);
         }
     }
-
 }

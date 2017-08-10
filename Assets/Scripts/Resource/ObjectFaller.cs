@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 // Dropperille apu luokka 
 // TODO: PARAMETRISOI DROPPERILLE
 public class ObjectFaller : MonoBehaviour
@@ -10,12 +9,23 @@ public class ObjectFaller : MonoBehaviour
     private Rigidbody2D body;
     private static readonly float maxVelocity = 8f;
     private float rotation;
+    private static int _playerLayer;
+
+    private float _escapeTimer;
+    private static readonly float _escapeTreshold = 0.2f;
+
+    public void Start()
+    {
+        _playerLayer = LayerMask.NameToLayer("Player");
+        _escapeTimer = Time.time + _escapeTreshold;
+    }
 
     public void StartFreeFall(float timer)
     {
         StartCoroutine(FallToGround(timer, new Vector2(-1, 1)));
         body = GetComponent<Rigidbody2D>();
         rotation = Random.Range(-4f, 4f);
+
     }
 
     public void StartFreeFall(float timer, Vector2 maxDirections)
@@ -54,4 +64,29 @@ public class ObjectFaller : MonoBehaviour
         Destroy(body);
         Destroy(this);
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (Time.time > _escapeTimer)
+        {
+            if (other.gameObject.layer == _playerLayer)
+            {
+                Destroy(body);
+                Destroy(this);
+            }
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

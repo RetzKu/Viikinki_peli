@@ -200,7 +200,13 @@ public class DeckScript : MonoBehaviour
                 t = 0;
                 openChanger = false;
                 openChanger2 = true;
-                GetComponentInChildren<CardMoverEraser>().ApplyOpenPosition();
+
+                var cardmovers = GetComponentInChildren<CardMoverEraser>();
+                if (cardmovers != null)
+                {
+                    cardmovers.ApplyOpenPosition();
+                }
+
                 //transform.FindChild("Base").localRotation = new Quaternion(0f, 0f, 0f, 0f);
             }
             // Juoksee joka kerta

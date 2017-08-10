@@ -29,6 +29,7 @@ TagManager:
   - Tilemap
   - TouchController
   - SpriteController
+  - Fish
   layers:
   - Default
   - TransparentFX

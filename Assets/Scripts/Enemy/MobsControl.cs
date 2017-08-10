@@ -35,6 +35,7 @@ public class MobsControl : MonoBehaviour
     public bool spawnBears;
     public bool naturalSpawn;
     List<spawn> spawner = new List<spawn>();
+
     void Start()
     {
 

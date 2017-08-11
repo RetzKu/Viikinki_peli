@@ -1,11 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InfoStone : Resource
 {
     public Rune RuneToTeach;
-
     public bool PlayerInRange = false;
 
     public Color Default;
@@ -26,16 +24,34 @@ public class InfoStone : Resource
     {
     }
 
-   
+    void Start()
+    {
+        RuneToTeach.init(this.gameObject);
+    }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) == true)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            CraftingManager.Instance.GetComponent<RuneHolder>();
-            //RuneToTeach.Fire();
-            //LearnStone();
-            //RuneToTeach.ValidateRune()
+        }
+    }
+
+    public void TryToTeachRune(bool[] positions, int[] touchCounts)
+    {
+        var craftingrecipeHolder = CraftingManager.Instance.GetComponent<RuneHolder>();
+        if (RuneToTeach != null && !RecipeLearned)
+        {
+            if (RuneToTeach.ValidateRune(positions, touchCounts))
+            {
+                LearnStone();
+                craftingrecipeHolder.AddRune(RuneToTeach);
+                // print("teached " + RuneToTeach.name);
+                // RecipeLearned = true;
+            }
+        }
+        else
+        {
+            Debug.LogWarning(gameObject.name + " does not contain rune or already learned");
         }
     }
 
@@ -87,7 +103,7 @@ public class InfoStone : Resource
                 StartTime = Time.time;
                 StartCoroutine(RecipeLearnedFade(StartTime));
                 RecipeLearned = true;
-                GameObject.Find("Player").GetComponent<RuneHolder>().AddRune(RuneToTeach);
+                // GameObject.Find("Player").GetComponent<RuneHolder>().AddRune(RuneToTeach);
             }
 
         }

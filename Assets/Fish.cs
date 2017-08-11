@@ -60,4 +60,9 @@ public class Fish : MonoBehaviour
         //{
         //}
     }
+    public void Hit()
+    {
+        // lennä ja jotain
+        GetComponent<DropScript>().Drop();
+    }
 }

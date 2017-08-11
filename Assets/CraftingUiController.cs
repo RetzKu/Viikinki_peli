@@ -126,6 +126,8 @@ public class CraftingUiController : MonoBehaviour
         current = ButtonState.Craft;
 
         SetAllCounts();
+
+        ResetAllColors(Color.white);
     }
 
     void OnBaseExit()
@@ -133,6 +135,8 @@ public class CraftingUiController : MonoBehaviour
         SetAllButtonsImages(ButtonState.Default);
         current = ButtonState.Default;
         SetAllButtonsImages(ButtonState.InCombat);
+
+        ResetToTransparent();
     }
 
     void SetAllActiveState(bool state)
@@ -169,12 +173,17 @@ public class CraftingUiController : MonoBehaviour
         _hudImages[yy * 3 + x].color = color;
     }
 
-    public void ResetAllColors()
+    public void ResetAllColors(Color color)
     {
         foreach (var image in _hudImages)
         {
-            image.color = ResetColor;
+            image.color = color;
         }
+    }
+
+    public void ResetToTransparent()
+    {
+        ResetAllColors(ResetColor);
     }
 
 

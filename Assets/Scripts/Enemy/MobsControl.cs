@@ -53,13 +53,6 @@ public class MobsControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (cave)
-        {
-            print("Cave count");
-            print(door.GetComponent<door>().mobs);
-        }
-        print("count");
-        print(Boids.Count);
         if(!naturalSpawn)
         {
             if (Input.GetKeyDown("y"))

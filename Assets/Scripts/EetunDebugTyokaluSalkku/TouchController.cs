@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class TouchController : MonoBehaviour
@@ -191,6 +192,8 @@ public class TouchController : MonoBehaviour
         _player = GameObject.FindWithTag("Player").GetComponent<combat>();
 
         lastPosition = transform.position;
+
+        StartCoroutine(FixEnumeration());
     }
 
     void OnBaseEnter()
@@ -217,10 +220,10 @@ public class TouchController : MonoBehaviour
 
     void Update()
     {
-#if !UNITY_EDITOR
+#if !UNITY_EDITOR 
         if (_init == false) // todo: miksi bugittaa androidilla
         {
-            SetTouchContollerCenters(_craftingUiController.GetPos());
+            // SetTouchContollerCenters(_craftingUiController.GetPos());
             _init = true;
         }
 
@@ -275,6 +278,34 @@ public class TouchController : MonoBehaviour
         }
         lastPosition = transform.position;
 #endif
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            Vector2[] pos = _craftingUiController.GetPos();
+            foreach (var p in pos)
+            {
+                Debug.LogErrorFormat("{0}", p);
+            }
+        }
+    }
+
+    IEnumerator FixEnumeration()
+    {
+        while (true)
+        {
+            if (_craftingUiController.Initted)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    SetTouchContollerCenters(_craftingUiController.GetPos());
+                    yield return new WaitForSeconds(0.2f);
+                }
+                break;
+            }
+            yield return null;
+        }
+
+        print("done");
     }
 
     private void UpdateTouchController(Vector3 mousePos)

@@ -44,6 +44,7 @@ public class CraftingUiController : MonoBehaviour
     private readonly int maxButtons = 9;
 
     private ButtonState current;
+    public bool Initted { get; set; }
 
     void Start()
     {
@@ -95,12 +96,15 @@ public class CraftingUiController : MonoBehaviour
             // center.y += _hudImages[i].rectTransform.rect.height;
         }
 
+
+
         var touchControllerGo = GameObject.FindWithTag("TouchController");
         TouchController touchController = touchControllerGo.GetComponent<TouchController>();
+
         touchController.SetTouchContollerCenters(pos);
-
-
         Numbers.gameObject.SetActive(false);
+
+        Initted = true;
     }
 
 

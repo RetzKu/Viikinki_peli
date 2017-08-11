@@ -10,19 +10,13 @@ public class ArcherAI : generalAi {
     public float shootTime = 1f;
     GameObject proManager;
 
-    public override void InitStart(float x, float y, EnemyType type,GameObject player)
+    protected override void InitStart(float x, float y, EnemyType type)
     {
         attackDist = UnityEngine.Random.Range(3f, 4f);
         myType = type;
         rotation.init(myType);
-        body = GetComponent<Rigidbody2D>();
-        spawnX = x;
-        spawnY = y;
-        body.MovePosition(new Vector2(spawnX, spawnY));
-        velocity = new Vector2(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f));
         Physics.InitRules(sepF, aliF, cohF, desiredseparation, alingmentDistance, IdleRadius, IdleBallDistance, ArriveRadius, MaxSteeringForce, MaxSpeed);
         Physics._maxSpeed = MaxSpeed;
-        this.player = player;
         proManager = GameObject.FindGameObjectWithTag("projectileManager");
 
     }

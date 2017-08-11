@@ -113,7 +113,26 @@ public abstract class generalAi : MonoBehaviour
     protected EnemyRotater rotation = new EnemyRotater();
 
     public abstract void UpdatePosition();
-    public abstract void InitStart(float x,float y, EnemyType type,GameObject player);
+    public void _InitStart(float x, float y, EnemyType type, GameObject player)
+    {
+        agro = false;
+        kys = false;
+        inAttack = false;
+        obc = false;
+        knocked = false;
+        GiveStartTarget = true;
+        inCave = false;
+        slow = false;
+        body = GetComponent<Rigidbody2D>();
+        spawnX = x;
+        spawnY = y;
+        body.MovePosition(new Vector2(spawnX, spawnY));
+        velocity = new Vector2(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f));
+        this.player = player;
+        InitStart(x, y, type);
+    }
+
+    protected abstract void InitStart(float x,float y, EnemyType type);
 
     protected float slowTime;
     protected float slowTimer;
@@ -376,8 +395,13 @@ public abstract class generalAi : MonoBehaviour
     protected void knocktimer()
     {
         knockCounter += Time.deltaTime;
-
-        if(knockCounter < knockTime * knockPercent)
+        LayerMask mask = LayerMask.GetMask("ObjectLayer", "Tile");
+        if (Physics2D.Raycast(body.position, knock, 0.1f, mask).collider != null)
+        {
+            knockCounter = knockTime;
+            print("end");
+        }
+        if (knockCounter < knockTime * knockPercent)
         {
             float t = knockCounter / knockTime * knockPercent;
             float k =  lerpate(MaxSpeed * 5, 0, t);

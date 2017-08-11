@@ -104,14 +104,14 @@ public class MobsControl : MonoBehaviour
                         {
                             GameObject m;
                             m = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
-                            m.GetComponent<generalAi>().InitStart(x, y,EnemyType.Archer, player);
+                            m.GetComponent<generalAi>()._InitStart(x, y,EnemyType.Archer, player);
                             Boids.Add(m);
                         }
                         if (spawnWolfs)
                         {
                             GameObject m;
                             m = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
-                            m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Wolf, player);
+                            m.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Wolf, player);
                             Boids.Add(m);
                         }
 
@@ -122,14 +122,14 @@ public class MobsControl : MonoBehaviour
                         {
                             GameObject m;
                             m = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
-                            m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Archer, player);
+                            m.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Archer, player);
                             Boids.Add(m);
                         }
                         else
                         {
                             GameObject m;
                             m = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
-                            m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Wolf, player);
+                            m.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Wolf, player);
                             Boids.Add(m);
                         }
 
@@ -206,14 +206,14 @@ public class MobsControl : MonoBehaviour
     {
         GameObject m;
         m = Instantiate(BigMan, new Vector2(x, y), Quaternion.identity);
-        m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Archer, player);
+        m.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Archer, player);
         Boids.Add(m);
     }
     public void spawnBigWolf(float x, float y)
     {
         GameObject m;
         m = Instantiate(BigWolf, new Vector2(x, y), Quaternion.identity);
-        m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Wolf, player);
+        m.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Wolf, player);
         Boids.Add(m);
     }
 }

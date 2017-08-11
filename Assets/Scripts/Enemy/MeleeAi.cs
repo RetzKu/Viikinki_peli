@@ -9,20 +9,14 @@ public class MeleeAi : generalAi {
     float attRefresh = 2f;
     float attCount = 0f;
     bool attack = true;
-    
-    public override void InitStart(float x, float y, EnemyType type,GameObject player)
+
+    protected override void InitStart(float x, float y, EnemyType type)
     {
         attackDist = swingDist;
         myType = type;
         rotation.init(myType);
-        body = GetComponent<Rigidbody2D>();
-        spawnX = x;
-        spawnY = y;
-        body.MovePosition(new Vector2(spawnX, spawnY));
-        velocity = new Vector2(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f));
         Physics.InitRules(sepF, aliF, cohF, desiredseparation, alingmentDistance, IdleRadius, IdleBallDistance, ArriveRadius, MaxSteeringForce, MaxSpeed);
         Physics._maxSpeed = MaxSpeed;
-        this.player = player;
         inCave = player.GetComponent<ChunkMover>().UnderGround;
 
     }

@@ -43,8 +43,11 @@ public class PlayerScript : MonoBehaviour
     public int Direction;
     internal CanvasController HpCanvas;
 
+    public static GameObject Player;
+
     void Start()
     {
+        Player = gameObject;
         HpCanvas = new CanvasController();
         Torsos = new List<SpriteRenderer>(3);
         /*Get Inventory parents*/
@@ -73,8 +76,16 @@ public class PlayerScript : MonoBehaviour
         RefreshHand();
         InventoryInput();
         if(Inventory.EquipData.Armor != null) { HpCanvas.ToggleArmorImage(true); } else { HpCanvas.ToggleArmorImage(false); }
-    }
 
+        if(Input.GetKey(KeyCode.U) == true) { GameObject.Find("Bear").GetComponent<Animator>().SetBool("Movinyg",true); }
+    }
+    public float GetAngle(Vector2 pointA, Vector2 pointB)
+    {
+        var target = pointB - pointA;
+        var angle = Vector2.Angle(pointA, pointB);
+        var orientation = Mathf.Sign(pointA.x * target.y - pointA.y * target.x);
+        return (360 - orientation * angle) % 360;
+    }
     public void LoseDurability()
     {
         //Inventory.EquipData.Tool.GetComponent<weaponStats>().useDuration();
@@ -268,6 +279,7 @@ public class PlayerScript : MonoBehaviour
                 Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                 Copy.GetComponent<SpriteRenderer>().sortingOrder = 1;
             }
+            if (Copy.GetComponent<Melee>() != null) { Copy.GetComponent<Melee>().Reposition(Hand); }
             if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
             if (Copy.GetComponent<longMelee>() != null) { Copy.GetComponent<longMelee>().Reposition(Hand); }
         }
@@ -300,6 +312,7 @@ public class PlayerScript : MonoBehaviour
                             Copy.transform.localRotation = rotation;
                             Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                             Copy.GetComponent<SpriteRenderer>().sortingOrder = 20;
+                            if (Copy.GetComponent<Melee>() != null) { Copy.GetComponent<Melee>().Reposition(Hand); }
                             if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
                             if (Copy.GetComponent<longMelee>() != null) { Copy.GetComponent<longMelee>().Reposition(Hand); }
                                 break;
@@ -312,6 +325,7 @@ public class PlayerScript : MonoBehaviour
                             Copy.transform.localRotation = rotation;
                             Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                             Copy.GetComponent<SpriteRenderer>().sortingOrder = 8;
+                            if (Copy.GetComponent<Melee>() != null) { Copy.GetComponent<Melee>().Reposition(Hand); }
                             if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
                             if (Copy.GetComponent<longMelee>() != null) { Copy.GetComponent<longMelee>().Reposition(Hand); }
                             break;
@@ -324,6 +338,7 @@ public class PlayerScript : MonoBehaviour
                             Copy.transform.localRotation = rotation;
                             Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                             Copy.GetComponent<SpriteRenderer>().sortingOrder = 16;
+                            if (Copy.GetComponent<Melee>() != null) { Copy.GetComponent<Melee>().Reposition(Hand); }
                             if (Copy.GetComponent<Ranged>() != null) { Copy.GetComponent<Ranged>().Reposition(Hand); }
                             if (Copy.GetComponent<longMelee>() != null) { Copy.GetComponent<longMelee>().Reposition(Hand); }
                             break;

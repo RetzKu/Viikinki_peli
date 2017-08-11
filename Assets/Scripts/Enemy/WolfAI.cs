@@ -251,7 +251,11 @@ public class WolfAI : generalAi
                 rotation.rotToPl = false;
                 if (obc)
                 {
-                    findPath(ref flags, ref velocity, ref target, player, body);
+                    bool success =  findPath(ref flags, ref velocity, ref target, player, body);
+                    if(!success)
+                    {
+                        followPlayer(ref dist, playerPos, 0, ref target, ref flags, Physics, sepF);
+                    }
                 }
                 else
                 {
@@ -262,7 +266,11 @@ public class WolfAI : generalAi
             {
                 rotation.playerPos = playerPos;
                 rotation.rotToPl = true;
-                findPath(ref flags, ref velocity, ref target, player, body);
+                bool success = findPath(ref flags, ref velocity, ref target, player, body);
+                if (!success)
+                {
+                    followPlayer(ref dist, playerPos, 0, ref target, ref flags, Physics, sepF);
+                }
             }
             //attackCounter = attackUptade;
         }
@@ -280,7 +288,7 @@ public class WolfAI : generalAi
         Vector2 first = (main + perpendicular);
         Vector2 second = (main + (perpendicular * -1));
 
-        Gizmos.DrawLine(body.position, body.position+main); // piirretään viiva visualisoimaan toimivuutta 
+        Gizmos.DrawLine(body.position, body.position + main); // piirretään viiva visualisoimaan toimivuutta 
         Gizmos.DrawLine(body.position, body.position + first);
         Gizmos.DrawLine(body.position, body.position + second);
         Gizmos.DrawLine(body.position, body.position + velocity);
@@ -339,6 +347,7 @@ public class WolfAI : generalAi
         }
         else
         {
+            
             return true;
         }
     }

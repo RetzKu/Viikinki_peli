@@ -127,8 +127,8 @@ public class DeckScript : MonoBehaviour
                 cards[x].transform.SetSiblingIndex(x);
                 cards[x].AddComponent<Image>().sprite = cardArray[3];
 
-                cards[x].AddComponent<CardMoverEraser>().DropDistance = 200f;
-                cards[x].GetComponent<CardMoverEraser>().ReturnSpeed = 1.5f;
+                cards[x].AddComponent<CardMoverEraser>();
+                cards[x].GetComponent<CardMoverEraser>();
 
                 GameObject tempObj = new GameObject("CardChild");
                 tempObj.transform.position = cards[x].transform.position;
@@ -170,6 +170,7 @@ public class DeckScript : MonoBehaviour
             // Tallennetaan "vanhojen" korttien propertiesit
             saveCardProperties();
 
+            // Testiä --> GetComponentInChildren<CardMoverEraser>().ApplyOpenPosition();
             // Ladataan uudet positiot ja anglet uudelle kortti määrälle
             cardCount = updatedCardCount;
             maxAngles = rotationMax(cardCount);
@@ -200,13 +201,7 @@ public class DeckScript : MonoBehaviour
                 t = 0;
                 openChanger = false;
                 openChanger2 = true;
-
-                var cardmovers = GetComponentInChildren<CardMoverEraser>();
-                if (cardmovers != null)
-                {
-                    cardmovers.ApplyOpenPosition();
-                }
-
+               // GetComponentInChildren<CardMoverEraser>().ApplyOpenPosition();
                 //transform.FindChild("Base").localRotation = new Quaternion(0f, 0f, 0f, 0f);
             }
             // Juoksee joka kerta
@@ -226,7 +221,7 @@ public class DeckScript : MonoBehaviour
                 t = 0;
                 openChanger = false;
                 openChanger2 = true;
-                GetComponentInChildren<CardMoverEraser>().ApplyOpenPosition();
+                //GetComponentInChildren<CardMoverEraser>().ApplyOpenPosition();
             }
             // Juoksee joka kerta
             for (int x = 0; x < cardCount - 1; x++)
@@ -251,7 +246,6 @@ public class DeckScript : MonoBehaviour
                 t = 0;
                 openChanger = false;
                 openChanger2 = true;
-                GetComponentInChildren<CardMoverEraser>().ApplyOpenPosition();
 
             }
             // Juoksee joka kerta
@@ -285,7 +279,6 @@ public class DeckScript : MonoBehaviour
             transform.FindChild("Card" + (brokenWeaponInt)).GetChild(0).GetComponent<Image>().color = new Color(cardColor2.r, cardColor2.g, cardColor2.b, Mathf.Lerp(1f, 0f, t));
             Color cardColor3 = transform.FindChild("Card" + (brokenWeaponInt)).GetChild(1).GetComponent<Image>().color;
             transform.FindChild("Card" + (brokenWeaponInt)).GetChild(1).GetComponent<Image>().color = new Color(cardColor3.r, cardColor3.g, cardColor3.b, Mathf.Lerp(1f, 0f, t));
-
 
             if (t >= 1)
             {
@@ -680,7 +673,7 @@ public class DeckScript : MonoBehaviour
         return new float[] { max[0] };
     }
 
-    public void saveCardProperties()
+    private void saveCardProperties()
     {
         // Päivitetään arrayt oikean kokoisiksi
         positions = new Vector3[cardCount];

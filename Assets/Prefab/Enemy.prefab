@@ -1225,7 +1225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2031ad80bc3df114696f3d0865c5394f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swingDist: 1
+  swingDist: 0.7
   inAttack: 0
   agro: 0
   attackDist: 0
@@ -1238,7 +1238,7 @@ MonoBehaviour:
   ArriveRadius: 0.3
   desiredseparation: 0.7
   alingmentDistance: 1
-  sepF: 0.05
+  sepF: 0.1
   aliF: 0.2
   cohF: 0.1
   velocity: {x: 0, y: 0}

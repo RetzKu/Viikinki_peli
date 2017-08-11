@@ -492,7 +492,7 @@ MonoBehaviour:
   IdleRefreshRate: 100
   IdleRadius: 60
   IdleBallDistance: 100
-  MaxSteeringForce: 0.1
+  MaxSteeringForce: 0.2
   ArriveRadius: 0.4
   desiredseparation: 0.7
   alingmentDistance: 1

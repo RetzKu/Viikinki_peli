@@ -24,20 +24,14 @@ public class WolfAI : generalAi
     float holderDist = 0;
     //generalAi AI = new generalAi();
     LayerMask mask;
-    public override void InitStart(float x, float y, EnemyType type,GameObject player) // jokaselle
+    protected override void InitStart(float x, float y, EnemyType type) // jokaselle
     {
         attackDist = leapDist;/* UnityEngine.Random.Range(leapDist-1f, leapDist+1f);*/
         //print(attackDist);
         myType = type;
         rotation.init(myType);
-        body = GetComponent<Rigidbody2D>();
-        spawnX = x;
-        spawnY = y;
-        body.MovePosition(new Vector2(spawnX, spawnY));
-        velocity = new Vector2(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f));
         Physics.InitRules(sepF, aliF, cohF, desiredseparation, alingmentDistance, IdleRadius, IdleBallDistance, ArriveRadius, MaxSteeringForce, MaxSpeed);
         Physics._maxSpeed = MaxSpeed;
-        this.player = player;
         mask = LayerMask.GetMask("Enemy");
         inCave =  player.GetComponent<ChunkMover>().UnderGround;
     }
@@ -229,14 +223,29 @@ public class WolfAI : generalAi
                 attackCounter+= Time.deltaTime;
                 if (!inAttack && attackCounter > attackUptade)
                 {
-                    findPath(ref flags, ref velocity, ref target, player, body);
+                    bool success = findPath(ref flags, ref velocity, ref target, player, body);
+                    if (!success)
+                    {
+                        followPlayer(ref dist, playerPos, 0, ref target, ref flags, Physics, sepF);
+                    }
                 }
                 else
                 {
-                    followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
-                    if (environment != null && environment.Length != 0)
+                    if (!obc)
                     {
-                        flags = flags | (int)behavior.CollideEnv;
+                        followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
+                        if (environment != null && environment.Length != 0)
+                        {
+                            flags = flags | (int)behavior.CollideEnv;
+                        }
+                    }
+                    else
+                    {
+                        bool success = findPath(ref flags, ref velocity, ref target, player, body);
+                        if (!success)
+                        {
+                            followPlayer(ref dist, playerPos, 0, ref target, ref flags, Physics, sepF);
+                        }
                     }
                 }
                 //reversedFindPath(ref flags, ref velocity, ref target, player, body);
@@ -372,7 +381,6 @@ public class WolfAI : generalAi
     public override void resetValues()
     {
         agro = true;
-        inAttack = false;
         justBite = false;
         bite = false;
         biteTimer = 0f;
@@ -382,6 +390,7 @@ public class WolfAI : generalAi
         {
             GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
         }
+        inAttack = false;
         //else
         //{
         //    attackCounter = attackUptade / 1.5f;

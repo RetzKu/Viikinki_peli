@@ -10,19 +10,13 @@ public class ArcherAI : generalAi {
     public float shootTime = 1f;
     GameObject proManager;
 
-    public override void InitStart(float x, float y, EnemyType type,GameObject player)
+    protected override void InitStart(float x, float y, EnemyType type)
     {
-        attackDist = UnityEngine.Random.Range(4f, 6f);
+        attackDist = UnityEngine.Random.Range(3f, 4f);
         myType = type;
         rotation.init(myType);
-        body = GetComponent<Rigidbody2D>();
-        spawnX = x;
-        spawnY = y;
-        body.MovePosition(new Vector2(spawnX, spawnY));
-        velocity = new Vector2(UnityEngine.Random.Range(-10f, 10f), UnityEngine.Random.Range(-10f, 10f));
         Physics.InitRules(sepF, aliF, cohF, desiredseparation, alingmentDistance, IdleRadius, IdleBallDistance, ArriveRadius, MaxSteeringForce, MaxSpeed);
         Physics._maxSpeed = MaxSpeed;
-        this.player = player;
         proManager = GameObject.FindGameObjectWithTag("projectileManager");
 
     }
@@ -106,6 +100,7 @@ public class ArcherAI : generalAi {
     }
     void archerPattern(Vector2 dist, Vector2 playerPos) // spe
     {
+        getObstacle(dist);
         attackCounter += Time.deltaTime;
         if(attackCounter < attackUptade &&  !inAttack)
         {
@@ -130,10 +125,21 @@ public class ArcherAI : generalAi {
                 }
                 Physics._desiredseparation = desiredseparation;
                 Physics._maxSpeed =MaxSpeed* 0.8f;
-                followPlayer(ref dist, playerPos,attackDist,ref target,ref flags,Physics,sepF);
-                if (environment != null && environment.Length != 0)
+                if (!obc)
                 {
-                    flags = flags | (int)behavior.CollideEnv;
+                    followPlayer(ref dist, playerPos,attackDist,ref target,ref flags,Physics,sepF);
+                    if (environment != null && environment.Length != 0)
+                    {
+                        flags = flags | (int)behavior.CollideEnv;
+                    }
+                }
+                else
+                {
+                    bool success = findPath(ref flags, ref velocity, ref target, player, body);
+                    if (!success)
+                    {
+                        followPlayer(ref dist, playerPos, 0, ref target, ref flags, Physics, sepF);
+                    }
                 }
             }
         }

@@ -3633,6 +3633,22 @@ GameObject:
   m_PrefabParentObject: {fileID: 1977754839611798, guid: b5405cc59ec405e42ac26438ef1b066d,
     type: 2}
   m_PrefabInternal: {fileID: 1834515388}
+--- !u!114 &1098307917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1098307897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7695a06b25356e74c95df5e29246add9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FishGameObject: {fileID: 1540058398098254, guid: f4a8aa837b01ea444a7ba05b984acfd0,
+    type: 2}
+  _player: {fileID: 1098307897}
+  SpawnRate: 0
+  MaxRange: 4
 --- !u!1 &1241721588
 GameObject:
   m_ObjectHideFlags: 0
@@ -4954,6 +4970,7 @@ MonoBehaviour:
   spawnArchers: 0
   spawnBears: 0
   naturalSpawn: 1
+  cave: 0
 --- !u!1 &2007032764
 GameObject:
   m_ObjectHideFlags: 0

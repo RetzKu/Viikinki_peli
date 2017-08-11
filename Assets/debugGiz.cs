@@ -32,7 +32,7 @@ public class debugGiz : MonoBehaviour
 
     private void DrawDirections()
     {
-        if (DrawTileDirs)
+        if (DrawTileDirs && false)
         {
 
             PathFinder.Dir[,] dirs = copy.panther.dirs;

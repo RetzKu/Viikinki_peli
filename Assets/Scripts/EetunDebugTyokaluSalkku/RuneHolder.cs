@@ -29,7 +29,7 @@ public class RuneHolder : MonoBehaviour
 
     void Start()
     {
-        for(int i = 0; i < runes.Count; i++)
+        for (int i = 0; i < runes.Count; i++)
         {
             if (runes[i] != null)
             {
@@ -73,7 +73,7 @@ public class RuneHolder : MonoBehaviour
         }
     }
 
-    public void SendIndices(Vec2[] positions, int realSize ) 
+    public void SendIndices(Vec2[] positions, int realSize)
     {
         for (int i = 0; i < realSize; i++)
         {
@@ -83,7 +83,7 @@ public class RuneHolder : MonoBehaviour
         int ii = 0;
         foreach (var rune in runes)
         {
-            if (rune.Length == realSize && rune.ValidateRune(positions ))
+            if (rune.Length == realSize && rune.ValidateRune(positions))
             {
                 if (Ownertype != OwnerType.Enemy)
                 {

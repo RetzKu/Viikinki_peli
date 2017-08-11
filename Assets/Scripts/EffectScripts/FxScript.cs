@@ -116,7 +116,7 @@ public class FxScript : MonoBehaviour {
         {
             lastHittedEnemy = trig.gameObject;
 
-            if(GetComponent<PlayerScript>().weaponInHand != null)
+            if (GetComponent<PlayerScript>().weaponInHand != null)
             {
                 GetComponentInChildren<weaponStats>().onRange = true;
             }
@@ -127,18 +127,18 @@ public class FxScript : MonoBehaviour {
         }
         else if (trig.gameObject.layer == LayerMask.NameToLayer("ObjectLayer"))
         {
-            if( GetComponent<combat>().IsAttacking())
+            if (GetComponent<combat>().IsAttacking())
             {
                 var resourceGo = trig.gameObject.GetComponent<Resource>();
                 // puuPrefabit toimivat hieman eri tavalla kuin muut resurrsit / sama pitää tällä tavalla niin tulevaisuudessa jos tulee eksoottinen prefab
                 if (resourceGo == null)
                 {
                     trig.gameObject.transform.parent.GetComponent<Resource>()
-                        .Hit((int) GetComponent<combat>().countPlayerDamage());
+                        .Hit((int)GetComponent<combat>().countPlayerDamage());
                 }
                 else
                 {
-                    resourceGo.Hit((int) GetComponent<combat>().countPlayerDamage());
+                    resourceGo.Hit((int)GetComponent<combat>().countPlayerDamage());
                 }
             }
         }

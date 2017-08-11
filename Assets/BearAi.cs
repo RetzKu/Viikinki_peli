@@ -24,7 +24,7 @@ public class BearAi : generalAi
     float holderDist = 0;
     //generalAi AI = new generalAi();
     LayerMask mask;
-    public override void InitStart(float x, float y, EnemyType type, GameObject player) // jokaselle
+    protected override void InitStart(float x, float y, EnemyType type) // jokaselle
     {
         attackDist = leapDist;/* UnityEngine.Random.Range(leapDist-1f, leapDist+1f);*/
         //print(attackDist);

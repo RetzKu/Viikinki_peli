@@ -15,18 +15,21 @@ public class RuneHolder : MonoBehaviour
     public bool IsOwnerPlayer = true;
 
     private RuneBarUiController _runeBarUiController;
-    private bool[] CanCast;
-    private float[] cds;
+
+    private List<bool> CanCast;
+    private List<float> cds;
 
     public void AddRune(Rune rune)
     {
         rune.init(this.gameObject);
         runes.Add(rune);
+        CanCast.Add(true);
+        cds.Add(0f);
     }
 
     void Start()
     {
-        for(int i = 0; i < runes.Count; i++)
+        for (int i = 0; i < runes.Count; i++)
         {
             if (runes[i] != null)
             {
@@ -45,13 +48,22 @@ public class RuneHolder : MonoBehaviour
             Debug.LogError("RuneHolder.cs: Cannot Find RuneBarUiController");
         }
 
-        CanCast = new bool[runes.Count];
-        cds = new float[runes.Count];
+        // CanCast = new bool[runes.Count];
+        // cds = new float[runes.Count];
+
+        CanCast = new List<bool>(runes.Count);
+        cds = new List<float>(runes.Count);
+
+        for (int i = 0; i < runes.Count; i++)
+        {
+            CanCast.Add(true);
+            cds.Add(0f);
+        }
     }
 
     void Update()
     {
-        for (int i = 0; i < cds.Length; i++)
+        for (int i = 0; i < cds.Count; i++)
         {
             cds[i] -= Time.deltaTime;
             if (cds[i] <= 0f)
@@ -61,7 +73,7 @@ public class RuneHolder : MonoBehaviour
         }
     }
 
-    public void SendIndices(Vec2[] positions, int realSize ) 
+    public void SendIndices(Vec2[] positions, int realSize)
     {
         for (int i = 0; i < realSize; i++)
         {
@@ -71,7 +83,7 @@ public class RuneHolder : MonoBehaviour
         int ii = 0;
         foreach (var rune in runes)
         {
-            if (rune.Length == realSize && rune.ValidateRune(positions ))
+            if (rune.Length == realSize && rune.ValidateRune(positions))
             {
                 if (Ownertype != OwnerType.Enemy)
                 {

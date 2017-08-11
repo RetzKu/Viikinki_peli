@@ -862,14 +862,11 @@ public class Perlin : MonoBehaviour
         return TileType.GrassLand; // place holder olisi kiva
     }
 
-
-
     // XD: 
     //void WriteBiomeDataToFile(BiomeSettings settings) // settings todo:
     //{
     //    string data = "";
     //    data += GetEnumName();
-
     //    // Kirjoita ehdot;
     //    for(int i = 0; i < settings.elevations.Length; i++)
     //    {

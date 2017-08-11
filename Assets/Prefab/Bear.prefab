@@ -334,10 +334,10 @@ GameObject:
   - component: {fileID: 4239465432998310}
   - component: {fileID: 95838695944579718}
   - component: {fileID: 50311733629005672}
-  - component: {fileID: 114296487332856214}
-  - component: {fileID: 114950410156743508}
   - component: {fileID: 61301480390770990}
   - component: {fileID: 114449907913420302}
+  - component: {fileID: 114625663763118248}
+  - component: {fileID: 114983412116816922}
   m_Layer: 8
   m_Name: Bear
   m_TagString: Enemy
@@ -709,7 +709,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1670808006553996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 180, y: 182, z: 0}
+  m_LocalPosition: {x: 166.29431, y: 169.63994, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 4598370890568142}
@@ -1141,9 +1141,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.07634735, y: 0.22342682}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6257477, y: 0.507501}
 --- !u!95 &95838695944579718
 Animator:
   serializedVersion: 3
@@ -1161,35 +1161,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114296487332856214
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1670808006553996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80fa3bb52c0fb02448ca2c2e111a548c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swingDist: 1
-  inAttack: 0
-  agro: 0
-  attackDist: 0
-  MaxSpeed: 3
-  knockTime: 0.2
-  IdleRefreshRate: 100
-  IdleRadius: 60
-  IdleBallDistance: 100
-  MaxSteeringForce: 0.1
-  ArriveRadius: 0.3
-  desiredseparation: 0.7
-  alingmentDistance: 1
-  sepF: 0.1
-  aliF: 0.2
-  cohF: 0.1
-  velocity: {x: 0, y: 0}
-  leapDist: 2
 --- !u!114 &114361219194568186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1216,6 +1187,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c7b3b2669070940ad93f01c6e7709a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scale: 3
+--- !u!114 &114625663763118248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1670808006553996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5c92b63534a5e249af8a5d562cc6794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swingDist: 1
+  inAttack: 0
+  agro: 0
+  attackDist: 0
+  MaxSpeed: 3
+  knockTime: 0.2
+  IdleRefreshRate: 100
+  IdleRadius: 60
+  IdleBallDistance: 100
+  MaxSteeringForce: 0.1
+  ArriveRadius: 0.2
+  desiredseparation: 0.7
+  alingmentDistance: 1
+  sepF: 0.05
+  aliF: 0.2
+  cohF: 0.1
+  velocity: {x: 0, y: 0}
+  leapDist: 2
+  getvel: {x: 0, y: 0}
 --- !u!114 &114645184092337382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1231,7 +1233,7 @@ MonoBehaviour:
   Sprites:
   - {fileID: 21300000, guid: 41a6a2b1d9b3ab84098a17abed9f257d, type: 3}
   - {fileID: 21300000, guid: 07a7e771e377f144e8ae8cffa963432b, type: 3}
---- !u!114 &114950410156743508
+--- !u!114 &114983412116816922
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1239,10 +1241,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1670808006553996}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bce9d65f43a55274ab63a4cd7d81c499, type: 3}
+  m_Script: {fileID: 11500000, guid: 2354d03a1632be8409f49777e50bc5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 2
+  damage: 5
+  hp: 200
+  armor: 2
 --- !u!212 &212035669330948798
 SpriteRenderer:
   m_ObjectHideFlags: 1

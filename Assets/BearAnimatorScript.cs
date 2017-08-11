@@ -9,13 +9,13 @@ public class BearAnimatorScript : MonoBehaviour
 
     public float scale;
     bool flip = false;
-    int Rotation = 0;
-    int OldRotation;
+    float Rotation = 0;
+
     void Awake()
     {
         AnimatorCP = transform.GetComponent<Animator>();
         WolfTransform = transform;
-        AnimationState(action.Moving);
+        transform.localScale = new Vector3(-scale, scale, 1);
     }
 
     void Update()
@@ -36,15 +36,23 @@ public class BearAnimatorScript : MonoBehaviour
         {
             case action.Attack:
                 {
+                    StartCoroutine(GetComponent<BearStats>().attack());
+                    
                     AnimatorCP.SetTrigger("Attack");
                     break;
                 }
             case action.Roar:
                 {
-
+                    GetComponent<Animator>().SetTrigger("Roar");
+                    break;
+                }
+            case action.Dead:
+                {
+                    GetComponent<Animator>().SetBool("Dead", true);
                     break;
                 }
         }
+
     }
     public void SpriteDirection(enemyDir Dir)
     {
@@ -66,21 +74,10 @@ public class BearAnimatorScript : MonoBehaviour
 
 
         }
+       
         if (flip == true) { transform.localScale = new Vector3(-scale, scale, 1); }
         else { transform.localScale = new Vector3(scale, scale, 1); }
-
         transform.localEulerAngles = new Vector3(0, 0, Rotation);
     }
-
-    IEnumerator tmp()
-    {
-        while(enabled)
-        {
-            transform.localEulerAngles = new Vector3(0, 0, Mathf.SmoothStep(OldRotation, Rotation, 1));
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
     
-
-
 }

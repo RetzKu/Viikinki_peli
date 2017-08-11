@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class arrow : Projectile {
 
+    private combat PlayerCombat;
+    private Vector2 StartPos;
+
+    private void Awake()
+    {
+        PlayerCombat = PlayerCombat.GetComponent<combat>();
+        StartPos = transform.position;
+    }
     public override void UpdateMovement()
     {
         currentLerpTime += Time.deltaTime;
@@ -21,5 +29,11 @@ public class arrow : Projectile {
 
         Vector2 d = lerPate(from, where, t);
         body.MovePosition(d);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        PlayerCombat.setHitPosition(transform.position);
+        PlayerCombat.takeDamage(2);
+        Destroy(transform.GetComponent<BoxCollider2D>());
     }
 }

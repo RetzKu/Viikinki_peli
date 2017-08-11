@@ -6,7 +6,7 @@ public class notskaScript : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D Collider)
     {
-        if (Collider.tag == "notPatePlayer" && GetComponent<CampFire>().type != ResourceType.campfire_noFire)
+        if (Collider.tag == "Player" && GetComponent<CampFire>().type != ResourceType.campfire_noFire)
         {
             GameObject tempPlayer;
             tempPlayer = GameObject.Find("Player");

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class TouchController : MonoBehaviour
@@ -27,11 +28,8 @@ public class TouchController : MonoBehaviour
     public GameObject touchCollider;
     public GameObject Character;
 
-
     public float offsetX;
     public float offsetY;
-
-
 
     // TODO: ^^^ CLEANUP ^^^
     public RuneHolder RuneHolder;
@@ -48,7 +46,6 @@ public class TouchController : MonoBehaviour
     {
         Crafting,
         RuneCasting
-
     }
 
     public Mode ControllerMode = Mode.Crafting;
@@ -56,18 +53,22 @@ public class TouchController : MonoBehaviour
     private bool _canSendIndices = false;
 
     //private delegate Action SendIndicesCallback;
+    // public Delegate RunePillarsCallBack;
+    // public event OnCraftingResourceChanged OnResourceCountChanged;
 
     void SendIndices()
     {
         if (ControllerMode == Mode.RuneCasting && _canSendIndices)
         {
             RuneHolder.SendIndices(BoolArrayFromIndices(runeIndices), _touchCounts);
+            _player.GetComponent<BaseChecker>().SendIndices(BoolArrayFromIndices(runeIndices), _touchCounts);
         }
         else if (ControllerMode == Mode.Crafting && _canSendIndices)
         {
             CraftingManagerHolder.SendIndices(BoolArrayFromIndices(runeIndices), _touchCounts);
+
         }
-        
+
         // 
         _canSendIndices = false;
     }
@@ -102,7 +103,6 @@ public class TouchController : MonoBehaviour
             }
         }
     }
-
     // Use this for initialization
     private float sceenXHack;
     void Start()
@@ -128,7 +128,7 @@ public class TouchController : MonoBehaviour
                 go.layer = LayerMask.NameToLayer("TouchController");
                 go.transform.parent = transform;
                 var coll = go.AddComponent<CircleCollider2D>();
-                coll.transform.position = new Vector3(x * offsetX + transform.position.x, y * offsetY + transform.position.y, 0);
+                coll.transform.position = new Vector3(x * offsetX /*+ transform.position.x*/, y * offsetY /*+ transform.position.y*/, 0);
                 coll.radius = Radius;
                 _colliders[ii] = go;
                 coll.isTrigger = true;
@@ -191,6 +191,8 @@ public class TouchController : MonoBehaviour
         _player = GameObject.FindWithTag("Player").GetComponent<combat>();
 
         lastPosition = transform.position;
+
+        StartCoroutine(FixEnumeration());
     }
 
     void OnBaseEnter()
@@ -217,10 +219,10 @@ public class TouchController : MonoBehaviour
 
     void Update()
     {
-#if !UNITY_EDITOR
+#if !UNITY_EDITOR 
         if (_init == false) // todo: miksi bugittaa androidilla
         {
-            SetTouchContollerCenters(_craftingUiController.GetPos());
+            // SetTouchContollerCenters(_craftingUiController.GetPos());
             _init = true;
         }
 
@@ -244,15 +246,14 @@ public class TouchController : MonoBehaviour
                 if (touches[i].phase == TouchPhase.Ended)
                 {
                     OnTouchEnded();
-                    FingerId = -1000;
 
+                    FingerId    = -1000;
                     var delta   = touches[i].position - startPosition;
                     endPosition = touches[i].position;
                     AttackDir   = delta;
 
                     _player.attackBoolean(delta,endPosition);
                     _player.GetComponent<AnimatorScript>().Attack();
-
                 }
             }
         }
@@ -268,13 +269,41 @@ public class TouchController : MonoBehaviour
 
             var delta = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _player.transform.position;
             AttackDir = delta;
-            _player.attackBoolean(delta,Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            _player.attackBoolean(delta, Camera.main.ScreenToWorldPoint(Input.mousePosition));
             _player.GetComponent<AnimatorScript>().Attack();
 
             // LineController.MovePoints(lastPosition - transform.position);
         }
         lastPosition = transform.position;
 #endif
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            Vector2[] pos = _craftingUiController.GetPos();
+            foreach (var p in pos)
+            {
+                Debug.LogErrorFormat("{0}", p);
+            }
+        }
+    }
+
+    IEnumerator FixEnumeration()
+    {
+        while (true)
+        {
+            if (_craftingUiController.Initted)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    SetTouchContollerCenters(_craftingUiController.GetPos());
+                    yield return new WaitForSeconds(0.2f);
+                }
+                break;
+            }
+            yield return null;
+        }
+
+        print("done");
     }
 
     private void UpdateTouchController(Vector3 mousePos)
@@ -311,8 +340,8 @@ public class TouchController : MonoBehaviour
         {
             _craftingUiController.HideNumbers();
             _craftingUiController.SetAllButtonsImages(CraftingUiController.ButtonState.InCombat);
+            _craftingUiController.ResetToTransparent();
         }
-        _craftingUiController.ResetAllColors();
         LineController.ResetPoints();
         LineController.HideLines();
 

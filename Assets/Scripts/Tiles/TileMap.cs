@@ -691,7 +691,4 @@ public class TileMap : MonoBehaviour, ITileMap
     {
         return !_chunkGenerationInProcess;
     }
-
-
 }
-

@@ -1187,7 +1187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c7b3b2669070940ad93f01c6e7709a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 3
+  scale: 2.5
 --- !u!114 &114625663763118248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1217,7 +1217,6 @@ MonoBehaviour:
   cohF: 0.1
   velocity: {x: 0, y: 0}
   leapDist: 2
-  getvel: {x: 0, y: 0}
 --- !u!114 &114645184092337382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1247,6 +1246,7 @@ MonoBehaviour:
   damage: 5
   hp: 200
   armor: 2
+  AttackArea: 1
 --- !u!212 &212035669330948798
 SpriteRenderer:
   m_ObjectHideFlags: 1

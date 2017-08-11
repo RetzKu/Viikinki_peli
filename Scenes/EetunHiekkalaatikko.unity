@@ -2989,78 +2989,6 @@ Transform:
   m_Father: {fileID: 362417159}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &128594766
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1768256398493074, guid: 9ba8cfce009a3764ba416b37c8f039af,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 128594767}
-  - component: {fileID: 128594769}
-  - component: {fileID: 128594768}
-  m_Layer: 0
-  m_Name: minmap
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &128594767
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4433194363785122, guid: 9ba8cfce009a3764ba416b37c8f039af,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 128594766}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.004, y: -7.707, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1686745558}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &128594768
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 23408127556983754, guid: 9ba8cfce009a3764ba416b37c8f039af,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 128594766}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 2100000, guid: b16f9961ade6b6f4e8c7342776c0811d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!33 &128594769
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 33237521181896082, guid: 9ba8cfce009a3764ba416b37c8f039af,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 128594766}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &129982491
 Prefab:
   m_ObjectHideFlags: 0
@@ -4267,73 +4195,7 @@ Prefab:
       propertyPath: SpriteController
       value: 
       objectReference: {fileID: 1310822892}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: a
-      value: 0.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: b
-      value: 0.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: c
-      value: 1.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: Forest.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: Forest.g
-      value: 0.52205884
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: Forest.b
-      value: 0.1709396
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: Jungle.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: Jungle.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: Jungle.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: Mountain.r
-      value: 0.33088237
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: Mountain.g
-      value: 0.33088237
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: Mountain.b
-      value: 0.33088237
-      objectReference: {fileID: 0}
-    - target: {fileID: 114672467721544216, guid: 9ba8cfce009a3764ba416b37c8f039af,
-        type: 2}
-      propertyPath: QuickLaunch
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 64556435119264034, guid: 9ba8cfce009a3764ba416b37c8f039af, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ba8cfce009a3764ba416b37c8f039af, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &554868586
@@ -6930,32 +6792,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!1 &1686745555 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1468715861072664, guid: 9ba8cfce009a3764ba416b37c8f039af,
-    type: 2}
-  m_PrefabInternal: {fileID: 535620828}
---- !u!4 &1686745558 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4772326767965640, guid: 9ba8cfce009a3764ba416b37c8f039af,
-    type: 2}
-  m_PrefabInternal: {fileID: 535620828}
---- !u!114 &1686745559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1686745555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e34f4d9a863581e4f9b19c2205576fdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  w: 0
-  h: 0
-  x: 0
-  y: 0
-  Mesh: {fileID: 0}
 --- !u!1001 &1693356888
 Prefab:
   m_ObjectHideFlags: 0
@@ -8510,6 +8346,10 @@ Prefab:
         type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931413781785626, guid: aa7beb610ae45184ca0c009d3990cb02, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aa7beb610ae45184ca0c009d3990cb02, type: 2}

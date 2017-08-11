@@ -38,7 +38,7 @@ public class MobsControl : MonoBehaviour
 
     [HideInInspector]
     public GameObject _door { set { door = value; } }
-    GameObject door = new GameObject();
+    GameObject door;
     public bool cave = false;
     void Start()
     {
@@ -97,14 +97,14 @@ public class MobsControl : MonoBehaviour
                         {
                             GameObject m;
                             m = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
-                            m.GetComponent<generalAi>().InitStart(x, y,EnemyType.Archer, player);
+                            m.GetComponent<generalAi>()._InitStart(x, y,EnemyType.Archer, player);
                             Boids.Add(m);
                         }
                         if (spawnWolfs)
                         {
                             GameObject m;
                             m = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
-                            m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Wolf, player);
+                            m.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Wolf, player);
                             Boids.Add(m);
                         }
 
@@ -115,14 +115,14 @@ public class MobsControl : MonoBehaviour
                         {
                             GameObject m;
                             m = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
-                            m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Archer, player);
+                            m.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Archer, player);
                             Boids.Add(m);
                         }
                         else
                         {
                             GameObject m;
                             m = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
-                            m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Wolf, player);
+                            m.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Wolf, player);
                             Boids.Add(m);
                         }
 
@@ -152,7 +152,10 @@ public class MobsControl : MonoBehaviour
             {
                 Destroy(Boids[ind]);
                 Boids.Remove(Boids[ind]);
-                door.GetComponent<door>().mobs -= 1;               
+                if (cave)
+                {
+                    door.GetComponent<door>().mobs -= 1;               
+                }
             }
             else
             {
@@ -196,14 +199,14 @@ public class MobsControl : MonoBehaviour
     {
         GameObject m;
         m = Instantiate(BigMan, new Vector2(x, y), Quaternion.identity);
-        m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Archer, player);
+        m.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Archer, player);
         Boids.Add(m);
     }
     public void spawnBigWolf(float x, float y)
     {
         GameObject m;
         m = Instantiate(BigWolf, new Vector2(x, y), Quaternion.identity);
-        m.GetComponent<generalAi>().InitStart(x, y, EnemyType.Wolf, player);
+        m.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Wolf, player);
         Boids.Add(m);
     }
 }

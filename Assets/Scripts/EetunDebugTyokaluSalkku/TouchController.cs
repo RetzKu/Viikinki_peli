@@ -291,6 +291,7 @@ public class TouchController : MonoBehaviour
         LineController.transform.position = transform.position;
     }
 
+
     private void OnTouchEnded()
     {
         SendIndices();

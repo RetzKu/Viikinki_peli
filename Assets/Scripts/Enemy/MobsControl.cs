@@ -131,10 +131,6 @@ public class MobsControl : MonoBehaviour
                     //wolfBoids.Add(go);
 
                 }
-                if(tries > 5 && cave)
-                {
-                    door.GetComponent<door>().mobs -= 1;
-                }
                 spawner[0].amount--;
 
             }
@@ -164,7 +160,7 @@ public class MobsControl : MonoBehaviour
                     Boids[ind].GetComponent<generalAi>().SlowRune(5f,0.5f);
                     print("slow");
                 }
-                //Boids[ind].GetComponent<generalAi>().UpdatePosition();
+                Boids[ind].GetComponent<generalAi>().UpdatePosition();
                 ind++;
             }
         }

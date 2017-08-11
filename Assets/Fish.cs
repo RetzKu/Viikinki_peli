@@ -51,15 +51,21 @@ public class Fish : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    //      void OnTriggerEnter2D(Collider2D other)
+    //      {
+    //          // drop
+    //          // if (other.gameObject.layer)
+    //          // {
+    //          // }
+    //          //if (other.gameObject.layer)
+    //          //{
+    //          //}
+    //      }
+
+    public void Hit()
     {
-        // drop
-        // if (other.gameObject.layer)
-        // {
-        // }
-        //if (other.gameObject.layer)
-        //{
-        //}
+        // lennä ja jotain
+        GetComponent<DropScript>().Drop();
     }
 
     public void Hit()

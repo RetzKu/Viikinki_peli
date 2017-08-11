@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(DropScript))]
 public class Fish : MonoBehaviour
 {
     private Rigidbody2D _body;
@@ -22,6 +22,7 @@ public class Fish : MonoBehaviour
         _body = GetComponent<Rigidbody2D>();
         _startPosition = transform.position; 
         _startPosition.y += startOffsetY;
+
 
         GetComponent<SpriteRenderer>().sprite = Corpse.CorpseSprites[Random.Range(0, Corpse.CorpseSprites.Length - 1)];
         transform.localScale = new Vector3(2f, 2f, 2f);
@@ -60,6 +61,7 @@ public class Fish : MonoBehaviour
         //{
         //}
     }
+
     public void Hit()
     {
         // lennä ja jotain

@@ -19,7 +19,7 @@ public class MiniMap : MonoBehaviour
         rendererGo.transform.parent = transform;
         _playerTransform = GameObject.FindWithTag("Player").transform;
 
-        Mesh.material.shader = Shader.Find("unlit");
+        //Mesh.material.shader = Shader.Find("unlit");
     }
 
     // nope

@@ -4649,7 +4649,7 @@ Prefab:
         type: 2}
       propertyPath: RuneToTeach
       value: 
-      objectReference: {fileID: 11400000, guid: c6117926ea9256e40828b88011ff31ce,
+      objectReference: {fileID: 11400000, guid: 08f97cce41dffac40b329561dbda7d15,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7289a413af869bc4a8bb1db1572d6a0e, type: 2}

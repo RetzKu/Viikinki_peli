@@ -71,7 +71,6 @@ public class door : MonoBehaviour
             MobsControl.instance.cave = true;
 
             //player.GetComponent<UpdatePathFind>().path.uptadeTiles(player.transform.position,dungeon);
-
             if (!spawnedMobs)
             {
                 spawnCaveMobs();

@@ -67,13 +67,11 @@ public class TileMap : MonoBehaviour, ITileMap
             {
                 GenerateChunks(5, 5);
                 PreLoad();
-                print("preload");
             }
             else
             {
                 GenerateChunks(5, 5);
                 PreSave();
-                print("saved");
             }
         }
         lastTint = tint;

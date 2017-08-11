@@ -142,6 +142,10 @@ public class FxScript : MonoBehaviour {
                 }
             }
         }
+        else if (trig.gameObject.CompareTag("Fish"))
+        {
+            trig.gameObject.GetComponent<Fish>().Hit();
+        }
     }
 
     void OnTriggerStay2D(Collider2D trig)

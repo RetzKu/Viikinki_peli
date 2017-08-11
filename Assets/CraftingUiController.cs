@@ -44,6 +44,7 @@ public class CraftingUiController : MonoBehaviour
     private readonly int maxButtons = 9;
 
     private ButtonState current;
+    public bool Initted { get; set; }
 
     void Start()
     {
@@ -95,12 +96,15 @@ public class CraftingUiController : MonoBehaviour
             // center.y += _hudImages[i].rectTransform.rect.height;
         }
 
+
+
         var touchControllerGo = GameObject.FindWithTag("TouchController");
         TouchController touchController = touchControllerGo.GetComponent<TouchController>();
+
         touchController.SetTouchContollerCenters(pos);
-
-
         Numbers.gameObject.SetActive(false);
+
+        Initted = true;
     }
 
 
@@ -122,6 +126,8 @@ public class CraftingUiController : MonoBehaviour
         current = ButtonState.Craft;
 
         SetAllCounts();
+
+        ResetAllColors(Color.white);
     }
 
     void OnBaseExit()
@@ -129,6 +135,8 @@ public class CraftingUiController : MonoBehaviour
         SetAllButtonsImages(ButtonState.Default);
         current = ButtonState.Default;
         SetAllButtonsImages(ButtonState.InCombat);
+
+        ResetToTransparent();
     }
 
     void SetAllActiveState(bool state)
@@ -165,12 +173,17 @@ public class CraftingUiController : MonoBehaviour
         _hudImages[yy * 3 + x].color = color;
     }
 
-    public void ResetAllColors()
+    public void ResetAllColors(Color color)
     {
         foreach (var image in _hudImages)
         {
-            image.color = ResetColor;
+            image.color = color;
         }
+    }
+
+    public void ResetToTransparent()
+    {
+        ResetAllColors(ResetColor);
     }
 
 

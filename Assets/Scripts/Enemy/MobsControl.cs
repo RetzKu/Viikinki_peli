@@ -36,10 +36,6 @@ public class MobsControl : MonoBehaviour
     public bool naturalSpawn;
     List<spawn> spawner = new List<spawn>();
 
-    [HideInInspector]
-    public GameObject _door { set { door = value; } }
-    GameObject door = new GameObject();
-    public bool cave = false;
     void Start()
     {
 
@@ -53,13 +49,6 @@ public class MobsControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (cave)
-        {
-            print("Cave count");
-            print(door.GetComponent<door>().mobs);
-        }
-        print("count");
-        print(Boids.Count);
         if(!naturalSpawn)
         {
             if (Input.GetKeyDown("y"))
@@ -138,10 +127,6 @@ public class MobsControl : MonoBehaviour
                     //wolfBoids.Add(go);
 
                 }
-                if(tries > 5 && cave)
-                {
-                    door.GetComponent<door>().mobs -= 1;
-                }
                 spawner[0].amount--;
 
             }
@@ -159,7 +144,8 @@ public class MobsControl : MonoBehaviour
             {
                 Destroy(Boids[ind]);
                 Boids.Remove(Boids[ind]);
-                door.GetComponent<door>().mobs -= 1;               
+                
+               
             }
             else
             {
@@ -168,7 +154,7 @@ public class MobsControl : MonoBehaviour
                     Boids[ind].GetComponent<generalAi>().SlowRune(5f,0.5f);
                     print("slow");
                 }
-                //Boids[ind].GetComponent<generalAi>().UpdatePosition();
+                Boids[ind].GetComponent<generalAi>().UpdatePosition();
                 ind++;
             }
         }

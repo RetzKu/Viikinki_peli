@@ -33,27 +33,35 @@ public class wolfStats : enemyStats {
         {
             flag = true;
             // ladataan kuolevan suden prefab
+
+            var go = GameObject.Find("luola_tuho");
             GameObject deadWolf = Resources.Load<GameObject>("ScmlAnims/wolf/entity_000");
+            deadWolf.transform.parent = go.transform;
             // otetaan sille suden positio kartalla
             deadWolf.transform.position = gameObject.transform.position;
+            deadWolf.transform.localScale = new Vector3(3f, 3f, 1f);
+            deadWolf.transform.localScale *= GetComponent<WolfAnimatorScript>().scale;
             // jos menee vasemmalle (kuollessa)
-            if(GetComponent<generalAi>().myDir == enemyDir.LD || GetComponent<generalAi>().myDir == enemyDir.LU || GetComponent<generalAi>().myDir == enemyDir.Left)
-            {
-                deadWolf.transform.localScale = new Vector3(3f, 3f, 1f);
-            }
+            //if (GetComponent<generalAi>().myDir == enemyDir.LD || GetComponent<generalAi>().myDir == enemyDir.LU || GetComponent<generalAi>().myDir == enemyDir.Left)
+            //{
+            //    deadWolf.transform.localScale = new Vector3(3f, 3f, 1f);
+            //}
             // oikealle (kuollessa)
-            else
+            if (GetComponent<generalAi>().myDir == enemyDir.RD || GetComponent<generalAi>().myDir == enemyDir.RU || GetComponent<generalAi>().myDir == enemyDir.Right)
             {
-                deadWolf.transform.localScale = new Vector3(-3f, 3f, 1f);
+                deadWolf.transform.localScale = new Vector3(-1.0f * deadWolf.transform.localScale.x, deadWolf.transform.localScale.y, deadWolf.transform.localScale.z);
             }
             // Susi kuolee aina vaakatasossa (ei kulmassa)
             deadWolf.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
-            Instantiate(deadWolf);
+
+            go = Instantiate(deadWolf);
+            go.transform.parent = GameObject.Find("luola_tuho").transform;
             // Tapetaan susi paten metodin avulla
             GetComponent<generalAi>().killMePls();
             print(gameObject.name + "died.");
-            
-            
+
+
+
         }
     }
 

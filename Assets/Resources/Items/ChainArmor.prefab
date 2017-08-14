@@ -70,9 +70,9 @@ GameObject:
   - component: {fileID: 114240922750442394}
   - component: {fileID: 212339517701269132}
   - component: {fileID: 61097440557161948}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: ChainArmor
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,6 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArmorMultiplier: 1.5
+  duration: 10
 --- !u!212 &212161014856038286
 SpriteRenderer:
   m_ObjectHideFlags: 1

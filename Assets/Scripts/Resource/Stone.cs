@@ -15,7 +15,9 @@ public class Stone : Resource
     {
         // TODO: ERIKOISTA
         GetComponent<DropScript>().Drop();
-        ObjectPool.instance.PoolObject(this.gameObject);
+
+        // ObjectPool.instance.PoolObject(this.gameObject);
+        transform.gameObject.gameObject.SetActive(false);
     }
 
     private Vector2 impact = Vector2.zero;

@@ -12,6 +12,9 @@ public class Perlin : MonoBehaviour
 
     private Dictionary<TileType, TilemapObjectSpawnSettings> TileSpawnSettings = new Dictionary<TileType, TilemapObjectSpawnSettings>((int)TileType.Max);
 
+    public SingleInstanceSpawnSettings SingleInstanceSpawnSettings;
+    private int _currentSpawn = 0;
+
     // Sampler for Trees 
     // private PoissonDiscSampler sampler;
     private int samplerWidth = Chunk.CHUNK_SIZE;
@@ -106,7 +109,19 @@ public class Perlin : MonoBehaviour
         InitalizeRenderTarget();
 
         // sampler = new PoissonDiscSampler(samplerWidth, samplerHeigth, samplerRadius);
+
+
+        // inline shuffle!  XDDDD
+        for (int i = 0; i < SingleInstanceSpawnSettings.Spawns.Count; i++)
+        {
+            var temp = SingleInstanceSpawnSettings.Spawns[i];
+            int randomIndex = Random.Range(i, SingleInstanceSpawnSettings.Spawns.Count);
+            SingleInstanceSpawnSettings.Spawns[i] = SingleInstanceSpawnSettings.Spawns[randomIndex];
+            SingleInstanceSpawnSettings.Spawns[randomIndex] = temp;
+        }
     }
+
+
 
     void InitSettings()
     {
@@ -307,7 +322,7 @@ public class Perlin : MonoBehaviour
 
     public Texture2D GenMiniMap(int w, int h)
     {
-        Width  = w;
+        Width = w;
         Heigth = h;
         Texture2D tex = GeneraTextureMap((e, m) => BiomeToColor(GetBiomeWSettings(e, m)));
         Heigth = Width = 250; // fuck 
@@ -672,11 +687,47 @@ public class Perlin : MonoBehaviour
             }
         }
 
+        SpawnRares(chunk);
+
         OffsetX = 0;
         OffsetY = 0;
     }
 
-    public GameObject TreeTrefab;
+    private readonly int SPAWN_MAX_TRIES = 5;
+    public void SpawnRares(Chunk chunk)
+    {
+        if (_currentSpawn >= SingleInstanceSpawnSettings.Spawns.Count)
+        {
+            return;
+        }
+
+        if (0 == Random.Range(0, SingleInstanceSpawnSettings.SpawnRate))
+        {
+            int tries = 0;
+            bool Success = false;
+
+            do
+            {
+                int x = Random.Range(0, Chunk.CHUNK_SIZE);
+                int y = Random.Range(0, Chunk.CHUNK_SIZE);
+
+                if (chunk.AreaClear(x, y))
+                {
+                    if (chunk.GetTileOnTileGameObject(x, y) == null)
+                    {
+                        var go = Instantiate(SingleInstanceSpawnSettings.Spawns[_currentSpawn]);
+                        go.transform.position = chunk.GetGameObject(x, y).transform.position;
+                        chunk.AddObject(x, y, go);
+                        Success = true;
+                        Debug.Log("rare spawned!");
+                        _currentSpawn++;
+                    }
+                }
+                tries++;
+            } while (tries < SPAWN_MAX_TRIES && !Success);
+        }
+    }
+
     public void GenerateChunk(TileType[,] tiles, GameObject[,] gameObjects, int offsetX, int offsetY, int startX, int startY) // chunkin offsetit 0,0:sta
     {
         int chunkSize = Chunk.CHUNK_SIZE;
@@ -872,11 +923,9 @@ public class Perlin : MonoBehaviour
     //    {
     //        float Elevation = settings.elevations[i].startElevation;
     //        WriteElevationIf(Elevation);
-
     //    }
 
     //    data += EndName();
-
     //    System.IO.File.WriteAllText("eetulähettääterveisensä.txt", data);
     //}
 

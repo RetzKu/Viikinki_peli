@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection.Emit;
-using System.Runtime.InteropServices;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 // must change start once scrolling
@@ -66,14 +62,12 @@ public class Chunk      // sub array
         return worldObjects.TryGetValue(new Vec2(x, y), out value);
     }
 
+    // voi palauttaa nullin
     public GameObject GetTileOnTileGameObject(int x, int y)
     {
         GameObject value;
-        if (worldObjects.TryGetValue(new Vec2(x, y), out value))
-        {
-            return value;
-        }
-        return null;
+        worldObjects.TryGetValue(new Vec2(x, y), out value);
+        return value; 
     }
 
     public void AddObject(int x, int y, GameObject go)
@@ -88,6 +82,9 @@ public class Chunk      // sub array
         foreach (var keypairvalue in worldObjects)
         {
             ResourceType type = keypairvalue.Value.GetComponent<Resource>().type;
+
+            if (!keypairvalue.Value.gameObject.activeSelf)
+                continue;
 
             keypairvalue.Value.transform.parent = null;
 
@@ -184,6 +181,27 @@ public class Chunk      // sub array
             }
         }
         return value;
+    }
+
+    public bool AreaClear(int x, int y)
+    {
+        for (int i = -4; i < 4; i +=2)
+        {
+            for (int j = -4; j < 4; j +=2)
+            {
+                if (InBounds(x + j, y + i) && TileMap.Collides(TilemapTilesView[y + i, x + j]))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public bool InBounds(int x, int y)
+    {
+        return x >= 0 && y >= 0 &&
+               x < CHUNK_SIZE && y < CHUNK_SIZE;
     }
 
     private void SetTypes(TileType[,] types)

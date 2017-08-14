@@ -13,6 +13,7 @@ public abstract class Rune : ScriptableObject
     public AudioClip Sound;
     public Sprite sprite;
     public Sprite HudImage;
+    public Sprite OnCdHudImage;
     public float Cd;
 
     public bool ValidateRune(Vec2[] runeIndices)
@@ -55,7 +56,7 @@ public abstract class Rune : ScriptableObject
 
     public virtual void OnGui(RuneBarUiController ui, int i)
     {
-        ui.OnCd(i, Cd);
+        ui.OnCd(i, Cd, OnCdHudImage);
     }
 
     public Sprite GetGuiImage()

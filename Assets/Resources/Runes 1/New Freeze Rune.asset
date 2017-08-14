@@ -20,7 +20,8 @@ MonoBehaviour:
     Y: 0
   Sound: {fileID: 0}
   sprite: {fileID: 21300000, guid: 09274f3c91c09c244bb3ffb0dd5959f3, type: 3}
-  HudImage: {fileID: 21300000, guid: 3c0e1a2869cfd7a419daff7c956e14cd, type: 3}
+  HudImage: {fileID: 21300000, guid: 854889c4351be564083a6350f990fbef, type: 3}
+  OnCdHudImage: {fileID: 21300028, guid: 854889c4351be564083a6350f990fbef, type: 3}
   Cd: 0
   EffectData:
     BuffToApply: {fileID: 11400000, guid: d36227bd1db615f42b160e47fd68e8b6, type: 2}

@@ -81,6 +81,7 @@ public class ObjectPool : MonoBehaviour
                 } else if(!onlyPooled) {
                     GameObject go = Instantiate(objectPrefabs[i]) as GameObject;
                     go.name = objectPrefabs[i].name;
+                    go.transform.parent = null;
                     return go;
                 }
                 break;

@@ -4151,6 +4151,34 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1 &487608231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 487608232}
+  m_Layer: 0
+  m_Name: StoneSpawningManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &487608232
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 487608231}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1899586844}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &535620828
 Prefab:
   m_ObjectHideFlags: 0
@@ -4195,6 +4223,12 @@ Prefab:
       propertyPath: SpriteController
       value: 
       objectReference: {fileID: 1310822892}
+    - target: {fileID: 114100974155229900, guid: 9ba8cfce009a3764ba416b37c8f039af,
+        type: 2}
+      propertyPath: SingleInstanceSpawnSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 7ed393da99fb4d14ea9336eb0c128e60,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ba8cfce009a3764ba416b37c8f039af, type: 2}
   m_IsPrefabParent: 0
@@ -4649,7 +4683,7 @@ Prefab:
         type: 2}
       propertyPath: RuneToTeach
       value: 
-      objectReference: {fileID: 11400000, guid: c6117926ea9256e40828b88011ff31ce,
+      objectReference: {fileID: 11400000, guid: 381077275c0ec7b4799f22ac2dbd357d,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7289a413af869bc4a8bb1db1572d6a0e, type: 2}
@@ -6394,7 +6428,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4215607394559902, guid: 735606dd2bac71047b80845bc97b376a, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1655810811596688, guid: 735606dd2bac71047b80845bc97b376a, type: 2}
       propertyPath: m_TagString
@@ -7138,7 +7172,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4214500096432208, guid: 317101aad9860994d946e75d103c65d0, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 114676718114899972, guid: 317101aad9860994d946e75d103c65d0,
         type: 2}
@@ -7487,6 +7521,11 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!4 &1899586844 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4214500096432208, guid: 317101aad9860994d946e75d103c65d0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1803174701}
 --- !u!1 &1928008853
 GameObject:
   m_ObjectHideFlags: 0

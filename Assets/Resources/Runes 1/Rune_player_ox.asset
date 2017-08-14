@@ -20,6 +20,7 @@ MonoBehaviour:
     Y: 1
   Sound: {fileID: 0}
   sprite: {fileID: 0}
-  HudImage: {fileID: 21300000, guid: 3c0e1a2869cfd7a419daff7c956e14cd, type: 3}
-  Cd: 0
+  HudImage: {fileID: 21300008, guid: 854889c4351be564083a6350f990fbef, type: 3}
+  OnCdHudImage: {fileID: 21300036, guid: 854889c4351be564083a6350f990fbef, type: 3}
+  Cd: 2
   buff: {fileID: 11400000, guid: 29b6e2bf970c41441bbfb92c929fcf1c, type: 2}

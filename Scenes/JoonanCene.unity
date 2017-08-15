@@ -4965,11 +4965,11 @@ MonoBehaviour:
   BigMan: {fileID: 0}
   BigWolf: {fileID: 0}
   player: {fileID: 1098307897}
-  spawnWolfs: 0
+  spawnWolfs: 1
   spawnMelee: 0
   spawnArchers: 0
   spawnBears: 0
-  naturalSpawn: 1
+  naturalSpawn: 0
   cave: 0
 --- !u!1 &2007032764
 GameObject:

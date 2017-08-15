@@ -29,6 +29,7 @@ public class DeckScript : MonoBehaviour
     // Arrayt joihin voidaan tallentaa positiot ja rotatiot
     private Vector3[] positions;
     private Quaternion[] rotations;
+    private bool[] equips;
     // Muuttuva uusi korttiluku
     private int updatedCardCount;
 
@@ -104,6 +105,8 @@ public class DeckScript : MonoBehaviour
         // Katsotaan inventoryn koko
         updatedCardCount = inventorySize();        
 
+
+        // Tää nousee kahella kerralla ja se pugaa
         // Jos inventoryn koko kasvaa
         if(cardCount < updatedCardCount)
         {
@@ -121,6 +124,7 @@ public class DeckScript : MonoBehaviour
             // Tekee oikean määrän kortteja (lisätty määrä)
             for (int x = 0; x < updatedCardCount; x++)
             {
+                // Tehdään parent objekti kortille
                 cards[x] = new GameObject("Card" + x);
                 cards[x].transform.parent = gameObject.transform;
                 cards[x].transform.localScale = new Vector3(0.7f, 1f, 1f);
@@ -128,12 +132,10 @@ public class DeckScript : MonoBehaviour
                 cards[x].AddComponent<Image>().sprite = cardArray[3];
 
                 cards[x].AddComponent<CardMoverEraser>();
-                cards[x].GetComponent<CardMoverEraser>();
 
-                GameObject tempObj = new GameObject("CardChild");
-                tempObj.transform.position = cards[x].transform.position;
-                Sprite cardImage = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<SpriteRenderer>().sprite;
 
+
+                // Covercolor esittää esineen durationia/kulumista
                 GameObject tempObj2 = new GameObject("coverColor");
                 tempObj2.transform.position = cards[x].transform.position;
                 tempObj2.AddComponent<RectTransform>().pivot = new Vector2(1f, 0.5f);
@@ -143,6 +145,28 @@ public class DeckScript : MonoBehaviour
                 tempObj2.GetComponent<Image>().color = new Color(0.13334f, 0.0902f, 0.02745f, 0.6902f);
                 tempObj2.GetComponent<RectTransform>().localPosition = new Vector3(50f, 0f, 0f);
 
+                // Equippedcolor indikoi mi(t)kä esineet pelaajalla on päällä
+                GameObject tempObj3 = new GameObject("equippedColor");
+                tempObj3.transform.position = cards[x].transform.position;
+                tempObj3.AddComponent<RectTransform>().pivot = new Vector2(1f, 0.5f);
+                tempObj3.AddComponent<Image>().sprite = Resources.Load<Sprite>("whitecard");
+                tempObj3.transform.SetParent(cards[x].transform);
+                tempObj3.transform.localScale = new Vector3(1f, 1f, 1f);
+                tempObj3.GetComponent<Image>().color = new Color(0.1961f, 0.7176f, 0.5411f, 0f);
+                tempObj3.GetComponent<RectTransform>().localPosition = new Vector3(50f, 0f, 0f);
+                // Tarkistetaan taulukosta oliko kyseinen esine päällä ennen kortin tuhoamista, jos oli laitetaan se uudestaan päälle
+                if (equips.Length > x)
+                {
+                    if (equips[x] == true)
+                    {
+                        tempObj3.GetComponent<Image>().color = new Color(0.1961f, 0.7176f, 0.5411f, 0.2667f);
+                    }
+                }
+
+                // Kortissa olevan aseen kuva
+                GameObject tempObj = new GameObject("CardChild");
+                tempObj.transform.position = cards[x].transform.position;
+                Sprite cardImage = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<SpriteRenderer>().sprite;
                 Rect cardImageRect = cardImage.rect;
                 var image = tempObj.AddComponent<Image>();
                 image.sprite = cardImage;
@@ -212,6 +236,8 @@ public class DeckScript : MonoBehaviour
             }
         }
 
+
+        // Tälle keino käsitellä monen kortin lisäys yhtä aikaa
         // Aukaisee inventoryn ja kortti lisääntynyt
         if (open == true && addCard == true && removeCard == false)
         {
@@ -224,10 +250,21 @@ public class DeckScript : MonoBehaviour
                 //GetComponentInChildren<CardMoverEraser>().ApplyOpenPosition();
             }
             // Juoksee joka kerta
-            for (int x = 0; x < cardCount - 1; x++)
+            if (positions.Length == cardCount - 1 || positions.Length == cardCount)
             {
-                transform.FindChild("Card" + x).localPosition = Vector3.Lerp(positions[x], new Vector3(maxPositionX[x], maxPositionY[x], 0f), t);
-                transform.FindChild("Card" + x).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(rotations[x].z, maxAngles[x], t), 0.5f);
+                for (int x = 0; x < cardCount - 1; x++)
+                {
+                    transform.FindChild("Card" + x).localPosition = Vector3.Lerp(positions[x], new Vector3(maxPositionX[x], maxPositionY[x], 0f), t);
+                    transform.FindChild("Card" + x).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(rotations[x].z, maxAngles[x], t), 0.5f);
+                }
+            }
+            else
+            {
+                for (int x = 0; x < cardCount - 1; x++)
+                {
+                    transform.FindChild("Card" + x).localPosition = Vector3.Lerp(new Vector3(0f, 0f, 0f), new Vector3(maxPositionX[x], maxPositionY[x], 0f), t);
+                    transform.FindChild("Card" + x).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(0f, maxAngles[x], t), 0.5f);
+                }
             }
             transform.FindChild("Card" + (cardCount - 1)).localPosition = Vector3.Lerp(new Vector3(minPositionX[(cardCount - 1)], minPositionY[(cardCount - 1)], 0f), new Vector3(maxPositionX[(cardCount - 1)], maxPositionY[(cardCount - 1)], 0f), t);
             transform.FindChild("Card" + (cardCount - 1)).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(minAngles[(cardCount - 1)], maxAngles[(cardCount - 1)], t), 0.5f);
@@ -283,12 +320,28 @@ public class DeckScript : MonoBehaviour
             if (t >= 1)
             {
                 removeCard = false;
+                transform.FindChild("Card" + (brokenWeaponInt)).GetChild(1).GetComponent<Image>().color = new Color(0.1961f, 0.7176f, 0.5411f, 0f);
+                equips[brokenWeaponInt] = false;
                 DestroyImmediate(transform.FindChild("Card" + (brokenWeaponInt)).gameObject);
+                //DestroyImmediate(cards[brokenWeaponInt]);
 
                 int tempInt = transform.childCount - 1;
                 for (int x = 0; x < tempInt; x++)
                 {
                     transform.GetChild(x).name = "Card" + x;
+
+                    float duration;
+                    try
+                    {
+                        duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<weaponStats>().duration;
+                    }
+                    catch
+                    {
+                        duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<armorScript>().duration;
+                    }
+
+                    transform.GetChild(x).GetChild(0).GetComponent<RectTransform>().localScale = new Vector3(1f - 0.1f * duration, 1f, 1f);
+
                 }
             }
         }
@@ -324,7 +377,29 @@ public class DeckScript : MonoBehaviour
                 openChanger = true;
             }
             // Juoksee joka kerta
+
+            if (positions.Length == cardCount - 1 || positions.Length == cardCount)
+            {
+                for (int x = 0; x < cardCount - 1; x++)
+                {
+                    transform.FindChild("Card" + x).localPosition = Vector3.Lerp(positions[x], new Vector3(minPositionX[x], minPositionY[x], 0f), t);
+                    transform.FindChild("Card" + x).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(rotations[x].z, minAngles[x], t), 0.5f);
+                }
+            }
+            else
+            {
+                for (int x = 0; x < cardCount - 1; x++)
+                {
+                    transform.FindChild("Card" + x).localPosition = Vector3.Lerp(new Vector3(0f, 0f, 0f), new Vector3(minPositionX[x], minPositionY[x], 0f), t);
+                    transform.FindChild("Card" + x).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(0f, minAngles[x], t), 0.5f);
+                }
+            }
+            transform.FindChild("Card" + (cardCount - 1)).localPosition = Vector3.Lerp(new Vector3(maxPositionX[(cardCount - 1)], maxPositionY[(cardCount - 1)], 0f), new Vector3(minPositionX[(cardCount - 1)], minPositionY[(cardCount - 1)], 0f), t);
+            transform.FindChild("Card" + (cardCount - 1)).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(maxAngles[(cardCount - 1)], minAngles[(cardCount - 1)], t), 0.5f);
+
             // 
+
+            /*
             for (int x = 0; x < cardCount - 1; x++)
             {
                 transform.FindChild("Card" + x).localPosition = Vector3.Lerp(positions[x], new Vector3(minPositionX[x], minPositionY[x], 0f), t);
@@ -332,6 +407,7 @@ public class DeckScript : MonoBehaviour
             }
             transform.FindChild("Card" + (cardCount - 1)).localPosition = Vector3.Lerp(new Vector3(maxPositionX[(cardCount - 1)], maxPositionY[(cardCount - 1)], 0f), new Vector3(minPositionX[(cardCount - 1)], minPositionY[(cardCount - 1)], 0f), t);
             transform.FindChild("Card" + (cardCount - 1)).localRotation = new Quaternion(0f, 0f, Mathf.Lerp(maxAngles[(cardCount - 1)], minAngles[(cardCount - 1)], t), 0.5f);
+            */
             if (t >= 1)
             {
                 addCard = false;
@@ -395,7 +471,7 @@ public class DeckScript : MonoBehaviour
 
         for (int x = 0; x < cardCount; x++)
         {
-            if(cards[x] != null)
+            if(transform.GetChild(x) != null)
             {
                 float duration;
                 try
@@ -406,8 +482,7 @@ public class DeckScript : MonoBehaviour
                 {
                     duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<armorScript>().duration;
                 }
-                
-                cards[x].transform.GetChild(0).GetComponent<RectTransform>().localScale = new Vector3(1f - 0.1f * duration, 1f, 1f);
+                transform.GetChild(x).GetChild(0).GetComponent<RectTransform>().localScale = new Vector3(1f - 0.1f * duration, 1f, 1f);
             }
         }
     }
@@ -678,15 +753,18 @@ public class DeckScript : MonoBehaviour
         // Päivitetään arrayt oikean kokoisiksi
         positions = new Vector3[cardCount];
         rotations = new Quaternion[cardCount];
+        equips = new bool[cardCount];
 
-        // Tuodaan arrayhin vanhat positionit
+        // Tuodaan arrayhin vanhat positionit sekä equip boolit
         for (int x = 0; x < cardCount; x++)
         {
             positions[x] = new Vector3(transform.FindChild("Card" + x).localPosition.x, transform.FindChild("Card" + x).localPosition.y, 0f);
             rotations[x] = new Quaternion(transform.FindChild("Card" + x).localRotation.x, transform.FindChild("Card" + x).localRotation.y, transform.FindChild("Card" + x).localRotation.z, transform.FindChild("Card" + x).localRotation.w);
+            equips[x] = (transform.FindChild("Card" + x).GetComponent<CardMoverEraser>().checkEquip());
         }
     }
 
+    // Viimeksi tuhoutunut ase, käytetään cardmovereraser scriptissä
     public void lastBrokenWeapon(int weaponInt)
     {
         brokenWeaponInt = weaponInt;
@@ -702,9 +780,18 @@ public class DeckScript : MonoBehaviour
         dragFlag = false;
     }
 
+    // Taitaa olla turha atm
     public Vector3 OpenInvPositions(int Count)
     {
         Vector3 tempVector3 = new Vector3(maxPositionX[Count], maxPositionY[Count], 0f);
         return tempVector3;
+    }
+
+    // Metodi jolla voidaan cardmoveresarerista tarkistaa boolean arrayn arvoja
+    public bool EquipArrayCheck (int ID)
+    {
+        if (equips.Length > ID)
+            return equips[ID];
+        else return false;
     }
 }

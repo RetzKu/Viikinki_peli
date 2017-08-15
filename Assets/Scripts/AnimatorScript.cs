@@ -71,8 +71,7 @@ public class AnimatorScript : MonoBehaviour
 
         if (Vector3.Distance(MousePoint, WrongWay) < Vector3.Distance(MousePoint, Destination))
         {
-            GetComponent<Movement>().Slowed = true;
-            GetComponent<Movement>().Started = true;
+            StartCoroutine(GetComponent<Movement>().Slowdown(1));
         }
 
     }

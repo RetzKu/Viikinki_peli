@@ -43,10 +43,6 @@ public class Movement : MonoBehaviour
     Vector2 acc = new Vector2(0f, 0f);
     private int LastDirection;
 
-    public float Duration;
-    public bool Started = false;
-    private float startTime;
-    public bool Slowed = false;
     public float ModifiedMaxSpd;
     // 2 max drag
     // 0 min drag
@@ -83,18 +79,29 @@ public class Movement : MonoBehaviour
         ModifiedMaxSpd = max_spd;
     }
 
-    public void AttackSlow()
+    public IEnumerator Slowdown(float duration)
     {
-        if(Started)
+        float StartTime = 0;
+        while(duration > StartTime)
         {
-            startTime = Time.time;
-            Started = false;
+            float t = StartTime / duration;
+            ModifiedMaxSpd = Mathf.SmoothStep(0.1f, max_spd, t);
+
+            yield return new WaitForSecondsRealtime(0.1f);
+            StartTime += 0.1f;
         }
-        float t = (Time.time - startTime) / Duration;
-        ModifiedMaxSpd = Mathf.SmoothStep(0.1f, max_spd, t);
-        if(ModifiedMaxSpd == 3)
+    }
+
+    public IEnumerator Slowdown(float duration,float MaxSlow)
+    {
+        float StartTime = 0;
+        while (duration > StartTime)
         {
-            Slowed = false;
+            float t = StartTime / duration;
+            ModifiedMaxSpd = Mathf.SmoothStep(MaxSlow, max_spd, t);
+
+            yield return new WaitForSecondsRealtime(0.1f);
+            StartTime += 0.1f;
         }
     }
 
@@ -108,10 +115,6 @@ public class Movement : MonoBehaviour
         else
         {
             knockClock();
-        }
-        if(Slowed)
-        {
-            AttackSlow();
         }
     }
 

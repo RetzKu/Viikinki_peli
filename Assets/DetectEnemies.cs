@@ -40,8 +40,7 @@ public class DetectEnemies : MonoBehaviour
             var slowArray = Physics2D.OverlapCircleAll(body.position, slowDown, mask); // , mask);
             if (slowArray.Length > 0)
             {
-                GetComponent<Movement>().Started = true;
-                GetComponent<Movement>().Slowed = true;
+                StartCoroutine(GetComponent<Movement>().Slowdown(0.5f, 1));
             }
             yield return new WaitForSeconds(0.1f);
         }

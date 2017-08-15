@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Name: Rune_Navigation
   m_EditorClassIdentifier: 
   Indices:
-  - X: 0
-    Y: 2
   - X: 1
+    Y: 0
+  - X: 0
     Y: 1
-  - X: 2
+  - X: 1
     Y: 2
   Sound: {fileID: 0}
-  sprite: {fileID: 21300008, guid: d6bf80a471b016c4e97bb0be2a66eb2e, type: 3}
-  HudImage: {fileID: 21300004, guid: 854889c4351be564083a6350f990fbef, type: 3}
-  OnCdHudImage: {fileID: 21300032, guid: 854889c4351be564083a6350f990fbef, type: 3}
+  sprite: {fileID: 21300008, guid: df7b1289d1bb0624aad59fbe59add2bf, type: 3}
+  HudImage: {fileID: 21300008, guid: 854889c4351be564083a6350f990fbef, type: 3}
+  OnCdHudImage: {fileID: 21300036, guid: 854889c4351be564083a6350f990fbef, type: 3}
   Cd: 3
+  SpeedColor: {r: 1, g: 1, b: 1, a: 1}

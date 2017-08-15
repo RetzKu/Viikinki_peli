@@ -43,6 +43,8 @@ public class CraftingUiController : MonoBehaviour
     private Dictionary<ButtonState, Sprite[]> buttonStateSprites;
     private readonly int maxButtons = 9;
 
+    private TouchController _touchContoller;
+
     private ButtonState current;
     public bool Initted { get; set; }
 
@@ -62,7 +64,6 @@ public class CraftingUiController : MonoBehaviour
         }
 
         CraftingManager.Instance.OnResourceCountChanged += CheckResourceNumbers;
-        // CraftingManager.Instance.SetResourcePickupEndLocation(Camera.main.ScreenToWorldPoint(ResourceEndLocation.position));
 
         buttonStateSprites = new Dictionary<ButtonState, Sprite[]>(5);
         buttonStateSprites[ButtonState.Default] = DefaultSprites;
@@ -96,17 +97,15 @@ public class CraftingUiController : MonoBehaviour
             // center.y += _hudImages[i].rectTransform.rect.height;
         }
 
+        var go = GameObject.FindWithTag("TouchController");
+        _touchContoller = go.GetComponent<TouchController>();
+        _touchContoller.SetTouchContollerCenters(pos);
 
-
-        var touchControllerGo = GameObject.FindWithTag("TouchController");
-        TouchController touchController = touchControllerGo.GetComponent<TouchController>();
-
-        touchController.SetTouchContollerCenters(pos);
         Numbers.gameObject.SetActive(false);
 
         Initted = true;
-    }
 
+    }
 
     public Vector2[] GetPos()
     {
@@ -125,7 +124,7 @@ public class CraftingUiController : MonoBehaviour
         SetAllActiveState(true);
         current = ButtonState.Craft;
 
-        SetAllCounts();
+        SetAllCounts(true);
 
         ResetAllColors(Color.white);
     }
@@ -187,7 +186,7 @@ public class CraftingUiController : MonoBehaviour
     }
 
 
-    public void SetAllCounts()
+    public void SetAllCounts(bool resetImages)
     {
         for (int i = 0; i < (int)IngredientType.Max; i++)
         {
@@ -195,15 +194,22 @@ public class CraftingUiController : MonoBehaviour
             int count = CraftingManager.Instance.GetInventoryCount((IngredientType)i);
             _hudItemCounts[index].text = count.ToString();
 
-            int x = index % 3;
-            int y = (index - x) / 3;
-            SetButtonImage(count <= 0 ? ButtonState.OutOf : ButtonState.Craft, x, y);
+            if (resetImages)
+            {
+                int x = index % 3;
+                int y = (index - x) / 3;
+                SetButtonImage(count <= 0 ? ButtonState.OutOf : ButtonState.Craft, x, y);
+            }
         }
     }
 
     void CheckResourceNumbers()
     {
-        SetAllCounts();
+        if (_touchContoller.ControllerMode == TouchController.Mode.Crafting)
+            SetAllCounts(true);
+        else if (_touchContoller.ControllerMode == TouchController.Mode.RuneCasting)
+            SetAllCounts(false);
+
     }
 
     private int count = 0;
@@ -267,7 +273,4 @@ public class CraftingUiController : MonoBehaviour
 
         _buttonVibrating[y * 3 + x] = false;
     }
-
 }
-
-

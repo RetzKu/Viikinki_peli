@@ -273,7 +273,6 @@ public class Perlin : MonoBehaviour
         int R = ObjectRValue;
         bool[,] treeArray = new bool[sizeY, sizeX];
 
-        // Blue noise olisi aina isompi Kuin R????
         // int blueNoiseSafeSpace = 15;
         for (int yc = 0; yc < sizeY; yc++)
         {
@@ -573,13 +572,13 @@ public class Perlin : MonoBehaviour
     public TilemapObjectSpawnSettings SpawnSettings;
     public void SpawnObject(Vector3 spawnPosition, Transform parent, TileType type, Chunk chunk, int x, int y)
     {
-        // choose object to spawn
 
         if (!IsImplementedSetting(type))
         {
             type = TileType.GrassLand; // atm kaikki grasslandikisi jos ei löydy
         }
 
+        // choose object to spawn
         TilemapObjectSpawnSettings setting;
         if (TileSpawnSettings.TryGetValue(type, out setting))
         {
@@ -913,7 +912,7 @@ public class Perlin : MonoBehaviour
         return TileType.GrassLand; // place holder olisi kiva
     }
 
-    // XD: 
+    // XD:
     //void WriteBiomeDataToFile(BiomeSettings settings) // settings todo:
     //{
     //    string data = "";

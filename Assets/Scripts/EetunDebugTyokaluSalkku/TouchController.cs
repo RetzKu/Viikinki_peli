@@ -219,7 +219,7 @@ public class TouchController : MonoBehaviour
 
     void Update()
     {
-#if !UNITY_EDITOR 
+#if !UNITY_EDITOR           // todo: bugittaako enää XDDDDDDDDD
         if (_init == false) // todo: miksi bugittaa androidilla
         {
             // SetTouchContollerCenters(_craftingUiController.GetPos());
@@ -334,7 +334,7 @@ public class TouchController : MonoBehaviour
 
         if (Mode.Crafting == ControllerMode)
         {
-            _craftingUiController.SetAllCounts();
+            _craftingUiController.SetAllCounts(true);
         }
         else
         {

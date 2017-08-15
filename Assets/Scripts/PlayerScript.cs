@@ -175,8 +175,15 @@ public class PlayerScript : MonoBehaviour
         //print(clickPosition);
         startPoint = playerPosition; // Pelaajan positio
         endPoint = Camera.main.ScreenToWorldPoint(mousePos); // Hiiren osoittama kohta
-
     }
+
+    public void UnEquip()
+    {
+        Hand.EmptyHand();
+        Inventory.EquipData.EmptyHand();
+        Inventory.Changed = true;
+    }
+
     void InventoryInput()
     {
         

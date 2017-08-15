@@ -42,6 +42,8 @@ public class CardMoverEraser : MonoBehaviour,
             string tempString = gameObject.name.Substring(gameObject.name.Length - 1, 1);
             int tempInt = int.Parse(tempString);
             // Kertoo inventorylle että laittaa käteen oikean esineen
+            if(_equipped)   
+            
             GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.EquipItem(tempInt);
         }
         _dragClick = false;
@@ -162,6 +164,7 @@ public class CardMoverEraser : MonoBehaviour,
         }
         else
         {
+            GameObject.Find("Player").GetComponent<PlayerScript>().UnEquip();
             Image tempImage = transform.GetChild(1).GetComponent<Image>();
             Color tempColor = tempImage.color;
             tempImage.color = new Color(tempColor.r, tempColor.g, tempColor.b, 0f);
@@ -173,5 +176,13 @@ public class CardMoverEraser : MonoBehaviour,
     {
         if (_equipped) return true;
         else return false;
+    }
+
+    public void AutoEquipFirstItem()
+    {
+            Image tempImage = transform.GetChild(1).GetComponent<Image>();
+            Color tempColor = tempImage.color;
+            tempImage.color = new Color(tempColor.r, tempColor.g, tempColor.b, 0.2667f);
+            _equipped = true;
     }
 }

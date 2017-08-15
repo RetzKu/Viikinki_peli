@@ -40,6 +40,7 @@ public class DeckScript : MonoBehaviour
     private bool openChanger2 = true;
     private bool addCard = false;
     private bool removeCard = false;
+    public bool weaponChanged = false;
 
     private bool dragFlag = false;
 
@@ -110,8 +111,9 @@ public class DeckScript : MonoBehaviour
         // Jos inventoryn koko kasvaa
         if(cardCount < updatedCardCount)
         {
-            // Tallennetaan "vanhojen" korttien propertiesit
-            saveCardProperties();
+
+                // Tallennetaan "vanhojen" korttien propertiesit
+                saveCardProperties();
 
             // Tuhoaa kaikki olemassa olevat kortit
             for (int x = 0; x < cardCount; x++)
@@ -130,10 +132,8 @@ public class DeckScript : MonoBehaviour
                 cards[x].transform.localScale = new Vector3(0.7f, 1f, 1f);
                 cards[x].transform.SetSiblingIndex(x);
                 cards[x].AddComponent<Image>().sprite = cardArray[3];
-
                 cards[x].AddComponent<CardMoverEraser>();
-
-
+               
 
                 // Covercolor esittää esineen durationia/kulumista
                 GameObject tempObj2 = new GameObject("coverColor");
@@ -173,6 +173,12 @@ public class DeckScript : MonoBehaviour
                 image.rectTransform.sizeDelta = cardImageRect.size;
                 tempObj.transform.SetParent(cards[x].transform);
                 tempObj.transform.localScale = new Vector3(2.85714285714286f, 2f, 1f);
+
+                if (weaponChanged == true && updatedCardCount - 1 == x)
+                {
+                    transform.GetChild(x).GetComponent<CardMoverEraser>().AutoEquipFirstItem();
+                    weaponChanged = false;
+                }
             }
 
             // Ladataan uudet positiot ja anglet uudelle kortti määrälle

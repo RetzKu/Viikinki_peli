@@ -17,6 +17,12 @@ public abstract class enemyStats : MonoBehaviour {
         Player = PlayerScript.Player.GetComponent<combat>();
     }
 
+    public int CalculateArmor(int hp, int armor, int damage)
+    {
+        if (damage > armor) { return hp -= damage - armor; }
+        return hp;
+    }
+
 
     public abstract void takeDamage(float damageTaken);
 }

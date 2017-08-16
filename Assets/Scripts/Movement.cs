@@ -92,6 +92,21 @@ public class Movement : MonoBehaviour
         }
     }
 
+    public IEnumerator PlayerSlow(float duration,float MaxSlow)
+    {
+        float StartTime = 0;
+        //start effect
+        while (duration > StartTime)
+        {
+            float t = StartTime / duration;
+            ModifiedMaxSpd = Mathf.SmoothStep(MaxSlow, max_spd, t);
+
+            yield return new WaitForSecondsRealtime(0.1f);
+            StartTime += 0.1f;
+        }
+        //end effect
+    }
+
     public IEnumerator Slowdown(float duration,float MaxSlow)
     {
         float StartTime = 0;

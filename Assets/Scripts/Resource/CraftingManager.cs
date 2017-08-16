@@ -50,7 +50,11 @@ public class CraftingManager : MonoBehaviour
     void Start()
     {
         Player = GameObject.FindWithTag("Player");
+
+        OnResourceCountChanged += () => { AudioManager.instance.Play("Item"); };
     }
+
+ 
 
     void Update()
     {

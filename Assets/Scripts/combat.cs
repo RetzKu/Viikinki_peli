@@ -226,6 +226,7 @@ public class combat : MonoBehaviour
     // Metodi jolla pelaaja ottaa damagea
     public void takeDamage(float rawTakenDamage)
     {
+        AudioManager.instance.Play("PlayerHit");
         int FilteredDamage = (int)(rawTakenDamage - armor);
         if(FilteredDamage < 0) { FilteredDamage = 0; }
         // Lisää tähän tsekkaus

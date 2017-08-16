@@ -38,11 +38,12 @@ public class CraftingRecipe : Rune
         {
             // TODO: CRAFTAUS ONNISTUI
             Debug.Log("Kirves!");
+            AudioManager.instance.Play("CraftingSuccess");
         }
         else
         {
             // TODO: CRAFTAUS FAILASI
-
+            AudioManager.instance.Play("CraftingFail");
         }
         // TODO: LAUNCHER, SOUND
     }

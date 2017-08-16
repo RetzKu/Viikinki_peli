@@ -25,6 +25,11 @@ public class Stone : Resource
         impact += dir.normalized * force.magnitude / 1.0f;//mass
     }
 
+    public override void Hit(int damage)
+    {
+        DefaultHit(damage, "Stone");
+    }
+
     void Update()
     {
         // if (Input.GetMouseButtonDown(1))

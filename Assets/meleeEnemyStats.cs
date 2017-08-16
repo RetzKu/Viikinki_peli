@@ -18,7 +18,7 @@ public class meleeEnemyStats : enemyStats {
         hp = hp - (rawDamageTaken / armor);
         GetComponent<generalAi>().KnockBack();
         foreach (SpriteRenderer t in GetComponentsInChildren<SpriteRenderer>()) { t.color = new Color(255f, 0f, 0f, 255f); }
-
+        AudioManager.instance.Play("GeneralHit");
         checkAlive();
     }
 

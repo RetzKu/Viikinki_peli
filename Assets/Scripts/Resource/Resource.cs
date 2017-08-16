@@ -104,6 +104,23 @@ public abstract class Resource : MonoBehaviour
         }
     }
 
+    public void DefaultHit(int damage, string effectName)
+    {
+        Hp -= damage;
+        if (Hp <= 0)
+        {
+            OnDead();
+            dead = true;
+        }
+        else
+        {
+            Vibrate();
+        }
+
+        if (!dead)
+            AudioManager.instance.Play(effectName);
+    }
+
     public abstract void OnDead();
     public abstract void Init(bool destroyedVersion);
 

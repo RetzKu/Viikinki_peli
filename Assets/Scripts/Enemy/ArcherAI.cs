@@ -162,11 +162,16 @@ public class ArcherAI : generalAi {
             //print("SHOOOOOOT");
             if(dist.magnitude > 1.5f)
             {
+                if(dist.magnitude < attackDist * 3f)
+                {
+                    AudioManager.instance.Play("Arrow");
+                }
                 Vector2 r =  Random.insideUnitCircle * Random.Range(0f, 2.5f) + playerPos;
                 proManager.GetComponent<ProjectileManager>().spawnProjectile(body.position, r);
             }
             else
             {
+                AudioManager.instance.Play("Arrow");
                 proManager.GetComponent<ProjectileManager>().spawnProjectile(body.position, playerPos);
             }
             chargeCounter = 0;

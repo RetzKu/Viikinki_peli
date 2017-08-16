@@ -109,10 +109,14 @@ public class AnimatorScript : MonoBehaviour
 
     public void Attack()
     {
-        StartTime = Time.time;
-        DirectionLock();
-        foreach (Animator t in Animators) { t.SetTrigger(AttackType()); }
-        GetComponent<FxScript>().instantiateFx();
+
+        if (GetComponent<combat>().OffCooldown == true)
+        {
+            StartTime = Time.time;
+            DirectionLock();
+            foreach (Animator t in Animators) { t.SetTrigger(AttackType()); } 
+        }
+
     }
 
     public void ResetStates()

@@ -16,6 +16,9 @@ public class combat : MonoBehaviour
     public float armor = 1;
     public float DefaultAttackLength = 0.2f;
 
+    public float AttackCooldown;
+    public bool OffCooldown = true;
+
     // Attack cd muuttuja, muuta attackSpeed muuttujaa jos haluat muokata attackspeediä
     private float attackSpeedTime = 0.0f;
     [HideInInspector]
@@ -48,51 +51,29 @@ public class combat : MonoBehaviour
         {
             death();
         }
-
-        // If lauseke jolla tarkistetaan lyöntiä
-        // Tarkistetaan onko lyönnin CD
-        if (atmAttackTime < Time.time && Time.time < (atmAttackTime + DefaultAttackLength))
-        {
-            // Onko pelajaalla asetta
-            if (GetComponent<PlayerScript>().weaponInHand != null)
-            {
-                GameObject tempWeapon = GetComponent<PlayerScript>().weaponInHand;
-
-                // Onko vihu efektin hitboxissa
-                if (tempWeapon.GetComponent<weaponStats>().onRange)
-                {
-                    // Onko jo tehty damagea tällä lyönnillä ja vihollinen olemassa
-                    if (damageDone == false && GetComponent<FxScript>().lastHittedEnemy != null)
-                    {
-                        // Tehään viholliseen damagea
-                        GetComponent<FxScript>().lastHittedEnemy.GetComponent<enemyStats>().takeDamage(countPlayerDamage());
-                        transform.GetComponent<PlayerScript>().LoseDurability();
-                        Debug.Log("Dmg given to: " + GetComponent<FxScript>().lastHittedEnemy.name + " " + countPlayerDamage() + ". HP left: " + GetComponent<FxScript>().lastHittedEnemy.GetComponent<enemyStats>().hp);
-                        damageDone = true;
-                    }
-                }
-            }
-            else
-            {
-                // Jos ei ole asetta, pelaaja käsin
-                if (GetComponent<FxScript>().handEffectOnrange)
-                {
-                    // Onko jo tehty damagea tällä lyönnillä ja vihollinen olemassa
-                    if (damageDone == false && GetComponent<FxScript>().lastHittedEnemy != null)
-                    {
-                        // Tehään viholliseen damagea
-                        GetComponent<FxScript>().lastHittedEnemy.GetComponent<enemyStats>().takeDamage(countPlayerDamage());
-                        Debug.Log("Dmg given to: " + GetComponent<FxScript>().lastHittedEnemy.name + " " + countPlayerDamage() + ". HP left: " + GetComponent<FxScript>().lastHittedEnemy.GetComponent<enemyStats>().hp);
-                        damageDone = true;
-                    }
-                }
-            }
-        }
-
-        // Lataa pelaajalle oikein hitboxin suunnan mukaan
         dirObjectName = getDirectionObject();
     }
 
+    public void DoDamage()
+    {
+        if(OffCooldown)
+        {
+            StartCoroutine(AttackCD());
+            if (GetComponent<PlayerScript>().EquippedTool.Tool != null)
+            {
+                GetComponent<PlayerScript>().LoseDurability(); 
+            }
+            GetComponent<FxScript>().instantiateFx();
+
+        }
+    }
+
+    IEnumerator AttackCD()
+    {
+        OffCooldown = false;
+        yield return new WaitForSecondsRealtime(AttackCooldown);
+        OffCooldown = true;
+    }
     // Lataa pelaajalle oikeat hitboxit
     public string getDirectionObject()
     {

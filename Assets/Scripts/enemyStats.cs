@@ -11,10 +11,17 @@ public abstract class enemyStats : MonoBehaviour {
     public float armor = 1f;
     public float AttackArea = 1;
     internal combat Player;
+    public bool Crittable = false;
 
     private void Start()
     {
         Player = PlayerScript.Player.GetComponent<combat>();
+    }
+
+    public int CalculateArmor(int hp, int armor, int damage)
+    {
+        if (damage > armor) { return hp -= damage - armor; }
+        return hp;
     }
 
 

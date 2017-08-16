@@ -34,12 +34,14 @@ public class DeckScript : MonoBehaviour
     private int updatedCardCount;
 
     // Bool onko invi auki
+    [HideInInspector]
     public bool open = false;
     // Flageja invin hallintaan
     private bool openChanger = false;
     private bool openChanger2 = true;
     private bool addCard = false;
     private bool removeCard = false;
+    [HideInInspector]
     public bool weaponChanged = false;
 
     private bool dragFlag = false;
@@ -123,6 +125,16 @@ public class DeckScript : MonoBehaviour
 
             cards = new GameObject[updatedCardCount];
 
+            bool equipsBoolean = false;
+
+            for(int z = 0; z < equips.Length; z++)
+            {
+                if(equips[z] == true)
+                {
+                    equipsBoolean = true;
+                }
+            }
+
             // Tekee oikean määrän kortteja (lisätty määrä)
             for (int x = 0; x < updatedCardCount; x++)
             {
@@ -174,12 +186,15 @@ public class DeckScript : MonoBehaviour
                 tempObj.transform.SetParent(cards[x].transform);
                 tempObj.transform.localScale = new Vector3(2.85714285714286f, 2f, 1f);
 
-                if (weaponChanged == true && updatedCardCount - 1 == x)
+                if (weaponChanged == true && updatedCardCount - 1 == x && equipsBoolean == false)
                 {
                     transform.GetChild(x).GetComponent<CardMoverEraser>().AutoEquipFirstItem();
+                    equips[x] = true;
                     weaponChanged = false;
                 }
             }
+
+            equipsBoolean = false;
 
             // Ladataan uudet positiot ja anglet uudelle kortti määrälle
             cardCount = updatedCardCount;
@@ -759,14 +774,19 @@ public class DeckScript : MonoBehaviour
         // Päivitetään arrayt oikean kokoisiksi
         positions = new Vector3[cardCount];
         rotations = new Quaternion[cardCount];
-        equips = new bool[cardCount];
+
+        // Koko pitää tarkistaa isomman mukaan koska välillä kortteja lisätään ja välillä poistetaan
+        if(cardCount > updatedCardCount)
+            equips = new bool[cardCount];
+        else
+        equips = new bool[updatedCardCount];
 
         // Tuodaan arrayhin vanhat positionit sekä equip boolit
         for (int x = 0; x < cardCount; x++)
         {
             positions[x] = new Vector3(transform.FindChild("Card" + x).localPosition.x, transform.FindChild("Card" + x).localPosition.y, 0f);
             rotations[x] = new Quaternion(transform.FindChild("Card" + x).localRotation.x, transform.FindChild("Card" + x).localRotation.y, transform.FindChild("Card" + x).localRotation.z, transform.FindChild("Card" + x).localRotation.w);
-            equips[x] = (transform.FindChild("Card" + x).GetComponent<CardMoverEraser>().checkEquip());
+            equips[x] = transform.FindChild("Card" + x).GetComponent<CardMoverEraser>().checkEquip();
         }
     }
 
@@ -785,8 +805,7 @@ public class DeckScript : MonoBehaviour
     {
         dragFlag = false;
     }
-
-    // Taitaa olla turha atm
+    
     public Vector3 OpenInvPositions(int Count)
     {
         Vector3 tempVector3 = new Vector3(maxPositionX[Count], maxPositionY[Count], 0f);

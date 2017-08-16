@@ -49,6 +49,7 @@ public class FxScript : MonoBehaviour {
         Destroy(CopyFx, LifeTime);
         CopyFx.AddComponent<FxFade>().Duration = LifeTime;
         CopyFx.AddComponent<BoxCollider2D>().isTrigger = true;
+        CopyFx.layer = LayerMask.NameToLayer("PlayerFx");
         ObjectPosition(CopyFx);
         CopyFx.transform.SetParent(transform);
         if (GetComponent<PlayerScript>().weaponInHand != null)
@@ -116,14 +117,7 @@ public class FxScript : MonoBehaviour {
         {
             lastHittedEnemy = trig.gameObject;
 
-            if (GetComponent<PlayerScript>().weaponInHand != null)
-            {
-                GetComponentInChildren<weaponStats>().onRange = true;
-            }
-            else
-            {
-                handEffectOnrange = true;
-            }
+            trig.GetComponent<enemyStats>().takeDamage(GetComponent<combat>().countPlayerDamage());
         }
         else if (trig.gameObject.layer == LayerMask.NameToLayer("ObjectLayer"))
         {

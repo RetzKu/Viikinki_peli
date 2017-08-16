@@ -20,7 +20,11 @@ public class wolfStats : enemyStats
     public override void takeDamage(float rawDamageTaken)
     {
         startTime = Time.time;
-        hp = hp - (rawDamageTaken / armor);
+        if (Crittable == false)
+        {
+            hp = CalculateArmor((int)hp, (int)armor, (int)rawDamageTaken);
+        }
+        else { hp = CalculateArmor((int)hp, (int)armor, (int)rawDamageTaken * 2); }
         GetComponent<generalAi>().KnockBack();
         foreach (SpriteRenderer t in GetComponentsInChildren<SpriteRenderer>()) { t.color = new Color(255f, 0f, 0f, 255f); }
         print(gameObject + " has " + hp + " hp left.");

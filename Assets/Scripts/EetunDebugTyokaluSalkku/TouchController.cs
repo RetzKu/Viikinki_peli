@@ -271,6 +271,7 @@ public class TouchController : MonoBehaviour
             AttackDir = delta;
             _player.attackBoolean(delta, Camera.main.ScreenToWorldPoint(Input.mousePosition));
             _player.GetComponent<AnimatorScript>().Attack();
+            _player.DoDamage();
 
             // LineController.MovePoints(lastPosition - transform.position);
         }

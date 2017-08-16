@@ -19,6 +19,11 @@ public class WolfAnimatorScript : MonoBehaviour
 
     void Update()
     {
+        if(WolfAnimator.GetBool("Moving") == true)
+        {
+            GetComponent<wolfStats>().Crittable = true;
+        }
+        else { GetComponent<wolfStats>().Crittable = false; }
     }
 
     public void AnimationState(action State)

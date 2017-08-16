@@ -50,6 +50,8 @@ public class CraftingManager : MonoBehaviour
     void Start()
     {
         Player = GameObject.FindWithTag("Player");
+
+        OnResourceCountChanged += () => {  /* ääni */ };
     }
 
     // RuneHolder samalle gameobjectille, jolle CraftiReseptit

@@ -43,7 +43,7 @@ public class RuneBarUiController : MonoBehaviour
     public void OnCd(int index, float duration, Sprite OnCdImage)
     {
         _faders[index].FadeOut(duration, OnCdImage);
-        // StartCoroutine(LerpImageColor(index, duration));
+        // StartCoroutine(LerpImageColor(_nextIndex, duration));
     }
 
     IEnumerator LerpImageColor(int index, float duration)

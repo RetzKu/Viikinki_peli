@@ -341,6 +341,7 @@ public class TileMap : MonoBehaviour, ITileMap
         swapColumn(1, 0);
         swapColumn(2, 1);
 
+
         for (int i = -1; i < 2; i++)    // -1
         {
             _chunks[i + 1, 2].DisableChunkCollision();

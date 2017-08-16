@@ -13,13 +13,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Indices:
   - X: 0
-    Y: 1
-  - X: 1
-    Y: 2
-  - X: 2
-    Y: 1
-  - X: 1
     Y: 0
+  - X: 0
+    Y: 1
+  - X: 0
+    Y: 2
+  - X: 1
+    Y: 1
   Sound: {fileID: 0}
   sprite: {fileID: 21300002, guid: df7b1289d1bb0624aad59fbe59add2bf, type: 3}
   HudImage: {fileID: 21300008, guid: 854889c4351be564083a6350f990fbef, type: 3}

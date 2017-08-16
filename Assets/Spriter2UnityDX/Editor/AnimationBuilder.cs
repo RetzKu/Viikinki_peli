@@ -201,7 +201,7 @@ namespace Spriter2UnityDX.Animations {
 			clip.EnsureQuaternionContinuity ();
 		}
 
-		//This is for curves that are tracked slightly differently from regular curves: Active curve and Z-index curve
+		//This is for curves that are tracked slightly differently from regular curves: Active curve and Z-_nextIndex curve
 		private void SetAdditionalCurves (Transform child, MainLineKey[] keys, TimeLine timeLine, AnimationClip clip, float defaultZ) {
 			var positionChanged = false;
 			var kfsZ = new List<Keyframe> ();
@@ -264,8 +264,8 @@ namespace Spriter2UnityDX.Animations {
 		}
 
 		private int GetIndexOrAdd (ref Sprite[] sprites, Sprite sprite) {
-			var index = ArrayUtility.IndexOf (sprites, sprite); //If the array already contains the sprite, return index
-			if (index < 0) {									//Otherwise, add sprite to array, then return index
+			var index = ArrayUtility.IndexOf (sprites, sprite); //If the array already contains the sprite, return _nextIndex
+			if (index < 0) {									//Otherwise, add sprite to array, then return _nextIndex
 				ArrayUtility.Add (ref sprites, sprite);
 				index = ArrayUtility.IndexOf (sprites, sprite);
 			}

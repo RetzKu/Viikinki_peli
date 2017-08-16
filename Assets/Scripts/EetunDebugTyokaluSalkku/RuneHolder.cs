@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using UnityEngine;
@@ -22,6 +23,7 @@ public class RuneHolder : MonoBehaviour
     public void AddRune(Rune rune)
     {
         rune.init(this.gameObject);
+        rune.InitInternalIndices();
         runes.Add(rune);
         CanCast.Add(true);
         cds.Add(0f);
@@ -34,6 +36,7 @@ public class RuneHolder : MonoBehaviour
             if (runes[i] != null)
             {
                 runes[i].init(this.gameObject);
+                runes[i].InitInternalIndices();
             }
             else
             {
@@ -84,6 +87,40 @@ public class RuneHolder : MonoBehaviour
         foreach (var rune in runes)
         {
             if (rune.Length == realSize && rune.ValidateRune(positions))
+            {
+                if (Ownertype != OwnerType.Enemy)
+                {
+                    if (CanCast[ii])
+                    {
+                        rune.Fire();
+                        CanCast[ii] = false;
+                        cds[ii] = rune.Cd;
+
+                        if (OwnerType.Player == Ownertype)
+                        {
+                            rune.OnGui(_runeBarUiController, ii);
+                            ParticleSpawner.instance.CastSpell(gameObject);
+                        }
+                    }
+                }
+                else
+                {
+                    rune.Fire();
+                }
+                break;
+            }
+            ii++;
+        }
+    }
+
+
+
+    public void SendIndices(Vec2[] runeIndices, int[] _touchCounts)
+    {
+        int ii = 0;
+        foreach (var rune in runes)
+        {
+            if (rune.Length == runeIndices.Length && rune.ValidateRune(runeIndices))
             {
                 if (Ownertype != OwnerType.Enemy)
                 {

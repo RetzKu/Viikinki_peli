@@ -27,6 +27,7 @@ public class InfoStone : Resource
     void Start()
     {
         RuneToTeach.init(this.gameObject);
+        RuneToTeach.InitInternalIndices();
     }
 
     private void Update()
@@ -36,12 +37,12 @@ public class InfoStone : Resource
         }
     }
 
-    public void TryToTeachRune(bool[] positions, int[] touchCounts)
+    public void TryToTeachRune(Vec2[] positions, int[] touchCounts)
     {
         var craftingrecipeHolder = CraftingManager.Instance.GetComponent<RuneHolder>();
         if (RuneToTeach != null && !RecipeLearned)
         {
-            if (RuneToTeach.ValidateRune(positions, touchCounts))
+            if (RuneToTeach.ValidateRune(positions))
             {
                 LearnStone();
                 craftingrecipeHolder.AddRune(RuneToTeach);

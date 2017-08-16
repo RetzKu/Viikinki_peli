@@ -21,6 +21,7 @@ public class RuneEffectLauncher : MonoBehaviour
         if (_afterEffects.Count != 0) // testi mielessä
         {
             _afterEffects[_afterEffects.Count - 1].init(this.gameObject); // TODO: tietyille runeille ei toimi korjaa kun tulee single targets
+            _afterEffects[_afterEffects.Count - 1].InitInternalIndices();
             _afterEffects[_afterEffects.Count - 1].Fire(); // nyt ollaan aivan huluja / rekursio params aoedataan XD
             _afterEffects.RemoveAt(_afterEffects.Count - 1);
         }

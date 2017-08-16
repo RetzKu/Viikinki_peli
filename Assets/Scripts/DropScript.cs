@@ -30,7 +30,7 @@ public class DropScript : MonoBehaviour
             {
                 if (Random.Range(0, 100) <= DropsList[i].DropChance) //did rng jesus bless ye
                 {
-                    GameObject Copy = Instantiate(DropsList[i].Item) as GameObject; //Copy item from droplist with correct index
+                    GameObject Copy = Instantiate(DropsList[i].Item) as GameObject; //Copy item from droplist with correct _nextIndex
                     Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player"; // changes layer so it shows to player and not under the map
                     Copy.transform.position = transform.position; //drop it at destroyed objects position
 
@@ -50,7 +50,7 @@ public class DropScript : MonoBehaviour
             {
                 if (Random.Range(0, 100) <= dropList[i].DropChance) //did rng jesus bless ye
                 {
-                    GameObject Copy = Instantiate(dropList[i].Item) as GameObject; //Copy item from droplist with correct index
+                    GameObject Copy = Instantiate(dropList[i].Item) as GameObject; //Copy item from droplist with correct _nextIndex
                     Copy.GetComponent<SpriteRenderer>().sortingLayerName = "Player"; // changes layer so it shows to player and not under the map
                     Copy.transform.position = transform.position; //drop it at destroyed objects position
 

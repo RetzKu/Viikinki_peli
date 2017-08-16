@@ -137,7 +137,7 @@ namespace Spriter2UnityDX.Prefabs {
 								defaultBones.TryGetValue (parentID, out parentInfo);
 								spriteInfo.Process (parentInfo);
 							}
-							child.localPosition = new Vector3 (spriteInfo.x, spriteInfo.y, oref.z_index); //Z-index helps determine draw order
+							child.localPosition = new Vector3 (spriteInfo.x, spriteInfo.y, oref.z_index); //Z-_nextIndex helps determine draw order
 							child.localEulerAngles = new Vector3 (0f, 0f, spriteInfo.angle);				//The reason I don't use layers or layer orders is because
 							child.localScale = new Vector3 (spriteInfo.scale_x, spriteInfo.scale_y, 1f);	//There tend to be a LOT of body parts, it's better to treat
 							var color = renderer.color;												//The entity as a single sprite for layer sorting purposes.

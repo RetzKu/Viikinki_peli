@@ -43,8 +43,7 @@ public class CardMoverEraser : MonoBehaviour,
             int tempInt = int.Parse(tempString);
             // Kertoo inventorylle että laittaa käteen oikean esineen
             if(_equipped)   
-            
-            GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.EquipItem(tempInt);
+            PlayerScript.Player.GetComponent<PlayerScript>().Inventory.EquipItem(tempInt);
         }
         _dragClick = false;
     }
@@ -69,9 +68,9 @@ public class CardMoverEraser : MonoBehaviour,
             string tempString = gameObject.name.Substring(gameObject.name.Length - 1, 1);
             int tempInt = int.Parse(tempString);
             // Kertoo inventorylle että pudottaa oikean esineen
-            GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.DropItem(tempInt);
+            PlayerScript.Player.GetComponent<PlayerScript>().Inventory.DropItem(tempInt);
             // Kertoo deckscriptille että hävittää deckistä oikean kortin
-            GameObject.Find("Deck1").GetComponent<DeckScript>().lastBrokenWeapon(tempInt);
+            transform.parent.GetComponent<DeckScript>().lastBrokenWeapon(tempInt);
         }
         else
         {
@@ -87,8 +86,6 @@ public class CardMoverEraser : MonoBehaviour,
         }
     }
 
-
-
     void Update()
     {
         if (_newCardFlag)
@@ -99,7 +96,7 @@ public class CardMoverEraser : MonoBehaviour,
 
         if (_returnBack)
         {
-            transform.position = Vector2.Lerp(_startPosition, _endPosition, _t);
+            transform.position = Vector2.Lerp( new Vector2(_startPosition.x + transform.parent.parent.transform.position.x, _startPosition.y + _startPosition.y), _endPosition, _t);
             _t -= Time.deltaTime * ReturnSpeed;
 
             if (_t < 0.0f)
@@ -113,6 +110,7 @@ public class CardMoverEraser : MonoBehaviour,
 
     public void OnPointerDown(PointerEventData eventData)
     {
+
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -135,7 +133,7 @@ public class CardMoverEraser : MonoBehaviour,
         string tempString = gameObject.name.Substring(gameObject.name.Length - 1, 1);
         int tempInt = int.Parse(tempString);
         tempVec = GetComponentInParent<DeckScript>().OpenInvPositions(tempInt);
-        _startPosition = tempVec + gameObject.transform.position;
+        _startPosition = tempVec;
     }
 
     public void ApplyOpenPosition()
@@ -164,7 +162,7 @@ public class CardMoverEraser : MonoBehaviour,
         }
         else
         {
-            GameObject.Find("Player").GetComponent<PlayerScript>().UnEquip();
+            PlayerScript.Player.GetComponent<PlayerScript>().UnEquip();
             Image tempImage = transform.GetChild(1).GetComponent<Image>();
             Color tempColor = tempImage.color;
             tempImage.color = new Color(tempColor.r, tempColor.g, tempColor.b, 0f);

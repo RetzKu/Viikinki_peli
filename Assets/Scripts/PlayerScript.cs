@@ -107,6 +107,15 @@ public class PlayerScript : MonoBehaviour
             Torsos[i].sprite = DefaultTorsos[i];
         }
     }
+    public void UnEquipArmor()
+    {
+        Inventory.EquipData.EmptyChest();
+        Inventory.EquipData.Armor.GetComponent<armorScript>().RemoveArmorStats();
+        for (int i = 0; i < 3; i++)
+        {
+            Torsos[i].sprite = DefaultTorsos[i];
+        }
+    }
 
     public void BreakWeapon()
     {

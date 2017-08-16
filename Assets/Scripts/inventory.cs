@@ -157,6 +157,7 @@ public class inventory
         public GameObject BreakWeapon() { GameObject RemovedTool = _Tool; _Tool = null; return RemovedTool; }
 
         public GameObject EmptyHand() { GameObject RemovedTool = _Tool; _Tool = null; return RemovedTool; }
+        public GameObject EmptyChest() { GameObject RemovedArmor = _ChestPiece; _ChestPiece = null; return RemovedArmor; }
         public void SetTool(GameObject Tool) { _Tool = Tool; }
         public bool UsedArrow() { if (ArrowCount > 1) { ArrowCount -= 1; return true; } else { return false; } }
     }

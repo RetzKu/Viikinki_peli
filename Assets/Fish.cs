@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(DropScript))]
+
 public class Fish : MonoBehaviour
 {
     private Rigidbody2D _body;

@@ -134,6 +134,8 @@ public class PlayerScript : MonoBehaviour
     {
         if (Inventory.Changed == true)
         {
+            GameObject.Find("Deck1").GetComponent<DeckScript>().weaponChanged = true;
+
             if (Inventory.EquipData.Tool != null)
             {
                 if (Hand.Copy == null)
@@ -145,6 +147,7 @@ public class PlayerScript : MonoBehaviour
                 {
                     GetComponent<FxScript>().FxUpdate(Inventory.EquipData.Tool.GetComponent<weaponStats>().weaponEffect);
                     Hand.Equip(Inventory.EquipData.Tool);
+                    //GameObject.Find("Deck1").GetComponent<DeckScript>().weaponChanged = true;
                 }
             }
             else { transform.GetComponent<FxScript>().Default(); Hand.EmptyHand(); }
@@ -175,8 +178,15 @@ public class PlayerScript : MonoBehaviour
         //print(clickPosition);
         startPoint = playerPosition; // Pelaajan positio
         endPoint = Camera.main.ScreenToWorldPoint(mousePos); // Hiiren osoittama kohta
-
     }
+
+    public void UnEquip()
+    {
+        Hand.EmptyHand();
+        Inventory.EquipData.EmptyHand();
+        Inventory.Changed = true;
+    }
+
     void InventoryInput()
     {
         

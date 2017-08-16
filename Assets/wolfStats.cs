@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class wolfStats : enemyStats {
+public class wolfStats : enemyStats
+{
 
     float startTime;
     // flägi jolla katsotaan onko kuolemasusi jo spawnattu
@@ -16,20 +17,20 @@ public class wolfStats : enemyStats {
     }
 
     // Susi ottaa damagea
-    public override void takeDamage(float rawDamageTaken) 
+    public override void takeDamage(float rawDamageTaken)
     {
         startTime = Time.time;
         hp = hp - (rawDamageTaken / armor);
         GetComponent<generalAi>().KnockBack();
-        foreach (SpriteRenderer t in GetComponentsInChildren<SpriteRenderer>()) {t.color = new Color(255f, 0f, 0f, 255f); }
+        foreach (SpriteRenderer t in GetComponentsInChildren<SpriteRenderer>()) { t.color = new Color(255f, 0f, 0f, 255f); }
         print(gameObject + " has " + hp + " hp left.");
         checkAlive();
     }
 
     // Katotaan onko susi elossa
-    public void checkAlive() 
+    public void checkAlive()
     {
-        if(hp <= 0 && flag == false)
+        if (hp <= 0 && flag == false)
         {
             flag = true;
             // ladataan kuolevan suden prefab
@@ -70,7 +71,7 @@ public class wolfStats : enemyStats {
     {
         // Etsitään suden pää gameobject
         if (gameObject.transform.GetChild(0).GetChild(0).GetChild(0).gameObject != null)
-            {
+        {
             // 3x GetChild(0) tarkoittaa Wolf -> back -> neck -> head_1
             GameObject hitbox = gameObject.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
             hitbox.layer = LayerMask.NameToLayer("notPateEnemy");
@@ -82,6 +83,6 @@ public class wolfStats : enemyStats {
             DestroyObject(hitbox.GetComponent<BoxCollider2D>(), 0.2f);
             DestroyObject(hitbox.GetComponent<wolfHeadScript>(), 0.2f);
             GameObject.Find("Player").GetComponent<combat>().setHitPosition(transform.localPosition);
-            }
+        }
     }
 }

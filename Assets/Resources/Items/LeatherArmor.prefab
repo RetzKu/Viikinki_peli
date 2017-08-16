@@ -38,9 +38,9 @@ GameObject:
   - component: {fileID: 114165772790734512}
   - component: {fileID: 212184707609646470}
   - component: {fileID: 61888068087682268}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: LeatherArmor
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +110,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1426678470164418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.208122, y: 24.123255, z: 0}
+  m_LocalPosition: {x: 176.01028, y: 178.51167, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 4569406845838726}

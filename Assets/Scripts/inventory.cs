@@ -52,8 +52,8 @@ public class inventory
         {
             if(t.name == tempObject.name)
             {
-                GameObject.Find("Deck1").GetComponent<DeckScript>().lastBrokenWeapon(InventoryData.FindIndex(a => a.name == t.name));
-                InventoryData.RemoveAt(InventoryData.FindIndex(a => a.name == t.name));
+                GameObject.Find("Deck1").GetComponent<DeckScript>().lastBrokenWeapon(InventoryData.FindIndex(a => a == t));
+                InventoryData.RemoveAt(InventoryData.FindIndex(a => a == t));
                 break;
             }
         }

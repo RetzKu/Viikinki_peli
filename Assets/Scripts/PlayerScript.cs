@@ -89,13 +89,13 @@ public class PlayerScript : MonoBehaviour
     public void LoseDurability()
     {
         //Inventory.EquipData.Tool.GetComponent<weaponStats>().useDuration();
-        Inventory.InventoryData.Find(a => a.name == EquippedTool.Tool.name).GetComponent<weaponStats>().useDuration();
+        Inventory.InventoryData.Find(a => a == EquippedTool.Tool).GetComponent<weaponStats>().useDuration();
         weaponInHand.GetComponent<weaponStats>().useDuration();
     }
 
     public void LoseArmorDurability(int amount)
     {
-        Inventory.InventoryData.Find(a => a.name == Inventory.EquipData.Armor.name).GetComponent<armorScript>().UseDurability(amount);
+        Inventory.InventoryData.Find(a => a == Inventory.EquipData.Armor).GetComponent<armorScript>().UseDurability(amount);
     }
 
     public void BreakArmor()

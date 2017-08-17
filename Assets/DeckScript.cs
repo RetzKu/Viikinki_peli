@@ -31,6 +31,7 @@ public class DeckScript : MonoBehaviour
     private Quaternion[] rotations;
     private bool[] equips;
     private bool[] armorInv;
+    private bool[] activeArmor;
     // Muuttuva uusi korttiluku
     private int updatedCardCount;
 
@@ -136,6 +137,9 @@ public class DeckScript : MonoBehaviour
                 }
             }
 
+            armorInv = new bool[updatedCardCount];
+            activeArmor = new bool[updatedCardCount];
+
             // Tekee oikean määrän kortteja (lisätty määrä)
             for (int x = 0; x < updatedCardCount; x++)
             {
@@ -180,6 +184,31 @@ public class DeckScript : MonoBehaviour
                 GameObject tempObj = new GameObject("CardChild");
                 tempObj.transform.position = cards[x].transform.position;
                 Sprite cardImage = PlayerScript.Player.GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<SpriteRenderer>().sprite;
+
+                if(PlayerScript.Player.GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<armorScript>() != null)
+                {
+                    // Kyseinen esine on armori
+                    armorInv[x] = true;
+                    // Jos ei ole yhtään armoria aktiivisena
+                    if (ArmorActiveCheck())
+                    {
+                        // Armori jo päällä
+                        
+                    }
+                    else
+                    {
+                        // Armoria ei vielä päällä
+                        PlayerScript.Player.GetComponent<PlayerScript>().Inventory.EquipItem(x);
+                        tempObj3.GetComponent<Image>().color = new Color(0.1961f, 0.7176f, 0.5411f, 0.2667f);
+                        activeArmor[x] = true;
+                    }
+                }
+                else
+                {
+                    // Kyseinen esine on ase
+                    armorInv[x] = false;
+                }
+
                 Rect cardImageRect = cardImage.rect;
                 var image = tempObj.AddComponent<Image>();
                 image.sprite = cardImage;
@@ -193,6 +222,11 @@ public class DeckScript : MonoBehaviour
                     equips[x] = true;
                     weaponChanged = false;
                 }
+            }
+
+            for (int zp = 0; zp < updatedCardCount; zp++)
+            {
+                print("Armori inventory[" + zp + "]: " + armorInv[zp] + ".");
             }
 
             equipsBoolean = false;
@@ -831,5 +865,16 @@ public class DeckScript : MonoBehaviour
         if (armorInv.Length > ID)
             return armorInv[ID];
         else return false;
+    }
+
+    private bool ArmorActiveCheck()
+    {
+        bool flag = false;
+        for (int x = 0; x < activeArmor.Length; x++)
+        {
+            if (activeArmor[x] == true)
+                flag = true;
+        }
+        return flag;
     }
 }

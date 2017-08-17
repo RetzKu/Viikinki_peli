@@ -35,17 +35,38 @@ public class CardMoverEraser : MonoBehaviour,
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (_dragClick == false)
+        // Katsoo gameobjectin nimestä viimeisen numeron
+        string tempString = gameObject.name.Substring(gameObject.name.Length - 1, 1);
+        int tempInt = int.Parse(tempString);
+
+        if (PlayerScript.Player.GetComponent<PlayerScript>().Inventory.InventoryData[tempInt].GetComponent<armorScript>() != null)
         {
-            equip();
-            // Katsoo gameobjectin nimestä viimeisen numeron
-            string tempString = gameObject.name.Substring(gameObject.name.Length - 1, 1);
-            int tempInt = int.Parse(tempString);
-            // Kertoo inventorylle että laittaa käteen oikean esineen
-            if(_equipped)   
-            PlayerScript.Player.GetComponent<PlayerScript>().Inventory.EquipItem(tempInt);
+            //Armori
+            /*
+            if (_dragClick == false)
+            {
+                equip();
+
+                // Kertoo inventorylle että laittaa käteen oikean esineen
+                if (_equipped)
+                    PlayerScript.Player.GetComponent<PlayerScript>().Inventory.EquipItem(tempInt);
+            }
+            _dragClick = false;
+            */
         }
-        _dragClick = false;
+        else
+        {
+            //Ase
+            if (_dragClick == false)
+            {
+                equip();
+                
+                // Kertoo inventorylle että laittaa käteen oikean esineen
+                if (_equipped)
+                    PlayerScript.Player.GetComponent<PlayerScript>().Inventory.EquipItem(tempInt);
+            }
+            _dragClick = false;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -162,7 +183,19 @@ public class CardMoverEraser : MonoBehaviour,
         }
         else
         {
-            PlayerScript.Player.GetComponent<PlayerScript>().UnEquip();
+            // Katsoo gameobjectin nimestä viimeisen numeron
+            string tempString = gameObject.name.Substring(gameObject.name.Length - 1, 1);
+            int tempInt = int.Parse(tempString);
+
+            if (PlayerScript.Player.GetComponent<PlayerScript>().Inventory.InventoryData[tempInt].GetComponent<armorScript>() != null){
+                // Armori
+                PlayerScript.Player.GetComponent<PlayerScript>().UnEquipArmor();
+            }
+            else
+            {
+                // Ase
+                PlayerScript.Player.GetComponent<PlayerScript>().UnEquip();
+            }
             Image tempImage = transform.GetChild(1).GetComponent<Image>();
             Color tempColor = tempImage.color;
             tempImage.color = new Color(tempColor.r, tempColor.g, tempColor.b, 0f);

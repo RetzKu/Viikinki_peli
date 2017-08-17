@@ -26,23 +26,26 @@ public class InfoStone : Resource
 
     void Start()
     {
-        RuneToTeach.init(this.gameObject);
-        RuneToTeach.InitInternalIndices();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (RuneToTeach != null)
         {
+            RuneToTeach.init(this.gameObject);
+            RuneToTeach.InitInternalIndices();
         }
     }
 
-    public void TryToTeachRune(Vec2[] positions, int[] touchCounts)
+    //  private void Update()
+    //  {
+    //      if (Input.GetKeyDown(KeyCode.E))
+    //      {
+    //      }
+    //  }
+
+    public void TryToTeachRune(Vec2[] positions, int realSize)
     {
         var craftingrecipeHolder = CraftingManager.Instance.GetComponent<RuneHolder>();
         if (RuneToTeach != null && !RecipeLearned)
         {
-            if (RuneToTeach.ValidateRune(positions))
+            if (RuneToTeach.Length == realSize && RuneToTeach.ValidateRune(positions))
             {
                 LearnStone();
                 craftingrecipeHolder.AddRune(RuneToTeach);

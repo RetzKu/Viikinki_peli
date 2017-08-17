@@ -52,10 +52,10 @@ public class RuneHolder : MonoBehaviour
         }
 
         // CanCast = new bool[runes.Count];
-        // cds = new float[runes.Count];
+        // cds     = new float[runes.Count];
 
         CanCast = new List<bool>(runes.Count);
-        cds = new List<float>(runes.Count);
+        cds     = new List<float>(runes.Count);
 
         for (int i = 0; i < runes.Count; i++)
         {
@@ -76,7 +76,7 @@ public class RuneHolder : MonoBehaviour
         }
     }
 
-    public void SendIndices(Vec2[] positions, int realSize)
+    public void SendIndices(Vec2[] positions, int realSize, float todoDeletethisFunction)
     {
         for (int i = 0; i < realSize; i++)
         {
@@ -115,12 +115,12 @@ public class RuneHolder : MonoBehaviour
 
 
 
-    public void SendIndices(Vec2[] runeIndices, int[] _touchCounts)
+    public void SendIndices(Vec2[] runeIndices, int realSize)
     {
         int ii = 0;
         foreach (var rune in runes)
         {
-            if (rune.Length == runeIndices.Length && rune.ValidateRune(runeIndices))
+            if (rune.Length == realSize - 1 && rune.ValidateRune(runeIndices))
             {
                 if (Ownertype != OwnerType.Enemy)
                 {

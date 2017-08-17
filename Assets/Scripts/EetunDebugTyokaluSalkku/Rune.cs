@@ -23,7 +23,6 @@ public abstract class Rune : ScriptableObject
     {
         _runTimeIndices = TouchController.GenerateInBetweenPositions(Indices, Indices.Length);
 
-
         //string s = "";
         //foreach (var v in _runTimeIndices)
         //{

@@ -129,6 +129,10 @@ public class Tree : Resource
     // ks Pine
     private void StartFalling()
     {
+        var falling = transform.GetChild(2);
+        var fader = falling.gameObject.AddComponent<Fader>();
+        fader.StartFading(deathTimer - 0.1f, 2f ,falling.GetComponent<SpriteRenderer>());
+
         var capsule = GetComponentInChildren<CapsuleCollider2D>();
         if (capsule != null)
         {

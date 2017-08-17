@@ -33,7 +33,7 @@ public class RuneBarUiController : MonoBehaviour
     void SetAllHudImages()
     {
         Sprite[] runeImages = _playerRuneHolder.GetHudImages();
-        for(int i = 0; i < runeImages.Length; i++)
+        for(int i = 0; i < _runeHudImages.Length; i++)
         {
             if (runeImages[i] != null)
                 _runeHudImages[i].sprite = runeImages[i];

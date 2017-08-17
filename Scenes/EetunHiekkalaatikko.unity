@@ -14774,6 +14774,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: Mountains.Array.size
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: FlatMountains.Array.size
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4215607394559902, guid: 735606dd2bac71047b80845bc97b376a, type: 2}
       propertyPath: m_LocalPosition.x
       value: 31.454117
@@ -14810,6 +14820,156 @@ Prefab:
       propertyPath: m_TagString
       value: SpriteController
       objectReference: {fileID: 0}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: Mountains.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300038, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: Mountains.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300046, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: Mountains.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300042, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: Mountains.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300034, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: Mountains.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300040, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: Mountains.Array.data[5]
+      value: 
+      objectReference: {fileID: 21300030, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: Mountains.Array.data[6]
+      value: 
+      objectReference: {fileID: 21300020, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: Mountains.Array.data[7]
+      value: 
+      objectReference: {fileID: 21300032, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: Mountains.Array.data[8]
+      value: 
+      objectReference: {fileID: 21300036, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: Mountains.Array.data[9]
+      value: 
+      objectReference: {fileID: 21300020, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: Mountains.Array.data[10]
+      value: 
+      objectReference: {fileID: 21300010, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: Mountains.Array.data[11]
+      value: 
+      objectReference: {fileID: 21300022, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: Mountains.Array.data[12]
+      value: 
+      objectReference: {fileID: 21300006, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: Mountains.Array.data[13]
+      value: 
+      objectReference: {fileID: 21300018, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: Mountains.Array.data[14]
+      value: 
+      objectReference: {fileID: 21300008, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: Mountains.Array.data[15]
+      value: 
+      objectReference: {fileID: 21300020, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: FlatMountains.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: FlatMountains.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300002, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: FlatMountains.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300004, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: FlatMountains.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300012, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: FlatMountains.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300014, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: FlatMountains.Array.data[5]
+      value: 
+      objectReference: {fileID: 21300016, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: FlatMountains.Array.data[6]
+      value: 
+      objectReference: {fileID: 21300024, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: FlatMountains.Array.data[7]
+      value: 
+      objectReference: {fileID: 21300026, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
+    - target: {fileID: 114065663959614504, guid: 735606dd2bac71047b80845bc97b376a,
+        type: 2}
+      propertyPath: FlatMountains.Array.data[8]
+      value: 
+      objectReference: {fileID: 21300028, guid: ae518f85bbf160c458cafff9631941b7,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 735606dd2bac71047b80845bc97b376a, type: 2}
   m_IsPrefabParent: 0
@@ -15982,6 +16142,7 @@ GameObject:
   - component: {fileID: 1735830241}
   - component: {fileID: 1735830240}
   - component: {fileID: 1735830244}
+  - component: {fileID: 1735830245}
   m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -16076,6 +16237,20 @@ MonoBehaviour:
   m_EventMask:
     serializedVersion: 2
     m_Bits: 32
+--- !u!114 &1735830245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1735830238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d5b1266ebcc9864dbc062e5b32fe24c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotationRate: 5.75
+  MaxZoom: 1.92
+  ZoomSpeed: 0.07
 --- !u!1 &1745587704
 GameObject:
   m_ObjectHideFlags: 0

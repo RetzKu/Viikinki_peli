@@ -72,12 +72,12 @@ public class TouchController : MonoBehaviour
 #else
         if (ControllerMode == Mode.RuneCasting && _canSendIndices)
         {
-            RuneHolder.SendIndices(GenerateInBetweenPositions(runeIndices, _nextIndex), _touchCounts);
-            _player.GetComponent<BaseChecker>().SendIndices(GenerateInBetweenPositions(runeIndices, _nextIndex), _touchCounts);
+            RuneHolder.SendIndices(GenerateInBetweenPositions(runeIndices, _nextIndex), _nextIndex);
+            _player.GetComponent<BaseChecker>().SendIndices(GenerateInBetweenPositions(runeIndices, _nextIndex), _nextIndex);
         }
         else if (ControllerMode == Mode.Crafting && _canSendIndices)
         {
-            CraftingManagerHolder.SendIndices(GenerateInBetweenPositions(runeIndices, _nextIndex), _touchCounts);
+            CraftingManagerHolder.SendIndices(GenerateInBetweenPositions(runeIndices, _nextIndex), _nextIndex);
         }
 #endif
 
@@ -87,7 +87,10 @@ public class TouchController : MonoBehaviour
 
     public static Vec2[] GenerateInBetweenPositions(Vec2[] indices, int size)
     {
-        Vec2[] value = new Vec2[size - 1];
+        Vec2[] value;
+        value = size > 0 ? new Vec2[size - 1] : new Vec2[0];
+
+
         for (int i = 0; i < size - 1; i++)
         {
             value[i] = indices[i] + indices[i + 1];

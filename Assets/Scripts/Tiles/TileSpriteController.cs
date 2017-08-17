@@ -22,6 +22,9 @@ public class TileSpriteController : MonoBehaviour
     private GameObject _borders;
 
 
+    public Sprite[] Mountains;
+    public Sprite[] FlatMountains;
+
     public enum CurrentPool
     {
         Border,
@@ -302,7 +305,7 @@ public class TileSpriteController : MonoBehaviour
 
     public void ResetAllTiles()
     {
-        for(int i = 0; i < borders.Count; i++)
+        for (int i = 0; i < borders.Count; i++)
         {
             var border = borders[i];
             {
@@ -327,6 +330,23 @@ public class TileSpriteController : MonoBehaviour
             for (int x = startX; x < width; x++)
             {
                 TileType type = tilemap.GetTile(x, y);
+
+                if (type == TileType.Mountain)
+                {
+                    int tile = GetAssetNameBitmaskNoStr(x, y, tilemap, type);
+                    if (tile == 15)
+                    {
+                        tilemap.GetTileGameObject(x, y).GetComponent<SpriteRenderer>().sprite = FlatMountains[Random.Range(0, FlatMountains.Length - 1)];
+                    }
+                    else
+                    {
+                        tilemap.GetTileGameObject(x, y).GetComponent<SpriteRenderer>().sprite = Mountains[tile];
+                    }
+
+                    continue;
+                }
+
+                // normals:
                 int value = GetAssetNameBitmaskNoStr(x, y, tilemap, type);
 
                 if (IsImplemented(type))
@@ -429,11 +449,11 @@ public class TileSpriteController : MonoBehaviour
         }
 
         // tarkista rajat
-        for(int i = 0; i < borders.Count; i++)
+        for (int i = 0; i < borders.Count; i++)
         {
             var border = borders[i];
-            if (offsetX > border.transform.position.x || 
-                offsetX + TileMap.TotalWidth < border.transform.position.x  ||
+            if (offsetX > border.transform.position.x ||
+                offsetX + TileMap.TotalWidth < border.transform.position.x ||
                 offsetY > border.transform.position.y ||
                 offsetY + TileMap.TotalHeight < border.transform.position.y)
             {
@@ -444,7 +464,7 @@ public class TileSpriteController : MonoBehaviour
                 i--;
             }
         }
-                // fuck fuck
+        // fuck fuck
     }
 
     // TMP NEW CREATE!
@@ -494,4 +514,9 @@ public class TileSpriteController : MonoBehaviour
         return 0;
     }
 
+    // reshapre ternary test XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD:
+    void bar(bool b, bool c, bool d, bool e, bool f)
+    {
+        var pate = b ? (f ? -1 : 2) : (c ? (e ? 5 : 3) : (d ? 4 : 100));
+    }
 }

@@ -266,6 +266,7 @@ public class ArcherAI : generalAi {
         }
         else
         {
+            ParticleSpawner.instance.SpawnDyingEffect(body.position);
             return true;
         }
     }

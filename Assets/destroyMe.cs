@@ -38,7 +38,7 @@ public class destroyMe : MonoBehaviour {
             counter += Time.deltaTime;
             if(counter > lifeTime && !visited)
             {
-                Debug.Log("destroy blood");
+               // Debug.Log("destroy blood");
                 GetComponent<ParticleSystem>().Pause();
                 Destroy(this.gameObject, 5f);
                 visited = true;

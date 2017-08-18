@@ -110,7 +110,6 @@ public class FxScript : MonoBehaviour {
     {
         Vector3 Mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var n = 0 - (Mathf.Atan2(MouseDir.y, MouseDir.x)) * 180 / Mathf.PI;
-        Debug.Log(n);
         //var n = 0 - (Mathf.Atan2(Base.y - Base.y + MouseDir.y,Base.x - Base.x + MouseDir.x)) * 180 / Mathf.PI; //origin - target
         //print(n);
         Copy.transform.Rotate(0, 0, n * -1);

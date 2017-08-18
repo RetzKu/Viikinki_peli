@@ -61,7 +61,10 @@ v2f vert( appdata_t IN )
     // OUT.vertex = UnityObjectToClipPos( IN.vertex );
 	// OUT.vertex = UnityObjectToClipPos(IN.vertex); 
 
-	OUT.vertex = UnityObjectToClipPos(IN.color);
+	 // OUT.vertex = UnityObjectToClipPos(IN.vertex); 
+	// OUT.vertex = UnityObjectToClipPos(IN.color);
+
+	OUT.vertex = mul(UNITY_MATRIX_MVP, IN.vertex);
     OUT.texcoord = IN.texcoord;
 
     OUT.color = IN.color * _Color;

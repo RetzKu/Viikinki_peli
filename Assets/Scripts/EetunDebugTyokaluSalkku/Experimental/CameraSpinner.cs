@@ -35,7 +35,6 @@ public class CameraSpinner : MonoBehaviour
                 StopSpinning();
         }
 
-
         if (_spinning)
         {
             if (_t >= 1f)

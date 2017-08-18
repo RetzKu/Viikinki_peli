@@ -191,6 +191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a20ed1d6e51d1f24ca64d8a862e3326f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SingleInstanceSpawnSettings: {fileID: 11400000, guid: 7ed393da99fb4d14ea9336eb0c128e60,
+    type: 2}
   MaxObjectOffset: 0.3
   RenderTarget: {fileID: 4452115064828550}
   DrawMode: 2
@@ -240,7 +242,8 @@ MonoBehaviour:
   CenterX: 1.5
   CenterY: 1.5
   SpawnSettings: {fileID: 11400000, guid: 655ce7f831845be4f9535528f9e15f11, type: 2}
-  TreeTrefab: {fileID: 1384798036243720, guid: 1d6b060ef40a3664da1b12583f13f561, type: 2}
+  DoorSpawnRate: 10
+  DoorPrefab: {fileID: 1500619622908896, guid: 48784c733145937429b392a440fa8575, type: 2}
   settings: {fileID: 11400000, guid: 969c536d7bb4979439a339ee5d529bdd, type: 2}
 --- !u!114 &114672467721544216
 MonoBehaviour:

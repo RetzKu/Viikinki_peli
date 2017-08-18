@@ -201,6 +201,20 @@ public class TileMap : MonoBehaviour, ITileMap
         }
     }
 
+    public void AddLater_hack(int x, int y, GameObject go)
+    {
+        int chunkX = 1;
+        int chunkY = 1;
+        GetChunkOffsetXY(ref chunkX, ref chunkY, x, y);
+
+        int offsetX = (int)x % Chunk.CHUNK_SIZE;
+        int offsetY = (int)y % Chunk.CHUNK_SIZE;
+        Chunk chunk = _chunks[chunkY, chunkX];
+
+        chunk.AddObject(x, y, go);
+    }
+
+
     void ResetColor()
     {
         foreach (var tile in TileGameObjects)

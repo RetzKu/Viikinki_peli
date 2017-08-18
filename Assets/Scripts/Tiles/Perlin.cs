@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -99,8 +100,11 @@ public class Perlin : MonoBehaviour
         InitSettings();
     }
 
+    private int[] _spawnsLeft;
     void Start()
     {
+        _spawnsLeft = new int[SingleInstanceSpawnSettings.Spawns.Count];
+        DoorHackGameObject = DoorPrefab;
         if (RenderTarget == null)
         {
             Debug.LogError("Please set the renderTarget (Quad)");
@@ -114,6 +118,7 @@ public class Perlin : MonoBehaviour
         // inline shuffle!  XDDDD
         for (int i = 0; i < SingleInstanceSpawnSettings.Spawns.Count; i++)
         {
+            _spawnsLeft[i] = SingleInstanceSpawnSettings.Spawns[i].Count;
             var temp = SingleInstanceSpawnSettings.Spawns[i];
             int randomIndex = Random.Range(i, SingleInstanceSpawnSettings.Spawns.Count);
             SingleInstanceSpawnSettings.Spawns[i] = SingleInstanceSpawnSettings.Spawns[randomIndex];
@@ -686,18 +691,37 @@ public class Perlin : MonoBehaviour
             }
         }
 
-        SpawnRares(chunk);
+        if (!TrySpawnRares(chunk))
+        {
+            TryToSpawnCaveDoors();
+        }
 
         OffsetX = 0;
         OffsetY = 0;
     }
 
-    private readonly int SPAWN_MAX_TRIES = 5;
-    public void SpawnRares(Chunk chunk)
+    [Header("every  doorspawnrate/per chunk")]
+    public int DoorSpawnRate = 10;
+    public GameObject DoorPrefab;
+
+    public static GameObject DoorHackGameObject;
+    public static bool CanPlaceDoor = false;
+    public void TryToSpawnCaveDoors()
     {
-        if (_currentSpawn >= SingleInstanceSpawnSettings.Spawns.Count)
+        if (0 == Random.Range(0, DoorSpawnRate))
         {
-            return;
+            CanPlaceDoor = true;
+        }
+    }
+
+
+    private readonly int SPAWN_MAX_TRIES = 5;
+    private bool AllSpawnded = false;
+    public bool SpawnRares(Chunk chunk) // Spawned y/n
+    {
+        if (_currentSpawn >= SingleInstanceSpawnSettings.Spawns.Count || AllSpawnded)
+        {
+            return false;
         }
 
         if (0 == Random.Range(0, SingleInstanceSpawnSettings.SpawnRate))
@@ -714,17 +738,120 @@ public class Perlin : MonoBehaviour
                 {
                     if (chunk.GetTileOnTileGameObject(x, y) == null)
                     {
-                        var go = Instantiate(SingleInstanceSpawnSettings.Spawns[_currentSpawn]);
-                        go.transform.position = chunk.GetGameObject(x, y).transform.position;
-                        chunk.AddObject(x, y, go);
-                        Success = true;
-                        Debug.Log("rare spawned!");
-                        _currentSpawn++;
+                        bool searchingForSpawn = true;
+                        int index = Random.Range(0, SingleInstanceSpawnSettings.Spawns.Count);
+                        int startIndex = index;
+
+                        while (searchingForSpawn)
+                        {
+                            if (_spawnsLeft[index] > 0)
+                            {
+                                var go = Instantiate(SingleInstanceSpawnSettings.Spawns[index].Spawn);
+                                _spawnsLeft[index]--;
+
+                                go.transform.position = chunk.GetGameObject(x, y).transform.position;
+                                go.transform.position = new Vector3(go.transform.position.x, go.transform.position.y, ZlayerManager.GetZFromY(go.transform.position));
+
+                                chunk.AddObject(x, y, go);
+                                Success = true;
+                                Debug.Log("rare spawned!");
+                                // _currentSpawn++;
+
+                                searchingForSpawn = false;
+                                break;
+                            }
+
+                            index++;
+                            if (index == startIndex)
+                            {
+                                AllSpawnded = true;
+                                break;
+                            }
+
+                            if (index == SingleInstanceSpawnSettings.Spawns.Count)
+                            {
+                                index = 0;
+                            }
+                        }
                     }
                 }
                 tries++;
             } while (tries < SPAWN_MAX_TRIES && !Success);
+            return Success;
         }
+        return false;
+    }
+
+
+    public int ChooseIndex(int size)
+    {
+        int index = Random.Range(0, size);
+        int startIndex = index;
+
+        while (true)
+        {
+            if (_spawnsLeft[startIndex] > 0)
+            {
+                return startIndex;
+            }
+
+            startIndex++;
+
+            if (startIndex == size)
+            {
+                startIndex = 0;
+            }
+
+            if (startIndex == index)
+            {
+                break;
+            }
+        }
+
+        return -1;
+    }
+
+    public bool TrySpawnRares(Chunk chunk)
+    {
+        if (AllSpawnded)
+            return false;
+
+        // choose index
+        int index = ChooseIndex(SingleInstanceSpawnSettings.Spawns.Count);
+
+        if (index == -1)
+        {
+            AllSpawnded = true;
+        }
+
+        if (0 == Random.Range(0, SingleInstanceSpawnSettings.SpawnRate))
+        {
+            int tries = 0;
+            do
+            {
+                int x = Random.Range(0, Chunk.CHUNK_SIZE);
+                int y = Random.Range(0, Chunk.CHUNK_SIZE);
+
+                if (chunk.AreaClear(x, y))
+                {
+                    if (chunk.GetTileOnTileGameObject(x, y) == null)
+                    {
+                        var go = Instantiate(SingleInstanceSpawnSettings.Spawns[index].Spawn);
+                        _spawnsLeft[index]--;
+
+                        go.transform.position = chunk.GetGameObject(x, y).transform.position;
+                        go.transform.position = new Vector3(go.transform.position.x, go.transform.position.y, ZlayerManager.GetZFromY(go.transform.position));
+
+                        chunk.AddObject(x, y, go);
+                        Debug.Log("rare spawned!");
+
+                        return true;
+                    }
+                }
+                tries++;
+            } while (tries < SPAWN_MAX_TRIES);
+        }
+        return false;
     }
 
     public void GenerateChunk(TileType[,] tiles, GameObject[,] gameObjects, int offsetX, int offsetY, int startX, int startY) // chunkin offsetit 0,0:sta
@@ -753,6 +880,7 @@ public class Perlin : MonoBehaviour
                 {
                     Collider2D body = go.GetComponent<Collider2D>();
                     body.enabled = true;
+
                 }
                 tiles[y, x] = type;
             }

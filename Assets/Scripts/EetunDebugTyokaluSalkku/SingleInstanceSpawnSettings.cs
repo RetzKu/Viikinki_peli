@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Tiles/SingleInstanceSpawnSettings")]
 public class SingleInstanceSpawnSettings : ScriptableObject
 {
-    public List<GameObject> Spawns;
+    public List<SpawnInstance> Spawns;
     public int SpawnRate;
 }

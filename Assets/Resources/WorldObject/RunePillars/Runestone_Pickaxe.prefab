@@ -38,7 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4293376574014476}
   - component: {fileID: 212026293499006906}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Rune_Pickaxe_Blue_Recipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4085481501074340}
   - component: {fileID: 212521584792868702}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Rune_Pickaxe_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4057612158585940}
   - component: {fileID: 212061615085676348}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Rune_Pickaxe_Red_Recipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,7 +300,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1593682653
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300004, guid: cda9de21021053a47b1a065b142ed522, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

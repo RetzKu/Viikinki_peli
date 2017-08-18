@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-public class SpawnInstance : MonoBehaviour
+public struct SpawnInstance
 {
     public GameObject Spawn;
     public int Count;

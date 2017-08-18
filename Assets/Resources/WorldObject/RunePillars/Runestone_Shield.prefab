@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4332009055293290}
   - component: {fileID: 212288229917546912}
   - component: {fileID: 114867979372164362}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Rune_Shield_Red_Recipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4716165982335768}
   - component: {fileID: 212890123299877928}
   - component: {fileID: 114963277048945702}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Rune_Shield_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4492806849122296}
   - component: {fileID: 212211458531349656}
   - component: {fileID: 114626657149452738}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Rune_Shield_Blue_Recipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1593682653
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300016, guid: cda9de21021053a47b1a065b142ed522, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

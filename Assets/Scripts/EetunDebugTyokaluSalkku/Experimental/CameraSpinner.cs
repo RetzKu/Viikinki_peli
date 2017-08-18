@@ -35,6 +35,7 @@ public class CameraSpinner : MonoBehaviour
                 StopSpinning();
         }
 
+
         if (_spinning)
         {
             if (_t >= 1f)
@@ -82,7 +83,8 @@ public class CameraSpinner : MonoBehaviour
     //    while (transform.rotation != TargetRotation)
     //    {
     //        transform.rotation = Quaternion.Lerp(from, TargetRotation, Time.time * RotationRate / 100f);
-    //        yield return null;
+    //        yield  timenull;
+
     //    }
     //}
 }

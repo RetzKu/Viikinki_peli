@@ -135,15 +135,21 @@ public class Movement : MonoBehaviour
 
     Vector2 Input_checker()
     {
-        //Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical")).normalized; // ???
-#if UNITY_EDITOR 
-        Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized; // WASD liikkuminen koneell
+        Vector2 movement = new Vector2(0, 0);
+        if (GetComponent<combat>().hp > 0)
+        {
+
+
+            //Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical")).normalized; // ???
+#if UNITY_EDITOR
+            movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized; // WASD liikkuminen koneell
 #else
         Vector2 movement = Joystick.GetInputVector(); // Kun buildataan phonelle
 #endif
 
-        if (movement.x == 0 && movement.y == 0) { rb.drag = slowdown; }
-        else { rb.drag = 2; }
+            if (movement.x == 0 && movement.y == 0) { rb.drag = slowdown; }
+            else { rb.drag = 2; } 
+        }
 
         return movement;
     }

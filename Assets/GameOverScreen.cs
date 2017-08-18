@@ -22,7 +22,7 @@ public class GameOverScreen : MonoBehaviour {
         {
             if (StartTime == 0)
             {
-
+                GameObject.Find("Player").transform.Find("Main Camera").GetComponent<CameraSpinner>().StartSpinning();
                 StartTime = Time.time;
                 StartCoroutine(FadeIn()); 
             }
@@ -30,11 +30,15 @@ public class GameOverScreen : MonoBehaviour {
 	}
     IEnumerator FadeIn()
     {
-        while(true)
+        while(GameObject.Find("Player").GetComponent<combat>().hp <= 0)
         {
             float t = (Time.time - StartTime) / FadeDuration;
             transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(255, 0, 0, Mathf.SmoothStep(0, 1, t));
             transform.GetComponent<Image>().color = new Color(0, 0, 0, Mathf.SmoothStep(0, 1, t));
+            if(t == 1)
+            {
+                GameObject.Find("Player").transform.Find("Main Camera").GetComponent<CameraSpinner>().StopSpinning();
+            }
             yield return new WaitForFixedUpdate();
         }
 

@@ -3089,12 +3089,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1977754839611798, guid: b5405cc59ec405e42ac26438ef1b066d,
     type: 2}
   m_PrefabInternal: {fileID: 2012568386}
---- !u!114 &131532006 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114037182199660584, guid: b5405cc59ec405e42ac26438ef1b066d,
-    type: 2}
-  m_PrefabInternal: {fileID: 2012568386}
-  m_Script: {fileID: 11500000, guid: b89cc67f5a1e31942802ff0453d461f5, type: 3}
 --- !u!1 &150173422
 GameObject:
   m_ObjectHideFlags: 0
@@ -8308,16 +8302,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114507850236751794, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: runes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114116883331461336, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: Inventory.InventoryData.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4173307104970268, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
       propertyPath: m_LocalPosition.x
       value: 25.2
@@ -8349,85 +8333,6 @@ Prefab:
     - target: {fileID: 4173307104970268, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
       propertyPath: m_RootOrder
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 70103911513326906, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 70989200074635580, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 70218858162413130, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1320921916812334, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
-      propertyPath: m_Layer
-      value: 28
-      objectReference: {fileID: 0}
-    - target: {fileID: 1469450995574228, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
-      propertyPath: m_Layer
-      value: 28
-      objectReference: {fileID: 0}
-    - target: {fileID: 1189465104916308, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}
-      propertyPath: m_Layer
-      value: 28
-      objectReference: {fileID: 0}
-    - target: {fileID: 50749736738128948, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: m_SleepingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102464536211990, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: Updater
-      value: 
-      objectReference: {fileID: 131532006}
-    - target: {fileID: 114102464536211990, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114507850236751794, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: runes.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: e16a8ceb4df570c4981a2e42bbb8567c,
-        type: 2}
-    - target: {fileID: 114507850236751794, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: runes.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: e16a8ceb4df570c4981a2e42bbb8567c,
-        type: 2}
-    - target: {fileID: 114507850236751794, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: runes.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114286256747533024, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: Duration
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114613662104883584, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: AttackCooldown
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114226087637341638, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: MaxDistance
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 114226087637341638, guid: b5405cc59ec405e42ac26438ef1b066d,
-        type: 2}
-      propertyPath: EffectOffSet.y
-      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5405cc59ec405e42ac26438ef1b066d, type: 2}

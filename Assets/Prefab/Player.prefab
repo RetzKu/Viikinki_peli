@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 95596494444626358}
   - component: {fileID: 114168565267878290}
   - component: {fileID: 70989200074635580}
-  m_Layer: 10
+  m_Layer: 28
   m_Name: d_c_torso
   m_TagString: notPatePlayer
   m_Icon: {fileID: 0}
@@ -300,7 +300,7 @@ GameObject:
   - component: {fileID: 95196998322497356}
   - component: {fileID: 114983095315675218}
   - component: {fileID: 70103911513326906}
-  m_Layer: 10
+  m_Layer: 28
   m_Name: s_c_torso
   m_TagString: notPatePlayer
   m_Icon: {fileID: 0}
@@ -383,7 +383,7 @@ GameObject:
   - component: {fileID: 95888391498598372}
   - component: {fileID: 114106720866073798}
   - component: {fileID: 70218858162413130}
-  m_Layer: 10
+  m_Layer: 28
   m_Name: u_c_torso
   m_TagString: notPatePlayer
   m_Icon: {fileID: 0}
@@ -793,7 +793,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977754839611798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.35, y: 27, z: 0}
+  m_LocalPosition: {x: 25.2, y: 24.2, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 4701210339847834}
@@ -1381,7 +1381,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!58 &58421809874053922
@@ -1617,7 +1617,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977754839611798}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c499b1efb0997e42b0cfb500150534b, type: 3}
   m_Name: 
@@ -1695,9 +1695,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BareHandSprite: {fileID: 21300020, guid: f43c53a45dee3724793fb23c5164e286, type: 3}
   LifeTime: 0.15
-  MaxDistance: 0.45
+  MaxDistance: 0.7
   SpriteScale: {x: 0.4, y: 0.4, z: 0.4}
-  EffectOffSet: {x: 0, y: 0.2, z: 0}
+  EffectOffSet: {x: 0, y: 0.1, z: 0}
   handEffectOnrange: 0
   lastHittedEnemy: {fileID: 0}
 --- !u!114 &114264761283226734
@@ -1745,9 +1745,6 @@ MonoBehaviour:
   Keyboard: 1
   Joystick: {fileID: 0}
   lerpUp: 1
-  Duration: 1
-  Started: 0
-  Slowed: 0
   ModifiedMaxSpd: 3
 --- !u!114 &114335856655356606
 MonoBehaviour:
@@ -1790,10 +1787,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ownertype: 0
   runes:
-  - {fileID: 11400000, guid: 41f55baef62436c468c41082d0ac439b, type: 2}
-  - {fileID: 11400000, guid: 6b2b94678b9625444a5fb76c126e4f2f, type: 2}
-  - {fileID: 11400000, guid: 354da4f74d5bf6c42a748031a9163aff, type: 2}
-  - {fileID: 11400000, guid: 32ef0aca30e66b145bb67bed7f07a85c, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   IsOwnerPlayer: 1
 --- !u!114 &114595434920760206
 MonoBehaviour:
@@ -1806,9 +1801,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5b1266ebcc9864dbc062e5b32fe24c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationRate: 5.75
-  MaxZoom: 1.92
-  ZoomSpeed: 0.07
+  RotationRate: 0.7
+  MaxZoom: 0.2
+  ZoomSpeed: 0.06
 --- !u!114 &114596991943841444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1832,13 +1827,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c036588fb7ae84b98c28ed62031ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
+  hp: 10
   dmgBase: 5
   rangedBaseDmg: 0
   movementSpeed: 100
   attackSpeed: 0.17
   armor: 1
   DefaultAttackLength: 0.2
+  AttackCooldown: 0.2
+  OffCooldown: 1
   atmAttackTime: 12.539397
 --- !u!114 &114652550397209084
 MonoBehaviour:

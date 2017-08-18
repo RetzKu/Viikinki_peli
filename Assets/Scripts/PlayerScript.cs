@@ -108,8 +108,8 @@ public class PlayerScript : MonoBehaviour
     }
     public void UnEquipArmor()
     {
-        Inventory.EquipData.EmptyChest();
         Inventory.EquipData.Armor.GetComponent<armorScript>().RemoveArmorStats();
+        Inventory.EquipData.EmptyChest();
         for (int i = 0; i < 3; i++)
         {
             Torsos[i].sprite = DefaultTorsos[i];

@@ -12,14 +12,8 @@ MonoBehaviour:
   m_Name: SingleInstanceObjectSpawnSettings
   m_EditorClassIdentifier: 
   Spawns:
-  - {fileID: 1558771522012546, guid: 7289a413af869bc4a8bb1db1572d6a0e, type: 2}
-  - {fileID: 1558771522012546, guid: 7289a413af869bc4a8bb1db1572d6a0e, type: 2}
-  - {fileID: 1558771522012546, guid: 7289a413af869bc4a8bb1db1572d6a0e, type: 2}
-  - {fileID: 1558771522012546, guid: 7289a413af869bc4a8bb1db1572d6a0e, type: 2}
-  - {fileID: 1558771522012546, guid: 7289a413af869bc4a8bb1db1572d6a0e, type: 2}
-  - {fileID: 1558771522012546, guid: 7289a413af869bc4a8bb1db1572d6a0e, type: 2}
-  - {fileID: 1558771522012546, guid: 7289a413af869bc4a8bb1db1572d6a0e, type: 2}
-  - {fileID: 1558771522012546, guid: 7289a413af869bc4a8bb1db1572d6a0e, type: 2}
-  - {fileID: 1558771522012546, guid: 7289a413af869bc4a8bb1db1572d6a0e, type: 2}
-  - {fileID: 1558771522012546, guid: 7289a413af869bc4a8bb1db1572d6a0e, type: 2}
-  SpawnRate: 4
+  - Spawn: {fileID: 1311341994458962, guid: b78588c0f97141b49b4897a4d67bc830, type: 2}
+    Count: 10
+  - Spawn: {fileID: 1558771522012546, guid: 7289a413af869bc4a8bb1db1572d6a0e, type: 2}
+    Count: 10
+  SpawnRate: 8

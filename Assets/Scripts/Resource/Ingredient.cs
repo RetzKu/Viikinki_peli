@@ -27,6 +27,8 @@ public class Ingredient : MonoBehaviour
     {
         if (!_player)
             _player = GameObject.FindWithTag("Player").GetComponent<Transform>();
+
+        GetComponent<SpriteRenderer>().sprite = ResourceManager.Instance.GetDropSprite(Type);
     }
 
     void OnTriggerEnter2D(Collider2D other)

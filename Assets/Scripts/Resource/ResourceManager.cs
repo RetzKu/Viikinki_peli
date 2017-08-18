@@ -134,4 +134,10 @@ public class ResourceManager : MonoBehaviour
     {
         return ResourceType.t_trunkEnd >= type;
     }
+
+    public Sprite[] DropSprites = new Sprite[9];
+    public Sprite GetDropSprite(IngredientType type)
+    {
+        return DropSprites[(int) type];
+    }
 }

@@ -60,7 +60,7 @@ TagManager:
   - EnemyFx
   - Door
   - PlayerHitBox
-  - 
+  - PlayerFx
   - 
   - 
   m_SortingLayers:

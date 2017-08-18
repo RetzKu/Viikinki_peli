@@ -69,6 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   attackWeight: 10
+  attackspeed: 3
   weaponEffect: {fileID: 21300010, guid: f43c53a45dee3724793fb23c5164e286, type: 3}
   onRange: 0
   distance: 1.2

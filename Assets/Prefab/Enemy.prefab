@@ -1184,8 +1184,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
-  hp: 100
-  armor: 1
+  hp: 5
+  armor: 0
+  AttackArea: 1
+  Crittable: 0
 --- !u!114 &114728105960161014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1199,6 +1201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Weapon: {fileID: 1192870776797376, guid: bd771d4617c99d149ad6c9dd912fcb49, type: 2}
   Movin: 0
+  Bow: {fileID: 0}
 --- !u!114 &114751757998946096
 MonoBehaviour:
   m_ObjectHideFlags: 1

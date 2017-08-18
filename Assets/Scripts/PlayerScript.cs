@@ -77,7 +77,6 @@ public class PlayerScript : MonoBehaviour
         InventoryInput();
         if(Inventory.EquipData.Armor != null) { HpCanvas.ToggleArmorImage(true); } else { HpCanvas.ToggleArmorImage(false); }
 
-        if(Input.GetKey(KeyCode.U) == true) { GameObject.Find("Bear").GetComponent<Animator>().SetBool("Movinyg",true); }
     }
     public float GetAngle(Vector2 pointA, Vector2 pointB)
     {

@@ -61,6 +61,7 @@ public class combat : MonoBehaviour
             StartCoroutine(AttackCD());
             if (GetComponent<PlayerScript>().EquippedTool.Tool != null)
             {
+                AttackCooldown = 1 / GetComponent<PlayerScript>().EquippedTool.Tool.GetComponent<weaponStats>().attackspeed;
                 GetComponent<PlayerScript>().LoseDurability(); 
             }
             GetComponent<FxScript>().instantiateFx();

@@ -30,6 +30,8 @@ public class DeckScript : MonoBehaviour
     private Vector3[] positions;
     private Quaternion[] rotations;
     private bool[] equips;
+    private bool[] armorInv;
+    private bool[] activeArmor;
     // Muuttuva uusi korttiluku
     private int updatedCardCount;
 
@@ -135,6 +137,9 @@ public class DeckScript : MonoBehaviour
                 }
             }
 
+            armorInv = new bool[updatedCardCount];
+            activeArmor = new bool[updatedCardCount];
+
             // Tekee oikean määrän kortteja (lisätty määrä)
             for (int x = 0; x < updatedCardCount; x++)
             {
@@ -178,7 +183,32 @@ public class DeckScript : MonoBehaviour
                 // Kortissa olevan aseen kuva
                 GameObject tempObj = new GameObject("CardChild");
                 tempObj.transform.position = cards[x].transform.position;
-                Sprite cardImage = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<SpriteRenderer>().sprite;
+                Sprite cardImage = PlayerScript.Player.GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<SpriteRenderer>().sprite;
+
+                if(PlayerScript.Player.GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<armorScript>() != null)
+                {
+                    // Kyseinen esine on armori
+                    armorInv[x] = true;
+                    // Jos ei ole yhtään armoria aktiivisena
+                    if (ArmorActiveCheck())
+                    {
+                        // Armori jo päällä
+                        
+                    }
+                    else
+                    {
+                        // Armoria ei vielä päällä
+                        PlayerScript.Player.GetComponent<PlayerScript>().Inventory.EquipItem(x);
+                        tempObj3.GetComponent<Image>().color = new Color(0.1961f, 0.7176f, 0.5411f, 0.2667f);
+                        activeArmor[x] = true;
+                    }
+                }
+                else
+                {
+                    // Kyseinen esine on ase
+                    armorInv[x] = false;
+                }
+
                 Rect cardImageRect = cardImage.rect;
                 var image = tempObj.AddComponent<Image>();
                 image.sprite = cardImage;
@@ -192,6 +222,11 @@ public class DeckScript : MonoBehaviour
                     equips[x] = true;
                     weaponChanged = false;
                 }
+            }
+
+            for (int zp = 0; zp < updatedCardCount; zp++)
+            {
+                print("Armori inventory[" + zp + "]: " + armorInv[zp] + ".");
             }
 
             equipsBoolean = false;
@@ -644,7 +679,7 @@ public class DeckScript : MonoBehaviour
     // Metodi jolla voidaan tarkistella inventoryn kokoa
     public int inventorySize()
     {
-        return GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData.Count;
+        return PlayerScript.Player.GetComponent<PlayerScript>().Inventory.InventoryData.Count;
     }
 
     // Default arvoja rotationille
@@ -777,10 +812,14 @@ public class DeckScript : MonoBehaviour
         rotations = new Quaternion[cardCount];
 
         // Koko pitää tarkistaa isomman mukaan koska välillä kortteja lisätään ja välillä poistetaan
-        if(cardCount > updatedCardCount)
+        if (cardCount > updatedCardCount)
+        {
             equips = new bool[cardCount];
+        }
         else
-        equips = new bool[updatedCardCount];
+        {
+            equips = new bool[updatedCardCount];
+        }
 
         // Tuodaan arrayhin vanhat positionit sekä equip boolit
         for (int x = 0; x < cardCount; x++)
@@ -819,5 +858,24 @@ public class DeckScript : MonoBehaviour
         if (equips.Length > ID)
             return equips[ID];
         else return false;
+    }
+
+    // Metodi jolla voidaan tarkistaa onko inventoryssä armoria päällä
+    public bool ArmorInvCheck(int ID)
+    {
+        if (armorInv.Length > ID)
+            return armorInv[ID];
+        else return false;
+    }
+
+    private bool ArmorActiveCheck()
+    {
+        bool flag = false;
+        for (int x = 0; x < activeArmor.Length; x++)
+        {
+            if (activeArmor[x] == true)
+                flag = true;
+        }
+        return flag;
     }
 }

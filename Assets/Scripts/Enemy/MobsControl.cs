@@ -152,7 +152,16 @@ public class MobsControl : MonoBehaviour
         {
             if (Boids[ind].GetComponent<generalAi>().killMyself())
             {
-                Destroy(Boids[ind]);
+                if(Boids[ind].GetComponent<generalAi>().MyType == EnemyType.bear && Boids[ind].GetComponent<generalAi>().kys)
+                {
+
+                    Boids[ind].GetComponent<generalAi>().enabled = false;
+                    Boids[ind].transform.parent = GameObject.Find("luola_tuho").transform;
+                }
+                else
+                {
+                    Destroy(Boids[ind]);
+                }
                 Boids.Remove(Boids[ind]);
                 if (cave)
                 {
@@ -226,7 +235,7 @@ public class MobsControl : MonoBehaviour
             if(tulos == BearR)
             {
                 go = Instantiate(Bear, new Vector2(x, y), Quaternion.identity);
-                go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Wolf, player);
+                go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.bear, player);
             }
             else if(tulos == ArcherR)
             {

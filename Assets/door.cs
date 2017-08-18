@@ -21,68 +21,78 @@ public class door : MonoBehaviour
     List<Room> finalRooms = new List<Room>();
     public float mobs = 0;
     private TileMap _tilemap;
+    bool spawnedMobs = false;
     BossTypes boss = BossTypes.unInit;
+
     void Start()
     {
         _tilemap = GameObject.FindWithTag("Tilemap").GetComponent<TileMap>();
     }
-    bool spawnedMobs = false;
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        ChunkMover mover = other.gameObject.transform.parent.GetComponent<ChunkMover>();
-        if (mover.UnderGround)
+        print(other.tag);
+        if (other.tag == "Player")
         {
-            // maan päälle
-            _tilemap.EnableTileMap();
-            MobsControl.instance.DeleteAllCurrentMobs();
-            mover.UnderGround = false;
-            MapGenerator.Instance.DestroyCave();
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            player.GetComponent<UpdatePathFind>().tilemap = GameObject.FindGameObjectWithTag("Tilemap").GetComponent<TileMap>();
-            player.GetComponent<UpdatePathFind>().path.map = GameObject.FindGameObjectWithTag("Tilemap").GetComponent<TileMap>();
-            int[] m = player.GetComponent<UpdatePathFind>().path.calculateIndex(player.transform.position);
-            player.GetComponent<UpdatePathFind>().path.uptadeTiles(m[0], m[1], GameObject.FindGameObjectWithTag("Tilemap").GetComponent<TileMap>());
-            ParticleSpawner.instance.destroybloods();
-            MobsControl.instance.cave = false;
-
-        }
-        else
-        {
-            _tilemap.DisableTileMap();
-            MobsControl.instance.DeleteAllCurrentMobs();
-            Activate();
-            mover.UnderGround = true;
-
-            MapGenerator dungeon = MapGenerator.Instance;
-            var go = GameObject.FindWithTag("SpriteController");
-            TileSpriteController tileSpriteController = go.GetComponent<TileSpriteController>();
-            tileSpriteController.ResetAllTiles();
-            tileSpriteController.SetTileSprites(dungeon.Width - 1, dungeon.Height - 1, dungeon, 1, 1);
-
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            player.GetComponent<UpdatePathFind>().tilemap = dungeon;
-
-            int[] m = player.GetComponent<UpdatePathFind>().path.calculateIndex(player.transform.position);
-
-
-            player.GetComponent<UpdatePathFind>().path.uptadeTiles(m[0], m[1], dungeon);
-
-            MobsControl.instance._door = this.gameObject;
-            MobsControl.instance.cave = true;
-
-            //player.GetComponent<UpdatePathFind>().path.uptadeTiles(player.transform.position,dungeon);
-
-            if (!spawnedMobs)
+            ChunkMover mover = other.gameObject.GetComponent<ChunkMover>();
+            if (mover.UnderGround)
             {
-                spawnCaveMobs();
-                spawnedMobs = true;
+                // maan päälle
+                fireplace.SetActive(false);
+                _tilemap.EnableTileMap();
+                MobsControl.instance.DeleteAllCurrentMobs();
+                mover.UnderGround = false;
+                MapGenerator.Instance.DestroyCave();
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                player.GetComponent<UpdatePathFind>().tilemap = GameObject.FindGameObjectWithTag("Tilemap").GetComponent<TileMap>();
+                player.GetComponent<UpdatePathFind>().path.map = GameObject.FindGameObjectWithTag("Tilemap").GetComponent<TileMap>();
+                int[] m = player.GetComponent<UpdatePathFind>().path.calculateIndex(player.transform.position);
+                player.GetComponent<UpdatePathFind>().path.uptadeTiles(m[0], m[1], GameObject.FindGameObjectWithTag("Tilemap").GetComponent<TileMap>());
+                ParticleSpawner.instance.destroybloods();
+                MobsControl.instance.cave = false;
+
+                player.GetComponent<FishSpawner>().enabled = true;
             }
             else
             {
-                spawnCreadedMobs();
-            }
-            ParticleSpawner.instance.destroybloods();
+                // maan Alle
+                _tilemap.DisableTileMap();
+                MobsControl.instance.DeleteAllCurrentMobs();
+                Activate();
+                mover.UnderGround = true;
 
+                MapGenerator dungeon = MapGenerator.Instance;
+                var go = GameObject.FindWithTag("SpriteController");
+                TileSpriteController tileSpriteController = go.GetComponent<TileSpriteController>();
+                tileSpriteController.ResetAllTiles();
+                tileSpriteController.SetTileSprites(dungeon.Width - 1, dungeon.Height - 1, dungeon, 1, 1);
+
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                player.GetComponent<UpdatePathFind>().tilemap = dungeon;
+
+                int[] m = player.GetComponent<UpdatePathFind>().path.calculateIndex(player.transform.position);
+
+
+                player.GetComponent<UpdatePathFind>().path.uptadeTiles(m[0], m[1], dungeon);
+
+                MobsControl.instance._door = this.gameObject;
+                MobsControl.instance.cave = true;
+
+                //player.GetComponent<UpdatePathFind>().path.uptadeTiles(player.transform.position,dungeon);
+
+                if (!spawnedMobs)
+                {
+                    spawnCaveMobs();
+                    spawnedMobs = true;
+                }
+                else
+                {
+                    spawnCreadedMobs();
+                }
+                ParticleSpawner.instance.destroybloods();
+
+                player.GetComponent<FishSpawner>().enabled = false;
+            }
         }
     }
 
@@ -207,7 +217,7 @@ public class door : MonoBehaviour
                     rndy = UnityEngine.Random.Range(0f, (float)finalRooms[i].roomsize - 1);
                 } while (MapGenerator.Instance.GetTileCollision(finalRooms[i].tiles[(int)rndx].tileX, finalRooms[i].tiles[(int)rndy].tileY));
                 Vector2 k = new Vector2(finalRooms[i].tiles[(int)rndx].tileX, finalRooms[i].tiles[(int)rndy].tileY);
-               /// te = k;
+                /// te = k;
                 Vector2 zero = (Vector2)MapGenerator.Instance.GetTileGameObject(0, 0).transform.position;
                 int rndBoss = UnityEngine.Random.Range(0, 1);
                 spawnpos.Add(new Vector2(k.x + zero.x, k.y + zero.y));
@@ -228,13 +238,13 @@ public class door : MonoBehaviour
 
             }
             float _mobAmount = finalRooms[i].roomsize / 10;
-            int mobAmount = UnityEngine.Random.Range(5,8);
+            int mobAmount = UnityEngine.Random.Range(5, 8);
             print(mobAmount);
             mobs += mobAmount;
-            if (mobAmount > 1) 
+            if (mobAmount > 1)
             {
                 //spawned = true;
-                for(int j = 0;j < mobAmount; j++)
+                for (int j = 0; j < mobAmount; j++)
                 {
                     float rndx;
                     float rndy;
@@ -269,18 +279,18 @@ public class door : MonoBehaviour
         //            Gizmos.DrawSphere(new Vector2(t.tileX + zero.x,t.tileY + zero.y), 1);
         //        }
         //    }
-            foreach(Vector2 vec in spawnpos)
-            {
+        foreach (Vector2 vec in spawnpos)
+        {
             Gizmos.color = Color.blue;
-            Gizmos.DrawSphere(new Vector3(vec.x,vec.y,-1),1);
-            }
+            Gizmos.DrawSphere(new Vector3(vec.x, vec.y, -1), 1);
+        }
     }
     void Update()
     {
         if (Input.GetKeyDown("v"))
         {
             Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                //nput.mousePosition;
+            //nput.mousePosition;
             MobsControl.instance.SpawnBoids(pos.x, pos.y, 0, 1);
             print("spawning");
         }
@@ -290,6 +300,10 @@ public class door : MonoBehaviour
 
     }
     Vector2 offset = new Vector2(0, 0);
+    int rand = 0;
+    Vector2 fire = new Vector2(0,0);
+    int fireRand = 0;
+    GameObject fireplace;
     public void Activate()
     {
         //destroy world
@@ -303,17 +317,24 @@ public class door : MonoBehaviour
         if (!created)                                                                                   // create door
         {
             int temp = finalRooms[finalRooms.Count - 1].edgeTiles.Count;
-            int rand = UnityEngine.Random.Range(0, temp);
+            rand = UnityEngine.Random.Range(0, temp);
 
             MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY - 1] = TileType.CaveDoor;
-            offset = new Vector2((float)finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX,(float) finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY - 1);
+            offset = new Vector2((float)finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, (float)finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY - 1);
             created = true;
             print("door created");
 
-
+            fireRand = UnityEngine.Random.Range(0, finalRooms[0].roomsize);
+            fire = new Vector2(finalRooms[0].tiles[fireRand].tileX, finalRooms[0].tiles[fireRand].tileY);
+            fireplace = ObjectPool.instance.GetObjectForType("Campfire_fire", false);         
+        }
+        else
+        {
+            MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY - 1] = TileType.CaveDoor;
+            fireplace.SetActive(true);
         }
         Vector2 mapPosition = (Vector2)transform.position - offset;
-
+        fireplace.transform.position = mapPosition + fire;
         MapGenerator.Instance.showRooms(mapPosition);
 
         //smooth

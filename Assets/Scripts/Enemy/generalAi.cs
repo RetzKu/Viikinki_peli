@@ -6,7 +6,8 @@ using UnityEngine;
 public enum EnemyType
 {
     Wolf,
-    Archer
+    Archer,
+    bear
 }
 public enum Dir
 {
@@ -83,7 +84,7 @@ public abstract class generalAi : MonoBehaviour
 
     Vector2 knock = new Vector2(0, 0);
     protected bool GiveStartTarget = true;
-    protected bool kys = false;
+    public bool kys = false;
     protected int counter = 0;
     public int IdleRefreshRate = 100;
     public float IdleRadius = 60.0f;

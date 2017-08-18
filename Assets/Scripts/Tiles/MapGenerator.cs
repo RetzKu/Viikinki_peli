@@ -226,6 +226,8 @@ public class MapGenerator : MonoBehaviour, ITileMap
                 TileObjects[x, y] = tileObject;
             }
         }
+
+        //fire.transform.parent = GameObject.Find("luola_tuho").transform;
     }
 
 

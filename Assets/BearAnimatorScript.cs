@@ -48,7 +48,9 @@ public class BearAnimatorScript : MonoBehaviour
                 }
             case action.Dead:
                 {
+                    GetComponent<Animator>().SetBool("Moving", false);
                     GetComponent<Animator>().SetBool("Dead", true);
+
                     break;
                 }
         }

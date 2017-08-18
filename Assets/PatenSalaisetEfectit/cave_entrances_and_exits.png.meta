@@ -1,15 +1,17 @@
 fileFormatVersion: 2
-guid: 463b61ad614ef164d81d2eb8c530de91
-timeCreated: 1503059510
+guid: 3c64be5e7f28c8a4ab187d3112b81641
+timeCreated: 1503039556
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: runeshapes_0
-    21300002: runeshapes_2
-    21300004: runeshapes_4
-    21300006: runeshapes_9
-    21300008: runeshapes_11
-    21300010: runeshapes_13
+    21300000: cave_entrances_and_exits_0
+    21300002: cave_entrances_and_exits_1
+    21300004: cave_entrances_and_exits_2
+    21300006: cave_entrances_and_exits_3
+    21300008: cave_entrances_and_exits_4
+    21300010: cave_entrances_and_exits_5
+    21300012: cave_entrances_and_exits_6
+    21300014: cave_entrances_and_exits_7
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -72,138 +74,108 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-  - buildTarget: iPhone
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: tvOS
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: Android
-    maxTextureSize: 2048
-    textureFormat: 4
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 1
-  - buildTarget: Tizen
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: WebGL
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: Samsung TV
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: runeshapes_0
+      name: cave_entrances_and_exits_0
       rect:
         serializedVersion: 2
         x: 2
-        y: 70
-        width: 65
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: runeshapes_2
-      rect:
-        serializedVersion: 2
-        x: 87
-        y: 70
-        width: 64
-        height: 64
+        y: 179
+        width: 128
+        height: 79
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: runeshapes_4
+      name: cave_entrances_and_exits_1
       rect:
         serializedVersion: 2
-        x: 169
-        y: 70
-        width: 65
-        height: 64
+        x: 131
+        y: 179
+        width: 128
+        height: 79
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: runeshapes_9
+      name: cave_entrances_and_exits_2
       rect:
         serializedVersion: 2
         x: 2
-        y: 1
-        width: 66
-        height: 64
+        y: 94
+        width: 128
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cave_entrances_and_exits_3
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 94
+        width: 128
+        height: 79
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: runeshapes_11
+      name: cave_entrances_and_exits_4
       rect:
         serializedVersion: 2
-        x: 87
-        y: 1
-        width: 65
-        height: 64
+        x: 34
+        y: 51
+        width: 62
+        height: 27
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: runeshapes_13
+      name: cave_entrances_and_exits_5
       rect:
         serializedVersion: 2
-        x: 170
-        y: 1
-        width: 64
-        height: 64
+        x: 167
+        y: 50
+        width: 63
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cave_entrances_and_exits_6
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 12
+        width: 62
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cave_entrances_and_exits_7
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 13
+        width: 63
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

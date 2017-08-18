@@ -51,8 +51,9 @@ public class BearStats : enemyStats
         }
        
         var Cast = Physics2D.CircleCast(Fx.transform.position, AttackArea, Vector3.zero, 0, LayerMask.GetMask("PlayerHitBox"));
+        AudioManager.instance.Play("Bear");
 
-        if(Cast)
+        if (Cast)
         {
             Player.setHitPosition(transform.position);
             Player.takeDamage(damage);

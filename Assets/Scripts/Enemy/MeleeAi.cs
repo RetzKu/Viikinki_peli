@@ -25,13 +25,9 @@ public class MeleeAi : generalAi {
     Collider2D[] CollisionArray = new Collider2D[0];
     public override void UpdatePosition()
     {
-        if(myType == EnemyType.Wolf)
-        {
-
-        }
         rotation.UpdateRotation(velocity, body.position);
         //print(velocity.magnitude);
-        if (myType == EnemyType.Wolf)
+        if (myType == EnemyType.bear)
         {
             transform.GetComponent<BearAnimatorScript>().SpriteDirection(myDir);
         }
@@ -108,11 +104,11 @@ public class MeleeAi : generalAi {
         }
         if (attack && dist.magnitude <= attackDist * 1.1f && !find)
         {
+            rotation.HardRotate(body.position, (Vector2)player.transform.position - body.position);
             //anim
-            if(myType == EnemyType.Wolf)
+            if(myType == EnemyType.bear)
             {
                 GetComponent<BearAnimatorScript>().AnimationTrigger(action.Attack);
-                AudioManager.instance.Play("Bear");
             }
             else
             {
@@ -120,6 +116,7 @@ public class MeleeAi : generalAi {
             }
             print("ATTTTAAAAAAAACK");
             attack = false;
+            rotation.Lock = false;
         }
         if (dist.magnitude > attackDist)
         {
@@ -151,6 +148,7 @@ public class MeleeAi : generalAi {
         else
         {
             followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
+            Physics._maxSpeed = MaxSpeed * 0.4f;
             rotation.rotToPl = true;
         }
 
@@ -183,7 +181,14 @@ public class MeleeAi : generalAi {
         }
         else
         {
-            ParticleSpawner.instance.SpawnDyingEffect(body.position);
+            if(myType == EnemyType.bear)
+            {
+                GetComponent<BearAnimatorScript>().AnimationTrigger(action.Dead);
+            }
+            else
+            {
+                ParticleSpawner.instance.SpawnDyingEffect(body.position);
+            }
             return true;
         }
     }
@@ -192,5 +197,9 @@ public class MeleeAi : generalAi {
         attack = false;
         attCount = 0f;
         agro = true;
+    }
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(body.position, 0.1f);
     }
 }

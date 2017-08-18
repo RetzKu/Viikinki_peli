@@ -18,6 +18,7 @@ public class ArcherAI : generalAi {
         Physics.InitRules(sepF, aliF, cohF, desiredseparation, alingmentDistance, IdleRadius, IdleBallDistance, ArriveRadius, MaxSteeringForce, MaxSpeed);
         Physics._maxSpeed = MaxSpeed;
         proManager = GameObject.FindGameObjectWithTag("projectileManager");
+        inCave = player.GetComponent<ChunkMover>().UnderGround;
 
     }
     Collider2D[] environment = new Collider2D[0];
@@ -66,7 +67,6 @@ public class ArcherAI : generalAi {
 
                     Physics._maxSpeed = MaxSpeed * 0.2f;
                     findPath(ref flags, ref velocity, ref target, player, body);
-
                 }
             }
             else if (agro)
@@ -76,11 +76,8 @@ public class ArcherAI : generalAi {
                     Physics._maxSpeed = MaxSpeed;
                 }
                 getEnvironment(ref environment);
-
                 Vector2 playerPos = player.transform.position;
-
-                Vector2 dist = body.position - playerPos;
-           
+                Vector2 dist = body.position - playerPos;           
                 archerPattern(dist, playerPos);         
             }
         }

@@ -6,7 +6,12 @@ using UnityEngine;
 public class CampFire : Resource
 {
     private Animator FireAnimation;
-
+    public GameObject Spr1;
+    public GameObject Spr2;
+    public GameObject Spr3;
+    public GameObject Spr4;
+    public GameObject Spr5;
+    public GameObject Circle;
     public enum FireState
     {
         OnFire,
@@ -46,17 +51,23 @@ public class CampFire : Resource
     private FireState test = FireState.OnFire;
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            SetFire(test);
-            test++;
-            if ((int)test == 3)
-            {
-                test = 0;
-            }
-        }
-    }
 
+
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
+        //    SetFire(test);
+        //    test++;
+        //    if ((int)test == 3)
+        //    {
+        //        test = 0;
+        //    }
+        //}
+    }
+    public void setRuneActive()
+    {
+        SetFire(FireState.Ember);
+        
+    }
     public override void Init(bool destroyedVersion)
     {
         type = destroyedVersion ? ResourceType.campfire_noFire : ResourceType.campfire_fire;

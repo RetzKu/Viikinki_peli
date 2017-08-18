@@ -47,7 +47,7 @@ public class EnemyRotater {
         {
             if (!rotToPl)
             {
-                if(MyType == EnemyType.Wolf)
+                if(MyType == EnemyType.Wolf || MyType == EnemyType.bear)
                 {
                     uptadeDir6(velocity);
                 }
@@ -145,7 +145,7 @@ public class EnemyRotater {
     {
         Vector2 dir = playerPos - ownPos;
 
-        if (MyType == EnemyType.Wolf)
+        if (MyType == EnemyType.Wolf || MyType == EnemyType.bear)
         {
             uptadeDir6(dir);
             if (velocity.magnitude == 0)

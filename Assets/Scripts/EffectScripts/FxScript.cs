@@ -24,6 +24,7 @@ public class FxScript : MonoBehaviour {
 	void Start ()
     {
         Fx = new GameObject("Fx");
+        Fx.layer = LayerMask.NameToLayer("PlayerFx");
         Fx.AddComponent<SpriteRenderer>().sprite = BareHandSprite;
         Fx.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0);
         Fx.transform.localScale = SpriteScale;
@@ -49,7 +50,6 @@ public class FxScript : MonoBehaviour {
         Destroy(CopyFx, LifeTime);
         CopyFx.AddComponent<FxFade>().Duration = LifeTime;
         CopyFx.AddComponent<BoxCollider2D>().isTrigger = true;
-        CopyFx.layer = LayerMask.NameToLayer("PlayerFx");
         ObjectPosition(CopyFx);
         CopyFx.transform.SetParent(transform);
         if (GetComponent<PlayerScript>().weaponInHand != null)

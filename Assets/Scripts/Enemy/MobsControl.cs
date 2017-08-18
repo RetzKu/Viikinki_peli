@@ -266,7 +266,7 @@ public class MobsControl : MonoBehaviour
 
     int round(int r)
     {
-        return (Mathf.Abs(ArcherR - r) < Mathf.Abs(MeleeR - r)) ?(Mathf.Abs(WolfR - r) < Mathf.Abs(ArcherR - r)) ?(Mathf.Abs(WolfR - r) < Mathf.Abs(BearR - r)) ?WolfR :BearR :(Mathf.Abs(ArcherR - r) < Mathf.Abs(BearR - r)) ?ArcherR:BearR:(Mathf.Abs(WolfR - r) < (MeleeR - r)) ?(Mathf.Abs(WolfR - r) < Mathf.Abs(BearR - r)) ?WolfR :BearR :(Mathf.Abs(MeleeR - r) < Mathf.Abs(BearR - r)) ?MeleeR:BearR;
+        return (Mathf.Abs(ArcherR - r) < Mathf.Abs(MeleeR - r)) ? (Mathf.Abs(WolfR - r) < Mathf.Abs(ArcherR - r)) ? (Mathf.Abs(WolfR - r) < Mathf.Abs(BearR - r)) ?WolfR :BearR : (Mathf.Abs(ArcherR - r) < Mathf.Abs(BearR - r)) ? ArcherR:BearR:(Mathf.Abs(WolfR - r) < (MeleeR - r)) ? (Mathf.Abs(WolfR - r) < Mathf.Abs(BearR - r)) ? WolfR : BearR : (Mathf.Abs(MeleeR - r) < Mathf.Abs(BearR - r)) ? MeleeR:BearR;
     }
 
 }

@@ -5,7 +5,13 @@ using UnityEngine;
 public class armorScript : MonoBehaviour {
 
     public float ArmorMultiplier = 2f;
-    public float duration = 10;
+    public int duration = 10;
+    public int MaxDuration;
+
+    private void Start()
+    {
+        MaxDuration = duration;
+    }
 
     // Tällä lisätään pelaajalle armoria
     public void addArmorStats()
@@ -17,7 +23,13 @@ public class armorScript : MonoBehaviour {
         GameObject.Find("Player").GetComponent<combat>().armor -= (int)ArmorMultiplier;
     }
 
-    public void UseDurability(float amount)
+    public float CalculateDuration()
+    {
+        float DurationPrecent = duration / (float)MaxDuration;
+        return DurationPrecent;
+    }
+
+    public void UseDurability(int amount)
     {
         duration -= amount;
         if(duration < 1) { GameObject.Find("Player").GetComponent<PlayerScript>().BreakArmor(); }

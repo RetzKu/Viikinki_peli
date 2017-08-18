@@ -10,7 +10,14 @@ public abstract class weaponStats : MonoBehaviour
     public float attackWeight = 10.0f;
     internal int duration = 20;
     public abstract void useDuration();
+    public abstract float CalculateDuration();
     public float attackspeed = 1;
+    public int MaxDuration;
+
+    private void Start()
+    {
+        MaxDuration = duration;
+    }
 
     [Header("Effect details")]
 

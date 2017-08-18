@@ -18,6 +18,11 @@ public class Melee : weaponStats
         duration--;
     }
 
+    public override float CalculateDuration()
+    {
+        float DurationPrecent = duration / (float)MaxDuration;
+        return DurationPrecent;
+    }
     /*void OnTriggerEnter2D(Collider2D Trigger)
     {
         if (Trigger.gameObject.tag == "Enemy")

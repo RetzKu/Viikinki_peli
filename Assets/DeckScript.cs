@@ -354,14 +354,14 @@ public class DeckScript : MonoBehaviour
                     float duration;
                     try
                     {
-                        duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<weaponStats>().duration;
+                        duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<weaponStats>().CalculateDuration();
                     }
                     catch
                     {
-                        duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<armorScript>().duration;
+                        duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<armorScript>().CalculateDuration();
                     }
 
-                    transform.GetChild(x).GetChild(0).GetComponent<RectTransform>().localScale = new Vector3(1f - 0.1f * duration, 1f, 1f);
+                    transform.GetChild(x).GetChild(0).GetComponent<RectTransform>().localScale = new Vector3(1 - duration, 1f, 1f);
 
                 }
             }
@@ -497,13 +497,14 @@ public class DeckScript : MonoBehaviour
                 float duration;
                 try
                 {
-                    duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<weaponStats>().duration;
+                    duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<weaponStats>().CalculateDuration();
                 }
                 catch
                 {
-                    duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<armorScript>().duration;
+                    duration = GameObject.Find("Player").GetComponent<PlayerScript>().Inventory.InventoryData[x].GetComponent<armorScript>().CalculateDuration();
                 }
-                transform.GetChild(x).GetChild(0).GetComponent<RectTransform>().localScale = new Vector3(1f - 0.1f * duration, 1f, 1f);
+
+                transform.GetChild(x).GetChild(0).GetComponent<RectTransform>().localScale = new Vector3(1 - duration, 1f, 1f);
             }
         }
     }

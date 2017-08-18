@@ -19,6 +19,12 @@ public class Ranged : weaponStats
         duration--;
     }
 
+    public override float CalculateDuration()
+    {
+        float DurationPrecent = duration / (float)MaxDuration;
+        return DurationPrecent;
+    }
+
     public void Reposition(Transform Hand)
     {
         Weapon = transform.gameObject;

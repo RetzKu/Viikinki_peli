@@ -22,6 +22,9 @@ public class TileSpriteController : MonoBehaviour
     private GameObject _borders;
 
 
+    public Sprite[] Mountains;
+    public Sprite[] FlatMountains;
+
     public enum CurrentPool
     {
         Border,
@@ -302,7 +305,7 @@ public class TileSpriteController : MonoBehaviour
 
     public void ResetAllTiles()
     {
-        for(int i = 0; i < borders.Count; i++)
+        for (int i = 0; i < borders.Count; i++)
         {
             var border = borders[i];
             {
@@ -311,6 +314,14 @@ public class TileSpriteController : MonoBehaviour
             }
         }
         borders.Clear();
+    }
+
+    public enum TileDir
+    {
+        N = 14,
+        S = 7,
+        E = 13,
+        W = 11,
     }
 
     public void SetTileSprites(int width, int height, ITileMap tilemap, int startX, int startY)
@@ -327,6 +338,51 @@ public class TileSpriteController : MonoBehaviour
             for (int x = startX; x < width; x++)
             {
                 TileType type = tilemap.GetTile(x, y);
+
+                if (type == TileType.Mountain) // outdoor mountain ===??)==??=9
+                {
+                    int tile = GetAssetNameBitmaskNoStr(x, y, tilemap, type);
+                    if (tile == 15)
+                    {
+                        tilemap.GetTileGameObject(x, y).GetComponent<SpriteRenderer>().sprite = FlatMountains[Random.Range(0, FlatMountains.Length - 1)];
+                    }
+                    else
+                    {
+                        tilemap.GetTileGameObject(x, y).GetComponent<SpriteRenderer>().sprite = Mountains[tile];
+                    }
+
+                    if (Perlin.CanPlaceDoor && (tile == (int)TileDir.N || tile == (int)TileDir.S || tile == (int)TileDir.E || tile == (int)TileDir.W))
+                    {
+                        var go = Instantiate(Perlin.DoorHackGameObject);
+                        go.transform.position = tilemap.GetTileGameObject(x, y).transform.position;
+                        go.transform.position = new Vector3(go.transform.position.x, go.transform.position.y, ZlayerManager.GetZFromY(go.transform.position));
+                        // tilemap.AddLater_hack(x, y, go);
+                        print("door placed");
+                        Perlin.CanPlaceDoor = false;
+
+                        // translate hack
+                        switch (tile)
+                        {
+                            case (int)TileDir.N:
+                                go.transform.Translate(Vector3.up);
+                                break;
+                            case (int)TileDir.S:
+                                go.transform.Translate(Vector3.down);
+                                break;
+                            case (int)TileDir.E:
+                                go.transform.Translate(Vector3.left);
+                                break;
+                            case (int)TileDir.W:
+                                go.transform.Translate(Vector3.right);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    continue;
+                }
+
+                // normals:
                 int value = GetAssetNameBitmaskNoStr(x, y, tilemap, type);
 
                 if (IsImplemented(type))
@@ -429,11 +485,11 @@ public class TileSpriteController : MonoBehaviour
         }
 
         // tarkista rajat
-        for(int i = 0; i < borders.Count; i++)
+        for (int i = 0; i < borders.Count; i++)
         {
             var border = borders[i];
-            if (offsetX > border.transform.position.x || 
-                offsetX + TileMap.TotalWidth < border.transform.position.x  ||
+            if (offsetX > border.transform.position.x ||
+                offsetX + TileMap.TotalWidth < border.transform.position.x ||
                 offsetY > border.transform.position.y ||
                 offsetY + TileMap.TotalHeight < border.transform.position.y)
             {
@@ -444,7 +500,7 @@ public class TileSpriteController : MonoBehaviour
                 i--;
             }
         }
-                // fuck fuck
+        // fuck fuck
     }
 
     // TMP NEW CREATE!
@@ -494,4 +550,9 @@ public class TileSpriteController : MonoBehaviour
         return 0;
     }
 
+    // reshapre ternary test XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD:
+    void bar(bool b, bool c, bool d, bool e, bool f)
+    {
+        var pate = b ? (f ? -1 : 2) : (c ? (e ? 5 : 3) : (d ? 4 : 100));
+    }
 }

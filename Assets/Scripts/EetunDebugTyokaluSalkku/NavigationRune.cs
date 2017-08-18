@@ -8,6 +8,8 @@ public class NavigationRune : Rune
     private GameObject owner;
     private RuneEffectLauncher launcher;
 
+    public Color SpeedColor;
+
     public override void init(GameObject owner)
     {
         this.owner = owner;
@@ -22,7 +24,7 @@ public class NavigationRune : Rune
     public override void Fire()
     {
         Vector3 closestBase = BaseManager.Instance.GetClosestBase().transform.position;
-        launcher.LaunchArrow(sprite, closestBase);
+        launcher.LaunchArrow(sprite, closestBase, SpeedColor);
     }
 
     //public override void OnGui(RuneBarUiController ui)

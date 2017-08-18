@@ -159,9 +159,12 @@ public abstract class Resource : MonoBehaviour
 
         yield return new WaitForSeconds(deathTimer);
 
-        DeActivate();
         // de-activate! / pool jne...
+        // StartCoroutine(FadeAway(2f, )); // default time japapappadabaduuu!
     }
+
+
+
 
     // TODO: tee resuille oma partikkelie effect
     private IEnumerator EmitParticles(Vector3 hitPosition, float intensity, float seconds)
@@ -173,6 +176,7 @@ public abstract class Resource : MonoBehaviour
         yield return new WaitForSeconds(seconds);   // Voi hoitaa kokonaan ParticleSystemissä
         //particleSystem.Stop();
     }
+
     #endregion
 
     public static string GetResourcePrefabName(ResourceType type)

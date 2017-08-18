@@ -1,4 +1,5 @@
-﻿using System;
+﻿#define DEV
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ public class TouchController : MonoBehaviour
     private LineRenderer lineRenderer;
 
     private Vector3[] positions;
-    public int index = 0;
+    public int _nextIndex = 0;
     private GameObject[] _colliders = new GameObject[9]; // yhdeksän kosketus kohtaa
     private bool _touching = false;
 
@@ -58,6 +59,7 @@ public class TouchController : MonoBehaviour
 
     void SendIndices()
     {
+#if !DEV
         if (ControllerMode == Mode.RuneCasting && _canSendIndices)
         {
             RuneHolder.SendIndices(BoolArrayFromIndices(runeIndices), _touchCounts);
@@ -66,18 +68,60 @@ public class TouchController : MonoBehaviour
         else if (ControllerMode == Mode.Crafting && _canSendIndices)
         {
             CraftingManagerHolder.SendIndices(BoolArrayFromIndices(runeIndices), _touchCounts);
-
         }
+#else
+        if (ControllerMode == Mode.RuneCasting && _canSendIndices)
+        {
+            RuneHolder.SendIndices(GenerateInBetweenPositions(runeIndices, _nextIndex), _nextIndex);
+            _player.GetComponent<BaseChecker>().SendIndices(GenerateInBetweenPositions(runeIndices, _nextIndex), _nextIndex);
+        }
+        else if (ControllerMode == Mode.Crafting && _canSendIndices)
+        {
+            CraftingManagerHolder.SendIndices(GenerateInBetweenPositions(runeIndices, _nextIndex), _nextIndex);
+        }
+#endif
 
         // 
         _canSendIndices = false;
     }
 
+    public static Vec2[] GenerateInBetweenPositions(Vec2[] indices, int size)
+    {
+        Vec2[] value;
+        value = size > 0 ? new Vec2[size - 1] : new Vec2[0];
+
+
+        for (int i = 0; i < size - 1; i++)
+        {
+            value[i] = indices[i] + indices[i + 1];
+        }
+
+        //Array.Sort(indices, (Vec2 v1, Vec2 v2) =>
+        //{
+        //    if (v1.X < v2.X)
+        //    {
+        //        return 1;
+        //    }
+        //    else if (v1.Y < v2.Y)
+        //    {
+        //        return 1;
+        //    }
+        //    return -1;
+        //});
+
+        string s = "";
+        foreach (var v in value)
+        {
+            s += "(" + v.X + ", " + v.Y + ") ";
+        }
+        print(s);
+
+        return value;
+    }
+
+
     void DrawToMouse(Vector2 mouse)
     {
-        // lineRenderer.positionCount = SlashLineIndex + 1;  // <-- uudempi unity kuin 5.5.1f1
-        // lineRenderer.positionCount = SlashLineIndex + 1;     // <-- unity 5.5.1f1
-        // lineRenderer.SetPosition(SlashLineIndex, new Vector3(mouse.x, mouse.y, 4f));
         if (LineController.GetLinePointCount() == 1)
         {
 
@@ -145,8 +189,8 @@ public class TouchController : MonoBehaviour
                 point.y = y;
 
                 ii++;
-                // _colliders[index].transform.position = new Vector3(start.x + x * offset, start.y + y * offset, 0);
-                // _colliders[index].radius = Radius;
+                // _colliders[size].transform.position = new Vector3(start.x + x * offset, start.y + y * offset, 0);
+                // _colliders[size].radius = Radius;
             }
         }
 
@@ -157,7 +201,7 @@ public class TouchController : MonoBehaviour
         {
             runeIndices[i] = new Vec2(0, 0);
         }
-        index = 0;
+        _nextIndex = 0;
         SetLineRendererCount(0);
 
         // Setup Crafting System
@@ -219,7 +263,7 @@ public class TouchController : MonoBehaviour
 
     void Update()
     {
-#if !UNITY_EDITOR 
+#if !UNITY_EDITOR           // todo: bugittaako enää XDDDDDDDDD
         if (_init == false) // todo: miksi bugittaa androidilla
         {
             // SetTouchContollerCenters(_craftingUiController.GetPos());
@@ -324,7 +368,7 @@ public class TouchController : MonoBehaviour
     private void OnTouchEnded()
     {
         SendIndices();
-        index = 0;
+        _nextIndex = 0;
 
         touchCollider.GetComponent<Collider2D>().enabled = false;
         _touching = false;
@@ -335,7 +379,7 @@ public class TouchController : MonoBehaviour
 
         if (Mode.Crafting == ControllerMode)
         {
-            _craftingUiController.SetAllCounts();
+            _craftingUiController.SetAllCounts(true);
         }
         else
         {
@@ -372,6 +416,8 @@ public class TouchController : MonoBehaviour
         _touchCounts[y * 3 + x]++;
     }
 
+
+    // private Vec2[] _touchPoints = new Vec2[maxRuneIndices];
     public void OnTouchDetected(int x, int y, Vector3 realTransform)
     {
         ResetColliders();
@@ -386,15 +432,35 @@ public class TouchController : MonoBehaviour
 
         if (_touching)
         {
+#if true
             Vector3 point = realTransform - transform.position;
-
             LineController.SetPoint(new Vector3(transform.position.x + point.x, transform.position.y + point.y, 4f));
-            if (index < maxRuneIndices)
+
+            if (_nextIndex < maxRuneIndices)
             {
-                runeIndices[index] = new Vec2(x, y);
+                runeIndices[_nextIndex] = new Vec2(x, y);
                 AddTouchCount(x, y);
-                index++;
+                _nextIndex++;
             }
+#else
+            // visuaali
+            Vector3 point = realTransform - transform.position;
+            LineController.SetPoint(new Vector3(transform.position.x + point.x, transform.position.y + point.y, 4f));
+
+            if (size < maxRuneIndices)
+            {
+                if (size != 0)
+                {
+                    runeIndices[size] = new Vec2(x, y);
+                    AddTouchCount(x, y);
+                    size++;
+                }
+                else
+                {
+
+                }
+            }
+#endif
         }
         _timer = Time.time + lineResetTime;
     }
@@ -402,7 +468,7 @@ public class TouchController : MonoBehaviour
     public bool[] BoolArrayFromIndices(Vec2[] indices)
     {
         bool[] value = new bool[9];
-        for (int i = 0; i < index; i++)
+        for (int i = 0; i < _nextIndex; i++)
         {
             int iii = GetBoolIndex(indices[i]);
             value[iii] = true;

@@ -33,17 +33,17 @@ public class RuneBarUiController : MonoBehaviour
     void SetAllHudImages()
     {
         Sprite[] runeImages = _playerRuneHolder.GetHudImages();
-        for(int i = 0; i < runeImages.Length; i++)
+        for(int i = 0; i < _runeHudImages.Length; i++)
         {
             if (runeImages[i] != null)
                 _runeHudImages[i].sprite = runeImages[i];
         }
     }
 
-    public void OnCd(int index, float duration)
+    public void OnCd(int index, float duration, Sprite OnCdImage)
     {
-        _faders[index].FadeOut(duration);
-        // StartCoroutine(LerpImageColor(index, duration));
+        _faders[index].FadeOut(duration, OnCdImage);
+        // StartCoroutine(LerpImageColor(_nextIndex, duration));
     }
 
     IEnumerator LerpImageColor(int index, float duration)

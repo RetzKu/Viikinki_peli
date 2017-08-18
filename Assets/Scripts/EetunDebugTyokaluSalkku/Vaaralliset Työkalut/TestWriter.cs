@@ -7,39 +7,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class TestWriter : MonoBehaviour
 {
-
-    private const int FileSize = 10 * 1024 * 1024;
-    void Start()
-    {
-        //var path = Path.Combine(Application.persistentDataPath, "bigfile.dat");
-        //try
-        //{
-        //    File.WriteAllBytes(path, new byte[FileSize]);
-        //    TestFileStream(path);
-        //    TestBinaryReaders(path);
-        //}
-        //finally
-        //{
-        //    File.Delete(path);
-        //}
-        //Chunk t = new Chunk();
-    }
-
-    void Update()
-    {
-        //TileType[,] a = new TileType[Chunk.CHUNK_SIZE, Chunk.CHUNK_SIZE];
-        //a[1,1] = TileType.Beach;
-
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    Save(a, "terve");
-        //}
-        //if (Input.GetKeyDown(KeyCode.B))
-        //{
-        //    Load("terve");
-        //}
-    }
-
     public static string GetChunkPath(string chunkName)
     {
         return Application.persistentDataPath + "/" + chunkName + ".sav";
@@ -80,9 +47,18 @@ public class TestWriter : MonoBehaviour
             // int c = 0;
             foreach (var keyvaluePair in tileObjects)
             {
-                writer.Write(keyvaluePair.Key.X);
-                writer.Write(keyvaluePair.Key.Y);
-                writer.Write((int)keyvaluePair.Value.GetComponent<Resource>().type);
+                if (!keyvaluePair.Value.activeSelf) // HOTFIX XD
+                {
+                    writer.Write(-1);
+                    writer.Write(-1);
+                    writer.Write((int)ResourceType.Max);
+                }
+                else
+                {
+                    writer.Write(keyvaluePair.Key.X);
+                    writer.Write(keyvaluePair.Key.Y);
+                    writer.Write((int)keyvaluePair.Value.GetComponent<Resource>().type);
+                }
                 // c++;
                 // Debug.Log((int)keyvaluePair.Value.GetComponent<Resource>().type);
             }
@@ -118,7 +94,7 @@ public class TestWriter : MonoBehaviour
             {
                 int size = reader.ReadInt32();
                 byte[] buffer = reader.ReadBytes(size);
-                TileType[,] tiles =  FromBytes(buffer);
+                TileType[,] tiles = FromBytes(buffer);
 
 
                 int count = reader.ReadInt32();
@@ -126,7 +102,19 @@ public class TestWriter : MonoBehaviour
 
                 for (int i = 0; i < count; i++)
                 {
-                    types.Add(new Vec2(reader.ReadInt32(), reader.ReadInt32()), (ResourceType)reader.ReadInt32());
+                        
+                    Vec2 pos = new Vec2(reader.ReadInt32(), reader.ReadInt32());
+                    ResourceType type = (ResourceType)reader.ReadInt32();
+
+                    if (type == ResourceType.Max) // HOTFIXS
+                    {
+                        continue;
+                    }
+                    types.Add(pos, type);
+
+                    // writer.Write(-1);
+                    // writer.Write(-1);
+                    // writer.Write((int)ResourceType.Max);
                     c++;
                 }
                 // Debug.Log("load " + chunkName + " " + c);
@@ -159,7 +147,7 @@ public class TestWriter : MonoBehaviour
         return mat;
     }
 
-    public static void PrintTile(TileType[,] map)
+public static void PrintTile(TileType[,] map)
     {
         string data = null;
         foreach (var row in map)
@@ -167,72 +155,5 @@ public class TestWriter : MonoBehaviour
             data += row.ToString();
         }
         Debug.Log(data);
-    }
-
-
-
-    private void TestFileStream(string path)
-    {
-        using (var stream = new FileStream(path, FileMode.Open))
-        {
-            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-            var readBytes = new byte[FileSize];
-            var log = "Read Size,Time\n";
-            foreach (var readSize in new[] { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096 })
-            {
-                stream.Position = 0;
-                stopwatch.Reset();
-                stopwatch.Start();
-                var offset = 0;
-                do
-                {
-                    offset += stream.Read(readBytes, offset, Math.Min(readSize, FileSize - offset));
-                }
-                while (offset < FileSize);
-                var time = stopwatch.ElapsedMilliseconds;
-                log += readSize + "," + time + "\n";
-            }
-            Debug.Log(log);
-        }
-    }
-
-    private void TestBinaryReaders(string path)
-    {
-        using (var stream = new FileStream(path, FileMode.Open))
-        {
-            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-            var log = "Reader,Time\n";
-            var numValues = FileSize / sizeof(ushort);
-            var readValues = new ushort[numValues];
-            var reader = new BinaryReader(stream);
-            stopwatch.Reset();
-            stopwatch.Start();
-            for (var i = 0; i < numValues; ++i)
-            {
-                readValues[i] = reader.ReadUInt16();
-            }
-            var time = stopwatch.ElapsedMilliseconds;
-            log += "BinaryReader," + time + "\n";
-
-            stream.Position = 0;
-            var bufferedReader = new BufferedBinaryReader(stream, 4096);
-            stopwatch.Reset();
-            stopwatch.Start();
-            while (bufferedReader.FillBuffer())
-            {
-                var readValsIndex = 0;
-                for (
-                    var numReads = bufferedReader.NumBytesAvailable / sizeof(ushort);
-                    numReads > 0;
-                    --numReads
-                )
-                {
-                    readValues[readValsIndex++] = bufferedReader.ReadUInt16();
-                }
-            }
-            time = stopwatch.ElapsedMilliseconds;
-            log += "BufferedBinaryReader," + time + "\n";
-            Debug.Log(log);
-        }
     }
 }

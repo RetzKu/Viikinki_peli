@@ -86,6 +86,8 @@ public interface ITileMap
     TileType GetTile(int x, int y);
     bool GetTileCollision(int x, int y);
     bool CanUpdatePathFind();
+
+    void AddLater_hack(int x, int y, GameObject go);
 }
 
 
@@ -117,6 +119,11 @@ public class MapGenerator : MonoBehaviour, ITileMap
         {
             return instance;
         }
+    }
+
+    public void AddLater_hack(int x, int y, GameObject go)
+    {
+        Debug.LogError("älä kutsu minua olen häck");
     }
 
     public int Width { get; set; }

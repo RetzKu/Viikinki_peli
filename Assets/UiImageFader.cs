@@ -18,17 +18,19 @@ public class UiImageFader : MonoBehaviour
         Overlay.transform.localScale = new Vector3(1f, 0f, 1f);
     }
 
-    public void FadeOut(float duration)
+    public void FadeOut(float duration, Sprite onCdImage)
     {
-        StartCoroutine(LerpOverlay(duration));
+        StartCoroutine(LerpOverlay(duration, onCdImage));
     }
 
-    IEnumerator LerpOverlay(float duration)
+    IEnumerator LerpOverlay(float duration, Sprite onCdImage)
     {
         float t = 0f;
 
         float increment = 0.02f / duration;
 
+        Sprite notOnCdSprite = Image.sprite;
+        Image.sprite = onCdImage;
         while (t <= 1f)
         {
             // Overlay.transform.position = Vector2.Lerp(_startPosition, new Vector2(_startPosition.x ,_startPosition.y - 100f), t);
@@ -37,5 +39,6 @@ public class UiImageFader : MonoBehaviour
             t += increment;
             yield return new WaitForSeconds(increment);
         }
+        Image.sprite = notOnCdSprite;
     }
 }

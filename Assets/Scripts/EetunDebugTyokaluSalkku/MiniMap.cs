@@ -14,12 +14,12 @@ public class MiniMap : MonoBehaviour
 
     void Start()
     {
-        GameObject rendererGo = new GameObject("Minimap renderer");
-        _renderer = rendererGo.AddComponent<SpriteRenderer>();
-        rendererGo.transform.parent = transform;
-        _playerTransform = GameObject.FindWithTag("Player").transform;
+        //GameObject rendererGo = new GameObject("Minimap renderer");
+        //_renderer = rendererGo.AddComponent<SpriteRenderer>();
+        //rendererGo.transform.parent = transform;
+        //_playerTransform = GameObject.FindWithTag("Player").transform;
 
-        Mesh.material.shader = Shader.Find("unlit");
+        // Mesh.material.shader = Shader.Find("unlit");
     }
 
     // nope

@@ -13,5 +13,8 @@ public class AoeEffectData
     public Rune AfterEffect;
     public Vector2 MovementDir;
     public float Speed;
+    public Color EndColor;
+    public Vector2 StartOffset;
+    public bool FollowsPlayer;
 }
 

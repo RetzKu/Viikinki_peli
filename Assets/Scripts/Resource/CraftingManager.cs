@@ -50,20 +50,12 @@ public class CraftingManager : MonoBehaviour
     void Start()
     {
         Player = GameObject.FindWithTag("Player");
-    }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            // näytä inventory Guille 
-            // delegatella?
-        }
+        OnResourceCountChanged += () => {  /* ääni */ };
     }
 
     // RuneHolder samalle gameobjectille, jolle CraftiReseptit
     // Resepti Itsessään laukaisee  TryCraftin();
-
     public bool TryToCraftItem(List<Cost> materials, GameObject prefab)
     {
         bool success = true;

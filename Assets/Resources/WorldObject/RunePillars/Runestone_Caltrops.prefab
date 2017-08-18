@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4078962792195378}
   - component: {fileID: 212030188211434896}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Rune_Caltrops_Red_Recipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4570826535632602}
   - component: {fileID: 212944633006081514}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Rune_Caltrops_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4948270269629186}
   - component: {fileID: 212875720399001058}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Rune_Caltrops_Blue_Recipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1593682653
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300026, guid: cda9de21021053a47b1a065b142ed522, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

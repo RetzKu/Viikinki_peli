@@ -10,14 +10,23 @@ public class WeaponBuffRune : Rune
 
     public Buff buff;
 
+
+    [Header("HUOMIO! vain visuaalit korjaa kun haluat tehdä 10000 lisää runea")]
+    public AoeEffectData FaderEffectData;
+
     public override void init(GameObject owner)
     {
         _owner = owner;     // Launcheriin visuaalinene efectio jos on sellainen 
+        this._launcher = owner.GetComponent<RuneEffectLauncher>();
     }
 
     public override void Fire()
     {
-        Debug.Log("start");
+        if (sprite != null && FaderEffectData != null)
+        {
+            _launcher.LaunchAoeFader(sprite, FaderEffectData);
+        }
+
         buff.Apply(_owner);   
     }
 

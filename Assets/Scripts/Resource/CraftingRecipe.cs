@@ -42,7 +42,6 @@ public class CraftingRecipe : Rune
         else
         {
             // TODO: CRAFTAUS FAILASI
-
         }
         // TODO: LAUNCHER, SOUND
     }

@@ -21,17 +21,18 @@ public class RuneEffectLauncher : MonoBehaviour
         if (_afterEffects.Count != 0) // testi mielessä
         {
             _afterEffects[_afterEffects.Count - 1].init(this.gameObject); // TODO: tietyille runeille ei toimi korjaa kun tulee single targets
+            _afterEffects[_afterEffects.Count - 1].InitInternalIndices();
             _afterEffects[_afterEffects.Count - 1].Fire(); // nyt ollaan aivan huluja / rekursio params aoedataan XD
             _afterEffects.RemoveAt(_afterEffects.Count - 1);
         }
     }
 
-    public void LaunchArrow(Sprite sprite, Vector3 lookAt)
+    public void LaunchArrow(Sprite sprite, Vector3 lookAt, Color speedColor)
     {
-        StartCoroutine(LaunchArrowEffect(sprite, lookAt, transform.position));
+        StartCoroutine(LaunchArrowEffect(sprite, lookAt, transform.position, speedColor));
     }
 
-    IEnumerator LaunchArrowEffect(Sprite sprite, Vector3 lookAt, Vector3 from)
+    IEnumerator LaunchArrowEffect(Sprite sprite, Vector3 lookAt, Vector3 from, Color speedColor)
     {
         GameObject go = new GameObject("arrow :D");
         var renderer = go.AddComponent<SpriteRenderer>();
@@ -39,24 +40,24 @@ public class RuneEffectLauncher : MonoBehaviour
         renderer.sprite = sprite;
 
         go.transform.position = this.transform.position;
-        go.transform.localScale = new Vector3(5f, 5f);
-
         go.transform.up = lookAt - from;
+
 
         // fade
         for (int i = 0; i < 40; i++)
         {
-            // go.transform.Translate(0f, 0.2f * Time.deltaTime, 0f); 
-            go.transform.position += new Vector3(0f, 10f * Time.deltaTime, 0f);
+            go.transform.position += new Vector3(0f, 4f * Time.deltaTime, 0f);
             go.transform.up = lookAt - go.transform.position;
+            // renderer.color = Color.Lerp(Color.white, speedColor, (float) i / 40); // XD
+
             yield return new WaitForSeconds(0.01f);
         }
 
-        StartCoroutine(attack(go, lookAt));
+        StartCoroutine(attack(go, lookAt, speedColor));
         // Destroy(go);
     }
 
-    IEnumerator attack(GameObject go, Vector3 lookAt)
+    IEnumerator attack(GameObject go, Vector3 lookAt, Color speedColor)
     {
         for (int i = 0; i < 50; i++)
         {
@@ -72,6 +73,11 @@ public class RuneEffectLauncher : MonoBehaviour
         StartCoroutine(LaunchEffect(sprite, data, mask));
     }
 
+    public void LaunchAoeFader(Sprite sprite, AoeEffectData data)
+    {
+        StartCoroutine(LaunchFader(sprite, data));
+    }
+
     void OnDrawGizmos()
     {
         if (_aoeEffectRunning)
@@ -79,6 +85,49 @@ public class RuneEffectLauncher : MonoBehaviour
             Gizmos.DrawWireSphere(_aoeStartPoint, _aoeEffectRadius);
         }
     }
+
+    IEnumerator LaunchFader(Sprite sprite, AoeEffectData buffData)
+    {
+        
+        GameObject go = new GameObject("Fader :D");
+        var renderer = go.AddComponent<SpriteRenderer>();
+        renderer.sortingLayerName = "RuneEffects";
+        renderer.sprite = sprite;
+
+        go.transform.position = this.transform.position;
+        _aoeStartPoint = go.transform.position; // debgu
+
+        int iterationForEffect = buffData.Frames;
+        float growAmountPerFrame = (buffData.EndScale - buffData.StartScale) / buffData.Frames;
+        go.transform.localScale = new Vector3(buffData.StartScale, buffData.StartScale);
+
+        float t = 0;
+        float tIncrement = 1f / iterationForEffect;
+
+        go.transform.Translate(buffData.StartOffset);
+
+        for (int i = 0; i < iterationForEffect; i++)
+        {
+            go.transform.localScale = new Vector3(go.transform.localScale.x + growAmountPerFrame, go.transform.localScale.y + growAmountPerFrame);
+            go.transform.Rotate(new Vector3(0, 0, buffData.TotalRotation / iterationForEffect));
+
+            if (buffData.FollowsPlayer)
+            {
+                print(transform.position);
+                go.transform.position = transform.position;
+            }
+
+            renderer.color = Color.Lerp(Color.white, buffData.EndColor, t);
+            t += tIncrement;
+            yield return null;
+        }
+
+        Destroy(go);
+        _aoeEffectRunning = false; //debug
+    }
+
+
+
 
     // private readonly int IterationForEffect = 60;
     IEnumerator LaunchEffect(Sprite sprite, AoeEffectData buffData, LayerMask mask)
@@ -97,10 +146,22 @@ public class RuneEffectLauncher : MonoBehaviour
         float growAmountPerFrame = (buffData.EndScale - buffData.StartScale) / buffData.Frames;
         go.transform.localScale = new Vector3(buffData.StartScale, buffData.StartScale);
 
+        float t = 0;
+        float tIncrement = 1f / iterationForEffect;
+
+        go.transform.Translate(buffData.StartOffset);
+
         for (int i = 0; i < iterationForEffect; i++)
         {
             go.transform.localScale = new Vector3(go.transform.localScale.x + growAmountPerFrame, go.transform.localScale.y + growAmountPerFrame);
-            go.transform.Translate(buffData.MovementDir * buffData.Speed * Time.deltaTime);
+            // go.transform.Translate(buffData.MovementDir * buffData.Speed * Time.deltaTime);
+
+            if (buffData.FollowsPlayer)
+            {
+                print(transform.position);
+                go.transform.position = transform.position;
+            }
+
             go.transform.Rotate(new Vector3(0, 0, buffData.TotalRotation / iterationForEffect));
 
             if (iterationForEffect % 3 == 0 || iterationForEffect <= 1) // mikä on hyvä applytys aika
@@ -117,10 +178,12 @@ public class RuneEffectLauncher : MonoBehaviour
                     }
                 }
             }
+
+            renderer.color = Color.Lerp(Color.white, buffData.EndColor, t);
+            t += tIncrement;
             yield return null;
         }
 
-        // TODO: effectin fadetus !
         Destroy(go);
 
         _aoeEffectRunning = false; //debug

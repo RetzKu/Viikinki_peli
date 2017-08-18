@@ -80,7 +80,7 @@ public class BaseChecker : MonoBehaviour
         //}
     }
 
-    public void SendIndices(bool[] positions, int[] touchCounts)
+    public void SendIndices(Vec2[] positions, int realSize)
     {
         var RunestoneCast = Physics2D.CircleCastAll(_player.transform.position, 5, Vector2.zero, 0f, LayerMask.GetMask("RuneStone"));
         if (RunestoneCast.Length != 0)
@@ -90,7 +90,7 @@ public class BaseChecker : MonoBehaviour
                 var infostone = t.transform.GetComponent<InfoStone>();
                 infostone.AlphaEffect();
                 ClosebyInfoStones.Add(infostone);
-                infostone.TryToTeachRune(positions, touchCounts);
+                infostone.TryToTeachRune(positions, realSize);
             }
         }
     }

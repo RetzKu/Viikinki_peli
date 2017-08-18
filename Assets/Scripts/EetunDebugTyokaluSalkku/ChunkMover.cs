@@ -11,6 +11,12 @@ public class Vec2
         Y = y;
     }
 
+
+    public static Vec2 operator +(Vec2 a, Vec2 b)
+    {
+        return new Vec2(a.X + b.X, a.Y + b.Y);
+    }
+
     public static bool operator ==(Vec2 a, Vec2 b)
     {
         return (a.X == b.X && a.Y == b.Y);

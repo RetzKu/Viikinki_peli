@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4690072403777368}
   - component: {fileID: 212065226168945396}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: runestones_83
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4990828564113026}
   - component: {fileID: 212889864483981778}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Rune_Sword_Blue_Recipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4075841592376274}
   - component: {fileID: 212398214876963286}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Rune_Sword_Red_Recipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1593682653
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300022, guid: cda9de21021053a47b1a065b142ed522, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

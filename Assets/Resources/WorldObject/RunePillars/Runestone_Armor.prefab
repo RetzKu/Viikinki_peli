@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4031661696155636}
   - component: {fileID: 212835223818821006}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Rune_Armor_Blue_Recipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4372942371097676}
   - component: {fileID: 212165599613233912}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Rune_Armor_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4490325402672738}
   - component: {fileID: 212258963537324496}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Rune_Armor_Red_Recipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,7 +300,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1593682653
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300012, guid: cda9de21021053a47b1a065b142ed522, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

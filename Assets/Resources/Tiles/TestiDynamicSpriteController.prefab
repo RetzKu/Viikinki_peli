@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114065663959614504}
   m_Layer: 0
   m_Name: TestiDynamicSpriteController
-  m_TagString: Untagged
+  m_TagString: SpriteController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,3 +52,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Settings: {fileID: 11400000, guid: a7f5f7fc6ece0ea46aca264de5477edc, type: 2}
+  Mountains:
+  - {fileID: 21300046, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300046, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300042, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300034, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300040, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300030, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300000, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300032, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300036, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300022, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300010, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300022, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300006, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300018, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300008, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300000, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  FlatMountains:
+  - {fileID: 21300000, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300002, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300004, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300012, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300014, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300016, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300024, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300026, guid: ae518f85bbf160c458cafff9631941b7, type: 3}
+  - {fileID: 21300028, guid: ae518f85bbf160c458cafff9631941b7, type: 3}

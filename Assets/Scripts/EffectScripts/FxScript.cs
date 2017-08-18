@@ -12,6 +12,8 @@ public class FxScript : MonoBehaviour {
     public float MaxDistance;
     public Vector3 SpriteScale = new Vector3(1f, 1f, 1f);
     [Header("Default x: 0, y: 0.3, z: 0")]
+    private Vector3 DefaultOffSet;
+    private float DefaultDistance;
     public Vector3 EffectOffSet;
 
     private Vector3 MousePoint;
@@ -23,6 +25,8 @@ public class FxScript : MonoBehaviour {
 
 	void Start ()
     {
+        DefaultOffSet = EffectOffSet;
+        DefaultDistance = MaxDistance;
         Fx = new GameObject("Fx");
         Fx.layer = LayerMask.NameToLayer("PlayerFx");
         Fx.AddComponent<SpriteRenderer>().sprite = BareHandSprite;
@@ -74,7 +78,7 @@ public class FxScript : MonoBehaviour {
         }
         else
         {
-            MaxDistance = 0.3f;
+            MaxDistance = DefaultDistance;
         }
         if (GetComponent<PlayerScript>().weaponInHand != null)
         {
@@ -83,7 +87,7 @@ public class FxScript : MonoBehaviour {
         }
         else
         {
-            EffectOffSet = new Vector3(0f, 0.3f, 0f);
+            EffectOffSet = DefaultOffSet;
         }
 
 #if UNITY_EDITOR
@@ -106,6 +110,7 @@ public class FxScript : MonoBehaviour {
     {
         Vector3 Mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var n = 0 - (Mathf.Atan2(MouseDir.y, MouseDir.x)) * 180 / Mathf.PI;
+        Debug.Log(n);
         //var n = 0 - (Mathf.Atan2(Base.y - Base.y + MouseDir.y,Base.x - Base.x + MouseDir.x)) * 180 / Mathf.PI; //origin - target
         //print(n);
         Copy.transform.Rotate(0, 0, n * -1);

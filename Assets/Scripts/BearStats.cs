@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +9,8 @@ public class BearStats : enemyStats
     // flägi jolla katsotaan onko kuolemasusi jo spawnattu
     private bool flag = false;
     private Transform Fx;
+    bool Crittable = false;
+
     private void Awake()
     {
         Fx = transform.Find("FX_001").transform;
@@ -25,7 +27,11 @@ public class BearStats : enemyStats
     public override void takeDamage(float rawDamageTaken)
     {
         startTime = Time.time;
-        hp = hp - (rawDamageTaken / armor);
+        if (Crittable == false)
+        {
+            hp = CalculateArmor((int)hp, (int)armor, (int)rawDamageTaken); 
+        }
+        else { hp = CalculateArmor((int)hp, (int)armor, (int)rawDamageTaken * 2); }
         GetComponent<generalAi>().KnockBack();
         foreach (SpriteRenderer t in GetComponentsInChildren<SpriteRenderer>()) { t.color = new Color(255f, 0f, 0f, 255f); }
         print(gameObject + " has " + hp + " hp left.");
@@ -47,8 +53,10 @@ public class BearStats : enemyStats
     {
         while(Fx.gameObject.activeSelf == false)
         {
+            Crittable = true;
             yield return new WaitUntil(() => Fx.gameObject.activeSelf == true);
         }
+        Crittable = false;
        
         var Cast = Physics2D.CircleCast(Fx.transform.position, AttackArea, Vector3.zero, 0, LayerMask.GetMask("PlayerHitBox"));
         AudioManager.instance.Play("Bear");

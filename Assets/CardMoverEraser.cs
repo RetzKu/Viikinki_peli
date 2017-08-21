@@ -18,6 +18,7 @@ public class CardMoverEraser : MonoBehaviour,
     private bool _newCardFlag = false;
     private bool _dragClick = false; // click false, drag true
     private bool _equipped = false;
+    private bool _equipped2 = false;
     CardMoverEraser[] kortit;
 
     void Start()
@@ -31,6 +32,7 @@ public class CardMoverEraser : MonoBehaviour,
         string tempString = gameObject.name.Substring(gameObject.name.Length - 1, 1);
         int tempInt = int.Parse(tempString);
         _equipped = transform.parent.GetComponent<DeckScript>().EquipArrayCheck(tempInt);
+        _equipped2 = transform.parent.GetComponent<DeckScript>().ActiveArmorCheck(tempInt);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -39,34 +41,26 @@ public class CardMoverEraser : MonoBehaviour,
         string tempString = gameObject.name.Substring(gameObject.name.Length - 1, 1);
         int tempInt = int.Parse(tempString);
 
-        if (PlayerScript.Player.GetComponent<PlayerScript>().Inventory.InventoryData[tempInt].GetComponent<armorScript>() != null)
+        //Ase
+        if (_dragClick == false)
         {
-            //Armori
-            /*
-            if (_dragClick == false)
-            {
-                equip();
+            equip();
 
-                // Kertoo inventorylle että laittaa käteen oikean esineen
-                if (_equipped)
-                    PlayerScript.Player.GetComponent<PlayerScript>().Inventory.EquipItem(tempInt);
-            }
-            _dragClick = false;
-            */
-        }
-        else
-        {
-            //Ase
-            if (_dragClick == false)
+            // Kertoo inventorylle että laittaa käteen oikean esineen
+            if (_equipped)
             {
-                equip();
-                
-                // Kertoo inventorylle että laittaa käteen oikean esineen
-                if (_equipped)
-                    PlayerScript.Player.GetComponent<PlayerScript>().Inventory.EquipItem(tempInt);
+                PlayerScript.Player.GetComponent<PlayerScript>().Inventory.EquipItem(tempInt);
             }
-            _dragClick = false;
+
+            // Kertoo inventorylle että laittaa oikean armorin päälle
+            if (_equipped2)
+            {
+                //PlayerScript.Player.GetComponent<PlayerScript>().UnEquipArmor();
+                PlayerScript.Player.GetComponent<PlayerScript>().Inventory.EquipItem(tempInt);
+                transform.parent.GetComponent<DeckScript>().SetArmorActive(tempInt);
+            }
         }
+        _dragClick = false;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -117,7 +111,7 @@ public class CardMoverEraser : MonoBehaviour,
 
         if (_returnBack)
         {
-            transform.position = Vector2.Lerp( new Vector2(_startPosition.x + transform.parent.parent.transform.position.x, _startPosition.y + _startPosition.y), _endPosition, _t);
+            transform.position = Vector2.Lerp(new Vector2(_startPosition.x + transform.parent.parent.transform.position.x, _startPosition.y + _startPosition.y), _endPosition, _t);
             _t -= Time.deltaTime * ReturnSpeed;
 
             if (_t < 0.0f)
@@ -168,52 +162,99 @@ public class CardMoverEraser : MonoBehaviour,
 
     private void equip()
     {
-        if (_equipped == false)
-        {
-            Image tempImage = transform.GetChild(1).GetComponent<Image>();
-            Color tempColor = tempImage.color;
-            kortit = FindObjectsOfType(typeof(CardMoverEraser)) as CardMoverEraser[];
-            foreach (CardMoverEraser kortti in kortit)
-            {
-                kortti.transform.GetChild(1).GetComponent<Image>().color = new Color(tempColor.r, tempColor.g, tempColor.b, 0f);
-                kortti._equipped = false;
-            };
-            tempImage.color = new Color(tempColor.r, tempColor.g, tempColor.b, 0.2667f);
-            _equipped = true;
-        }
-        else
-        {
-            // Katsoo gameobjectin nimestä viimeisen numeron
-            string tempString = gameObject.name.Substring(gameObject.name.Length - 1, 1);
-            int tempInt = int.Parse(tempString);
+        // Katsoo gameobjectin nimestä viimeisen numeron
+        string tempString = gameObject.name.Substring(gameObject.name.Length - 1, 1);
+        int tempInt = int.Parse(tempString);
 
-            if (PlayerScript.Player.GetComponent<PlayerScript>().Inventory.InventoryData[tempInt].GetComponent<armorScript>() != null){
-                // Armori
-                PlayerScript.Player.GetComponent<PlayerScript>().UnEquipArmor();
+        if (PlayerScript.Player.GetComponent<PlayerScript>().Inventory.InventoryData[tempInt].GetComponent<armorScript>() != null)
+        {
+            // Armor -> _equipped2
+            // Armor equip
+            if (_equipped2 == false)
+            {
+                Image tempImage = transform.GetChild(1).GetComponent<Image>();
+                Color tempColor = tempImage.color;
+                kortit = FindObjectsOfType(typeof(CardMoverEraser)) as CardMoverEraser[];
+                foreach (CardMoverEraser kortti in kortit)
+                {
+                    if (transform.parent.GetComponent<DeckScript>().ArmorWeaponCheck(tempInt))
+                    {
+                        kortti.transform.GetChild(1).GetComponent<Image>().color = new Color(tempColor.r, tempColor.g, tempColor.b, 0f);
+                    }
+                    kortti._equipped2 = false;
+                }
+                tempImage.color = new Color(tempColor.r, tempColor.g, tempColor.b, 0.2667f);
+                _equipped2 = true;
             }
+            // Armor unequip
             else
             {
-                // Ase
-                PlayerScript.Player.GetComponent<PlayerScript>().UnEquip();
+                PlayerScript.Player.GetComponent<PlayerScript>().UnEquipArmor();
+                transform.parent.GetComponent<DeckScript>().SetArmorUnactive(tempInt);
+                Image tempImage = transform.GetChild(1).GetComponent<Image>();
+                Color tempColor = tempImage.color;
+                tempImage.color = new Color(tempColor.r, tempColor.g, tempColor.b, 0f);
+                _equipped2 = false;
             }
-            Image tempImage = transform.GetChild(1).GetComponent<Image>();
-            Color tempColor = tempImage.color;
-            tempImage.color = new Color(tempColor.r, tempColor.g, tempColor.b, 0f);
-            _equipped = false;
         }
 
+        else
+        {
+            // Ase -> _equipped
+            // Ase equip
+            if (_equipped == false)
+            {
+                Image tempImage = transform.GetChild(1).GetComponent<Image>();
+                Color tempColor = tempImage.color;
+                kortit = FindObjectsOfType(typeof(CardMoverEraser)) as CardMoverEraser[];
+                foreach (CardMoverEraser kortti in kortit)
+                {
+                    if (!transform.parent.GetComponent<DeckScript>().ArmorWeaponCheck(tempInt))
+                    {
+                        kortti.transform.GetChild(1).GetComponent<Image>().color = new Color(tempColor.r, tempColor.g, tempColor.b, 0f);
+                    }
+                    kortti._equipped = false;
+                };
+                tempImage.color = new Color(tempColor.r, tempColor.g, tempColor.b, 0.2667f);
+                _equipped = true;
+            }
+            // Ase unequip
+            else
+            {
+                PlayerScript.Player.GetComponent<PlayerScript>().UnEquip();
+                Image tempImage = transform.GetChild(1).GetComponent<Image>();
+                Color tempColor = tempImage.color;
+                tempImage.color = new Color(tempColor.r, tempColor.g, tempColor.b, 0f);
+                _equipped = false;
+            }
+        }
     }
+
     public bool checkEquip()
     {
         if (_equipped) return true;
         else return false;
     }
 
+    public bool checkEquip2()
+    {
+        if (_equipped2) return true;
+        else return false;
+    }
+
     public void AutoEquipFirstItem()
     {
-            Image tempImage = transform.GetChild(1).GetComponent<Image>();
-            Color tempColor = tempImage.color;
-            tempImage.color = new Color(tempColor.r, tempColor.g, tempColor.b, 0.2667f);
-            _equipped = true;
+        Image tempImage = transform.GetChild(1).GetComponent<Image>();
+        Color tempColor = tempImage.color;
+        tempImage.color = new Color(tempColor.r, tempColor.g, tempColor.b, 0.2667f);
+        _equipped = true;
+    }
+
+    public void AutoEquipFirstItem2()
+    {
+        Image tempImage = transform.GetChild(1).GetComponent<Image>();
+        Color tempColor = tempImage.color;
+        tempImage.color = new Color(tempColor.r, tempColor.g, tempColor.b, 0.2667f);
+        _equipped2 = true;
     }
 }

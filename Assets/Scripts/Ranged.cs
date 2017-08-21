@@ -36,4 +36,15 @@ public class Ranged : weaponStats
         if (Weapon.transform.localScale.x < 0){ Vector3 Scale = Weapon.transform.localScale; Scale.x *= -1; Weapon.transform.localScale = Scale;}
 
     }
+    public void Reposition(Transform Hand,bool enemy)
+    {
+        Weapon = transform.gameObject;
+
+        if (Hand.name == "u_l_hand") { Weapon.transform.localRotation = Quaternion.Euler(0, 0, 90); Weapon.GetComponent<SpriteRenderer>().sortingOrder = -1; }
+        if (Hand.name == "d_r_hand") { Weapon.transform.localRotation = Quaternion.Euler(0, 0, -90); }
+        if (Hand.name == "s_l_hand") { Weapon.transform.localRotation = Quaternion.Euler(0, 0, -67); Weapon.GetComponent<SpriteRenderer>().sortingOrder = -2; }
+
+        if (Weapon.transform.localScale.x < 0) { Vector3 Scale = Weapon.transform.localScale; Scale.x *= -1; Weapon.transform.localScale = Scale; }
+
+    }
 }

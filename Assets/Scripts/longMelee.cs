@@ -34,4 +34,13 @@ public class longMelee : weaponStats
         if (Hand.name == "s_l_hand") { Weapon.transform.localRotation = Quaternion.Euler(0, 0,-90); Weapon.GetComponent<SpriteRenderer>().sortingOrder = 11; }
 
     }
+    public void Reposition(Transform Hand,bool enemy)
+    {
+        Weapon = transform.gameObject;
+
+        if (Hand.name == "u_l_hand") { Weapon.transform.localRotation = Quaternion.Euler(0, 0, 6); Weapon.GetComponent<SpriteRenderer>().sortingOrder = -6; }
+        if (Hand.name == "d_r_hand") { Weapon.transform.localRotation = Quaternion.Euler(0, 0, 163.6f); Weapon.GetComponent<SpriteRenderer>().sortingOrder = -2; }
+        if (Hand.name == "s_l_hand") { Weapon.transform.localRotation = Quaternion.Euler(0, 0, -90); Weapon.GetComponent<SpriteRenderer>().sortingOrder = -2; }
+
+    }
 }

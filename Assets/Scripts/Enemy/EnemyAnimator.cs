@@ -52,9 +52,11 @@ internal class EnemyAnimator : MonoBehaviour {
         if(GetComponent<archerStats>() == null)
         {
             Hand = new HandRoot(Hands[0], SpriteFinderScript.Instance.RandomMeleeWeapon(), Hands);
+            
         }
         else
         {
+            Bow.GetComponent<SpriteRenderer>().sortingLayerName = "ObjectLayer";
             Hand = new HandRoot(Hands[0], Bow, Hands);
         }
 
@@ -234,6 +236,7 @@ internal class EnemyAnimator : MonoBehaviour {
             _Weapon = Instantiate(Weapon);
             DestroyObject(_Weapon.GetComponent<Collider2D>());
             Hands = HandsList;
+            _Weapon.GetComponent<SpriteRenderer>().sortingLayerName = "ObjectLayer";
         }
 
         public void SwapHand(enemyDir Direction)
@@ -253,9 +256,9 @@ internal class EnemyAnimator : MonoBehaviour {
 
         private void WeaponSettings()
         {
-            if(_Weapon.GetComponent<Melee>() != null) { _Weapon.GetComponent<Melee>().Reposition(_Hand); }
-            else if (_Weapon.GetComponent<longMelee>() != null) { _Weapon.GetComponent<longMelee>().Reposition(_Hand); }
-            else if (_Weapon.GetComponent<Ranged>() != null) { _Weapon.GetComponent<Ranged>().Reposition(_Hand); }
+            if(_Weapon.GetComponent<Melee>() != null) { _Weapon.GetComponent<Melee>().Reposition(_Hand,true); }
+            else if (_Weapon.GetComponent<longMelee>() != null) { _Weapon.GetComponent<longMelee>().Reposition(_Hand,true); }
+            else if (_Weapon.GetComponent<Ranged>() != null) { _Weapon.GetComponent<Ranged>().Reposition(_Hand,true); }
         }
 
     }

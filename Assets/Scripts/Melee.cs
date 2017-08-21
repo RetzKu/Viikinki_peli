@@ -80,4 +80,40 @@ public class Melee : weaponStats
                 }
         }
     }
+    public void Reposition(Transform Hand,bool enemy)
+    {
+
+        GameObject Weapon = transform.gameObject;
+        if (Weapon.transform.localScale.x < 0) { Vector3 Scale = Weapon.transform.localScale; Scale.x *= -1; Weapon.transform.localScale = Scale; }
+
+        switch (Hand.transform.name)
+        {
+            case "s_l_hand":
+                {
+                    Quaternion rotation = Quaternion.Euler(0, 0, -90);
+                    Weapon.transform.position = Hand.position;
+                    Weapon.transform.localRotation = rotation;
+                    Weapon.GetComponent<SpriteRenderer>().sortingOrder = -1;
+                    break;
+                }
+            case "u_l_hand":
+                {
+                    Quaternion rotation = Quaternion.Euler(0, 0, 32.8f);
+                    Weapon.transform.SetParent(Hand);
+                    Weapon.transform.position = Hand.position;
+                    Weapon.transform.localRotation = rotation;
+                    Weapon.GetComponent<SpriteRenderer>().sortingOrder = -4;
+                    break;
+                }
+            case "d_r_hand":
+                {
+                    Quaternion rotation = Quaternion.Euler(0, 0, 103.594f);
+                    Weapon.transform.position = Hand.position;
+                    Weapon.transform.localRotation = rotation;
+                    Weapon.GetComponent<SpriteRenderer>().sortingOrder = -1;
+                    Vector3 Scale = Weapon.transform.localScale; Scale.x *= -1; Weapon.transform.localScale = Scale;
+                    break;
+                }
+        }
+    }
 }

@@ -23,12 +23,14 @@ public class door : MonoBehaviour
     private TileMap _tilemap;
     bool spawnedMobs = false;
     BossTypes boss = BossTypes.unInit;
-
     void Start()
     {
         _tilemap = GameObject.FindWithTag("Tilemap").GetComponent<TileMap>();
     }
-
+    public void activateFire()
+    {
+        fireplace.GetComponent<CampFire>().setRuneActive();
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         print(other.tag);

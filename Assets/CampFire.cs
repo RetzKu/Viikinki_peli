@@ -65,31 +65,31 @@ public class CampFire : Resource
     }
 
     private FireState test = FireState.OnFire;
-    public void Update()
-    {
+    //public void Update()
+    //{
 
 
-        //if (Input.GetKeyDown(KeyCode.L))
-        //{
-        //    setRuneActive();
-        //    print("got input");
-        //    //test++;
-        //    //if ((int)test == 3)
-        //    //{
-        //    //    test = 0;
-        //    //}
-        //}
-        //if (Input.GetKeyDown(KeyCode.K))
-        //{
-        //    activateFirePlace();
-        //    print("got input");
-        //    //test++;
-        //    //if ((int)test == 3)
-        //    //{
-        //    //    test = 0;
-        //    //}
-        //}
-    }
+    //    //if (Input.GetKeyDown(KeyCode.L))
+    //    //{
+    //    //    setRuneActive();
+    //    //    print("got input");
+    //    //    //test++;
+    //    //    //if ((int)test == 3)
+    //    //    //{
+    //    //    //    test = 0;
+    //    //    //}
+    //    //}
+    //    //if (Input.GetKeyDown(KeyCode.K))
+    //    //{
+    //    //    activateFirePlace();
+    //    //    print("got input");
+    //    //    //test++;
+    //    //    //if ((int)test == 3)
+    //    //    //{
+    //    //    //    test = 0;
+    //    //    //}
+    //    //}
+    //}
     void setchild(GameObject go)
     {
         go.transform.position = transform.position + new Vector3(1.0f, 0, 0);

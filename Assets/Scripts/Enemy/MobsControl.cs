@@ -69,12 +69,12 @@ public class MobsControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!naturalSpawn)
+        if(!naturalSpawn)
         {
             if (Input.GetKeyDown("y"))
             {
                 var pl = player.GetComponent<Rigidbody2D>().position;
-                SpawnBoids(pl.x, pl.y, 4f, Mob_Amount);
+                SpawnBoids(pl.x, pl.y, 4f, Mob_Amount);          
             }
             if (Input.GetKeyDown("m"))
             {
@@ -104,8 +104,8 @@ public class MobsControl : MonoBehaviour
                     k = player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(x, y));
                     tries++;
                 }
-                while (k == PathFinder.Dir.NoDir && tries < 5);
-                if (tries <= 5 && x > 0 && y > 0 && k != PathFinder.Dir.error)
+                while (k == PathFinder.Dir.NoDir && tries<5);
+                if(tries <= 5 && x > 0 && y > 0 && k != PathFinder.Dir.error)
                 {
                     if (!naturalSpawn)
                     {
@@ -113,7 +113,7 @@ public class MobsControl : MonoBehaviour
                         {
                             GameObject m;
                             m = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
-                            m.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Archer, player);
+                            m.GetComponent<generalAi>()._InitStart(x, y,EnemyType.Archer, player);
                             Boids.Add(m);
                         }
                         if (spawnWolfs)
@@ -125,7 +125,7 @@ public class MobsControl : MonoBehaviour
                         }
 
                     }
-                    else if (tries < 5)
+                    else if(tries < 5)
                     {
                         randomSpawn(x, y);
                     }
@@ -133,9 +133,13 @@ public class MobsControl : MonoBehaviour
                     //wolfBoids.Add(go);
 
                 }
-                if (tries > 5 && cave)
+                if(tries > 5 && cave)
                 {
                     door.GetComponent<door>().mobs -= 1;
+                    if(door.GetComponent<door>().mobs == 0)
+                    {
+                        door.GetComponent<door>().activateFire(); // toimii teoreettisesti
+                    }
                 }
                 spawner[0].amount--;
 
@@ -152,7 +156,7 @@ public class MobsControl : MonoBehaviour
         {
             if (Boids[ind].GetComponent<generalAi>().killMyself())
             {
-                if (Boids[ind].GetComponent<generalAi>().MyType == EnemyType.bear && Boids[ind].GetComponent<generalAi>().kys)
+                if(Boids[ind].GetComponent<generalAi>().MyType == EnemyType.bear && Boids[ind].GetComponent<generalAi>().kys)
                 {
 
                     Boids[ind].GetComponent<generalAi>().enabled = false;
@@ -166,13 +170,17 @@ public class MobsControl : MonoBehaviour
                 if (cave)
                 {
                     door.GetComponent<door>().mobs -= 1;
+                    if (door.GetComponent<door>().mobs == 0)
+                    {
+                        door.GetComponent<door>().activateFire(); // toimii teoreettisesti
+                    }
                 }
             }
             else
             {
                 if (slow)
                 {
-                    Boids[ind].GetComponent<generalAi>().SlowRune(5f, 0.5f);
+                    Boids[ind].GetComponent<generalAi>().SlowRune(5f,0.5f);
                     print("slow");
                 }
                 //Boids[ind].GetComponent<generalAi>().UpdatePosition();
@@ -221,7 +229,7 @@ public class MobsControl : MonoBehaviour
         Boids.Add(m);
     }
 
-    void randomSpawn(float x, float y)
+    void randomSpawn(float x,float y)
     {
         //for(int i = 0; i < maxamount; i++)
         //{
@@ -232,12 +240,12 @@ public class MobsControl : MonoBehaviour
             r -= noSpawn;
             int tulos = round(r);
 
-            if (tulos == BearR)
+            if(tulos == BearR)
             {
                 go = Instantiate(Bear, new Vector2(x, y), Quaternion.identity);
                 go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.bear, player);
             }
-            else if (tulos == ArcherR)
+            else if(tulos == ArcherR)
             {
                 go = Instantiate(Archer, new Vector2(x, y), Quaternion.identity);
                 go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Archer, player);
@@ -245,7 +253,7 @@ public class MobsControl : MonoBehaviour
             else if (tulos == MeleeR)
             {
                 go = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
-                go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Archer, player);
+                go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Archer, player); 
             }
             else if (tulos == WolfR)
             {
@@ -266,7 +274,7 @@ public class MobsControl : MonoBehaviour
 
     int round(int r)
     {
-        return (Mathf.Abs(ArcherR - r) < Mathf.Abs(MeleeR - r)) ? (Mathf.Abs(WolfR - r) < Mathf.Abs(ArcherR - r)) ? (Mathf.Abs(WolfR - r) < Mathf.Abs(BearR - r)) ? WolfR : BearR : (Mathf.Abs(ArcherR - r) < Mathf.Abs(BearR - r)) ? ArcherR : BearR : (Mathf.Abs(WolfR - r) < (MeleeR - r)) ? (Mathf.Abs(WolfR - r) < Mathf.Abs(BearR - r)) ? WolfR : BearR : (Mathf.Abs(MeleeR - r) < Mathf.Abs(BearR - r)) ? MeleeR : BearR;
+        return (Mathf.Abs(ArcherR - r) < Mathf.Abs(MeleeR - r)) ? (Mathf.Abs(WolfR - r) < Mathf.Abs(ArcherR - r)) ? (Mathf.Abs(WolfR - r) < Mathf.Abs(BearR - r)) ?WolfR :BearR : (Mathf.Abs(ArcherR - r) < Mathf.Abs(BearR - r)) ? ArcherR:BearR:(Mathf.Abs(WolfR - r) < (MeleeR - r)) ? (Mathf.Abs(WolfR - r) < Mathf.Abs(BearR - r)) ? WolfR : BearR : (Mathf.Abs(MeleeR - r) < Mathf.Abs(BearR - r)) ? MeleeR:BearR;
     }
 
 }

@@ -1,19 +1,19 @@
 fileFormatVersion: 2
 guid: f513e2f844b5f8548b35885ac0057c39
-timeCreated: 1503061352
+timeCreated: 1503295972
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: resources_ground_bone
-    21300002: resources_ground_teeth
-    21300004: resources_ground_bearfur
-    21300006: resources_ground_stone
-    21300008: resources_ground_wood
-    21300010: resources_ground_seaweed
-    21300012: resources_ground_string
-    21300014: resources_ground_feather
-    21300016: resources_ground_fish
-    21300018: resources_ground_pine
+    21300000: resources_ground_bbone
+    21300002: resources_ground_dteeth
+    21300004: resources_ground_fbearfur
+    21300006: resources_ground_gstone
+    21300008: resources_ground_awood
+    21300010: resources_ground_iseaweed
+    21300012: resources_ground_cstring
+    21300014: resources_ground_hfeather
+    21300016: resources_ground_jfish
+    21300018: resources_ground_kpine
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: resources_ground_bone
+      name: resources_ground_bbone
       rect:
         serializedVersion: 2
         x: 1
@@ -149,7 +149,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_teeth
+      name: resources_ground_dteeth
       rect:
         serializedVersion: 2
         x: 22
@@ -162,7 +162,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_bearfur
+      name: resources_ground_fbearfur
       rect:
         serializedVersion: 2
         x: 35
@@ -175,7 +175,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_stone
+      name: resources_ground_gstone
       rect:
         serializedVersion: 2
         x: 1
@@ -188,7 +188,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_wood
+      name: resources_ground_awood
       rect:
         serializedVersion: 2
         x: 18
@@ -201,7 +201,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_seaweed
+      name: resources_ground_iseaweed
       rect:
         serializedVersion: 2
         x: 38
@@ -214,7 +214,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_string
+      name: resources_ground_cstring
       rect:
         serializedVersion: 2
         x: 2
@@ -227,7 +227,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_feather
+      name: resources_ground_hfeather
       rect:
         serializedVersion: 2
         x: 18
@@ -240,7 +240,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_fish
+      name: resources_ground_jfish
       rect:
         serializedVersion: 2
         x: 37
@@ -253,7 +253,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_pine
+      name: resources_ground_kpine
       rect:
         serializedVersion: 2
         x: 1

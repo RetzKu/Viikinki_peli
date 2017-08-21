@@ -59,12 +59,12 @@ v2f vert( appdata_t IN )
 {
 	v2f OUT;
     // OUT.vertex = UnityObjectToClipPos( IN.vertex );
-	// OUT.vertex = UnityObjectToClipPos(IN.vertex); 
 
-	OUT.vertex = UnityObjectToClipPos(IN.color);
+	OUT.vertex = mul(UNITY_MATRIX_MVP, IN.vertex);
     OUT.texcoord = IN.texcoord;
 
     OUT.color = IN.color * _Color;
+
     //#ifdef PIXELSNAP_ON
     //OUT.vertex = UnityPixelSnap( OUT.vertex );
     //#endif
@@ -73,8 +73,6 @@ v2f vert( appdata_t IN )
 }
 
 ENDCG
-
-
 
     SubShader
     {

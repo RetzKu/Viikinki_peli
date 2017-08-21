@@ -7940,11 +7940,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4260555803333498, guid: 6a5e500add1454a49b4e1f29be371056, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 29.895227
+      value: 177.574
       objectReference: {fileID: 0}
     - target: {fileID: 4260555803333498, guid: 6a5e500add1454a49b4e1f29be371056, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 28.016138
+      value: 185.024
       objectReference: {fileID: 0}
     - target: {fileID: 4260555803333498, guid: 6a5e500add1454a49b4e1f29be371056, type: 2}
       propertyPath: m_LocalPosition.z

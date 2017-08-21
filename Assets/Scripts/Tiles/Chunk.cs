@@ -253,20 +253,25 @@ public class Chunk      // sub array
             {
                 go = ObjectPool.instance.GetObjectForType(Resource.GetResourcePrefabName(type), false);
                 go.gameObject.GetComponent<Resource>().Init(true);
+
+                go.transform.position = new Vector3(v.X + offsetX * CHUNK_SIZE, v.Y + offsetY * CHUNK_SIZE, ZlayerManager.GetZFromY(go.transform.position));
+                go.transform.parent = _parent.transform;
+                worldObjects[keyvaluepair.Key] = go;
             }
-            else
+            else // #HaCK ctrl_c_ctrl_v
             {
                 go = ObjectPool.instance.GetObjectForType(Resource.GetResourcePrefabName(type), false);
                 if (go != null)
                 {
                     go.gameObject.GetComponent<Resource>().Init(false);
+
+                    go.transform.position = new Vector3(v.X + offsetX * CHUNK_SIZE, v.Y + offsetY * CHUNK_SIZE, ZlayerManager.GetZFromY(go.transform.position));
+                    go.transform.parent = _parent.transform;
+                    worldObjects[keyvaluepair.Key] = go;
                 }
             }
 
-            go.transform.position = new Vector3(v.X + offsetX * CHUNK_SIZE, v.Y + offsetY * CHUNK_SIZE, ZlayerManager.GetZFromY(go.transform.position));
-            go.transform.parent = _parent.transform;
 
-            worldObjects[keyvaluepair.Key] = go;
         }
     }
 

@@ -136,6 +136,10 @@ public class MobsControl : MonoBehaviour
                 if(tries > 5 && cave)
                 {
                     door.GetComponent<door>().mobs -= 1;
+                    if(door.GetComponent<door>().mobs == 0)
+                    {
+                        door.GetComponent<door>().activateFire(); // toimii teoreettisesti
+                    }
                 }
                 spawner[0].amount--;
 
@@ -165,7 +169,11 @@ public class MobsControl : MonoBehaviour
                 Boids.Remove(Boids[ind]);
                 if (cave)
                 {
-                    door.GetComponent<door>().mobs -= 1;               
+                    door.GetComponent<door>().mobs -= 1;
+                    if (door.GetComponent<door>().mobs == 0)
+                    {
+                        door.GetComponent<door>().activateFire(); // toimii teoreettisesti
+                    }
                 }
             }
             else

@@ -298,6 +298,7 @@ public class TouchController : MonoBehaviour
 
                     _player.attackBoolean(delta,endPosition);
                     _player.GetComponent<AnimatorScript>().Attack();
+                    _player.DoDamage();
                 }
             }
         }

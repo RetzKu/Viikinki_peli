@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum CastTypes
 {
-    Light,
-    Fire,
-    Rock
+    Light = 0,
+    Fire = 1,
+    Rock = 2
 }   
 
 public class EnemyCasting : MonoBehaviour {
@@ -17,6 +17,8 @@ public class EnemyCasting : MonoBehaviour {
     private CastTypes _myType = CastTypes.Light;
     public CastTypes myType { set { _myType = value; } }
     float counter = 0;
+
+
 	// Update is called once per frame
 	void Update () {
         counter += Time.deltaTime;

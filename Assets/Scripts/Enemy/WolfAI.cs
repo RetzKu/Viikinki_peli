@@ -140,6 +140,7 @@ public class WolfAI : generalAi
                     rotation.HardRotate( body.position, velocity);
                     GetComponent<WolfAnimatorScript>().SpriteDirection(myDir);
                     GetComponent<WolfAnimatorScript>().AnimationTrigger(action.Attack);
+                    AudioManager.instance.Bark();
                     GetComponent<WolfAnimatorScript>().AnimationState(action.Idle);
 
                 }
@@ -184,6 +185,7 @@ public class WolfAI : generalAi
                     //GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
                     GetComponent<WolfAnimatorScript>().AnimationTrigger(action.Attack);
                     GetComponent<WolfAnimatorScript>().AnimationTrigger(action.LeapEnd);
+                    AudioManager.instance.Bark();
                     target = body.position + (velocity * 0.1f);
                     bite = true;
                 }
@@ -356,7 +358,7 @@ public class WolfAI : generalAi
         }
         else
         {
-            
+            AudioManager.instance.Play("WolfDeath");
             return true;
         }
     }

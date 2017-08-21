@@ -12,6 +12,7 @@ public class ParticleSpawner : MonoBehaviour {
     public GameObject Explosion;
     public GameObject fireExp;
     public GameObject rockExp;
+    public GameObject DyingEffect;
     public static ParticleSpawner instance;
     //public List<GameObject> bloods = new List<GameObject>();
 
@@ -67,6 +68,12 @@ public class ParticleSpawner : MonoBehaviour {
     {
         var ss = Instantiate(rockExp);
         ss.GetComponent<SecretExplosion>().init(position, time);
+    }
+    public void SpawnDyingEffect(Vector2 position)
+    {
+        var ss = Instantiate(DyingEffect);
+        ss.transform.position = position + new Vector2(0,-0.2f);
+        Destroy(ss, 1f);
     }
     public void destroybloods()
     {

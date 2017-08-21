@@ -336,8 +336,8 @@ GameObject:
   - component: {fileID: 50311733629005672}
   - component: {fileID: 61301480390770990}
   - component: {fileID: 114449907913420302}
-  - component: {fileID: 114625663763118248}
   - component: {fileID: 114983412116816922}
+  - component: {fileID: 114837334749607960}
   m_Layer: 8
   m_Name: Bear
   m_TagString: Enemy
@@ -1187,36 +1187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c7b3b2669070940ad93f01c6e7709a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 3
---- !u!114 &114625663763118248
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1670808006553996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5c92b63534a5e249af8a5d562cc6794, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swingDist: 1
-  inAttack: 0
-  agro: 0
-  attackDist: 0
-  MaxSpeed: 3
-  knockTime: 0.2
-  IdleRefreshRate: 100
-  IdleRadius: 60
-  IdleBallDistance: 100
-  MaxSteeringForce: 0.1
-  ArriveRadius: 0.2
-  desiredseparation: 0.7
-  alingmentDistance: 1
-  sepF: 0.05
-  aliF: 0.2
-  cohF: 0.1
-  velocity: {x: 0, y: 0}
-  leapDist: 2
+  scale: 2
 --- !u!114 &114645184092337382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1232,6 +1203,34 @@ MonoBehaviour:
   Sprites:
   - {fileID: 21300000, guid: 41a6a2b1d9b3ab84098a17abed9f257d, type: 3}
   - {fileID: 21300000, guid: 07a7e771e377f144e8ae8cffa963432b, type: 3}
+--- !u!114 &114837334749607960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1670808006553996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2031ad80bc3df114696f3d0865c5394f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swingDist: 1.5
+  inAttack: 0
+  agro: 0
+  attackDist: 1.5
+  MaxSpeed: 3
+  knockTime: 0.2
+  IdleRefreshRate: 100
+  IdleRadius: 60
+  IdleBallDistance: 100
+  MaxSteeringForce: 0.1
+  ArriveRadius: 0.3
+  desiredseparation: 0.7
+  alingmentDistance: 1
+  sepF: 0.01
+  aliF: 0.2
+  cohF: 0.1
+  velocity: {x: 0, y: 0}
 --- !u!114 &114983412116816922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1243,11 +1242,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2354d03a1632be8409f49777e50bc5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 4
-  hp: 20
-  armor: 0
+  damage: 5
+  hp: 200
+  armor: 2
   AttackArea: 1
-  Crittable: 0
 --- !u!212 &212035669330948798
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -25,8 +25,13 @@ public class Ingredient : MonoBehaviour
 
     void Start()
     {
+        transform.parent = GameObject.Find("luola_tuho").transform;
         if (!_player)
             _player = GameObject.FindWithTag("Player").GetComponent<Transform>();
+
+        GetComponent<SpriteRenderer>().sprite = ResourceManager.Instance.GetDropSprite(Type);
+        float multiplier = Random.Range(1f, 3f);
+        transform.localScale = new Vector3(multiplier, multiplier, multiplier);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -46,5 +51,8 @@ public class Ingredient : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        // Khää Khää!!
+        float z = ZlayerManager.GetZFromY(transform.position);
+        transform.position = new Vector3(transform.position.x, transform.position.y, z);
     }
 }

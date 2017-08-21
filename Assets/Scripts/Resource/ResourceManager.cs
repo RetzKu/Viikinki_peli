@@ -27,6 +27,8 @@ public class ResourceManager : MonoBehaviour
         Tree._treeShadows = Resources.LoadAll<Sprite>("WorldObject/shadows");
 
         _runeSprites = Resources.LoadAll<Sprite>("WorldObject/RunePillars/runepillars");
+
+        initDropSprites();
     }
 
     void Start()
@@ -133,5 +135,23 @@ public class ResourceManager : MonoBehaviour
     public static bool IsBehindable(ResourceType type)
     {
         return ResourceType.t_trunkEnd >= type;
+    }
+
+
+    public Sprite[] DropSprites = new Sprite[9];
+    private void initDropSprites()
+    {
+        DropSprites = Resources.LoadAll<Sprite>("WorldObject/droppedResources");
+        if (DropSprites == null)
+        {
+            Debug.LogError("could't load dropsprites");
+        }
+    }
+
+    public Sprite GetDropSprite(IngredientType type)
+    {
+        print(type);
+        print(DropSprites.Length);
+        return DropSprites[(int)type];
     }
 }

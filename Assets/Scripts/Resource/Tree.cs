@@ -98,6 +98,11 @@ public class Tree : Resource
         }
     }
 
+    public override void Hit(int damage)
+    {
+        DefaultHit(damage, "Tree");
+    }
+
     public override void OnDead()
     {
         type = ResourceManager.Instance.GetTrunk(type);

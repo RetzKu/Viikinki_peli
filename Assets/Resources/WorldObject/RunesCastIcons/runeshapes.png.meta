@@ -1,9 +1,15 @@
 fileFormatVersion: 2
 guid: 463b61ad614ef164d81d2eb8c530de91
-timeCreated: 1502450640
+timeCreated: 1503059510
 licenseType: Pro
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: runeshapes_0
+    21300002: runeshapes_2
+    21300004: runeshapes_4
+    21300006: runeshapes_9
+    21300008: runeshapes_11
+    21300010: runeshapes_13
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -124,7 +130,85 @@ TextureImporter:
     overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: runeshapes_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 70
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: runeshapes_2
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 70
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: runeshapes_4
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 70
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: runeshapes_9
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1
+        width: 66
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: runeshapes_11
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 1
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: runeshapes_13
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 1
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
     outline: []
   spritePackingTag: 
   userData: 

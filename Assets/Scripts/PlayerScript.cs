@@ -143,7 +143,7 @@ public class PlayerScript : MonoBehaviour
         if (Inventory.Changed == true)
         {
             GameObject.Find("Deck1").GetComponent<DeckScript>().weaponChanged = true;
-
+            AudioManager.instance.Play("ItemSwap");
             if (Inventory.EquipData.Tool != null)
             {
                 if (Hand.Copy == null)

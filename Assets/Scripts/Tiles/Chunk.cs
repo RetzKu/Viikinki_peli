@@ -67,7 +67,7 @@ public class Chunk      // sub array
     {
         GameObject value;
         worldObjects.TryGetValue(new Vec2(x, y), out value);
-        return value; 
+        return value;
     }
 
     public void AddObject(int x, int y, GameObject go)
@@ -185,9 +185,9 @@ public class Chunk      // sub array
 
     public bool AreaClear(int x, int y)
     {
-        for (int i = -4; i < 4; i +=2)
+        for (int i = -4; i < 4; i += 2)
         {
-            for (int j = -4; j < 4; j +=2)
+            for (int j = -4; j < 4; j += 2)
             {
                 if (InBounds(x + j, y + i) && TileMap.Collides(TilemapTilesView[y + i, x + j]))
                 {
@@ -248,21 +248,30 @@ public class Chunk      // sub array
             ResourceType type = keyvaluepair.Value;
 
             GameObject go = null;
+
             if (ResourceManager.Instance.IsTrunkType(type)) // kaikki destroyed 
             {
                 go = ObjectPool.instance.GetObjectForType(Resource.GetResourcePrefabName(type), false);
                 go.gameObject.GetComponent<Resource>().Init(true);
+
+                go.transform.position = new Vector3(v.X + offsetX * CHUNK_SIZE, v.Y + offsetY * CHUNK_SIZE, ZlayerManager.GetZFromY(go.transform.position));
+                go.transform.parent = _parent.transform;
+                worldObjects[keyvaluepair.Key] = go;
             }
-            else
+            else // #HaCK ctrl_c_ctrl_v
             {
                 go = ObjectPool.instance.GetObjectForType(Resource.GetResourcePrefabName(type), false);
-                go.gameObject.GetComponent<Resource>().Init(false);
+                if (go != null)
+                {
+                    go.gameObject.GetComponent<Resource>().Init(false);
+
+                    go.transform.position = new Vector3(v.X + offsetX * CHUNK_SIZE, v.Y + offsetY * CHUNK_SIZE, ZlayerManager.GetZFromY(go.transform.position));
+                    go.transform.parent = _parent.transform;
+                    worldObjects[keyvaluepair.Key] = go;
+                }
             }
 
-            go.transform.position = new Vector3(v.X + offsetX * CHUNK_SIZE, v.Y + offsetY * CHUNK_SIZE, ZlayerManager.GetZFromY(go.transform.position));
-            go.transform.parent = _parent.transform;
 
-            worldObjects[keyvaluepair.Key] = go;
         }
     }
 

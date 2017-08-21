@@ -29,8 +29,14 @@ public class s_c_torsoScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D trig)
     {
+        if(trig.gameObject.layer == LayerMask.NameToLayer("EnemyFx") && trig.GetComponent<wolfHeadScript>() != null)
+        {
+            PlayerScript.Player.GetComponent<combat>().setHitPosition(trig.transform.position);
+            PlayerScript.Player.GetComponent<combat>().takeDamage(trig.GetComponent<wolfHeadScript>().DealDamage());
+        }
         if (trig.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
+
             // Tässä vaiheessa pitäisi tarkistaa keneltä viholliselta otetaan damagea
             // --> Paten scriptiä ei ole vielä commitettu
             // if (getcomponent<generalaitjsp>().myType == jokuEnum.archer){} 

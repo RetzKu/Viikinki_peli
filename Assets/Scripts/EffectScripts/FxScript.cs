@@ -119,9 +119,14 @@ public class FxScript : MonoBehaviour {
     {
         if (trig.gameObject.tag == "Enemy")
         {
+
+            if (trig.GetComponent<enemyStats>() != null)
+            {
+                trig.GetComponent<enemyStats>().takeDamage(GetComponent<combat>().countPlayerDamage()); 
+            }
+            
             lastHittedEnemy = trig.gameObject;
 
-            trig.GetComponent<enemyStats>().takeDamage(GetComponent<combat>().countPlayerDamage());
         }
         else if (trig.gameObject.layer == LayerMask.NameToLayer("ObjectLayer"))
         {

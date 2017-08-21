@@ -79,10 +79,10 @@ public class wolfStats : enemyStats
         {
             // 3x GetChild(0) tarkoittaa Wolf -> back -> neck -> head_1
             GameObject hitbox = gameObject.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
-            hitbox.layer = LayerMask.NameToLayer("notPateEnemy");
+            hitbox.layer = LayerMask.NameToLayer("EnemyFx");
             hitbox.tag = "Enemy";
             // Lisätään hitboxi ja scripti päälle
-            hitbox.AddComponent<BoxCollider2D>().isTrigger = true;
+            hitbox.AddComponent<BoxCollider2D>().isTrigger = false;
             hitbox.AddComponent<wolfHeadScript>();
             // Tuhotaan molemmat gameobjectit ajan mukaan
             DestroyObject(hitbox.GetComponent<BoxCollider2D>(), 0.2f);

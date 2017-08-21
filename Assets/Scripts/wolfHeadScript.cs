@@ -28,6 +28,11 @@ public class wolfHeadScript : MonoBehaviour {
         }
     }
 
+    public float DealDamage()
+    {
+        return GetComponentInParent<enemyStats>().damage;
+    }
+
     void dealDamage()
     {
         if (GameObject.Find("EnemySpawner") != null) // Poista  if "optimointivaiheessa"

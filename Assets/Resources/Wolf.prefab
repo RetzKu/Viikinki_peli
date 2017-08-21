@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 61121774367510554}
   m_Layer: 26
   m_Name: efect
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -274,7 +274,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1975485080313304}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 208.30843, y: 150.61986, z: 0}
+  m_LocalPosition: {x: 181.91, y: 179.463, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4488191838752110}
@@ -452,9 +452,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: -0.13, y: -0.05}
+  m_Offset: {x: -0.14622498, y: 0.003326416}
   serializedVersion: 2
-  m_Size: {x: 1.25, y: 0.8}
+  m_Size: {x: 0.800292, y: 0.35953102}
 --- !u!95 &95077611498893316
 Animator:
   serializedVersion: 3
@@ -494,7 +494,7 @@ MonoBehaviour:
   IdleRadius: 60
   IdleBallDistance: 100
   MaxSteeringForce: 0.2
-  ArriveRadius: 0.4
+  ArriveRadius: 0.8
   desiredseparation: 0.7
   alingmentDistance: 1
   sepF: 0.05

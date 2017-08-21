@@ -28,6 +28,7 @@ public class wolfStats : enemyStats
         GetComponent<generalAi>().KnockBack();
         foreach (SpriteRenderer t in GetComponentsInChildren<SpriteRenderer>()) { t.color = new Color(255f, 0f, 0f, 255f); }
         print(gameObject + " has " + hp + " hp left.");
+        AudioManager.instance.Play("GeneralHit");
         checkAlive();
     }
 

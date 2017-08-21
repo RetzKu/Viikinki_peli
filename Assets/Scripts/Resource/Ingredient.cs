@@ -25,6 +25,7 @@ public class Ingredient : MonoBehaviour
 
     void Start()
     {
+        transform.parent = GameObject.Find("luola_tuho").transform;
         if (!_player)
             _player = GameObject.FindWithTag("Player").GetComponent<Transform>();
 

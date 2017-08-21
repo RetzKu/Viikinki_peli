@@ -32,7 +32,14 @@ public class SecretExplosion : MonoBehaviour {
                     print("FADED");
                     ex = Instantiate(ex);
                     ex.transform.position = transform.position;
-                    ex.transform.parent = transform; 
+                    ex.transform.parent = transform;
+                    var Cast = Physics2D.CircleCast(transform.position, 10, Vector3.zero, 0, LayerMask.GetMask("PlayerHitBox"));
+                    if (Cast)
+                    {
+                        GameObject.Find("Player").GetComponent<combat>().setHitPosition(transform.position);
+                        GameObject.Find("Player").GetComponent<combat>().takeDamage(1);
+                        print("ottaa tamakee");
+                    }
                     fadeTimer = 0f;
                 }
                 else
@@ -54,7 +61,7 @@ public class SecretExplosion : MonoBehaviour {
                 else
                 {
                     float t = fadeTimer / fadetime;
-                    print(t);
+                    //print(t);
                     Color temp = sp.color;
                     temp.a = 1f - t;
                     sp.color = temp;

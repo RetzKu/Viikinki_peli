@@ -27,7 +27,14 @@ public class MeleeAi : generalAi {
     {
         rotation.UpdateRotation(velocity, body.position);
         //print(velocity.magnitude);
-        transform.GetComponent<EnemyAnimator>().ChangeDirection(myDir);
+        if (myType == EnemyType.bear)
+        {
+            transform.GetComponent<BearAnimatorScript>().SpriteDirection(myDir);
+        }
+        else
+        {
+            transform.GetComponent<EnemyAnimator>().ChangeDirection(myDir);
+        }
         LayerMask mask = new LayerMask();
         mask = LayerMask.GetMask("Enemy");
         getFriends(ref HeardArray, ref CollisionArray, alingmentDistance, desiredseparation, mask);
@@ -61,10 +68,9 @@ public class MeleeAi : generalAi {
             }
             else if (agro)
             {
-                if (inCave)
-                {
-                    Physics._maxSpeed = MaxSpeed;
-                }
+
+                Physics._maxSpeed = MaxSpeed;
+                
                 Vector2 playerPos = player.GetComponent<DetectEnemies>().getPosition();
 
                 Vector2 dist = body.position - playerPos;
@@ -76,25 +82,14 @@ public class MeleeAi : generalAi {
         {
             knocktimer();
         }
-       // print((behavior)flags);
         powers = Physics.applyBehaviors(HeardArray, CollisionArray, new Collider2D[0], velocity, target, body.position, flags, CollState);
         target = powers[1];
         velocity = powers[0];
-
-        //velocity *= Time.deltaTime;
-        //Vector2 r = velocity * Time.deltaTime;
-        //print(velocity.magnitude);
-        //if (knocked)
-        //{
-        //    print(velocity.magnitude);
-        //}
-
         body.MovePosition(body.position + velocity * Time.deltaTime);
     }
 
     void meleePattern(Vector2 dist, Vector2 playerPos)
     {
-       //findPath(ref flags, ref velocity, ref target, player, body);
         LayerMask mask = new LayerMask();
         getObstacle(dist);
         bool find = obc;
@@ -102,24 +97,29 @@ public class MeleeAi : generalAi {
         {
             find = true;
         }
-        //attackCounter += Time.deltaTime;
         clock();// sets attack
-        //if (attackCounter <= attackUptade &&!inAttack)
-        if(attack && find && dist.magnitude < 0.5f)
+        if(attack && find && dist.magnitude < 1f)
         {
             find = false;
         }
         if (attack && dist.magnitude <= attackDist * 1.1f && !find)
         {
+            rotation.HardRotate(body.position, (Vector2)player.transform.position - body.position);
             //anim
-            GetComponent<EnemyAnimator>().Attack();
+            if(myType == EnemyType.bear)
+            {
+                GetComponent<BearAnimatorScript>().AnimationTrigger(action.Attack);
+            }
+            else
+            {
+                GetComponent<EnemyAnimator>().Attack();
+            }
             print("ATTTTAAAAAAAACK");
             attack = false;
+            rotation.Lock = false;
         }
-        //{
         if (dist.magnitude > attackDist)
         {
-            //Physics._maxSteeringForce = MaxSteeringForce * 0.01f;
             //follow player
             if (velocity.magnitude == 0)
             {
@@ -134,54 +134,26 @@ public class MeleeAi : generalAi {
             if (!find)
             {
                 followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
-                //findPath(ref flags, ref velocity, ref target, player, body);
             }
             else
             {
-                //followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
-
                 bool success = findPath(ref flags, ref velocity, ref target, player, body);
                 if (!success)
                 {
                     followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
                 }
             }
-            //}
 
-            //else ?
         }
-        //else
-        //{
-        //    attackCounter = 0;
-        //    inAttack = true;
-        //    //dash(dist, playerPos);
-        //}
-    }
-    //void dash(Vector2 dist, Vector2 playerPos)
-    //{
-    //    if(velocity.magnitude == 0 && swings < swingAmount)
-    //    {
-    //        flags = (int)behavior.seekAndArrive;
-    //        inSwing = true;
-    //        Vector2 temp = playerPos - body.position;
-    //        temp.Normalize();
-    //        temp *= swingDist;
-    //        target = body.position + temp;
-    //        Physics._maxSpeed = MaxSpeed * 1.5f;
-    //        swings++;
-    //    }
-    //    else if (swings == swingAmount)
-    //    {
-    //        Physics._maxSpeed = MaxSpeed;
-    //        inAttack = false;
-    //        inSwing = false;
-    //    }
-    //    else if(!inSwing)
-    //    {
-    //        followPlayer(ref dist, playerPos, swingDist, ref target, ref flags, Physics, sepF);
-    //    }
+        else
+        {
+            followPlayer(ref dist, playerPos, attackDist, ref target, ref flags, Physics, sepF);
+            Physics._maxSpeed = MaxSpeed * 0.4f;
+            rotation.rotToPl = true;
+        }
 
-    //}
+    }
+
     void clock()
     {
         if(attack == false)
@@ -209,6 +181,14 @@ public class MeleeAi : generalAi {
         }
         else
         {
+            if(myType == EnemyType.bear)
+            {
+                GetComponent<BearAnimatorScript>().AnimationTrigger(action.Dead);
+            }
+            else
+            {
+                ParticleSpawner.instance.SpawnDyingEffect(body.position);
+            }
             return true;
         }
     }
@@ -217,5 +197,9 @@ public class MeleeAi : generalAi {
         attack = false;
         attCount = 0f;
         agro = true;
+    }
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(body.position, 0.1f);
     }
 }

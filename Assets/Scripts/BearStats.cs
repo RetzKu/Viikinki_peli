@@ -36,6 +36,7 @@ public class BearStats : enemyStats
         foreach (SpriteRenderer t in GetComponentsInChildren<SpriteRenderer>()) { t.color = new Color(255f, 0f, 0f, 255f); }
         print(gameObject + " has " + hp + " hp left.");
         checkAlive();
+        AudioManager.instance.Play("GeneralHit");
     }
 
     // Katotaan onko susi elossa
@@ -58,8 +59,9 @@ public class BearStats : enemyStats
         Crittable = false;
        
         var Cast = Physics2D.CircleCast(Fx.transform.position, AttackArea, Vector3.zero, 0, LayerMask.GetMask("PlayerHitBox"));
+        AudioManager.instance.Play("Bear");
 
-        if(Cast)
+        if (Cast)
         {
             Player.setHitPosition(transform.position);
             Player.takeDamage(damage);

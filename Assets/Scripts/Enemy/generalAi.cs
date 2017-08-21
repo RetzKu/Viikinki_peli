@@ -96,7 +96,7 @@ public abstract class generalAi : MonoBehaviour
 
     public float desiredseparation = 0.7f; // def
     public float alingmentDistance = 1.0f; // def
-    
+
     public float sepF = 0.1f;                // def
     public float aliF = 0.2f;                // def
     public float cohF = 0.1f;                // def
@@ -134,7 +134,7 @@ public abstract class generalAi : MonoBehaviour
         InitStart(x, y, type);
     }
 
-    protected abstract void InitStart(float x,float y, EnemyType type);
+    protected abstract void InitStart(float x, float y, EnemyType type);
 
     protected float slowTime;
     protected float slowTimer;
@@ -148,7 +148,7 @@ public abstract class generalAi : MonoBehaviour
         UpdatePosition();
     }
 
-    public void followPlayer(ref Vector2 dist, Vector2 playerPos, float attackDist,ref Vector2 target,ref int flags,EnemyMovement Physics,float sepF)
+    public void followPlayer(ref Vector2 dist, Vector2 playerPos, float attackDist, ref Vector2 target, ref int flags, EnemyMovement Physics, float sepF)
     {
         //print(attackDist);
         dist.Normalize();
@@ -162,9 +162,9 @@ public abstract class generalAi : MonoBehaviour
     protected void getEnvironment(ref Collider2D[] environment)
     {
         envTimer += Time.deltaTime;
-        if(envTimer > envTime)
+        if (envTimer > envTime)
         {
-            LayerMask mask = LayerMask.GetMask("ObjectLayer","Tile");
+            LayerMask mask = LayerMask.GetMask("ObjectLayer", "Tile");
             environment = Physics2D.OverlapCircleAll(body.position, 1f, mask);// muokkaa radiusta
             envTimer = 0;
         }
@@ -172,39 +172,39 @@ public abstract class generalAi : MonoBehaviour
     }
     float t = 0f;
     float tr = 0.1f;
-    protected void getFriends(ref Collider2D[] friends, ref Collider2D[] coll, float alir,float desr,LayerMask mask)
+    protected void getFriends(ref Collider2D[] friends, ref Collider2D[] coll, float alir, float desr, LayerMask mask)
     {
         t += Time.deltaTime;
-        if(t > tr)
+        if (t > tr)
         {
             friends = Physics2D.OverlapCircleAll(body.position, alir, mask);
             coll = Physics2D.OverlapCircleAll(body.position, desr, mask);
             t = 0f;
         }
     }
-    public bool findPath(ref int flags,ref Vector2 velocity,ref Vector2 target ,GameObject player,Rigidbody2D body)
+    public bool findPath(ref int flags, ref Vector2 velocity, ref Vector2 target, GameObject player, Rigidbody2D body)
     {
         PathFinder.Dir k = player.GetComponent<UpdatePathFind>().path.getTileDir(body.position);
         rotation.rotToPl = false;
         rotation.playerPos = player.transform.position;
         if (k == PathFinder.Dir.NoDir)
         {
-            if (player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2 (body.position.x-1, body.position.y)) != PathFinder.Dir.NoDir)
+            if (player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(body.position.x - 1, body.position.y)) != PathFinder.Dir.NoDir)
             {
                 flags = (int)behavior.findPath;
                 target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x - 1, body.position.y));
             }
-            else if (player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(body.position.x+1, body.position.y)) != PathFinder.Dir.NoDir)
+            else if (player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(body.position.x + 1, body.position.y)) != PathFinder.Dir.NoDir)
             {
                 flags = (int)behavior.findPath;
                 target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x + 1, body.position.y));
             }
-            else if (player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(body.position.x, body.position.y-1)) != PathFinder.Dir.NoDir)
+            else if (player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(body.position.x, body.position.y - 1)) != PathFinder.Dir.NoDir)
             {
                 flags = (int)behavior.findPath;
-                target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x , body.position.y-1));
+                target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x, body.position.y - 1));
             }
-            else if (player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(body.position.x, body.position.y+1)) != PathFinder.Dir.NoDir)
+            else if (player.GetComponent<UpdatePathFind>().path.getTileDir(new Vector2(body.position.x, body.position.y + 1)) != PathFinder.Dir.NoDir)
             {
                 flags = (int)behavior.findPath;
                 target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x, body.position.y + 1));
@@ -217,12 +217,12 @@ public abstract class generalAi : MonoBehaviour
         else if (k == PathFinder.Dir.Right)
         {
             flags = (int)behavior.findPath;
-            target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x +1, body.position.y));
+            target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x + 1, body.position.y));
         }
         else if (k == PathFinder.Dir.Left)
         {
             flags = (int)behavior.findPath;
-            target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x -1, body.position.y));
+            target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x - 1, body.position.y));
         }
         else if (k == PathFinder.Dir.Up)
         {
@@ -259,7 +259,7 @@ public abstract class generalAi : MonoBehaviour
             PathFinder.Dir temp = player.GetComponent<UpdatePathFind>().path.getTileDir(ind);
             if (temp != PathFinder.Dir.NoDir || temp != PathFinder.Dir.NoWayOut)
             {
-                target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x - 1, body.position.y));               
+                target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x - 1, body.position.y));
             }
             else
             {
@@ -289,7 +289,7 @@ public abstract class generalAi : MonoBehaviour
             PathFinder.Dir temp = player.GetComponent<UpdatePathFind>().path.getTileDir(ind);
             if (temp != PathFinder.Dir.NoDir || temp != PathFinder.Dir.NoWayOut)
             {
-                target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x, body.position.y-1));
+                target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x, body.position.y - 1));
             }
             else
             {
@@ -304,7 +304,7 @@ public abstract class generalAi : MonoBehaviour
             PathFinder.Dir temp = player.GetComponent<UpdatePathFind>().path.getTileDir(ind);
             if (temp != PathFinder.Dir.NoDir || temp != PathFinder.Dir.NoWayOut)
             {
-                target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x , body.position.y+1));
+                target = player.GetComponent<UpdatePathFind>().path.getTileTrans(new Vector2(body.position.x, body.position.y + 1));
             }
             else
             {
@@ -319,7 +319,7 @@ public abstract class generalAi : MonoBehaviour
         }
     }
 
-    public void wander(Collider2D[] HeardArray,ref int flags,ref bool GiveStartTarget,ref int counter,int IdleRefreshRate)
+    public void wander(Collider2D[] HeardArray, ref int flags, ref bool GiveStartTarget, ref int counter, int IdleRefreshRate)
     {
         if (HeardArray.Length > 1)
         {
@@ -347,10 +347,10 @@ public abstract class generalAi : MonoBehaviour
         }
 
     }
-    public void RayCollide(ref collision CollState,ref Vector2 velocity,float collideDist, Rigidbody2D body)
+    public void RayCollide(ref collision CollState, ref Vector2 velocity, float collideDist, Rigidbody2D body)
     {
         CollState = collision.none;
-        LayerMask mask = LayerMask.GetMask("ObjectLayer","Tile");
+        LayerMask mask = LayerMask.GetMask("ObjectLayer", "Tile");
         Vector2 main = velocity;
         main.Normalize();
         main *= collideDist; // EETU TRIGGER
@@ -382,7 +382,7 @@ public abstract class generalAi : MonoBehaviour
         {
             this.knockPercent = knockPercent;
             knocked = true;
-            rotation.Lock = true; 
+            rotation.Lock = true;
             resetValues();
             knock = body.position - player.GetComponent<DetectEnemies>().getPosition();
             knock.Normalize();
@@ -406,7 +406,7 @@ public abstract class generalAi : MonoBehaviour
         if (knockCounter < knockTime * knockPercent)
         {
             float t = knockCounter / knockTime * knockPercent;
-            float k =  lerpate(MaxSpeed * 5, 0, t);
+            float k = lerpate(MaxSpeed * 5, 0, t);
             //print(k);
             Physics._maxSpeed = k;
             target = body.position + knock;
@@ -429,12 +429,12 @@ public abstract class generalAi : MonoBehaviour
     {
         kys = true;
     }
-    public virtual void SlowRune(float time,float slowPercent,bool reset = false)
+    public virtual void SlowRune(float time, float slowPercent, bool reset = false)
     {
-        
+
         if (!slow)
-        {          
-            this.slowPercent = slowPercent;           
+        {
+            this.slowPercent = slowPercent;
             ParticleSpawner.instance.SpawSlow(this.gameObject, time);
             MaxSpeed *= slowPercent;
             Physics._maxSpeed = MaxSpeed;
@@ -451,7 +451,7 @@ public abstract class generalAi : MonoBehaviour
     protected virtual void SlowRuneTimer()
     {
         slowTimer += Time.deltaTime;
-        if(slowTimer> slowTime)
+        if (slowTimer > slowTime)
         {
             print("freed");
             Physics._maxSpeed = MaxSpeed /= slowPercent;
@@ -466,11 +466,11 @@ public abstract class generalAi : MonoBehaviour
     protected void getObstacle(Vector2 dist)
     {
         obsTimer += Time.deltaTime;
-        if(obsTimer > obsTime)
+        if (obsTimer > obsTime)
         {
-            int mask = LayerMask.GetMask("ObjectLayer","Tile");
-            RaycastHit2D[] ob =  Physics2D.CircleCastAll(body.position, 0.5f, player.transform.position - (Vector3)body.position, dist.magnitude, mask);
-            if(ob.Length == 0)
+            int mask = LayerMask.GetMask("ObjectLayer", "Tile");
+            RaycastHit2D[] ob = Physics2D.CircleCastAll(body.position, 0.5f, player.transform.position - (Vector3)body.position, dist.magnitude, mask);
+            if (ob.Length == 0)
             {
                 obc = false;
             }

@@ -615,7 +615,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1200063822567436}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -50.138714, y: -47.99829, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4306599901374474}
@@ -660,12 +660,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977754839611798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 179.39508, y: 176.8472, z: 0}
+  m_LocalPosition: {x: 200.66708, y: 149.99352, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
-  - {fileID: 4897871658082226}
-  - {fileID: 4055309367867618}
   - {fileID: 4880050155927646}
+  - {fileID: 4055309367867618}
+  - {fileID: 4897871658082226}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1001,7 +1001,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1258667535122618}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -50.138714, y: -47.99829, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4764727435085210}
@@ -1010,7 +1010,7 @@ Transform:
   - {fileID: 4375122884307804}
   - {fileID: 4515610167727254}
   m_Father: {fileID: 4173307104970268}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4890116939038626
 Transform:
@@ -1032,7 +1032,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1868395301923798}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -50.138714, y: -47.99829, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4444211312736616}
@@ -1041,7 +1041,7 @@ Transform:
   - {fileID: 4571319227087686}
   - {fileID: 4737525216792236}
   m_Father: {fileID: 4173307104970268}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4936175884857792
 Transform:
@@ -1089,7 +1089,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &70305166460511146
 CapsuleCollider2D:
   m_ObjectHideFlags: 1
@@ -1205,6 +1205,7 @@ MonoBehaviour:
   attackDist: 4.815528
   MaxSpeed: 2
   knockTime: 0.1
+  kys: 0
   IdleRefreshRate: 100
   IdleRadius: 60
   IdleBallDistance: 100

@@ -9,7 +9,7 @@ public class arrow : Projectile {
 
     private void Awake()
     {
-        PlayerCombat = PlayerCombat.GetComponent<combat>();
+        PlayerCombat = PlayerScript.Player.GetComponent<combat>();
         StartPos = transform.position;
     }
     public override void UpdateMovement()

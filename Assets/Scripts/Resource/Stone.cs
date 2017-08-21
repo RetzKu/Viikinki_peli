@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class Stone : Resource
 {
@@ -17,10 +15,7 @@ public class Stone : Resource
     {
         // TODO: ERIKOISTA
         GetComponent<DropScript>().Drop();
-
-        // ObjectPool.instance.PoolObject(this.gameObject);
-        // transform.gameObject.gameObject.SetActive(false);
-        StartCoroutine(FadeAway(deathTimer));
+        ObjectPool.instance.PoolObject(this.gameObject);
     }
 
     private Vector2 impact = Vector2.zero;
@@ -30,23 +25,10 @@ public class Stone : Resource
         impact += dir.normalized * force.magnitude / 1.0f;//mass
     }
 
-    private IEnumerator FadeAway(float totalTime)
+    public override void Hit(int damage)
     {
-        var fader = gameObject.AddComponent<Fader>();
-        fader.StartFading(totalTime, 0f, GetComponent<SpriteRenderer>());
-
-        yield return new WaitForSeconds(totalTime);
-        gameObject.SetActive(false);
-
-        bool looping = true;
-        int i = 0;
+        DefaultHit(damage, "Stone");
     }
-
-    Action foo()
-    {
-        return () => { Debug.Log("hello"); };
-    }
-    
 
     void Update()
     {

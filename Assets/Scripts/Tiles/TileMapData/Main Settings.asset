@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Name: Main Settings
   m_EditorClassIdentifier: 
   SpriteData:
-  - Type: 2
+  - Type: 1
     Sprites:
-    - {fileID: 21300000, guid: ae55ffb5efcb04b4097df538892e0dbe, type: 3}
+    - {fileID: 21300002, guid: ae55ffb5efcb04b4097df538892e0dbe, type: 3}
     - {fileID: 21300004, guid: ae55ffb5efcb04b4097df538892e0dbe, type: 3}
     - {fileID: 21300006, guid: ae55ffb5efcb04b4097df538892e0dbe, type: 3}
     - {fileID: 21300008, guid: ae55ffb5efcb04b4097df538892e0dbe, type: 3}
     - {fileID: 21300010, guid: ae55ffb5efcb04b4097df538892e0dbe, type: 3}
-  - Type: 1
+  - Type: 5
     Sprites:
-    - {fileID: 21300002, guid: ae55ffb5efcb04b4097df538892e0dbe, type: 3}
+    - {fileID: 21300000, guid: ae55ffb5efcb04b4097df538892e0dbe, type: 3}
     - {fileID: 21300004, guid: ae55ffb5efcb04b4097df538892e0dbe, type: 3}
     - {fileID: 21300006, guid: ae55ffb5efcb04b4097df538892e0dbe, type: 3}
     - {fileID: 21300008, guid: ae55ffb5efcb04b4097df538892e0dbe, type: 3}

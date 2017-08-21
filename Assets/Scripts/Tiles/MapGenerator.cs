@@ -88,6 +88,7 @@ public interface ITileMap
     bool CanUpdatePathFind();
 
     void AddLater_hack(int x, int y, GameObject go);
+    void StartAnim_hack(int x, int y, GameObject go, bool boolean);
 }
 
 
@@ -125,6 +126,12 @@ public class MapGenerator : MonoBehaviour, ITileMap
     {
         Debug.LogError("älä kutsu minua olen häck");
     }
+
+    public void StartAnim_hack(int x, int y, GameObject go, bool khaa)
+    {
+        Debug.LogError("älä kutsu minua olen häck");
+    }
+
 
     public int Width { get; set; }
     public int Height { get; set; }

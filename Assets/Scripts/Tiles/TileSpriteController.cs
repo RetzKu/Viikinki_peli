@@ -339,6 +339,18 @@ public class TileSpriteController : MonoBehaviour
             {
                 TileType type = tilemap.GetTile(x, y);
 
+    #if false    
+                   if (type == TileType.Water || type == TileType.DeepWater)
+                    {
+                        tilemap.GetTileGameObject(x, y).GetComponent<Animator>().enabled = true;
+                        return;
+                    }
+                    else
+                    {
+                        tilemap.GetTileGameObject(x, y).GetComponent<Animator>().enabled = false;
+                    }
+    #endif
+
                 if (type == TileType.Mountain) // outdoor mountain ===??)==??=9
                 {
                     int tile = GetAssetNameBitmaskNoStr(x, y, tilemap, type);

@@ -7,7 +7,6 @@ public enum TileType
     Invalid,
 
     DeepWater,
-    Water,
     Mountain,
 
 
@@ -16,17 +15,12 @@ public enum TileType
 
     CollisionTiles,
 
+    Water,
 
 
     CaveFloor,
     CaveDoor,
     Beach,
-    //Scorhed,
-    //Bare,
-    //Tundra,
-    //TemperateDesert,
-    //Shrubland,      // en edes tiedä mikä on Shrubland
-    //Taiga,          // näiden tilalle hassuja biome/tileTypejä
 
     Forest,
     GrassLand,

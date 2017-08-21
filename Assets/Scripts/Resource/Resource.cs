@@ -107,7 +107,7 @@ public abstract class Resource : MonoBehaviour
     public void DefaultHit(int damage, string effectName)
     {
         Hp -= damage;
-        if (Hp <= 0)
+        if (Hp <= 0 && !dead)
         {
             OnDead();
             dead = true;

@@ -39,6 +39,7 @@ public class TileMap : MonoBehaviour, ITileMap
     public bool QuickLaunch = false;
     private int _preMadeSeed = 100;
 
+    public GameObject HackyAnimationPrefab;
 
     void Start()
     {
@@ -94,7 +95,7 @@ public class TileMap : MonoBehaviour, ITileMap
                 int viewIndexX = x * Chunk.CHUNK_SIZE;
                 int viewIndexY = y * Chunk.CHUNK_SIZE;
                 _chunks[y, x].Init(x + offX, y + offY, this.transform, Tiles, TileGameObjects, viewIndexX,
-                    viewIndexY);
+                    viewIndexY, HackyAnimationPrefab);
             }
         }
     }
@@ -212,6 +213,11 @@ public class TileMap : MonoBehaviour, ITileMap
         Chunk chunk = _chunks[chunkY, chunkX];
 
         chunk.AddObject(x, y, go);
+    }
+
+    public void StartAnim_hack(int x, int y, GameObject go, bool enabled)
+    {
+        GetTileGameObject(x, y).GetComponent<Animator>().enabled = enabled;
     }
 
 

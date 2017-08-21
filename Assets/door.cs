@@ -303,7 +303,7 @@ public class door : MonoBehaviour
     int rand = 0;
     Vector2 fire = new Vector2(0,0);
     int fireRand = 0;
-    GameObject fireplace;
+    GameObject fireplace = null;
     public void Activate()
     {
         //destroy world
@@ -326,12 +326,14 @@ public class door : MonoBehaviour
 
             fireRand = UnityEngine.Random.Range(0, finalRooms[0].roomsize);
             fire = new Vector2(finalRooms[0].tiles[fireRand].tileX, finalRooms[0].tiles[fireRand].tileY);
-            fireplace = ObjectPool.instance.GetObjectForType("Campfire_fire", false);         
+            fireplace = ObjectPool.instance.GetObjectForType("Campfire_fire", false);
+            fireplace.GetComponent<CampFire>().init();     
         }
         else
         {
-            MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY - 1] = TileType.CaveDoor;
+            MapGenerator.Instance.map[finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileX, finalRooms[finalRooms.Count - 1].edgeTiles[rand].tileY - 1] = TileType.CaveDoor;            
             fireplace.SetActive(true);
+            fireplace.GetComponent<CampFire>().secureState();
         }
         Vector2 mapPosition = (Vector2)transform.position - offset;
         fireplace.transform.position = mapPosition + fire;

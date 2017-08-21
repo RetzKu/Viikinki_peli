@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 120029334383615676}
   m_Layer: 0
   m_Name: Controller
-  m_TagString: Untagged
+  m_TagString: TouchController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -292,14 +292,14 @@ MonoBehaviour:
   amountOfSpheres: 3
   offset: 1.44
   Radius: 0.57
-  bulletSpeed: 19.62
   LineStartWidth: 0.05
   MaxWidht: 1.14
   lineResetTime: 1
-  index: 0
+  _nextIndex: 0
   touchCollider: {fileID: 1332215388892680}
   Character: {fileID: 0}
-  screenX: 279.5
+  offsetX: 0
+  offsetY: 0
   RuneHolder: {fileID: 0}
   CraftingManagerHolder: {fileID: 0}
   ButtonColor: {r: 0.42647058, g: 0.40986922, b: 0.37002593, a: 1}

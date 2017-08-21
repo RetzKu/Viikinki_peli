@@ -575,6 +575,7 @@ GameObject:
   - component: {fileID: 114508786296571636}
   - component: {fileID: 114751757998946096}
   - component: {fileID: 114059144767191806}
+  - component: {fileID: 114681227023707496}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -629,7 +630,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977754839611798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.97895, y: 32.852325, z: 0}
+  m_LocalPosition: {x: 181.5857, y: 180.25114, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 4701210339847834}
@@ -1090,7 +1091,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &70305166460511146
 CapsuleCollider2D:
   m_ObjectHideFlags: 1
@@ -1200,6 +1201,18 @@ MonoBehaviour:
   armor: 0
   AttackArea: 1
   Crittable: 0
+--- !u!114 &114681227023707496
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1977754839611798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da54bb42bec3bca49b0472ff447de58b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DropsList: []
 --- !u!114 &114728105960161014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1246,6 +1259,7 @@ MonoBehaviour:
   attackDist: 0
   MaxSpeed: 3
   knockTime: 0.1
+  kys: 0
   IdleRefreshRate: 100
   IdleRadius: 60
   IdleBallDistance: 100

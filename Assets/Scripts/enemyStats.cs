@@ -20,9 +20,23 @@ public abstract class enemyStats : MonoBehaviour {
 
     public int CalculateArmor(int hp, int armor, int damage)
     {
-        if (damage > armor) { return hp -= damage - armor; }
+        if (damage > armor)
+        {
+            hp -= damage - armor;
+        }
+
+        if(hp <= 0)
+        {
+            GetComponent<DropScript>().Drop();
+            Destroy(GetComponent<DropScript>());
+        }
         return hp;
     }
+
+    //private void OnDestroy()
+    //{
+    //    GetComponent<DropScript>().Drop();
+    //}
 
 
     public abstract void takeDamage(float damageTaken);

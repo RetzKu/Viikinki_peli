@@ -44,6 +44,7 @@ public class BearStats : enemyStats
     {
         if (hp <= 0 && flag == false)
         {
+            if (transform.localEulerAngles.z > 0) { transform.localEulerAngles = new Vector3(0, 0, 0); } else { transform.localEulerAngles = new Vector3(-180, 0, -180); }
             GetComponent<generalAi>().killMePls();
         }
     }

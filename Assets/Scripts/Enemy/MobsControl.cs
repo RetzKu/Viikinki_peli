@@ -149,7 +149,6 @@ public class MobsControl : MonoBehaviour
                 spawner.Remove(spawner[0]);
             }
         }
-
         int ind = 0;
 
         while (ind < Boids.Count)

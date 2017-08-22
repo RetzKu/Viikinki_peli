@@ -2925,48 +2925,6 @@ Transform:
   m_Father: {fileID: 362417159}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &129982491
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4373966958268876, guid: 48784c733145937429b392a440fa8575, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 180.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 4373966958268876, guid: 48784c733145937429b392a440fa8575, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 181.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4373966958268876, guid: 48784c733145937429b392a440fa8575, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4373966958268876, guid: 48784c733145937429b392a440fa8575, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4373966958268876, guid: 48784c733145937429b392a440fa8575, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4373966958268876, guid: 48784c733145937429b392a440fa8575, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4373966958268876, guid: 48784c733145937429b392a440fa8575, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4373966958268876, guid: 48784c733145937429b392a440fa8575, type: 2}
-      propertyPath: m_RootOrder
-      value: 13
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 48784c733145937429b392a440fa8575, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &135206417
 GameObject:
   m_ObjectHideFlags: 0
@@ -3894,7 +3852,7 @@ MonoBehaviour:
   LineStartWidth: 0.05
   MaxWidht: 1.14
   lineResetTime: 1
-  index: 0
+  _nextIndex: 0
   touchCollider: {fileID: 341634822}
   Character: {fileID: 936331373}
   offsetX: 0
@@ -4005,7 +3963,7 @@ GameObject:
   - component: {fileID: 555910236}
   - component: {fileID: 555910235}
   - component: {fileID: 555910234}
-  m_Layer: 10
+  m_Layer: 28
   m_Name: s_c_torso
   m_TagString: notPatePlayer
   m_Icon: {fileID: 0}
@@ -4041,7 +3999,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0.001, y: 0.055}
   m_Size: {x: 0.105, y: 0.325}
@@ -4353,7 +4311,7 @@ GameObject:
   - component: {fileID: 789391933}
   - component: {fileID: 789391932}
   - component: {fileID: 789391931}
-  m_Layer: 10
+  m_Layer: 28
   m_Name: d_c_torso
   m_TagString: notPatePlayer
   m_Icon: {fileID: 0}
@@ -4389,7 +4347,7 @@ CapsuleCollider2D:
   m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0.054}
   m_Size: {x: 0.16, y: 0.31}
@@ -4460,11 +4418,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!1 &851269609 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1500619622908896, guid: 48784c733145937429b392a440fa8575,
-    type: 2}
-  m_PrefabInternal: {fileID: 129982491}
 --- !u!1 &894813966
 GameObject:
   m_ObjectHideFlags: 0
@@ -4670,6 +4623,7 @@ GameObject:
   - component: {fileID: 936331391}
   - component: {fileID: 936331392}
   - component: {fileID: 936331393}
+  - component: {fileID: 936331394}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -4701,7 +4655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859abfb1546e9a74d969c99f50f3ff08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 851269609}
+  door: {fileID: 0}
 --- !u!114 &936331376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4806,6 +4760,8 @@ MonoBehaviour:
   attackSpeed: 0.17
   armor: 1
   DefaultAttackLength: 0.2
+  AttackCooldown: 0
+  OffCooldown: 1
   atmAttackTime: 0
 --- !u!114 &936331383
 MonoBehaviour:
@@ -4821,7 +4777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ownertype: 0
   runes:
-  - {fileID: 11400000, guid: 91fb5823455859b49800803396222102, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 6b2b94678b9625444a5fb76c126e4f2f, type: 2}
   - {fileID: 11400000, guid: 354da4f74d5bf6c42a748031a9163aff, type: 2}
   IsOwnerPlayer: 1
@@ -5014,11 +4970,22 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0.06}
   m_Size: {x: 0.08, y: 0.23}
   m_Direction: 0
+--- !u!114 &936331394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 936331373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4cc7c6ff647c242bec7c60d3743139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &985884192
 GameObject:
   m_ObjectHideFlags: 0
@@ -6502,7 +6469,7 @@ GameObject:
   - component: {fileID: 1819049646}
   - component: {fileID: 1819049645}
   - component: {fileID: 1819049644}
-  m_Layer: 10
+  m_Layer: 28
   m_Name: u_c_torso
   m_TagString: notPatePlayer
   m_Icon: {fileID: 0}
@@ -6538,7 +6505,7 @@ CapsuleCollider2D:
   m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0.054}
   m_Size: {x: 0.16, y: 0.31}

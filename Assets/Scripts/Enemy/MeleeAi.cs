@@ -184,6 +184,7 @@ public class MeleeAi : generalAi {
             if(myType == EnemyType.bear)
             {
                 GetComponent<BearAnimatorScript>().AnimationTrigger(action.Dead);
+                this.gameObject.layer = 0;
             }
             else
             {

@@ -674,11 +674,11 @@ MonoBehaviour:
   spawnBears: 0
   naturalSpawn: 1
   cave: 0
-  noSpawn: 10
-  MeleeR: 10
-  ArcherR: 20
-  WolfR: 30
-  BearR: 40
+  noSpawn: 30
+  MeleeR: 75
+  ArcherR: 58
+  WolfR: 22
+  BearR: 6
 --- !u!114 &114794321535803728
 MonoBehaviour:
   m_ObjectHideFlags: 1

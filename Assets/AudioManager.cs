@@ -37,9 +37,10 @@ public class AudioManager : MonoBehaviour {
         {
             instance = this;
         }
+        Play("Ambient",true);
 	}
 	
-    public void Play(string name)
+    public void Play(string name,bool loop = false)
     {
         Sound s = Array.Find(GeneralSounds, sound => sound.name == name);
         if(s == null)
@@ -48,7 +49,8 @@ public class AudioManager : MonoBehaviour {
             return;
         }
         if(s.pitchRandomizer == 0)
-        {
+        {            
+            s.source.loop = loop;
             s.source.Play();
             return;
         }

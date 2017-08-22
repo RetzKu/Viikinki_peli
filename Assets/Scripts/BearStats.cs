@@ -30,7 +30,7 @@ public class BearStats : enemyStats
         {
             hp = CalculateArmor((int)hp, (int)armor, (int)rawDamageTaken); 
         }
-        else { hp = CalculateArmor((int)hp, (int)armor, (int)rawDamageTaken * 2); }
+        else { hp = CalculateArmor((int)hp, (int)armor, (int)rawDamageTaken * 2); AudioManager.instance.Play("Crit"); }
         GetComponent<generalAi>().KnockBack();
         foreach (SpriteRenderer t in GetComponentsInChildren<SpriteRenderer>()) { t.color = new Color(255f, 0f, 0f, 255f); }
         print(gameObject + " has " + hp + " hp left.");

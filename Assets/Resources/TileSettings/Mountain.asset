@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04dc6761d973d26478f4b5b7179a0081, type: 3}
   m_Name: Mountain
   m_EditorClassIdentifier: 
-  Type: 3
+  Type: 2
   SpawnableObjects:
   - ObjectPrefab: {fileID: 0}
     SpawnRate: 0

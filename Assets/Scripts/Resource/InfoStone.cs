@@ -40,6 +40,8 @@ public class InfoStone : Resource
     //      }
     //  }
 
+     //              ------------Rune rune----------------
+
     public void TryToTeachRune(Vec2[] positions, int realSize)
     {
         var craftingrecipeHolder = CraftingManager.Instance.GetComponent<RuneHolder>();

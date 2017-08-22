@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04dc6761d973d26478f4b5b7179a0081, type: 3}
   m_Name: Water
   m_EditorClassIdentifier: 
-  Type: 2
+  Type: 5
   SpawnableObjects:
   - ObjectPrefab: {fileID: 1442913211837032, guid: 008965e054cf0a94c84b820e12ee658a,
       type: 2}

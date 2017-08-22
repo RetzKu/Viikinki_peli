@@ -21,7 +21,7 @@ public class DropScript : MonoBehaviour
     public void Drop()
     {
         // TODO: korjaan kun on päivä yö cycle
-        // bool night = DropChecker.NightDrops(); // is it night drops time
+        // bool night = DropChecker.NightDrops(); // is it night drops ChangeTime
         bool night = false;
 
         for (int i = 0; i < DropsList.Count; i++) //Loop x times in objects drop list

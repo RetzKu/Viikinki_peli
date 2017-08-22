@@ -144,7 +144,7 @@ public class Movement : MonoBehaviour
 #if UNITY_EDITOR
             movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized; // WASD liikkuminen koneell
 #else
-        Vector2 movement = Joystick.GetInputVector(); // Kun buildataan phonelle
+        movement = Joystick.GetInputVector(); // Kun buildataan phonelle
 #endif
 
             if (movement.x == 0 && movement.y == 0) { rb.drag = slowdown; }

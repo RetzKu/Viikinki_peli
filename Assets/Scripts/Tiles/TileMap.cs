@@ -39,6 +39,10 @@ public class TileMap : MonoBehaviour, ITileMap
     public bool QuickLaunch = false;
     private int _preMadeSeed = 100;
 
+    public GameObject HackyAnimationPrefab;
+
+    public Sprite[] deep;
+    public Sprite[] normal;
 
     void Start()
     {
@@ -78,6 +82,8 @@ public class TileMap : MonoBehaviour, ITileMap
         }
         lastTint = tint;
         // SpriteController.gameObject.SetActive(false);
+
+        TileAnime.InitAnime(deep, normal);
     }
 
     // 196.01
@@ -94,7 +100,7 @@ public class TileMap : MonoBehaviour, ITileMap
                 int viewIndexX = x * Chunk.CHUNK_SIZE;
                 int viewIndexY = y * Chunk.CHUNK_SIZE;
                 _chunks[y, x].Init(x + offX, y + offY, this.transform, Tiles, TileGameObjects, viewIndexX,
-                    viewIndexY);
+                    viewIndexY, HackyAnimationPrefab);
             }
         }
     }
@@ -212,6 +218,11 @@ public class TileMap : MonoBehaviour, ITileMap
         Chunk chunk = _chunks[chunkY, chunkX];
 
         chunk.AddObject(x, y, go);
+    }
+
+    public void StartAnim_hack(int x, int y, GameObject go, bool enabled)
+    {
+        GetTileGameObject(x, y).GetComponent<Animator>().enabled = enabled;
     }
 
 
@@ -513,6 +524,8 @@ public class TileMap : MonoBehaviour, ITileMap
 
     void Update()
     {
+        TileAnime.UpdateTiles();
+
         Tint();
 
         //if (Input.GetKeyDown(KeyCode.Q))

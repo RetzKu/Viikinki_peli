@@ -10,6 +10,8 @@ using UnityEngine;
 
 public class Fish : MonoBehaviour
 {
+    public GameObject _waterEffect;
+
     private Rigidbody2D _body;
     private Vector2 _startPosition;
     private readonly float startOffsetY = -0.6f;
@@ -17,6 +19,8 @@ public class Fish : MonoBehaviour
     public void Start()
     {
         Init();
+        var go = Instantiate(_waterEffect);
+        go.transform.position = transform.position;
     }
 
     public void Init()
@@ -48,6 +52,8 @@ public class Fish : MonoBehaviour
 
         if (transform.position.y <= _startPosition.y)
         {
+            var go = Instantiate(_waterEffect);
+            go.transform.position = transform.position;
             Destroy(this.gameObject);
         }
     }
@@ -62,6 +68,7 @@ public class Fish : MonoBehaviour
         //{
         //}
     }
+
     public void Hit()
     {
         // lennä ja jotain

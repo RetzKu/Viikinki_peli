@@ -8,7 +8,7 @@ public abstract class weaponStats : MonoBehaviour
 
     public float damage = 1.0f;
     public float attackWeight = 10.0f;
-    internal int duration = 20;
+    public int duration = 20;
     public abstract void useDuration();
     public abstract float CalculateDuration();
     public float attackspeed = 1;

@@ -1262,7 +1262,7 @@ MonoBehaviour:
   damage: 5
   hp: 20
   armor: 1
-  AttackArea: 1
+  AttackArea: 0.5
   Crittable: 0
 --- !u!212 &212035669330948798
 SpriteRenderer:

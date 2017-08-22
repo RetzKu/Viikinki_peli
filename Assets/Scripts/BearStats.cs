@@ -9,7 +9,6 @@ public class BearStats : enemyStats
     // flägi jolla katsotaan onko kuolemasusi jo spawnattu
     private bool flag = false;
     private Transform Fx;
-    bool Crittable = false;
 
     private void Awake()
     {

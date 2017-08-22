@@ -44,15 +44,15 @@ public class MobsControl : MonoBehaviour
     public bool cave = false;
 
     [Header("KÄYTÄ JOS USKALLAT")]
-    [Range(0, 50)]
+    [Range(0, 100)]
     public int noSpawn;
-    [Range(0, 50)]
+    [Range(0, 100)]
     public int MeleeR;
-    [Range(0, 50)]
+    [Range(0, 100)]
     public int ArcherR;
-    [Range(0, 50)]
+    [Range(0, 100)]
     public int WolfR;
-    [Range(0, 50)]
+    [Range(0, 100)]
     public int BearR;
 
 
@@ -230,44 +230,102 @@ public class MobsControl : MonoBehaviour
 
     void randomSpawn(float x,float y)
     {
-        //for(int i = 0; i < maxamount; i++)
-        //{
-        GameObject go;
-        int r = UnityEngine.Random.Range(0, 50);
-        if (r > noSpawn)
+        int maxamount = 5;
+        for (int i = 0; i < maxamount;i++)
         {
-            r -= noSpawn;
-            int tulos = round(r);
-
-            if(tulos == BearR)
+            int hahmo = Random.Range(0, 5);
+            switch(hahmo)
             {
-                go = Instantiate(Bear, new Vector2(x, y), Quaternion.identity);
-                go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.bear, player);
+                case 0:
+                    //nospawn
+                    if(noSpawn >= Random.Range(1, 100)) {}
+                    else { maxamount++; }
+                    break;
+                case 1:
+                    //bear
+                    if (BearR >= Random.Range(1, 100)) { SpawnBear(x, y); }
+                    else { maxamount++; }
+                    break;
+                case 2:
+                    //archer
+                    if (ArcherR >= Random.Range(1, 100)) { SpawnArcher(x, y); }
+                    else { maxamount++; }
+                    break;
+                case 3:
+                    //wolf
+                    if (WolfR >= Random.Range(1, 100)) { SpawnWolf(x, y); }
+                    else { maxamount++; }
+                    break;
+                case 4:
+                    //melee
+                    if (MeleeR >= Random.Range(1, 100)) { SpawnMelee(x, y); }
+                    else { maxamount++; }
+                    break;
             }
-            else if(tulos == ArcherR)
-            {
-                go = Instantiate(Archer, new Vector2(x, y), Quaternion.identity);
-                go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Archer, player);
-            }
-            else if (tulos == MeleeR)
-            {
-                go = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
-                go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Archer, player); 
-            }
-            else if (tulos == WolfR)
-            {
-                go = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
-                go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Wolf, player);
-            }
-            else
-            {
-                Debug.Log("INVALID SPAWN VALUE");
-                return;
-            }
-            Boids.Add(go);
-
         }
+        ////for(int i = 0; i < maxamount; i++)
+        ////{
+        //GameObject go;
+        //int r = UnityEngine.Random.Range(0, 100);
+        //if (r > noSpawn)
+        //{
+        //    r -= noSpawn;
+        //    //int tulos = round(r);
+        //    int tulos = r;
+
+        //    if(tulos == BearR)
+        //    {
+        //        go = Instantiate(Bear, new Vector2(x, y), Quaternion.identity);
+        //        go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.bear, player);
+        //    }
+        //    else if(tulos == ArcherR)
+        //    {
+        //        go = Instantiate(Archer, new Vector2(x, y), Quaternion.identity);
+        //        go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Archer, player);
+        //    }
+        //    else if (tulos == MeleeR)
+        //    {
+        //        go = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
+        //        go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Archer, player); 
+        //    }
+        //    else if (tulos == WolfR)
+        //    {
+        //        go = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
+        //        go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Wolf, player);
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("INVALID SPAWN VALUE");
+        //        return;
+        //    }
+        //    Boids.Add(go);
+
+        //}
         // }
+    }
+    void SpawnWolf(float x, float y)
+    {
+        GameObject go = Instantiate(Wolf, new Vector2(x, y), Quaternion.identity);
+        go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Wolf, player);
+        Boids.Add(go);
+    }
+    void SpawnBear(float x, float y)
+    {
+        GameObject go = Instantiate(Bear, new Vector2(x, y), Quaternion.identity);
+        go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.bear, player);
+        Boids.Add(go);
+    }
+    void SpawnMelee(float x, float y)
+    {
+        GameObject go = Instantiate(MeleeDude, new Vector2(x, y), Quaternion.identity);
+        go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Archer, player);
+        Boids.Add(go);
+    }
+    void SpawnArcher(float x, float y)
+    {
+        GameObject go = Instantiate(Archer, new Vector2(x, y), Quaternion.identity);
+        go.GetComponent<generalAi>()._InitStart(x, y, EnemyType.Archer, player);
+        Boids.Add(go);
     }
 
 

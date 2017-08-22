@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ba8e8d31a59b54683be862aa6f98ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waterEffect: {fileID: 1937281278253244, guid: 157276a9d01dfe448be1f226445d4284,
+  _waterEffect: {fileID: 1937281278253244, guid: 69e3ef7cc407be0469dcdfc0a0606b74,
     type: 2}
 --- !u!114 &114307650072298590
 MonoBehaviour:

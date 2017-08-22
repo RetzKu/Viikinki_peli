@@ -379,8 +379,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3392ccd266d224f469c4823886e7ec18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NormalSpriteMaterial: {fileID: 0}
-  OcculuderSpriteMaterial: {fileID: 0}
+  NormalSpriteMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  OcculuderSpriteMaterial: {fileID: 2100000, guid: 4b7452374a729074e88ee8b63a371caf,
+    type: 2}
   CorpseDrops:
   - Item: {fileID: 1093993870452012, guid: 4fed55b4841709f429a0550704b75d0d, type: 2}
     DropChance: 10

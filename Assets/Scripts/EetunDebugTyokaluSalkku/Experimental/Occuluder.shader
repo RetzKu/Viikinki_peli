@@ -63,7 +63,7 @@ Shader "Sprites/Occluder"
             {
                 v2f OUT;
                 OUT.vertex = mul(UNITY_MATRIX_MVP, IN.vertex) ;
-
+				// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
                 OUT.texcoord = IN.texcoord;
                 OUT.color = IN.color * _Color;

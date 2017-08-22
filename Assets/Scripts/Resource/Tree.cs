@@ -5,6 +5,8 @@ public class Tree : Resource
 {
     public static Sprite[] _treeShadows;
 
+
+
     public override void Init(bool destroyed)
     {
         SetCollidersInChilds(false);
@@ -34,26 +36,26 @@ public class Tree : Resource
         float z = ZlayerManager.GetZFromY(transform.position);
         transform.position = new Vector3(transform.position.x, transform.position.y, z);
 
-        // Hyi vittu
-        if (transform.childCount == 3)
-        {
-            GameObject shadowGo = new GameObject("shadow");
-            shadowGo.transform.parent = transform;
-            var shadowRenderer = shadowGo.AddComponent<SpriteRenderer>();
-            shadowRenderer.sortingLayerID = SortingLayer.NameToID("ObjectShadow");
-            shadowRenderer.sprite = _treeShadows[ResourceManager.TreeToShadow(type)];
-            shadowGo.transform.position = transform.position;
-        }
-        else
-        {
-            var shadow = transform.GetChild(3);
-            var shadowRenderer = shadow.gameObject.GetComponent<SpriteRenderer>(); 
-            shadowRenderer.sprite = _treeShadows[ResourceManager.TreeToShadow(type)];
-            shadowRenderer.sortingLayerID = SortingLayer.NameToID("ObjectShadow");
-            shadowRenderer.enabled = true;
+        //// Hyi vittu
+        //if (transform.childCount == 3)
+        //{
+        //    GameObject shadowGo = new GameObject("shadow");
+        //    shadowGo.transform.parent = transform;
+        //    var shadowRenderer = shadowGo.AddComponent<SpriteRenderer>();
+        //    shadowRenderer.sortingLayerID = SortingLayer.NameToID("ObjectShadow");
+        //    shadowRenderer.sprite = _treeShadows[ResourceManager.TreeToShadow(type)];
+        //    shadowGo.transform.position = transform.position;
+        //}
+        //else
+        //{
+        //    var shadow = transform.GetChild(3);
+        //    var shadowRenderer = shadow.gameObject.GetComponent<SpriteRenderer>(); 
+        //    shadowRenderer.sprite = _treeShadows[ResourceManager.TreeToShadow(type)];
+        //    shadowRenderer.sortingLayerID = SortingLayer.NameToID("ObjectShadow");
+        //    shadowRenderer.enabled = true;
 
-            shadow.transform.position = transform.position;
-        }
+        //    shadow.transform.position = transform.position;
+        //}
     }
 
     public void StubInit()
@@ -80,7 +82,8 @@ public class Tree : Resource
 
     SpriteRenderer GetShadowRender()
     {
-        return transform.GetChild(3).GetComponent<SpriteRenderer>();
+        // return transform.GetChild(3).GetComponent<SpriteR// enderer>(
+        return null;
     }
 
     public void CopyStub()
@@ -110,7 +113,7 @@ public class Tree : Resource
 
         GetComponent<DropScript>().Drop();
 
-        GetShadowRender().sprite = ResourceManager.GetFallenTreeSprite();
+        // GetShadowRender().sprite = ResourceManager.GetFallenTreeSprite();
     }
 
     public override void DeActivate()

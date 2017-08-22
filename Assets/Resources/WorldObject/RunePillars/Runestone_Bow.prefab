@@ -161,7 +161,7 @@ MonoBehaviour:
   defaultFibrateTimer: 0.015
   deathTimer: 4
   type: 46
-  RuneToTeach: {fileID: 0}
+  RuneToTeach: {fileID: 11400000, guid: efce95b38a8c831479467a07e8778e6f, type: 2}
   PlayerInRange: 0
   Default: {r: 0, g: 0, b: 0, a: 0}
   RecipeLearned: 0

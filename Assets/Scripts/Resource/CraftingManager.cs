@@ -33,6 +33,7 @@ public class CraftingManager : MonoBehaviour
         _resourcePickupEndPosition = position;
     }
 
+
     void OnDrawGizmos()
     {
         if (InventoryPosition)

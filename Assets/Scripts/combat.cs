@@ -204,6 +204,8 @@ public class combat : MonoBehaviour
     public void takeDamage(float rawTakenDamage)
     {
         AudioManager.instance.Play("PlayerHit");
+        DamageVisual.TakeDamage();
+
         int FilteredDamage = (int)(rawTakenDamage - armor);
         if(FilteredDamage < 0) { FilteredDamage = 0; }
         // Lisää tähän tsekkaus
@@ -214,7 +216,9 @@ public class combat : MonoBehaviour
         
         GetComponent<Movement>().KnockBack(lastEnemyHitPosition);
         Debug.Log("Player has " + hp + " hp left.");
-        GetComponent<DamageVisual>().TakeDamage();
+
+        // GetComponent<DamageVisual>().TakeDamage();
+
         if (CampfireDamageFlag)
         {
             //GetComponent<ScreenShake>().Shake(); // Ison veren kanssa

@@ -71,10 +71,15 @@ public enum ResourceType
     Runestone_Axe,
     Runestone_Arrow,
     Runestone_Armor,
+
+    Seaweed_1,
+    Seaweed_2,
+    Seaweed_3,
+    Seaweed_4,
+
     Max,
 }
 // WARNING WARNING Enumi järjestyksen rikkominen / väliin lisäys särkee kaikein lisää aina maxin alle
-
 
 
 public abstract class Resource : MonoBehaviour
@@ -87,7 +92,6 @@ public abstract class Resource : MonoBehaviour
 
     protected bool dead = false;
     private Coroutine _fibrateEffect;
-
 
     public virtual void Hit(int damage)
     {

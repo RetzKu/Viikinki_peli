@@ -1212,7 +1212,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da54bb42bec3bca49b0472ff447de58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DropsList: []
+  DropsList:
+  - Item: {fileID: 1192870776797376, guid: 8b2fc8f710225fe45834273ed2366bb6, type: 2}
+    DropChance: 5
+    NightItem: 0
+  - Item: {fileID: 1192870776797376, guid: d9c5fb8e682fe8a45a9a182416288284, type: 2}
+    DropChance: 3
+    NightItem: 0
+  - Item: {fileID: 1192870776797376, guid: 21f97f4ffc854984295002d570d3ccf7, type: 2}
+    DropChance: 4
+    NightItem: 0
 --- !u!114 &114728105960161014
 MonoBehaviour:
   m_ObjectHideFlags: 1

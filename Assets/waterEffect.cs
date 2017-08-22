@@ -6,6 +6,6 @@ public class waterEffect : MonoBehaviour
 {
     public void OnEnd()
     {
-        Destroy(gameObject);
+            Destroy(gameObject);
     }
 }

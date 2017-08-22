@@ -32,7 +32,8 @@ public class FxScript : MonoBehaviour {
         Fx.AddComponent<SpriteRenderer>().sprite = BareHandSprite;
         Fx.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0);
         Fx.transform.localScale = SpriteScale;
-	}
+        Fx.tag = "Fish";
+    }
 
     public void Default()
     {

@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40704b0034ef6b34387daeec3f617756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 100
+  Hp: 3
   defaultFibrateTimer: 0.1
   deathTimer: 4
   type: 1
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DropsList:
   - Item: {fileID: 1315745760049726, guid: fa86f3a92b6697e459feed2a1aa11d1d, type: 2}
-    DropChance: 50
+    DropChance: 100
     NightItem: 0
 --- !u!212 &212536873287173378
 SpriteRenderer:

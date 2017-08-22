@@ -143,6 +143,7 @@ public class Movement : MonoBehaviour
             //Vector2 movement = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical")).normalized; // ???
 #if UNITY_EDITOR
             movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized; // WASD liikkuminen koneell
+            // movement = Joystick.GetInputVector(); // Kun buildataan phonelle
 #else
             movement = Joystick.GetInputVector(); // Kun buildataan phonelle
 #endif

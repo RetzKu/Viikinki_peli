@@ -1020,7 +1020,7 @@ public class Perlin : MonoBehaviour
     {
         foreach (BiomeSettings.ElevationData elevationsArray in settings.Elevations)
         {
-            // for (int i = 0; i < elevationsArray.startElevation; i++) // järjestykseesä pienin suurint
+            for (int i = 0; i < elevationsArray.StartElevation; i++) // järjestykseesä pienin suurint
             {
                 // 0.16f
                 if (e < elevationsArray.StartElevation)

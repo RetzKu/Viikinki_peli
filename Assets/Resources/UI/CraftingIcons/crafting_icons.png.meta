@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 2b77ee65210d1e94c9cd1b4a80b8c283
-timeCreated: 1499933561
+timeCreated: 1503412192
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -165,12 +165,12 @@ TextureImporter:
       name: crafting_icons_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 168
+        x: 2
+        y: 166
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -178,12 +178,12 @@ TextureImporter:
       name: crafting_icons_1
       rect:
         serializedVersion: 2
-        x: 25
-        y: 168
+        x: 27
+        y: 166
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -191,12 +191,12 @@ TextureImporter:
       name: crafting_icons_2
       rect:
         serializedVersion: 2
-        x: 50
-        y: 168
+        x: 52
+        y: 166
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -204,12 +204,12 @@ TextureImporter:
       name: crafting_icons_3
       rect:
         serializedVersion: 2
-        x: 76
-        y: 168
+        x: 77
+        y: 166
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -217,12 +217,12 @@ TextureImporter:
       name: crafting_icons_4
       rect:
         serializedVersion: 2
-        x: 101
-        y: 168
+        x: 102
+        y: 166
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -230,12 +230,12 @@ TextureImporter:
       name: crafting_icons_5
       rect:
         serializedVersion: 2
-        x: 126
-        y: 168
+        x: 127
+        y: 166
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -243,12 +243,12 @@ TextureImporter:
       name: crafting_icons_6
       rect:
         serializedVersion: 2
-        x: 152
-        y: 167
+        x: 153
+        y: 166
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -256,12 +256,12 @@ TextureImporter:
       name: crafting_icons_7
       rect:
         serializedVersion: 2
-        x: 177
-        y: 167
+        x: 178
+        y: 166
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -269,12 +269,12 @@ TextureImporter:
       name: crafting_icons_8
       rect:
         serializedVersion: 2
-        x: 202
-        y: 167
+        x: 203
+        y: 166
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -282,12 +282,12 @@ TextureImporter:
       name: crafting_icons_9
       rect:
         serializedVersion: 2
-        x: 0
-        y: 143
+        x: 2
+        y: 141
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -295,12 +295,12 @@ TextureImporter:
       name: crafting_icons_10
       rect:
         serializedVersion: 2
-        x: 25
-        y: 143
+        x: 27
+        y: 141
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -308,12 +308,12 @@ TextureImporter:
       name: crafting_icons_11
       rect:
         serializedVersion: 2
-        x: 50
-        y: 143
+        x: 52
+        y: 141
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -321,12 +321,12 @@ TextureImporter:
       name: crafting_icons_12
       rect:
         serializedVersion: 2
-        x: 76
-        y: 143
+        x: 77
+        y: 141
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -334,12 +334,12 @@ TextureImporter:
       name: crafting_icons_13
       rect:
         serializedVersion: 2
-        x: 101
-        y: 143
+        x: 102
+        y: 141
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -347,12 +347,12 @@ TextureImporter:
       name: crafting_icons_14
       rect:
         serializedVersion: 2
-        x: 126
-        y: 143
+        x: 127
+        y: 141
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -360,12 +360,12 @@ TextureImporter:
       name: crafting_icons_15
       rect:
         serializedVersion: 2
-        x: 152
-        y: 142
+        x: 153
+        y: 141
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -373,12 +373,12 @@ TextureImporter:
       name: crafting_icons_16
       rect:
         serializedVersion: 2
-        x: 177
-        y: 142
+        x: 178
+        y: 141
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -386,12 +386,12 @@ TextureImporter:
       name: crafting_icons_17
       rect:
         serializedVersion: 2
-        x: 202
-        y: 142
+        x: 203
+        y: 141
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -399,12 +399,12 @@ TextureImporter:
       name: crafting_icons_18
       rect:
         serializedVersion: 2
-        x: 0
-        y: 118
+        x: 2
+        y: 116
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -412,12 +412,12 @@ TextureImporter:
       name: crafting_icons_19
       rect:
         serializedVersion: 2
-        x: 25
-        y: 118
+        x: 27
+        y: 116
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -425,12 +425,12 @@ TextureImporter:
       name: crafting_icons_20
       rect:
         serializedVersion: 2
-        x: 50
-        y: 118
+        x: 52
+        y: 116
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -438,12 +438,12 @@ TextureImporter:
       name: crafting_icons_21
       rect:
         serializedVersion: 2
-        x: 76
-        y: 118
+        x: 77
+        y: 116
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -451,12 +451,12 @@ TextureImporter:
       name: crafting_icons_22
       rect:
         serializedVersion: 2
-        x: 101
-        y: 118
+        x: 102
+        y: 116
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -464,12 +464,12 @@ TextureImporter:
       name: crafting_icons_23
       rect:
         serializedVersion: 2
-        x: 126
-        y: 118
+        x: 127
+        y: 116
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -477,12 +477,12 @@ TextureImporter:
       name: crafting_icons_24
       rect:
         serializedVersion: 2
-        x: 152
-        y: 117
+        x: 153
+        y: 116
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -490,12 +490,12 @@ TextureImporter:
       name: crafting_icons_25
       rect:
         serializedVersion: 2
-        x: 177
-        y: 117
+        x: 178
+        y: 116
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -503,12 +503,12 @@ TextureImporter:
       name: crafting_icons_26
       rect:
         serializedVersion: 2
-        x: 202
-        y: 117
+        x: 203
+        y: 116
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -516,12 +516,12 @@ TextureImporter:
       name: crafting_icons_27
       rect:
         serializedVersion: 2
-        x: 76
-        y: 93
+        x: 77
+        y: 89
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -529,12 +529,12 @@ TextureImporter:
       name: crafting_icons_28
       rect:
         serializedVersion: 2
-        x: 101
-        y: 93
+        x: 102
+        y: 89
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -542,12 +542,12 @@ TextureImporter:
       name: crafting_icons_29
       rect:
         serializedVersion: 2
-        x: 126
-        y: 93
+        x: 127
+        y: 89
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -555,12 +555,12 @@ TextureImporter:
       name: crafting_icons_30
       rect:
         serializedVersion: 2
-        x: 76
-        y: 68
+        x: 77
+        y: 64
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -568,12 +568,12 @@ TextureImporter:
       name: crafting_icons_31
       rect:
         serializedVersion: 2
-        x: 101
-        y: 68
+        x: 102
+        y: 64
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -581,12 +581,12 @@ TextureImporter:
       name: crafting_icons_32
       rect:
         serializedVersion: 2
-        x: 126
-        y: 68
+        x: 127
+        y: 64
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -594,12 +594,12 @@ TextureImporter:
       name: crafting_icons_33
       rect:
         serializedVersion: 2
-        x: 76
-        y: 43
+        x: 77
+        y: 39
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -607,12 +607,12 @@ TextureImporter:
       name: crafting_icons_34
       rect:
         serializedVersion: 2
-        x: 101
-        y: 43
+        x: 102
+        y: 39
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -620,12 +620,12 @@ TextureImporter:
       name: crafting_icons_35
       rect:
         serializedVersion: 2
-        x: 126
-        y: 43
+        x: 127
+        y: 39
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

@@ -275,6 +275,9 @@ MonoBehaviour:
   - Item: {fileID: 1628905066876882, guid: bf16cb4a51aeec54f9dc26a060de29f0, type: 2}
     DropChance: 100
     NightItem: 0
+  - Item: {fileID: 1435741853176566, guid: 39faaf2ff52a5904db21a021e537957b, type: 2}
+    DropChance: 50
+    NightItem: 0
 --- !u!114 &114721178487755548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -286,7 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5097306c2ecae4ca7db9e15ad5187a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 100
+  Hp: 3
   defaultFibrateTimer: 0.1
   deathTimer: 2.34
   type: 3

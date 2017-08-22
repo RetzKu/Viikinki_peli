@@ -19,9 +19,9 @@ MonoBehaviour:
   Cd: 0
   Prefab: {fileID: 1555371022316682, guid: 856a5b9dc46f2e549b811a468a77d07c, type: 2}
   Materials:
-  - Type: 0
-    Count: 0
-  - Type: 0
-    Count: 0
-  - Type: 0
-    Count: 0
+  - Type: 3
+    Count: 1
+  - Type: 5
+    Count: 1
+  - Type: 6
+    Count: 1

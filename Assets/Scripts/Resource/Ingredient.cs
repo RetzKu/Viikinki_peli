@@ -36,18 +36,26 @@ public class Ingredient : MonoBehaviour
             _player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         GetComponent<SpriteRenderer>().sprite = ResourceManager.Instance.GetDropSprite(Type);
 
-        transform.localScale = new Vector3(3f, 3f, 3f);
+        transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            transform.localScale = new Vector3(5f, 5f, 5f);
+            transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
             // Poimi
             CraftingManager.Instance.AddToInventory(this.gameObject);
             GetComponent<BoxCollider2D>().enabled = false; // ei useita
+
+            //// hyi vittu
+            //if (Type == IngredientType.Feather)
+            //{
+            //    var go = Instantiate(gameObject);
+            //    ObjectPool.instance.PoolObject(go);
+            //}
         }
+
     }
 
     void Update()

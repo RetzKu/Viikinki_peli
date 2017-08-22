@@ -18,4 +18,18 @@ MonoBehaviour:
   OnCdHudImage: {fileID: 0}
   Cd: 0
   Prefab: {fileID: 1830157689502956, guid: 243c70e89a75e7f43895e031aebe4ac0, type: 2}
-  Materials: []
+  Materials:
+  - Type: 2
+    Count: 1
+  - Type: 5
+    Count: 1
+  - Type: 1
+    Count: 1
+  - Type: 0
+    Count: 1
+  - Type: 5
+    Count: 0
+  - Type: 6
+    Count: 1
+  - Type: 8
+    Count: 1

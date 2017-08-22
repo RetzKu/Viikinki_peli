@@ -47,7 +47,7 @@ public class InfoStone : Resource
         var craftingrecipeHolder = CraftingManager.Instance.GetComponent<RuneHolder>();
         if (RuneToTeach != null && !RecipeLearned)
         {
-            if (RuneToTeach.Length == realSize && RuneToTeach.ValidateRune(positions))
+            if (RuneToTeach.Length + 1 == realSize && RuneToTeach.ValidateRune(positions))
             {
                 LearnStone();
                 craftingrecipeHolder.AddRune(RuneToTeach);

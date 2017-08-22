@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f513e2f844b5f8548b35885ac0057c39
-timeCreated: 1503295972
+timeCreated: 1503412610
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -14,6 +14,16 @@ TextureImporter:
     21300014: resources_ground_hfeather
     21300016: resources_ground_jfish
     21300018: resources_ground_kpine
+    21300020: droppedResources_b
+    21300022: droppedResources_d
+    21300024: droppedResources_e
+    21300026: droppedResources_f
+    21300028: droppedResources_a
+    21300030: droppedResources_h
+    21300032: droppedResources_c
+    21300034: droppedResources_g
+    21300036: droppedResources_i
+    21300038: droppedResources_j
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -136,11 +146,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: resources_ground_bbone
+      name: droppedResources_b
       rect:
         serializedVersion: 2
         x: 1
-        y: 113
+        y: 49
         width: 14
         height: 14
       alignment: 0
@@ -149,11 +159,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_dteeth
+      name: droppedResources_d
       rect:
         serializedVersion: 2
         x: 22
-        y: 113
+        y: 49
         width: 6
         height: 14
       alignment: 0
@@ -162,11 +172,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_fbearfur
+      name: droppedResources_e
       rect:
         serializedVersion: 2
         x: 35
-        y: 113
+        y: 49
         width: 14
         height: 14
       alignment: 0
@@ -175,24 +185,24 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_gstone
+      name: droppedResources_f
       rect:
         serializedVersion: 2
         x: 1
-        y: 100
+        y: 35
         width: 14
-        height: 8
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_awood
+      name: droppedResources_a
       rect:
         serializedVersion: 2
         x: 18
-        y: 99
+        y: 35
         width: 14
         height: 10
       alignment: 0
@@ -201,11 +211,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_iseaweed
+      name: droppedResources_h
       rect:
         serializedVersion: 2
         x: 38
-        y: 96
+        y: 32
         width: 12
         height: 13
       alignment: 0
@@ -214,11 +224,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_cstring
+      name: droppedResources_c
       rect:
         serializedVersion: 2
         x: 2
-        y: 81
+        y: 17
         width: 13
         height: 14
       alignment: 0
@@ -227,24 +237,24 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_hfeather
+      name: droppedResources_g
       rect:
         serializedVersion: 2
         x: 18
-        y: 81
-        width: 13
-        height: 14
+        y: 16
+        width: 14
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_jfish
+      name: droppedResources_i
       rect:
         serializedVersion: 2
         x: 37
-        y: 78
+        y: 14
         width: 14
         height: 14
       alignment: 0
@@ -253,11 +263,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: resources_ground_kpine
+      name: droppedResources_j
       rect:
         serializedVersion: 2
         x: 1
-        y: 66
+        y: 2
         width: 14
         height: 10
       alignment: 0

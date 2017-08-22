@@ -30,7 +30,7 @@ public class Room : IComparable<Room>
                 {
                     if (x == tile.tileX || y == tile.tileY)
                     {
-                        if (map[x, y] == TileType.CaveWall)
+                        if (map[x, y] == TileType.Mountain)
                         {
                             edgeTiles.Add(tile);
                         }
@@ -192,7 +192,7 @@ public class MapGenerator : MonoBehaviour, ITileMap
     }
     public bool GetTileCollision(int x,int y)
     {
-        return map[x, y] == TileType.CaveWall;
+        return map[x, y] == TileType.Mountain;
     }
     public void DestroyCave()
     {
@@ -226,7 +226,7 @@ public class MapGenerator : MonoBehaviour, ITileMap
                 {
                     spriteRenderer.sprite = GrassSprite;
                 }
-                else if (MapGenerator.Instance.map[x, y] == TileType.CaveWall)
+                else if (MapGenerator.Instance.map[x, y] == TileType.Mountain)
                 {
                     spriteRenderer.sprite = SuperSprite;
                     tileObject.AddComponent<BoxCollider2D>();
@@ -261,11 +261,11 @@ public class MapGenerator : MonoBehaviour, ITileMap
             {
                 if (x == 0 || x == Width - 1 || y == 0 || y == Height - 1)
                 {
-                    map[x, y] = TileType.CaveWall;
+                    map[x, y] = TileType.Mountain;
                 }
                 else
                 {
-                    map[x, y] = (pseudoRandom.Next(0, 100) < randomFillPercent) ? TileType.CaveWall : TileType.CaveFloor;
+                    map[x, y] = (pseudoRandom.Next(0, 100) < randomFillPercent) ? TileType.Mountain : TileType.CaveFloor;
                 }
             }
         }
@@ -273,7 +273,7 @@ public class MapGenerator : MonoBehaviour, ITileMap
 
     List<Room> ProcessMap()
     {
-        List<List<Coord>> wallregions = GetRegions(TileType.CaveWall);
+        List<List<Coord>> wallregions = GetRegions(TileType.Mountain);
 
         int wallThresholdSize = 50; // any wall region which is less than 50 tiles will be removed
 
@@ -300,7 +300,7 @@ public class MapGenerator : MonoBehaviour, ITileMap
             {
                 foreach (Coord tile in roomregion)
                 {
-                    map[tile.tileX, tile.tileY] = TileType.CaveWall;
+                    map[tile.tileX, tile.tileY] = TileType.Mountain;
                 }
             }
             else
@@ -531,7 +531,7 @@ public class MapGenerator : MonoBehaviour, ITileMap
 
                     foreach (Coord tile in newRegion)
                     {
-                        mapFlags[tile.tileX, tile.tileY] = TileType.CaveWall;
+                        mapFlags[tile.tileX, tile.tileY] = TileType.Mountain;
                     }
                 }
             }
@@ -550,7 +550,7 @@ public class MapGenerator : MonoBehaviour, ITileMap
 
                 if (neighbourWallTiles > walls)
                 {
-                    map[x, y] = TileType.CaveWall;
+                    map[x, y] = TileType.Mountain;
                 }
                 else if (neighbourWallTiles < walls)
                 {
@@ -577,7 +577,7 @@ public class MapGenerator : MonoBehaviour, ITileMap
         Queue<Coord> queue = new Queue<Coord>();
         queue.Enqueue(new Coord(startX, startY));
 
-        mapFlags[startX, startY] = TileType.CaveWall;
+        mapFlags[startX, startY] = TileType.Mountain;
         while (queue.Count > 0)
         {
             Coord tile = queue.Dequeue();
@@ -591,7 +591,7 @@ public class MapGenerator : MonoBehaviour, ITileMap
                     {
                         if (mapFlags[x, y] == TileType.CaveFloor && map[x, y] == tileType)
                         {
-                            mapFlags[x, y] = TileType.CaveWall;
+                            mapFlags[x, y] = TileType.Mountain;
                             queue.Enqueue(new Coord(x, y));
                         }
                     }
@@ -619,7 +619,7 @@ public class MapGenerator : MonoBehaviour, ITileMap
                 {
                     if (neighbourX != gridX || neighbourY != gridY)
                     {
-                        if(map[neighbourX, neighbourY] == TileType.CaveWall) { wallCount++; }
+                        if(map[neighbourX, neighbourY] == TileType.Mountain) { wallCount++; }
                         //wallCount += map[neighbourX, neighbourY];
                     }
                 }

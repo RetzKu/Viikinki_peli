@@ -85,7 +85,6 @@ public class CraftingManager : MonoBehaviour
             var faller = go.AddComponent<ObjectFaller>();
             faller.StartFreeFall(2.4f);
 
-
             // Update Gui
             if (OnResourceCountChanged != null)
                 OnResourceCountChanged();
@@ -125,7 +124,6 @@ public class CraftingManager : MonoBehaviour
         StartCoroutine(DragToInventoryEffect(go));
     }
 
-    // TODO: laske aika oikein
     private IEnumerator DragToInventoryEffect(GameObject go)
     {
         if (InventoryPosition)

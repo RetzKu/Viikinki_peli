@@ -35,12 +35,12 @@ MonoBehaviour:
     EditorName: beach
   - StartElevation: 0.5
     Tiles:
-    - StartMoisture: 0.2
+    - StartMoisture: 0.47
       Type: 10
       AssetName: 
       SpawnSettings: {fileID: 11400000, guid: 655ce7f831845be4f9535528f9e15f11, type: 2}
-    - StartMoisture: 0.7
-      Type: 10
+    - StartMoisture: 0.612
+      Type: 13
       AssetName: 
       SpawnSettings: {fileID: 0}
     - StartMoisture: 1

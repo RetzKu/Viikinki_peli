@@ -29,7 +29,7 @@ public class Fish : MonoBehaviour
         _startPosition = transform.position; 
         _startPosition.y += startOffsetY;
 
-        GetComponent<SpriteRenderer>().sprite = Corpse.CorpseSprites[Random.Range(0, Corpse.CorpseSprites.Length - 1)];
+        //GetComponent<SpriteRenderer>().sprite = Corpse.CorpseSprites[Random.Range(0, Corpse.CorpseSprites.Length - 1)];
         transform.localScale = new Vector3(2f, 2f, 2f);
     }
 
@@ -45,7 +45,7 @@ public class Fish : MonoBehaviour
     void Update()
     {
         var fishDirection = _body.velocity.normalized;
-        transform.right = fishDirection;
+        transform.right = -fishDirection;
 
         // monnit oikein päin!
         transform.localScale = fishDirection.x >= 0f ? new Vector3(2f, -2f, 2f) : new Vector3(2f, 2f, 2f);

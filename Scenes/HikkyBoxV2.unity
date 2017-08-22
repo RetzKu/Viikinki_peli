@@ -7555,6 +7555,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114504605446385876, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: GeneralSounds.Array.size
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 4214500096432208, guid: 317101aad9860994d946e75d103c65d0, type: 2}
       propertyPath: m_LocalPosition.x
       value: 25.199982
@@ -7628,6 +7633,56 @@ Prefab:
     - target: {fileID: 114676718114899972, guid: 317101aad9860994d946e75d103c65d0,
         type: 2}
       propertyPath: spawnWolfs
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114504605446385876, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: GeneralSounds.Array.data[11].name
+      value: Crit
+      objectReference: {fileID: 0}
+    - target: {fileID: 114504605446385876, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: GeneralSounds.Array.data[11].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: a84f7145a6a980f4c9bd84a4f8785720, type: 3}
+    - target: {fileID: 114504605446385876, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: GeneralSounds.Array.data[11].volume
+      value: 0.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 114504605446385876, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: GeneralSounds.Array.data[11].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114504605446385876, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: GeneralSounds.Array.data[11].pitchRandomizer
+      value: 0.076
+      objectReference: {fileID: 0}
+    - target: {fileID: 114504605446385876, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: GeneralSounds.Array.data[12].name
+      value: Ambient
+      objectReference: {fileID: 0}
+    - target: {fileID: 114504605446385876, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: GeneralSounds.Array.data[12].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: fe21dcc92c69db546befc64591116a97, type: 3}
+    - target: {fileID: 114504605446385876, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: GeneralSounds.Array.data[12].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114504605446385876, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: GeneralSounds.Array.data[12].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114504605446385876, guid: 317101aad9860994d946e75d103c65d0,
+        type: 2}
+      propertyPath: GeneralSounds.Array.data[12].pitchRandomizer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

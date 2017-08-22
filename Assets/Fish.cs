@@ -29,7 +29,7 @@ public class Fish : MonoBehaviour
         _startPosition = transform.position; 
         _startPosition.y += startOffsetY;
 
-        // GetComponent<SpriteRenderer>().sprite = Corpse.CorpseSprites[Random.Range(0, Corpse.CorpseSprites.Length - 1)];
+        //GetComponent<SpriteRenderer>().sprite = Corpse.CorpseSprites[Random.Range(0, Corpse.CorpseSprites.Length - 1)];
         transform.localScale = new Vector3(2f, 2f, 2f);
     }
 
@@ -58,7 +58,7 @@ public class Fish : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D trig)
+    void OnTriggerEnter2D(Collider2D other)
     {
         // drop
         // if (other.gameObject.layer)
@@ -67,7 +67,6 @@ public class Fish : MonoBehaviour
         //if (other.gameObject.layer)
         //{
         //}
-      
     }
 
     public void Hit()

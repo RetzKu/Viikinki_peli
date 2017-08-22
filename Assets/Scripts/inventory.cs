@@ -42,15 +42,27 @@ public class inventory
         }
     }
 
-    public void BreakArmor() {int i = InventoryData.FindIndex(a => a.name == EquipData.BreakArmor().name);
-        InventoryData.RemoveAt(i);
+    public void BreakArmor()
+    {
+        //GameObject.Find("Deck1").GetComponent<DeckScript>().lastBrokenWeapon(InventoryData.FindIndex(a => a == t));
+        //InventoryData.RemoveAt(InventoryData.FindIndex(a => a == EquipData.BreakArmor()));
+        GameObject tempObject = EquipData.BreakArmor();
+        foreach (GameObject t in InventoryData)
+        {
+            if (t == tempObject)
+            {
+                GameObject.Find("Deck1").GetComponent<DeckScript>().lastBrokenWeapon(InventoryData.FindIndex(a => a == t));
+                InventoryData.RemoveAt(InventoryData.FindIndex(a => a == t));
+                break;
+            }
+        }
     }
     public void BreakWeapon()
     {
     GameObject tempObject = EquipData.BreakWeapon();    
         foreach (GameObject t in InventoryData)
         {
-            if(t.name == tempObject.name)
+            if(t == tempObject)
             {
                 GameObject.Find("Deck1").GetComponent<DeckScript>().lastBrokenWeapon(InventoryData.FindIndex(a => a == t));
                 InventoryData.RemoveAt(InventoryData.FindIndex(a => a == t));

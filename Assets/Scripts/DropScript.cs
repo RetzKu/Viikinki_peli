@@ -36,7 +36,7 @@ public class DropScript : MonoBehaviour
 
                     // TODO: HUOMIO FREEFALL ON T}}LL}}
 
-                    if (Copy.GetComponent<SpriteRenderer>().name != "arrow_metal")
+                    if (Copy.GetComponent<SpriteRenderer>().sprite.name != "Arrow")
                     {
                         Copy.AddComponent<ObjectFaller>().StartFreeFall(1.5f); 
                     }

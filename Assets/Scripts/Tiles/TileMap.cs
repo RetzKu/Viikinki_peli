@@ -41,6 +41,9 @@ public class TileMap : MonoBehaviour, ITileMap
 
     public GameObject HackyAnimationPrefab;
 
+    public Sprite[] deep;
+    public Sprite[] normal;
+
     void Start()
     {
         Width = TotalWidth;
@@ -79,6 +82,8 @@ public class TileMap : MonoBehaviour, ITileMap
         }
         lastTint = tint;
         // SpriteController.gameObject.SetActive(false);
+
+        TileAnime.InitAnime(deep, normal);
     }
 
     // 196.01
@@ -519,6 +524,8 @@ public class TileMap : MonoBehaviour, ITileMap
 
     void Update()
     {
+        TileAnime.UpdateTiles();
+
         Tint();
 
         //if (Input.GetKeyDown(KeyCode.Q))

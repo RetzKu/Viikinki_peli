@@ -252,7 +252,7 @@ public class MapGenerator : MonoBehaviour, ITileMap
         //var joku = DateTime.Now.Second;
         //seed = DateTime.Now.Ticks.ToString();
         
-        //    seed = Time.time.ToString();
+        //    seed = Time.ChangeTime.ToString();
         //}
         System.Random pseudoRandom = new System.Random(seed.GetHashCode());
         for (int x = 0; x < Width; x++)

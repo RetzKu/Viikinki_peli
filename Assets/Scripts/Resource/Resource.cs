@@ -177,7 +177,7 @@ public abstract class Resource : MonoBehaviour
         yield return new WaitForSeconds(deathTimer);
 
         // de-activate! / pool jne...
-        // StartCoroutine(FadeAway(2f, )); // default time japapappadabaduuu!
+        // StartCoroutine(FadeAway(2f, )); // default ChangeTime japapappadabaduuu!
     }
 
 

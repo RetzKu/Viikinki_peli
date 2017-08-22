@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class FishSpawner : MonoBehaviour
@@ -11,10 +12,13 @@ public class FishSpawner : MonoBehaviour
 
     private TileMap _tilemap;
 
+    public GameObject WaterEffect;
+
     void Start()
     {
-        _player = GameObject.FindWithTag("Player");
-        _tilemap = FindObjectOfType<TileMap>();
+        _player     = GameObject.FindWithTag("Player");
+        _tilemap    = FindObjectOfType<TileMap>();
+        WaterEffect = FishGameObject.GetComponent<Fish>()._waterEffect;
     }
 
     void Update()
@@ -36,6 +40,7 @@ public class FishSpawner : MonoBehaviour
         {
             SpawnFish(transform.position + new Vector3(0f, 2f));
         }
+
     }
 
     private void SpawnFish(Vector3 position)

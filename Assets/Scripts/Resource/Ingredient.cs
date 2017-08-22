@@ -25,7 +25,13 @@ public class Ingredient : MonoBehaviour
 
     void Start()
     {
-        transform.parent = GameObject.Find("luola_tuho").transform;
+
+        var go = GameObject.Find("luola_tuho").transform;
+        if (go != null)
+        {
+            transform.parent = go.transform;
+        }
+
         if (!_player)
             _player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         GetComponent<SpriteRenderer>().sprite = ResourceManager.Instance.GetDropSprite(Type);
@@ -35,9 +41,9 @@ public class Ingredient : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        transform.localScale = new Vector3(5f, 5f, 5f);
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            transform.localScale = new Vector3(5f, 5f, 5f);
             // Poimi
             CraftingManager.Instance.AddToInventory(this.gameObject);
             GetComponent<BoxCollider2D>().enabled = false; // ei useita

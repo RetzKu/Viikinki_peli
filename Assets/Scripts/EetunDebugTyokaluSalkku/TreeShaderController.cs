@@ -6,6 +6,10 @@ public class TreeShaderController : MonoBehaviour
 {
     private TileMap _tileMap;
     private bool _running = false;
+    private float _timer;
+    public GameObject WaterEffect;
+
+    private float fakeZAxel;
 
     void Start()
     {
@@ -37,12 +41,26 @@ public class TreeShaderController : MonoBehaviour
 
     void Update()
     {
+        fakeZAxel = ZlayerManager.GetZFromY(transform.position);
+
         // onko kaikki pakollisia
         TryToSetShader(new Vector3(1.0f, 1.0f, 0f));
         TryToSetShader(new Vector3(1.0f, 0f, 1.0f));
 
         TryToSetShader(new Vector3(0f, 0f, 0f));
         TryToSetShader(new Vector3(1f, 0f, 0f));
+
+        //if (_timer < Time.time)
+        //{
+        //    print("ef");
+        //    var type = _tileMap.GetTile(transform.position + new Vector3(0.0f, -0.5f, 0f));
+        //    if (type == TileType.Water)
+        //    {
+        //        // var go = Instantiate(WaterEffect);
+        //        // go.transform.position = transform.position + new Vector3(0.0f, -0.5f, 0.0f);
+        //    }
+        //    _timer = Time.time + 1f;
+        //}
     }
 
     void TryToSetShader(Vector3 offset)
@@ -56,7 +74,7 @@ public class TreeShaderController : MonoBehaviour
             {
                 Resource resource = resourceOnTile.GetComponent<Resource>();
 
-                if (resource.transform.position.z < transform.position.z)
+                if (resource.transform.position.z < fakeZAxel)
                 {
                     resource.SetOcculuderShader();
                 }

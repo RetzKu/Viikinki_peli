@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 
@@ -177,7 +178,11 @@ public class Chunk      // sub array
                     sr.sortingLayerName = "TileMap";
                     var bc = tileObject.AddComponent<BoxCollider2D>();
                     bc.enabled = false;
-    #endif
+
+                // test
+                    var anime = tileObject.AddComponent<TileAnime>();
+                    anime.enabled = false;
+#endif
                 }
             }
 

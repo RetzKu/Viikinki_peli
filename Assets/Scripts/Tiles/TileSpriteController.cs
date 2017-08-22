@@ -339,15 +339,19 @@ public class TileSpriteController : MonoBehaviour
             {
                 TileType type = tilemap.GetTile(x, y);
 
-    #if false    
+    #if true    
                    if (type == TileType.Water || type == TileType.DeepWater)
                     {
-                        tilemap.GetTileGameObject(x, y).GetComponent<Animator>().enabled = true;
-                        return;
+                        var anime = tilemap.GetTileGameObject(x, y).GetComponent<TileAnime>(); 
+                        anime.enabled = true;
+                        anime.SetSprites(type);
+                        anime.Continue(); // maybe redudant 
+                        
+                        continue;
                     }
                     else
                     {
-                        tilemap.GetTileGameObject(x, y).GetComponent<Animator>().enabled = false;
+                        tilemap.GetTileGameObject(x, y).GetComponent<TileAnime>().enabled = false;
                     }
     #endif
 
@@ -515,7 +519,7 @@ public class TileSpriteController : MonoBehaviour
         // fuck fuck
     }
 
-    // TMP NEW CREATE!
+     // TMP NEW CREATE!
     [Obsolete]
     public bool TileWeight(TileType type, TileType type2)
     {

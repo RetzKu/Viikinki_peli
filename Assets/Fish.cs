@@ -11,6 +11,7 @@ using UnityEngine;
 public class Fish : MonoBehaviour
 {
     public GameObject _waterEffect;
+
     private Rigidbody2D _body;
     private Vector2 _startPosition;
     private readonly float startOffsetY = -0.6f;

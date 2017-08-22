@@ -406,6 +406,16 @@ MonoBehaviour:
   - Item: {fileID: 1133136836472450, guid: cf3155f8e68c2884ea8556a2c83afe20, type: 2}
     DropChance: 10
     NightItem: 0
+  DropSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114235837633677902
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -475,7 +485,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cbdd5e3228cb9f448888c77a003bc652, type: 2}
   - {fileID: 11400000, guid: 41f55baef62436c468c41082d0ac439b, type: 2}
   - {fileID: 11400000, guid: 41f55baef62436c468c41082d0ac439b, type: 2}
-  - {fileID: 11400000, guid: 91fb5823455859b49800803396222102, type: 2}
+  - {fileID: 0}
   RuneBuffs:
   - {fileID: 11400000, guid: 29b6e2bf970c41441bbfb92c929fcf1c, type: 2}
   - {fileID: 11400000, guid: fb3323d780652034cb919ecb88028f8e, type: 2}
@@ -578,6 +588,18 @@ MonoBehaviour:
     volume: 0.903
     pitch: 1
     pitchRandomizer: 0.076
+    source: {fileID: 0}
+  - name: Crit
+    clip: {fileID: 8300000, guid: a84f7145a6a980f4c9bd84a4f8785720, type: 3}
+    volume: 0.58
+    pitch: 1
+    pitchRandomizer: 0.076
+    source: {fileID: 0}
+  - name: Ambient
+    clip: {fileID: 8300000, guid: fe21dcc92c69db546befc64591116a97, type: 3}
+    volume: 1
+    pitch: 1
+    pitchRandomizer: 0
     source: {fileID: 0}
   WolfBarks:
   - name: WolfBark1

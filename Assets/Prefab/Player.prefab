@@ -779,7 +779,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977754839611798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.35, y: 27, z: 0}
+  m_LocalPosition: {x: 25.2, y: 24.2, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 4701210339847834}
@@ -1671,8 +1671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e1d3afbdf75a84ea4813618555efff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaterEffect: {fileID: 1937281278253244, guid: 157276a9d01dfe448be1f226445d4284,
-    type: 2}
+  WaterEffect: {fileID: 0}
 --- !u!114 &114210843949519274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1815,9 +1814,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ownertype: 0
   runes:
-  - {fileID: 11400000, guid: 41f55baef62436c468c41082d0ac439b, type: 2}
+  - {fileID: 11400000, guid: 6b2b94678b9625444a5fb76c126e4f2f, type: 2}
+  - {fileID: 11400000, guid: aaadc1b0d8f159349906ff4b43a24781, type: 2}
   - {fileID: 11400000, guid: 354da4f74d5bf6c42a748031a9163aff, type: 2}
-  - {fileID: 11400000, guid: 381077275c0ec7b4799f22ac2dbd357d, type: 2}
   IsOwnerPlayer: 1
 --- !u!114 &114596991943841444
 MonoBehaviour:

@@ -157,8 +157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c59e298300d6404985e55a304b39e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArmorMultiplier: 1.5
+  ArmorMultiplier: 3
   duration: 10
+  MaxDuration: 0
 --- !u!212 &212161014856038286
 SpriteRenderer:
   m_ObjectHideFlags: 1

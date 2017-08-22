@@ -574,6 +574,7 @@ GameObject:
   - component: {fileID: 114316052009345806}
   - component: {fileID: 114158304993457522}
   - component: {fileID: 114462557661782716}
+  - component: {fileID: 114196506979967250}
   m_Layer: 8
   m_Name: EnemyArcher
   m_TagString: Enemy
@@ -660,7 +661,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977754839611798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 200.66708, y: 149.99352, z: 0}
+  m_LocalPosition: {x: 181.52542, y: 179.68552, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 4880050155927646}
@@ -1183,11 +1184,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08dbe15d63643234995e0a18a8102916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 4
   hp: 100
-  armor: 1
+  armor: 0
   AttackArea: 1
   Crittable: 0
+--- !u!114 &114196506979967250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1977754839611798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da54bb42bec3bca49b0472ff447de58b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DropsList:
+  - Item: {fileID: 1941705026831842, guid: 167dd15b75951fa46aeaf9cc64271c9d, type: 2}
+    DropChance: 100
+    NightItem: 0
+  - Item: {fileID: 1941705026831842, guid: 167dd15b75951fa46aeaf9cc64271c9d, type: 2}
+    DropChance: 100
+    NightItem: 0
 --- !u!114 &114316052009345806
 MonoBehaviour:
   m_ObjectHideFlags: 1

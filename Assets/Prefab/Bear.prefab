@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: 114449907913420302}
   - component: {fileID: 114983412116816922}
   - component: {fileID: 114837334749607960}
+  - component: {fileID: 114507296957379584}
   m_Layer: 8
   m_Name: Bear
   m_TagString: Enemy
@@ -709,7 +710,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1670808006553996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 196.90904, y: 151.12093, z: 0}
+  m_LocalPosition: {x: 155.81897, y: 173.34349, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 4598370890568142}
@@ -1187,7 +1188,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c7b3b2669070940ad93f01c6e7709a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 2
+  scale: 3
+--- !u!114 &114507296957379584
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1670808006553996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da54bb42bec3bca49b0472ff447de58b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DropsList:
+  - Item: {fileID: 1042098482681052, guid: 6a5e500add1454a49b4e1f29be371056, type: 2}
+    DropChance: 100
+    NightItem: 0
 --- !u!114 &114645184092337382
 MonoBehaviour:
   m_ObjectHideFlags: 1

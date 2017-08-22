@@ -297,8 +297,13 @@ public class TouchController : MonoBehaviour
                     AttackDir   = delta;
 
                     _player.attackBoolean(delta,endPosition);
-                    _player.GetComponent<AnimatorScript>().Attack();
-                    _player.DoDamage();
+
+                    if (_player.GetComponent<combat>().hp > 0)
+	                {
+		                _player.GetComponent<AnimatorScript>().Attack();
+                        _player.DoDamage(); 
+	                }
+
                 }
             }
         }
@@ -315,8 +320,11 @@ public class TouchController : MonoBehaviour
             var delta = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _player.transform.position;
             AttackDir = delta;
             _player.attackBoolean(delta, Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            _player.GetComponent<AnimatorScript>().Attack();
-            _player.DoDamage();
+            if (_player.GetComponent<combat>().hp > 0)
+            {
+                _player.GetComponent<AnimatorScript>().Attack();
+                _player.DoDamage();
+            }
 
             // LineController.MovePoints(lastPosition - transform.position);
         }

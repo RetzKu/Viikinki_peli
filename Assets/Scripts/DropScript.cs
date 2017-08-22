@@ -35,7 +35,12 @@ public class DropScript : MonoBehaviour
                     Copy.transform.position = transform.position; //drop it at destroyed objects position
 
                     // TODO: HUOMIO FREEFALL ON T}}LL}}
-                    Copy.AddComponent<ObjectFaller>().StartFreeFall(1.5f);
+
+                    if (Copy.GetComponent<SpriteRenderer>().name != "arrow_metal")
+                    {
+                        Copy.AddComponent<ObjectFaller>().StartFreeFall(1.5f); 
+                    }
+
                 }
             }
         }

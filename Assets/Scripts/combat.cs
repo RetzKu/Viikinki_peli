@@ -62,7 +62,6 @@ public class combat : MonoBehaviour
             if (GetComponent<PlayerScript>().EquippedTool.Tool != null)
             {
                 AttackCooldown = 1 / GetComponent<PlayerScript>().EquippedTool.Tool.GetComponent<weaponStats>().attackspeed;
-                GetComponent<PlayerScript>().LoseDurability(); 
             }
             GetComponent<FxScript>().instantiateFx();
 
@@ -176,13 +175,9 @@ public class combat : MonoBehaviour
                     Vector2 tempo2 = new Vector2((direction.x - transform.position.x), (direction.y - transform.position.y));
                     tempo2.Normalize();
 
-                    GameObject.Find("projectileManager").GetComponent<ProjectileManager>().spawnProjectile(transform.position, (Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position).normalized * 6 + transform.position /*new Vector2(transform.position.x + tempo2.x * 6, transform.position.y + tempo2.y * 6)*/);
+                    GameObject.Find("projectileManager").GetComponent<ProjectileManager>().SpawnPlayerProjectile(transform.position, (Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position).normalized * 6 + transform.position /*new Vector2(transform.position.x + tempo2.x * 6, transform.position.y + tempo2.y * 6)*/);
                     transform.GetComponent<PlayerScript>().LoseDurability();
                     // Tähän voisi laittaa efektin vaihtumaan bowi efektiin
-                }
-                else
-                {
-                    // Tähän voisi laittaa efektin vaihtumaan lyönti efektiin
                 }
             }
         }

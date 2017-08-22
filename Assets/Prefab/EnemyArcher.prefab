@@ -1184,8 +1184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08dbe15d63643234995e0a18a8102916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 4
-  hp: 100
+  damage: 2
+  hp: 3
   armor: 0
   AttackArea: 1
   Crittable: 0

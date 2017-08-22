@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjectileManager : MonoBehaviour {
 
     public GameObject arrow;
+    public GameObject PlayerArrow;
     List<GameObject> pro_tiles = new List<GameObject>();
 	// Use this for initialization
 
@@ -30,6 +31,12 @@ public class ProjectileManager : MonoBehaviour {
     {
         var go = Instantiate(arrow,new Vector2(0,0), Quaternion.identity);
         go.GetComponent<Projectile>().init(from,where);
+        pro_tiles.Add(go);
+    }
+    public void SpawnPlayerProjectile(Vector2 from, Vector2 where)
+    {
+        var go = Instantiate(PlayerArrow, new Vector2(0, 0), Quaternion.identity);
+        go.GetComponent<Projectile>().init(from, where);
         pro_tiles.Add(go);
     }
 }

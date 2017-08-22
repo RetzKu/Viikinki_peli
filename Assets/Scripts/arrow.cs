@@ -32,8 +32,15 @@ public class arrow : Projectile {
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerCombat.setHitPosition(transform.position);
-        PlayerCombat.takeDamage(2);
+        if (gameObject.layer == LayerMask.NameToLayer("EnemyFx"))
+        {
+            PlayerCombat.setHitPosition(transform.position);
+            PlayerCombat.takeDamage(2); 
+        }
+        else
+        {
+            collision.GetComponent<enemyStats>().takeDamage(2);
+        }
         Destroy(transform.GetComponent<BoxCollider2D>());
     }
 }

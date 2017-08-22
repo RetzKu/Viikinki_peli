@@ -30,6 +30,12 @@ public abstract class enemyStats : MonoBehaviour {
             GetComponent<DropScript>().Drop();
             Destroy(GetComponent<DropScript>());
         }
+
+        if (GameObject.Find("Player").GetComponent<PlayerScript>().weaponInHand != null)
+        {
+            PlayerScript.Player.GetComponent<PlayerScript>().LoseDurability(); 
+        }
+
         return hp;
     }
 

@@ -17,7 +17,7 @@ public class archerStats : enemyStats {
     public override void takeDamage(float rawDamageTaken)
     {
         startTime = Time.time;
-        hp = hp - (rawDamageTaken / armor);
+        hp = CalculateArmor((int)hp, (int)armor, (int)rawDamageTaken);
         GetComponent<generalAi>().KnockBack();
         foreach (SpriteRenderer t in GetComponentsInChildren<SpriteRenderer>()) { t.color = new Color(255f, 0f, 0f, 255f); }
         AudioManager.instance.Play("GeneralHit");

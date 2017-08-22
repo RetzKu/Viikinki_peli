@@ -16,11 +16,11 @@ public class armorScript : MonoBehaviour {
     // Tällä lisätään pelaajalle armoria
     public void addArmorStats()
     {
-        GameObject.Find("Player").GetComponent<combat>().armor += (int)ArmorMultiplier;
+        GameObject.Find("Player").GetComponent<combat>().armor = (int)ArmorMultiplier;
     }
     public void RemoveArmorStats()
     {
-        GameObject.Find("Player").GetComponent<combat>().armor -= (int)ArmorMultiplier;
+        GameObject.Find("Player").GetComponent<combat>().armor = 0;
     }
 
     public float CalculateDuration()

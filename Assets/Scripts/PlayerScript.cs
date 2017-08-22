@@ -223,7 +223,8 @@ public class PlayerScript : MonoBehaviour
 
         public CanvasController()
         {
-            HpCanvas = GameObject.Find("Canvas 2").transform.GetChild(1);
+            // Järjestys muuttunu RIP
+            HpCanvas = GameObject.Find("Canvas 2").transform.GetChild(2);
             Sword = HpCanvas.GetChild(2).GetChild(0).gameObject;
             ArmorImage = HpCanvas.GetChild(1).GetComponent<Image>();
             OGPos = Sword.transform.position;

@@ -224,7 +224,7 @@ public class DeckScript : MonoBehaviour
                         }
                     }
                     activeArmor[x] = true;
-                    PlayerScript.Player.GetComponent<PlayerScript>().UnEquipArmor();
+                    //PlayerScript.Player.GetComponent<PlayerScript>().UnEquipArmor();
                     PlayerScript.Player.GetComponent<PlayerScript>().Inventory.EquipItem(x);
                     tempObj3.GetComponent<Image>().color = new Color(0.1961f, 0.7176f, 0.5411f, 0.2667f);
 

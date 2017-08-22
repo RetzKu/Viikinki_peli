@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using Mono.Cecil.Cil;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 // must change start once scrolling
 public class View<T>
@@ -130,7 +132,8 @@ public class Chunk      // sub array
         // GameObjectView._startY = startIndexY;
     }
 
-    public void Init(int chunkOffsetX, int chunkOffsetY, Transform tilemap, TileType[,] tiles, GameObject[,] gameobjects, int viewStartXIndex, int viewStartYIndex)
+    public void Init(int chunkOffsetX, int chunkOffsetY, Transform tilemap, TileType[,] tiles, GameObject[,] gameobjects, int viewStartXIndex, int viewStartYIndex,
+         GameObject testPrefab)
     {
         // Debug.Log("x: " + viewStartXIndex);
         TilemapTilesView = new View<TileType>(tiles, viewStartXIndex, viewStartYIndex, CHUNK_SIZE); // 0 1 2    // SETVIEW;
@@ -145,26 +148,43 @@ public class Chunk      // sub array
         GameObject parent = new GameObject("Chunk(" + offsetX + "," + offsetY + ")");
         parent.transform.parent = tilemap;
 
-        for (int y = 0; y < CHUNK_SIZE; y++)
-        {
-            for (int x = 0; x < CHUNK_SIZE; x++)
+            for (int y = 0; y < CHUNK_SIZE; y++)
             {
-                TilemapTilesView[y, x] = TileType.Invalid;
+                for (int x = 0; x < CHUNK_SIZE; x++)
+                {
+                    TilemapTilesView[y, x] = TileType.Invalid;
 
-                GameObject tileObject = new GameObject("(" + y + "," + x + ")");
-                tileObject.transform.parent = parent.transform;
-                tileObject.transform.position = new Vector3(x + chunkOffsetX, y + chunkOffsetY, 0);
-                tileObject.layer = 9;
 
-                GameObjectView[y, x] = tileObject;
+    #if false    
+                    // GameObject tileObject = TileMap.Instantiate(testPrefab);  // new GameObject("(" + y + "," + x + ")");
+                    GameObject tileObject = Instantiator.instantiateGo(testPrefab);
+    #else
+                    GameObject tileObject = new GameObject("(" + y + "," + x + ")");
+    #endif
 
-                SpriteRenderer spriteRenderer = tileObject.AddComponent<SpriteRenderer>();
-                spriteRenderer.sortingLayerName = "TileMap";
+                    tileObject.transform.parent = parent.transform;
+                    tileObject.transform.position = new Vector3(x + chunkOffsetX, y + chunkOffsetY, 0);
+                    tileObject.layer = 9;
 
-                var collider = tileObject.AddComponent<BoxCollider2D>();
-                collider.enabled = false;
+                    GameObjectView[y, x] = tileObject;
+
+    #if false
+                    /* SpriteRenderer spriteRenderer = */
+                    tileObject.GetComponent<SpriteRenderer>().sortingLayerName = "TileMap";
+                    tileObject.GetComponent<BoxCollider2D>().enabled = false;
+                    // var anim = tileObject.AddComponent<Animator>();
+    #else
+                    var sr = tileObject.AddComponent<SpriteRenderer>();
+                    sr.sortingLayerName = "TileMap";
+                    var bc = tileObject.AddComponent<BoxCollider2D>();
+                    bc.enabled = false;
+
+                // test
+                    var anime = tileObject.AddComponent<TileAnime>();
+                    anime.enabled = false;
+#endif
+                }
             }
-        }
 
         _parent = new GameObject("Chunk " + offsetX + ", " + offsetY);
         _parent.transform.parent = tilemap;

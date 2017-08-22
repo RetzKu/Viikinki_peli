@@ -107,7 +107,7 @@ namespace Spriter2UnityDX.Importing {
 		}
 		[XmlAttribute] public CurveType curve_type { get; set; } // enum : INSTANT,LINEAR,QUADRATIC,CUBIC //Dengar.NOTE (again, no caps)
 		[XmlAttribute] public float c1 { get; set; } 
-		[XmlAttribute] public float c2 { get; set; } //I think these should be implemented some time in the future
+		[XmlAttribute] public float c2 { get; set; } //I think these should be implemented some ChangeTime in the future
 		[XmlAttribute] public int spin { get; set; }
 		[XmlElement ("bone", typeof(SpatialInfo)), XmlElement ("object", typeof(SpriteInfo))]
 		public SpatialInfo info { get; set; }

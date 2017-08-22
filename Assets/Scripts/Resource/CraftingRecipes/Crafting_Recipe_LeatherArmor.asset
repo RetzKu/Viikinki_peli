@@ -9,41 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b11ebac4e06919847abf467de307184f, type: 3}
-  m_Name: Crafting_Recipe_Bow
+  m_Name: Crafting_Recipe_LeatherArmor
   m_EditorClassIdentifier: 
-  Indices:
-  - X: 2
-    Y: 0
-  - X: 1
-    Y: 1
-  - X: 0
-    Y: 2
-  - X: 1
-    Y: 2
-  - X: 2
-    Y: 2
-  - X: 1
-    Y: 1
-  - X: 0
-    Y: 0
+  Indices: []
   Sound: {fileID: 0}
   sprite: {fileID: 0}
   HudImage: {fileID: 0}
   OnCdHudImage: {fileID: 0}
   Cd: 0
-  Prefab: {fileID: 1386470419308244, guid: 1bed30da8ec31904a893159a7589637c, type: 2}
-  Materials:
-  - Type: 8
-    Count: 1
-  - Type: 0
-    Count: 1
-  - Type: 1
-    Count: 1
-  - Type: 3
-    Count: 1
-  - Type: 7
-    Count: 1
-  - Type: 0
-    Count: 1
-  - Type: 2
-    Count: 1
+  Prefab: {fileID: 1426678470164418, guid: 71b5cf4481fd70149995ef26d23b6b68, type: 2}
+  Materials: []

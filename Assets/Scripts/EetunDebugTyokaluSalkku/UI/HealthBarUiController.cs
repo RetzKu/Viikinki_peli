@@ -25,9 +25,9 @@ public class HealthBarUiController : MonoBehaviour
         }
     }
 
-    //IEnumerator StartNextBar(float time, float endScale)
+    //IEnumerator StartNextBar(float ChangeTime, float endScale)
     //{
-    //    // yield return new WaitForSeconds(time);
+    //    // yield return new WaitForSeconds(ChangeTime);
     //    // StartCoroutine(LerpToScale(0.4f, endScale, HpBar));
     //}
 

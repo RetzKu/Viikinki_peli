@@ -11,6 +11,7 @@ public class BaseChecker : MonoBehaviour
     private bool _lastFrameOnBase = false;
     private int _baseMask;
     private GameObject _player;
+    private CampFire _campfire;
 
     public List<InfoStone> ClosebyInfoStones = new List<InfoStone>(2);
 
@@ -35,6 +36,7 @@ public class BaseChecker : MonoBehaviour
             {
                 OnEnter();
                 _lastFrameOnBase = true;
+                _campfire = hit.transform.gameObject.GetComponent<CampFire>();
             }
         }
         else
@@ -43,6 +45,7 @@ public class BaseChecker : MonoBehaviour
             {
                 OnExit();
                 _lastFrameOnBase = false;
+                _campfire = null;
             }
         }
 
@@ -66,7 +69,6 @@ public class BaseChecker : MonoBehaviour
         //{
         //    // !TODO: tänään aloitetaan tosta!
         //    //hit.transform.gameObject.GetComponent<InfoStone>().Vibrate();
-
         //    //GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Vibrate(0, 0);
         //    //GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Vibrate(1, 0);
         //    //GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Vibrate(2, 0);
@@ -75,13 +77,15 @@ public class BaseChecker : MonoBehaviour
         //    //GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Vibrate(1, 2);
         //    //GameObject.FindGameObjectWithTag("ResourceUiController").GetComponent<CraftingUiController>().Vibrate(2, 2);
         //}
-        //else
-        //{
-        //}
     }
 
     public void SendIndices(Vec2[] positions, int realSize)
     {
+        if (_campfire)
+        {
+            // _campfire.ValidateRune(positions, realSize);
+        }
+
         var RunestoneCast = Physics2D.CircleCastAll(_player.transform.position, 5, Vector2.zero, 0f, LayerMask.GetMask("RuneStone"));
         if (RunestoneCast.Length != 0)
         {

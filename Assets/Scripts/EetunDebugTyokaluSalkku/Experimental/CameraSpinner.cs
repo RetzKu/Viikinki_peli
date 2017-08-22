@@ -82,7 +82,7 @@ public class CameraSpinner : MonoBehaviour
 
     //    while (transform.rotation != TargetRotation)
     //    {
-    //        transform.rotation = Quaternion.Lerp(from, TargetRotation, Time.time * RotationRate / 100f);
+    //        transform.rotation = Quaternion.Lerp(from, TargetRotation, Time.ChangeTime * RotationRate / 100f);
     //        yield  timenull;
 
     //    }

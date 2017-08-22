@@ -107,7 +107,7 @@ public abstract class Resource : MonoBehaviour
     public void DefaultHit(int damage, string effectName)
     {
         Hp -= damage;
-        if (Hp <= 0)
+        if (Hp <= 0 && !dead)
         {
             OnDead();
             dead = true;
@@ -177,7 +177,7 @@ public abstract class Resource : MonoBehaviour
         yield return new WaitForSeconds(deathTimer);
 
         // de-activate! / pool jne...
-        // StartCoroutine(FadeAway(2f, )); // default time japapappadabaduuu!
+        // StartCoroutine(FadeAway(2f, )); // default ChangeTime japapappadabaduuu!
     }
 
 

@@ -43,4 +43,4 @@ Material:
       second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _OccludedColor
-      second: {r: 0, g: 0, b: 0, a: 0.5}
+      second: {r: 0.20588237, g: 0.06862746, b: 0, a: 0.601}

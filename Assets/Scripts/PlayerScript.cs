@@ -76,7 +76,6 @@ public class PlayerScript : MonoBehaviour
         RefreshHand();
         InventoryInput();
         if(Inventory.EquipData.Armor != null) { HpCanvas.ToggleArmorImage(true); } else { HpCanvas.ToggleArmorImage(false); }
-
     }
     public float GetAngle(Vector2 pointA, Vector2 pointB)
     {

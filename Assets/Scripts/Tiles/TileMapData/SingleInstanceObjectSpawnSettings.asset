@@ -13,7 +13,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Spawns:
   - Spawn: {fileID: 1311341994458962, guid: b78588c0f97141b49b4897a4d67bc830, type: 2}
-    Count: 10
+    Count: 6
   - Spawn: {fileID: 1558771522012546, guid: 7289a413af869bc4a8bb1db1572d6a0e, type: 2}
-    Count: 10
-  SpawnRate: 8
+    Count: 6
+  - Spawn: {fileID: 1003784687279370, guid: eba8d75636a6465449644e4f60b63cb4, type: 2}
+    Count: 6
+  - Spawn: {fileID: 1815396902085598, guid: bf22a2f9340c96443aafcbb8339739f0, type: 2}
+    Count: 6
+  - Spawn: {fileID: 1373269806012604, guid: 2849f01dbaeb8d14b9facd78ac902f49, type: 2}
+    Count: 6
+  - Spawn: {fileID: 1136387008849982, guid: dc1977bc287808f4fa20a6cdfeddf8a5, type: 2}
+    Count: 6
+  - Spawn: {fileID: 1128293061333794, guid: e11d02daff317e944832292f3898a86c, type: 2}
+    Count: 6
+  - Spawn: {fileID: 1609119758463580, guid: 3517375eb2e808c498c72c54fb9b1d3c, type: 2}
+    Count: 6
+  SpawnRate: 10

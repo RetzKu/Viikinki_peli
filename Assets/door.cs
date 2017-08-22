@@ -23,20 +23,35 @@ public class door : MonoBehaviour
     private TileMap _tilemap;
     bool spawnedMobs = false;
     BossTypes boss = BossTypes.unInit;
+
     void Start()
     {
         _tilemap = GameObject.FindWithTag("Tilemap").GetComponent<TileMap>();
     }
+
     public void activateFire()
     {
         fireplace.GetComponent<CampFire>().setRuneActive();
     }
+
+    private bool _intoTheCaves = false;
+    IEnumerator HackitHeiluu()
+    {
+        _intoTheCaves = true;
+        yield return null;
+        _intoTheCaves = false;
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         print(other.tag);
-        if (other.tag == "Player")
+        if (other.tag == "Player" && !_intoTheCaves)
         {
             ChunkMover mover = other.gameObject.GetComponent<ChunkMover>();
+
+            StartCoroutine(HackitHeiluu());
+            print("LUOLIIIN.." + mover.UnderGround);
+
             if (mover.UnderGround)
             {
                 // maan päälle

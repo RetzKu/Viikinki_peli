@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 114850052468086974}
   - component: {fileID: 212818613885740266}
   - component: {fileID: 61119209653946970}
-  m_Layer: 26
-  m_Name: arrow
+  m_Layer: 29
+  m_Name: PlayerArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

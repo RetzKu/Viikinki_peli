@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 86e218568da6d3946a1ffdceee9efe41
-timeCreated: 1499863383
+timeCreated: 1503400277
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -37,6 +37,7 @@ TextureImporter:
     21300060: pine
     21300062: pine_falling
     21300064: pine_trunk
+    21300066: TREES (1)_0
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -545,6 +546,19 @@ TextureImporter:
         height: 9
       alignment: 9
       pivot: {x: 0.46753147, y: -0.005068673}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TREES (1)_0
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 178
+        width: 52
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

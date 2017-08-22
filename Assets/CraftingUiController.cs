@@ -118,6 +118,23 @@ public class CraftingUiController : MonoBehaviour
         return pos;
     }
 
+    private bool _buttonstate = false;
+    public void EnableInventory()
+    {
+        _buttonstate = !_buttonstate;
+
+        if (_buttonstate)
+        {
+            OnBaseEnter();
+            print("on");            
+        }
+        else
+        {
+            OnBaseExit();
+            print("off");            
+        }
+    }
+
     void OnBaseEnter()
     {
         SetAllButtonsImages(ButtonState.Craft);

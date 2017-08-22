@@ -51,7 +51,7 @@ public class s_c_torsoScript : MonoBehaviour {
 
         if (trig.transform.tag == "Item")
         {
-            if(trig.GetComponent<SpriteRenderer>().sprite.name == "arrow_metal")
+            if(trig.GetComponent<SpriteRenderer>().sprite.name == "Arrow")
             {
                 GetComponentInParent<PlayerScript>().EquippedTool.ArrowCount++;
                 Destroy(trig.gameObject);

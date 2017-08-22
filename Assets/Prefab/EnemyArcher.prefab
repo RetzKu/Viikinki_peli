@@ -1201,10 +1201,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DropsList:
-  - Item: {fileID: 1941705026831842, guid: 167dd15b75951fa46aeaf9cc64271c9d, type: 2}
+  - Item: {fileID: 1714856249146214, guid: 694fb469b490efe4aa4a956e0bf1f391, type: 2}
     DropChance: 100
     NightItem: 0
-  - Item: {fileID: 1941705026831842, guid: 167dd15b75951fa46aeaf9cc64271c9d, type: 2}
+  - Item: {fileID: 1714856249146214, guid: 694fb469b490efe4aa4a956e0bf1f391, type: 2}
+    DropChance: 100
+    NightItem: 0
+  - Item: {fileID: 1714856249146214, guid: 694fb469b490efe4aa4a956e0bf1f391, type: 2}
+    DropChance: 100
+    NightItem: 0
+  - Item: {fileID: 1714856249146214, guid: 694fb469b490efe4aa4a956e0bf1f391, type: 2}
+    DropChance: 100
+    NightItem: 0
+  - Item: {fileID: 1714856249146214, guid: 694fb469b490efe4aa4a956e0bf1f391, type: 2}
     DropChance: 100
     NightItem: 0
 --- !u!114 &114316052009345806

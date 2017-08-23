@@ -67,10 +67,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15fe2e1555ab584cb343bda26a0a4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 2
   attackWeight: 10
-  DefaultAttackLength: 0.2
-  weaponEffect: {fileID: 0}
+  duration: 20
+  attackspeed: 2
+  MaxDuration: 0
+  weaponEffect: {fileID: 21300040, guid: f43c53a45dee3724793fb23c5164e286, type: 3}
+  onRange: 0
+  distance: 0.2
+  weaponEffectScale: {x: 0.3, y: 0.3, z: 1}
+  effectOffSet: {x: 0, y: 0.2, z: 0}
 --- !u!212 &212329432246329072
 SpriteRenderer:
   m_ObjectHideFlags: 1

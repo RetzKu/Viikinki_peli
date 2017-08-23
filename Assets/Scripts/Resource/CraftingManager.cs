@@ -121,7 +121,11 @@ public class CraftingManager : MonoBehaviour
 
     public void AddToInventory(GameObject go)
     {
-        StartCoroutine(DragToInventoryEffect(go));
+        //StartCoroutine(DragToInventoryEffect(go));
+        var ingredient = go.GetComponent<Ingredient>();
+        AddToInventory(ingredient.Type);
+
+        Destroy(go); // Lopussa himmennystä
     }
 
     private IEnumerator DragToInventoryEffect(GameObject go)

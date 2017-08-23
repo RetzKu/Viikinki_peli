@@ -133,7 +133,7 @@ public class inventory
 
         public int ArrowCount { get { return _ArrowCount; } set { _ArrowCount = value; } }
 
-        public Equipped() { _ChestPiece = null; _Tool = null; }
+        public Equipped() { _ChestPiece = null; _Tool = null; _ArrowCount = 10; }
 
         public GameObject SwapItem(GameObject Item)
         {

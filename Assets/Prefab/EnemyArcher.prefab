@@ -1204,6 +1204,15 @@ MonoBehaviour:
   - Item: {fileID: 1217691251102874, guid: 8671e944e6e4932459578bb0c9e93f9b, type: 2}
     DropChance: 10
     NightItem: 0
+  - Item: {fileID: 1714856249146214, guid: 694fb469b490efe4aa4a956e0bf1f391, type: 2}
+    DropChance: 100
+    NightItem: 0
+  - Item: {fileID: 1714856249146214, guid: 694fb469b490efe4aa4a956e0bf1f391, type: 2}
+    DropChance: 100
+    NightItem: 0
+  - Item: {fileID: 1714856249146214, guid: 694fb469b490efe4aa4a956e0bf1f391, type: 2}
+    DropChance: 100
+    NightItem: 0
 --- !u!114 &114316052009345806
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -35,6 +35,7 @@ public abstract class enemyStats : MonoBehaviour {
         {
             PlayerScript.Player.GetComponent<PlayerScript>().LoseDurability(); 
         }
+        ParticleSpawner.instance.SpawSmallBlood(GameObject.Find("Player").transform.position, transform.position);
 
         return hp;
     }

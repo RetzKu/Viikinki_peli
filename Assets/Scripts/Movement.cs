@@ -24,7 +24,7 @@ public class Movement : MonoBehaviour
     public float thrust = 15;
     public float max_spd = 3;
     public float min_spd_pate = 0.2f;
-    public float max_spd_pate = 3;
+    public float max_spd_pate = 2;
     bool inAttack = false;
     bool knockBack = false;
     public bool Keyboard = true;
@@ -145,7 +145,7 @@ public class Movement : MonoBehaviour
             movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized; // WASD liikkuminen koneell
             // movement = Joystick.GetInputVector(); // Kun buildataan phonelle
 #else
-            movement = Joystick.GetInputVector(); // Kun buildataan phonelle
+            movement = Joystick.GetInputVector().normalized; // Kun buildataan phonelle
 #endif
 
             if (movement.x == 0 && movement.y == 0) { rb.drag = slowdown; }

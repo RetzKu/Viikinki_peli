@@ -47,6 +47,7 @@ public class Ingredient : MonoBehaviour
             // Poimi
             CraftingManager.Instance.AddToInventory(this.gameObject);
             GetComponent<BoxCollider2D>().enabled = false; // ei useita
+            
 
             //// hyi vittu
             //if (Type == IngredientType.Feather)
